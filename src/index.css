@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0b0c10;
+    color: #f1f5f9;
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom retro scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #13141f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2c3149;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* CodeMirror customizations for dark theme */
+.cm-editor {
+  background-color: #13141f !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 13px !important;
+}
+
+.cm-gutters {
+  background-color: #0b0c10 !important;
+  border-right: 1px solid #1f2232 !important;
+  color: #64748b !important;
+}
