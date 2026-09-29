@@ -1,0 +1,150 @@
+{
+  "id": "remove-all-adjacent-duplicates",
+  "wingId": "data-structures",
+  "floor": 7,
+  "title": "Remove All Adjacent Duplicates In String",
+  "difficulty": "easy",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "repeater-slime",
+    "name": "Echo-Gel the Recursive Slime",
+    "title": "Absorber of Adjacent Pairs",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "slime",
+    "color": "#ec4899",
+    "attackName": "Twin Ooze Compression",
+    "attackPower": 1,
+    "defeatQuote": "All my adjacent layers collapsed into void..."
+  },
+  "description": "You are given a string `s` consisting of lowercase English letters. A duplicate removal consists of choosing two adjacent and equal letters and removing them.\n\nWe repeatedly make duplicate removals on `s` until we no longer can. Return the final string after all such duplicate removals have been made.",
+  "examples": [
+    {
+      "input": "s = \"abbaca\"",
+      "output": "\"ca\""
+    },
+    {
+      "input": "s = \"azxxzy\"",
+      "output": "\"ay\""
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 10^5",
+    "s consists of lowercase English letters."
+  ],
+  "starterCode": "function removeDuplicates(s) {\n  return \"\";\n}",
+  "solutionCode": "function removeDuplicates(s) {\n  const stack = [];\n  for (const c of s) {\n    if (stack.length > 0 && stack[stack.length - 1] === c) {\n      stack.pop();\n    } else {\n      stack.push(c);\n    }\n  }\n  return stack.join('');\n}",
+  "functionName": "removeDuplicates",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "abbaca"
+      ],
+      "expected": "ca",
+      "inputDisplay": "s = \"abbaca\"",
+      "expectedDisplay": "\"ca\"",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "azxxzy"
+      ],
+      "expected": "ay",
+      "inputDisplay": "s = \"azxxzy\"",
+      "expectedDisplay": "\"ay\"",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "a"
+      ],
+      "expected": "a",
+      "inputDisplay": "s = \"a\"",
+      "expectedDisplay": "\"a\"",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "a"
+      ],
+      "expected": "a",
+      "inputDisplay": "\"a\"",
+      "expectedDisplay": "a",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        "aa"
+      ],
+      "expected": "",
+      "inputDisplay": "\"aa\"",
+      "expectedDisplay": "",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        "aaa"
+      ],
+      "expected": "a",
+      "inputDisplay": "\"aaa\"",
+      "expectedDisplay": "a",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        "aababaab"
+      ],
+      "expected": "ba",
+      "inputDisplay": "\"aababaab\"",
+      "expectedDisplay": "ba",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        "azxxzy"
+      ],
+      "expected": "ay",
+      "inputDisplay": "\"azxxzy\"",
+      "expectedDisplay": "ay",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        "baab"
+      ],
+      "expected": "",
+      "inputDisplay": "\"baab\"",
+      "expectedDisplay": "",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        "abcdef"
+      ],
+      "expected": "abcdef",
+      "inputDisplay": "\"abcdef\"",
+      "expectedDisplay": "abcdef",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use a stack. If the incoming character matches the top of the stack, pop it; otherwise push."
+  ],
+  "python": {
+    "starterCode": "def removeDuplicates(s):\n    return \"\"\n",
+    "solutionCode": "def removeDuplicates(s):\n    stack = []\n    for c in s:\n        if stack and stack[-1] == c:\n            stack.pop()\n        else:\n            stack.append(c)\n    return \"\".join(stack)\n"
+  },
+  "leetcodeId": 1047,
+  "leetcodeTitle": "Remove All Adjacent Duplicates In String",
+  "leetcodeUrl": "https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/"
+}

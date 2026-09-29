@@ -1,0 +1,239 @@
+{
+  "id": "intersection-of-two-arrays",
+  "wingId": "data-structures",
+  "floor": 6,
+  "title": "Intersection of Two Arrays",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "cross-skeleton",
+    "name": "Intersecto the Bone Sifter",
+    "title": "Keeper of Common Remnants",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "skeleton",
+    "color": "#f97316",
+    "attackName": "Dual Scythe Cross",
+    "attackPower": 1,
+    "defeatQuote": "Our common ground was shattered..."
+  },
+  "description": "Given two integer arrays `nums1` and `nums2`, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.",
+  "examples": [
+    {
+      "input": "nums1 = [1, 2, 2, 1], nums2 = [2, 2]",
+      "output": "[2]"
+    },
+    {
+      "input": "nums1 = [4, 9, 5], nums2 = [9, 4, 9, 8, 4]",
+      "output": "[4, 9]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums1.length, nums2.length <= 1000",
+    "0 <= nums1[i], nums2[i] <= 1000"
+  ],
+  "starterCode": "function intersection(nums1, nums2) {\n  return [];\n}",
+  "solutionCode": "function intersection(nums1, nums2) {\n  const set1 = new Set(nums1);\n  const result = new Set();\n  for (const n of nums2) {\n    if (set1.has(n)) result.add(n);\n  }\n  return Array.from(result);\n}",
+  "functionName": "intersection",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        2
+      ],
+      "inputDisplay": "nums1 = [1,2,2,1], nums2 = [2,2]",
+      "expectedDisplay": "[2]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          4,
+          9,
+          5
+        ],
+        [
+          9,
+          4,
+          9,
+          8,
+          4
+        ]
+      ],
+      "expected": [
+        9,
+        4
+      ],
+      "inputDisplay": "nums1 = [4,9,5], nums2 = [9,4,9,8,4]",
+      "expectedDisplay": "[9, 4]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "nums1 = [1,2,3], nums2 = [4,5,6]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[1], [1]",
+      "expectedDisplay": "[1]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "[1], [2]",
+      "expectedDisplay": "[]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [],
+        [
+          1
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "[], [1]",
+      "expectedDisplay": "[]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[1,1], [1]",
+      "expectedDisplay": "[1]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          4,
+          9,
+          5
+        ],
+        [
+          9,
+          4,
+          9,
+          8,
+          4
+        ]
+      ],
+      "expected": [
+        9,
+        4
+      ],
+      "inputDisplay": "[4,9,5], [9,4,9,8,4]",
+      "expectedDisplay": "[9,4]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "[1,2,3], [4,5,6]",
+      "expectedDisplay": "[]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": [
+        0
+      ],
+      "inputDisplay": "[-1,0], [0,1]",
+      "expectedDisplay": "[0]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Convert the first array into a Set, then filter the second array and deduplicate with another Set."
+  ],
+  "python": {
+    "starterCode": "def intersection(nums1, nums2):\n    return []\n",
+    "solutionCode": "def intersection(nums1, nums2):\n    return list(set(nums1) & set(nums2))\n"
+  },
+  "leetcodeId": 349,
+  "leetcodeTitle": "Intersection of Two Arrays",
+  "leetcodeUrl": "https://leetcode.com/problems/intersection-of-two-arrays/"
+}

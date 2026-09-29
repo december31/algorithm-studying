@@ -1,0 +1,271 @@
+{
+  "id": "n-queens",
+  "wingId": "backtracking",
+  "floor": 15,
+  "title": "N-Queens",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "queen-dragon",
+    "name": "Tiamat the Chess Sovereign",
+    "title": "Empress of the 8-Directional Diagonal",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#dc2626",
+    "attackName": "Checkmate Breath",
+    "attackPower": 3,
+    "defeatQuote": "All N queens peacefully ruled their diagonals... Checkmate."
+  },
+  "description": "The n-queens puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other.\n\nGiven an integer `n`, return all distinct solutions to the n-queens puzzle. You may return the answer in any order. Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space.",
+  "examples": [
+    {
+      "input": "n = 4",
+      "output": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]"
+    },
+    {
+      "input": "n = 1",
+      "output": "[[\"Q\"]]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 9"
+  ],
+  "starterCode": "function solveNQueens(n) {\n  return [];\n}",
+  "solutionCode": "function solveNQueens(n) {\n  const result = [];\n  const cols = new Set();\n  const diag1 = new Set(); // r - c\n  const diag2 = new Set(); // r + c\n  const board = Array.from({ length: n }, () => Array(n).fill('.'));\n\n  function backtrack(row) {\n    if (row === n) {\n      result.push(board.map((r) => r.join('')));\n      return;\n    }\n    for (let col = 0; col < n; col++) {\n      if (cols.has(col) || diag1.has(row - col) || diag2.has(row + col)) continue;\n      cols.add(col);\n      diag1.add(row - col);\n      diag2.add(row + col);\n      board[row][col] = 'Q';\n      backtrack(row + 1);\n      board[row][col] = '.';\n      cols.delete(col);\n      diag1.delete(row - col);\n      diag2.delete(row + col);\n    }\n  }\n  backtrack(0);\n  return result;\n}",
+  "functionName": "solveNQueens",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4
+      ],
+      "expected": [
+        [
+          ".Q..",
+          "...Q",
+          "Q...",
+          "..Q."
+        ],
+        [
+          "..Q.",
+          "Q...",
+          "...Q",
+          ".Q.."
+        ]
+      ],
+      "inputDisplay": "n = 4",
+      "expectedDisplay": "2 solutions found",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": [
+        [
+          "Q"
+        ]
+      ],
+      "inputDisplay": "n = 1",
+      "expectedDisplay": "[[\"Q\"]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        2
+      ],
+      "expected": [],
+      "inputDisplay": "n = 2",
+      "expectedDisplay": "[] (impossible)",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        1
+      ],
+      "expected": [
+        [
+          "Q"
+        ]
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "[[\"Q\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        2
+      ],
+      "expected": [],
+      "inputDisplay": "2",
+      "expectedDisplay": "[]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        3
+      ],
+      "expected": [],
+      "inputDisplay": "3",
+      "expectedDisplay": "[]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        4
+      ],
+      "expected": [
+        [
+          ".Q..",
+          "...Q",
+          "Q...",
+          "..Q."
+        ],
+        [
+          "..Q.",
+          "Q...",
+          "...Q",
+          ".Q.."
+        ]
+      ],
+      "inputDisplay": "4",
+      "expectedDisplay": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        5
+      ],
+      "expected": [
+        [
+          "Q....",
+          "..Q..",
+          "....Q",
+          ".Q...",
+          "...Q."
+        ],
+        [
+          "Q....",
+          "...Q.",
+          ".Q...",
+          "....Q",
+          "..Q.."
+        ],
+        [
+          ".Q...",
+          "...Q.",
+          "Q....",
+          "..Q..",
+          "....Q"
+        ],
+        [
+          ".Q...",
+          "....Q",
+          "..Q..",
+          "Q....",
+          "...Q."
+        ],
+        [
+          "..Q..",
+          "Q....",
+          "...Q.",
+          ".Q...",
+          "....Q"
+        ],
+        [
+          "..Q..",
+          "....Q",
+          ".Q...",
+          "...Q.",
+          "Q...."
+        ],
+        [
+          "...Q.",
+          "Q....",
+          "..Q..",
+          "....Q",
+          ".Q..."
+        ],
+        [
+          "...Q.",
+          ".Q...",
+          "....Q",
+          "..Q..",
+          "Q...."
+        ],
+        [
+          "....Q",
+          ".Q...",
+          "...Q.",
+          "Q....",
+          "..Q.."
+        ],
+        [
+          "....Q",
+          "..Q..",
+          "Q....",
+          "...Q.",
+          ".Q..."
+        ]
+      ],
+      "inputDisplay": "5",
+      "expectedDisplay": "[[\"Q....\",\"..Q..\",\"....Q\",\".Q...\",\"...Q.\"],[\"Q....\",\"...Q.\",\".Q...\",\"....Q\",\"..Q..\"],[\".Q...\",\"...Q.\",\"Q....\",\"..Q..\",\"....Q\"],[\".Q...\",\"....Q\",\"..Q..\",\"Q....\",\"...Q.\"],[\"..Q..\",\"Q....\",\"...Q.\",\".Q...\",\"....Q\"],[\"..Q..\",\"....Q\",\".Q...\",\"...Q.\",\"Q....\"],[\"...Q.\",\"Q....\",\"..Q..\",\"....Q\",\".Q...\"],[\"...Q.\",\".Q...\",\"....Q\",\"..Q..\",\"Q....\"],[\"....Q\",\".Q...\",\"...Q.\",\"Q....\",\"..Q..\"],[\"....Q\",\"..Q..\",\"Q....\",\"...Q.\",\".Q...\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        4
+      ],
+      "expected": [
+        [
+          ".Q..",
+          "...Q",
+          "Q...",
+          "..Q."
+        ],
+        [
+          "..Q.",
+          "Q...",
+          "...Q",
+          ".Q.."
+        ]
+      ],
+      "inputDisplay": "4",
+      "expectedDisplay": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        1
+      ],
+      "expected": [
+        [
+          "Q"
+        ]
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "[[\"Q\"]]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Maintain sets for occupied columns, positive diagonals (r + c), and negative diagonals (r - c)."
+  ],
+  "python": {
+    "starterCode": "def solveNQueens(n):\n    return []\n",
+    "solutionCode": "def solveNQueens(n):\n    res = []\n    cols, diag1, diag2 = set(), set(), set()\n    board = [[\".\"] * n for _ in range(n)]\n    def backtrack(r):\n        if r == n:\n            res.append([\"\".join(row) for row in board])\n            return\n        for c in range(n):\n            if c in cols or (r - c) in diag1 or (r + c) in diag2:\n                continue\n            cols.add(c)\n            diag1.add(r - c)\n            diag2.add(r + c)\n            board[r][c] = \"Q\"\n            backtrack(r + 1)\n            board[r][c] = \".\"\n            cols.remove(c)\n            diag1.remove(r - c)\n            diag2.remove(r + c)\n    backtrack(0)\n    return res\n"
+  },
+  "leetcodeId": 51,
+  "leetcodeTitle": "N-Queens",
+  "leetcodeUrl": "https://leetcode.com/problems/n-queens/"
+}

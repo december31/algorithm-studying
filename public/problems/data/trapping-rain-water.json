@@ -1,0 +1,206 @@
+{
+  "id": "trapping-rain-water",
+  "wingId": "binary-search-greedy",
+  "floor": 20,
+  "title": "Trapping Rain Water",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "abyssal-aquifer",
+    "name": "Cataclysmic Abyssal Aquifer",
+    "title": "Leviathan of Inundated Ravines",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "dragon",
+    "color": "#2563eb",
+    "attackName": "Tidal Monotonic Deluge",
+    "attackPower": 3,
+    "defeatQuote": "You trapped all the volume across my elevation bars..."
+  },
+  "description": "Given `n` non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.",
+  "examples": [
+    {
+      "input": "height = [0,1,0,2,1,0,1,3,2,1,2,1]",
+      "output": "6"
+    },
+    {
+      "input": "height = [4,2,0,3,2,5]",
+      "output": "9"
+    }
+  ],
+  "constraints": [
+    "n == height.length",
+    "1 <= n <= 2 * 10^4",
+    "0 <= height[i] <= 10^5"
+  ],
+  "starterCode": "function trap(height) {\n  return 0;\n}",
+  "solutionCode": "function trap(height) {\n  if (!height || height.length === 0) return 0;\n  let left = 0, right = height.length - 1;\n  let leftMax = 0, rightMax = 0;\n  let totalWater = 0;\n  while (left < right) {\n    if (height[left] < height[right]) {\n      if (height[left] >= leftMax) leftMax = height[left];\n      else totalWater += leftMax - height[left];\n      left++;\n    } else {\n      if (height[right] >= rightMax) rightMax = height[right];\n      else totalWater += rightMax - height[right];\n      right--;\n    }\n  }\n  return totalWater;\n}",
+  "functionName": "trap",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          0,
+          1,
+          0,
+          2,
+          1,
+          0,
+          1,
+          3,
+          2,
+          1,
+          2,
+          1
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "height = [0,1,0,2,1,0,1,3,2,1,2,1]",
+      "expectedDisplay": "6"
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          4,
+          2,
+          0,
+          3,
+          2,
+          5
+        ]
+      ],
+      "expected": 9,
+      "inputDisplay": "height = [4,2,0,3,2,5]",
+      "expectedDisplay": "9"
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "height = [0]",
+      "expectedDisplay": "0"
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          3,
+          0,
+          3
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "height = [3,0,3]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          5,
+          4,
+          1,
+          2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "height = [5,4,1,2]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          0,
+          2,
+          0
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "height = [0,2,0]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "height = [2,0,2]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          5,
+          2,
+          1,
+          2,
+          1,
+          5
+        ]
+      ],
+      "expected": 14,
+      "inputDisplay": "height = deep valley",
+      "expectedDisplay": "14",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "strictly ascending",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "strictly descending",
+      "expectedDisplay": "0",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use two pointers moving inward. Maintain leftMax and rightMax; the water trapped at any position is bounded by min(leftMax, rightMax) - height."
+  ],
+  "python": {
+    "starterCode": "def trap(height):\n    return 0\n",
+    "solutionCode": "def trap(height):\n    if not height:\n        return 0\n    left, right = 0, len(height) - 1\n    left_max, right_max = 0, 0\n    water = 0\n    while left < right:\n        if height[left] < height[right]:\n            if height[left] >= left_max:\n                left_max = height[left]\n            else:\n                water += left_max - height[left]\n            left += 1\n        else:\n            if height[right] >= right_max:\n                right_max = height[right]\n            else:\n                water += right_max - height[right]\n            right -= 1\n    return water\n"
+  },
+  "leetcodeId": 42,
+  "leetcodeTitle": "Trapping Rain Water",
+  "leetcodeUrl": "https://leetcode.com/problems/trapping-rain-water/"
+}

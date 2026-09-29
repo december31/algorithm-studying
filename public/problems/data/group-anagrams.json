@@ -1,0 +1,257 @@
+{
+  "id": "group-anagrams",
+  "wingId": "data-structures",
+  "floor": 10,
+  "title": "Group Anagrams",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "cipher-wraith",
+    "name": "Vesper the Cipher Wraith",
+    "title": "Sorcerer of Sorted Canonical Keys",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Permutational Drain",
+    "attackPower": 2,
+    "defeatQuote": "My anagram clusters were canonicalized and banished..."
+  },
+  "description": "Given an array of strings `strs`, group the anagrams together. You can return the answer in any order.",
+  "examples": [
+    {
+      "input": "strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+      "output": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]"
+    },
+    {
+      "input": "strs = [\"\"]",
+      "output": "[[\"\"]]"
+    },
+    {
+      "input": "strs = [\"a\"]",
+      "output": "[[\"a\"]]"
+    }
+  ],
+  "constraints": [
+    "1 <= strs.length <= 10^4",
+    "0 <= strs[i].length <= 100",
+    "strs[i] consists of lowercase English letters."
+  ],
+  "starterCode": "function groupAnagrams(strs) {\n  return [];\n}",
+  "solutionCode": "function groupAnagrams(strs) {\n  const map = {};\n  for (const s of strs) {\n    const key = s.split('').sort().join('');\n    if (!map[key]) map[key] = [];\n    map[key].push(s);\n  }\n  return Object.values(map);\n}",
+  "functionName": "groupAnagrams",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "eat",
+          "tea",
+          "tan",
+          "ate",
+          "nat",
+          "bat"
+        ]
+      ],
+      "expected": [
+        [
+          "eat",
+          "tea",
+          "ate"
+        ],
+        [
+          "tan",
+          "nat"
+        ],
+        [
+          "bat"
+        ]
+      ],
+      "inputDisplay": "strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+      "expectedDisplay": "[[\"eat\",\"tea\",\"ate\"],[\"tan\",\"nat\"],[\"bat\"]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          ""
+        ]
+      ],
+      "expected": [
+        [
+          ""
+        ]
+      ],
+      "inputDisplay": "strs = [\"\"]",
+      "expectedDisplay": "[[\"\"]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "a"
+        ]
+      ],
+      "expected": [
+        [
+          "a"
+        ]
+      ],
+      "inputDisplay": "strs = [\"a\"]",
+      "expectedDisplay": "[[\"a\"]]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          ""
+        ]
+      ],
+      "expected": [
+        [
+          ""
+        ]
+      ],
+      "inputDisplay": "[\"\"]",
+      "expectedDisplay": "[[\"\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          "a"
+        ]
+      ],
+      "expected": [
+        [
+          "a"
+        ]
+      ],
+      "inputDisplay": "[\"a\"]",
+      "expectedDisplay": "[[\"a\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          "a",
+          "a"
+        ]
+      ],
+      "expected": [
+        [
+          "a",
+          "a"
+        ]
+      ],
+      "inputDisplay": "[\"a\",\"a\"]",
+      "expectedDisplay": "[[\"a\",\"a\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          "ab",
+          "ba",
+          "abc",
+          "cba"
+        ]
+      ],
+      "expected": [
+        [
+          "ab",
+          "ba"
+        ],
+        [
+          "abc",
+          "cba"
+        ]
+      ],
+      "inputDisplay": "[\"ab\",\"ba\",\"abc\",\"cba\"]",
+      "expectedDisplay": "[[\"ab\",\"ba\"],[\"abc\",\"cba\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          "cat",
+          "dog",
+          "tac",
+          "god",
+          "act"
+        ]
+      ],
+      "expected": [
+        [
+          "cat",
+          "tac",
+          "act"
+        ],
+        [
+          "dog",
+          "god"
+        ]
+      ],
+      "inputDisplay": "[\"cat\",\"dog\",\"tac\",\"god\",\"act\"]",
+      "expectedDisplay": "[[\"cat\",\"tac\",\"act\"],[\"dog\",\"god\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          "no",
+          "on",
+          "yes",
+          "sey"
+        ]
+      ],
+      "expected": [
+        [
+          "no",
+          "on"
+        ],
+        [
+          "yes",
+          "sey"
+        ]
+      ],
+      "inputDisplay": "[\"no\",\"on\",\"yes\",\"sey\"]",
+      "expectedDisplay": "[[\"no\",\"on\"],[\"yes\",\"sey\"]]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          "hello"
+        ]
+      ],
+      "expected": [
+        [
+          "hello"
+        ]
+      ],
+      "inputDisplay": "[\"hello\"]",
+      "expectedDisplay": "[[\"hello\"]]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Sort each word alphabetically to use as the hash map key."
+  ],
+  "python": {
+    "starterCode": "def groupAnagrams(strs):\n    return []\n",
+    "solutionCode": "def groupAnagrams(strs):\n    groups = {}\n    for s in strs:\n        key = \"\".join(sorted(s))\n        if key not in groups:\n            groups[key] = []\n        groups[key].append(s)\n    return list(groups.values())\n"
+  },
+  "leetcodeId": 49,
+  "leetcodeTitle": "Group Anagrams",
+  "leetcodeUrl": "https://leetcode.com/problems/group-anagrams/"
+}

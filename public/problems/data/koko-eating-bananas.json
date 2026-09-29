@@ -1,0 +1,204 @@
+{
+  "id": "koko-eating-bananas",
+  "wingId": "binary-search-greedy",
+  "floor": 18,
+  "title": "Koko Eating Bananas",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "voracious-kong",
+    "name": "Voracious Kong of the Logarithmic Horizon",
+    "title": "Beast of Rate Optimization",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "gargoyle",
+    "color": "#f59e0b",
+    "attackName": "Pancake Banana Barrel Barrage",
+    "attackPower": 2,
+    "defeatQuote": "You found the exact integer rate speed to outrun the guard..."
+  },
+  "description": "Koko loves to eat bananas. There are `n` piles of bananas, the `i-th` pile has `piles[i]` bananas. The guards will return in `h` hours.\n\nKoko can decide her bananas-per-hour eating speed of `k`. Each hour, she chooses some pile of bananas and eats `k` bananas from that pile. If the pile has less than `k` bananas, she eats all of them and will not eat any more bananas during this hour.\n\nReturn the minimum integer `k` such that she can eat all the bananas within `h` hours.",
+  "examples": [
+    {
+      "input": "piles = [3,6,7,11], h = 8",
+      "output": "4"
+    },
+    {
+      "input": "piles = [30,11,23,4,20], h = 5",
+      "output": "30"
+    },
+    {
+      "input": "piles = [30,11,23,4,20], h = 6",
+      "output": "23"
+    }
+  ],
+  "constraints": [
+    "1 <= piles.length <= 10^4",
+    "piles.length <= h <= 10^9",
+    "1 <= piles[i] <= 10^9"
+  ],
+  "starterCode": "function minEatingSpeed(piles, h) {\n  return 1;\n}",
+  "solutionCode": "function minEatingSpeed(piles, h) {\n  let low = 1, high = Math.max(...piles);\n  let ans = high;\n  while (low <= high) {\n    const mid = Math.floor((low + high) / 2);\n    let hours = 0;\n    for (const p of piles) {\n      hours += Math.ceil(p / mid);\n    }\n    if (hours <= h) {\n      ans = mid;\n      high = mid - 1;\n    } else {\n      low = mid + 1;\n    }\n  }\n  return ans;\n}",
+  "functionName": "minEatingSpeed",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          6,
+          7,
+          11
+        ],
+        8
+      ],
+      "expected": 4,
+      "inputDisplay": "piles = [3,6,7,11], h = 8",
+      "expectedDisplay": "4"
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          30,
+          11,
+          23,
+          4,
+          20
+        ],
+        5
+      ],
+      "expected": 30,
+      "inputDisplay": "piles = [30,11,23,4,20], h = 5",
+      "expectedDisplay": "30"
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          30,
+          11,
+          23,
+          4,
+          20
+        ],
+        6
+      ],
+      "expected": 23,
+      "inputDisplay": "piles = [30,11,23,4,20], h = 6",
+      "expectedDisplay": "23"
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          312884470
+        ],
+        312884469
+      ],
+      "expected": 2,
+      "inputDisplay": "large single pile",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1000000000
+        ],
+        2
+      ],
+      "expected": 500000000,
+      "inputDisplay": "10^9 bananas in 2h",
+      "expectedDisplay": "500000000",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        4
+      ],
+      "expected": 1,
+      "inputDisplay": "all 1s matching h",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          5,
+          5,
+          5
+        ],
+        6
+      ],
+      "expected": 3,
+      "inputDisplay": "piles = [5,5,5], h = 6",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          2,
+          2
+        ],
+        2
+      ],
+      "expected": 2,
+      "inputDisplay": "piles = [2,2], h = 2",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          10,
+          20,
+          30
+        ],
+        100
+      ],
+      "expected": 1,
+      "inputDisplay": "large hour budget",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          15,
+          20,
+          25,
+          30
+        ],
+        10
+      ],
+      "expected": 10,
+      "inputDisplay": "piles = [15,20,25,30], h = 10",
+      "expectedDisplay": "10",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Binary search the candidate speed k in [1, max(piles)]. For each speed, compute the total ceiling hours needed."
+  ],
+  "python": {
+    "starterCode": "def minEatingSpeed(piles, h):\n    return 1\n",
+    "solutionCode": "def minEatingSpeed(piles, h):\n    import math\n    low, high = 1, max(piles)\n    ans = high\n    while low <= high:\n        mid = (low + high) // 2\n        hours = sum(math.ceil(p / mid) for p in piles)\n        if hours <= h:\n            ans = mid\n            high = mid - 1\n        else:\n            low = mid + 1\n    return ans\n"
+  },
+  "leetcodeId": 875,
+  "leetcodeTitle": "Koko Eating Bananas",
+  "leetcodeUrl": "https://leetcode.com/problems/koko-eating-bananas/"
+}

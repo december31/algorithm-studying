@@ -1,0 +1,207 @@
+{
+  "id": "counting-bits",
+  "wingId": "bit-manipulation",
+  "floor": 3,
+  "title": "Counting Bits",
+  "difficulty": "easy",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "binary-shade",
+    "name": "Shiftus the Progression Shade",
+    "title": "Master of i >> 1 Recurrence",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#a855f7",
+    "attackName": "Bit Shift Drain",
+    "attackPower": 1,
+    "defeatQuote": "The DP recurrence dp[i] = dp[i >> 1] + (i & 1) outpaced me..."
+  },
+  "description": "Given an integer `n`, return an array `ans` of length `n + 1` such that for each `i` (0 <= i <= n), `ans[i]` is the number of 1's in the binary representation of `i`.",
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "[0,1,1]"
+    },
+    {
+      "input": "n = 5",
+      "output": "[0,1,1,2,1,2]"
+    }
+  ],
+  "constraints": [
+    "0 <= n <= 10^5"
+  ],
+  "starterCode": "function countBits(n) {\n  return [];\n}",
+  "solutionCode": "function countBits(n) {\n  const ans = new Array(n + 1).fill(0);\n  for (let i = 1; i <= n; i++) {\n    ans[i] = ans[i >> 1] + (i & 1);\n  }\n  return ans;\n}",
+  "functionName": "countBits",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2
+      ],
+      "expected": [
+        0,
+        1,
+        1
+      ],
+      "inputDisplay": "n = 2",
+      "expectedDisplay": "[0, 1, 1]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        5
+      ],
+      "expected": [
+        0,
+        1,
+        1,
+        2,
+        1,
+        2
+      ],
+      "inputDisplay": "n = 5",
+      "expectedDisplay": "[0, 1, 1, 2, 1, 2]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        0
+      ],
+      "expected": [
+        0
+      ],
+      "inputDisplay": "n = 0",
+      "expectedDisplay": "[0]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        0
+      ],
+      "expected": [
+        0
+      ],
+      "inputDisplay": "0",
+      "expectedDisplay": "[0]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        1
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "[0,1]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        3
+      ],
+      "expected": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "inputDisplay": "3",
+      "expectedDisplay": "[0,1,1,2]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        4
+      ],
+      "expected": [
+        0,
+        1,
+        1,
+        2,
+        1
+      ],
+      "inputDisplay": "4",
+      "expectedDisplay": "[0,1,1,2,1]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        5
+      ],
+      "expected": [
+        0,
+        1,
+        1,
+        2,
+        1,
+        2
+      ],
+      "inputDisplay": "5",
+      "expectedDisplay": "[0,1,1,2,1,2]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        8
+      ],
+      "expected": [
+        0,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        1
+      ],
+      "inputDisplay": "8",
+      "expectedDisplay": "[0,1,1,2,1,2,2,3,1]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        10
+      ],
+      "expected": [
+        0,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        1,
+        2,
+        2
+      ],
+      "inputDisplay": "10",
+      "expectedDisplay": "[0,1,1,2,1,2,2,3,1,2,2]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "The number of set bits in i is equal to set bits in (i >> 1) plus (i & 1)."
+  ],
+  "python": {
+    "starterCode": "def countBits(n):\n    return []\n",
+    "solutionCode": "def countBits(n):\n    ans = [0] * (n + 1)\n    for i in range(1, n + 1):\n        ans[i] = ans[i >> 1] + (i & 1)\n    return ans\n"
+  },
+  "leetcodeId": 338,
+  "leetcodeTitle": "Counting Bits",
+  "leetcodeUrl": "https://leetcode.com/problems/counting-bits/"
+}

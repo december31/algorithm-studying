@@ -1,0 +1,195 @@
+{
+  "id": "find-peak-element",
+  "wingId": "binary-search-greedy",
+  "floor": 13,
+  "title": "Find Peak Element",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "summit-dragon",
+    "name": "Apex the Summit Dragon",
+    "title": "Monarch of Local Maximums",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#dc2626",
+    "attackName": "Altitude Flare",
+    "attackPower": 2,
+    "defeatQuote": "You followed the upward slope straight to my crest..."
+  },
+  "description": "A peak element is an element that is strictly greater than its neighbors. Given an integer array `nums`, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks. Must run in O(log n).",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,1]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [1,2,1,3,5,6,4]",
+      "output": "5"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 1000",
+    "-2^31 <= nums[i] <= 2^31 - 1"
+  ],
+  "starterCode": "function findPeakElement(nums) {\n  return 0;\n}",
+  "solutionCode": "function findPeakElement(nums) {\n  let left = 0, right = nums.length - 1;\n  while (left < right) {\n    const mid = Math.floor((left + right) / 2);\n    if (nums[mid] < nums[mid + 1]) {\n      left = mid + 1; // rising slope: peak must exist to the right\n    } else {\n      right = mid; // falling slope: peak is at mid or to the left\n    }\n  }\n  return left;\n}",
+  "functionName": "findPeakElement",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "nums = [1,2,3,1]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          1,
+          3,
+          5,
+          6,
+          4
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "nums = [1,2,1,3,5,6,4]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "nums = [1]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1,2]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[2,1]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1,2,1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[1,2,3,4]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[4,3,2,1]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          1,
+          3,
+          5,
+          6,
+          4
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[1, 2, 1, 3, ... (7 items)]",
+      "expectedDisplay": "5",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "If nums[mid] < nums[mid+1], you are on an upward slope and a peak is guaranteed to the right."
+  ],
+  "python": {
+    "starterCode": "def findPeakElement(nums):\n    return 0\n",
+    "solutionCode": "def findPeakElement(nums):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        mid = (left + right) // 2\n        if nums[mid] < nums[mid + 1]:\n            left = mid + 1\n        else:\n            right = mid\n    return left\n"
+  },
+  "leetcodeId": 162,
+  "leetcodeTitle": "Find Peak Element",
+  "leetcodeUrl": "https://leetcode.com/problems/find-peak-element/"
+}

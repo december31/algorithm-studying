@@ -1,0 +1,194 @@
+{
+  "id": "candy",
+  "wingId": "binary-search-greedy",
+  "floor": 16,
+  "title": "Candy",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "sugar-lich",
+    "name": "Dulcis the Confection Lich",
+    "title": "Exactor of Strict Rating Rations",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#ec4899",
+    "attackName": "Crystalline Sugar Nova",
+    "attackPower": 3,
+    "defeatQuote": "Both left and right condition sweeps matched minimum distribution..."
+  },
+  "description": "There are `n` children standing in a line. Each child is assigned a rating value given in the integer array `ratings`. Each child must have at least one candy. Children with a higher rating get more candies than their neighbors. Return the minimum number of candies you need to distribute.",
+  "examples": [
+    {
+      "input": "ratings = [1,0,2]",
+      "output": "5"
+    },
+    {
+      "input": "ratings = [1,2,2]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "n == ratings.length",
+    "1 <= n <= 2 * 10^4",
+    "0 <= ratings[i] <= 2 * 10^4"
+  ],
+  "starterCode": "function candy(ratings) {\n  return 0;\n}",
+  "solutionCode": "function candy(ratings) {\n  const n = ratings.length;\n  const candies = new Array(n).fill(1);\n  // Left-to-right pass\n  for (let i = 1; i < n; i++) {\n    if (ratings[i] > ratings[i - 1]) candies[i] = candies[i - 1] + 1;\n  }\n  // Right-to-left pass\n  for (let i = n - 2; i >= 0; i--) {\n    if (ratings[i] > ratings[i + 1]) candies[i] = Math.max(candies[i], candies[i + 1] + 1);\n  }\n  return candies.reduce((a, b) => a + b, 0);\n}",
+  "functionName": "candy",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "ratings = [1,0,2]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "ratings = [1,2,2]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          3,
+          2,
+          2,
+          1
+        ]
+      ],
+      "expected": 7,
+      "inputDisplay": "ratings = [1,3,2,2,1]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[1,2]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[2,1]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1,1]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[1,2,2]",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          3,
+          2,
+          2,
+          1
+        ]
+      ],
+      "expected": 7,
+      "inputDisplay": "[1,3,2,2,1]",
+      "expectedDisplay": "7",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          87,
+          87,
+          87,
+          2,
+          1
+        ]
+      ],
+      "expected": 13,
+      "inputDisplay": "[1, 2, 87, 87, ... (7 items)]",
+      "expectedDisplay": "13",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Make two passes: first left-to-right, then right-to-left taking max(candies[i], candies[i+1] + 1)."
+  ],
+  "python": {
+    "starterCode": "def candy(ratings):\n    return 0\n",
+    "solutionCode": "def candy(ratings):\n    n = len(ratings)\n    candies = [1] * n\n    for i in range(1, n):\n        if ratings[i] > ratings[i - 1]:\n            candies[i] = candies[i - 1] + 1\n    for i in range(n - 2, -1, -1):\n        if ratings[i] > ratings[i + 1]:\n            candies[i] = max(candies[i], candies[i + 1] + 1)\n    return sum(candies)\n"
+  },
+  "leetcodeId": 135,
+  "leetcodeTitle": "Candy",
+  "leetcodeUrl": "https://leetcode.com/problems/candy/"
+}

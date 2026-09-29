@@ -1,0 +1,194 @@
+{
+  "id": "maximum-depth-of-binary-tree",
+  "wingId": "backtracking",
+  "floor": 5,
+  "title": "Maximum Depth of Binary Tree",
+  "difficulty": "easy",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "altitude-spider",
+    "name": "Silas the Tower Web Spinner",
+    "title": "Weaver of Tree Altitudes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "spider",
+    "color": "#0284c7",
+    "attackName": "Silken Descent",
+    "attackPower": 1,
+    "defeatQuote": "My tallest branch could not evade you..."
+  },
+  "description": "Given the root of a binary tree, return its maximum depth. A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.",
+  "examples": [
+    {
+      "input": "root = [3, 9, 20, null, null, 15, 7]",
+      "output": "3"
+    },
+    {
+      "input": "root = [1, null, 2]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "The number of nodes in the tree is in the range [0, 10^4].",
+    "-100 <= Node.val <= 100"
+  ],
+  "starterCode": "function maxDepth(root) {\n  return 0;\n}",
+  "solutionCode": "function maxDepth(root) {\n  if (!root || root.length === 0 || root[0] === null) return 0;\n  function getDepth(idx) {\n    if (idx >= root.length || root[idx] === null || root[idx] === undefined) return 0;\n    return 1 + Math.max(getDepth(2 * idx + 1), getDepth(2 * idx + 2));\n  }\n  return getDepth(0);\n}",
+  "functionName": "maxDepth",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          9,
+          20,
+          null,
+          null,
+          15,
+          7
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "root = [3, 9, 20, null, null, 15, 7]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "root = [1, null, 2]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        []
+      ],
+      "expected": 0,
+      "inputDisplay": "root = []",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        []
+      ],
+      "expected": 0,
+      "inputDisplay": "[]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1,2]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1,null,2]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          null,
+          null,
+          5
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[1, 2, 3, 4, ... (7 items)]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          null,
+          3,
+          null,
+          4
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[1, 2, null, 3, ... (6 items)]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[1, 2, 3, 4, ... (7 items)]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Depth of node = 1 + max(depth(left), depth(right)). Base case returns 0."
+  ],
+  "python": {
+    "starterCode": "def maxDepth(root):\n    return 0\n",
+    "solutionCode": "def maxDepth(root):\n    if not root or root[0] is None:\n        return 0\n    def get_depth(idx):\n        if idx >= len(root) or root[idx] is None:\n            return 0\n        return 1 + max(get_depth(2 * idx + 1), get_depth(2 * idx + 2))\n    return get_depth(0)\n"
+  },
+  "leetcodeId": 104,
+  "leetcodeTitle": "Maximum Depth of Binary Tree",
+  "leetcodeUrl": "https://leetcode.com/problems/maximum-depth-of-binary-tree/"
+}

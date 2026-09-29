@@ -7,10 +7,18 @@ export const GameOverModal: React.FC = () => {
   const { currentProblem, currentFloor, restartRunOnPermadeath } = useGameStore();
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4"
+    >
       <motion.div
-        initial={{ scale: 0.8, opacity: 0, y: 30 }}
+        initial={{ scale: 0.85, opacity: 0, y: 30 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.85, opacity: 0, y: 30 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 350 }}
         className="max-w-md w-full bg-dungeon-darkest border-2 border-rose-600 rounded-2xl p-6 shadow-[0_0_50px_rgba(225,29,72,0.5)] text-center relative overflow-hidden"
       >
         {/* Blood vignette overlay */}
@@ -52,6 +60,6 @@ export const GameOverModal: React.FC = () => {
           <span>RE-ROLL DUNGEON & TRY AGAIN (FLOOR 1)</span>
         </button>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };

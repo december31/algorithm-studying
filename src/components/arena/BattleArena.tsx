@@ -29,22 +29,26 @@ export const BattleArena: React.FC = () => {
       />
 
       {/* Center Stage: Hero vs Monster Encounter */}
-      <div className="relative z-10 flex items-center justify-around py-3 px-4 min-h-[140px]">
+      <div className="relative z-10 grid grid-cols-[1fr_auto_1fr] items-center py-2 px-2 sm:px-4 min-h-[160px]">
         {/* Hero Left Side */}
-        <HeroView />
+        <div className="flex justify-center">
+          <HeroView />
+        </div>
 
         {/* VS Center Clashing Icon */}
-        <div className="flex flex-col items-center">
-          <div className="w-9 h-9 rounded-full bg-dungeon-darkest border border-amber-500/50 flex items-center justify-center font-pixel text-xs text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+        <div className="flex flex-col items-center justify-center px-2 sm:px-4 select-none">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-dungeon-darkest border border-amber-500/50 flex items-center justify-center font-pixel text-[10px] sm:text-xs text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.3)]">
             VS
           </div>
-          <span className="text-[8px] font-pixel text-slate-500 mt-1 uppercase">
+          <span className="text-[8px] font-pixel text-slate-500 mt-1 uppercase tracking-wider">
             {currentProblem.difficulty}
           </span>
         </div>
 
         {/* Monster Right Side */}
-        <MonsterView />
+        <div className="flex justify-center">
+          <MonsterView />
+        </div>
       </div>
 
       {/* Floating Combat Damage & Status Texts */}

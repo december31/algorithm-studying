@@ -1,11 +1,11 @@
 import React from 'react';
 import { useGameStore } from '../../store/useGameStore';
 import { motion } from 'framer-motion';
-import { ShoppingBag, ArrowLeft, Heart, Sparkles } from 'lucide-react';
+import { ShoppingBag, ArrowLeft, Heart, Sparkles, X } from 'lucide-react';
 import { sfx } from '../../engine/sfx';
 
 export const ShopModal: React.FC = () => {
-  const { stats, buyPotion, setScreen } = useGameStore();
+  const { stats, buyPotion, closeShop, previousScreen } = useGameStore();
 
   const buyHpUpgrade = () => {
     const cost = 100;
@@ -23,14 +23,34 @@ export const ShopModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) closeShop();
+      }}
+    >
       <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
+        initial={{ scale: 0.85, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.85, opacity: 0, y: 20 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 350 }}
         className="max-w-md w-full bg-dungeon-darkest border-2 border-amber-500 rounded-2xl p-6 shadow-[0_0_50px_rgba(245,158,11,0.3)] relative"
       >
+        {/* Close Button */}
+        <button
+          onClick={closeShop}
+          className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
+          title="Close Shop"
+        >
+          <X className="w-4 h-4" />
+        </button>
+
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6 pr-6">
           <div className="flex items-center gap-2">
             <ShoppingBag className="w-6 h-6 text-amber-400" />
             <h2 className="font-pixel text-base text-amber-400">DUNGEON SHOP</h2>
@@ -81,13 +101,13 @@ export const ShopModal: React.FC = () => {
 
         {/* Return Button */}
         <button
-          onClick={() => setScreen('battle')}
+          onClick={closeShop}
           className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-pixel text-xs flex items-center justify-center gap-2 transition-colors border border-slate-700"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>RETURN TO TOWER</span>
+          <span>{previousScreen === 'map' ? 'RETURN TO MAP' : 'RETURN TO BATTLE'}</span>
         </button>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };

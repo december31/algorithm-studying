@@ -1,0 +1,203 @@
+{
+  "id": "single-number-ii",
+  "wingId": "bit-manipulation",
+  "floor": 10,
+  "title": "Single Number II",
+  "difficulty": "medium",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "triad-golem",
+    "name": "Triad the Modulo Golem",
+    "title": "Guardian of Thrice-Repeated Runes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#eab308",
+    "attackName": "Ternary Stun Pulse",
+    "attackPower": 2,
+    "defeatQuote": "Bit modulo 3 revealed the single remainder..."
+  },
+  "description": "Given an integer array `nums` where every element appears three times except for one, which appears exactly once. Find the single element and return it. Must be O(1) space.",
+  "examples": [
+    {
+      "input": "nums = [2,2,3,2]",
+      "output": "3"
+    },
+    {
+      "input": "nums = [0,1,0,1,0,1,99]",
+      "output": "99"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 3 * 10^4",
+    "-2^31 <= nums[i] <= 2^31 - 1"
+  ],
+  "starterCode": "function singleNumberII(nums) {\n  return 0;\n}",
+  "solutionCode": "function singleNumberII(nums) {\n  let ones = 0, twos = 0;\n  for (const n of nums) {\n    ones = (ones ^ n) & ~twos;\n    twos = (twos ^ n) & ~ones;\n  }\n  return ones;\n}",
+  "functionName": "singleNumberII",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          2,
+          3,
+          2
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "nums = [2, 2, 3, 2]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          99
+        ]
+      ],
+      "expected": 99,
+      "inputDisplay": "nums = [0,1,0,1,0,1,99]",
+      "expectedDisplay": "99",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "nums = [5]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          2,
+          2,
+          3,
+          2
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[2,2,3,2]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          99
+        ]
+      ],
+      "expected": 99,
+      "inputDisplay": "[0, 1, 0, 1, ... (7 items)]",
+      "expectedDisplay": "99",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1,1,1,2]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          -2,
+          -2,
+          1,
+          -2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[-2,-2,1,-2]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          30000,
+          500,
+          30000,
+          30000
+        ]
+      ],
+      "expected": 500,
+      "inputDisplay": "[30000,500,30000,30000]",
+      "expectedDisplay": "500",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          43,
+          16,
+          43,
+          43
+        ]
+      ],
+      "expected": 16,
+      "inputDisplay": "[43,16,43,43]",
+      "expectedDisplay": "16",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          0,
+          0,
+          0,
+          5
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[0,0,0,5]",
+      "expectedDisplay": "5",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Track bits appearing 1 time and 2 times using bitwise gates: ones = (ones ^ n) & ~twos."
+  ],
+  "python": {
+    "starterCode": "def singleNumberII(nums):\n    return 0\n",
+    "solutionCode": "def singleNumberII(nums):\n    ones, twos = 0, 0\n    for n in nums:\n        ones = (ones ^ n) & ~twos\n        twos = (twos ^ n) & ~ones\n    return ones\n"
+  },
+  "leetcodeId": 137,
+  "leetcodeTitle": "Single Number II",
+  "leetcodeUrl": "https://leetcode.com/problems/single-number-ii/"
+}

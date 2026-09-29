@@ -1,0 +1,250 @@
+{
+  "id": "two-sum",
+  "wingId": "data-structures",
+  "floor": 1,
+  "title": "Two Sum",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "goblin-scout",
+    "name": "Grom the Key Goblin",
+    "title": "Scavenger of Key-Value Shards",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "goblin",
+    "color": "#eab308",
+    "attackName": "Rusty Dagger Shank",
+    "attackPower": 1,
+    "defeatQuote": "Grom could not find complement in time..."
+  },
+  "description": "Given an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.",
+  "examples": [
+    {
+      "input": "nums = [2, 7, 11, 15], target = 9",
+      "output": "[0, 1]"
+    },
+    {
+      "input": "nums = [3, 2, 4], target = 6",
+      "output": "[1, 2]"
+    },
+    {
+      "input": "nums = [3, 3], target = 6",
+      "output": "[0, 1]"
+    }
+  ],
+  "constraints": [
+    "2 <= nums.length <= 10^4",
+    "-10^9 <= nums[i] <= 10^9",
+    "Exactly one valid answer exists."
+  ],
+  "starterCode": "function twoSum(nums, target) {\n  return [];\n}",
+  "solutionCode": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const complement = target - nums[i];\n    if (map.has(complement)) {\n      return [map.get(complement), i];\n    }\n    map.set(nums[i], i);\n  }\n  return [];\n}",
+  "functionName": "twoSum",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          7,
+          11,
+          15
+        ],
+        9
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "inputDisplay": "nums = [2, 7, 11, 15], target = 9",
+      "expectedDisplay": "[0, 1]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          2,
+          4
+        ],
+        6
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "inputDisplay": "nums = [3, 2, 4], target = 6",
+      "expectedDisplay": "[1, 2]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          3,
+          3
+        ],
+        6
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "inputDisplay": "nums = [3, 3], target = 6",
+      "expectedDisplay": "[0, 1]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          -1,
+          -2,
+          -3,
+          -4,
+          -5
+        ],
+        -8
+      ],
+      "expected": [
+        2,
+        4
+      ],
+      "inputDisplay": "[-1,-2,-3,-4,-5], -8",
+      "expectedDisplay": "[2,4]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          0,
+          4,
+          3,
+          0
+        ],
+        0
+      ],
+      "expected": [
+        0,
+        3
+      ],
+      "inputDisplay": "[0,4,3,0], 0",
+      "expectedDisplay": "[0,3]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          -3,
+          4,
+          3,
+          90
+        ],
+        0
+      ],
+      "expected": [
+        0,
+        2
+      ],
+      "inputDisplay": "[-3,4,3,90], 0",
+      "expectedDisplay": "[0,2]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          5,
+          8,
+          12,
+          20,
+          35
+        ],
+        55
+      ],
+      "expected": [
+        4,
+        5
+      ],
+      "inputDisplay": "[1, 5, 8, 12, ... (6 items)], 55",
+      "expectedDisplay": "[4,5]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          100,
+          200,
+          300,
+          400
+        ],
+        700
+      ],
+      "expected": [
+        2,
+        3
+      ],
+      "inputDisplay": "[100,200,300,400], 700",
+      "expectedDisplay": "[2,3]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          5,
+          75,
+          25
+        ],
+        100
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "inputDisplay": "[5,75,25], 100",
+      "expectedDisplay": "[1,2]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        19
+      ],
+      "expected": [
+        8,
+        9
+      ],
+      "inputDisplay": "[1, 2, 3, 4, ... (10 items)], 19",
+      "expectedDisplay": "[8,9]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Store previously seen values in a Hash Map to look up complements in O(1) time."
+  ],
+  "python": {
+    "starterCode": "def twoSum(nums, target):\n    return []\n",
+    "solutionCode": "def twoSum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        comp = target - num\n        if comp in seen:\n            return [seen[comp], i]\n        seen[num] = i\n    return []\n"
+  },
+  "leetcodeId": 1,
+  "leetcodeTitle": "Two Sum",
+  "leetcodeUrl": "https://leetcode.com/problems/two-sum/"
+}

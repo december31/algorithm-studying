@@ -1,0 +1,198 @@
+{
+  "id": "single-number",
+  "wingId": "bit-manipulation",
+  "floor": 1,
+  "title": "Single Number",
+  "difficulty": "easy",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "xor-imp",
+    "name": "Null-Imp the Binary Canceller",
+    "title": "Scavenger of Paired Bits",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "slime",
+    "color": "#10b981",
+    "attackName": "Bitwise Inversion Slash",
+    "attackPower": 1,
+    "defeatQuote": "All paired numbers annihilated to zero, leaving my true identity..."
+  },
+  "description": "Given a non-empty array of integers `nums`, every element appears twice except for one. Find that single one. You must implement a solution with a linear runtime complexity and use only constant extra space (O(1) memory).",
+  "examples": [
+    {
+      "input": "nums = [2,2,1]",
+      "output": "1"
+    },
+    {
+      "input": "nums = [4,1,2,1,2]",
+      "output": "4"
+    },
+    {
+      "input": "nums = [1]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 3 * 10^4",
+    "-3 * 10^4 <= nums[i] <= 3 * 10^4"
+  ],
+  "starterCode": "function singleNumber(nums) {\n  return 0;\n}",
+  "solutionCode": "function singleNumber(nums) {\n  let res = 0;\n  for (const n of nums) res ^= n;\n  return res;\n}",
+  "functionName": "singleNumber",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "nums = [2, 2, 1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          4,
+          1,
+          2,
+          1,
+          2
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "nums = [4, 1, 2, 1, 2]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "nums = [1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          4,
+          1,
+          2,
+          1,
+          2
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[4,1,2,1,2]",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          -1,
+          -1,
+          -2
+        ]
+      ],
+      "expected": -2,
+      "inputDisplay": "[-1,-1,-2]",
+      "expectedDisplay": "-2",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[0,1,0]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          17,
+          12,
+          17
+        ]
+      ],
+      "expected": 12,
+      "inputDisplay": "[17,12,17]",
+      "expectedDisplay": "12",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          99
+        ]
+      ],
+      "expected": 99,
+      "inputDisplay": "[99]",
+      "expectedDisplay": "99",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          5,
+          4,
+          3,
+          2,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[5, 4, 3, 2, ... (9 items)]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "XORing a number with itself yields 0: a ^ a = 0. XORing with 0 preserves value: a ^ 0 = a."
+  ],
+  "python": {
+    "starterCode": "def singleNumber(nums):\n    return 0\n",
+    "solutionCode": "def singleNumber(nums):\n    res = 0\n    for n in nums:\n        res ^= n\n    return res\n"
+  },
+  "leetcodeId": 136,
+  "leetcodeTitle": "Single Number",
+  "leetcodeUrl": "https://leetcode.com/problems/single-number/"
+}

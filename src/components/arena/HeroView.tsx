@@ -30,17 +30,17 @@ export const HeroView: React.FC = () => {
   return (
     <div className="flex flex-col items-center select-none">
       {/* Hero Title & Level */}
-      <div className="text-center mb-1">
-        <div className="font-pixel text-[9px] text-emerald-400 tracking-wider uppercase">
+      <div className="text-center h-8 flex flex-col justify-center mb-1">
+        <div className="font-pixel text-[9px] text-emerald-400 tracking-wider uppercase truncate max-w-[140px] sm:max-w-[170px]">
           ALGO-HERO (YOU)
         </div>
-        <div className="text-[10px] text-slate-400 font-mono italic">
+        <div className="text-[10px] text-slate-400 font-mono italic truncate max-w-[140px] sm:max-w-[170px]">
           LVL {stats.level} ALGO-MAGE
         </div>
       </div>
 
-      {/* Player HP Bar - Exact same shape & style as Monster HP Bar, but emerald to cyan color */}
-      <div className="w-32 sm:w-40 h-3 bg-dungeon-darkest border border-emerald-800 rounded-full overflow-hidden p-0.5 mb-1 shadow-inner relative">
+      {/* Player HP Bar */}
+      <div className="w-32 sm:w-44 h-3 bg-dungeon-darkest border border-emerald-800 rounded-full overflow-hidden p-0.5 mb-1 shadow-inner relative">
         <motion.div
           animate={{ width: `${Math.max(0, Math.min(100, (stats.hp / stats.maxHp) * 100))}%` }}
           transition={{ type: 'spring', stiffness: 200, damping: 20 }}
@@ -49,7 +49,7 @@ export const HeroView: React.FC = () => {
       </div>
 
       {/* HP Value & Shield Status */}
-      <div className="flex items-center gap-2 mb-2 font-mono text-[9px]">
+      <div className="flex items-center justify-center gap-1.5 h-4 mb-2 font-mono text-[9px]">
         <span className="text-slate-300 font-bold">{stats.hp} / {stats.maxHp} HP</span>
         {stats.shieldPassedCount > 0 && (
           <span className="text-sky-400 font-pixel text-[8px] bg-sky-950/80 px-1 rounded border border-sky-600/40 animate-pulse">
@@ -61,16 +61,16 @@ export const HeroView: React.FC = () => {
       {/* Hero Sprite Container */}
       <motion.div
         animate={getAnimationProps()}
-        className="relative flex items-center justify-center"
+        className="relative w-20 h-24 sm:w-24 sm:h-28 flex items-center justify-center"
       >
         {/* Arcane Cast Aura Glow */}
         {heroAnim === 'cast' && (
-          <div className="absolute inset-0 w-24 h-24 -left-3 -top-3 rounded-full bg-sky-500/40 blur-xl animate-pulse" />
+          <div className="absolute inset-0 w-24 h-24 -left-2 -top-2 rounded-full bg-sky-500/40 blur-xl animate-pulse" />
         )}
 
         {/* 8-bit Pixel Character Canvas / SVG */}
         <div
-          className={`w-16 h-20 sm:w-20 sm:h-24 flex items-center justify-center rounded-lg p-2 relative transition-all ${
+          className={`w-full h-full flex items-center justify-center rounded-lg p-2 relative transition-all ${
             heroAnim === 'hurt'
               ? 'bg-rose-500/30 filter drop-shadow-[0_0_15px_rgba(244,63,94,0.8)]'
               : 'filter drop-shadow-[0_0_12px_rgba(56,189,248,0.4)]'
@@ -107,19 +107,21 @@ export const HeroView: React.FC = () => {
         </div>
 
         {/* Hero Shadow */}
-        <div className="absolute -bottom-2 w-14 h-3 bg-black/40 rounded-full blur-xs pointer-events-none" />
+        <div className="absolute -bottom-1.5 w-16 h-3 bg-black/40 rounded-full blur-xs pointer-events-none" />
       </motion.div>
 
       {/* Hero Action Intent (Quick Potion Use) */}
-      <button
-        onClick={usePotion}
-        disabled={stats.potions === 0 || stats.hp >= stats.maxHp}
-        className="mt-2 px-2.5 py-0.5 rounded-md bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-800/60 font-pixel text-[8px] text-emerald-300 flex items-center gap-1 shadow transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-        title="Drink health potion to restore +35 HP"
-      >
-        <span>🧪</span>
-        <span>HEAL ({stats.potions})</span>
-      </button>
+      <div className="h-6 mt-2 flex items-center justify-center">
+        <button
+          onClick={usePotion}
+          disabled={stats.potions === 0 || stats.hp >= stats.maxHp}
+          className="px-2.5 py-0.5 rounded-md bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-800/60 font-pixel text-[8px] text-emerald-300 flex items-center gap-1 shadow transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          title="Drink health potion to restore +35 HP"
+        >
+          <span>🧪</span>
+          <span>HEAL ({stats.potions})</span>
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,238 @@
+{
+  "id": "letter-combinations-of-a-phone-number",
+  "wingId": "backtracking",
+  "floor": 18,
+  "title": "Letter Combinations of a Phone Number",
+  "difficulty": "medium",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "dialing-chimera",
+    "name": "The Dialing Chimera",
+    "title": "Keeper of Keypad Permutations",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "gargoyle",
+    "color": "#a855f7",
+    "attackName": "Polyphonic Digit Scream",
+    "attackPower": 2,
+    "defeatQuote": "Every branch of phone digits traversed to the leaf..."
+  },
+  "description": "Given a string containing digits from `2-9` inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.",
+  "examples": [
+    {
+      "input": "digits = \"23\"",
+      "output": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]"
+    },
+    {
+      "input": "digits = \"\"",
+      "output": "[]"
+    },
+    {
+      "input": "digits = \"2\"",
+      "output": "[\"a\",\"b\",\"c\"]"
+    }
+  ],
+  "constraints": [
+    "0 <= digits.length <= 4",
+    "digits[i] is a digit in the range ['2', '9']."
+  ],
+  "starterCode": "function letterCombinations(digits) {\n  return [];\n}",
+  "solutionCode": "function letterCombinations(digits) {\n  if (!digits) return [];\n  const map = {\n    '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',\n    '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'\n  };\n  const res = [];\n  function backtrack(idx, path) {\n    if (idx === digits.length) {\n      res.push(path);\n      return;\n    }\n    const letters = map[digits[idx]] || '';\n    for (let i = 0; i < letters.length; i++) {\n      backtrack(idx + 1, path + letters[i]);\n    }\n  }\n  backtrack(0, '');\n  return res;\n}",
+  "functionName": "letterCombinations",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "23"
+      ],
+      "expected": [
+        "ad",
+        "ae",
+        "af",
+        "bd",
+        "be",
+        "bf",
+        "cd",
+        "ce",
+        "cf"
+      ],
+      "inputDisplay": "digits = \"23\"",
+      "expectedDisplay": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]"
+    },
+    {
+      "id": 2,
+      "input": [
+        ""
+      ],
+      "expected": [],
+      "inputDisplay": "digits = \"\"",
+      "expectedDisplay": "[]"
+    },
+    {
+      "id": 3,
+      "input": [
+        "2"
+      ],
+      "expected": [
+        "a",
+        "b",
+        "c"
+      ],
+      "inputDisplay": "digits = \"2\"",
+      "expectedDisplay": "[\"a\",\"b\",\"c\"]"
+    },
+    {
+      "id": 4,
+      "input": [
+        "9"
+      ],
+      "expected": [
+        "w",
+        "x",
+        "y",
+        "z"
+      ],
+      "inputDisplay": "digits = \"9\"",
+      "expectedDisplay": "[\"w\",\"x\",\"y\",\"z\"]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        "79"
+      ],
+      "expected": [
+        "pw",
+        "px",
+        "py",
+        "pz",
+        "qw",
+        "qx",
+        "qy",
+        "qz",
+        "rw",
+        "rx",
+        "ry",
+        "rz",
+        "sw",
+        "sx",
+        "sy",
+        "sz"
+      ],
+      "inputDisplay": "digits = \"79\"",
+      "expectedDisplay": "16 combinations",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        "4"
+      ],
+      "expected": [
+        "g",
+        "h",
+        "i"
+      ],
+      "inputDisplay": "digits = \"4\"",
+      "expectedDisplay": "[\"g\",\"h\",\"i\"]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        "22"
+      ],
+      "expected": [
+        "aa",
+        "ab",
+        "ac",
+        "ba",
+        "bb",
+        "bc",
+        "ca",
+        "cb",
+        "cc"
+      ],
+      "inputDisplay": "digits = \"22\"",
+      "expectedDisplay": "9 combinations",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        "345"
+      ],
+      "expected": [
+        "dgj",
+        "dgk",
+        "dgl",
+        "dhj",
+        "dhk",
+        "dhl",
+        "dij",
+        "dik",
+        "dil",
+        "egj",
+        "egk",
+        "egl",
+        "ehj",
+        "ehk",
+        "ehl",
+        "eij",
+        "eik",
+        "eil",
+        "fgj",
+        "fgk",
+        "fgl",
+        "fhj",
+        "fhk",
+        "fhl",
+        "fij",
+        "fik",
+        "fil"
+      ],
+      "inputDisplay": "digits = \"345\"",
+      "expectedDisplay": "27 combinations",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        "7"
+      ],
+      "expected": [
+        "p",
+        "q",
+        "r",
+        "s"
+      ],
+      "inputDisplay": "digits = \"7\"",
+      "expectedDisplay": "[\"p\",\"q\",\"r\",\"s\"]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        "8"
+      ],
+      "expected": [
+        "t",
+        "u",
+        "v"
+      ],
+      "inputDisplay": "digits = \"8\"",
+      "expectedDisplay": "[\"t\",\"u\",\"v\"]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Map each digit to its respective letters. Recurse depth-first, passing the accumulated string down to the base case at digits.length."
+  ],
+  "python": {
+    "starterCode": "def letterCombinations(digits):\n    return []\n",
+    "solutionCode": "def letterCombinations(digits):\n    if not digits:\n        return []\n    mapping = {\n        '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',\n        '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'\n    }\n    res = []\n    def backtrack(idx, path):\n        if idx == len(digits):\n            res.append(path)\n            return\n        for char in mapping.get(digits[idx], ''):\n            backtrack(idx + 1, path + char)\n    backtrack(0, '')\n    return res\n"
+  },
+  "leetcodeId": 17,
+  "leetcodeTitle": "Letter Combinations of a Phone Number",
+  "leetcodeUrl": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/"
+}

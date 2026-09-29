@@ -32,4 +32,20 @@ export interface Problem {
   hints: string[];
   // Generates visual frames for step-by-step animation based on the problem test case
   generateDefaultFrames: (testCase: TestCase) => VisualizerFrame[];
+  // LeetCode Reference
+  leetcodeId?: number;
+  leetcodeTitle?: string;
+  leetcodeUrl?: string;
+  leetcode?: {
+    id: number;
+    title: string;
+    slug: string;
+    url: string;
+    difficulty: 'Easy' | 'Medium' | 'Hard';
+  };
+  // Python starter & solution code
+  python?: {
+    starterCode: string;
+    solutionCode: string;
+  };
 }

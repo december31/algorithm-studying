@@ -1,0 +1,145 @@
+{
+  "id": "reverse-bits",
+  "wingId": "bit-manipulation",
+  "floor": 4,
+  "title": "Reverse Bits",
+  "difficulty": "easy",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "mirror-gargoyle",
+    "name": "Reflector the Inverted Gargoyle",
+    "title": "Rotator of 32 Register Cells",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "gargoyle",
+    "color": "#64748b",
+    "attackName": "Reversed Bit Burst",
+    "attackPower": 1,
+    "defeatQuote": "My 32-bit register was inverted end-to-end..."
+  },
+  "description": "Reverse bits of a given 32 bits unsigned integer.",
+  "examples": [
+    {
+      "input": "n = 43261596 (0b00000010100101000001111010011100)",
+      "output": "964176192 (0b00111001011110000010100101000000)"
+    }
+  ],
+  "constraints": [
+    "The input must be a binary string or 32-bit integer."
+  ],
+  "starterCode": "function reverseBits(n) {\n  return 0;\n}",
+  "solutionCode": "function reverseBits(n) {\n  let result = 0;\n  for (let i = 0; i < 32; i++) {\n    result = (result << 1) | (n & 1);\n    n >>>= 1;\n  }\n  return result >>> 0;\n}",
+  "functionName": "reverseBits",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        43261596
+      ],
+      "expected": 964176192,
+      "inputDisplay": "n = 43261596",
+      "expectedDisplay": "964176192",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": 2147483648,
+      "inputDisplay": "n = 1 (bit 0 -> bit 31)",
+      "expectedDisplay": "2147483648",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        0
+      ],
+      "expected": 0,
+      "inputDisplay": "n = 0",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        0
+      ],
+      "expected": 0,
+      "inputDisplay": "0",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        1
+      ],
+      "expected": 2147483648,
+      "inputDisplay": "1",
+      "expectedDisplay": "2147483648",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        2
+      ],
+      "expected": 1073741824,
+      "inputDisplay": "2",
+      "expectedDisplay": "1073741824",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        2147483648
+      ],
+      "expected": 1,
+      "inputDisplay": "2147483648",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        4294967295
+      ],
+      "expected": 4294967295,
+      "inputDisplay": "4294967295",
+      "expectedDisplay": "4294967295",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        43261596
+      ],
+      "expected": 964176192,
+      "inputDisplay": "43261596",
+      "expectedDisplay": "964176192",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        1073741824
+      ],
+      "expected": 2,
+      "inputDisplay": "1073741824",
+      "expectedDisplay": "2",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Shift result left by 1 and OR with (n & 1), then shift n right by 1 for 32 iterations."
+  ],
+  "python": {
+    "starterCode": "def reverseBits(n):\n    return 0\n",
+    "solutionCode": "def reverseBits(n):\n    res = 0\n    for _ in range(32):\n        res = (res << 1) | (n & 1)\n        n >>= 1\n    return res\n"
+  },
+  "leetcodeId": 190,
+  "leetcodeTitle": "Reverse Bits",
+  "leetcodeUrl": "https://leetcode.com/problems/reverse-bits/"
+}

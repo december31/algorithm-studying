@@ -1539,4 +1539,332 @@ def shortestPathLength(graph):
     return ans
 `,
   },
+  'longest-substring-without-repeating-characters': {
+    starterCode: `def lengthOfLongestSubstring(s):
+    return 0
+`,
+    solutionCode: `def lengthOfLongestSubstring(s):
+    seen = {}
+    max_len = 0
+    left = 0
+    for right, c in enumerate(s):
+        if c in seen and seen[c] >= left:
+            left = seen[c] + 1
+        seen[c] = right
+        max_len = max(max_len, right - left + 1)
+    return max_len
+`,
+  },
+  'three-sum': {
+    starterCode: `def threeSum(nums):
+    return []
+`,
+    solutionCode: `def threeSum(nums):
+    nums.sort()
+    res = []
+    for i in range(len(nums) - 2):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        l, r = i + 1, len(nums) - 1
+        while l < r:
+            s = nums[i] + nums[l] + nums[r]
+            if s == 0:
+                res.append([nums[i], nums[l], nums[r]])
+                while l < r and nums[l] == nums[l + 1]:
+                    l += 1
+                while l < r and nums[r] == nums[r - 1]:
+                    r -= 1
+                l += 1
+                r -= 1
+            elif s < 0:
+                l += 1
+            else:
+                r -= 1
+    return res
+`,
+  },
+  'merge-k-sorted-lists': {
+    starterCode: `def mergeKLists(lists):
+    return []
+`,
+    solutionCode: `def mergeKLists(lists):
+    if not lists:
+        return []
+    import heapq
+    heap = []
+    res = []
+    for i, arr in enumerate(lists):
+        if arr:
+            heapq.heappush(heap, (arr[0], i, 0))
+    while heap:
+        val, arr_idx, elem_idx = heapq.heappop(heap)
+        res.append(val)
+        if elem_idx + 1 < len(lists[arr_idx]):
+            heapq.heappush(heap, (lists[arr_idx][elem_idx + 1], arr_idx, elem_idx + 1))
+    return res
+`,
+  },
+  'letter-combinations-of-a-phone-number': {
+    starterCode: `def letterCombinations(digits):
+    return []
+`,
+    solutionCode: `def letterCombinations(digits):
+    if not digits:
+        return []
+    mapping = {
+        '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',
+        '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'
+    }
+    res = []
+    def backtrack(idx, path):
+        if idx == len(digits):
+            res.append(path)
+            return
+        for char in mapping.get(digits[idx], ''):
+            backtrack(idx + 1, path + char)
+    backtrack(0, '')
+    return res
+`,
+  },
+  'palindrome-partitioning': {
+    starterCode: `def partition(s):
+    return []
+`,
+    solutionCode: `def partition(s):
+    res = []
+    def backtrack(start, curr):
+        if start == len(s):
+            res.append(list(curr))
+            return
+        for end in range(start + 1, len(s) + 1):
+            sub = s[start:end]
+            if sub == sub[::-1]:
+                curr.append(sub)
+                backtrack(end, curr)
+                curr.pop()
+    backtrack(0, [])
+    return res
+`,
+  },
+  'word-break-ii': {
+    starterCode: `def wordBreak(s, wordDict):
+    return []
+`,
+    solutionCode: `def wordBreak(s, wordDict):
+    d = set(wordDict)
+    memo = {}
+    def dfs(rem):
+        if rem in memo:
+            return memo[rem]
+        if not rem:
+            return [""]
+        res = []
+        for word in wordDict:
+            if rem.startswith(word):
+                sub_res = dfs(rem[len(word):])
+                for sub in sub_res:
+                    res.append(word if not sub else word + " " + sub)
+        memo[rem] = res
+        return res
+    return dfs(s)
+`,
+  },
+  'course-schedule-ii': {
+    starterCode: `def findOrder(numCourses, prerequisites):
+    return []
+`,
+    solutionCode: `def findOrder(numCourses, prerequisites):
+    from collections import deque
+    in_degree = [0] * numCourses
+    adj = [[] for _ in range(numCourses)]
+    for dest, src in prerequisites:
+        adj[src].append(dest)
+        in_degree[dest] += 1
+    queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+    order = []
+    while queue:
+        u = queue.popleft()
+        order.append(u)
+        for v in adj[u]:
+            in_degree[v] -= 1
+            if in_degree[v] == 0:
+                queue.append(v)
+    return order if len(order) == numCourses else []
+`,
+  },
+  'pacific-atlantic-water-flow': {
+    starterCode: `def pacificAtlantic(heights):
+    return []
+`,
+    solutionCode: `def pacificAtlantic(heights):
+    if not heights:
+        return []
+    m, n = len(heights), len(heights[0])
+    pac = [[False] * n for _ in range(m)]
+    atl = [[False] * n for _ in range(m)]
+    def dfs(r, c, vis, prev_h):
+        if r < 0 or r >= m or c < 0 or c >= n or vis[r][c] or heights[r][c] < prev_h:
+            return
+        vis[r][c] = True
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            dfs(r + dr, c + dc, vis, heights[r][c])
+    for i in range(m):
+        dfs(i, 0, pac, heights[i][0])
+        dfs(i, n - 1, atl, heights[i][n - 1])
+    for j in range(n):
+        dfs(0, j, pac, heights[0][j])
+        dfs(m - 1, j, atl, heights[m - 1][j])
+    return [[i, j] for i in range(m) for j in range(n) if pac[i][j] and atl[i][j]]
+`,
+  },
+  'longest-increasing-path-in-a-matrix': {
+    starterCode: `def longestIncreasingPath(matrix):
+    return 0
+`,
+    solutionCode: `def longestIncreasingPath(matrix):
+    if not matrix:
+        return 0
+    m, n = len(matrix), len(matrix[0])
+    memo = [[0] * n for _ in range(m)]
+    dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+    def dfs(r, c):
+        if memo[r][c] != 0:
+            return memo[r][c]
+        length = 1
+        for dr, dc in dirs:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < m and 0 <= nc < n and matrix[nr][nc] > matrix[r][c]:
+                length = max(length, 1 + dfs(nr, nc))
+        memo[r][c] = length
+        return length
+    return max(dfs(r, c) for r in range(m) for c in range(n))
+`,
+  },
+  'koko-eating-bananas': {
+    starterCode: `def minEatingSpeed(piles, h):
+    return 1
+`,
+    solutionCode: `def minEatingSpeed(piles, h):
+    import math
+    low, high = 1, max(piles)
+    ans = high
+    while low <= high:
+        mid = (low + high) // 2
+        hours = sum(math.ceil(p / mid) for p in piles)
+        if hours <= h:
+            ans = mid
+            high = mid - 1
+        else:
+            low = mid + 1
+    return ans
+`,
+  },
+  'jump-game-ii': {
+    starterCode: `def jump(nums):
+    return 0
+`,
+    solutionCode: `def jump(nums):
+    jumps, curr_end, farthest = 0, 0, 0
+    for i in range(len(nums) - 1):
+        farthest = max(farthest, i + nums[i])
+        if i == curr_end:
+            jumps += 1
+            curr_end = farthest
+    return jumps
+`,
+  },
+  'trapping-rain-water': {
+    starterCode: `def trap(height):
+    return 0
+`,
+    solutionCode: `def trap(height):
+    if not height:
+        return 0
+    left, right = 0, len(height) - 1
+    left_max, right_max = 0, 0
+    water = 0
+    while left < right:
+        if height[left] < height[right]:
+            if height[left] >= left_max:
+                left_max = height[left]
+            else:
+                water += left_max - height[left]
+            left += 1
+        else:
+            if height[right] >= right_max:
+                right_max = height[right]
+            else:
+                water += right_max - height[right]
+            right -= 1
+    return water
+`,
+  },
+  'divide-two-integers': {
+    starterCode: `def divide(dividend, divisor):
+    return 0
+`,
+    solutionCode: `def divide(dividend, divisor):
+    MAX = 2147483647
+    MIN = -2147483648
+    if dividend == MIN and divisor == -1:
+        return MAX
+    negative = (dividend < 0) ^ (divisor < 0)
+    a, b = abs(dividend), abs(divisor)
+    quotient = 0
+    while a >= b:
+        temp, mult = b, 1
+        while a >= (temp << 1):
+            temp <<= 1
+            mult <<= 1
+        a -= temp
+        quotient += mult
+    return -quotient if negative else quotient
+`,
+  },
+  'find-the-duplicate-number': {
+    starterCode: `def findDuplicate(nums):
+    return 0
+`,
+    solutionCode: `def findDuplicate(nums):
+    slow, fast = nums[0], nums[0]
+    while True:
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+        if slow == fast:
+            break
+    slow = nums[0]
+    while slow != fast:
+        slow = nums[slow]
+        fast = nums[fast]
+    return slow
+`,
+  },
+  'number-of-valid-words-for-each-puzzle': {
+    starterCode: `def findNumOfValidWords(words, puzzles):
+    return []
+`,
+    solutionCode: `def findNumOfValidWords(words, puzzles):
+    from collections import Counter
+    word_count = Counter()
+    for w in words:
+        mask = 0
+        for ch in w:
+            mask |= 1 << (ord(ch) - 97)
+        word_count[mask] += 1
+    res = []
+    for p in puzzles:
+        first_bit = 1 << (ord(p[0]) - 97)
+        mask = 0
+        for ch in p:
+            mask |= 1 << (ord(ch) - 97)
+        count = 0
+        submask = mask
+        while submask > 0:
+            if submask & first_bit:
+                count += word_count[submask]
+            submask = (submask - 1) & mask
+        res.append(count)
+    return res
+`,
+  },
 };

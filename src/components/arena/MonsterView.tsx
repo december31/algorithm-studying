@@ -280,32 +280,42 @@ export const MonsterView: React.FC = () => {
   return (
     <div className="flex flex-col items-center select-none">
       {/* Monster Title & Name */}
-      <div className="text-center mb-1">
-        <div className="font-pixel text-[9px] text-rose-400 tracking-wider uppercase">
+      <div className="text-center h-8 flex flex-col justify-center mb-1">
+        <div className="font-pixel text-[9px] text-rose-400 tracking-wider uppercase truncate max-w-[140px] sm:max-w-[170px]" title={monster.name}>
           {monster.name}
         </div>
-        <div className="text-[10px] text-slate-400 font-mono italic">
+        <div className="text-[10px] text-slate-400 font-mono italic truncate max-w-[140px] sm:max-w-[170px]" title={monster.title}>
           {monster.title}
         </div>
       </div>
 
       {/* Monster HP Bar */}
-      <div className="w-32 sm:w-40 h-3 bg-dungeon-darkest border border-rose-900 rounded-full overflow-hidden p-0.5 mb-2 shadow-inner">
+      <div className="w-32 sm:w-44 h-3 bg-dungeon-darkest border border-rose-900 rounded-full overflow-hidden p-0.5 mb-1 shadow-inner relative">
         <motion.div
-          animate={{ width: `${(monsterHp / maxMonsterHp) * 100}%` }}
+          animate={{ width: `${Math.max(0, Math.min(100, (monsterHp / maxMonsterHp) * 100))}%` }}
           transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-          className="h-full bg-gradient-to-r from-rose-600 to-amber-500 rounded-full"
+          className="h-full bg-gradient-to-r from-rose-600 via-rose-500 to-amber-500 rounded-full shadow-[0_0_8px_rgba(244,63,94,0.5)]"
         />
+      </div>
+
+      {/* HP Value & Damage Status */}
+      <div className="flex items-center justify-center gap-1.5 h-4 mb-2 font-mono text-[9px]">
+        <span className="text-slate-300 font-bold">{monsterHp} / {maxMonsterHp} HP</span>
+        {monsterHp < maxMonsterHp && (
+          <span className="text-rose-400 font-pixel text-[8px] bg-rose-950/80 px-1 rounded border border-rose-600/40 animate-pulse">
+            -{maxMonsterHp - monsterHp}
+          </span>
+        )}
       </div>
 
       {/* Monster Sprite */}
       <motion.div
         key={`monster-sprite-${monster.id}`}
         animate={getAnimationProps()}
-        className="relative flex items-center justify-center"
+        className="relative w-20 h-24 sm:w-24 sm:h-28 flex items-center justify-center"
       >
         <div
-          className={`w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-lg p-2 transition-all ${
+          className={`w-full h-full flex items-center justify-center rounded-lg p-2 transition-all ${
             monsterAnim === 'hurt'
               ? 'bg-rose-500/40 filter drop-shadow-[0_0_20px_rgba(244,63,94,0.9)]'
               : 'filter drop-shadow-[0_0_12px_rgba(239,68,68,0.3)]'
@@ -315,13 +325,15 @@ export const MonsterView: React.FC = () => {
         </div>
 
         {/* Monster Shadow */}
-        <div className="absolute -bottom-2 w-16 h-3 bg-black/40 rounded-full blur-xs pointer-events-none" />
+        <div className="absolute -bottom-1.5 w-16 h-3 bg-black/40 rounded-full blur-xs pointer-events-none" />
       </motion.div>
 
       {/* Attack Intent Indicator */}
-      <div className="mt-2 px-2.5 py-0.5 rounded-md bg-rose-950/80 border border-rose-800/60 font-pixel text-[8px] text-rose-300 flex items-center gap-1 shadow">
-        <span>⚔️</span>
-        <span>{monster.attackName}</span>
+      <div className="h-6 mt-2 flex items-center justify-center">
+        <div className="px-2.5 py-0.5 rounded-md bg-rose-950/80 border border-rose-800/60 font-pixel text-[8px] text-rose-300 flex items-center gap-1 shadow">
+          <span>⚔️</span>
+          <span className="truncate max-w-[110px] sm:max-w-[140px]">{monster.attackName}</span>
+        </div>
       </div>
     </div>
   );

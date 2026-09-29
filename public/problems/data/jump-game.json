@@ -1,0 +1,190 @@
+{
+  "id": "jump-game",
+  "wingId": "binary-search-greedy",
+  "floor": 10,
+  "title": "Jump Game",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "spring-goblin",
+    "name": "Springo the Leap Goblin",
+    "title": "Surveyor of Chasm Reachabilities",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "goblin",
+    "color": "#f59e0b",
+    "attackName": "Spring-Loaded Leap Slash",
+    "attackPower": 2,
+    "defeatQuote": "Your maximum reach bridged the final abyss..."
+  },
+  "description": "You are given an integer array `nums`. You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position. Return `true` if you can reach the last index, or `false` otherwise.",
+  "examples": [
+    {
+      "input": "nums = [2,3,1,1,4]",
+      "output": "true"
+    },
+    {
+      "input": "nums = [3,2,1,0,4]",
+      "output": "false"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10^4",
+    "0 <= nums[i] <= 10^5"
+  ],
+  "starterCode": "function canJump(nums) {\n  return false;\n}",
+  "solutionCode": "function canJump(nums) {\n  let maxReach = 0;\n  for (let i = 0; i < nums.length; i++) {\n    if (i > maxReach) return false;\n    maxReach = Math.max(maxReach, i + nums[i]);\n    if (maxReach >= nums.length - 1) return true;\n  }\n  return true;\n}",
+  "functionName": "canJump",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          1,
+          1,
+          4
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "nums = [2,3,1,1,4]",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          2,
+          1,
+          0,
+          4
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "nums = [3,2,1,0,4]",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "nums = [0]",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[0]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          2,
+          0
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[2,0]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          0,
+          2,
+          3
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[0,2,3]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          2,
+          5,
+          0,
+          0
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[2,5,0,0]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1,1,1,1]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          0,
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1,2,0,1]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Maintain maxReach = max(maxReach, i + nums[i]). If i > maxReach, you are stuck."
+  ],
+  "python": {
+    "starterCode": "def canJump(nums):\n    return False\n",
+    "solutionCode": "def canJump(nums):\n    max_reach = 0\n    for i, jump in enumerate(nums):\n        if i > max_reach:\n            return False\n        max_reach = max(max_reach, i + jump)\n        if max_reach >= len(nums) - 1:\n            return True\n    return True\n"
+  },
+  "leetcodeId": 55,
+  "leetcodeTitle": "Jump Game",
+  "leetcodeUrl": "https://leetcode.com/problems/jump-game/"
+}

@@ -19,10 +19,18 @@ export const VictoryModal: React.FC = () => {
   const isWingBoss = currentFloor === 10;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+    >
       <motion.div
-        initial={{ scale: 0.8, opacity: 0, y: 20 }}
+        initial={{ scale: 0.85, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.85, opacity: 0, y: 20 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 350 }}
         className="max-w-md w-full bg-dungeon-darkest border-2 border-emerald-500 rounded-2xl p-6 shadow-[0_0_50px_rgba(16,185,129,0.4)] text-center relative overflow-hidden"
       >
         {/* Glow backdrop */}
@@ -78,6 +86,6 @@ export const VictoryModal: React.FC = () => {
           )}
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };

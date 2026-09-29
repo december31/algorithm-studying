@@ -1,0 +1,218 @@
+{
+  "id": "binary-tree-paths",
+  "wingId": "backtracking",
+  "floor": 1,
+  "title": "Binary Tree Paths",
+  "difficulty": "easy",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "path-imp",
+    "name": "Twig the Root Imp",
+    "title": "Scout of the Branching Trails",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "slime",
+    "color": "#10b981",
+    "attackName": "Briar Thorn Whip",
+    "attackPower": 1,
+    "defeatQuote": "All my branch trails were navigated..."
+  },
+  "description": "Given the root of a binary tree represented as an array in level-order, return all root-to-leaf paths in any order. A leaf is a node with no children.",
+  "examples": [
+    {
+      "input": "root = [1, 2, 3, null, 5]",
+      "output": "[\"1->2->5\",\"1->3\"]"
+    },
+    {
+      "input": "root = [1]",
+      "output": "[\"1\"]"
+    }
+  ],
+  "constraints": [
+    "The number of nodes in the tree is in the range [1, 100].",
+    "-100 <= Node.val <= 100"
+  ],
+  "starterCode": "function binaryTreePaths(root) {\n  return [];\n}",
+  "solutionCode": "function binaryTreePaths(root) {\n  if (!root || root.length === 0 || root[0] === null) return [];\n  const paths = [];\n  function dfs(idx, currPath) {\n    if (idx >= root.length || root[idx] === null || root[idx] === undefined) return;\n    const next = currPath === '' ? String(root[idx]) : currPath + '->' + root[idx];\n    const leftIdx = 2 * idx + 1;\n    const rightIdx = 2 * idx + 2;\n    const isLeaf = (leftIdx >= root.length || root[leftIdx] === null || root[leftIdx] === undefined) &&\n                   (rightIdx >= root.length || root[rightIdx] === null || root[rightIdx] === undefined);\n    if (isLeaf) {\n      paths.push(next);\n      return;\n    }\n    dfs(leftIdx, next);\n    dfs(rightIdx, next);\n  }\n  dfs(0, '');\n  return paths;\n}",
+  "functionName": "binaryTreePaths",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          null,
+          5
+        ]
+      ],
+      "expected": [
+        "1->2->5",
+        "1->3"
+      ],
+      "inputDisplay": "root = [1, 2, 3, null, 5]",
+      "expectedDisplay": "[\"1->2->5\", \"1->3\"]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        "1"
+      ],
+      "inputDisplay": "root = [1]",
+      "expectedDisplay": "[\"1\"]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          null
+        ]
+      ],
+      "expected": [
+        "1->2"
+      ],
+      "inputDisplay": "root = [1, 2, null]",
+      "expectedDisplay": "[\"1->2\"]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        "1"
+      ],
+      "inputDisplay": "[1]",
+      "expectedDisplay": "[\"1\"]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        "1->2"
+      ],
+      "inputDisplay": "[1,2]",
+      "expectedDisplay": "[\"1->2\"]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": [
+        "1->2"
+      ],
+      "inputDisplay": "[1,null,2]",
+      "expectedDisplay": "[\"1->2\"]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        "1->2->4",
+        "1->2->5",
+        "1->3"
+      ],
+      "inputDisplay": "[1,2,3,4,5]",
+      "expectedDisplay": "[\"1->2->4\",\"1->2->5\",\"1->3\"]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          7,
+          8,
+          null,
+          9
+        ]
+      ],
+      "expected": [
+        "7->8->9"
+      ],
+      "inputDisplay": "[7,8,null,9]",
+      "expectedDisplay": "[\"7->8->9\"]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          null,
+          3,
+          null,
+          4
+        ]
+      ],
+      "expected": [
+        "1->2->3"
+      ],
+      "inputDisplay": "[1, 2, null, 3, ... (6 items)]",
+      "expectedDisplay": "[\"1->2->3\"]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          null,
+          2,
+          null,
+          3
+        ]
+      ],
+      "expected": [
+        "1->2"
+      ],
+      "inputDisplay": "[1,null,2,null,3]",
+      "expectedDisplay": "[\"1->2\"]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Recursively traverse downwards passing the current path string until reaching a leaf node."
+  ],
+  "python": {
+    "starterCode": "def binaryTreePaths(root):\n    return []\n",
+    "solutionCode": "def binaryTreePaths(root):\n    if not root or root[0] is None:\n        return []\n    paths = []\n    def dfs(idx, curr):\n        if idx >= len(root) or root[idx] is None:\n            return\n        nxt = str(root[idx]) if not curr else curr + \"->\" + str(root[idx])\n        left = 2 * idx + 1\n        right = 2 * idx + 2\n        is_leaf = (left >= len(root) or root[left] is None) and (right >= len(root) or root[right] is None)\n        if is_leaf:\n            paths.append(nxt)\n            return\n        dfs(left, nxt)\n        dfs(right, nxt)\n    dfs(0, \"\")\n    return paths\n"
+  },
+  "leetcodeId": 257,
+  "leetcodeTitle": "Binary Tree Paths",
+  "leetcodeUrl": "https://leetcode.com/problems/binary-tree-paths/"
+}

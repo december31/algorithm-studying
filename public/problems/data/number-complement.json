@@ -1,0 +1,149 @@
+{
+  "id": "number-complement",
+  "wingId": "bit-manipulation",
+  "floor": 7,
+  "title": "Number Complement",
+  "difficulty": "easy",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "complement-imp",
+    "name": "Inverto the Bit-Flip Imp",
+    "title": "Inverter of Bit Width Masks",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "slime",
+    "color": "#f59e0b",
+    "attackName": "Complementary Flash",
+    "attackPower": 1,
+    "defeatQuote": "My mask flipped each 1 to 0 and 0 to 1..."
+  },
+  "description": "The complement of an integer is the integer you get when you flip all the 0's to 1's and all the 1's to 0's in its binary representation. Given an integer `num`, return its complement.",
+  "examples": [
+    {
+      "input": "num = 5 (0b101)",
+      "output": "2 (0b010)"
+    },
+    {
+      "input": "num = 1 (0b1)",
+      "output": "0 (0b0)"
+    }
+  ],
+  "constraints": [
+    "1 <= num < 2^31"
+  ],
+  "starterCode": "function findComplement(num) {\n  return 0;\n}",
+  "solutionCode": "function findComplement(num) {\n  let mask = 1;\n  while (mask < num) {\n    mask = (mask << 1) | 1;\n  }\n  return num ^ mask;\n}",
+  "functionName": "findComplement",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        5
+      ],
+      "expected": 2,
+      "inputDisplay": "num = 5 (101 -> 010)",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": 0,
+      "inputDisplay": "num = 1 (1 -> 0)",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        2
+      ],
+      "expected": 1,
+      "inputDisplay": "num = 2 (10 -> 01)",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        1
+      ],
+      "expected": 0,
+      "inputDisplay": "1",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        2
+      ],
+      "expected": 1,
+      "inputDisplay": "2",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        3
+      ],
+      "expected": 0,
+      "inputDisplay": "3",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        5
+      ],
+      "expected": 2,
+      "inputDisplay": "5",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        7
+      ],
+      "expected": 0,
+      "inputDisplay": "7",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        8
+      ],
+      "expected": 7,
+      "inputDisplay": "8",
+      "expectedDisplay": "7",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        10
+      ],
+      "expected": 5,
+      "inputDisplay": "10",
+      "expectedDisplay": "5",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Create an all-1s mask of the same bit length, then XOR num with mask."
+  ],
+  "python": {
+    "starterCode": "def findComplement(num):\n    return 0\n",
+    "solutionCode": "def findComplement(num):\n    mask = 1\n    while mask < num:\n        mask = (mask << 1) | 1\n    return num ^ mask\n"
+  },
+  "leetcodeId": 476,
+  "leetcodeTitle": "Number Complement",
+  "leetcodeUrl": "https://leetcode.com/problems/number-complement/"
+}

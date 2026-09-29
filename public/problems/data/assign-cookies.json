@@ -1,0 +1,217 @@
+{
+  "id": "assign-cookies",
+  "wingId": "binary-search-greedy",
+  "floor": 5,
+  "title": "Assign Cookies",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "glutton-orc",
+    "name": "Gromm the Cookie Glutton",
+    "title": "Devourer of Sized Treats",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "orc",
+    "color": "#15803d",
+    "attackName": "Gluttonous Roar",
+    "attackPower": 1,
+    "defeatQuote": "All the children received their satisfied treats..."
+  },
+  "description": "Assume you are an awesome parent and want to give your children some cookies. Each child `i` has a greed factor `g[i]`, and each cookie `j` has a size `s[j]`. If `s[j] >= g[i]`, we can assign cookie `j` to child `i`. Maximize the number of content children.",
+  "examples": [
+    {
+      "input": "g = [1,2,3], s = [1,1]",
+      "output": "1"
+    },
+    {
+      "input": "g = [1,2], s = [1,2,3]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= g.length <= 3 * 10^4",
+    "0 <= s.length <= 3 * 10^4",
+    "1 <= g[i], s[j] <= 2^31 - 1"
+  ],
+  "starterCode": "function findContentChildren(g, s) {\n  return 0;\n}",
+  "solutionCode": "function findContentChildren(g, s) {\n  g.sort((a, b) => a - b);\n  s.sort((a, b) => a - b);\n  let child = 0, cookie = 0;\n  while (child < g.length && cookie < s.length) {\n    if (s[cookie] >= g[child]) {\n      child++;\n    }\n    cookie++;\n  }\n  return child;\n}",
+  "functionName": "findContentChildren",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "g = [1,2,3], s = [1,1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "g = [1,2], s = [1,2,3]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          3,
+          4
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "g = [3,4], s = [1,2]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1], [1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ],
+        []
+      ],
+      "expected": 0,
+      "inputDisplay": "[1], []",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [],
+        [
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[], [1]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          3
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1,2,3], [3]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1,2], [1,2,3]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[3,4], [1,2,3,4]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1,2,3], [1,1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Sort both arrays. Satisfy the child with the smallest greed factor using the smallest viable cookie."
+  ],
+  "python": {
+    "starterCode": "def findContentChildren(g, s):\n    return 0\n",
+    "solutionCode": "def findContentChildren(g, s):\n    g.sort()\n    s.sort()\n    child, cookie = 0, 0\n    while child < len(g) and cookie < len(s):\n        if s[cookie] >= g[child]:\n            child += 1\n        cookie += 1\n    return child\n"
+  },
+  "leetcodeId": 455,
+  "leetcodeTitle": "Assign Cookies",
+  "leetcodeUrl": "https://leetcode.com/problems/assign-cookies/"
+}

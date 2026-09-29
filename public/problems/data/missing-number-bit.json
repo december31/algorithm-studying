@@ -1,0 +1,197 @@
+{
+  "id": "missing-number-bit",
+  "wingId": "bit-manipulation",
+  "floor": 8,
+  "title": "Missing Number",
+  "difficulty": "easy",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "balance-skeleton",
+    "name": "Nullus the XOR Boneguard",
+    "title": "Keeper of Index-Value Balance",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "skeleton",
+    "color": "#475569",
+    "attackName": "XOR Void Blade",
+    "attackPower": 1,
+    "defeatQuote": "The XOR balance isolated the missing number..."
+  },
+  "description": "Given an array `nums` containing `n` distinct numbers in the range `[0, n]`, return the only number in the range that is missing from the array using bitwise XOR.",
+  "examples": [
+    {
+      "input": "nums = [3,0,1]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [0,1]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "n == nums.length",
+    "1 <= n <= 10^4",
+    "0 <= nums[i] <= n"
+  ],
+  "starterCode": "function missingNumberBit(nums) {\n  return 0;\n}",
+  "solutionCode": "function missingNumberBit(nums) {\n  let xor = nums.length;\n  for (let i = 0; i < nums.length; i++) {\n    xor ^= i ^ nums[i];\n  }\n  return xor;\n}",
+  "functionName": "missingNumberBit",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          0,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "nums = [3, 0, 1]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "nums = [0, 1]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          9,
+          6,
+          4,
+          2,
+          3,
+          5,
+          7,
+          0,
+          1
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "nums = 9 elements missing 8",
+      "expectedDisplay": "8",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[0]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[0,1]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[1,2]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          9,
+          6,
+          4,
+          2,
+          3,
+          5,
+          7,
+          0,
+          1
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "[9, 6, 4, 2, ... (9 items)]",
+      "expectedDisplay": "8",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          0,
+          2,
+          3
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[0,2,3]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          0,
+          3,
+          4
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1,0,3,4]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "XOR all indices 0..n and all array values. Paired values cancel out, leaving the missing number."
+  ],
+  "python": {
+    "starterCode": "def missingNumberBit(nums):\n    return 0\n",
+    "solutionCode": "def missingNumberBit(nums):\n    xor = len(nums)\n    for i, n in enumerate(nums):\n        xor ^= i ^ n\n    return xor\n"
+  },
+  "leetcodeId": 268,
+  "leetcodeTitle": "Missing Number",
+  "leetcodeUrl": "https://leetcode.com/problems/missing-number/"
+}

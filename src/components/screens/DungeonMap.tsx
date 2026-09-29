@@ -6,7 +6,7 @@ import { Layers, Coins, GitCommit, GitBranch, Network, Table, ShoppingBag, Shiel
 import { motion } from 'framer-motion';
 
 export const DungeonMap: React.FC = () => {
-  const { stats, unlockedFloors, selectWing, setScreen } = useGameStore();
+  const { stats, unlockedFloors, selectWing, setScreen, healPlayer } = useGameStore();
 
   const getWingIcon = (icon: string) => {
     switch (icon) {
@@ -56,6 +56,18 @@ export const DungeonMap: React.FC = () => {
           <div className="font-pixel text-xs text-amber-400 bg-dungeon-darkest px-3 py-2 rounded-xl border border-slate-800">
             💰 {stats.gold} GOLD
           </div>
+
+          {/* Rest at Camp (Full Heal) when damaged */}
+          {stats.hp < stats.maxHp && (
+            <button
+              onClick={() => healPlayer(stats.maxHp)}
+              className="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-pixel text-xs font-bold flex items-center gap-1.5 transition-colors shadow"
+              title="Rest at Camp to restore full health before your next dungeon run"
+            >
+              <span>🏕️</span>
+              <span>REST (+{stats.maxHp - stats.hp} HP)</span>
+            </button>
+          )}
 
           {/* Shop Button */}
           <button

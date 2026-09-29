@@ -1,0 +1,159 @@
+{
+  "id": "divide-two-integers",
+  "wingId": "bit-manipulation",
+  "floor": 18,
+  "title": "Divide Two Integers",
+  "difficulty": "medium",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "quotient-wraith",
+    "name": "Quotient Wraith of Binary Halving",
+    "title": "Phantom of Integer Division without Operators",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "lich",
+    "color": "#a855f7",
+    "attackName": "Bitwise Long Division Beam",
+    "attackPower": 2,
+    "defeatQuote": "Shifted and subtracted my essence until the remainder perished..."
+  },
+  "description": "Given two integers `dividend` and `divisor`, divide two integers without using multiplication, division, and mod operator.\n\nThe integer division should truncate toward zero. Return the quotient after dividing dividend by divisor. Clamp within the 32-bit signed integer range `[-2^31, 2^31 - 1]`.",
+  "examples": [
+    {
+      "input": "dividend = 10, divisor = 3",
+      "output": "3",
+      "explanation": "10/3 = 3.33333.. which is truncated to 3."
+    },
+    {
+      "input": "dividend = 7, divisor = -3",
+      "output": "-2",
+      "explanation": "7/-3 = -2.33333.. which is truncated to -2."
+    }
+  ],
+  "constraints": [
+    "-2^31 <= dividend, divisor <= 2^31 - 1",
+    "divisor != 0"
+  ],
+  "starterCode": "function divide(dividend, divisor) {\n  return 0;\n}",
+  "solutionCode": "function divide(dividend, divisor) {\n  const MAX = 2147483647;\n  const MIN = -2147483648;\n  if (dividend === MIN && divisor === -1) return MAX;\n  const negative = (dividend < 0) !== (divisor < 0);\n  let a = Math.abs(dividend);\n  let b = Math.abs(divisor);\n  let quotient = 0;\n  while (a >= b) {\n    let temp = b, multiple = 1;\n    while (a >= temp * 2 && temp * 2 > 0) {\n      temp *= 2;\n      multiple *= 2;\n    }\n    a -= temp;\n    quotient += multiple;\n  }\n  return negative ? -quotient : quotient;\n}",
+  "functionName": "divide",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        10,
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "dividend = 10, divisor = 3",
+      "expectedDisplay": "3"
+    },
+    {
+      "id": 2,
+      "input": [
+        7,
+        -3
+      ],
+      "expected": -2,
+      "inputDisplay": "dividend = 7, divisor = -3",
+      "expectedDisplay": "-2"
+    },
+    {
+      "id": 3,
+      "input": [
+        0,
+        1
+      ],
+      "expected": 0,
+      "inputDisplay": "dividend = 0, divisor = 1",
+      "expectedDisplay": "0"
+    },
+    {
+      "id": 4,
+      "input": [
+        -2147483648,
+        -1
+      ],
+      "expected": 2147483647,
+      "inputDisplay": "overflow clamp case",
+      "expectedDisplay": "2147483647",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        1,
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "dividend = 1, divisor = 1",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        -1,
+        1
+      ],
+      "expected": -1,
+      "inputDisplay": "dividend = -1, divisor = 1",
+      "expectedDisplay": "-1",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        2147483647,
+        2
+      ],
+      "expected": 1073741823,
+      "inputDisplay": "large dividend halving",
+      "expectedDisplay": "1073741823",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        -2147483648,
+        1
+      ],
+      "expected": -2147483648,
+      "inputDisplay": "min 32-bit int / 1",
+      "expectedDisplay": "-2147483648",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        100,
+        10
+      ],
+      "expected": 10,
+      "inputDisplay": "dividend = 100, divisor = 10",
+      "expectedDisplay": "10",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        -100,
+        -25
+      ],
+      "expected": 4,
+      "inputDisplay": "dividend = -100, divisor = -25",
+      "expectedDisplay": "4",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Double the divisor using bit shifts (divisor << 1) repeatedly until it exceeds the remaining dividend, then subtract and add the power of two to quotient."
+  ],
+  "python": {
+    "starterCode": "def divide(dividend, divisor):\n    return 0\n",
+    "solutionCode": "def divide(dividend, divisor):\n    MAX = 2147483647\n    MIN = -2147483648\n    if dividend == MIN and divisor == -1:\n        return MAX\n    negative = (dividend < 0) ^ (divisor < 0)\n    a, b = abs(dividend), abs(divisor)\n    quotient = 0\n    while a >= b:\n        temp, mult = b, 1\n        while a >= (temp << 1):\n            temp <<= 1\n            mult <<= 1\n        a -= temp\n        quotient += mult\n    return -quotient if negative else quotient\n"
+  },
+  "leetcodeId": 29,
+  "leetcodeTitle": "Divide Two Integers",
+  "leetcodeUrl": "https://leetcode.com/problems/divide-two-integers/"
+}

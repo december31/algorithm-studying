@@ -1,0 +1,184 @@
+{
+  "id": "triplets-with-bitwise-and-equal-to-zero",
+  "wingId": "bit-manipulation",
+  "floor": 16,
+  "title": "Triples with Bitwise AND Equal to Zero",
+  "difficulty": "hard",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "zero-lich",
+    "name": "Nullus-Rex the Zero Arch-Lich",
+    "title": "Devourer of Non-Zero Configurations",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#9333ea",
+    "attackName": "Cataclysmic Nullification",
+    "attackPower": 3,
+    "defeatQuote": "All triplets (i, j, k) annihilated to zero bitwise..."
+  },
+  "description": "Given an integer array nums, return the number of AND triplets. An AND triplet is a tuple of indices (i, j, k) such that nums[i] & nums[j] & nums[k] == 0.",
+  "examples": [
+    {
+      "input": "nums = [2,1,3]",
+      "output": "12"
+    },
+    {
+      "input": "nums = [0,0,0]",
+      "output": "27"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 1000",
+    "0 <= nums[i] < 2^16"
+  ],
+  "starterCode": "function countTriplets(nums) {\n  return 0;\n}",
+  "solutionCode": "function countTriplets(nums) {\n  const pairCount = new Array(1 << 16).fill(0);\n  for (const a of nums) {\n    for (const b of nums) {\n      pairCount[a & b]++;\n    }\n  }\n  let ans = 0;\n  for (const c of nums) {\n    for (let pair = 0; pair < (1 << 16); pair++) {\n      if ((c & pair) === 0) {\n        ans += pairCount[pair];\n      }\n    }\n  }\n  return ans;\n}",
+  "functionName": "countTriplets",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          1,
+          3
+        ]
+      ],
+      "expected": 12,
+      "inputDisplay": "nums = [2, 1, 3]",
+      "expectedDisplay": "12",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 27,
+      "inputDisplay": "nums = [0, 0, 0]",
+      "expectedDisplay": "27",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "nums = [1]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[0]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          2,
+          1,
+          3
+        ]
+      ],
+      "expected": 12,
+      "inputDisplay": "[2,1,3]",
+      "expectedDisplay": "12",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 27,
+      "inputDisplay": "[0,0,0]",
+      "expectedDisplay": "27",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "expected": 24,
+      "inputDisplay": "[1,2,4]",
+      "expectedDisplay": "24",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[1,1,1]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          3,
+          5,
+          7
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[3,5,7]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Precompute counts of (nums[i] & nums[j]) in a table of size 2^16, reducing O(n^3) to O(n^2 + 2^16 * n)."
+  ],
+  "python": {
+    "starterCode": "def countTriplets(nums):\n    return 0\n",
+    "solutionCode": "def countTriplets(nums):\n    pair_count = [0] * (1 << 16)\n    for a in nums:\n        for b in nums:\n            pair_count[a & b] += 1\n    ans = 0\n    for c in nums:\n        for pair in range(1 << 16):\n            if (c & pair) == 0:\n                ans += pair_count[pair]\n    return ans\n"
+  },
+  "leetcodeId": 982,
+  "leetcodeTitle": "Triples with Bitwise AND Equal to Zero",
+  "leetcodeUrl": "https://leetcode.com/problems/triples-with-bitwise-and-equal-to-zero/"
+}

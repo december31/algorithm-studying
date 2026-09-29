@@ -1,0 +1,261 @@
+{
+  "id": "number-of-valid-words-for-each-puzzle",
+  "wingId": "bit-manipulation",
+  "floor": 20,
+  "title": "Number of Valid Words for Each Puzzle",
+  "difficulty": "hard",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "cryptarch-sphinx",
+    "name": "Cryptarch Sphinx of 26 Bit Masks",
+    "title": "Emperor of Alphabet Submasks",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "lich",
+    "color": "#e11d48",
+    "attackName": "Submask Enumeration Blast",
+    "attackPower": 3,
+    "defeatQuote": "All submasks collapsed before your bitwise deduction..."
+  },
+  "description": "With respect to a given `puzzle` string, a `word` is valid if:\n- `word` contains the first letter of `puzzle`.\n- For each letter in `word`, that letter is in `puzzle`.\n\nReturn an array `answer`, where `answer[i]` is the number of words in the given word list `words` that are valid with respect to the puzzle `puzzles[i]`.",
+  "examples": [
+    {
+      "input": "words = [\"aaaa\",\"asas\",\"able\",\"ability\",\"actt\",\"actor\",\"access\"], puzzles = [\"aboveyz\",\"abrodyz\",\"abslute\",\"absoryz\",\"actresz\",\"gaswxyz\"]",
+      "output": "[1,1,3,2,4,0]"
+    },
+    {
+      "input": "words = [\"apple\",\"plea\",\"please\"], puzzles = [\"aelwxyz\",\"aelpxyz\",\"aelpsxy\",\"saelpxy\",\"xaelpsy\"]",
+      "output": "[0,1,3,2,0]"
+    }
+  ],
+  "constraints": [
+    "1 <= words.length <= 10^5",
+    "4 <= words[i].length <= 50",
+    "1 <= puzzles.length <= 10^4",
+    "puzzles[i].length == 7",
+    "words[i] and puzzles[i] consist of lowercase English letters."
+  ],
+  "starterCode": "function findNumOfValidWords(words, puzzles) {\n  return [];\n}",
+  "solutionCode": "function findNumOfValidWords(words, puzzles) {\n  const wordCount = new Map();\n  for (const w of words) {\n    let mask = 0;\n    for (let i = 0; i < w.length; i++) {\n      mask |= (1 << (w.charCodeAt(i) - 97));\n    }\n    wordCount.set(mask, (wordCount.get(mask) || 0) + 1);\n  }\n  const res = [];\n  for (const p of puzzles) {\n    const firstBit = 1 << (p.charCodeAt(0) - 97);\n    let mask = 0;\n    for (let i = 0; i < p.length; i++) {\n      mask |= (1 << (p.charCodeAt(i) - 97));\n    }\n    let count = 0;\n    let submask = mask;\n    while (submask > 0) {\n      if ((submask & firstBit) !== 0) {\n        count += wordCount.get(submask) || 0;\n      }\n      submask = (submask - 1) & mask;\n    }\n    res.push(count);\n  }\n  return res;\n}",
+  "functionName": "findNumOfValidWords",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "aaaa",
+          "asas",
+          "able",
+          "ability",
+          "actt",
+          "actor",
+          "access"
+        ],
+        [
+          "aboveyz",
+          "abrodyz",
+          "abslute",
+          "absoryz",
+          "actresz",
+          "gaswxyz"
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        3,
+        2,
+        4,
+        0
+      ],
+      "inputDisplay": "7 words, 6 puzzles",
+      "expectedDisplay": "[1,1,3,2,4,0]"
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "apple",
+          "plea",
+          "please"
+        ],
+        [
+          "aelwxyz",
+          "aelpxyz",
+          "aelpsxy",
+          "saelpxy",
+          "xaelpsy"
+        ]
+      ],
+      "expected": [
+        0,
+        2,
+        3,
+        1,
+        0
+      ],
+      "inputDisplay": "3 words, 5 puzzles",
+      "expectedDisplay": "[0,2,3,1,0]"
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "abc",
+          "ab",
+          "a"
+        ],
+        [
+          "abcdefg"
+        ]
+      ],
+      "expected": [
+        3
+      ],
+      "inputDisplay": "words with common subsets",
+      "expectedDisplay": "[3]"
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          "abcd"
+        ],
+        [
+          "abcdefg",
+          "bcdefga"
+        ]
+      ],
+      "expected": [
+        1,
+        1
+      ],
+      "inputDisplay": "first character required constraint",
+      "expectedDisplay": "[1,1]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          "cat",
+          "dog",
+          "bird"
+        ],
+        [
+          "actwxyz",
+          "dogwxyz"
+        ]
+      ],
+      "expected": [
+        1,
+        1
+      ],
+      "inputDisplay": "2 puzzles matching exactly 1 word",
+      "expectedDisplay": "[1,1]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          "zzzz"
+        ],
+        [
+          "zabcdef"
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "single letter mask",
+      "expectedDisplay": "[1]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          "abcdefg"
+        ],
+        [
+          "abcdefg"
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "exact 7-letter match",
+      "expectedDisplay": "[1]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          "hijk"
+        ],
+        [
+          "abcdefg"
+        ]
+      ],
+      "expected": [
+        0
+      ],
+      "inputDisplay": "disjoint character sets",
+      "expectedDisplay": "[0]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          "a",
+          "b",
+          "c"
+        ],
+        [
+          "abcdefg",
+          "bacdefg"
+        ]
+      ],
+      "expected": [
+        1,
+        1
+      ],
+      "inputDisplay": "first letter exclusivity",
+      "expectedDisplay": "[1,1]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          "hello",
+          "world"
+        ],
+        [
+          "helowxy",
+          "wordlxy"
+        ]
+      ],
+      "expected": [
+        1,
+        1
+      ],
+      "inputDisplay": "common english words",
+      "expectedDisplay": "[1,1]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Represent each word as a 26-bit bitmask. Each puzzle has length 7, so iterate over all 2^7 = 128 submasks using submask = (submask - 1) & mask."
+  ],
+  "python": {
+    "starterCode": "def findNumOfValidWords(words, puzzles):\n    return []\n",
+    "solutionCode": "def findNumOfValidWords(words, puzzles):\n    from collections import Counter\n    word_count = Counter()\n    for w in words:\n        mask = 0\n        for ch in w:\n            mask |= 1 << (ord(ch) - 97)\n        word_count[mask] += 1\n    res = []\n    for p in puzzles:\n        first_bit = 1 << (ord(p[0]) - 97)\n        mask = 0\n        for ch in p:\n            mask |= 1 << (ord(ch) - 97)\n        count = 0\n        submask = mask\n        while submask > 0:\n            if submask & first_bit:\n                count += word_count[submask]\n            submask = (submask - 1) & mask\n        res.append(count)\n    return res\n"
+  },
+  "leetcodeId": 1178,
+  "leetcodeTitle": "Number of Valid Words for Each Puzzle",
+  "leetcodeUrl": "https://leetcode.com/problems/number-of-valid-words-for-each-puzzle/"
+}

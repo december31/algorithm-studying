@@ -1,0 +1,466 @@
+{
+  "id": "permutations",
+  "wingId": "backtracking",
+  "floor": 9,
+  "title": "Permutations",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "permutation-wraith",
+    "name": "Vortex the Permutation Wraith",
+    "title": "Spinner of Factorial Fates",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#d946ef",
+    "attackName": "Factorial Spiral",
+    "attackPower": 2,
+    "defeatQuote": "All N! arrangements were conquered..."
+  },
+  "description": "Given an array `nums` of distinct integers, return all the possible permutations. You can return the answer in any order.",
+  "examples": [
+    {
+      "input": "nums = [1, 2, 3]",
+      "output": "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]"
+    },
+    {
+      "input": "nums = [0, 1]",
+      "output": "[[0,1],[1,0]]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 6",
+    "-10 <= nums[i] <= 10",
+    "All the integers of nums are unique."
+  ],
+  "starterCode": "function permute(nums) {\n  return [];\n}",
+  "solutionCode": "function permute(nums) {\n  const result = [];\n  const used = new Array(nums.length).fill(false);\n  function backtrack(current) {\n    if (current.length === nums.length) {\n      result.push([...current]);\n      return;\n    }\n    for (let i = 0; i < nums.length; i++) {\n      if (used[i]) continue;\n      used[i] = true;\n      current.push(nums[i]);\n      backtrack(current);\n      current.pop();\n      used[i] = false;\n    }\n  }\n  backtrack([]);\n  return result;\n}",
+  "functionName": "permute",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "inputDisplay": "nums = [1, 2, 3]",
+      "expectedDisplay": "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "inputDisplay": "nums = [0, 1]",
+      "expectedDisplay": "[[0,1],[1,0]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ],
+      "inputDisplay": "nums = [1]",
+      "expectedDisplay": "[[1]]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ],
+      "inputDisplay": "[1]",
+      "expectedDisplay": "[[1]]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "inputDisplay": "[0,1]",
+      "expectedDisplay": "[[0,1],[1,0]]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "inputDisplay": "[1,2]",
+      "expectedDisplay": "[[1,2],[2,1]]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        [
+          3,
+          2,
+          1
+        ],
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "inputDisplay": "[3,2,1]",
+      "expectedDisplay": "[[3,2,1],[3,1,2],[2,3,1],[2,1,3],[1,3,2],[1,2,3]]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "inputDisplay": "[1,2,3]",
+      "expectedDisplay": "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          5,
+          6
+        ]
+      ],
+      "expected": [
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "inputDisplay": "[5,6]",
+      "expectedDisplay": "[[5,6],[6,5]]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          4,
+          3
+        ],
+        [
+          1,
+          3,
+          2,
+          4
+        ],
+        [
+          1,
+          3,
+          4,
+          2
+        ],
+        [
+          1,
+          4,
+          2,
+          3
+        ],
+        [
+          1,
+          4,
+          3,
+          2
+        ],
+        [
+          2,
+          1,
+          3,
+          4
+        ],
+        [
+          2,
+          1,
+          4,
+          3
+        ],
+        [
+          2,
+          3,
+          1,
+          4
+        ],
+        [
+          2,
+          3,
+          4,
+          1
+        ],
+        [
+          2,
+          4,
+          1,
+          3
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2,
+          4
+        ],
+        [
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          3,
+          2,
+          1,
+          4
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          3,
+          4,
+          1,
+          2
+        ],
+        [
+          3,
+          4,
+          2,
+          1
+        ],
+        [
+          4,
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ],
+        [
+          4,
+          2,
+          3,
+          1
+        ],
+        [
+          4,
+          3,
+          1,
+          2
+        ],
+        [
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "inputDisplay": "[1,2,3,4]",
+      "expectedDisplay": "[[1,2,3,4],[1,2,4,3],[1,3,2,4],[1,3,4,2],[1,4,2,3],[1,4,3,2],[2,1,3,4],[2,1,4,3],[2,3,1,4],[2,3,4,1],[2,4,1,3],[2,4,3,1],[3,1,2,4],[3,1,4,2],[3,2,1,4],[3,2,4,1],[3,4,1,2],[3,4,2,1],[4,1,2,3],[4,1,3,2],[4,2,1,3],[4,2,3,1],[4,3,1,2],[4,3,2,1]]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Track visited elements with a boolean array. Choose, recurse, then unchoose."
+  ],
+  "python": {
+    "starterCode": "def permute(nums):\n    return []\n",
+    "solutionCode": "def permute(nums):\n    res = []\n    used = [False] * len(nums)\n    def backtrack(curr):\n        if len(curr) == len(nums):\n            res.append(list(curr))\n            return\n        for i in range(len(nums)):\n            if not used[i]:\n                used[i] = True\n                curr.append(nums[i])\n                backtrack(curr)\n                curr.pop()\n                used[i] = False\n    backtrack([])\n    return res\n"
+  },
+  "leetcodeId": 46,
+  "leetcodeTitle": "Permutations",
+  "leetcodeUrl": "https://leetcode.com/problems/permutations/"
+}

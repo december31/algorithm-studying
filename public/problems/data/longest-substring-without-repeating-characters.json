@@ -1,0 +1,154 @@
+{
+  "id": "longest-substring-without-repeating-characters",
+  "wingId": "data-structures",
+  "floor": 18,
+  "title": "Longest Substring Without Repeating Characters",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "gorgon-substring",
+    "name": "Medusith of the Unbroken String",
+    "title": "Queen of Sliding Boundaries",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "slime",
+    "color": "#06b6d4",
+    "attackName": "Duplicate Character Constriction",
+    "attackPower": 2,
+    "defeatQuote": "Your window expanded without a single collision..."
+  },
+  "description": "Given a string `s`, find the length of the longest substring without repeating characters.",
+  "examples": [
+    {
+      "input": "s = \"abcabcbb\"",
+      "output": "3",
+      "explanation": "The answer is \"abc\", with the length of 3."
+    },
+    {
+      "input": "s = \"bbbbb\"",
+      "output": "1",
+      "explanation": "The answer is \"b\", with the length of 1."
+    },
+    {
+      "input": "s = \"pwwkew\"",
+      "output": "3",
+      "explanation": "The answer is \"wke\", with the length of 3."
+    }
+  ],
+  "constraints": [
+    "0 <= s.length <= 5 * 10^4",
+    "s consists of English letters, digits, symbols and spaces."
+  ],
+  "starterCode": "function lengthOfLongestSubstring(s) {\n  return 0;\n}",
+  "solutionCode": "function lengthOfLongestSubstring(s) {\n  const map = new Map();\n  let maxLen = 0, left = 0;\n  for (let right = 0; right < s.length; right++) {\n    const c = s[right];\n    if (map.has(c) && map.get(c) >= left) {\n      left = map.get(c) + 1;\n    }\n    map.set(c, right);\n    maxLen = Math.max(maxLen, right - left + 1);\n  }\n  return maxLen;\n}",
+  "functionName": "lengthOfLongestSubstring",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "abcabcbb"
+      ],
+      "expected": 3,
+      "inputDisplay": "s = \"abcabcbb\"",
+      "expectedDisplay": "3"
+    },
+    {
+      "id": 2,
+      "input": [
+        "bbbbb"
+      ],
+      "expected": 1,
+      "inputDisplay": "s = \"bbbbb\"",
+      "expectedDisplay": "1"
+    },
+    {
+      "id": 3,
+      "input": [
+        "pwwkew"
+      ],
+      "expected": 3,
+      "inputDisplay": "s = \"pwwkew\"",
+      "expectedDisplay": "3"
+    },
+    {
+      "id": 4,
+      "input": [
+        ""
+      ],
+      "expected": 0,
+      "inputDisplay": "s = \"\"",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        " "
+      ],
+      "expected": 1,
+      "inputDisplay": "s = \" \"",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        "au"
+      ],
+      "expected": 2,
+      "inputDisplay": "s = \"au\"",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        "dvdf"
+      ],
+      "expected": 3,
+      "inputDisplay": "s = \"dvdf\"",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        "abba"
+      ],
+      "expected": 2,
+      "inputDisplay": "s = \"abba\"",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        "tmmzuxt"
+      ],
+      "expected": 5,
+      "inputDisplay": "s = \"tmmzuxt\"",
+      "expectedDisplay": "5",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        "abcdefghijklmnopqrstuvwxyz"
+      ],
+      "expected": 26,
+      "inputDisplay": "s = \"a..z\"",
+      "expectedDisplay": "26",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Track the last seen index of each character in a Hash Map. When a duplicate appears inside the current window, shift the left pointer past it."
+  ],
+  "python": {
+    "starterCode": "def lengthOfLongestSubstring(s):\n    return 0\n",
+    "solutionCode": "def lengthOfLongestSubstring(s):\n    seen = {}\n    max_len = 0\n    left = 0\n    for right, c in enumerate(s):\n        if c in seen and seen[c] >= left:\n            left = seen[c] + 1\n        seen[c] = right\n        max_len = max(max_len, right - left + 1)\n    return max_len\n"
+  },
+  "leetcodeId": 3,
+  "leetcodeTitle": "Longest Substring Without Repeating Characters",
+  "leetcodeUrl": "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
+}

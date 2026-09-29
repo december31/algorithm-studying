@@ -1,22 +1,29 @@
-import { allProblems } from '../src/data/problems';
+import { problemCatalog, loadProblem } from '../src/data/problems/loader';
 import { executeSolution } from '../src/engine/runner';
 import { DungeonTopic } from '../src/types/game';
 
 async function verifyAll() {
-  console.log('⚔️  VERIFYING ALGODUNGEON CURRICULUM (ALL 5 TOPICS / 83 PROBLEMS)...');
+  console.log(`⚔️  VERIFYING ALGODUNGEON CURRICULUM (ALL 5 TOPICS / ${problemCatalog.length} PROBLEMS FROM JSON DATABASE)...`);
   let totalProblems = 0;
   let passedProblems = 0;
   let totalTests = 0;
   let passedTests = 0;
 
-  const topics = Object.keys(allProblems) as DungeonTopic[];
+  const topics: DungeonTopic[] = [
+    'data-structures',
+    'backtracking',
+    'graphs',
+    'binary-search-greedy',
+    'bit-manipulation',
+  ];
 
   for (const topic of topics) {
-    console.log(`\n=== Topic Wing: ${topic.toUpperCase()} ===`);
-    const problems = allProblems[topic];
+    const topicEntries = problemCatalog.filter((p) => p.wingId === topic);
+    console.log(`\n=== Topic Wing: ${topic.toUpperCase()} (${topicEntries.length} Problems) ===`);
 
-    for (const prob of problems) {
+    for (const entry of topicEntries) {
       totalProblems++;
+      const prob = await loadProblem(entry.id);
       totalTests += prob.testCases.length;
 
       // Test with starter/solution code
@@ -27,9 +34,9 @@ async function verifyAll() {
 
       if (report.allPassed) {
         passedProblems++;
-        console.log(`  ✅ [Floor ${prob.floor}] ${prob.title} (${prob.difficulty}) - ${report.passCount}/${prob.testCases.length} tests passed`);
+        console.log(`  ✅ [${prob.difficulty.toUpperCase()}] ${prob.title} - ${report.passCount}/${prob.testCases.length} tests passed`);
       } else {
-        console.error(`  ❌ [Floor ${prob.floor}] ${prob.title} FAILED:`, report.globalError || 'Test failure');
+        console.error(`  ❌ [${prob.difficulty.toUpperCase()}] ${prob.title} FAILED:`, report.globalError || 'Test failure');
         for (const res of report.results) {
           if (!res.passed) {
             console.error(`     - Case ${res.testCaseId} Failed: expected ${res.expectedDisplay}, got ${res.actualDisplay}`);
@@ -59,6 +66,6 @@ async function verifyAll() {
 }
 
 verifyAll().catch((err) => {
-  console.error('Fatal verification error:', err);
+  console.error(err);
   process.exit(1);
 });

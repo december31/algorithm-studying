@@ -1,0 +1,240 @@
+{
+  "id": "top-k-frequent-elements",
+  "wingId": "data-structures",
+  "floor": 11,
+  "title": "Top K Frequent Elements",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "frequency-golem",
+    "name": "Ferrum the Frequency Golem",
+    "title": "Titan of Tallied Occurrences",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Resonant Quake",
+    "attackPower": 2,
+    "defeatQuote": "The top frequencies outweighed my stony mass..."
+  },
+  "description": "Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.",
+  "examples": [
+    {
+      "input": "nums = [1, 1, 1, 2, 2, 3], k = 2",
+      "output": "[1, 2]"
+    },
+    {
+      "input": "nums = [1], k = 1",
+      "output": "[1]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10^5",
+    "-10^4 <= nums[i] <= 10^4",
+    "k is in the range [1, the number of unique elements in the array]."
+  ],
+  "starterCode": "function topKFrequent(nums, k) {\n  return [];\n}",
+  "solutionCode": "function topKFrequent(nums, k) {\n  const count = new Map();\n  for (const n of nums) count.set(n, (count.get(n) || 0) + 1);\n  const bucket = Array.from({ length: nums.length + 1 }, () => []);\n  for (const [n, freq] of count.entries()) {\n    bucket[freq].push(n);\n  }\n  const result = [];\n  for (let i = bucket.length - 1; i >= 0 && result.length < k; i--) {\n    for (const n of bucket[i]) {\n      result.push(n);\n      if (result.length === k) break;\n    }\n  }\n  return result;\n}",
+  "functionName": "topKFrequent",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          2,
+          2,
+          3
+        ],
+        2
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "inputDisplay": "nums = [1,1,1,2,2,3], k = 2",
+      "expectedDisplay": "[1, 2]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "nums = [1], k = 1",
+      "expectedDisplay": "[1]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          4,
+          1,
+          -1,
+          2,
+          -1,
+          2,
+          3
+        ],
+        2
+      ],
+      "expected": [
+        -1,
+        2
+      ],
+      "inputDisplay": "nums = [4,1,-1,2,-1,2,3], k = 2",
+      "expectedDisplay": "[-1, 2]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[1], 1",
+      "expectedDisplay": "[1]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          2
+        ],
+        2
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "inputDisplay": "[1,2], 2",
+      "expectedDisplay": "[1,2]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          1,
+          2,
+          2,
+          3,
+          3
+        ],
+        3
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "inputDisplay": "[1, 1, 2, 2, ... (6 items)], 3",
+      "expectedDisplay": "[1,2,3]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          5,
+          5,
+          5,
+          6,
+          6,
+          7
+        ],
+        1
+      ],
+      "expected": [
+        5
+      ],
+      "inputDisplay": "[5, 5, 5, 6, ... (6 items)], 1",
+      "expectedDisplay": "[5]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          -1,
+          -1,
+          -2,
+          -2,
+          -2
+        ],
+        1
+      ],
+      "expected": [
+        -2
+      ],
+      "inputDisplay": "[-1,-1,-2,-2,-2], 1",
+      "expectedDisplay": "[-2]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "inputDisplay": "[1,2,3,4], 4",
+      "expectedDisplay": "[1,2,3,4]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          10,
+          10,
+          20
+        ],
+        1
+      ],
+      "expected": [
+        10
+      ],
+      "inputDisplay": "[10,10,20], 1",
+      "expectedDisplay": "[10]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Count occurrences with a Map, then use bucket sort where index = frequency."
+  ],
+  "python": {
+    "starterCode": "def topKFrequent(nums, k):\n    return []\n",
+    "solutionCode": "def topKFrequent(nums, k):\n    count = {}\n    for n in nums:\n        count[n] = count.get(n, 0) + 1\n    buckets = [[] for _ in range(len(nums) + 1)]\n    for n, freq in count.items():\n        buckets[freq].append(n)\n    res = []\n    for i in range(len(buckets) - 1, 0, -1):\n        for n in buckets[i]:\n            res.append(n)\n            if len(res) == k:\n                return res\n    return res\n"
+  },
+  "leetcodeId": 347,
+  "leetcodeTitle": "Top K Frequent Elements",
+  "leetcodeUrl": "https://leetcode.com/problems/top-k-frequent-elements/"
+}

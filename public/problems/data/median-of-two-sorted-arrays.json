@@ -1,0 +1,217 @@
+{
+  "id": "median-of-two-sorted-arrays",
+  "wingId": "binary-search-greedy",
+  "floor": 17,
+  "title": "Median of Two Sorted Arrays",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "median-dragon",
+    "name": "Bifrost the Dual Partition Dragon",
+    "title": "Emperor of Balanced Halves",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#dc2626",
+    "attackName": "Dual Horizon Disintegration",
+    "attackPower": 3,
+    "defeatQuote": "The dual array partition balanced with O(log(min(m,n))) perfection..."
+  },
+  "description": "Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).",
+  "examples": [
+    {
+      "input": "nums1 = [1,3], nums2 = [2]",
+      "output": "2.0"
+    },
+    {
+      "input": "nums1 = [1,2], nums2 = [3,4]",
+      "output": "2.5"
+    }
+  ],
+  "constraints": [
+    "nums1.length == m, nums2.length == n",
+    "0 <= m, n <= 1000",
+    "1 <= m + n <= 2000"
+  ],
+  "starterCode": "function findMedianSortedArrays(nums1, nums2) {\n  return 0.0;\n}",
+  "solutionCode": "function findMedianSortedArrays(nums1, nums2) {\n  if (nums1.length > nums2.length) return findMedianSortedArrays(nums2, nums1);\n  const m = nums1.length, n = nums2.length;\n  let left = 0, right = m;\n  while (left <= right) {\n    const p1 = Math.floor((left + right) / 2);\n    const p2 = Math.floor((m + n + 1) / 2) - p1;\n\n    const maxLeft1 = p1 === 0 ? -Infinity : nums1[p1 - 1];\n    const minRight1 = p1 === m ? Infinity : nums1[p1];\n\n    const maxLeft2 = p2 === 0 ? -Infinity : nums2[p2 - 1];\n    const minRight2 = p2 === n ? Infinity : nums2[p2];\n\n    if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {\n      if ((m + n) % 2 === 0) {\n        return (Math.max(maxLeft1, maxLeft2) + Math.min(minRight1, minRight2)) / 2;\n      } else {\n        return Math.max(maxLeft1, maxLeft2);\n      }\n    } else if (maxLeft1 > minRight2) {\n      right = p1 - 1;\n    } else {\n      left = p1 + 1;\n    }\n  }\n  return 0.0;\n}",
+  "functionName": "findMedianSortedArrays",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "nums1 = [1,3], nums2 = [2]",
+      "expectedDisplay": "2.0",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "expected": 2.5,
+      "inputDisplay": "nums1 = [1,2], nums2 = [3,4]",
+      "expectedDisplay": "2.5",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "nums1 = [0,0], nums2 = [0,0]",
+      "expectedDisplay": "0.0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[0,0], [0,0]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [],
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[], [1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          2
+        ],
+        []
+      ],
+      "expected": 2,
+      "inputDisplay": "[2], []",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "expected": 2.5,
+      "inputDisplay": "[1,2], [3,4]",
+      "expectedDisplay": "2.5",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          7
+        ]
+      ],
+      "expected": 2.5,
+      "inputDisplay": "[1,3], [2,7]",
+      "expectedDisplay": "2.5",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      ],
+      "expected": 5.5,
+      "inputDisplay": "[1,2,3,4,5], [6,7,8,9,10]",
+      "expectedDisplay": "5.5",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          3
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1,3], [2]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Binary search the smaller array for a cut point such that left elements <= right elements."
+  ],
+  "python": {
+    "starterCode": "def findMedianSortedArrays(nums1, nums2):\n    return 0.0\n",
+    "solutionCode": "def findMedianSortedArrays(nums1, nums2):\n    if len(nums1) > len(nums2):\n        return findMedianSortedArrays(nums2, nums1)\n    m, n = len(nums1), len(nums2)\n    left, right = 0, m\n    while left <= right:\n        p1 = (left + right) // 2\n        p2 = (m + n + 1) // 2 - p1\n        max_left1 = float(\"-inf\") if p1 == 0 else nums1[p1 - 1]\n        min_right1 = float(\"inf\") if p1 == m else nums1[p1]\n        max_left2 = float(\"-inf\") if p2 == 0 else nums2[p2 - 1]\n        min_right2 = float(\"inf\") if p2 == n else nums2[p2]\n        if max_left1 <= min_right2 and max_left2 <= min_right1:\n            if (m + n) % 2 == 0:\n                return (max(max_left1, max_left2) + min(min_right1, min_right2)) / 2.0\n            else:\n                return float(max(max_left1, max_left2))\n        elif max_left1 > min_right2:\n            right = p1 - 1\n        else:\n            left = p1 + 1\n    return 0.0\n"
+  },
+  "leetcodeId": 4,
+  "leetcodeTitle": "Median of Two Sorted Arrays",
+  "leetcodeUrl": "https://leetcode.com/problems/median-of-two-sorted-arrays/"
+}

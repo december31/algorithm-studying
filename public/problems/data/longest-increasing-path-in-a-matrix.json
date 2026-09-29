@@ -1,0 +1,273 @@
+{
+  "id": "longest-increasing-path-in-a-matrix",
+  "wingId": "graphs",
+  "floor": 18,
+  "title": "Longest Increasing Path in a Matrix",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "ascendant-titan",
+    "name": "Ascendant Titan of Mountain Crests",
+    "title": "Emperor of Strict Ascent Paths",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "gargoyle",
+    "color": "#dc2626",
+    "attackName": "Steep Avalanche Cascade",
+    "attackPower": 3,
+    "defeatQuote": "You climbed the maximal DAG path straight to my throne..."
+  },
+  "description": "Given an `m x n` integers `matrix`, return the length of the longest increasing path in `matrix`. From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary.",
+  "examples": [
+    {
+      "input": "matrix = [[9,9,4],[6,6,8],[2,1,1]]",
+      "output": "4",
+      "explanation": "The longest increasing path is [1, 2, 6, 9]."
+    },
+    {
+      "input": "matrix = [[3,4,5],[3,2,6],[2,2,1]]",
+      "output": "4",
+      "explanation": "The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed."
+    },
+    {
+      "input": "matrix = [[1]]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "m == matrix.length",
+    "n == matrix[i].length",
+    "1 <= m, n <= 200",
+    "0 <= matrix[i][j] <= 2^31 - 1"
+  ],
+  "starterCode": "function longestIncreasingPath(matrix) {\n  return 0;\n}",
+  "solutionCode": "function longestIncreasingPath(matrix) {\n  if (!matrix || matrix.length === 0) return 0;\n  const m = matrix.length, n = matrix[0].length;\n  const memo = Array.from({ length: m }, () => new Array(n).fill(0));\n  const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];\n  let maxPath = 0;\n  function dfs(r, c) {\n    if (memo[r][c] !== 0) return memo[r][c];\n    let len = 1;\n    for (const [dr, dc] of dirs) {\n      const nr = r + dr, nc = c + dc;\n      if (nr >= 0 && nr < m && nc >= 0 && nc < n && matrix[nr][nc] > matrix[r][c]) {\n        len = Math.max(len, 1 + dfs(nr, nc));\n      }\n    }\n    memo[r][c] = len;\n    return len;\n  }\n  for (let i = 0; i < m; i++) {\n    for (let j = 0; j < n; j++) {\n      maxPath = Math.max(maxPath, dfs(i, j));\n    }\n  }\n  return maxPath;\n}",
+  "functionName": "longestIncreasingPath",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            9,
+            9,
+            4
+          ],
+          [
+            6,
+            6,
+            8
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "matrix = [[9,9,4],[6,6,8],[2,1,1]]",
+      "expectedDisplay": "4"
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            3,
+            4,
+            5
+          ],
+          [
+            3,
+            2,
+            6
+          ],
+          [
+            2,
+            2,
+            1
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "matrix = [[3,4,5],[3,2,6],[2,2,1]]",
+      "expectedDisplay": "4"
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "matrix = [[1]]",
+      "expectedDisplay": "1"
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "matrix = 2x2 grid",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          [
+            7,
+            8,
+            9
+          ],
+          [
+            9,
+            7,
+            6
+          ],
+          [
+            7,
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "matrix = serpentine path",
+      "expectedDisplay": "6",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "single row increasing 1..5",
+      "expectedDisplay": "5",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          [
+            5
+          ],
+          [
+            4
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "single column decreasing 5..1",
+      "expectedDisplay": "5",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            2
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "all identical cells",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "matrix with equal adjacents",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            7,
+            6,
+            5,
+            4
+          ]
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "2x4 continuous snake",
+      "expectedDisplay": "8",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Model the matrix as a Directed Acyclic Graph (DAG) with edges from smaller to strictly larger neighbors. Use DFS with memoization."
+  ],
+  "python": {
+    "starterCode": "def longestIncreasingPath(matrix):\n    return 0\n",
+    "solutionCode": "def longestIncreasingPath(matrix):\n    if not matrix:\n        return 0\n    m, n = len(matrix), len(matrix[0])\n    memo = [[0] * n for _ in range(m)]\n    dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    def dfs(r, c):\n        if memo[r][c] != 0:\n            return memo[r][c]\n        length = 1\n        for dr, dc in dirs:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < m and 0 <= nc < n and matrix[nr][nc] > matrix[r][c]:\n                length = max(length, 1 + dfs(nr, nc))\n        memo[r][c] = length\n        return length\n    return max(dfs(r, c) for r in range(m) for c in range(n))\n"
+  },
+  "leetcodeId": 329,
+  "leetcodeTitle": "Longest Increasing Path in a Matrix",
+  "leetcodeUrl": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/"
+}

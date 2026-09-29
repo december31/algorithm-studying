@@ -1,0 +1,199 @@
+{
+  "id": "lemonade-change",
+  "wingId": "binary-search-greedy",
+  "floor": 6,
+  "title": "Lemonade Change",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "cashier-wraith",
+    "name": "Tithe the Bill Collector",
+    "title": "Exactor of Exact Currency",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#10b981",
+    "attackName": "Counterfeit Curse",
+    "attackPower": 1,
+    "defeatQuote": "You provided exact change down to the last dollar..."
+  },
+  "description": "At a lemonade stand, each lemonade costs $5. Customers stand in a queue and order one at a time. Each customer pays with a $5, $10, or $20 bill. Return `true` if you can provide every customer with correct change.",
+  "examples": [
+    {
+      "input": "bills = [5,5,5,10,20]",
+      "output": "true"
+    },
+    {
+      "input": "bills = [5,5,10,10,20]",
+      "output": "false"
+    }
+  ],
+  "constraints": [
+    "1 <= bills.length <= 10^5",
+    "bills[i] is either 5, 10, or 20."
+  ],
+  "starterCode": "function lemonadeChange(bills) {\n  return true;\n}",
+  "solutionCode": "function lemonadeChange(bills) {\n  let five = 0, ten = 0;\n  for (const b of bills) {\n    if (b === 5) {\n      five++;\n    } else if (b === 10) {\n      if (five === 0) return false;\n      five--;\n      ten++;\n    } else {\n      // $20 bill: prefer giving $10 + $5 over 3x $5\n      if (ten > 0 && five > 0) {\n        ten--;\n        five--;\n      } else if (five >= 3) {\n        five -= 3;\n      } else {\n        return false;\n      }\n    }\n  }\n  return true;\n}",
+  "functionName": "lemonadeChange",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          5,
+          5,
+          5,
+          10,
+          20
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "bills = [5,5,5,10,20]",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5,
+          5,
+          10,
+          10,
+          20
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "bills = [5,5,10,10,20]",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5,
+          5,
+          10
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "bills = [5, 5, 10]",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          5
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[5]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          10
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[10]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          5,
+          5,
+          10
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[5,5,10]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          10,
+          10
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[10,10]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          5,
+          5,
+          10,
+          10,
+          20
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[5,5,10,10,20]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          5,
+          5,
+          5,
+          5,
+          20,
+          20,
+          5,
+          5,
+          20,
+          5
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[5, 5, 5, 5, ... (10 items)]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          5,
+          10,
+          5,
+          20
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[5,10,5,20]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Always prioritize giving a $10 bill as change for a $20 bill, preserving flexible $5 bills."
+  ],
+  "python": {
+    "starterCode": "def lemonadeChange(bills):\n    return True\n",
+    "solutionCode": "def lemonadeChange(bills):\n    five, ten = 0, 0\n    for b in bills:\n        if b == 5:\n            five += 1\n        elif b == 10:\n            if five == 0:\n                return False\n            five -= 1\n            ten += 1\n        else:\n            if ten > 0 and five > 0:\n                ten -= 1\n                five -= 1\n            elif five >= 3:\n                five -= 3\n            else:\n                return False\n    return True\n"
+  },
+  "leetcodeId": 860,
+  "leetcodeTitle": "Lemonade Change",
+  "leetcodeUrl": "https://leetcode.com/problems/lemonade-change/"
+}

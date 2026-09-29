@@ -1,0 +1,232 @@
+{
+  "id": "cousins-in-binary-tree",
+  "wingId": "graphs",
+  "floor": 6,
+  "title": "Cousins in Binary Tree",
+  "difficulty": "easy",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "kin-skeleton",
+    "name": "Kin the Linked Skeleton",
+    "title": "Tracker of Tree Lineages",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "skeleton",
+    "color": "#e2e8f0",
+    "attackName": "Bone Relic Pierce",
+    "attackPower": 1,
+    "defeatQuote": "Different parents, same depth confirmed..."
+  },
+  "description": "In a binary tree, the root node is at depth 0. Two nodes of a binary tree are cousins if they have the same depth with different parents. Return `true` if `x` and `y` are cousins.",
+  "examples": [
+    {
+      "input": "root = [1, 2, 3, 4], x = 4, y = 3",
+      "output": "false"
+    },
+    {
+      "input": "root = [1, 2, 3, null, 4, null, 5], x = 5, y = 4",
+      "output": "true"
+    }
+  ],
+  "constraints": [
+    "The number of nodes in the tree will be between 2 and 100."
+  ],
+  "starterCode": "function isCousins(root, x, y) {\n  return false;\n}",
+  "solutionCode": "function isCousins(root, x, y) {\n  let xInfo = null, yInfo = null;\n  function dfs(idx, depth, parent) {\n    if (idx >= root.length || root[idx] === null || root[idx] === undefined) return;\n    const val = root[idx];\n    if (val === x) xInfo = { depth, parent };\n    if (val === y) yInfo = { depth, parent };\n    dfs(2 * idx + 1, depth + 1, val);\n    dfs(2 * idx + 2, depth + 1, val);\n  }\n  dfs(0, 0, null);\n  return xInfo && yInfo && xInfo.depth === yInfo.depth && xInfo.parent !== yInfo.parent;\n}",
+  "functionName": "isCousins",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4,
+        3
+      ],
+      "expected": false,
+      "inputDisplay": "root = [1, 2, 3, 4], x = 4, y = 3",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          null,
+          4,
+          null,
+          5
+        ],
+        5,
+        4
+      ],
+      "expected": true,
+      "inputDisplay": "root = [1,2,3,null,4,null,5], x = 5, y = 4",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          null,
+          4
+        ],
+        2,
+        3
+      ],
+      "expected": false,
+      "inputDisplay": "x = 2, y = 3 (siblings)",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        2,
+        3
+      ],
+      "expected": false,
+      "inputDisplay": "[1,2,3], 2, 3",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4,
+        3
+      ],
+      "expected": false,
+      "inputDisplay": "[1,2,3,4], 4, 3",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          null,
+          4,
+          null,
+          5
+        ],
+        4,
+        5
+      ],
+      "expected": true,
+      "inputDisplay": "[1, 2, 3, null, ... (7 items)], 4, 5",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          null,
+          4
+        ],
+        2,
+        3
+      ],
+      "expected": false,
+      "inputDisplay": "[1,2,3,null,4], 2, 3",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        4,
+        6
+      ],
+      "expected": true,
+      "inputDisplay": "[1, 2, 3, 4, ... (7 items)], 4, 6",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        4,
+        5
+      ],
+      "expected": false,
+      "inputDisplay": "[1, 2, 3, 4, ... (7 items)], 4, 5",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        2,
+        4
+      ],
+      "expected": false,
+      "inputDisplay": "[1,2,3,4], 2, 4",
+      "expectedDisplay": "false",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Record the depth and parent of both target nodes via DFS, then compare."
+  ],
+  "python": {
+    "starterCode": "def isCousins(root, x, y):\n    return False\n",
+    "solutionCode": "def isCousins(root, x, y):\n    x_info, y_info = None, None\n    def dfs(idx, depth, parent):\n        nonlocal x_info, y_info\n        if idx >= len(root) or root[idx] is None:\n            return\n        v = root[idx]\n        if v == x: x_info = (depth, parent)\n        if v == y: y_info = (depth, parent)\n        dfs(2 * idx + 1, depth + 1, v)\n        dfs(2 * idx + 2, depth + 1, v)\n    dfs(0, 0, None)\n    return x_info and y_info and x_info[0] == y_info[0] and x_info[1] != y_info[1]\n"
+  },
+  "leetcodeId": 993,
+  "leetcodeTitle": "Cousins in Binary Tree",
+  "leetcodeUrl": "https://leetcode.com/problems/cousins-in-binary-tree/"
+}

@@ -1,0 +1,154 @@
+{
+  "id": "valid-parentheses",
+  "wingId": "data-structures",
+  "floor": 2,
+  "title": "Valid Parentheses",
+  "difficulty": "easy",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "bracket-imp",
+    "name": "Klack the Bracket Imp",
+    "title": "Weaver of Nested Enclosures",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "slime",
+    "color": "#38bdf8",
+    "attackName": "Unbalanced Clatter",
+    "attackPower": 1,
+    "defeatQuote": "All my brackets were popped cleanly..."
+  },
+  "description": "Given a string `s` containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.\n\nOpen brackets must be closed by the same type of brackets in the correct LIFO order.",
+  "examples": [
+    {
+      "input": "s = \"()\"",
+      "output": "true"
+    },
+    {
+      "input": "s = \"()[]{}\"",
+      "output": "true"
+    },
+    {
+      "input": "s = \"(]\"",
+      "output": "false"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 10^4",
+    "s consists of parentheses only '()[]{}'."
+  ],
+  "starterCode": "function isValid(s) {\n  return true;\n}",
+  "solutionCode": "function isValid(s) {\n  const stack = [];\n  const map = { ')': '(', '}': '{', ']': '[' };\n  for (const c of s) {\n    if (c === '(' || c === '{' || c === '[') {\n      stack.push(c);\n    } else {\n      if (stack.length === 0 || stack.pop() !== map[c]) return false;\n    }\n  }\n  return stack.length === 0;\n}",
+  "functionName": "isValid",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "()"
+      ],
+      "expected": true,
+      "inputDisplay": "s = \"()\"",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "()[]{}"
+      ],
+      "expected": true,
+      "inputDisplay": "s = \"()[]{}\"",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "(]"
+      ],
+      "expected": false,
+      "inputDisplay": "s = \"(]\"",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        ""
+      ],
+      "expected": true,
+      "inputDisplay": "\"\"",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        "["
+      ],
+      "expected": false,
+      "inputDisplay": "\"[\"",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        "]"
+      ],
+      "expected": false,
+      "inputDisplay": "\"]\"",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        "{[]}"
+      ],
+      "expected": true,
+      "inputDisplay": "\"{[]}\"",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        "([)]"
+      ],
+      "expected": false,
+      "inputDisplay": "\"([)]\"",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        "((((((()))))))"
+      ],
+      "expected": true,
+      "inputDisplay": "\"((((((()))))))\"",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        "()()()()"
+      ],
+      "expected": true,
+      "inputDisplay": "\"()()()()\"",
+      "expectedDisplay": "true",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Push opening brackets to stack; on closing bracket, pop and ensure matching pair."
+  ],
+  "python": {
+    "starterCode": "def isValid(s):\n    return True\n",
+    "solutionCode": "def isValid(s):\n    stack = []\n    mapping = {\")\": \"(\", \"}\": \"{\", \"]\": \"[\"}\n    for char in s:\n        if char in mapping.values():\n            stack.append(char)\n        elif char in mapping:\n            if not stack or stack.pop() != mapping[char]:\n                return False\n    return not stack\n"
+  },
+  "leetcodeId": 20,
+  "leetcodeTitle": "Valid Parentheses",
+  "leetcodeUrl": "https://leetcode.com/problems/valid-parentheses/"
+}

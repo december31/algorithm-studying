@@ -10,7 +10,8 @@ import { indentMore, indentLess } from '@codemirror/commands';
 import { useGameStore, getStarterCode, getSolutionCode } from '../../store/useGameStore';
 import { executeSolution } from '../../engine/runner';
 import { executePythonSolution } from '../../engine/pythonRunner';
-import { Play, RotateCcw, Lightbulb, Code2, BookOpen, Swords } from 'lucide-react';
+import { Play, RotateCcw, Lightbulb, Code2, BookOpen, Swords, ExternalLink } from 'lucide-react';
+import { SolutionModal } from './SolutionModal';
 
 // Smart 4-space Tab command: indents selected lines or inserts spaces up to the next 4-space tab stop
 const smartTab = ({ state, dispatch }: { state: any; dispatch: any }) => {
@@ -47,10 +48,12 @@ export const CodeEditor: React.FC = () => {
     setRunning,
     setExecutionReport,
     takeSacrificeHealth,
+    stats,
   } = useGameStore();
 
   const [activeTab, setActiveTab] = useState<'editor' | 'description'>('editor');
   const [showHintIndex, setShowHintIndex] = useState<number>(-1);
+  const [isSolutionModalOpen, setIsSolutionModalOpen] = useState(false);
 
   const editorExtensions = React.useMemo(() => {
     const langExt = language === 'python' ? python() : javascript({ jsx: false, typescript: false });
@@ -114,15 +117,13 @@ export const CodeEditor: React.FC = () => {
     }
   };
 
-  const handleLoadSolution = () => {
-    if (
-      window.confirm(
-        `Load reference ${language === 'python' ? 'Python' : 'JavaScript'} solution? This forbidden knowledge will sacrifice 15 HP!`
-      )
-    ) {
-      if (takeSacrificeHealth(15, 'Forbidden Solution')) {
-        setCode(getSolutionCode(currentProblem, language));
-      }
+  const handleOpenSolutionModal = () => {
+    setIsSolutionModalOpen(true);
+  };
+
+  const handleConfirmSolution = () => {
+    if (takeSacrificeHealth(25, 'Forbidden Solution')) {
+      setCode(getSolutionCode(currentProblem, language));
     }
   };
 
@@ -199,12 +200,12 @@ export const CodeEditor: React.FC = () => {
         <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Load Solution Button */}
           <button
-            onClick={handleLoadSolution}
+            onClick={handleOpenSolutionModal}
             className="px-2 sm:px-2.5 py-1.5 rounded-lg bg-purple-950/70 hover:bg-purple-900 border border-purple-600/40 text-purple-300 font-pixel text-[10px] flex items-center gap-1 transition-colors"
-            title="Load reference solution (-15 HP)"
+            title="Open Forbidden Scroll of Shame (-25 HP)"
           >
-            <span>💡</span>
-            <span className="hidden sm:inline">SOLUTION (-15 HP)</span>
+            <span>📜</span>
+            <span className="hidden sm:inline">SOLUTION (-25 HP)</span>
           </button>
 
           {/* Hints Toggle */}
@@ -282,8 +283,22 @@ export const CodeEditor: React.FC = () => {
       ) : (
         /* Problem Description View */
         <div className="p-4 overflow-y-auto max-h-[340px] space-y-4 text-slate-300">
-          <div>
-            <h3 className="font-pixel text-xs text-sky-400 mb-2">DESCRIPTION</h3>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between gap-2 pb-1.5 border-b border-slate-800">
+              <h3 className="font-pixel text-xs text-sky-400">DESCRIPTION</h3>
+              {currentProblem.leetcodeUrl && (
+                <a
+                  href={currentProblem.leetcodeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-400 font-pixel text-[10px] transition-colors group"
+                  title={`Open LeetCode #${currentProblem.leetcodeId}: ${currentProblem.leetcodeTitle}`}
+                >
+                  <span>LeetCode #{currentProblem.leetcodeId}</span>
+                  <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              )}
+            </div>
             <p className="font-sans text-sm leading-relaxed whitespace-pre-line text-slate-200">
               {currentProblem.description}
             </p>
@@ -314,6 +329,17 @@ export const CodeEditor: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Funny Solution Confirmation Modal */}
+      <SolutionModal
+        isOpen={isSolutionModalOpen}
+        onClose={() => setIsSolutionModalOpen(false)}
+        onConfirm={handleConfirmSolution}
+        language={language}
+        currentHp={stats.hp}
+        monsterName={currentProblem.monster.name}
+        cost={25}
+      />
     </div>
   );
 };

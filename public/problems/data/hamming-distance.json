@@ -1,0 +1,159 @@
+{
+  "id": "hamming-distance",
+  "wingId": "bit-manipulation",
+  "floor": 6,
+  "title": "Hamming Distance",
+  "difficulty": "easy",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "diff-specter",
+    "name": "Divergo the Discrepancy Specter",
+    "title": "Tallyman of Discordant Bits",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Discordant Pulse",
+    "attackPower": 1,
+    "defeatQuote": "All divergent bit positions were tallied..."
+  },
+  "description": "The Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers `x` and `y`, return the Hamming distance between them.",
+  "examples": [
+    {
+      "input": "x = 1, y = 4",
+      "output": "2"
+    },
+    {
+      "input": "x = 3, y = 1",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "0 <= x, y <= 2^31 - 1"
+  ],
+  "starterCode": "function hammingDistance(x, y) {\n  return 0;\n}",
+  "solutionCode": "function hammingDistance(x, y) {\n  let xor = x ^ y;\n  let dist = 0;\n  while (xor > 0) {\n    xor &= (xor - 1);\n    dist++;\n  }\n  return dist;\n}",
+  "functionName": "hammingDistance",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1,
+        4
+      ],
+      "expected": 2,
+      "inputDisplay": "x = 1 (0001), y = 4 (0100)",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "x = 3 (0011), y = 1 (0001)",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        0,
+        0
+      ],
+      "expected": 0,
+      "inputDisplay": "x = 0, y = 0",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        0,
+        0
+      ],
+      "expected": 0,
+      "inputDisplay": "0, 0",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        1,
+        1
+      ],
+      "expected": 0,
+      "inputDisplay": "1, 1",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        0,
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "0, 1",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        1,
+        4
+      ],
+      "expected": 2,
+      "inputDisplay": "1, 4",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        3,
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "3, 1",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        10,
+        20
+      ],
+      "expected": 4,
+      "inputDisplay": "10, 20",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        15,
+        0
+      ],
+      "expected": 4,
+      "inputDisplay": "15, 0",
+      "expectedDisplay": "4",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Compute x ^ y, then count the number of 1-bits in the result."
+  ],
+  "python": {
+    "starterCode": "def hammingDistance(x, y):\n    return 0\n",
+    "solutionCode": "def hammingDistance(x, y):\n    xor = x ^ y\n    count = 0\n    while xor:\n        xor &= (xor - 1)\n        count += 1\n    return count\n"
+  },
+  "leetcodeId": 461,
+  "leetcodeTitle": "Hamming Distance",
+  "leetcodeUrl": "https://leetcode.com/problems/hamming-distance/"
+}

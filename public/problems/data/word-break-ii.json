@@ -1,0 +1,228 @@
+{
+  "id": "word-break-ii",
+  "wingId": "backtracking",
+  "floor": 20,
+  "title": "Word Break II",
+  "difficulty": "hard",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "lexicon-overlord",
+    "name": "Lexicon Overlord of Endless Parse Trees",
+    "title": "Grand Tyrant of Dictionary Decompositions",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "lich",
+    "color": "#e11d48",
+    "attackName": "Recursive Lexicon Fracture",
+    "attackPower": 3,
+    "defeatQuote": "Every word token found its rightful whitespace boundary..."
+  },
+  "description": "Given a string `s` and a dictionary of strings `wordDict`, add spaces in `s` to construct a sentence where each word is a valid dictionary word. Return all such possible sentences in any order.",
+  "examples": [
+    {
+      "input": "s = \"catsanddog\", wordDict = [\"cat\",\"cats\",\"and\",\"sand\",\"dog\"]",
+      "output": "[\"cats and dog\",\"cat sand dog\"]"
+    },
+    {
+      "input": "s = \"pineapplepenapple\", wordDict = [\"apple\",\"pen\",\"applepen\",\"pine\",\"pineapple\"]",
+      "output": "[\"pine apple pen apple\",\"pineapple pen apple\",\"pine applepen apple\"]"
+    },
+    {
+      "input": "s = \"catsandog\", wordDict = [\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]",
+      "output": "[]"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 20",
+    "1 <= wordDict.length <= 1000",
+    "1 <= wordDict[i].length <= 10"
+  ],
+  "starterCode": "function wordBreak(s, wordDict) {\n  return [];\n}",
+  "solutionCode": "function wordBreak(s, wordDict) {\n  const dict = new Set(wordDict);\n  const memo = new Map();\n  function dfs(str) {\n    if (memo.has(str)) return memo.get(str);\n    if (str.length === 0) return [''];\n    const res = [];\n    for (const word of dict) {\n      if (str.startsWith(word)) {\n        const subList = dfs(str.slice(word.length));\n        for (const sub of subList) {\n          res.push(sub.length === 0 ? word : word + ' ' + sub);\n        }\n      }\n    }\n    memo.set(str, res);\n    return res;\n  }\n  return dfs(s);\n}",
+  "functionName": "wordBreak",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "catsanddog",
+        [
+          "cat",
+          "cats",
+          "and",
+          "sand",
+          "dog"
+        ]
+      ],
+      "expected": [
+        "cat sand dog",
+        "cats and dog"
+      ],
+      "inputDisplay": "s = \"catsanddog\", wordDict = 5 words",
+      "expectedDisplay": "[\"cat sand dog\",\"cats and dog\"]"
+    },
+    {
+      "id": 2,
+      "input": [
+        "pineapplepenapple",
+        [
+          "apple",
+          "pen",
+          "applepen",
+          "pine",
+          "pineapple"
+        ]
+      ],
+      "expected": [
+        "pine apple pen apple",
+        "pine applepen apple",
+        "pineapple pen apple"
+      ],
+      "inputDisplay": "s = \"pineapplepenapple\"",
+      "expectedDisplay": "3 sentences"
+    },
+    {
+      "id": 3,
+      "input": [
+        "catsandog",
+        [
+          "cats",
+          "dog",
+          "sand",
+          "and",
+          "cat"
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "s = \"catsandog\"",
+      "expectedDisplay": "[]"
+    },
+    {
+      "id": 4,
+      "input": [
+        "a",
+        [
+          "a"
+        ]
+      ],
+      "expected": [
+        "a"
+      ],
+      "inputDisplay": "s = \"a\", wordDict = [\"a\"]",
+      "expectedDisplay": "[\"a\"]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        "ab",
+        [
+          "a",
+          "b"
+        ]
+      ],
+      "expected": [
+        "a b"
+      ],
+      "inputDisplay": "s = \"ab\"",
+      "expectedDisplay": "[\"a b\"]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        "aaaa",
+        [
+          "a",
+          "aa",
+          "aaa"
+        ]
+      ],
+      "expected": [
+        "a a a a",
+        "a a aa",
+        "a aa a",
+        "a aaa",
+        "aa a a",
+        "aa aa",
+        "aaa a"
+      ],
+      "inputDisplay": "s = \"aaaa\"",
+      "expectedDisplay": "7 sentences",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        "bb",
+        [
+          "a",
+          "b",
+          "bbb"
+        ]
+      ],
+      "expected": [
+        "b b"
+      ],
+      "inputDisplay": "s = \"bb\"",
+      "expectedDisplay": "[\"b b\"]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        "sanddog",
+        [
+          "sand",
+          "dog"
+        ]
+      ],
+      "expected": [
+        "sand dog"
+      ],
+      "inputDisplay": "s = \"sanddog\"",
+      "expectedDisplay": "[\"sand dog\"]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        "cat",
+        [
+          "cat"
+        ]
+      ],
+      "expected": [
+        "cat"
+      ],
+      "inputDisplay": "s = \"cat\"",
+      "expectedDisplay": "[\"cat\"]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        "dogcat",
+        [
+          "cat",
+          "dog"
+        ]
+      ],
+      "expected": [
+        "dog cat"
+      ],
+      "inputDisplay": "s = \"dogcat\"",
+      "expectedDisplay": "[\"dog cat\"]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "DFS from the start of the string, matching any prefix that exists in the dictionary. Memoize results for each suffix string to avoid repeated work."
+  ],
+  "python": {
+    "starterCode": "def wordBreak(s, wordDict):\n    return []\n",
+    "solutionCode": "def wordBreak(s, wordDict):\n    d = set(wordDict)\n    memo = {}\n    def dfs(rem):\n        if rem in memo:\n            return memo[rem]\n        if not rem:\n            return [\"\"]\n        res = []\n        for word in wordDict:\n            if rem.startswith(word):\n                sub_res = dfs(rem[len(word):])\n                for sub in sub_res:\n                    res.append(word if not sub else word + \" \" + sub)\n        memo[rem] = res\n        return res\n    return dfs(s)\n"
+  },
+  "leetcodeId": 140,
+  "leetcodeTitle": "Word Break II",
+  "leetcodeUrl": "https://leetcode.com/problems/word-break-ii/"
+}

@@ -1,0 +1,227 @@
+{
+  "id": "average-of-levels-in-binary-tree",
+  "wingId": "graphs",
+  "floor": 4,
+  "title": "Average of Levels in Binary Tree",
+  "difficulty": "easy",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "mean-specter",
+    "name": "Equus the Average Specter",
+    "title": "Tallyman of Tree Layers",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#a855f7",
+    "attackName": "Layered Drain",
+    "attackPower": 1,
+    "defeatQuote": "Each level of my spectral tree was averaged..."
+  },
+  "description": "Given the root of a binary tree, return the average value of the nodes on each level in the form of an array.",
+  "examples": [
+    {
+      "input": "root = [3, 9, 20, null, null, 15, 7]",
+      "output": "[3, 14.5, 11]"
+    },
+    {
+      "input": "root = [3, 9, 20, 15, 7]",
+      "output": "[3, 14.5, 11]"
+    }
+  ],
+  "constraints": [
+    "The number of nodes in the tree is in the range [1, 10^4]."
+  ],
+  "starterCode": "function averageOfLevels(root) {\n  return [];\n}",
+  "solutionCode": "function averageOfLevels(root) {\n  if (!root || root.length === 0 || root[0] === null) return [];\n  const result = [];\n  const queue = [0]; // indices\n  while (queue.length > 0) {\n    const size = queue.length;\n    let sum = 0;\n    for (let i = 0; i < size; i++) {\n      const idx = queue.shift();\n      sum += root[idx];\n      const left = 2 * idx + 1;\n      const right = 2 * idx + 2;\n      if (left < root.length && root[left] !== null && root[left] !== undefined) queue.push(left);\n      if (right < root.length && root[right] !== null && root[right] !== undefined) queue.push(right);\n    }\n    result.push(Number((sum / size).toFixed(5)));\n  }\n  return result;\n}",
+  "functionName": "averageOfLevels",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          9,
+          20,
+          null,
+          null,
+          15,
+          7
+        ]
+      ],
+      "expected": [
+        3,
+        14.5,
+        11
+      ],
+      "inputDisplay": "root = [3, 9, 20, null, null, 15, 7]",
+      "expectedDisplay": "[3, 14.5, 11]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2.5
+      ],
+      "inputDisplay": "root = [1, 2, 3]",
+      "expectedDisplay": "[1, 2.5]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5
+        ]
+      ],
+      "expected": [
+        5
+      ],
+      "inputDisplay": "root = [5]",
+      "expectedDisplay": "[5]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[1]",
+      "expectedDisplay": "[1]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2.5
+      ],
+      "inputDisplay": "[1,2,3]",
+      "expectedDisplay": "[1,2.5]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "inputDisplay": "[1,2]",
+      "expectedDisplay": "[1,2]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "inputDisplay": "[1,null,2]",
+      "expectedDisplay": "[1,2]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "expected": [
+        1,
+        2.5,
+        5.5
+      ],
+      "inputDisplay": "[1, 2, 3, 4, ... (7 items)]",
+      "expectedDisplay": "[1,2.5,5.5]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          10,
+          5,
+          15,
+          null,
+          null,
+          6,
+          20
+        ]
+      ],
+      "expected": [
+        10,
+        10,
+        13
+      ],
+      "inputDisplay": "[10, 5, 15, null, ... (7 items)]",
+      "expectedDisplay": "[10,10,13]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          2147483647,
+          2147483647,
+          2147483647
+        ]
+      ],
+      "expected": [
+        2147483647,
+        2147483647
+      ],
+      "inputDisplay": "[2147483647,2147483647,2147483647]",
+      "expectedDisplay": "[2147483647,2147483647]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use standard queue BFS: loop over queue.length to process one level at a time."
+  ],
+  "python": {
+    "starterCode": "def averageOfLevels(root):\n    return []\n",
+    "solutionCode": "from collections import deque\ndef averageOfLevels(root):\n    if not root or root[0] is None:\n        return []\n    res = []\n    q = deque([0])\n    while q:\n        size = len(q)\n        total = 0\n        for _ in range(size):\n            idx = q.popleft()\n            total += root[idx]\n            left, right = 2 * idx + 1, 2 * idx + 2\n            if left < len(root) and root[left] is not None:\n                q.append(left)\n            if right < len(root) and root[right] is not None:\n                q.append(right)\n        res.append(round(total / size, 5))\n    return res\n"
+  },
+  "leetcodeId": 637,
+  "leetcodeTitle": "Average of Levels in Binary Tree",
+  "leetcodeUrl": "https://leetcode.com/problems/average-of-levels-in-binary-tree/"
+}

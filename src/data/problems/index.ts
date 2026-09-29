@@ -6,6 +6,22 @@ import { graphProblems } from './graphs';
 import { binarySearchGreedyProblems } from './binarySearchGreedy';
 import { bitManipulationProblems } from './bitManipulation';
 import { getEnrichedTestCases } from '../edgeCases';
+import { getLeetCodeRef, leetcodeMapping } from '../leetcodeMapping';
+
+export { leetcodeMapping, getLeetCodeRef };
+
+function enrichWithLeetCode(p: Problem): Problem {
+  const ref = getLeetCodeRef(p.id);
+  if (!ref) return p;
+  return {
+    ...p,
+    title: ref.title,
+    leetcodeId: ref.id,
+    leetcodeTitle: ref.title,
+    leetcodeUrl: ref.url,
+    leetcode: ref,
+  };
+}
 
 export const allTopics: DungeonTopic[] = [
   'data-structures',
@@ -16,11 +32,11 @@ export const allTopics: DungeonTopic[] = [
 ];
 
 export const allProblems: Record<DungeonTopic, Problem[]> = {
-  'data-structures': dataStructureProblems,
-  'backtracking': backtrackingProblems,
-  'graphs': graphProblems,
-  'binary-search-greedy': binarySearchGreedyProblems,
-  'bit-manipulation': bitManipulationProblems,
+  'data-structures': dataStructureProblems.map(enrichWithLeetCode),
+  'backtracking': backtrackingProblems.map(enrichWithLeetCode),
+  'graphs': graphProblems.map(enrichWithLeetCode),
+  'binary-search-greedy': binarySearchGreedyProblems.map(enrichWithLeetCode),
+  'bit-manipulation': bitManipulationProblems.map(enrichWithLeetCode),
 };
 
 // Utility to shuffle an array immutably
@@ -43,7 +59,7 @@ function shuffle<T>(array: T[]): T[] {
  * - Full suite of 10 test cases per problem (3 sample + 7 hidden edge cases).
  */
 export function generateDungeonRun(topic: DungeonTopic): Problem[] {
-  const pool = allProblems[topic] || dataStructureProblems;
+  const pool = allProblems[topic] || allProblems['data-structures'];
 
   const easyPool = pool.filter((p) => p.difficulty === 'easy');
   const mediumPool = pool.filter((p) => p.difficulty === 'medium');
@@ -71,7 +87,6 @@ export function generateDungeonRun(topic: DungeonTopic): Problem[] {
     return {
       ...p,
       floor: floorNum,
-      title: isBoss ? `Floor 10: BOSS - ${p.title}` : `Floor ${floorNum}: ${p.title}`,
       testCases: enrichedTests,
       monster: {
         ...p.monster,
@@ -85,7 +100,7 @@ export function generateDungeonRun(topic: DungeonTopic): Problem[] {
 }
 
 export function getProblem(wingId: DungeonTopic, floor: number): Problem | undefined {
-  const problems = allProblems[wingId] || dataStructureProblems;
+  const problems = allProblems[wingId] || allProblems['data-structures'];
   const p = problems.find((item) => item.floor === floor) || problems[0];
   if (!p) return undefined;
   const enrichedTests = getEnrichedTestCases(p);

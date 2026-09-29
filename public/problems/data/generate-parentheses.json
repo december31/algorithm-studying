@@ -1,0 +1,197 @@
+{
+  "id": "generate-parentheses",
+  "wingId": "backtracking",
+  "floor": 12,
+  "title": "Generate Parentheses",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "parenthesis-djinn",
+    "name": "Zul the Balance Djinn",
+    "title": "Architect of Well-Formed Pairs",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "slime",
+    "color": "#06b6d4",
+    "attackName": "Resonant Closure",
+    "attackPower": 2,
+    "defeatQuote": "The opening and closing brackets reached equilibrium..."
+  },
+  "description": "Given `n` pairs of parentheses, write a function to generate all combinations of well-formed parentheses.",
+  "examples": [
+    {
+      "input": "n = 3",
+      "output": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]"
+    },
+    {
+      "input": "n = 1",
+      "output": "[\"()\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 8"
+  ],
+  "starterCode": "function generateParenthesis(n) {\n  return [];\n}",
+  "solutionCode": "function generateParenthesis(n) {\n  const result = [];\n  function backtrack(open, close, current) {\n    if (current.length === 2 * n) {\n      result.push(current);\n      return;\n    }\n    if (open < n) backtrack(open + 1, close, current + '(');\n    if (close < open) backtrack(open, close + 1, current + ')');\n  }\n  backtrack(0, 0, '');\n  return result;\n}",
+  "functionName": "generateParenthesis",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3
+      ],
+      "expected": [
+        "((()))",
+        "(()())",
+        "(())()",
+        "()(())",
+        "()()()"
+      ],
+      "inputDisplay": "n = 3",
+      "expectedDisplay": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": [
+        "()"
+      ],
+      "inputDisplay": "n = 1",
+      "expectedDisplay": "[\"()\"]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        2
+      ],
+      "expected": [
+        "(())",
+        "()()"
+      ],
+      "inputDisplay": "n = 2",
+      "expectedDisplay": "[\"(())\", \"()()\"]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        1
+      ],
+      "expected": [
+        "()"
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "[\"()\"]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        2
+      ],
+      "expected": [
+        "(())",
+        "()()"
+      ],
+      "inputDisplay": "2",
+      "expectedDisplay": "[\"(())\",\"()()\"]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        3
+      ],
+      "expected": [
+        "((()))",
+        "(()())",
+        "(())()",
+        "()(())",
+        "()()()"
+      ],
+      "inputDisplay": "3",
+      "expectedDisplay": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        4
+      ],
+      "expected": [
+        "(((())))",
+        "((()()))",
+        "((())())",
+        "((()))()",
+        "(()(()))",
+        "(()()())",
+        "(()())()",
+        "(())(())",
+        "(())()()",
+        "()((()))",
+        "()(()())",
+        "()(())()",
+        "()()(())",
+        "()()()()"
+      ],
+      "inputDisplay": "4",
+      "expectedDisplay": "[\"(((())))\",\"((()()))\",\"((())())\",\"((()))()\",\"(()(()))\",\"(()()())\",\"(()())()\",\"(())(())\",\"(())()()\",\"()((()))\",\"()(()())\",\"()(())()\",\"()()(())\",\"()()()()\"]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        1
+      ],
+      "expected": [
+        "()"
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "[\"()\"]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        2
+      ],
+      "expected": [
+        "(())",
+        "()()"
+      ],
+      "inputDisplay": "2",
+      "expectedDisplay": "[\"(())\",\"()()\"]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        3
+      ],
+      "expected": [
+        "((()))",
+        "(()())",
+        "(())()",
+        "()(())",
+        "()()()"
+      ],
+      "inputDisplay": "3",
+      "expectedDisplay": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Only add \"(\" if open < n; only add \")\" if close < open."
+  ],
+  "python": {
+    "starterCode": "def generateParenthesis(n):\n    return []\n",
+    "solutionCode": "def generateParenthesis(n):\n    res = []\n    def backtrack(open_c, close_c, curr):\n        if len(curr) == 2 * n:\n            res.append(curr)\n            return\n        if open_c < n:\n            backtrack(open_c + 1, close_c, curr + \"(\")\n        if close_c < open_c:\n            backtrack(open_c, close_c + 1, curr + \")\")\n    backtrack(0, 0, \"\")\n    return res\n"
+  },
+  "leetcodeId": 22,
+  "leetcodeTitle": "Generate Parentheses",
+  "leetcodeUrl": "https://leetcode.com/problems/generate-parentheses/"
+}

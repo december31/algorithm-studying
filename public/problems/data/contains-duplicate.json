@@ -1,0 +1,204 @@
+{
+  "id": "contains-duplicate",
+  "wingId": "data-structures",
+  "floor": 3,
+  "title": "Contains Duplicate",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mirror-slime",
+    "name": "Doppel the Cloned Slime",
+    "title": "Divider of Identical Souls",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "slime",
+    "color": "#10b981",
+    "attackName": "Mitotic Splash",
+    "attackPower": 1,
+    "defeatQuote": "No duplicates found in my essence..."
+  },
+  "description": "Given an integer array `nums`, return `true` if any value appears at least twice in the array, and return `false` if every element is distinct.",
+  "examples": [
+    {
+      "input": "nums = [1, 2, 3, 1]",
+      "output": "true"
+    },
+    {
+      "input": "nums = [1, 2, 3, 4]",
+      "output": "false"
+    },
+    {
+      "input": "nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]",
+      "output": "true"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10^5",
+    "-10^9 <= nums[i] <= 10^9"
+  ],
+  "starterCode": "function containsDuplicate(nums) {\n  return false;\n}",
+  "solutionCode": "function containsDuplicate(nums) {\n  return new Set(nums).size !== nums.length;\n}",
+  "functionName": "containsDuplicate",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "nums = [1, 2, 3, 1]",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "nums = [1, 2, 3, 4]",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          3,
+          3,
+          4,
+          3,
+          2,
+          4,
+          2
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        []
+      ],
+      "expected": false,
+      "inputDisplay": "[]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[0,0]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          -1,
+          -2,
+          -3,
+          -1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[-1,-2,-3,-1]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          -1,
+          -2,
+          -3,
+          -4
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[-1,-2,-3,-4]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          10,
+          20,
+          30,
+          40,
+          10
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[10,20,30,40,10]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1, 2, 3, 4, ... (7 items)]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "A Hash Set stores only unique values. Compare set size with array length."
+  ],
+  "python": {
+    "starterCode": "def containsDuplicate(nums):\n    return False\n",
+    "solutionCode": "def containsDuplicate(nums):\n    return len(set(nums)) != len(nums)\n"
+  },
+  "leetcodeId": 217,
+  "leetcodeTitle": "Contains Duplicate",
+  "leetcodeUrl": "https://leetcode.com/problems/contains-duplicate/"
+}

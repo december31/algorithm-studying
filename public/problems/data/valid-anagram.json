@@ -1,0 +1,160 @@
+{
+  "id": "valid-anagram",
+  "wingId": "data-structures",
+  "floor": 4,
+  "title": "Valid Anagram",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "anagram-shade",
+    "name": "Lexis the Scrambled Shade",
+    "title": "Distorter of Wordcraft",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#a855f7",
+    "attackName": "Permuted Curse",
+    "attackPower": 1,
+    "defeatQuote": "You balanced every single character tally..."
+  },
+  "description": "Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `false` otherwise.\n\nAn Anagram is a word or phrase formed by rearranging the letters of a different word or phrase.",
+  "examples": [
+    {
+      "input": "s = \"anagram\", t = \"nagaram\"",
+      "output": "true"
+    },
+    {
+      "input": "s = \"rat\", t = \"car\"",
+      "output": "false"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length, t.length <= 5 * 10^4",
+    "s and t consist of lowercase English letters."
+  ],
+  "starterCode": "function isAnagram(s, t) {\n  return false;\n}",
+  "solutionCode": "function isAnagram(s, t) {\n  if (s.length !== t.length) return false;\n  const count = {};\n  for (const c of s) count[c] = (count[c] || 0) + 1;\n  for (const c of t) {\n    if (!count[c]) return false;\n    count[c]--;\n  }\n  return true;\n}",
+  "functionName": "isAnagram",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "anagram",
+        "nagaram"
+      ],
+      "expected": true,
+      "inputDisplay": "s = \"anagram\", t = \"nagaram\"",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "rat",
+        "car"
+      ],
+      "expected": false,
+      "inputDisplay": "s = \"rat\", t = \"car\"",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "listen",
+        "silent"
+      ],
+      "expected": true,
+      "inputDisplay": "s = \"listen\", t = \"silent\"",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "",
+        ""
+      ],
+      "expected": true,
+      "inputDisplay": "\"\", \"\"",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        "a",
+        "a"
+      ],
+      "expected": true,
+      "inputDisplay": "\"a\", \"a\"",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        "a",
+        "b"
+      ],
+      "expected": false,
+      "inputDisplay": "\"a\", \"b\"",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        "rat",
+        "car"
+      ],
+      "expected": false,
+      "inputDisplay": "\"rat\", \"car\"",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        "aabb",
+        "bbaa"
+      ],
+      "expected": true,
+      "inputDisplay": "\"aabb\", \"bbaa\"",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        "listen",
+        "silent"
+      ],
+      "expected": true,
+      "inputDisplay": "\"listen\", \"silent\"",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        "ab",
+        "a"
+      ],
+      "expected": false,
+      "inputDisplay": "\"ab\", \"a\"",
+      "expectedDisplay": "false",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Count character frequencies of s in a hash map, then decrement with t."
+  ],
+  "python": {
+    "starterCode": "def isAnagram(s, t):\n    return False\n",
+    "solutionCode": "def isAnagram(s, t):\n    if len(s) != len(t):\n        return False\n    count = {}\n    for c in s:\n        count[c] = count.get(c, 0) + 1\n    for c in t:\n        if c not in count or count[c] == 0:\n            return False\n        count[c] -= 1\n    return True\n"
+  },
+  "leetcodeId": 242,
+  "leetcodeTitle": "Valid Anagram",
+  "leetcodeUrl": "https://leetcode.com/problems/valid-anagram/"
+}

@@ -1,0 +1,222 @@
+{
+  "id": "word-ladder",
+  "wingId": "graphs",
+  "floor": 13,
+  "title": "Word Ladder",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "lexicon-dragon",
+    "name": "Verbis the Word Serpent",
+    "title": "Devourer of Orthographic Mutations",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#dc2626",
+    "attackName": "Morphological Inferno",
+    "attackPower": 3,
+    "defeatQuote": "Your shortest transformation sequence pierced my vocabulary..."
+  },
+  "description": "A transformation sequence from `beginWord` to `endWord` using a dictionary `wordList` is a sequence of words where every adjacent pair differs by a single letter. Return the number of words in the shortest transformation sequence from `beginWord` to `endWord`, or 0 if no such sequence exists.",
+  "examples": [
+    {
+      "input": "beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+      "output": "5"
+    },
+    {
+      "input": "beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= beginWord.length <= 10",
+    "1 <= wordList.length <= 5000"
+  ],
+  "starterCode": "function ladderLength(beginWord, endWord, wordList) {\n  return 0;\n}",
+  "solutionCode": "function ladderLength(beginWord, endWord, wordList) {\n  const words = new Set(wordList);\n  if (!words.has(endWord)) return 0;\n  const queue = [[beginWord, 1]];\n  const visited = new Set([beginWord]);\n\n  while (queue.length > 0) {\n    const [curr, level] = queue.shift();\n    if (curr === endWord) return level;\n    for (let i = 0; i < curr.length; i++) {\n      for (let c = 97; c <= 122; c++) {\n        const next = curr.slice(0, i) + String.fromCharCode(c) + curr.slice(i + 1);\n        if (words.has(next) && !visited.has(next)) {\n          visited.add(next);\n          queue.push([next, level + 1]);\n        }\n      }\n    }\n  }\n  return 0;\n}",
+  "functionName": "ladderLength",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log",
+          "cog"
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "hit -> cog via 6 words",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log"
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "endWord not in wordList",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "a",
+        "c",
+        [
+          "a",
+          "b",
+          "c"
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "a -> c",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "a",
+        "c",
+        [
+          "a",
+          "b",
+          "c"
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "\"a\", \"c\", [\"a\",\"b\",\"c\"]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        "hot",
+        "dog",
+        [
+          "hot",
+          "dog"
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "\"hot\", \"dog\", [\"hot\",\"dog\"]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        "hot",
+        "dog",
+        [
+          "hot",
+          "cog",
+          "dog"
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "\"hot\", \"dog\", [\"hot\",\"cog\",\"dog\"]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log",
+          "cog"
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "\"hit\", \"cog\", [\"hot\", \"dot\", \"dog\", \"lot\", ... (6 items)]",
+      "expectedDisplay": "5",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log"
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "\"hit\", \"cog\", [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        "a",
+        "b",
+        [
+          "b"
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "\"a\", \"b\", [\"b\"]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        "red",
+        "tax",
+        [
+          "ted",
+          "tex",
+          "red",
+          "tax",
+          "tad",
+          "den",
+          "rex",
+          "pee"
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "\"red\", \"tax\", [\"ted\", \"tex\", \"red\", \"tax\", ... (8 items)]",
+      "expectedDisplay": "4",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Treat words as nodes and 1-letter differences as edges. BFS finds shortest path."
+  ],
+  "python": {
+    "starterCode": "def ladderLength(beginWord, endWord, wordList):\n    return 0\n",
+    "solutionCode": "from collections import deque\ndef ladderLength(beginWord, endWord, wordList):\n    words = set(wordList)\n    if endWord not in words:\n        return 0\n    q = deque([(beginWord, 1)])\n    visited = {beginWord}\n    while q:\n        curr, level = q.popleft()\n        if curr == endWord:\n            return level\n        for i in range(len(curr)):\n            for c in \"abcdefghijklmnopqrstuvwxyz\":\n                nxt = curr[:i] + c + curr[i+1:]\n                if nxt in words and nxt not in visited:\n                    visited.add(nxt)\n                    q.append((nxt, level + 1))\n    return 0\n"
+  },
+  "leetcodeId": 127,
+  "leetcodeTitle": "Word Ladder",
+  "leetcodeUrl": "https://leetcode.com/problems/word-ladder/"
+}

@@ -1,0 +1,212 @@
+{
+  "id": "jump-game-ii",
+  "wingId": "binary-search-greedy",
+  "floor": 19,
+  "title": "Jump Game II",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "leaping-behemoth",
+    "name": "Leaping Behemoth of Minimum Strides",
+    "title": "Titan of Optimal Interval Strides",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "slime",
+    "color": "#eab308",
+    "attackName": "Spring-Loaded Leap Smash",
+    "attackPower": 2,
+    "defeatQuote": "You crossed my chasm in the exact theoretical minimum jumps..."
+  },
+  "description": "You are given a 0-indexed array of integers `nums` of length `n`. You are initially positioned at `nums[0]`. Each element `nums[i]` represents the maximum length of a forward jump from index `i`.\n\nReturn the minimum number of jumps to reach `nums[n - 1]`. You can assume that you can always reach the last index.",
+  "examples": [
+    {
+      "input": "nums = [2,3,1,1,4]",
+      "output": "2",
+      "explanation": "Jump 1 step from index 0 to 1, then 3 steps to the last index."
+    },
+    {
+      "input": "nums = [2,3,0,1,4]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10^4",
+    "0 <= nums[i] <= 1000"
+  ],
+  "starterCode": "function jump(nums) {\n  return 0;\n}",
+  "solutionCode": "function jump(nums) {\n  let jumps = 0, currentEnd = 0, farthest = 0;\n  for (let i = 0; i < nums.length - 1; i++) {\n    farthest = Math.max(farthest, i + nums[i]);\n    if (i === currentEnd) {\n      jumps++;\n      currentEnd = farthest;\n    }\n  }\n  return jumps;\n}",
+  "functionName": "jump",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          1,
+          1,
+          4
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "nums = [2,3,1,1,4]",
+      "expectedDisplay": "2"
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          3,
+          0,
+          1,
+          4
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "nums = [2,3,0,1,4]",
+      "expectedDisplay": "2"
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "nums = [0]",
+      "expectedDisplay": "0"
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "nums = [1,2]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "nums = [1,1,1,1]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "huge initial jump",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "nums = [2,1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          3,
+          2,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "nums = [3,2,1,1,1]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "nums = [1,2,3]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          7,
+          0,
+          9,
+          6,
+          9,
+          6,
+          1,
+          7,
+          9,
+          0,
+          1,
+          2,
+          9,
+          0,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "scattered big steps",
+      "expectedDisplay": "2",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Greedily record the farthest reachable index. When you reach the boundary of the current jump, increment jumps and update the boundary to the farthest point."
+  ],
+  "python": {
+    "starterCode": "def jump(nums):\n    return 0\n",
+    "solutionCode": "def jump(nums):\n    jumps, curr_end, farthest = 0, 0, 0\n    for i in range(len(nums) - 1):\n        farthest = max(farthest, i + nums[i])\n        if i == curr_end:\n            jumps += 1\n            curr_end = farthest\n    return jumps\n"
+  },
+  "leetcodeId": 45,
+  "leetcodeTitle": "Jump Game II",
+  "leetcodeUrl": "https://leetcode.com/problems/jump-game-ii/"
+}

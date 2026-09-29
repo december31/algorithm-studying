@@ -1,0 +1,256 @@
+{
+  "id": "daily-temperatures",
+  "wingId": "data-structures",
+  "floor": 9,
+  "title": "Daily Temperatures",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "frost-orc",
+    "name": "Brog the Frost Orc",
+    "title": "Warden of the Thermal Peak",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "orc",
+    "color": "#38bdf8",
+    "attackName": "Permafrost Cleave",
+    "attackPower": 2,
+    "defeatQuote": "The temperature soared beyond my freezing grasp..."
+  },
+  "description": "Given an array of integers `temperatures` represents daily temperatures, return an array `answer` such that `answer[i]` is the number of days you have to wait after the `i`th day to get a warmer temperature. If there is no future day for which this is possible, keep `answer[i] == 0` instead.",
+  "examples": [
+    {
+      "input": "temperatures = [73, 74, 75, 71, 69, 72, 76, 73]",
+      "output": "[1, 1, 4, 2, 1, 1, 0, 0]"
+    },
+    {
+      "input": "temperatures = [30, 40, 50, 60]",
+      "output": "[1, 1, 1, 0]"
+    }
+  ],
+  "constraints": [
+    "1 <= temperatures.length <= 10^5",
+    "30 <= temperatures[i] <= 100"
+  ],
+  "starterCode": "function dailyTemperatures(temperatures) {\n  return new Array(temperatures.length).fill(0);\n}",
+  "solutionCode": "function dailyTemperatures(temperatures) {\n  const n = temperatures.length;\n  const res = new Array(n).fill(0);\n  const stack = [];\n  for (let i = 0; i < n; i++) {\n    while (stack.length > 0 && temperatures[i] > temperatures[stack[stack.length - 1]]) {\n      const prev = stack.pop();\n      res[prev] = i - prev;\n    }\n    stack.push(i);\n  }\n  return res;\n}",
+  "functionName": "dailyTemperatures",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          73,
+          74,
+          75,
+          71,
+          69,
+          72,
+          76,
+          73
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        4,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      "inputDisplay": "temperatures = [73,74,75,71,69,72,76,73]",
+      "expectedDisplay": "[1,1,4,2,1,1,0,0]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          30,
+          40,
+          50,
+          60
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "inputDisplay": "temperatures = [30,40,50,60]",
+      "expectedDisplay": "[1,1,1,0]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          30,
+          60,
+          90
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        0
+      ],
+      "inputDisplay": "temperatures = [30,60,90]",
+      "expectedDisplay": "[1,1,0]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          30
+        ]
+      ],
+      "expected": [
+        0
+      ],
+      "inputDisplay": "[30]",
+      "expectedDisplay": "[0]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          30,
+          40
+        ]
+      ],
+      "expected": [
+        1,
+        0
+      ],
+      "inputDisplay": "[30,40]",
+      "expectedDisplay": "[1,0]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          40,
+          30
+        ]
+      ],
+      "expected": [
+        0,
+        0
+      ],
+      "inputDisplay": "[40,30]",
+      "expectedDisplay": "[0,0]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          30,
+          30,
+          30
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "inputDisplay": "[30,30,30]",
+      "expectedDisplay": "[0,0,0]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          89,
+          62,
+          70,
+          58,
+          47,
+          47,
+          46,
+          76,
+          100,
+          70
+        ]
+      ],
+      "expected": [
+        8,
+        1,
+        5,
+        4,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      "inputDisplay": "[89, 62, 70, 58, ... (10 items)]",
+      "expectedDisplay": "[8,1,5,4,3,2,1,1,0,0]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          10,
+          20,
+          30,
+          40,
+          50
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "inputDisplay": "[10,20,30,40,50]",
+      "expectedDisplay": "[1,1,1,1,0]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          50,
+          40,
+          30,
+          20,
+          10
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "inputDisplay": "[50,40,30,20,10]",
+      "expectedDisplay": "[0,0,0,0,0]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Maintain a monotonic decreasing stack of indices. Pop when encountering a warmer day."
+  ],
+  "python": {
+    "starterCode": "def dailyTemperatures(temperatures):\n    return [0] * len(temperatures)\n",
+    "solutionCode": "def dailyTemperatures(temperatures):\n    n = len(temperatures)\n    res = [0] * n\n    stack = []\n    for i, t in enumerate(temperatures):\n        while stack and t > temperatures[stack[-1]]:\n            prev = stack.pop()\n            res[prev] = i - prev\n        stack.append(i)\n    return res\n"
+  },
+  "leetcodeId": 739,
+  "leetcodeTitle": "Daily Temperatures",
+  "leetcodeUrl": "https://leetcode.com/problems/daily-temperatures/"
+}

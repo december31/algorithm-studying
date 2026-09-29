@@ -1,0 +1,154 @@
+{
+  "id": "longest-valid-parentheses",
+  "wingId": "data-structures",
+  "floor": 17,
+  "title": "Longest Valid Parentheses",
+  "difficulty": "hard",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "arch-archon",
+    "name": "Aethelgard the Infinite Boundary",
+    "title": "Emperor of Balanced Dimensions",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#9333ea",
+    "attackName": "Cataclysmic Void Split",
+    "attackPower": 3,
+    "defeatQuote": "The balance of parentheses held against all odds..."
+  },
+  "description": "Given a string containing just the characters '(' and ')', return the length of the longest valid (well-formed) parentheses substring.",
+  "examples": [
+    {
+      "input": "s = \"(()\"",
+      "output": "2"
+    },
+    {
+      "input": "s = \")()())\"",
+      "output": "4"
+    },
+    {
+      "input": "s = \"\"",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "0 <= s.length <= 3 * 10^4",
+    "s[i] is '(', or ')'."
+  ],
+  "starterCode": "function longestValidParentheses(s) {\n  return 0;\n}",
+  "solutionCode": "function longestValidParentheses(s) {\n  const stack = [-1];\n  let maxLen = 0;\n  for (let i = 0; i < s.length; i++) {\n    if (s[i] === '(') {\n      stack.push(i);\n    } else {\n      stack.pop();\n      if (stack.length === 0) {\n        stack.push(i);\n      } else {\n        maxLen = Math.max(maxLen, i - stack[stack.length - 1]);\n      }\n    }\n  }\n  return maxLen;\n}",
+  "functionName": "longestValidParentheses",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "(()"
+      ],
+      "expected": 2,
+      "inputDisplay": "s = \"(()\"",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        ")()())"
+      ],
+      "expected": 4,
+      "inputDisplay": "s = \")()())\"",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        ""
+      ],
+      "expected": 0,
+      "inputDisplay": "s = \"\"",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        ""
+      ],
+      "expected": 0,
+      "inputDisplay": "\"\"",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        "()"
+      ],
+      "expected": 2,
+      "inputDisplay": "\"()\"",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        "("
+      ],
+      "expected": 0,
+      "inputDisplay": "\"(\"",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        ")"
+      ],
+      "expected": 0,
+      "inputDisplay": "\")\"",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        "()()"
+      ],
+      "expected": 4,
+      "inputDisplay": "\"()()\"",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        ")()())"
+      ],
+      "expected": 4,
+      "inputDisplay": "\")()())\"",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        "(()())"
+      ],
+      "expected": 6,
+      "inputDisplay": "\"(()())\"",
+      "expectedDisplay": "6",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Push -1 as a base index. On \"(\", push index. On \")\", pop and calculate distance to new top."
+  ],
+  "python": {
+    "starterCode": "def longestValidParentheses(s):\n    return 0\n",
+    "solutionCode": "def longestValidParentheses(s):\n    stack = [-1]\n    max_len = 0\n    for i, c in enumerate(s):\n        if c == \"(\":\n            stack.append(i)\n        else:\n            stack.pop()\n            if not stack:\n                stack.append(i)\n            else:\n                max_len = max(max_len, i - stack[-1])\n    return max_len\n"
+  },
+  "leetcodeId": 32,
+  "leetcodeTitle": "Longest Valid Parentheses",
+  "leetcodeUrl": "https://leetcode.com/problems/longest-valid-parentheses/"
+}

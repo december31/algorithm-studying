@@ -1,0 +1,389 @@
+{
+  "id": "flood-fill",
+  "wingId": "graphs",
+  "floor": 1,
+  "title": "Flood Fill",
+  "difficulty": "easy",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "venom-spider",
+    "name": "Venomfang the Broodmother",
+    "title": "Matriarch of the Webbed Chamber",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "spider",
+    "color": "#10b981",
+    "attackName": "Neurotoxic Webbing",
+    "attackPower": 1,
+    "defeatQuote": "The flood of color dissolved my silken domain..."
+  },
+  "description": "An image is represented by an `m x n` integer grid `image` where `image[i][j]` represents the pixel value. You are also given three integers `sr`, `sc`, and `color`. You should perform a flood fill on the image starting from the pixel `image[sr][sc]`.",
+  "examples": [
+    {
+      "input": "image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2",
+      "output": "[[2,2,2],[2,2,0],[2,0,1]]"
+    },
+    {
+      "input": "image = [[0,0,0],[0,0,0]], sr = 0, sc = 0, color = 0",
+      "output": "[[0,0,0],[0,0,0]]"
+    }
+  ],
+  "constraints": [
+    "m == image.length, n == image[i].length",
+    "1 <= m, n <= 50",
+    "0 <= color < 2^16"
+  ],
+  "starterCode": "function floodFill(image, sr, sc, color) {\n  return image;\n}",
+  "solutionCode": "function floodFill(image, sr, sc, color) {\n  const orig = image[sr][sc];\n  if (orig === color) return image;\n  const m = image.length, n = image[0].length;\n  function dfs(r, c) {\n    if (r < 0 || r >= m || c < 0 || c >= n || image[r][c] !== orig) return;\n    image[r][c] = color;\n    dfs(r + 1, c);\n    dfs(r - 1, c);\n    dfs(r, c + 1);\n    dfs(r, c - 1);\n  }\n  dfs(sr, sc);\n  return image;\n}",
+  "functionName": "floodFill",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ],
+        1,
+        1,
+        2
+      ],
+      "expected": [
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "inputDisplay": "image = 3x3, sr = 1, sc = 1, color = 2",
+      "expectedDisplay": "[[2,2,2],[2,2,0],[2,0,1]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "inputDisplay": "image = 2x3 all 0, color = 0",
+      "expectedDisplay": "[[0,0,0],[0,0,0]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ],
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ],
+      "inputDisplay": "image = 2x3, color same",
+      "expectedDisplay": "[[0,0,0],[0,1,1]]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        0,
+        0,
+        2
+      ],
+      "expected": [
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "inputDisplay": "[[0,0,0],[0,0,0]], 0, 0, 2",
+      "expectedDisplay": "[[2,2,2],[2,2,2]]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ],
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ],
+      "inputDisplay": "[[0,0,0],[0,1,1]], 1, 1, 1",
+      "expectedDisplay": "[[0,0,0],[0,1,1]]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          [
+            1
+          ]
+        ],
+        0,
+        0,
+        2
+      ],
+      "expected": [
+        [
+          2
+        ]
+      ],
+      "inputDisplay": "[[1]], 0, 0, 2",
+      "expectedDisplay": "[[2]]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        0,
+        0,
+        5
+      ],
+      "expected": [
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "inputDisplay": "[[2,2],[2,2]], 0, 0, 5",
+      "expectedDisplay": "[[5,5],[5,5]]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        0,
+        0,
+        9
+      ],
+      "expected": [
+        [
+          9,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "inputDisplay": "[[1,2],[3,4]], 0, 0, 9",
+      "expectedDisplay": "[[9,2],[3,4]]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ],
+        0,
+        0,
+        3
+      ],
+      "expected": [
+        [
+          3,
+          3,
+          3
+        ],
+        [
+          3,
+          3,
+          0
+        ]
+      ],
+      "inputDisplay": "[[1,1,1],[1,1,0]], 0, 0, 3",
+      "expectedDisplay": "[[3,3,3],[3,3,0]]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ],
+        1,
+        1,
+        4
+      ],
+      "expected": [
+        [
+          0,
+          4,
+          0
+        ],
+        [
+          4,
+          4,
+          4
+        ]
+      ],
+      "inputDisplay": "[[0,1,0],[1,1,1]], 1, 1, 4",
+      "expectedDisplay": "[[0,4,0],[4,4,4]]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Save the original starting color. If it matches target color, return immediately. Otherwise DFS 4 directions."
+  ],
+  "python": {
+    "starterCode": "def floodFill(image, sr, sc, color):\n    return image\n",
+    "solutionCode": "def floodFill(image, sr, sc, color):\n    orig = image[sr][sc]\n    if orig == color:\n        return image\n    m, n = len(image), len(image[0])\n    def dfs(r, c):\n        if r < 0 or r >= m or c < 0 or c >= n or image[r][c] != orig:\n            return\n        image[r][c] = color\n        dfs(r + 1, c)\n        dfs(r - 1, c)\n        dfs(r, c + 1)\n        dfs(r, c - 1)\n    dfs(sr, sc)\n    return image\n"
+  },
+  "leetcodeId": 733,
+  "leetcodeTitle": "Flood Fill",
+  "leetcodeUrl": "https://leetcode.com/problems/flood-fill/"
+}

@@ -1,0 +1,225 @@
+{
+  "id": "same-tree",
+  "wingId": "backtracking",
+  "floor": 6,
+  "title": "Same Tree",
+  "difficulty": "easy",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "mirror-lich",
+    "name": "Twin-Soul the Dual Lich",
+    "title": "Conjurer of Duplicate Phylacteries",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#6366f1",
+    "attackName": "Synchronous Ray",
+    "attackPower": 1,
+    "defeatQuote": "Our dual structures were validated identical..."
+  },
+  "description": "Given the roots of two binary trees `p` and `q`, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.",
+  "examples": [
+    {
+      "input": "p = [1, 2, 3], q = [1, 2, 3]",
+      "output": "true"
+    },
+    {
+      "input": "p = [1, 2], q = [1, null, 2]",
+      "output": "false"
+    }
+  ],
+  "constraints": [
+    "The number of nodes in both trees is in the range [0, 100]."
+  ],
+  "starterCode": "function isSameTree(p, q) {\n  return true;\n}",
+  "solutionCode": "function isSameTree(p, q) {\n  if (p.length !== q.length) return false;\n  for (let i = 0; i < p.length; i++) {\n    if (p[i] !== q[i]) return false;\n  }\n  return true;\n}",
+  "functionName": "isSameTree",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "p = [1,2,3], q = [1,2,3]",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "p = [1,2], q = [1,null,2]",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "p = [1,2,1], q = [1,1,2]",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1], [1]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1], [2]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [],
+        []
+      ],
+      "expected": true,
+      "inputDisplay": "[], []",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1,2], [1,null,2]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1,2,1], [1,1,2]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1,2,3,4], [1,2,3,4]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          5
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1,2,3,4], [1,2,3,5]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Compare both trees node-by-node simultaneously."
+  ],
+  "python": {
+    "starterCode": "def isSameTree(p, q):\n    return True\n",
+    "solutionCode": "def isSameTree(p, q):\n    return p == q\n"
+  },
+  "leetcodeId": 100,
+  "leetcodeTitle": "Same Tree",
+  "leetcodeUrl": "https://leetcode.com/problems/same-tree/"
+}

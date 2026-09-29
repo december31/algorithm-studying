@@ -1,0 +1,236 @@
+{
+  "id": "sliding-window-maximum",
+  "wingId": "data-structures",
+  "floor": 16,
+  "title": "Sliding Window Maximum",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "window-leviathan",
+    "name": "Ouroboros the Monotonic Deque",
+    "title": "Apex Sovereign of Sliding Windows",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#dc2626",
+    "attackName": "Glacial Deque Squeeze",
+    "attackPower": 3,
+    "defeatQuote": "My monotonic window shattered under your O(n) precision..."
+  },
+  "description": "You are given an array of integers `nums`, there is a sliding window of size `k` which is moving from the very left of the array to the very right. You can only see the `k` numbers in the window. Each time the sliding window moves right by one position.\n\nReturn the max sliding window.",
+  "examples": [
+    {
+      "input": "nums = [1,3,-1,-3,5,3,6,7], k = 3",
+      "output": "[3,3,5,5,6,7]"
+    },
+    {
+      "input": "nums = [1], k = 1",
+      "output": "[1]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10^5",
+    "-10^4 <= nums[i] <= 10^4",
+    "1 <= k <= nums.length"
+  ],
+  "starterCode": "function maxSlidingWindow(nums, k) {\n  return [];\n}",
+  "solutionCode": "function maxSlidingWindow(nums, k) {\n  const q = []; // monotonic deque storing indices\n  const res = [];\n  for (let i = 0; i < nums.length; i++) {\n    // Remove indices outside current window\n    while (q.length > 0 && q[0] <= i - k) q.shift();\n    // Maintain decreasing order in deque\n    while (q.length > 0 && nums[q[q.length - 1]] <= nums[i]) q.pop();\n    q.push(i);\n    if (i >= k - 1) res.push(nums[q[0]]);\n  }\n  return res;\n}",
+  "functionName": "maxSlidingWindow",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3,
+          -1,
+          -3,
+          5,
+          3,
+          6,
+          7
+        ],
+        3
+      ],
+      "expected": [
+        3,
+        3,
+        5,
+        5,
+        6,
+        7
+      ],
+      "inputDisplay": "nums = [1,3,-1,-3,5,3,6,7], k = 3",
+      "expectedDisplay": "[3, 3, 5, 5, 6, 7]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "nums = [1], k = 1",
+      "expectedDisplay": "[1]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          -1
+        ],
+        1
+      ],
+      "expected": [
+        1,
+        -1
+      ],
+      "inputDisplay": "nums = [1, -1], k = 1",
+      "expectedDisplay": "[1, -1]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[1], 1",
+      "expectedDisplay": "[1]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          -1
+        ],
+        1
+      ],
+      "expected": [
+        1,
+        -1
+      ],
+      "inputDisplay": "[1,-1], 1",
+      "expectedDisplay": "[1,-1]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          9,
+          11
+        ],
+        2
+      ],
+      "expected": [
+        11
+      ],
+      "inputDisplay": "[9,11], 2",
+      "expectedDisplay": "[11]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          4,
+          -2
+        ],
+        2
+      ],
+      "expected": [
+        4
+      ],
+      "inputDisplay": "[4,-2], 2",
+      "expectedDisplay": "[4]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          3,
+          1,
+          2,
+          0,
+          5
+        ],
+        3
+      ],
+      "expected": [
+        3,
+        3,
+        2,
+        5
+      ],
+      "inputDisplay": "[1, 3, 1, 2, ... (6 items)], 3",
+      "expectedDisplay": "[3,3,2,5]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          7,
+          2,
+          4
+        ],
+        2
+      ],
+      "expected": [
+        7,
+        4
+      ],
+      "inputDisplay": "[7,2,4], 2",
+      "expectedDisplay": "[7,4]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        3
+      ],
+      "expected": [
+        3,
+        4,
+        5
+      ],
+      "inputDisplay": "[1,2,3,4,5], 3",
+      "expectedDisplay": "[3,4,5]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Store indices in a double-ended queue. Maintain decreasing element values so the front always holds the current window maximum."
+  ],
+  "python": {
+    "starterCode": "def maxSlidingWindow(nums, k):\n    return []\n",
+    "solutionCode": "from collections import deque\ndef maxSlidingWindow(nums, k):\n    q = deque()\n    res = []\n    for i, n in enumerate(nums):\n        while q and q[0] <= i - k:\n            q.popleft()\n        while q and nums[q[-1]] <= n:\n            q.pop()\n        q.append(i)\n        if i >= k - 1:\n            res.append(nums[q[0]])\n    return res\n"
+  },
+  "leetcodeId": 239,
+  "leetcodeTitle": "Sliding Window Maximum",
+  "leetcodeUrl": "https://leetcode.com/problems/sliding-window-maximum/"
+}

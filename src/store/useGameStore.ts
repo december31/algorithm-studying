@@ -3,20 +3,26 @@ import { DungeonTopic, GameScreen, PlayerStats, CombatLog } from '../types/game'
 import { Problem } from '../types/problem';
 import { VisualizerFrame } from '../types/visualizer';
 import { ExecutionReport } from '../engine/runner';
-import { getProblem, generateDungeonRun } from '../data/problems';
-import { pythonCurriculum } from '../data/pythonCurriculum';
+import {
+  loadProblem,
+  prefetchProblems,
+  generateDungeonRunCatalog,
+  defaultInitialProblem,
+  initialCatalogRun,
+  CatalogEntry,
+} from '../data/problems/loader';
 import { sfx } from '../engine/sfx';
 
 export function getStarterCode(problem: Problem, lang: 'python' | 'javascript'): string {
   if (lang === 'python') {
-    return pythonCurriculum[problem.id]?.starterCode || `def ${problem.functionName}(*args):\n    pass\n`;
+    return problem.python?.starterCode || `def ${problem.functionName}(*args):\n    pass\n`;
   }
   return problem.starterCode;
 }
 
 export function getSolutionCode(problem: Problem, lang: 'python' | 'javascript'): string {
   if (lang === 'python') {
-    return pythonCurriculum[problem.id]?.solutionCode || `def ${problem.functionName}(*args):\n    pass\n`;
+    return problem.python?.solutionCode || `def ${problem.functionName}(*args):\n    pass\n`;
   }
   return problem.solutionCode;
 }
@@ -30,7 +36,9 @@ export interface FloatingText {
 interface GameState {
   // Screens & Navigation
   screen: GameScreen;
+  previousScreen: GameScreen;
   setScreen: (screen: GameScreen) => void;
+  closeShop: () => void;
 
   // Player Stats
   stats: PlayerStats;
@@ -38,8 +46,10 @@ interface GameState {
   // Dungeon & Run State
   currentWing: DungeonTopic;
   currentFloor: number;
-  currentRunProblems: Problem[];
+  currentRunCatalog: CatalogEntry[];
+  currentRunProblems: (CatalogEntry | Problem)[];
   currentProblem: Problem;
+  isLoadingProblem: boolean;
   monsterHp: number;
   maxMonsterHp: number;
   unlockedFloors: Record<DungeonTopic, number>;
@@ -92,12 +102,24 @@ interface GameState {
   stepBackward: () => void;
 }
 
-const initialRun = generateDungeonRun('data-structures');
-const initialProblem = initialRun[0];
+const initialRun = initialCatalogRun;
+const initialProblem = defaultInitialProblem;
 
 export const useGameStore = create<GameState>((set, get) => ({
-  screen: 'battle',
-  setScreen: (screen) => set({ screen }),
+  screen: 'map',
+  previousScreen: 'map',
+  setScreen: (screen) => {
+    const current = get().screen;
+    if (current === screen) return;
+    set({
+      previousScreen: current !== 'shop' && current !== 'victory' && current !== 'gameover' ? current : get().previousScreen,
+      screen,
+    });
+  },
+  closeShop: () => {
+    const { previousScreen } = get();
+    set({ screen: previousScreen || 'map' });
+  },
 
   stats: {
     maxHp: 100,
@@ -113,8 +135,10 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   currentWing: 'data-structures',
   currentFloor: 1,
+  currentRunCatalog: initialRun,
   currentRunProblems: initialRun,
   currentProblem: initialProblem,
+  isLoadingProblem: false,
   monsterHp: initialProblem.testCases.length,
   maxMonsterHp: initialProblem.testCases.length,
   unlockedFloors: {
@@ -159,59 +183,97 @@ export const useGameStore = create<GameState>((set, get) => ({
   isPlayingTimeline: false,
   playbackSpeed: 1,
 
-  selectWing: (wing) => {
-    const runProblems = generateDungeonRun(wing);
+  selectWing: async (wing) => {
+    const runCatalog = generateDungeonRunCatalog(wing);
     const floor = 1;
-    const problem = runProblems[0] || initialProblem;
+    const entry = runCatalog[0];
     const { language } = get();
-    set({
+
+    set((s) => ({
       currentWing: wing,
       currentFloor: floor,
-      currentRunProblems: runProblems,
-      currentProblem: problem,
-      code: getStarterCode(problem, language),
-      monsterHp: problem.testCases.length,
-      maxMonsterHp: problem.testCases.length,
+      currentRunCatalog: runCatalog,
+      currentRunProblems: runCatalog,
+      isLoadingProblem: true,
+      monsterHp: entry.monster.maxHp,
+      maxMonsterHp: entry.monster.maxHp,
       lastReport: null,
-      activeTestCaseId: problem.testCases[0].id,
-      frames: problem.generateDefaultFrames(problem.testCases[0]),
-      currentFrameIndex: 0,
-      isPlayingTimeline: false,
       heroAnim: 'idle',
       monsterAnim: 'idle',
+      previousScreen: 'map',
       screen: 'battle',
+      stats: {
+        ...s.stats,
+        hp: s.stats.maxHp, // Restores hero to 100 HP for the new journey!
+        shield: 0,
+        shieldPassedCount: 0,
+      },
       combatLogs: [
         {
           id: `log-${Date.now()}`,
           sender: 'system',
-          message: `Arrived at ${problem.title}. ${problem.monster.name} emerges! 10 floors await you in this wing.`,
+          message: `Arrived at ${entry.title}. ${entry.monster.name} emerges! 10 floors await you in this wing.`,
           type: 'info',
           timestamp: Date.now(),
         },
       ],
-    });
+    }));
+
+    try {
+      const problem = await loadProblem(entry.id);
+      set({
+        currentProblem: problem,
+        isLoadingProblem: false,
+        code: getStarterCode(problem, language),
+        monsterHp: problem.testCases.length,
+        maxMonsterHp: problem.testCases.length,
+        activeTestCaseId: problem.testCases[0].id,
+        frames: problem.generateDefaultFrames(problem.testCases[0]),
+        currentFrameIndex: 0,
+        isPlayingTimeline: false,
+      });
+
+      // Asynchronously prefetch remaining floors in the background
+      prefetchProblems(runCatalog.slice(1).map((e) => e.id));
+    } catch (err) {
+      console.error('Failed to load problem:', err);
+      set({ isLoadingProblem: false });
+    }
   },
 
-  selectFloor: (floor) => {
-    const { currentRunProblems, language } = get();
-    const problem = currentRunProblems[floor - 1];
-    if (!problem) return;
+  selectFloor: async (floor) => {
+    const { currentRunCatalog, language } = get();
+    const entry = currentRunCatalog[floor - 1];
+    if (!entry) return;
 
     set({
       currentFloor: floor,
-      currentProblem: problem,
-      code: getStarterCode(problem, language),
-      monsterHp: problem.testCases.length,
-      maxMonsterHp: problem.testCases.length,
+      isLoadingProblem: true,
+      monsterHp: entry.monster.maxHp,
+      maxMonsterHp: entry.monster.maxHp,
       lastReport: null,
-      activeTestCaseId: problem.testCases[0].id,
-      frames: problem.generateDefaultFrames(problem.testCases[0]),
-      currentFrameIndex: 0,
-      isPlayingTimeline: false,
       heroAnim: 'idle',
       monsterAnim: 'idle',
       screen: 'battle',
     });
+
+    try {
+      const problem = await loadProblem(entry.id);
+      set({
+        currentProblem: problem,
+        isLoadingProblem: false,
+        code: getStarterCode(problem, language),
+        monsterHp: problem.testCases.length,
+        maxMonsterHp: problem.testCases.length,
+        activeTestCaseId: problem.testCases[0].id,
+        frames: problem.generateDefaultFrames(problem.testCases[0]),
+        currentFrameIndex: 0,
+        isPlayingTimeline: false,
+      });
+    } catch (err) {
+      console.error('Failed to load floor problem:', err);
+      set({ isLoadingProblem: false });
+    }
   },
 
   setCode: (code) => set({ code }),
@@ -482,30 +544,43 @@ export const useGameStore = create<GameState>((set, get) => ({
     }));
   },
 
-  advanceFloor: () => {
-    const { currentWing, currentFloor, unlockedFloors, language, currentRunProblems } = get();
+  advanceFloor: async () => {
+    const { currentWing, currentFloor, unlockedFloors, language, currentRunCatalog } = get();
     const nextFloor = currentFloor + 1;
     if (nextFloor <= 10) {
-      const nextProblem = currentRunProblems[nextFloor - 1];
-      if (nextProblem) {
+      const nextEntry = currentRunCatalog[nextFloor - 1];
+      if (nextEntry) {
         set({
           currentFloor: nextFloor,
-          currentProblem: nextProblem,
-          code: getStarterCode(nextProblem, language),
-          monsterHp: nextProblem.testCases.length,
-          maxMonsterHp: nextProblem.testCases.length,
-          lastReport: null,
+          isLoadingProblem: true,
           unlockedFloors: {
             ...unlockedFloors,
             [currentWing]: Math.max(unlockedFloors[currentWing] || 1, nextFloor),
           },
-          activeTestCaseId: nextProblem.testCases[0].id,
-          frames: nextProblem.generateDefaultFrames(nextProblem.testCases[0]),
-          currentFrameIndex: 0,
+          monsterHp: nextEntry.monster.maxHp,
+          maxMonsterHp: nextEntry.monster.maxHp,
+          lastReport: null,
           heroAnim: 'idle',
           monsterAnim: 'idle',
           screen: 'battle',
         });
+
+        try {
+          const nextProblem = await loadProblem(nextEntry.id);
+          set({
+            currentProblem: nextProblem,
+            isLoadingProblem: false,
+            code: getStarterCode(nextProblem, language),
+            monsterHp: nextProblem.testCases.length,
+            maxMonsterHp: nextProblem.testCases.length,
+            activeTestCaseId: nextProblem.testCases[0].id,
+            frames: nextProblem.generateDefaultFrames(nextProblem.testCases[0]),
+            currentFrameIndex: 0,
+          });
+        } catch (err) {
+          console.error('Failed to advance floor problem:', err);
+          set({ isLoadingProblem: false });
+        }
       }
     } else {
       // Completed all 10 floors of this wing! Return to map
@@ -513,24 +588,19 @@ export const useGameStore = create<GameState>((set, get) => ({
     }
   },
 
-  restartRunOnPermadeath: () => {
+  restartRunOnPermadeath: async () => {
     // Permadeath reset: full health, re-roll fresh 10 problems for current wing starting at Floor 1!
     const { currentWing, language } = get();
-    const freshRun = generateDungeonRun(currentWing);
-    const floor1Problem = freshRun[0];
+    const freshRun = generateDungeonRunCatalog(currentWing);
+    const floor1Entry = freshRun[0];
 
     set((s) => ({
       screen: 'battle',
       currentFloor: 1,
+      currentRunCatalog: freshRun,
       currentRunProblems: freshRun,
-      currentProblem: floor1Problem,
-      code: getStarterCode(floor1Problem, language),
-      monsterHp: floor1Problem.testCases.length,
-      maxMonsterHp: floor1Problem.testCases.length,
+      isLoadingProblem: true,
       lastReport: null,
-      activeTestCaseId: floor1Problem.testCases[0].id,
-      frames: floor1Problem.generateDefaultFrames(floor1Problem.testCases[0]),
-      currentFrameIndex: 0,
       heroAnim: 'idle',
       monsterAnim: 'idle',
       stats: {
@@ -549,6 +619,25 @@ export const useGameStore = create<GameState>((set, get) => ({
         },
       ],
     }));
+
+    try {
+      const floor1Problem = await loadProblem(floor1Entry.id);
+      set({
+        currentProblem: floor1Problem,
+        isLoadingProblem: false,
+        code: getStarterCode(floor1Problem, language),
+        monsterHp: floor1Problem.testCases.length,
+        maxMonsterHp: floor1Problem.testCases.length,
+        activeTestCaseId: floor1Problem.testCases[0].id,
+        frames: floor1Problem.generateDefaultFrames(floor1Problem.testCases[0]),
+        currentFrameIndex: 0,
+      });
+
+      prefetchProblems(freshRun.slice(1).map((e) => e.id));
+    } catch (err) {
+      console.error('Failed to restart run problem:', err);
+      set({ isLoadingProblem: false });
+    }
   },
 
   addCombatLog: (sender, message, type) => {

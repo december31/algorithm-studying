@@ -1,0 +1,264 @@
+{
+  "id": "sliding-puzzle",
+  "wingId": "graphs",
+  "floor": 15,
+  "title": "Sliding Puzzle",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "puzzle-lich",
+    "name": "Permutio the Tile Arch-Lich",
+    "title": "Master of the 2x3 Configuration Space",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#9333ea",
+    "attackName": "Permutational Entanglement",
+    "attackPower": 3,
+    "defeatQuote": "The 2x3 state space reached the target 123450..."
+  },
+  "description": "On a 2 x 3 board, there are five tiles labeled 1 to 5, and an empty square represented by 0. A move consists of choosing 0 and a 4-directionally adjacent number and swapping it. Return the least number of moves required so that the state of the board is solved: [[1,2,3],[4,5,0]], or -1 if impossible.",
+  "examples": [
+    {
+      "input": "board = [[1,2,3],[4,0,5]]",
+      "output": "1"
+    },
+    {
+      "input": "board = [[1,2,3],[5,4,0]]",
+      "output": "-1"
+    },
+    {
+      "input": "board = [[4,1,2],[5,0,3]]",
+      "output": "5"
+    }
+  ],
+  "constraints": [
+    "board.length == 2, board[i].length == 3",
+    "board[i][j] is in the range [0, 5]."
+  ],
+  "starterCode": "function slidingPuzzle(board) {\n  return -1;\n}",
+  "solutionCode": "function slidingPuzzle(board) {\n  const target = '123450';\n  const start = board.flat().join('');\n  if (start === target) return 0;\n  const neighbors = {\n    0: [1, 3],\n    1: [0, 2, 4],\n    2: [1, 5],\n    3: [0, 4],\n    4: [1, 3, 5],\n    5: [2, 4]\n  };\n  const queue = [[start, 0]];\n  const visited = new Set([start]);\n  while (queue.length > 0) {\n    const [state, moves] = queue.shift();\n    if (state === target) return moves;\n    const zeroIdx = state.indexOf('0');\n    for (const nextIdx of neighbors[zeroIdx]) {\n      const arr = state.split('');\n      arr[zeroIdx] = arr[nextIdx];\n      arr[nextIdx] = '0';\n      const nextState = arr.join('');\n      if (!visited.has(nextState)) {\n        visited.add(nextState);\n        queue.push([nextState, moves + 1]);\n      }\n    }\n  }\n  return -1;\n}",
+  "functionName": "slidingPuzzle",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            0,
+            5
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "board = [[1,2,3],[4,0,5]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            5,
+            4,
+            0
+          ]
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "board = [[1,2,3],[5,4,0]] (unsolvable)",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            4,
+            1,
+            2
+          ],
+          [
+            5,
+            0,
+            3
+          ]
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "board = [[4,1,2],[5,0,3]]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            0
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[[1,2,3],[4,5,0]]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            5,
+            4,
+            0
+          ]
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "[[1,2,3],[5,4,0]]",
+      "expectedDisplay": "-1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          [
+            4,
+            1,
+            2
+          ],
+          [
+            5,
+            0,
+            3
+          ]
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[[4,1,2],[5,0,3]]",
+      "expectedDisplay": "5",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            0,
+            5
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[1,2,3],[4,0,5]]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          [
+            3,
+            2,
+            4
+          ],
+          [
+            1,
+            5,
+            0
+          ]
+        ]
+      ],
+      "expected": 14,
+      "inputDisplay": "[[3,2,4],[1,5,0]]",
+      "expectedDisplay": "14",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          [
+            1,
+            2,
+            0
+          ],
+          [
+            4,
+            5,
+            3
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[1,2,0],[4,5,3]]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            0
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[[1,2,3],[4,5,0]]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Represent 2x3 board as a 6-character string and BFS through all reachable state transitions."
+  ],
+  "python": {
+    "starterCode": "def slidingPuzzle(board):\n    return -1\n",
+    "solutionCode": "from collections import deque\ndef slidingPuzzle(board):\n    target = \"123450\"\n    start = \"\".join(str(n) for row in board for n in row)\n    if start == target:\n        return 0\n    neighbors = {\n        0: [1, 3],\n        1: [0, 2, 4],\n        2: [1, 5],\n        3: [0, 4],\n        4: [1, 3, 5],\n        5: [2, 4]\n    }\n    q = deque([(start, 0)])\n    visited = {start}\n    while q:\n        state, moves = q.popleft()\n        if state == target:\n            return moves\n        z = state.index(\"0\")\n        for nxt in neighbors[z]:\n            arr = list(state)\n            arr[z], arr[nxt] = arr[nxt], arr[z]\n            n_state = \"\".join(arr)\n            if n_state not in visited:\n                visited.add(n_state)\n                q.append((n_state, moves + 1))\n    return -1\n"
+  },
+  "leetcodeId": 773,
+  "leetcodeTitle": "Sliding Puzzle",
+  "leetcodeUrl": "https://leetcode.com/problems/sliding-puzzle/"
+}

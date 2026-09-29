@@ -1,0 +1,319 @@
+{
+  "id": "merge-intervals",
+  "wingId": "binary-search-greedy",
+  "floor": 11,
+  "title": "Merge Intervals",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "interval-titan",
+    "name": "Consolidus the Interval Titan",
+    "title": "Fuser of Overlapping Chrono-Spans",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#eab308",
+    "attackName": "Temporal Compression",
+    "attackPower": 2,
+    "defeatQuote": "All overlapping time spans were unified..."
+  },
+  "description": "Given an array of `intervals` where `intervals[i] = [start_i, end_i]`, merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.",
+  "examples": [
+    {
+      "input": "intervals = [[1,3],[2,6],[8,10],[15,18]]",
+      "output": "[[1,6],[8,10],[15,18]]"
+    },
+    {
+      "input": "intervals = [[1,4],[4,5]]",
+      "output": "[[1,5]]"
+    }
+  ],
+  "constraints": [
+    "1 <= intervals.length <= 10^4",
+    "intervals[i].length == 2",
+    "0 <= start_i <= end_i <= 10^4"
+  ],
+  "starterCode": "function mergeIntervals(intervals) {\n  return [];\n}",
+  "solutionCode": "function mergeIntervals(intervals) {\n  if (intervals.length <= 1) return intervals;\n  intervals.sort((a, b) => a[0] - b[0]);\n  const result = [intervals[0]];\n  for (let i = 1; i < intervals.length; i++) {\n    const prev = result[result.length - 1];\n    const curr = intervals[i];\n    if (curr[0] <= prev[1]) {\n      prev[1] = Math.max(prev[1], curr[1]);\n    } else {\n      result.push(curr);\n    }\n  }\n  return result;\n}",
+  "functionName": "mergeIntervals",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            15,
+            18
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          6
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          15,
+          18
+        ]
+      ],
+      "inputDisplay": "[[1,3],[2,6],[8,10],[15,18]]",
+      "expectedDisplay": "[[1,6],[8,10],[15,18]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          5
+        ]
+      ],
+      "inputDisplay": "[[1,4],[4,5]]",
+      "expectedDisplay": "[[1,5]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          4
+        ]
+      ],
+      "inputDisplay": "[[1,4],[2,3]]",
+      "expectedDisplay": "[[1,4]]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          [
+            1,
+            4
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          4
+        ]
+      ],
+      "inputDisplay": "[[1,4]]",
+      "expectedDisplay": "[[1,4]]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          [
+            1,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          5
+        ]
+      ],
+      "inputDisplay": "[[1,4],[4,5]]",
+      "expectedDisplay": "[[1,5]]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          4
+        ]
+      ],
+      "inputDisplay": "[[1,4],[2,3]]",
+      "expectedDisplay": "[[1,4]]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          [
+            1,
+            4
+          ],
+          [
+            0,
+            4
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          4
+        ]
+      ],
+      "inputDisplay": "[[1,4],[0,4]]",
+      "expectedDisplay": "[[0,4]]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          [
+            1,
+            4
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          4
+        ]
+      ],
+      "inputDisplay": "[[1,4],[0,1]]",
+      "expectedDisplay": "[[0,4]]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          [
+            1,
+            4
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          4
+        ]
+      ],
+      "inputDisplay": "[[1,4],[0,0]]",
+      "expectedDisplay": "[[0,0],[1,4]]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            1,
+            10
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          10
+        ]
+      ],
+      "inputDisplay": "[[2,3],[4,5],[6,7],[8,9],[1,10]]",
+      "expectedDisplay": "[[1,10]]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Sort intervals by start time. Merge with previous if current.start <= prev.end."
+  ],
+  "python": {
+    "starterCode": "def mergeIntervals(intervals):\n    return []\n",
+    "solutionCode": "def mergeIntervals(intervals):\n    if len(intervals) <= 1:\n        return intervals\n    intervals.sort(key=lambda x: x[0])\n    res = [intervals[0]]\n    for curr in intervals[1:]:\n        if curr[0] <= res[-1][1]:\n            res[-1][1] = max(res[-1][1], curr[1])\n        else:\n            res.append(curr)\n    return res\n"
+  },
+  "leetcodeId": 56,
+  "leetcodeTitle": "Merge Intervals",
+  "leetcodeUrl": "https://leetcode.com/problems/merge-intervals/"
+}

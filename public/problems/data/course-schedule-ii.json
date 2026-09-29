@@ -1,0 +1,275 @@
+{
+  "id": "course-schedule-ii",
+  "wingId": "graphs",
+  "floor": 16,
+  "title": "Course Schedule II",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "topological-archon",
+    "name": "Topological Archon of Dependencies",
+    "title": "Master of In-Degree Sequencing",
+    "maxHp": 4,
+    "hp": 4,
+    "sprite": "lich",
+    "color": "#38bdf8",
+    "attackName": "Circular Prerequisite Binding",
+    "attackPower": 2,
+    "defeatQuote": "Zero in-degree ordering resolved every dependency..."
+  },
+  "description": "There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]` indicates that you must take course `bi` first if you want to take course `ai`.\n\nReturn the ordering of courses you should take to finish all courses. If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.",
+  "examples": [
+    {
+      "input": "numCourses = 2, prerequisites = [[1,0]]",
+      "output": "[0,1]"
+    },
+    {
+      "input": "numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]",
+      "output": "[0,2,1,3]"
+    },
+    {
+      "input": "numCourses = 1, prerequisites = []",
+      "output": "[0]"
+    }
+  ],
+  "constraints": [
+    "1 <= numCourses <= 2000",
+    "0 <= prerequisites.length <= numCourses * (numCourses - 1)"
+  ],
+  "starterCode": "function findOrder(numCourses, prerequisites) {\n  return [];\n}",
+  "solutionCode": "function findOrder(numCourses, prerequisites) {\n  const inDegree = new Array(numCourses).fill(0);\n  const adj = Array.from({ length: numCourses }, () => []);\n  for (const [dest, src] of prerequisites) {\n    adj[src].push(dest);\n    inDegree[dest]++;\n  }\n  const queue = [];\n  for (let i = 0; i < numCourses; i++) {\n    if (inDegree[i] === 0) queue.push(i);\n  }\n  const order = [];\n  while (queue.length > 0) {\n    const u = queue.shift();\n    order.push(u);\n    for (const v of adj[u]) {\n      inDegree[v]--;\n      if (inDegree[v] === 0) queue.push(v);\n    }\n  }\n  return order.length === numCourses ? order : [];\n}",
+  "functionName": "findOrder",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2,
+        [
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "inputDisplay": "numCourses = 2, prerequisites = [[1,0]]",
+      "expectedDisplay": "[0,1]"
+    },
+    {
+      "id": 2,
+      "input": [
+        4,
+        [
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "inputDisplay": "numCourses = 4, prereqs = 4 pairs",
+      "expectedDisplay": "[0,1,2,3]"
+    },
+    {
+      "id": 3,
+      "input": [
+        1,
+        []
+      ],
+      "expected": [
+        0
+      ],
+      "inputDisplay": "numCourses = 1, prerequisites = []",
+      "expectedDisplay": "[0]"
+    },
+    {
+      "id": 4,
+      "input": [
+        2,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "numCourses = 2, cycle [[0,1],[1,0]]",
+      "expectedDisplay": "[]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        3,
+        [
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "inputDisplay": "numCourses = 3, chain",
+      "expectedDisplay": "[0,1,2]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        3,
+        []
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "inputDisplay": "numCourses = 3, independent",
+      "expectedDisplay": "[0,1,2]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        2,
+        1,
+        0
+      ],
+      "inputDisplay": "numCourses = 3, reverse dependencies",
+      "expectedDisplay": "[2,1,0]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        3,
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "numCourses = 3, 3-node cycle",
+      "expectedDisplay": "[]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        2,
+        []
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "inputDisplay": "numCourses = 2, empty prereqs",
+      "expectedDisplay": "[0,1]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        5,
+        [
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "inputDisplay": "numCourses = 5, branching tree",
+      "expectedDisplay": "[0,1,2,3,4]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Compute in-degrees of all nodes. Enqueue courses with in-degree 0. As courses are taken, decrement neighbor in-degrees."
+  ],
+  "python": {
+    "starterCode": "def findOrder(numCourses, prerequisites):\n    return []\n",
+    "solutionCode": "def findOrder(numCourses, prerequisites):\n    from collections import deque\n    in_degree = [0] * numCourses\n    adj = [[] for _ in range(numCourses)]\n    for dest, src in prerequisites:\n        adj[src].append(dest)\n        in_degree[dest] += 1\n    queue = deque([i for i in range(numCourses) if in_degree[i] == 0])\n    order = []\n    while queue:\n        u = queue.popleft()\n        order.append(u)\n        for v in adj[u]:\n            in_degree[v] -= 1\n            if in_degree[v] == 0:\n                queue.append(v)\n    return order if len(order) == numCourses else []\n"
+  },
+  "leetcodeId": 210,
+  "leetcodeTitle": "Course Schedule II",
+  "leetcodeUrl": "https://leetcode.com/problems/course-schedule-ii/"
+}

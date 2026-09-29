@@ -1,0 +1,149 @@
+{
+  "id": "n-queens-ii",
+  "wingId": "backtracking",
+  "floor": 16,
+  "title": "N-Queens II",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "grandmaster-lich",
+    "name": "Mortis the Grandmaster",
+    "title": "Arch-Lich of Combinatorial Checkmates",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#9333ea",
+    "attackName": "Perpetual Diagonal Ray",
+    "attackPower": 3,
+    "defeatQuote": "The total solution tally dispelled my curse..."
+  },
+  "description": "The n-queens puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other.\n\nGiven an integer `n`, return the number of distinct solutions to the n-queens puzzle.",
+  "examples": [
+    {
+      "input": "n = 4",
+      "output": "2"
+    },
+    {
+      "input": "n = 1",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 9"
+  ],
+  "starterCode": "function totalNQueens(n) {\n  return 0;\n}",
+  "solutionCode": "function totalNQueens(n) {\n  let count = 0;\n  const cols = new Set();\n  const diag1 = new Set();\n  const diag2 = new Set();\n\n  function backtrack(row) {\n    if (row === n) {\n      count++;\n      return;\n    }\n    for (let col = 0; col < n; col++) {\n      if (cols.has(col) || diag1.has(row - col) || diag2.has(row + col)) continue;\n      cols.add(col);\n      diag1.add(row - col);\n      diag2.add(row + col);\n      backtrack(row + 1);\n      cols.delete(col);\n      diag1.delete(row - col);\n      diag2.delete(row + col);\n    }\n  }\n  backtrack(0);\n  return count;\n}",
+  "functionName": "totalNQueens",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4
+      ],
+      "expected": 2,
+      "inputDisplay": "n = 4",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "n = 1",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        5
+      ],
+      "expected": 10,
+      "inputDisplay": "n = 5",
+      "expectedDisplay": "10",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "1",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        2
+      ],
+      "expected": 0,
+      "inputDisplay": "2",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        3
+      ],
+      "expected": 0,
+      "inputDisplay": "3",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        4
+      ],
+      "expected": 2,
+      "inputDisplay": "4",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        5
+      ],
+      "expected": 10,
+      "inputDisplay": "5",
+      "expectedDisplay": "10",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        6
+      ],
+      "expected": 4,
+      "inputDisplay": "6",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        7
+      ],
+      "expected": 40,
+      "inputDisplay": "7",
+      "expectedDisplay": "40",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Count valid full placements at row === n instead of building string boards."
+  ],
+  "python": {
+    "starterCode": "def totalNQueens(n):\n    return 0\n",
+    "solutionCode": "def totalNQueens(n):\n    count = 0\n    cols, diag1, diag2 = set(), set(), set()\n    def backtrack(r):\n        nonlocal count\n        if r == n:\n            count += 1\n            return\n        for c in range(n):\n            if c in cols or (r - c) in diag1 or (r + c) in diag2:\n                continue\n            cols.add(c)\n            diag1.add(r - c)\n            diag2.add(r + c)\n            backtrack(r + 1)\n            cols.remove(c)\n            diag1.remove(r - c)\n            diag2.remove(r + c)\n    backtrack(0)\n    return count\n"
+  },
+  "leetcodeId": 52,
+  "leetcodeTitle": "N-Queens II",
+  "leetcodeUrl": "https://leetcode.com/problems/n-queens-ii/"
+}

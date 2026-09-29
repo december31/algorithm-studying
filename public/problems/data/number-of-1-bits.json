@@ -1,0 +1,153 @@
+{
+  "id": "number-of-1-bits",
+  "wingId": "bit-manipulation",
+  "floor": 2,
+  "title": "Number of 1 Bits",
+  "difficulty": "easy",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "popcount-skeleton",
+    "name": "Tally the Bit Skeleton",
+    "title": "Counter of Radiant High Pins",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "skeleton",
+    "color": "#38bdf8",
+    "attackName": "Hamming Weight Shock",
+    "attackPower": 1,
+    "defeatQuote": "My lowest set bits were cleared one by one..."
+  },
+  "description": "Given a positive integer `n`, write a function that returns the number of set bits it has (also known as the Hamming weight).",
+  "examples": [
+    {
+      "input": "n = 11 (binary 1011)",
+      "output": "3"
+    },
+    {
+      "input": "n = 128 (binary 10000000)",
+      "output": "1"
+    },
+    {
+      "input": "n = 2147483645",
+      "output": "30"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 2^31 - 1"
+  ],
+  "starterCode": "function hammingWeight(n) {\n  return 0;\n}",
+  "solutionCode": "function hammingWeight(n) {\n  let count = 0;\n  while (n > 0) {\n    n = n & (n - 1);\n    count++;\n  }\n  return count;\n}",
+  "functionName": "hammingWeight",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        11
+      ],
+      "expected": 3,
+      "inputDisplay": "n = 11 (0b1011)",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        128
+      ],
+      "expected": 1,
+      "inputDisplay": "n = 128 (0b10000000)",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        7
+      ],
+      "expected": 3,
+      "inputDisplay": "n = 7 (0b111)",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        0
+      ],
+      "expected": 0,
+      "inputDisplay": "0",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "1",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        2
+      ],
+      "expected": 1,
+      "inputDisplay": "2",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        3
+      ],
+      "expected": 2,
+      "inputDisplay": "3",
+      "expectedDisplay": "2",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        7
+      ],
+      "expected": 3,
+      "inputDisplay": "7",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        15
+      ],
+      "expected": 4,
+      "inputDisplay": "15",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        2147483647
+      ],
+      "expected": 31,
+      "inputDisplay": "2147483647",
+      "expectedDisplay": "31",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "n & (n - 1) clears the lowest set bit in O(1) operations."
+  ],
+  "python": {
+    "starterCode": "def hammingWeight(n):\n    return 0\n",
+    "solutionCode": "def hammingWeight(n):\n    count = 0\n    while n:\n        n &= (n - 1)\n        count += 1\n    return count\n"
+  },
+  "leetcodeId": 191,
+  "leetcodeTitle": "Number of 1 Bits",
+  "leetcodeUrl": "https://leetcode.com/problems/number-of-1-bits/"
+}

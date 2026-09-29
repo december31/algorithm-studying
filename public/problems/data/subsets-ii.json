@@ -1,0 +1,334 @@
+{
+  "id": "subsets-ii",
+  "wingId": "backtracking",
+  "floor": 13,
+  "title": "Subsets II",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "clone-specter",
+    "name": "Mirage the Duplicate Specter",
+    "title": "Pruner of Redundant Branches",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#a855f7",
+    "attackName": "Phantasmal Echo",
+    "attackPower": 2,
+    "defeatQuote": "Duplicate subsets were pruned from the branch tree..."
+  },
+  "description": "Given an integer array `nums` that may contain duplicates, return all possible subsets (the power set). The solution set must not contain duplicate subsets. Return the solution in any order.",
+  "examples": [
+    {
+      "input": "nums = [1, 2, 2]",
+      "output": "[[],[1],[1,2],[1,2,2],[2],[2,2]]"
+    },
+    {
+      "input": "nums = [0]",
+      "output": "[[],[0]]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10",
+    "-10 <= nums[i] <= 10"
+  ],
+  "starterCode": "function subsetsWithDup(nums) {\n  return [];\n}",
+  "solutionCode": "function subsetsWithDup(nums) {\n  const result = [];\n  nums.sort((a, b) => a - b);\n  function backtrack(start, current) {\n    result.push([...current]);\n    for (let i = start; i < nums.length; i++) {\n      if (i > start && nums[i] === nums[i - 1]) continue;\n      current.push(nums[i]);\n      backtrack(i + 1, current);\n      current.pop();\n    }\n  }\n  backtrack(0, []);\n  return result;\n}",
+  "functionName": "subsetsWithDup",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "inputDisplay": "nums = [1, 2, 2]",
+      "expectedDisplay": "[[],[1],[1,2],[1,2,2],[2],[2,2]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          0
+        ]
+      ],
+      "inputDisplay": "nums = [0]",
+      "expectedDisplay": "[[], [0]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          4,
+          4,
+          4
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4
+        ]
+      ],
+      "inputDisplay": "nums = [4, 4, 4]",
+      "expectedDisplay": "[[], [4], [4, 4], [4, 4, 4]]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          0
+        ]
+      ],
+      "inputDisplay": "[0]",
+      "expectedDisplay": "[[],[0]]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "inputDisplay": "[1,1]",
+      "expectedDisplay": "[[],[1],[1,1]]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2
+        ]
+      ],
+      "inputDisplay": "[1,2]",
+      "expectedDisplay": "[[],[1],[1,2],[2]]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "inputDisplay": "[1,2,2]",
+      "expectedDisplay": "[[],[1],[1,2],[1,2,2],[2],[2,2]]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          4,
+          4,
+          4
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4
+        ]
+      ],
+      "inputDisplay": "[4,4,4]",
+      "expectedDisplay": "[[],[4],[4,4],[4,4,4]]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3
+        ]
+      ],
+      "inputDisplay": "[1,2,3]",
+      "expectedDisplay": "[[],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "inputDisplay": "[2,2,2,2]",
+      "expectedDisplay": "[[],[2],[2,2],[2,2,2],[2,2,2,2]]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Sort the array. Skip elements if nums[i] === nums[i-1] when i > start."
+  ],
+  "python": {
+    "starterCode": "def subsetsWithDup(nums):\n    return []\n",
+    "solutionCode": "def subsetsWithDup(nums):\n    nums.sort()\n    res = []\n    def backtrack(start, curr):\n        res.append(list(curr))\n        for i in range(start, len(nums)):\n            if i > start and nums[i] == nums[i - 1]:\n                continue\n            curr.append(nums[i])\n            backtrack(i + 1, curr)\n            curr.pop()\n    backtrack(0, [])\n    return res\n"
+  },
+  "leetcodeId": 90,
+  "leetcodeTitle": "Subsets II",
+  "leetcodeUrl": "https://leetcode.com/problems/subsets-ii/"
+}

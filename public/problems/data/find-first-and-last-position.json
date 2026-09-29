@@ -1,0 +1,233 @@
+{
+  "id": "find-first-and-last-position",
+  "wingId": "binary-search-greedy",
+  "floor": 9,
+  "title": "Find First and Last Position of Element in Sorted Array",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "span-gargoyle",
+    "name": "Vorg the Bound Gargoyle",
+    "title": "Keeper of Left & Right Horizons",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "gargoyle",
+    "color": "#3b82f6",
+    "attackName": "Horizonal Shockwave",
+    "attackPower": 2,
+    "defeatQuote": "Both boundaries were pinned down in O(log n)..."
+  },
+  "description": "Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value. If target is not found, return [-1, -1]. Must be O(log n).",
+  "examples": [
+    {
+      "input": "nums = [5,7,7,8,8,10], target = 8",
+      "output": "[3,4]"
+    },
+    {
+      "input": "nums = [5,7,7,8,8,10], target = 6",
+      "output": "[-1,-1]"
+    }
+  ],
+  "constraints": [
+    "0 <= nums.length <= 10^5",
+    "-10^9 <= nums[i], target <= 10^9"
+  ],
+  "starterCode": "function searchRange(nums, target) {\n  return [-1, -1];\n}",
+  "solutionCode": "function searchRange(nums, target) {\n  function findBound(isFirst) {\n    let left = 0, right = nums.length - 1;\n    let bound = -1;\n    while (left <= right) {\n      const mid = Math.floor((left + right) / 2);\n      if (nums[mid] === target) {\n        bound = mid;\n        if (isFirst) right = mid - 1;\n        else left = mid + 1;\n      } else if (nums[mid] < target) {\n        left = mid + 1;\n      } else {\n        right = mid - 1;\n      }\n    }\n    return bound;\n  }\n  return [findBound(true), findBound(false)];\n}",
+  "functionName": "searchRange",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          5,
+          7,
+          7,
+          8,
+          8,
+          10
+        ],
+        8
+      ],
+      "expected": [
+        3,
+        4
+      ],
+      "inputDisplay": "nums = [5,7,7,8,8,10], target = 8",
+      "expectedDisplay": "[3, 4]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5,
+          7,
+          7,
+          8,
+          8,
+          10
+        ],
+        6
+      ],
+      "expected": [
+        -1,
+        -1
+      ],
+      "inputDisplay": "nums = [5,7,7,8,8,10], target = 6",
+      "expectedDisplay": "[-1, -1]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [],
+        0
+      ],
+      "expected": [
+        -1,
+        -1
+      ],
+      "inputDisplay": "nums = [], target = 0",
+      "expectedDisplay": "[-1, -1]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [],
+        0
+      ],
+      "expected": [
+        -1,
+        -1
+      ],
+      "inputDisplay": "[], 0",
+      "expectedDisplay": "[-1,-1]",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": [
+        0,
+        0
+      ],
+      "inputDisplay": "[1], 1",
+      "expectedDisplay": "[0,0]",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1
+        ],
+        2
+      ],
+      "expected": [
+        -1,
+        -1
+      ],
+      "inputDisplay": "[1], 2",
+      "expectedDisplay": "[-1,-1]",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          2,
+          2
+        ],
+        2
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "inputDisplay": "[2,2], 2",
+      "expectedDisplay": "[0,1]",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          3,
+          3,
+          3,
+          4,
+          5
+        ],
+        3
+      ],
+      "expected": [
+        2,
+        5
+      ],
+      "inputDisplay": "[1, 2, 3, 3, ... (8 items)], 3",
+      "expectedDisplay": "[2,5]",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          5,
+          7,
+          7,
+          8,
+          8,
+          10
+        ],
+        6
+      ],
+      "expected": [
+        -1,
+        -1
+      ],
+      "inputDisplay": "[5, 7, 7, 8, ... (6 items)], 6",
+      "expectedDisplay": "[-1,-1]",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        1
+      ],
+      "expected": [
+        0,
+        4
+      ],
+      "inputDisplay": "[1,1,1,1,1], 1",
+      "expectedDisplay": "[0,4]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Run two binary searches: one searching leftwards when match is found, one searching rightwards."
+  ],
+  "python": {
+    "starterCode": "def searchRange(nums, target):\n    return [-1, -1]\n",
+    "solutionCode": "def searchRange(nums, target):\n    def find_bound(first):\n        left, right = 0, len(nums) - 1\n        bound = -1\n        while left <= right:\n            mid = (left + right) // 2\n            if nums[mid] == target:\n                bound = mid\n                if first:\n                    right = mid - 1\n                else:\n                    left = mid + 1\n            elif nums[mid] < target:\n                left = mid + 1\n            else:\n                right = mid - 1\n        return bound\n    return [find_bound(True), find_bound(False)]\n"
+  },
+  "leetcodeId": 34,
+  "leetcodeTitle": "Find First and Last Position of Element in Sorted Array",
+  "leetcodeUrl": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/"
+}

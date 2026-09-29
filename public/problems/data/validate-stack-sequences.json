@@ -1,0 +1,235 @@
+{
+  "id": "validate-stack-sequences",
+  "wingId": "data-structures",
+  "floor": 13,
+  "title": "Validate Stack Sequences",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "sequence-treant",
+    "name": "Kallor the Knot-Bender",
+    "title": "Entangler of Push/Pop Orders",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "treant",
+    "color": "#15803d",
+    "attackName": "Twisted Root Lash",
+    "attackPower": 2,
+    "defeatQuote": "The sequence was untangled smoothly..."
+  },
+  "description": "Given two integer arrays `pushed` and `popped` each with distinct values, return `true` if this could have been the result of a sequence of push and pop operations on an initially empty stack, or `false` otherwise.",
+  "examples": [
+    {
+      "input": "pushed = [1, 2, 3, 4, 5], popped = [4, 5, 3, 2, 1]",
+      "output": "true"
+    },
+    {
+      "input": "pushed = [1, 2, 3, 4, 5], popped = [4, 3, 5, 1, 2]",
+      "output": "false"
+    }
+  ],
+  "constraints": [
+    "1 <= pushed.length <= 1000",
+    "0 <= pushed[i] <= 1000",
+    "pushed.length == popped.length"
+  ],
+  "starterCode": "function validateStackSequences(pushed, popped) {\n  return false;\n}",
+  "solutionCode": "function validateStackSequences(pushed, popped) {\n  const stack = [];\n  let j = 0;\n  for (const x of pushed) {\n    stack.push(x);\n    while (stack.length > 0 && j < popped.length && stack[stack.length - 1] === popped[j]) {\n      stack.pop();\n      j++;\n    }\n  }\n  return j === popped.length;\n}",
+  "functionName": "validateStackSequences",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          4,
+          5,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "pushed = [1,2,3,4,5], popped = [4,5,3,2,1]",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          4,
+          3,
+          5,
+          1,
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "pushed = [1,2,3,4,5], popped = [4,3,5,1,2]",
+      "expectedDisplay": "false",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "pushed = [1,0], popped = [1,0]",
+      "expectedDisplay": "true",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1], [1]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1], [2]",
+      "expectedDisplay": "false",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1,2], [2,1]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1,2], [1,2]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1,2,3], [3,2,1]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          3,
+          2
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1,2,3], [1,3,2]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[2,1,0], [1,2,0]",
+      "expectedDisplay": "true",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Simulate the stack push sequence. While the top matches popped[j], pop and increment j."
+  ],
+  "python": {
+    "starterCode": "def validateStackSequences(pushed, popped):\n    return False\n",
+    "solutionCode": "def validateStackSequences(pushed, popped):\n    stack = []\n    j = 0\n    for x in pushed:\n        stack.append(x)\n        while stack and j < len(popped) and stack[-1] == popped[j]:\n            stack.pop()\n            j += 1\n    return j == len(popped)\n"
+  },
+  "leetcodeId": 946,
+  "leetcodeTitle": "Validate Stack Sequences",
+  "leetcodeUrl": "https://leetcode.com/problems/validate-stack-sequences/"
+}

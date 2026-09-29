@@ -1,0 +1,242 @@
+{
+  "id": "island-perimeter",
+  "wingId": "graphs",
+  "floor": 2,
+  "title": "Island Perimeter",
+  "difficulty": "easy",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "reef-slime",
+    "name": "Coralis the Reef Slime",
+    "title": "Scout of the Shoreline Boundary",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "slime",
+    "color": "#38bdf8",
+    "attackName": "Tidal Splash",
+    "attackPower": 1,
+    "defeatQuote": "My perimeter boundaries were surveyed completely..."
+  },
+  "description": "You are given `row x col` `grid` representing a map where `grid[i][j] = 1` represents land and `grid[i][j] = 0` represents water.\n\nGrid cells are connected horizontally/vertically. Determine the perimeter of the island.",
+  "examples": [
+    {
+      "input": "grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]",
+      "output": "16"
+    },
+    {
+      "input": "grid = [[1]]",
+      "output": "4"
+    },
+    {
+      "input": "grid = [[1,0]]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "row == grid.length, col == grid[i].length",
+    "1 <= row, col <= 100",
+    "grid[i][j] is 0 or 1"
+  ],
+  "starterCode": "function islandPerimeter(grid) {\n  return 0;\n}",
+  "solutionCode": "function islandPerimeter(grid) {\n  const m = grid.length, n = grid[0].length;\n  let perimeter = 0;\n  for (let r = 0; r < m; r++) {\n    for (let c = 0; c < n; c++) {\n      if (grid[r][c] === 1) {\n        perimeter += 4;\n        if (r > 0 && grid[r - 1][c] === 1) perimeter -= 2;\n        if (c > 0 && grid[r][c - 1] === 1) perimeter -= 2;\n      }\n    }\n  }\n  return perimeter;\n}",
+  "functionName": "islandPerimeter",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 16,
+      "inputDisplay": "grid = 4x4 island",
+      "expectedDisplay": "16",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "grid = [[1]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "grid = [[1, 0]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1]]",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1,0]]",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1],[0]]",
+      "expectedDisplay": "4",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "[[1,1],[1,1]]",
+      "expectedDisplay": "8",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "[[1,1,1]]",
+      "expectedDisplay": "8",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 12,
+      "inputDisplay": "[[0,1,0],[1,1,1],[0,1,0]]",
+      "expectedDisplay": "12",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          [
+            1,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "[[1,0,1]]",
+      "expectedDisplay": "8",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Each land cell adds 4 edges. Subtract 2 for every adjacent neighbor (top and left)."
+  ],
+  "python": {
+    "starterCode": "def islandPerimeter(grid):\n    return 0\n",
+    "solutionCode": "def islandPerimeter(grid):\n    m, n = len(grid), len(grid[0])\n    perimeter = 0\n    for r in range(m):\n        for c in range(n):\n            if grid[r][c] == 1:\n                perimeter += 4\n                if r > 0 and grid[r - 1][c] == 1:\n                    perimeter -= 2\n                if c > 0 and grid[r][c - 1] == 1:\n                    perimeter -= 2\n    return perimeter\n"
+  },
+  "leetcodeId": 463,
+  "leetcodeTitle": "Island Perimeter",
+  "leetcodeUrl": "https://leetcode.com/problems/island-perimeter/"
+}

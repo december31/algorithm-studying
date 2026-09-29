@@ -1,0 +1,199 @@
+{
+  "id": "find-the-highest-altitude",
+  "wingId": "binary-search-greedy",
+  "floor": 7,
+  "title": "Find the Highest Altitude",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "cliff-specter",
+    "name": "Zephyr the Summit Specter",
+    "title": "Lord of the Highest Elevation",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#38bdf8",
+    "attackName": "Hypobaric Gust",
+    "attackPower": 1,
+    "defeatQuote": "You reached the supreme altitude above my clouds..."
+  },
+  "description": "There is a biker going on a road trip. The road trip consists of `n + 1` points at different altitudes. You are given an integer array `gain` of length `n` where `gain[i]` is the net gain in altitude between points `i` and `i + 1`. Return the highest altitude of a point. Start altitude is 0.",
+  "examples": [
+    {
+      "input": "gain = [-5,1,5,0,-7]",
+      "output": "1"
+    },
+    {
+      "input": "gain = [-4,-3,-2,-1,4,3,2]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "n == gain.length",
+    "1 <= n <= 100",
+    "-100 <= gain[i] <= 100"
+  ],
+  "starterCode": "function largestAltitude(gain) {\n  return 0;\n}",
+  "solutionCode": "function largestAltitude(gain) {\n  let maxAlt = 0;\n  let curr = 0;\n  for (const g of gain) {\n    curr += g;\n    maxAlt = Math.max(maxAlt, curr);\n  }\n  return maxAlt;\n}",
+  "functionName": "largestAltitude",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          -5,
+          1,
+          5,
+          0,
+          -7
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "gain = [-5,1,5,0,-7]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          -4,
+          -3,
+          -2,
+          -1,
+          4,
+          3,
+          2
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "gain = [-4,-3,-2,-1,4,3,2]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "gain = [1, 2, 3]",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[0]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          -1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[-1]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          5,
+          -3,
+          2,
+          -1
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[5,-3,2,-1]",
+      "expectedDisplay": "5",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          -4,
+          -3,
+          -2,
+          -1,
+          4,
+          3,
+          2
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[-4, -3, -2, -1, ... (7 items)]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          -5,
+          1,
+          5,
+          0,
+          -7
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[-5,1,5,0,-7]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          10,
+          -5,
+          20,
+          -30
+        ]
+      ],
+      "expected": 25,
+      "inputDisplay": "[10,-5,20,-30]",
+      "expectedDisplay": "25",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Accumulate the running prefix sum starting from 0 and maintain the max value."
+  ],
+  "python": {
+    "starterCode": "def largestAltitude(gain):\n    return 0\n",
+    "solutionCode": "def largestAltitude(gain):\n    max_alt = 0\n    curr = 0\n    for g in gain:\n        curr += g\n        max_alt = max(max_alt, curr)\n    return max_alt\n"
+  },
+  "leetcodeId": 1732,
+  "leetcodeTitle": "Find the Highest Altitude",
+  "leetcodeUrl": "https://leetcode.com/problems/find-the-highest-altitude/"
+}

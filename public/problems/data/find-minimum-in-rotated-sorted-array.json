@@ -1,0 +1,205 @@
+{
+  "id": "find-minimum-in-rotated-sorted-array",
+  "wingId": "binary-search-greedy",
+  "floor": 14,
+  "title": "Find Minimum in Rotated Sorted Array",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "inflection-treant",
+    "name": "Nadir the Root Weaver",
+    "title": "Guardian of the Valley Low",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "treant",
+    "color": "#15803d",
+    "attackName": "Tectonic Dip Crack",
+    "attackPower": 2,
+    "defeatQuote": "The valley inflection was discovered in logarithmic time..."
+  },
+  "description": "Given the sorted rotated array `nums` of unique elements, return the minimum element of this array. Must run in O(log n) time.",
+  "examples": [
+    {
+      "input": "nums = [3,4,5,1,2]",
+      "output": "1"
+    },
+    {
+      "input": "nums = [4,5,6,7,0,1,2]",
+      "output": "0"
+    },
+    {
+      "input": "nums = [11,13,15,17]",
+      "output": "11"
+    }
+  ],
+  "constraints": [
+    "n == nums.length",
+    "1 <= n <= 5000",
+    "-5000 <= nums[i] <= 5000"
+  ],
+  "starterCode": "function findMin(nums) {\n  return 0;\n}",
+  "solutionCode": "function findMin(nums) {\n  let left = 0, right = nums.length - 1;\n  while (left < right) {\n    const mid = Math.floor((left + right) / 2);\n    if (nums[mid] > nums[right]) {\n      left = mid + 1;\n    } else {\n      right = mid;\n    }\n  }\n  return nums[left];\n}",
+  "functionName": "findMin",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          4,
+          5,
+          1,
+          2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "nums = [3,4,5,1,2]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          4,
+          5,
+          6,
+          7,
+          0,
+          1,
+          2
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "nums = [4,5,6,7,0,1,2]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          11,
+          13,
+          15,
+          17
+        ]
+      ],
+      "expected": 11,
+      "inputDisplay": "nums = [11,13,15,17]",
+      "expectedDisplay": "11",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[2,1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1,2]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[3,1,2]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [
+        [
+          4,
+          5,
+          6,
+          7,
+          0,
+          1,
+          2
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[4, 5, 6, 7, ... (7 items)]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        [
+          11,
+          13,
+          15,
+          17
+        ]
+      ],
+      "expected": 11,
+      "inputDisplay": "[11,13,15,17]",
+      "expectedDisplay": "11",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        [
+          2,
+          3,
+          4,
+          5,
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[2,3,4,5,1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Compare nums[mid] with nums[right]. If mid is greater, the inflection drop is in the right half."
+  ],
+  "python": {
+    "starterCode": "def findMin(nums):\n    return 0\n",
+    "solutionCode": "def findMin(nums):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        mid = (left + right) // 2\n        if nums[mid] > nums[right]:\n            left = mid + 1\n        else:\n            right = mid\n    return nums[left]\n"
+  },
+  "leetcodeId": 153,
+  "leetcodeTitle": "Find Minimum in Rotated Sorted Array",
+  "leetcodeUrl": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+}
