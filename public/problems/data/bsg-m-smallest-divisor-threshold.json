@@ -1,0 +1,83 @@
+{
+  "id": "bsg-m-smallest-divisor-threshold",
+  "wingId": "binary-search-greedy",
+  "floor": 454,
+  "title": "Smallest Divisor Given a Threshold",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-smallest-divisor-threshold",
+    "name": "Quotient Specter",
+    "title": "Minimizer of Clamped Divisors",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#10b981",
+    "attackName": "Divisor Snap",
+    "attackPower": 2,
+    "defeatQuote": "Smallest integer divisor ensuring sum of division results <= threshold!"
+  },
+  "description": "Given an array of integers `nums` and an integer `threshold`, find the smallest divisor such that the result of dividing each element by the divisor (rounded up) sums to at most `threshold`.",
+  "examples": [
+    {
+      "input": "nums = [1,2,5,9], threshold = 6",
+      "output": "5"
+    },
+    {
+      "input": "nums = [44,22,33,11,1], threshold = 5",
+      "output": "44"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 50000",
+    "nums.length <= threshold <= 10^6"
+  ],
+  "starterCode": "def smallestDivisor(nums: list[int], threshold: int) -> int:\n    pass\n",
+  "solutionCode": "def smallestDivisor(nums: list[int], threshold: int) -> int:\n    import math\n    lo, hi = 1, max(nums)\n    ans = hi\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        total = sum(math.ceil(x / mid) for x in nums)\n        if total <= threshold:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n",
+  "functionName": "smallestDivisor",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          5,
+          9
+        ],
+        6
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[[1, 2, 5, 9], 6]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          44,
+          22,
+          33,
+          11,
+          1
+        ],
+        5
+      ],
+      "expected": 44,
+      "inputDisplay": "args=[[44, 22, 33, 11, 1], 5]",
+      "expectedDisplay": "44",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search divisor in [1, max(nums)]. Check sum(ceil(x / mid)) <= threshold."
+  ],
+  "python": {
+    "starterCode": "def smallestDivisor(nums: list[int], threshold: int) -> int:\n    pass\n",
+    "solutionCode": "def smallestDivisor(nums: list[int], threshold: int) -> int:\n    import math\n    lo, hi = 1, max(nums)\n    ans = hi\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        total = sum(math.ceil(x / mid) for x in nums)\n        if total <= threshold:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n"
+  },
+  "leetcodeId": 1283,
+  "leetcodeTitle": "Smallest Divisor Given a Threshold",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-smallest-divisor-threshold/"
+}

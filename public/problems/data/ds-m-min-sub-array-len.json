@@ -1,0 +1,121 @@
+{
+  "id": "ds-m-min-sub-array-len",
+  "wingId": "data-structures",
+  "floor": 138,
+  "title": "Minimum Size Subarray Sum",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-min-sub-array-len",
+    "name": "Sum Strangler",
+    "title": "Compressor of Target Bounds",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#a855f7",
+    "attackName": "Target Squeeze",
+    "attackPower": 2,
+    "defeatQuote": "The minimal window satisfying target sum was found!"
+  },
+  "description": "Given an array of positive integers `nums` and a positive integer `target`, return the minimal length of a subarray whose sum is greater than or equal to `target`. If there is no such subarray, return `0` instead.",
+  "examples": [
+    {
+      "input": "target = 7, nums = [2,3,1,2,4,3]",
+      "output": "2"
+    },
+    {
+      "input": "target = 4, nums = [1,4,4]",
+      "output": "1"
+    },
+    {
+      "input": "target = 11, nums = [1,1,1,1,1,1,1,1]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= target <= 10^9",
+    "1 <= len(nums) <= 10^5",
+    "1 <= nums[i] <= 10^4"
+  ],
+  "starterCode": "def minSubArrayLen(target: int, nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minSubArrayLen(target: int, nums: list[int]) -> int:\n    left = 0\n    curr_sum = 0\n    min_len = float('inf')\n    for right in range(len(nums)):\n        curr_sum += nums[right]\n        while curr_sum >= target:\n            min_len = min(min_len, right - left + 1)\n            curr_sum -= nums[left]\n            left += 1\n    return min_len if min_len != float('inf') else 0\n",
+  "functionName": "minSubArrayLen",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        7,
+        [
+          2,
+          3,
+          1,
+          2,
+          4,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[7, [2, 3, 1, 2, 4, 3]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        4,
+        [
+          1,
+          4,
+          4
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[4, [1, 4, 4]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        11,
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[11, [1, 1, 1, 1, 1, 1, 1, 1]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        6,
+        [
+          10
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[6, [10]]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Expand right to satisfy sum >= target, shrink left to minimize window."
+  ],
+  "python": {
+    "starterCode": "def minSubArrayLen(target: int, nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minSubArrayLen(target: int, nums: list[int]) -> int:\n    left = 0\n    curr_sum = 0\n    min_len = float('inf')\n    for right in range(len(nums)):\n        curr_sum += nums[right]\n        while curr_sum >= target:\n            min_len = min(min_len, right - left + 1)\n            curr_sum -= nums[left]\n            left += 1\n    return min_len if min_len != float('inf') else 0\n"
+  },
+  "leetcodeId": 209,
+  "leetcodeTitle": "Minimum Size Subarray Sum",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-min-sub-array-len/"
+}

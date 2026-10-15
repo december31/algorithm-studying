@@ -375,6 +375,29 @@ test("solveAncientTemple F3 T4", solveAncientTemple(6, [
     [1, 0, 1, 0, 1, 0]
 ]), 22)
 
+# 19. Special Boss: Maximum Parentheses
+def maxParentheses(n: int, s: str, v: list[int]) -> int:
+    import heapq
+    pq = []
+    ans = 0
+    for char, val in zip(s, v):
+        if char == '(':
+            heapq.heappush(pq, -val)
+        else:
+            if pq and (-pq[0] + val > 0):
+                top = -heapq.heappop(pq)
+                ans += top + val
+                heapq.heappush(pq, -(-val))
+    return ans
+
+test("maxParentheses Sample 0", maxParentheses(2, "()", [1, 3]), 4)
+test("maxParentheses Sample 1", maxParentheses(5, "(()()", [4, -1, 3, -999, 4]), 10)
+test("maxParentheses Reversed", maxParentheses(2, ")(", [10, 10]), 0)
+test("maxParentheses All Negative", maxParentheses(4, "(())", [-10, -20, -30, -40]), 0)
+test("maxParentheses Regret Upgrade", maxParentheses(4, "()()", [10, -15, 10, 20]), 30)
+test("maxParentheses Mixed Regrets", maxParentheses(8, "((())())", [5, -2, 10, 8, 3, -1, 15, -4]), 40)
+
 print(f"\n🐍 Python Curriculum Verification: {tests_passed}/{total_tests} test cases passed!")
 if tests_passed != total_tests:
     sys.exit(1)
+

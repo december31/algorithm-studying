@@ -1,0 +1,155 @@
+{
+  "id": "ds-e-min-stack",
+  "wingId": "data-structures",
+  "floor": 103,
+  "title": "Min Stack Trace",
+  "difficulty": "easy",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-e-min-stack",
+    "name": "Depression Wight",
+    "title": "Keeper of Absolute Minimums",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Abyssal Drain",
+    "attackPower": 1,
+    "defeatQuote": "My minimal values were tracked at every elevation!"
+  },
+  "description": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time. Given operations `[\"push\", x]`, `[\"pop\"]`, `[\"top\"]`, `[\"getMin\"]`, return the outputs of `top` and `getMin`.",
+  "examples": [
+    {
+      "input": "commands = [[\"push\", -2], [\"push\", 0], [\"push\", -3], [\"getMin\"], [\"pop\"], [\"top\"], [\"getMin\"]]",
+      "output": "[-3, 0, -2]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(commands) <= 200",
+    "Operations will be valid"
+  ],
+  "starterCode": "def minStackTrace(commands: list) -> list:\n    pass\n",
+  "solutionCode": "def minStackTrace(commands: list) -> list:\n    stack = []\n    min_stack = []\n    out = []\n    for c in commands:\n        op = c[0]\n        if op == 'push':\n            val = c[1]\n            stack.append(val)\n            if not min_stack or val <= min_stack[-1]:\n                min_stack.append(val)\n        elif op == 'pop':\n            val = stack.pop()\n            if val == min_stack[-1]:\n                min_stack.pop()\n        elif op == 'top':\n            out.append(stack[-1])\n        elif op == 'getMin':\n            out.append(min_stack[-1])\n    return out\n",
+  "functionName": "minStackTrace",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "push",
+            -2
+          ],
+          [
+            "push",
+            0
+          ],
+          [
+            "push",
+            -3
+          ],
+          [
+            "getMin"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "top"
+          ],
+          [
+            "getMin"
+          ]
+        ]
+      ],
+      "expected": [
+        -3,
+        0,
+        -2
+      ],
+      "inputDisplay": "[['push', -2], ['push', 0], ['push', -3], ['getMin'], ['pop'], ['top'], ['getMin",
+      "expectedDisplay": "[-3, 0, -2]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            "push",
+            1
+          ],
+          [
+            "push",
+            2
+          ],
+          [
+            "getMin"
+          ]
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[['push', 1], ['push', 2], ['getMin']]",
+      "expectedDisplay": "[1]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            "push",
+            2
+          ],
+          [
+            "push",
+            0
+          ],
+          [
+            "push",
+            3
+          ],
+          [
+            "push",
+            0
+          ],
+          [
+            "getMin"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "getMin"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "getMin"
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "inputDisplay": "[['push', 2], ['push', 0], ['push', 3], ['push', 0], ['getMin'], ['pop'], ['getM",
+      "expectedDisplay": "[0, 0, 0]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Store paired minimums or maintain an auxiliary stack storing the running minimum."
+  ],
+  "python": {
+    "starterCode": "def minStackTrace(commands: list) -> list:\n    pass\n",
+    "solutionCode": "def minStackTrace(commands: list) -> list:\n    stack = []\n    min_stack = []\n    out = []\n    for c in commands:\n        op = c[0]\n        if op == 'push':\n            val = c[1]\n            stack.append(val)\n            if not min_stack or val <= min_stack[-1]:\n                min_stack.append(val)\n        elif op == 'pop':\n            val = stack.pop()\n            if val == min_stack[-1]:\n                min_stack.pop()\n        elif op == 'top':\n            out.append(stack[-1])\n        elif op == 'getMin':\n            out.append(min_stack[-1])\n    return out\n"
+  },
+  "leetcodeId": 155,
+  "leetcodeTitle": "Min Stack Trace",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-e-min-stack/"
+}

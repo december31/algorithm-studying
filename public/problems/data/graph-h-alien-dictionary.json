@@ -1,0 +1,97 @@
+{
+  "id": "graph-h-alien-dictionary",
+  "wingId": "graphs",
+  "floor": 371,
+  "title": "Alien Dictionary Topological Sort",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-h-alien-dictionary",
+    "name": "Xenoglossic Archon",
+    "title": "Decipherer of Extraterrestrial Alphabets",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "beholder",
+    "color": "#ec4899",
+    "attackName": "Lexical Distortion",
+    "attackPower": 3,
+    "defeatQuote": "Alien lexicographical character order deciphered!"
+  },
+  "description": "There is a new alien language that uses the English alphabet. However, the order of the letters is unknown to you. You are given a list of strings `words` from the alien language's dictionary, where the strings are claimed to be sorted lexicographically according to this alien language. Return a string of the unique letters in the new alien language sorted in lexicographically increasing order. If the order is invalid, return `\"\"`.",
+  "examples": [
+    {
+      "input": "words = [\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]",
+      "output": "\"wertf\""
+    },
+    {
+      "input": "words = [\"z\",\"x\"]",
+      "output": "\"zx\""
+    },
+    {
+      "input": "words = [\"z\",\"x\",\"z\"]",
+      "output": "\"\""
+    }
+  ],
+  "constraints": [
+    "1 <= words.length <= 100",
+    "1 <= words[i].length <= 100"
+  ],
+  "starterCode": "def alienOrder(words: list[str]) -> str:\n    pass\n",
+  "solutionCode": "def alienOrder(words: list[str]) -> str:\n    from collections import defaultdict, deque\n    adj = defaultdict(set)\n    in_deg = {c: 0 for w in words for c in w}\n    for i in range(len(words) - 1):\n        w1, w2 = words[i], words[i + 1]\n        min_len = min(len(w1), len(w2))\n        if len(w1) > len(w2) and w1[:min_len] == w2[:min_len]:\n            return \"\"\n        for j in range(min_len):\n            if w1[j] != w2[j]:\n                if w2[j] not in adj[w1[j]]:\n                    adj[w1[j]].add(w2[j])\n                    in_deg[w2[j]] += 1\n                break\n    q = deque([c for c, deg in in_deg.items() if deg == 0])\n    res = []\n    while q:\n        c = q.popleft()\n        res.append(c)\n        for nxt in adj[c]:\n            in_deg[nxt] -= 1\n            if in_deg[nxt] == 0: q.append(nxt)\n    return \"\".join(res) if len(res) == len(in_deg) else \"\"\n",
+  "functionName": "alienOrder",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "wrt",
+          "wrf",
+          "er",
+          "ett",
+          "rftt"
+        ]
+      ],
+      "expected": "wertf",
+      "inputDisplay": "['wrt', 'wrf', 'er', 'ett', 'rftt']",
+      "expectedDisplay": "wertf",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "z",
+          "x"
+        ]
+      ],
+      "expected": "zx",
+      "inputDisplay": "['z', 'x']",
+      "expectedDisplay": "zx",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "z",
+          "x",
+          "z"
+        ]
+      ],
+      "expected": "",
+      "inputDisplay": "['z', 'x', 'z']",
+      "expectedDisplay": "",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Compare adjacent words to extract directed character precedence edges. Kahn's topological sort determines order."
+  ],
+  "python": {
+    "starterCode": "def alienOrder(words: list[str]) -> str:\n    pass\n",
+    "solutionCode": "def alienOrder(words: list[str]) -> str:\n    from collections import defaultdict, deque\n    adj = defaultdict(set)\n    in_deg = {c: 0 for w in words for c in w}\n    for i in range(len(words) - 1):\n        w1, w2 = words[i], words[i + 1]\n        min_len = min(len(w1), len(w2))\n        if len(w1) > len(w2) and w1[:min_len] == w2[:min_len]:\n            return \"\"\n        for j in range(min_len):\n            if w1[j] != w2[j]:\n                if w2[j] not in adj[w1[j]]:\n                    adj[w1[j]].add(w2[j])\n                    in_deg[w2[j]] += 1\n                break\n    q = deque([c for c, deg in in_deg.items() if deg == 0])\n    res = []\n    while q:\n        c = q.popleft()\n        res.append(c)\n        for nxt in adj[c]:\n            in_deg[nxt] -= 1\n            if in_deg[nxt] == 0: q.append(nxt)\n    return \"\".join(res) if len(res) == len(in_deg) else \"\"\n"
+  },
+  "leetcodeId": 269,
+  "leetcodeTitle": "Alien Dictionary Topological Sort",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-alien-dictionary/"
+}

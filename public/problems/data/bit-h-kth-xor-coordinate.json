@@ -1,0 +1,140 @@
+{
+  "id": "bit-h-kth-xor-coordinate",
+  "wingId": "bit-manipulation",
+  "floor": 597,
+  "title": "K-th Largest XOR Coordinate Value",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-bit-h-kth-xor-coordinate",
+    "name": "Grid XOR Sovereign",
+    "title": "Master of 2D Bitwise Prefixes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#8b5cf6",
+    "attackName": "2D Bitwise Crossfire",
+    "attackPower": 3,
+    "defeatQuote": "Compute the 2D prefix XOR of all rectangular subgrids, find the k-th rank!"
+  },
+  "description": "You are given a 2D integer matrix `matrix` of size `m x n` and an integer `k`. The value of coordinate `(a, b)` of the matrix is the XOR of all `matrix[i][j]` where `0 <= i <= a < m` and `0 <= j <= b < n` (0-indexed). Find the `k-th` largest value (1-indexed) of all the coordinates of `matrix`.",
+  "examples": [
+    {
+      "input": "matrix = [[5,2],[1,6]], k = 1",
+      "output": "7"
+    },
+    {
+      "input": "matrix = [[5,2],[1,6]], k = 2",
+      "output": "5"
+    },
+    {
+      "input": "matrix = [[5,2],[1,6]], k = 3",
+      "output": "4"
+    },
+    {
+      "input": "matrix = [[5,2],[1,6]], k = 4",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "m == matrix.length",
+    "n == matrix[i].length",
+    "1 <= m, n <= 1000",
+    "1 <= k <= m * n"
+  ],
+  "starterCode": "def kthLargestValue(matrix: list[list[int]], k: int) -> int:\n    pass\n",
+  "solutionCode": "def kthLargestValue(matrix: list[list[int]], k: int) -> int:\n    m, n = len(matrix), len(matrix[0])\n    xor_grid = [[0] * (n + 1) for _ in range(m + 1)]\n    values = []\n    for i in range(1, m + 1):\n        for j in range(1, n + 1):\n            val = matrix[i-1][j-1] ^ xor_grid[i-1][j] ^ xor_grid[i][j-1] ^ xor_grid[i-1][j-1]\n            xor_grid[i][j] = val\n            values.append(val)\n    values.sort(reverse=True)\n    return values[k - 1]\n",
+  "functionName": "kthLargestValue",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            5,
+            2
+          ],
+          [
+            1,
+            6
+          ]
+        ],
+        1
+      ],
+      "expected": 7,
+      "inputDisplay": "args=[[[5, 2], [1, 6]], 1]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            5,
+            2
+          ],
+          [
+            1,
+            6
+          ]
+        ],
+        2
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[[[5, 2], [1, 6]], 2]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            5,
+            2
+          ],
+          [
+            1,
+            6
+          ]
+        ],
+        3
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[[[5, 2], [1, 6]], 3]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          [
+            5,
+            2
+          ],
+          [
+            1,
+            6
+          ]
+        ],
+        4
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[[5, 2], [1, 6]], 4]",
+      "expectedDisplay": "0",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use 2D prefix XOR: xor[i][j] = matrix[i-1][j-1] ^ xor[i-1][j] ^ xor[i][j-1] ^ xor[i-1][j-1]. Collect all coordinates and sort or quickselect."
+  ],
+  "python": {
+    "starterCode": "def kthLargestValue(matrix: list[list[int]], k: int) -> int:\n    pass\n",
+    "solutionCode": "def kthLargestValue(matrix: list[list[int]], k: int) -> int:\n    m, n = len(matrix), len(matrix[0])\n    xor_grid = [[0] * (n + 1) for _ in range(m + 1)]\n    values = []\n    for i in range(1, m + 1):\n        for j in range(1, n + 1):\n            val = matrix[i-1][j-1] ^ xor_grid[i-1][j] ^ xor_grid[i][j-1] ^ xor_grid[i-1][j-1]\n            xor_grid[i][j] = val\n            values.append(val)\n    values.sort(reverse=True)\n    return values[k - 1]\n"
+  },
+  "leetcodeId": 1738,
+  "leetcodeTitle": "K-th Largest XOR Coordinate Value",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-kth-xor-coordinate/"
+}

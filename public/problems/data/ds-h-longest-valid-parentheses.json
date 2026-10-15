@@ -1,0 +1,94 @@
+{
+  "id": "ds-h-longest-valid-parentheses",
+  "wingId": "data-structures",
+  "floor": 177,
+  "title": "Longest Valid Parentheses",
+  "difficulty": "hard",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-h-longest-valid-parentheses",
+    "name": "Parenthesis Titan",
+    "title": "Keeper of Unbroken Nestings",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#38bdf8",
+    "attackName": "Bracket Slam",
+    "attackPower": 3,
+    "defeatQuote": "Stack index tracking calculated the longest unbroken well-formed span!"
+  },
+  "description": "Given a string containing just the characters `'('` and `')'`, return the length of the longest valid (well-formed) parentheses substring.",
+  "examples": [
+    {
+      "input": "s = \"(()\"",
+      "output": "2"
+    },
+    {
+      "input": "s = \")()())\"",
+      "output": "4"
+    },
+    {
+      "input": "s = \"\"",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "0 <= len(s) <= 3 * 10^4",
+    "s[i] is '(' or ')'"
+  ],
+  "starterCode": "def longestValidParentheses(s: str) -> int:\n    pass\n",
+  "solutionCode": "def longestValidParentheses(s: str) -> int:\n    stack = [-1]\n    max_len = 0\n    for i, ch in enumerate(s):\n        if ch == '(':\n            stack.append(i)\n        else:\n            stack.pop()\n            if not stack:\n                stack.append(i)\n            else:\n                max_len = max(max_len, i - stack[-1])\n    return max_len\n",
+  "functionName": "longestValidParentheses",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "(()"
+      ],
+      "expected": 2,
+      "inputDisplay": "(()",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        ")()())"
+      ],
+      "expected": 4,
+      "inputDisplay": ")()())",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        ""
+      ],
+      "expected": 0,
+      "inputDisplay": "",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "()(()()"
+      ],
+      "expected": 4,
+      "inputDisplay": "()(()()",
+      "expectedDisplay": "4",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Initialize stack with -1 as boundary. Pop on ')'; if stack empty push current index, else compute i - stack[-1]."
+  ],
+  "python": {
+    "starterCode": "def longestValidParentheses(s: str) -> int:\n    pass\n",
+    "solutionCode": "def longestValidParentheses(s: str) -> int:\n    stack = [-1]\n    max_len = 0\n    for i, ch in enumerate(s):\n        if ch == '(':\n            stack.append(i)\n        else:\n            stack.pop()\n            if not stack:\n                stack.append(i)\n            else:\n                max_len = max(max_len, i - stack[-1])\n    return max_len\n"
+  },
+  "leetcodeId": 32,
+  "leetcodeTitle": "Longest Valid Parentheses",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-longest-valid-parentheses/"
+}

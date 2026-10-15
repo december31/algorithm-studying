@@ -1,0 +1,103 @@
+{
+  "id": "bsg-h-count-smaller-after-self",
+  "wingId": "binary-search-greedy",
+  "floor": 488,
+  "title": "Count of Smaller Numbers After Self",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-count-smaller-after-self",
+    "name": "Fenwick Specter",
+    "title": "Inversion Counter of the Trailing Veil",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "spectre",
+    "color": "#ec4899",
+    "attackName": "Inversion Flare",
+    "attackPower": 3,
+    "defeatQuote": "For each nums[i], count of smaller elements to its right tallied!"
+  },
+  "description": "Given an integer array `nums`, return an integer array `counts` where `counts[i]` is the number of smaller elements to the right of `nums[i]`.",
+  "examples": [
+    {
+      "input": "nums = [5,2,6,1]",
+      "output": "[2,1,1,0]"
+    },
+    {
+      "input": "nums = [-1]",
+      "output": "[0]"
+    },
+    {
+      "input": "nums = [-1,-1]",
+      "output": "[0,0]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 100000"
+  ],
+  "starterCode": "def countSmaller(nums: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def countSmaller(nums: list[int]) -> list[int]:\n    import bisect\n    sorted_list = []\n    ans = []\n    for x in reversed(nums):\n        idx = bisect.bisect_left(sorted_list, x)\n        ans.append(idx)\n        sorted_list.insert(idx, x)\n    return ans[::-1]\n",
+  "functionName": "countSmaller",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          5,
+          2,
+          6,
+          1
+        ]
+      ],
+      "expected": [
+        2,
+        1,
+        1,
+        0
+      ],
+      "inputDisplay": "[5, 2, 6, 1]",
+      "expectedDisplay": "[2, 1, 1, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          -1
+        ]
+      ],
+      "expected": [
+        0
+      ],
+      "inputDisplay": "[-1]",
+      "expectedDisplay": "[0]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "expected": [
+        0,
+        0
+      ],
+      "inputDisplay": "[-1, -1]",
+      "expectedDisplay": "[0, 0]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Iterate from right to left, using binary search (bisect_left) to find position in sorted seen numbers."
+  ],
+  "python": {
+    "starterCode": "def countSmaller(nums: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def countSmaller(nums: list[int]) -> list[int]:\n    import bisect\n    sorted_list = []\n    ans = []\n    for x in reversed(nums):\n        idx = bisect.bisect_left(sorted_list, x)\n        ans.append(idx)\n        sorted_list.insert(idx, x)\n    return ans[::-1]\n"
+  },
+  "leetcodeId": 315,
+  "leetcodeTitle": "Count of Smaller Numbers After Self",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-count-smaller-after-self/"
+}

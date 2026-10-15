@@ -1,0 +1,110 @@
+{
+  "id": "ds-m-longest-wpi",
+  "wingId": "data-structures",
+  "floor": 150,
+  "title": "Longest Well-Performing Interval",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-longest-wpi",
+    "name": "Overtime Lich",
+    "title": "Counter of Tiresome Shifts",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#e11d48",
+    "attackName": "Fatigue Hex",
+    "attackPower": 2,
+    "defeatQuote": "Score strictly greater than 0 identified the longest interval!"
+  },
+  "description": "We are given `hours`, a list of the number of hours worked per day for a given employee. A day is considered to be a tiring day if and only if the number of hours worked is (strictly) greater than `8`. A well-performing interval is an interval of days on which the number of tiring days is strictly larger than the number of non-tiring days. Return the length of the longest well-performing interval.",
+  "examples": [
+    {
+      "input": "hours = [9,9,6,0,6,6,9]",
+      "output": "3"
+    },
+    {
+      "input": "hours = [6,6,6]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= len(hours) <= 10^4",
+    "0 <= hours[i] <= 16"
+  ],
+  "starterCode": "def longestWPI(hours: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def longestWPI(hours: list[int]) -> int:\n    res = curr = 0\n    seen = {}\n    for i, h in enumerate(hours):\n        curr += (1 if h > 8 else -1)\n        if curr > 0:\n            res = i + 1\n        else:\n            if curr not in seen:\n                seen[curr] = i\n            if curr - 1 in seen:\n                res = max(res, i - seen[curr - 1])\n    return res\n",
+  "functionName": "longestWPI",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          9,
+          9,
+          6,
+          0,
+          6,
+          6,
+          9
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[9, 9, 6, 0, 6, 6, 9]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[6, 6, 6]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          9,
+          9,
+          9
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[9, 9, 9]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          6,
+          9,
+          9
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[6, 9, 9]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Convert days with >8h to +1, else -1. Look for intervals where prefix sum difference > 0."
+  ],
+  "python": {
+    "starterCode": "def longestWPI(hours: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def longestWPI(hours: list[int]) -> int:\n    res = curr = 0\n    seen = {}\n    for i, h in enumerate(hours):\n        curr += (1 if h > 8 else -1)\n        if curr > 0:\n            res = i + 1\n        else:\n            if curr not in seen:\n                seen[curr] = i\n            if curr - 1 in seen:\n                res = max(res, i - seen[curr - 1])\n    return res\n"
+  },
+  "leetcodeId": 1124,
+  "leetcodeTitle": "Longest Well-Performing Interval",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-longest-wpi/"
+}

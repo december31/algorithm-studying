@@ -1,0 +1,110 @@
+{
+  "id": "ds-e-majority-element",
+  "wingId": "data-structures",
+  "floor": 108,
+  "title": "Dominant Rune Search",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-e-majority-element",
+    "name": "Boyer-Moore Golem",
+    "title": "Candidate Voter of the Colosseum",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "golem",
+    "color": "#a855f7",
+    "attackName": "Majority Quake",
+    "attackPower": 1,
+    "defeatQuote": "The majority candidate has overwhelmed my tally!"
+  },
+  "description": "Given an array `nums` of size `n`, return the majority element. The majority element is the element that appears more than `⌊n / 2⌋` times. You may assume that the majority element always exists.",
+  "examples": [
+    {
+      "input": "nums = [3,2,3]",
+      "output": "3"
+    },
+    {
+      "input": "nums = [2,2,1,1,1,2,2]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 5 * 10^4",
+    "-10^9 <= nums[i] <= 10^9"
+  ],
+  "starterCode": "def majorityElement(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def majorityElement(nums: list[int]) -> int:\n    candidate = None\n    count = 0\n    for num in nums:\n        if count == 0:\n            candidate = num\n        count += (1 if num == candidate else -1)\n    return candidate\n",
+  "functionName": "majorityElement",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          2,
+          3
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[3, 2, 3]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          2,
+          1,
+          1,
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[2, 2, 1, 1, 1, 2, 2]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          6,
+          6,
+          6,
+          7,
+          7
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "[6, 6, 6, 7, 7]",
+      "expectedDisplay": "6",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Boyer-Moore Voting Algorithm achieves O(n) time and O(1) space."
+  ],
+  "python": {
+    "starterCode": "def majorityElement(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def majorityElement(nums: list[int]) -> int:\n    candidate = None\n    count = 0\n    for num in nums:\n        if count == 0:\n            candidate = num\n        count += (1 if num == candidate else -1)\n    return candidate\n"
+  },
+  "leetcodeId": 169,
+  "leetcodeTitle": "Dominant Rune Search",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-e-majority-element/"
+}

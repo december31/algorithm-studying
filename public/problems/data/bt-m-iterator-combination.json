@@ -1,0 +1,76 @@
+{
+  "id": "bt-m-iterator-combination",
+  "wingId": "backtracking",
+  "floor": 238,
+  "title": "All Combinations of Length K",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-iterator-combination",
+    "name": "Lexicon Golem",
+    "title": "Iterator of Ordered Combinations",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#64748b",
+    "attackName": "Lexicon Strike",
+    "attackPower": 2,
+    "defeatQuote": "All k-length combinations listed in sorted order!"
+  },
+  "description": "Given a string `characters` of sorted distinct lowercase English letters and a number `combinationLength`, return all combinations of characters of length `combinationLength` in lexicographical order.",
+  "examples": [
+    {
+      "input": "characters = \"abc\", combinationLength = 2",
+      "output": "[\"ab\",\"ac\",\"bc\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= combinationLength <= len(characters) <= 15"
+  ],
+  "starterCode": "def generateAllCombinations(characters: str, combinationLength: int) -> list[str]:\n    pass\n",
+  "solutionCode": "def generateAllCombinations(characters: str, combinationLength: int) -> list[str]:\n    res = []\n    def backtrack(idx, path):\n        if len(path) == combinationLength:\n            res.append(''.join(path))\n            return\n        for i in range(idx, len(characters)):\n            path.append(characters[i])\n            backtrack(i + 1, path)\n            path.pop()\n    backtrack(0, [])\n    return res\n",
+  "functionName": "generateAllCombinations",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "abc",
+        2
+      ],
+      "expected": [
+        "ab",
+        "ac",
+        "bc"
+      ],
+      "inputDisplay": "args=['abc', 2]",
+      "expectedDisplay": "['ab', 'ac', 'bc']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "abcd",
+        3
+      ],
+      "expected": [
+        "abc",
+        "abd",
+        "acd",
+        "bcd"
+      ],
+      "inputDisplay": "args=['abcd', 3]",
+      "expectedDisplay": "['abc', 'abd', 'acd', 'bcd']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Standard combination generation maintaining order of characters."
+  ],
+  "python": {
+    "starterCode": "def generateAllCombinations(characters: str, combinationLength: int) -> list[str]:\n    pass\n",
+    "solutionCode": "def generateAllCombinations(characters: str, combinationLength: int) -> list[str]:\n    res = []\n    def backtrack(idx, path):\n        if len(path) == combinationLength:\n            res.append(''.join(path))\n            return\n        for i in range(idx, len(characters)):\n            path.append(characters[i])\n            backtrack(i + 1, path)\n            path.pop()\n    backtrack(0, [])\n    return res\n"
+  },
+  "leetcodeId": 1286,
+  "leetcodeTitle": "All Combinations of Length K",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-iterator-combination/"
+}

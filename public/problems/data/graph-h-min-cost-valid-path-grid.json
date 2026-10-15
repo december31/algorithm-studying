@@ -1,0 +1,110 @@
+{
+  "id": "graph-h-min-cost-valid-path-grid",
+  "wingId": "graphs",
+  "floor": 383,
+  "title": "Min Cost to Make at Least One Valid Path (0-1 BFS)",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-h-min-cost-valid-path-grid",
+    "name": "Conveyor Automaton",
+    "title": "Overhauler of Misdirected Signs",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "gargoyle",
+    "color": "#10b981",
+    "attackName": "Arrow Reversal",
+    "attackPower": 3,
+    "defeatQuote": "Minimum arrow modifications to reach bottom-right corner!"
+  },
+  "description": "Given an `m x n` grid. Each cell has a sign pointing right (1), left (2), lower (3), or upper (4). In each step you can follow the sign for cost 0, or change the sign for cost 1. Return the minimum cost to make at least one valid path from `(0, 0)` to `(m - 1, n - 1)`.",
+  "examples": [
+    {
+      "input": "grid = [[1,1,1,1],[2,2,2,2],[1,1,1,1],[2,2,2,2]]",
+      "output": "3"
+    },
+    {
+      "input": "grid = [[1,1,3],[3,2,2],[1,1,4]]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 100"
+  ],
+  "starterCode": "def minCost(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minCost(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    from collections import deque\n    dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    dist = [[float('inf')] * C for _ in range(R)]\n    dist[0][0] = 0\n    dq = deque([(0, 0)])\n    while dq:\n        r, c = dq.popleft()\n        if r == R - 1 and c == C - 1: return dist[r][c]\n        for i, (dr, dc) in enumerate(dirs, 1):\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C:\n                w = 0 if grid[r][c] == i else 1\n                if dist[r][c] + w < dist[nr][nc]:\n                    dist[nr][nc] = dist[r][c] + w\n                    if w == 0: dq.appendleft((nr, nc))\n                    else: dq.append((nr, nc))\n    return 0\n",
+  "functionName": "minCost",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            2,
+            2,
+            2,
+            2
+          ],
+          [
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            2,
+            2,
+            2,
+            2
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[[1, 1, 1, 1], [2, 2, 2, 2], [1, 1, 1, 1], [2, 2, 2, 2]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            1,
+            3
+          ],
+          [
+            3,
+            2,
+            2
+          ],
+          [
+            1,
+            1,
+            4
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[[1, 1, 3], [3, 2, 2], [1, 1, 4]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use 0-1 BFS with a deque: push cost 0 transitions to left, cost 1 transitions to right."
+  ],
+  "python": {
+    "starterCode": "def minCost(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minCost(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    from collections import deque\n    dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    dist = [[float('inf')] * C for _ in range(R)]\n    dist[0][0] = 0\n    dq = deque([(0, 0)])\n    while dq:\n        r, c = dq.popleft()\n        if r == R - 1 and c == C - 1: return dist[r][c]\n        for i, (dr, dc) in enumerate(dirs, 1):\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C:\n                w = 0 if grid[r][c] == i else 1\n                if dist[r][c] + w < dist[nr][nc]:\n                    dist[nr][nc] = dist[r][c] + w\n                    if w == 0: dq.appendleft((nr, nc))\n                    else: dq.append((nr, nc))\n    return 0\n"
+  },
+  "leetcodeId": 1368,
+  "leetcodeTitle": "Min Cost to Make at Least One Valid Path (0-1 BFS)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-min-cost-valid-path-grid/"
+}

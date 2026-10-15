@@ -1,0 +1,112 @@
+{
+  "id": "bt-m-shopping-offers",
+  "wingId": "backtracking",
+  "floor": 248,
+  "title": "Shopping Offers Minimum Cost",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-shopping-offers",
+    "name": "Bargain Fiend",
+    "title": "Vendor of Discount Bundles",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#f59e0b",
+    "attackName": "Discount Slash",
+    "attackPower": 2,
+    "defeatQuote": "Special bundles and regular pricing optimized to lowest cost!"
+  },
+  "description": "In a store, there are some items for sale. You are given an array `price` where `price[i]` is the price of the `i-th` item, `special` offers with bundle counts and bundle price, and an array `needs` representing your target item counts. Return the lowest price you have to pay for exactly certain items as specified.",
+  "examples": [
+    {
+      "input": "price = [2,5], special = [[3,0,5],[1,2,10]], needs = [3,2]",
+      "output": "14"
+    },
+    {
+      "input": "price = [2,3,4], special = [[1,1,0,4],[2,2,1,9]], needs = [1,2,1]",
+      "output": "11"
+    }
+  ],
+  "constraints": [
+    "price.length == needs.length",
+    "1 <= len(price) <= 6"
+  ],
+  "starterCode": "def shoppingOffers(price: list[int], special: list[list[int]], needs: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def shoppingOffers(price: list[int], special: list[list[int]], needs: list[int]) -> int:\n    memo = {}\n    def dfs(cur_needs):\n        key = tuple(cur_needs)\n        if key in memo: return memo[key]\n        cost = sum(p * n for p, n in zip(price, cur_needs))\n        for sp in special:\n            new_needs = [cur_needs[i] - sp[i] for i in range(len(price))]\n            if all(x >= 0 for x in new_needs):\n                cost = min(cost, sp[-1] + dfs(new_needs))\n        memo[key] = cost\n        return cost\n    return dfs(needs)\n",
+  "functionName": "shoppingOffers",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          5
+        ],
+        [
+          [
+            3,
+            0,
+            5
+          ],
+          [
+            1,
+            2,
+            10
+          ]
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "expected": 14,
+      "inputDisplay": "args=[[2, 5], [[3, 0, 5], [1, 2, 10]], [3, 2]]",
+      "expectedDisplay": "14",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          [
+            1,
+            1,
+            0,
+            4
+          ],
+          [
+            2,
+            2,
+            1,
+            9
+          ]
+        ],
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "expected": 11,
+      "inputDisplay": "args=[[2, 3, 4], [[1, 1, 0, 4], [2, 2, 1, 9]], [1, 2, 1]]",
+      "expectedDisplay": "11",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Memoized DFS on remaining needs tuple, testing each applicable special bundle."
+  ],
+  "python": {
+    "starterCode": "def shoppingOffers(price: list[int], special: list[list[int]], needs: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def shoppingOffers(price: list[int], special: list[list[int]], needs: list[int]) -> int:\n    memo = {}\n    def dfs(cur_needs):\n        key = tuple(cur_needs)\n        if key in memo: return memo[key]\n        cost = sum(p * n for p, n in zip(price, cur_needs))\n        for sp in special:\n            new_needs = [cur_needs[i] - sp[i] for i in range(len(price))]\n            if all(x >= 0 for x in new_needs):\n                cost = min(cost, sp[-1] + dfs(new_needs))\n        memo[key] = cost\n        return cost\n    return dfs(needs)\n"
+  },
+  "leetcodeId": 638,
+  "leetcodeTitle": "Shopping Offers Minimum Cost",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-shopping-offers/"
+}

@@ -1,0 +1,117 @@
+{
+  "id": "ds-m-max-width-ramp",
+  "wingId": "data-structures",
+  "floor": 151,
+  "title": "Maximum Width Ramp",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-max-width-ramp",
+    "name": "Incline Behemoth",
+    "title": "Ascender of Stagnant Slopes",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#6366f1",
+    "attackName": "Slope Bash",
+    "attackPower": 2,
+    "defeatQuote": "A decreasing index stack tracked the widest possible ramp!"
+  },
+  "description": "A ramp in an integer array `nums` is a pair `(i, j)` for which `i < j` and `nums[i] <= nums[j]`. The width of such a ramp is `j - i`. Given an integer array `nums`, return the maximum width of a ramp in `nums`. If there is no ramp, return `0`.",
+  "examples": [
+    {
+      "input": "nums = [6,0,8,2,1,5]",
+      "output": "4"
+    },
+    {
+      "input": "nums = [9,8,1,0,1,9,4,0,4,1]",
+      "output": "7"
+    }
+  ],
+  "constraints": [
+    "2 <= len(nums) <= 5 * 10^4",
+    "0 <= nums[i] <= 5 * 10^4"
+  ],
+  "starterCode": "def maxWidthRamp(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def maxWidthRamp(nums: list[int]) -> int:\n    stack = []\n    for i, n in enumerate(nums):\n        if not stack or nums[stack[-1]] > n:\n            stack.append(i)\n    res = 0\n    for j in range(len(nums) - 1, -1, -1):\n        while stack and nums[stack[-1]] <= nums[j]:\n            res = max(res, j - stack.pop())\n    return res\n",
+  "functionName": "maxWidthRamp",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          6,
+          0,
+          8,
+          2,
+          1,
+          5
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[6, 0, 8, 2, 1, 5]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          9,
+          8,
+          1,
+          0,
+          1,
+          9,
+          4,
+          0,
+          4,
+          1
+        ]
+      ],
+      "expected": 7,
+      "inputDisplay": "[9, 8, 1, 0, 1, 9, 4, 0, 4, 1]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[5, 4, 3, 2, 1]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1, 2]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Push decreasing indices onto a stack. Iterate from right to left popping when condition holds."
+  ],
+  "python": {
+    "starterCode": "def maxWidthRamp(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def maxWidthRamp(nums: list[int]) -> int:\n    stack = []\n    for i, n in enumerate(nums):\n        if not stack or nums[stack[-1]] > n:\n            stack.append(i)\n    res = 0\n    for j in range(len(nums) - 1, -1, -1):\n        while stack and nums[stack[-1]] <= nums[j]:\n            res = max(res, j - stack.pop())\n    return res\n"
+  },
+  "leetcodeId": 962,
+  "leetcodeTitle": "Maximum Width Ramp",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-max-width-ramp/"
+}

@@ -1,0 +1,83 @@
+{
+  "id": "bit-m-longest-substring-even-vowels",
+  "wingId": "bit-manipulation",
+  "floor": 544,
+  "title": "Longest Substring with Even Vowel Counts",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-longest-substring-even-vowels",
+    "name": "Vocalic Siren",
+    "title": "Mistress of Parity Harmonics",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Siren Song",
+    "attackPower": 2,
+    "defeatQuote": "Longest substring where each of 'a, e, i, o, u' appears an even number of times!"
+  },
+  "description": "Given the string `s`, return the size of the longest substring containing each vowel ('a', 'e', 'i', 'o', 'u') an even number of times.",
+  "examples": [
+    {
+      "input": "s = \"eleetminicoworoep\"",
+      "output": "13"
+    },
+    {
+      "input": "s = \"leetcodeisgreat\"",
+      "output": "5"
+    },
+    {
+      "input": "s = \"bcbcbc\"",
+      "output": "6"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 500000"
+  ],
+  "starterCode": "def findTheLongestSubstring(s: str) -> int:\n    pass\n",
+  "solutionCode": "def findTheLongestSubstring(s: str) -> int:\n    vowels = {'a': 0, 'e': 1, 'i': 2, 'o': 3, 'u': 4}\n    first_seen = {0: -1}\n    mask = 0\n    max_len = 0\n    for i, ch in enumerate(s):\n        if ch in vowels:\n            mask ^= (1 << vowels[ch])\n        if mask in first_seen:\n            max_len = max(max_len, i - first_seen[mask])\n        else:\n            first_seen[mask] = i\n    return max_len\n",
+  "functionName": "findTheLongestSubstring",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "eleetminicoworoep"
+      ],
+      "expected": 13,
+      "inputDisplay": "eleetminicoworoep",
+      "expectedDisplay": "13",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "leetcodeisgreat"
+      ],
+      "expected": 5,
+      "inputDisplay": "leetcodeisgreat",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "bcbcbc"
+      ],
+      "expected": 6,
+      "inputDisplay": "bcbcbc",
+      "expectedDisplay": "6",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Maintain a 5-bit parity mask for the vowels. Whenever the same mask reappears at j, substring (first_seen[mask], j] has all even vowel counts."
+  ],
+  "python": {
+    "starterCode": "def findTheLongestSubstring(s: str) -> int:\n    pass\n",
+    "solutionCode": "def findTheLongestSubstring(s: str) -> int:\n    vowels = {'a': 0, 'e': 1, 'i': 2, 'o': 3, 'u': 4}\n    first_seen = {0: -1}\n    mask = 0\n    max_len = 0\n    for i, ch in enumerate(s):\n        if ch in vowels:\n            mask ^= (1 << vowels[ch])\n        if mask in first_seen:\n            max_len = max(max_len, i - first_seen[mask])\n        else:\n            first_seen[mask] = i\n    return max_len\n"
+  },
+  "leetcodeId": 1371,
+  "leetcodeTitle": "Longest Substring with Even Vowel Counts",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-longest-substring-even-vowels/"
+}

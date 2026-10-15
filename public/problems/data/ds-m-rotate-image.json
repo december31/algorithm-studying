@@ -1,0 +1,167 @@
+{
+  "id": "ds-m-rotate-image",
+  "wingId": "data-structures",
+  "floor": 141,
+  "title": "Rotate Matrix 90 Degrees Clockwise",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-rotate-image",
+    "name": "Gyroscopic Drake",
+    "title": "Rotator of Spatial Grids",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#10b981",
+    "attackName": "Torque Breath",
+    "attackPower": 2,
+    "defeatQuote": "Transpose followed by reflection turned the board 90 degrees!"
+  },
+  "description": "You are given an `n x n` 2D `matrix` representing an image, rotate the image by 90 degrees (clockwise) in-place. Return the rotated matrix.",
+  "examples": [
+    {
+      "input": "matrix = [[1,2,3],[4,5,6],[7,8,9]]",
+      "output": "[[7,4,1],[8,5,2],[9,6,3]]"
+    }
+  ],
+  "constraints": [
+    "n == len(matrix) == len(matrix[i])",
+    "1 <= n <= 20",
+    "-1000 <= matrix[i][j] <= 1000"
+  ],
+  "starterCode": "def rotateImage(matrix: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def rotateImage(matrix: list[list[int]]) -> list[list[int]]:\n    n = len(matrix)\n    for i in range(n):\n        for j in range(i + 1, n):\n            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]\n    for r in range(n):\n        matrix[r].reverse()\n    return matrix\n",
+  "functionName": "rotateImage",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          7,
+          4,
+          1
+        ],
+        [
+          8,
+          5,
+          2
+        ],
+        [
+          9,
+          6,
+          3
+        ]
+      ],
+      "inputDisplay": "[[1, 2, 3], [4, 5, 6], [7, 8, 9]]",
+      "expectedDisplay": "[[7, 4, 1], [8, 5, 2], [9, 6, 3]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            5,
+            1,
+            9,
+            11
+          ],
+          [
+            2,
+            4,
+            8,
+            10
+          ],
+          [
+            13,
+            3,
+            6,
+            7
+          ],
+          [
+            15,
+            14,
+            12,
+            16
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          15,
+          13,
+          2,
+          5
+        ],
+        [
+          14,
+          3,
+          4,
+          1
+        ],
+        [
+          12,
+          6,
+          8,
+          9
+        ],
+        [
+          16,
+          7,
+          10,
+          11
+        ]
+      ],
+      "inputDisplay": "[[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]]",
+      "expectedDisplay": "[[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ],
+      "inputDisplay": "[[1]]",
+      "expectedDisplay": "[[1]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Transpose the matrix across its main diagonal, then reverse each row."
+  ],
+  "python": {
+    "starterCode": "def rotateImage(matrix: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def rotateImage(matrix: list[list[int]]) -> list[list[int]]:\n    n = len(matrix)\n    for i in range(n):\n        for j in range(i + 1, n):\n            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]\n    for r in range(n):\n        matrix[r].reverse()\n    return matrix\n"
+  },
+  "leetcodeId": 48,
+  "leetcodeTitle": "Rotate Matrix 90 Degrees Clockwise",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-rotate-image/"
+}

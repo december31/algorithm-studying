@@ -1,0 +1,139 @@
+{
+  "id": "graph-m-pacific-atlantic",
+  "wingId": "graphs",
+  "floor": 314,
+  "title": "Pacific Atlantic Water Flow",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-pacific-atlantic",
+    "name": "Aquatic Drake",
+    "title": "Conduit of Dual Oceans",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#38bdf8",
+    "attackName": "Oceanic Deluge",
+    "attackPower": 2,
+    "defeatQuote": "Coordinates capable of draining into both Pacific and Atlantic revealed!"
+  },
+  "description": "There is an `m x n` rectangular island that borders both the Pacific Ocean and Atlantic Ocean. The Pacific touches top and left borders, while Atlantic touches bottom and right borders. Water can flow in 4 directions to equal or lower height cells. Return a list of grid coordinates where water can flow to both oceans.",
+  "examples": [
+    {
+      "input": "heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]",
+      "output": "[[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 200"
+  ],
+  "starterCode": "def pacificAtlantic(heights: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def pacificAtlantic(heights: list[list[int]]) -> list[list[int]]:\n    if not heights: return []\n    R, C = len(heights), len(heights[0])\n    pac, atl = set(), set()\n    def dfs(r, c, visited):\n        visited.add((r, c))\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C and (nr, nc) not in visited:\n                if heights[nr][nc] >= heights[r][c]:\n                    dfs(nr, nc, visited)\n    for r in range(R):\n        dfs(r, 0, pac)\n        dfs(r, C - 1, atl)\n    for c in range(C):\n        dfs(0, c, pac)\n        dfs(R - 1, c, atl)\n    return sorted([[r, c] for r, c in (pac & atl)])\n",
+  "functionName": "pacificAtlantic",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2,
+            2,
+            3,
+            5
+          ],
+          [
+            3,
+            2,
+            3,
+            4,
+            4
+          ],
+          [
+            2,
+            4,
+            5,
+            3,
+            1
+          ],
+          [
+            6,
+            7,
+            1,
+            4,
+            5
+          ],
+          [
+            5,
+            1,
+            1,
+            2,
+            4
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "inputDisplay": "[[1, 2, 2, 3, 5], [3, 2, 3, 4, 4], [2, 4, 5, 3, 1], [6, 7, 1, 4, 5], [5, 1, 1, 2",
+      "expectedDisplay": "[[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0
+        ]
+      ],
+      "inputDisplay": "[[1]]",
+      "expectedDisplay": "[[0, 0]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Work backwards: reverse the flow starting from ocean borders moving inward to higher or equal terrain."
+  ],
+  "python": {
+    "starterCode": "def pacificAtlantic(heights: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def pacificAtlantic(heights: list[list[int]]) -> list[list[int]]:\n    if not heights: return []\n    R, C = len(heights), len(heights[0])\n    pac, atl = set(), set()\n    def dfs(r, c, visited):\n        visited.add((r, c))\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C and (nr, nc) not in visited:\n                if heights[nr][nc] >= heights[r][c]:\n                    dfs(nr, nc, visited)\n    for r in range(R):\n        dfs(r, 0, pac)\n        dfs(r, C - 1, atl)\n    for c in range(C):\n        dfs(0, c, pac)\n        dfs(R - 1, c, atl)\n    return sorted([[r, c] for r, c in (pac & atl)])\n"
+  },
+  "leetcodeId": 417,
+  "leetcodeTitle": "Pacific Atlantic Water Flow",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-pacific-atlantic/"
+}

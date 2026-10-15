@@ -1,0 +1,119 @@
+{
+  "id": "bit-h-max-xor-element-bound",
+  "wingId": "bit-manipulation",
+  "floor": 571,
+  "title": "Bounded Maximum XOR",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-max-xor-element-bound",
+    "name": "XOR Threshold Behemoth",
+    "title": "Guardian of the Upper Limit",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#dc2626",
+    "attackName": "Capped Voltage Burst",
+    "attackPower": 3,
+    "defeatQuote": "Exceed the bound mi and your XOR shall be denied!"
+  },
+  "description": "Given an array `nums` of non-negative integers and a 2D array `queries` where `queries[i] = [xi, mi]`. The answer to query `i` is the maximum bitwise XOR value of `xi` with any element in `nums` that is `<= mi`. If all elements in `nums` are `> mi`, the answer is `-1`. Return an array of the answers to all queries.",
+  "examples": [
+    {
+      "input": "nums = [0,1,2,3,4], queries = [[3,1],[1,3],[5,6]]",
+      "output": "[3,3,7]"
+    },
+    {
+      "input": "nums = [5,2,4,6,6,3], queries = [[12,4],[8,1],[6,3]]",
+      "output": "[15,-1,5]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length, queries.length <= 10^5",
+    "0 <= nums[j], xi, mi <= 10^9"
+  ],
+  "starterCode": "def maximizeXor(nums: list[int], queries: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def maximizeXor(nums: list[int], queries: list[list[int]]) -> list[int]:\n    nums.sort()\n    indexed_q = sorted([(m, x, i) for i, (x, m) in enumerate(queries)])\n    ans = [-1] * len(queries)\n    trie = {}\n    idx = 0\n    n = len(nums)\n    def insert(num):\n        node = trie\n        for b in range(30, -1, -1):\n            bit = (num >> b) & 1\n            if bit not in node: node[bit] = {}\n            node = node[bit]\n    def query_max(x):\n        if not trie: return -1\n        node = trie\n        res = 0\n        for b in range(30, -1, -1):\n            bit = (x >> b) & 1\n            opp = 1 - bit\n            if opp in node:\n                res |= (1 << b)\n                node = node[opp]\n            else:\n                node = node[bit]\n        return res\n    for m, x, orig_idx in indexed_q:\n        while idx < n and nums[idx] <= m:\n            insert(nums[idx])\n            idx += 1\n        ans[orig_idx] = query_max(x)\n    return ans\n",
+  "functionName": "maximizeXor",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          [
+            3,
+            1
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            5,
+            6
+          ]
+        ]
+      ],
+      "expected": [
+        3,
+        3,
+        7
+      ],
+      "inputDisplay": "args=[[0, 1, 2, 3, 4], [[3, 1], [1, 3], [5, 6]]]",
+      "expectedDisplay": "[3, 3, 7]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5,
+          2,
+          4,
+          6,
+          6,
+          3
+        ],
+        [
+          [
+            12,
+            4
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            6,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        15,
+        -1,
+        5
+      ],
+      "inputDisplay": "args=[[5, 2, 4, 6, 6, 3], [[12, 4], [8, 1], [6, 3]]]",
+      "expectedDisplay": "[15, -1, 5]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort queries by mi and nums in ascending order. Add elements into a 0-1 Trie as mi increases."
+  ],
+  "python": {
+    "starterCode": "def maximizeXor(nums: list[int], queries: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def maximizeXor(nums: list[int], queries: list[list[int]]) -> list[int]:\n    nums.sort()\n    indexed_q = sorted([(m, x, i) for i, (x, m) in enumerate(queries)])\n    ans = [-1] * len(queries)\n    trie = {}\n    idx = 0\n    n = len(nums)\n    def insert(num):\n        node = trie\n        for b in range(30, -1, -1):\n            bit = (num >> b) & 1\n            if bit not in node: node[bit] = {}\n            node = node[bit]\n    def query_max(x):\n        if not trie: return -1\n        node = trie\n        res = 0\n        for b in range(30, -1, -1):\n            bit = (x >> b) & 1\n            opp = 1 - bit\n            if opp in node:\n                res |= (1 << b)\n                node = node[opp]\n            else:\n                node = node[bit]\n        return res\n    for m, x, orig_idx in indexed_q:\n        while idx < n and nums[idx] <= m:\n            insert(nums[idx])\n            idx += 1\n        ans[orig_idx] = query_max(x)\n    return ans\n"
+  },
+  "leetcodeId": 1707,
+  "leetcodeTitle": "Bounded Maximum XOR",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-max-xor-element-bound/"
+}

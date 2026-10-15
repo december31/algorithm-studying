@@ -1,0 +1,74 @@
+{
+  "id": "bit-m-repeated-dna-sequences",
+  "wingId": "bit-manipulation",
+  "floor": 518,
+  "title": "Repeated DNA Sequences (Bitmask Rolling Hash)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-repeated-dna-sequences",
+    "name": "Genetic Spectre",
+    "title": "Extractor of Duplicate 10-mers",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#10b981",
+    "attackName": "Gene Duplication",
+    "attackPower": 2,
+    "defeatQuote": "10-letter nucleotide substrings appearing more than once identified!"
+  },
+  "description": "The DNA sequence is composed of a series of nucleotides: 'A', 'C', 'G', and 'T'. Given a string `s` that represents a DNA sequence, return all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule in sorted order.",
+  "examples": [
+    {
+      "input": "s = \"AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT\"",
+      "output": "[\"AAAAACCCCC\",\"CCCCCAAAAA\"]"
+    },
+    {
+      "input": "s = \"AAAAAAAAAAAAA\"",
+      "output": "[\"AAAAAAAAAA\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 100000"
+  ],
+  "starterCode": "def findRepeatedDnaSequences(s: str) -> list[str]:\n    pass\n",
+  "solutionCode": "def findRepeatedDnaSequences(s: str) -> list[str]:\n    if len(s) < 10: return []\n    mapping = {'A': 0, 'C': 1, 'G': 2, 'T': 3}\n    seen = set()\n    repeated = set()\n    mask = 0\n    for i in range(9):\n        mask = (mask << 2) | mapping[s[i]]\n    for i in range(9, len(s)):\n        mask = ((mask << 2) & 0xFFFFF) | mapping[s[i]]\n        sub = s[i - 9:i + 1]\n        if mask in seen:\n            repeated.add(sub)\n        else:\n            seen.add(mask)\n    return sorted(list(repeated))\n",
+  "functionName": "findRepeatedDnaSequences",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
+      ],
+      "expected": [
+        "AAAAACCCCC",
+        "CCCCCAAAAA"
+      ],
+      "inputDisplay": "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",
+      "expectedDisplay": "['AAAAACCCCC', 'CCCCCAAAAA']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "AAAAAAAAAAAAA"
+      ],
+      "expected": [
+        "AAAAAAAAAA"
+      ],
+      "inputDisplay": "AAAAAAAAAAAAA",
+      "expectedDisplay": "['AAAAAAAAAA']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Represent each nucleotide as 2 bits ('A'=00, 'C'=01, 'G'=10, 'T'=11). A 10-mer fits in a 20-bit mask."
+  ],
+  "python": {
+    "starterCode": "def findRepeatedDnaSequences(s: str) -> list[str]:\n    pass\n",
+    "solutionCode": "def findRepeatedDnaSequences(s: str) -> list[str]:\n    if len(s) < 10: return []\n    mapping = {'A': 0, 'C': 1, 'G': 2, 'T': 3}\n    seen = set()\n    repeated = set()\n    mask = 0\n    for i in range(9):\n        mask = (mask << 2) | mapping[s[i]]\n    for i in range(9, len(s)):\n        mask = ((mask << 2) & 0xFFFFF) | mapping[s[i]]\n        sub = s[i - 9:i + 1]\n        if mask in seen:\n            repeated.add(sub)\n        else:\n            seen.add(mask)\n    return sorted(list(repeated))\n"
+  },
+  "leetcodeId": 187,
+  "leetcodeTitle": "Repeated DNA Sequences (Bitmask Rolling Hash)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-repeated-dna-sequences/"
+}

@@ -1,0 +1,97 @@
+{
+  "id": "graph-m-evaluate-division",
+  "wingId": "graphs",
+  "floor": 337,
+  "title": "Evaluate Division (Weighted Directed Graph)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-evaluate-division",
+    "name": "Ratio Archon",
+    "title": "Equator of Fractional Variables",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "gargoyle",
+    "color": "#10b981",
+    "attackName": "Ratio Cascade",
+    "attackPower": 2,
+    "defeatQuote": "Multiplicative path weights evaluated across query pairs!"
+  },
+  "description": "You are given an array of variable pairs `equations` and an array of real numbers `values`, where `equations[i] = [Ai, Bi]` and `values[i]` represent `Ai / Bi = values[i]`. You are also given `queries` where `queries[j] = [Cj, Dj]`. Return the answers to all queries. If a single answer cannot be determined, return -1.0.",
+  "examples": [
+    {
+      "input": "equations = [[\"a\",\"b\"],[\"b\",\"c\"]], values = [2.0,3.0], queries = [[\"a\",\"c\"],[\"b\",\"a\"],[\"a\",\"e\"],[\"a\",\"a\"],[\"x\",\"x\"]]",
+      "output": "[6.0,0.5,-1.0,1.0,-1.0]"
+    }
+  ],
+  "constraints": [
+    "1 <= equations.length <= 20",
+    "1 <= queries.length <= 20"
+  ],
+  "starterCode": "def calcEquation(equations: list[list[str]], values: list[float], queries: list[list[str]]) -> list[float]:\n    pass\n",
+  "solutionCode": "def calcEquation(equations: list[list[str]], values: list[float], queries: list[list[str]]) -> list[float]:\n    from collections import defaultdict, deque\n    graph = defaultdict(dict)\n    for (u, v), val in zip(equations, values):\n        graph[u][v] = val\n        graph[v][u] = 1.0 / val\n    res = []\n    for u, v in queries:\n        if u not in graph or v not in graph:\n            res.append(-1.0)\n            continue\n        if u == v:\n            res.append(1.0)\n            continue\n        q = deque([(u, 1.0)])\n        visited = set([u])\n        ans = -1.0\n        while q:\n            curr, prod = q.popleft()\n            if curr == v:\n                ans = prod\n                break\n            for nxt, weight in graph[curr].items():\n                if nxt not in visited:\n                    visited.add(nxt)\n                    q.append((nxt, prod * weight))\n        res.append(ans)\n    return res\n",
+  "functionName": "calcEquation",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ],
+        [
+          2.0,
+          3.0
+        ],
+        [
+          [
+            "a",
+            "c"
+          ],
+          [
+            "b",
+            "a"
+          ],
+          [
+            "a",
+            "e"
+          ],
+          [
+            "a",
+            "a"
+          ],
+          [
+            "x",
+            "x"
+          ]
+        ]
+      ],
+      "expected": [
+        6.0,
+        0.5,
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "inputDisplay": "args=[[['a', 'b'], ['b', 'c']], [2.0, 3.0], [['a', 'c'], ['b', 'a'], ['a', 'e'],",
+      "expectedDisplay": "[6.0, 0.5, -1.0, 1.0, -1.0]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Model as a weighted directed graph where edge (u, v) has weight w and edge (v, u) has weight 1/w. Use BFS."
+  ],
+  "python": {
+    "starterCode": "def calcEquation(equations: list[list[str]], values: list[float], queries: list[list[str]]) -> list[float]:\n    pass\n",
+    "solutionCode": "def calcEquation(equations: list[list[str]], values: list[float], queries: list[list[str]]) -> list[float]:\n    from collections import defaultdict, deque\n    graph = defaultdict(dict)\n    for (u, v), val in zip(equations, values):\n        graph[u][v] = val\n        graph[v][u] = 1.0 / val\n    res = []\n    for u, v in queries:\n        if u not in graph or v not in graph:\n            res.append(-1.0)\n            continue\n        if u == v:\n            res.append(1.0)\n            continue\n        q = deque([(u, 1.0)])\n        visited = set([u])\n        ans = -1.0\n        while q:\n            curr, prod = q.popleft()\n            if curr == v:\n                ans = prod\n                break\n            for nxt, weight in graph[curr].items():\n                if nxt not in visited:\n                    visited.add(nxt)\n                    q.append((nxt, prod * weight))\n        res.append(ans)\n    return res\n"
+  },
+  "leetcodeId": 399,
+  "leetcodeTitle": "Evaluate Division (Weighted Directed Graph)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-evaluate-division/"
+}

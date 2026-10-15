@@ -1,0 +1,78 @@
+{
+  "id": "graph-m-similar-string-groups",
+  "wingId": "graphs",
+  "floor": 362,
+  "title": "Similar String Groups (Connected Components)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-similar-string-groups",
+    "name": "Anagram Specter",
+    "title": "Consolidator of 2-Swap Permutations",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#6366f1",
+    "attackName": "Permute Pulse",
+    "attackPower": 2,
+    "defeatQuote": "Equivalence groups of strings reachable via 2-char swaps determined!"
+  },
+  "description": "Two strings `X` and `Y` are similar if we can swap two letters (in different positions) of `X`, so that it equals `Y`. We are given a list `strs` of strings where every string is an anagram of every other string. Return the number of groups of similar strings.",
+  "examples": [
+    {
+      "input": "strs = [\"tars\",\"rats\",\"arts\",\"star\"]",
+      "output": "2"
+    },
+    {
+      "input": "strs = [\"omv\",\"ovm\"]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= strs.length <= 300",
+    "1 <= strs[i].length <= 300"
+  ],
+  "starterCode": "def numSimilarGroups(strs: list[str]) -> int:\n    pass\n",
+  "solutionCode": "def numSimilarGroups(strs: list[str]) -> int:\n    n = len(strs)\n    parent = list(range(n))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    def is_similar(s1, s2):\n        diff = 0\n        for c1, c2 in zip(s1, s2):\n            if c1 != c2:\n                diff += 1\n                if diff > 2: return False\n        return diff == 0 or diff == 2\n    for i in range(n):\n        for j in range(i + 1, n):\n            if is_similar(strs[i], strs[j]):\n                parent[find(i)] = find(j)\n    return len({find(i) for i in range(n)})\n",
+  "functionName": "numSimilarGroups",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "tars",
+          "rats",
+          "arts",
+          "star"
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "['tars', 'rats', 'arts', 'star']",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "omv",
+          "ovm"
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "['omv', 'ovm']",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Two anagrams are similar if their Hamming distance is 0 or 2. Connect and count DSU components."
+  ],
+  "python": {
+    "starterCode": "def numSimilarGroups(strs: list[str]) -> int:\n    pass\n",
+    "solutionCode": "def numSimilarGroups(strs: list[str]) -> int:\n    n = len(strs)\n    parent = list(range(n))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    def is_similar(s1, s2):\n        diff = 0\n        for c1, c2 in zip(s1, s2):\n            if c1 != c2:\n                diff += 1\n                if diff > 2: return False\n        return diff == 0 or diff == 2\n    for i in range(n):\n        for j in range(i + 1, n):\n            if is_similar(strs[i], strs[j]):\n                parent[find(i)] = find(j)\n    return len({find(i) for i in range(n)})\n"
+  },
+  "leetcodeId": 839,
+  "leetcodeTitle": "Similar String Groups (Connected Components)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-similar-string-groups/"
+}

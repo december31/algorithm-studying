@@ -30,7 +30,9 @@ export type DungeonTopic =
   | 'backtracking'
   | 'graphs'
   | 'binary-search-greedy'
-  | 'bit-manipulation';
+  | 'bit-manipulation'
+  | 'security-sectors-trial'
+  | 'maximum-parentheses-trial';
 
 export interface DungeonWing {
   id: DungeonTopic;
@@ -41,6 +43,9 @@ export interface DungeonWing {
   floorsCount: number;
   unlocked: boolean;
   color: string;
+  badge?: string;
+  isSpecialTrial?: boolean;
+  steps?: string[];
 }
 
 export interface CombatLog {

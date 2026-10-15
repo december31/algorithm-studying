@@ -1,0 +1,90 @@
+{
+  "id": "ds-m-reorganize-string",
+  "wingId": "data-structures",
+  "floor": 129,
+  "title": "Reorganize String (No Adjacent Equal)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-reorganize-string",
+    "name": "Alternating Drake",
+    "title": "Enforcer of Non-Repeating Breaths",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#14b8a6",
+    "attackName": "Alternating Fire",
+    "attackPower": 2,
+    "defeatQuote": "Your max-heap interleaved my characters without repetition!"
+  },
+  "description": "Given a string `s`, rearrange the characters of `s` so that any two adjacent characters are not the same. Return any possible rearrangement of `s` or return `\"\"` if not possible.",
+  "examples": [
+    {
+      "input": "s = \"aab\"",
+      "output": "\"aba\""
+    },
+    {
+      "input": "s = \"aaab\"",
+      "output": "\"\""
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 500",
+    "s consists of lowercase English letters"
+  ],
+  "starterCode": "def reorganizeString(s: str) -> str:\n    pass\n",
+  "solutionCode": "def reorganizeString(s: str) -> str:\n    import heapq\n    from collections import Counter\n    counts = Counter(s)\n    max_freq = max(counts.values())\n    if max_freq > (len(s) + 1) // 2:\n        return \"\"\n    heap = [(-count, ch) for ch, count in counts.items()]\n    heapq.heapify(heap)\n    res = []\n    prev_cnt, prev_ch = 0, ''\n    while heap:\n        cnt, ch = heapq.heappop(heap)\n        res.append(ch)\n        if prev_cnt < 0:\n            heapq.heappush(heap, (prev_cnt, prev_ch))\n        prev_cnt = cnt + 1\n        prev_ch = ch\n    return ''.join(res)\n",
+  "functionName": "reorganizeString",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "aab"
+      ],
+      "expected": "aba",
+      "inputDisplay": "aab",
+      "expectedDisplay": "aba",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "aaab"
+      ],
+      "expected": "",
+      "inputDisplay": "aaab",
+      "expectedDisplay": "",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "vvvlo"
+      ],
+      "expected": "vlvov",
+      "inputDisplay": "vvvlo",
+      "expectedDisplay": "vlvov",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "a"
+      ],
+      "expected": "a",
+      "inputDisplay": "a",
+      "expectedDisplay": "a",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use a max-heap of character frequencies, pulling the top two alternating."
+  ],
+  "python": {
+    "starterCode": "def reorganizeString(s: str) -> str:\n    pass\n",
+    "solutionCode": "def reorganizeString(s: str) -> str:\n    import heapq\n    from collections import Counter\n    counts = Counter(s)\n    max_freq = max(counts.values())\n    if max_freq > (len(s) + 1) // 2:\n        return \"\"\n    heap = [(-count, ch) for ch, count in counts.items()]\n    heapq.heapify(heap)\n    res = []\n    prev_cnt, prev_ch = 0, ''\n    while heap:\n        cnt, ch = heapq.heappop(heap)\n        res.append(ch)\n        if prev_cnt < 0:\n            heapq.heappush(heap, (prev_cnt, prev_ch))\n        prev_cnt = cnt + 1\n        prev_ch = ch\n    return ''.join(res)\n"
+  },
+  "leetcodeId": 767,
+  "leetcodeTitle": "Reorganize String (No Adjacent Equal)",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-reorganize-string/"
+}

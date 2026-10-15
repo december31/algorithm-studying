@@ -1,0 +1,120 @@
+{
+  "id": "bt-m-combination-sum",
+  "wingId": "backtracking",
+  "floor": 216,
+  "title": "Combination Sum (Unlimited Reuse)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-combination-sum",
+    "name": "Sum Titan",
+    "title": "Pounder of Target Coin Allocations",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Coin Stomp",
+    "attackPower": 2,
+    "defeatQuote": "Unbounded candidate reuse achieved the target sum!"
+  },
+  "description": "Given an array of distinct integers `candidates` and a target integer `target`, return a list of all unique combinations of `candidates` where the chosen numbers sum to `target`. The same number may be chosen unlimited times.",
+  "examples": [
+    {
+      "input": "candidates = [2,3,6,7], target = 7",
+      "output": "[[2,2,3],[7]]"
+    },
+    {
+      "input": "candidates = [2,3,5], target = 8",
+      "output": "[[2,2,2,2],[2,3,3],[3,5]]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(candidates) <= 30",
+    "2 <= candidates[i] <= 40",
+    "1 <= target <= 40"
+  ],
+  "starterCode": "def combinationSum(candidates: list[int], target: int) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def combinationSum(candidates: list[int], target: int) -> list[list[int]]:\n    candidates.sort()\n    res = []\n    def backtrack(idx, rem, path):\n        if rem == 0:\n            res.append(list(path))\n            return\n        for i in range(idx, len(candidates)):\n            if candidates[i] > rem: break\n            path.append(candidates[i])\n            backtrack(i, rem - candidates[i], path)\n            path.pop()\n    backtrack(0, target, [])\n    return res\n",
+  "functionName": "combinationSum",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          6,
+          7
+        ],
+        7
+      ],
+      "expected": [
+        [
+          2,
+          2,
+          3
+        ],
+        [
+          7
+        ]
+      ],
+      "inputDisplay": "args=[[2, 3, 6, 7], 7]",
+      "expectedDisplay": "[[2, 2, 3], [7]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          3,
+          5
+        ],
+        8
+      ],
+      "expected": [
+        [
+          2,
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          3,
+          3
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "inputDisplay": "args=[[2, 3, 5], 8]",
+      "expectedDisplay": "[[2, 2, 2, 2], [2, 3, 3], [3, 5]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          2
+        ],
+        1
+      ],
+      "expected": [],
+      "inputDisplay": "args=[[2], 1]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Since candidates can be reused, recursive call passes i instead of i + 1."
+  ],
+  "python": {
+    "starterCode": "def combinationSum(candidates: list[int], target: int) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def combinationSum(candidates: list[int], target: int) -> list[list[int]]:\n    candidates.sort()\n    res = []\n    def backtrack(idx, rem, path):\n        if rem == 0:\n            res.append(list(path))\n            return\n        for i in range(idx, len(candidates)):\n            if candidates[i] > rem: break\n            path.append(candidates[i])\n            backtrack(i, rem - candidates[i], path)\n            path.pop()\n    backtrack(0, target, [])\n    return res\n"
+  },
+  "leetcodeId": 39,
+  "leetcodeTitle": "Combination Sum (Unlimited Reuse)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-combination-sum/"
+}

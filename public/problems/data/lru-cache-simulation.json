@@ -28,8 +28,8 @@
     "1 <= cap <= 1000",
     "1 <= ops.length <= 10^4"
   ],
-  "starterCode": "function getLruOrder(ops, cap) {\n  return [];\n}",
-  "solutionCode": "function getLruOrder(ops, cap) {\n  const map = new Map();\n  for (const item of ops) {\n    if (map.has(item)) {\n      map.delete(item);\n    } else if (map.size >= cap) {\n      const oldest = map.keys().next().value;\n      map.delete(oldest);\n    }\n    map.set(item, true);\n  }\n  return Array.from(map.keys()).reverse();\n}",
+  "starterCode": "def getLruOrder(ops, cap):\n    return []\n",
+  "solutionCode": "def getLruOrder(ops, cap):\n    cache = {}\n    for item in ops:\n        if item in cache:\n            del cache[item]\n        elif len(cache) >= cap:\n            oldest = next(iter(cache))\n            del cache[oldest]\n        cache[item] = True\n    return list(reversed(list(cache.keys())))\n",
   "functionName": "getLruOrder",
   "testCases": [
     {

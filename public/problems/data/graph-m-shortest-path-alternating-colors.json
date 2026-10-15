@@ -1,0 +1,126 @@
+{
+  "id": "graph-m-shortest-path-alternating-colors",
+  "wingId": "graphs",
+  "floor": 367,
+  "title": "Shortest Path with Alternating Colors",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-shortest-path-alternating-colors",
+    "name": "Bicolor Sphinx",
+    "title": "Guardian of Alternating Rainbow Gates",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "sphinx",
+    "color": "#ec4899",
+    "attackName": "Prismatic Flux",
+    "attackPower": 2,
+    "defeatQuote": "Shortest red-blue alternating step paths to every node mapped!"
+  },
+  "description": "You are given an integer `n`, the number of nodes in a directed graph. There are `redEdges` and `blueEdges`. Return an array `answer` of length `n`, where `answer[x]` is the length of the shortest path from node 0 to node `x` such that the edge colors alternate, or -1 if no such path exists.",
+  "examples": [
+    {
+      "input": "n = 3, redEdges = [[0,1],[1,2]], blueEdges = []",
+      "output": "[0,1,-1]"
+    },
+    {
+      "input": "n = 3, redEdges = [[0,1]], blueEdges = [[2,1]]",
+      "output": "[0,1,-1]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 100"
+  ],
+  "starterCode": "def shortestAlternatingPaths(n: int, redEdges: list[list[int]], blueEdges: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def shortestAlternatingPaths(n: int, redEdges: list[list[int]], blueEdges: list[list[int]]) -> list[int]:\n    from collections import defaultdict, deque\n    adj = {0: defaultdict(list), 1: defaultdict(list)}\n    for u, v in redEdges: adj[0][u].append(v)\n    for u, v in blueEdges: adj[1][u].append(v)\n    dist = [[float('inf'), float('inf')] for _ in range(n)]\n    dist[0][0] = dist[0][1] = 0\n    q = deque([(0, 0, 0), (0, 1, 0)])  # (u, last_color, steps)\n    while q:\n        u, color, d = q.popleft()\n        next_color = 1 - color\n        for v in adj[next_color][u]:\n            if d + 1 < dist[v][next_color]:\n                dist[v][next_color] = d + 1\n                q.append((v, next_color, d + 1))\n    res = []\n    for i in range(n):\n        m = min(dist[i][0], dist[i][1])\n        res.append(m if m != float('inf') else -1)\n    return res\n",
+  "functionName": "shortestAlternatingPaths",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        []
+      ],
+      "expected": [
+        0,
+        1,
+        -1
+      ],
+      "inputDisplay": "args=[3, [[0, 1], [1, 2]], []]",
+      "expectedDisplay": "[0, 1, -1]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            2,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        -1
+      ],
+      "inputDisplay": "args=[3, [[0, 1]], [[2, 1]]]",
+      "expectedDisplay": "[0, 1, -1]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "inputDisplay": "args=[3, [[0, 1]], [[1, 2]]]",
+      "expectedDisplay": "[0, 1, 2]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "BFS state is (node, last_edge_color). Explore edges of the opposite color."
+  ],
+  "python": {
+    "starterCode": "def shortestAlternatingPaths(n: int, redEdges: list[list[int]], blueEdges: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def shortestAlternatingPaths(n: int, redEdges: list[list[int]], blueEdges: list[list[int]]) -> list[int]:\n    from collections import defaultdict, deque\n    adj = {0: defaultdict(list), 1: defaultdict(list)}\n    for u, v in redEdges: adj[0][u].append(v)\n    for u, v in blueEdges: adj[1][u].append(v)\n    dist = [[float('inf'), float('inf')] for _ in range(n)]\n    dist[0][0] = dist[0][1] = 0\n    q = deque([(0, 0, 0), (0, 1, 0)])  # (u, last_color, steps)\n    while q:\n        u, color, d = q.popleft()\n        next_color = 1 - color\n        for v in adj[next_color][u]:\n            if d + 1 < dist[v][next_color]:\n                dist[v][next_color] = d + 1\n                q.append((v, next_color, d + 1))\n    res = []\n    for i in range(n):\n        m = min(dist[i][0], dist[i][1])\n        res.append(m if m != float('inf') else -1)\n    return res\n"
+  },
+  "leetcodeId": 1129,
+  "leetcodeTitle": "Shortest Path with Alternating Colors",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-shortest-path-alternating-colors/"
+}

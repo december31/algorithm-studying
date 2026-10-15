@@ -1,0 +1,106 @@
+{
+  "id": "graph-m-number-closed-islands",
+  "wingId": "graphs",
+  "floor": 339,
+  "title": "Number of Closed Islands",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-number-closed-islands",
+    "name": "Cavern Wraith",
+    "title": "Dweller of Landlocked Grottos",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#10b981",
+    "attackName": "Subterranean Seal",
+    "attackPower": 2,
+    "defeatQuote": "Completely landlocked 0-islands isolated and counted!"
+  },
+  "description": "Given a 2D `grid` consists of 0s (land) and 1s (water). An island is a maximal 4-directionally connected group of 0s and a closed island is an island totally surrounded by 1s (not touching grid boundaries). Return the number of closed islands.",
+  "examples": [
+    {
+      "input": "grid = [[1,1,1,1,1,1,1,0],[1,0,0,0,0,1,1,0],[1,0,1,0,1,1,1,0],[1,0,0,0,0,1,0,1],[1,1,1,1,1,1,1,0]]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= grid.length, grid[0].length <= 100"
+  ],
+  "starterCode": "def closedIsland(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def closedIsland(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    def dfs(r, c):\n        if r < 0 or r >= R or c < 0 or c >= C:\n            return False\n        if grid[r][c] == 1:\n            return True\n        grid[r][c] = 1\n        d1 = dfs(r + 1, c)\n        d2 = dfs(r - 1, c)\n        d3 = dfs(r, c + 1)\n        d4 = dfs(r, c - 1)\n        return d1 and d2 and d3 and d4\n    ans = 0\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == 0:\n                if dfs(r, c): ans += 1\n    return ans\n",
+  "functionName": "closedIsland",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            1,
+            0,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[[1, 1, 1, 1, 1, 1, 1, 0], [1, 0, 0, 0, 0, 1, 1, 0], [1, 0, 1, 0, 1, 1, 1, 0], [",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Flood fill each component of 0s. If any cell touches the boundary, it is not closed."
+  ],
+  "python": {
+    "starterCode": "def closedIsland(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def closedIsland(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    def dfs(r, c):\n        if r < 0 or r >= R or c < 0 or c >= C:\n            return False\n        if grid[r][c] == 1:\n            return True\n        grid[r][c] = 1\n        d1 = dfs(r + 1, c)\n        d2 = dfs(r - 1, c)\n        d3 = dfs(r, c + 1)\n        d4 = dfs(r, c - 1)\n        return d1 and d2 and d3 and d4\n    ans = 0\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == 0:\n                if dfs(r, c): ans += 1\n    return ans\n"
+  },
+  "leetcodeId": 1254,
+  "leetcodeTitle": "Number of Closed Islands",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-number-closed-islands/"
+}

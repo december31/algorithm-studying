@@ -1,0 +1,94 @@
+{
+  "id": "graph-h-sort-items-by-groups",
+  "wingId": "graphs",
+  "floor": 382,
+  "title": "Sort Items by Groups Respecting Dependencies",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-h-sort-items-by-groups",
+    "name": "Hierarchical Archon",
+    "title": "Master of Two-Tier Topological Ordering",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#ec4899",
+    "attackName": "Two-Tier Decree",
+    "attackPower": 3,
+    "defeatQuote": "Nested group-item dependencies resolved topologically!"
+  },
+  "description": "There are `n` items each belonging to zero or one of `m` groups. Items that belong to the same group should be adjacent in the sorted array. Dependencies are specified by `beforeItems`. Return a sorted list of items such that all conditions are met, or `[]` if impossible.",
+  "examples": [
+    {
+      "input": "n = 8, m = 2, group = [-1,-1,1,0,0,1,0,-1], beforeItems = [[],[6],[5],[6],[3,6],[],[],[]]",
+      "output": "[6,3,4,1,5,2,0,7]"
+    }
+  ],
+  "constraints": [
+    "1 <= m <= n <= 30000"
+  ],
+  "starterCode": "def sortItems(n: int, m: int, group: list[int], beforeItems: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def sortItems(n: int, m: int, group: list[int], beforeItems: list[list[int]]) -> list[int]:\n    from collections import defaultdict, deque\n    # Assign lone items their own unique group\n    next_group = m\n    for i in range(n):\n        if group[i] == -1:\n            group[i] = next_group\n            next_group += 1\n    item_adj = defaultdict(list)\n    item_in = [0] * n\n    group_adj = defaultdict(set)\n    group_in = [0] * next_group\n    for u in range(n):\n        for v in beforeItems[u]:\n            item_adj[v].append(u)\n            item_in[u] += 1\n            if group[u] != group[v]:\n                if group[u] not in group_adj[group[v]]:\n                    group_adj[group[v]].add(group[u])\n                    group_in[group[u]] += 1\n    def topo(nodes, adj, in_deg):\n        q = deque([x for x in nodes if in_deg[x] == 0])\n        res = []\n        while q:\n            curr = q.popleft()\n            res.append(curr)\n            for nxt in adj[curr]:\n                in_deg[nxt] -= 1\n                if in_deg[nxt] == 0: q.append(nxt)\n        return res if len(res) == len(nodes) else []\n    sorted_groups = topo(list(range(next_group)), group_adj, group_in)\n    sorted_items = topo(list(range(n)), item_adj, item_in)\n    if not sorted_groups or not sorted_items: return []\n    group_to_items = defaultdict(list)\n    for item in sorted_items:\n        group_to_items[group[item]].append(item)\n    res = []\n    for g in sorted_groups:\n        res.extend(group_to_items[g])\n    return res\n",
+  "functionName": "sortItems",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        8,
+        2,
+        [
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          -1
+        ],
+        [
+          [],
+          [
+            6
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [],
+          [],
+          []
+        ]
+      ],
+      "expected": [
+        6,
+        3,
+        4,
+        5,
+        2,
+        0,
+        7,
+        1
+      ],
+      "inputDisplay": "args=[8, 2, [-1, -1, 1, 0, 0, 1, 0, -1], [[], [6], [5], [6], [3, 6], [], [], []]",
+      "expectedDisplay": "[6, 3, 4, 5, 2, 0, 7, 1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Two-level topological sort: first sort groups, then sort items within each group."
+  ],
+  "python": {
+    "starterCode": "def sortItems(n: int, m: int, group: list[int], beforeItems: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def sortItems(n: int, m: int, group: list[int], beforeItems: list[list[int]]) -> list[int]:\n    from collections import defaultdict, deque\n    # Assign lone items their own unique group\n    next_group = m\n    for i in range(n):\n        if group[i] == -1:\n            group[i] = next_group\n            next_group += 1\n    item_adj = defaultdict(list)\n    item_in = [0] * n\n    group_adj = defaultdict(set)\n    group_in = [0] * next_group\n    for u in range(n):\n        for v in beforeItems[u]:\n            item_adj[v].append(u)\n            item_in[u] += 1\n            if group[u] != group[v]:\n                if group[u] not in group_adj[group[v]]:\n                    group_adj[group[v]].add(group[u])\n                    group_in[group[u]] += 1\n    def topo(nodes, adj, in_deg):\n        q = deque([x for x in nodes if in_deg[x] == 0])\n        res = []\n        while q:\n            curr = q.popleft()\n            res.append(curr)\n            for nxt in adj[curr]:\n                in_deg[nxt] -= 1\n                if in_deg[nxt] == 0: q.append(nxt)\n        return res if len(res) == len(nodes) else []\n    sorted_groups = topo(list(range(next_group)), group_adj, group_in)\n    sorted_items = topo(list(range(n)), item_adj, item_in)\n    if not sorted_groups or not sorted_items: return []\n    group_to_items = defaultdict(list)\n    for item in sorted_items:\n        group_to_items[group[item]].append(item)\n    res = []\n    for g in sorted_groups:\n        res.extend(group_to_items[g])\n    return res\n"
+  },
+  "leetcodeId": 1203,
+  "leetcodeTitle": "Sort Items by Groups Respecting Dependencies",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-sort-items-by-groups/"
+}

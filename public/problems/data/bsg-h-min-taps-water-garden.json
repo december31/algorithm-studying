@@ -1,0 +1,84 @@
+{
+  "id": "bsg-h-min-taps-water-garden",
+  "wingId": "binary-search-greedy",
+  "floor": 493,
+  "title": "Minimum Taps to Water Garden",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-min-taps-water-garden",
+    "name": "Hydration Titan",
+    "title": "Opener of Spanning Irrigation Taps",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "titan",
+    "color": "#38bdf8",
+    "attackName": "Hydro Cannon",
+    "attackPower": 3,
+    "defeatQuote": "Minimum taps opened to irrigate garden interval [0, n]!"
+  },
+  "description": "There is a 1D garden on the x-axis from 0 to `n`. There are `n + 1` taps at points `[0, 1, ..., n]`. The `i`-th tap can water `[i - ranges[i], i + ranges[i]]`. Return the minimum number of taps to water the whole garden, or -1 if impossible.",
+  "examples": [
+    {
+      "input": "n = 5, ranges = [3,4,1,1,0,0]",
+      "output": "1"
+    },
+    {
+      "input": "n = 3, ranges = [0,0,0,0]",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 10000",
+    "ranges.length == n + 1"
+  ],
+  "starterCode": "def minTaps(n: int, ranges: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minTaps(n: int, ranges: list[int]) -> int:\n    max_reach = [0] * (n + 1)\n    for i, r in enumerate(ranges):\n        left = max(0, i - r)\n        right = min(n, i + r)\n        max_reach[left] = max(max_reach[left], right)\n    curr_end = farthest = taps = 0\n    for i in range(n):\n        farthest = max(farthest, max_reach[i])\n        if i == curr_end:\n            taps += 1\n            curr_end = farthest\n            if curr_end <= i: return -1\n    return taps\n",
+  "functionName": "minTaps",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        5,
+        [
+          3,
+          4,
+          1,
+          1,
+          0,
+          0
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[5, [3, 4, 1, 1, 0, 0]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[3, [0, 0, 0, 0]]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Convert each tap to interval [left, right], track max_reach[left] = right, then run Jump Game II."
+  ],
+  "python": {
+    "starterCode": "def minTaps(n: int, ranges: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minTaps(n: int, ranges: list[int]) -> int:\n    max_reach = [0] * (n + 1)\n    for i, r in enumerate(ranges):\n        left = max(0, i - r)\n        right = min(n, i + r)\n        max_reach[left] = max(max_reach[left], right)\n    curr_end = farthest = taps = 0\n    for i in range(n):\n        farthest = max(farthest, max_reach[i])\n        if i == curr_end:\n            taps += 1\n            curr_end = farthest\n            if curr_end <= i: return -1\n    return taps\n"
+  },
+  "leetcodeId": 1326,
+  "leetcodeTitle": "Minimum Taps to Water Garden",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-min-taps-water-garden/"
+}

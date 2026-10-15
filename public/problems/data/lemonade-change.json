@@ -32,8 +32,8 @@
     "1 <= bills.length <= 10^5",
     "bills[i] is either 5, 10, or 20."
   ],
-  "starterCode": "function lemonadeChange(bills) {\n  return true;\n}",
-  "solutionCode": "function lemonadeChange(bills) {\n  let five = 0, ten = 0;\n  for (const b of bills) {\n    if (b === 5) {\n      five++;\n    } else if (b === 10) {\n      if (five === 0) return false;\n      five--;\n      ten++;\n    } else {\n      // $20 bill: prefer giving $10 + $5 over 3x $5\n      if (ten > 0 && five > 0) {\n        ten--;\n        five--;\n      } else if (five >= 3) {\n        five -= 3;\n      } else {\n        return false;\n      }\n    }\n  }\n  return true;\n}",
+  "starterCode": "def lemonadeChange(bills):\n    return True\n",
+  "solutionCode": "def lemonadeChange(bills):\n    five, ten = 0, 0\n    for b in bills:\n        if b == 5:\n            five += 1\n        elif b == 10:\n            if five == 0:\n                return False\n            five -= 1\n            ten += 1\n        else:\n            if ten > 0 and five > 0:\n                ten -= 1\n                five -= 1\n            elif five >= 3:\n                five -= 3\n            else:\n                return False\n    return True\n",
   "functionName": "lemonadeChange",
   "testCases": [
     {

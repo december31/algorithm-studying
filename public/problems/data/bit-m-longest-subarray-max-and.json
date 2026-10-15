@@ -1,0 +1,81 @@
+{
+  "id": "bit-m-longest-subarray-max-and",
+  "wingId": "bit-manipulation",
+  "floor": 538,
+  "title": "Longest Subarray with Maximum Bitwise AND",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-longest-subarray-max-and",
+    "name": "AND Peak Fiend",
+    "title": "Seeker of Max Contiguous Value Runs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#f59e0b",
+    "attackName": "Max AND Stride",
+    "attackPower": 2,
+    "defeatQuote": "Longest contiguous run of the maximum array value found!"
+  },
+  "description": "Given an integer array `nums`. Consider the maximum possible bitwise AND of a subarray of `nums`. Return the length of the longest subarray that has this maximum bitwise AND.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,3,2,2]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [1,2,3,4]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 100000"
+  ],
+  "starterCode": "def longestSubarray(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def longestSubarray(nums: list[int]) -> int:\n    max_val = max(nums)\n    max_len = curr_len = 0\n    for x in nums:\n        if x == max_val:\n            curr_len += 1\n            max_len = max(max_len, curr_len)\n        else:\n            curr_len = 0\n    return max_len\n",
+  "functionName": "longestSubarray",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          3,
+          2,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 2, 3, 3, 2, 2]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1, 2, 3, 4]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "The maximum possible bitwise AND of any subarray is simply max(nums). Find the longest consecutive run of max(nums)."
+  ],
+  "python": {
+    "starterCode": "def longestSubarray(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def longestSubarray(nums: list[int]) -> int:\n    max_val = max(nums)\n    max_len = curr_len = 0\n    for x in nums:\n        if x == max_val:\n            curr_len += 1\n            max_len = max(max_len, curr_len)\n        else:\n            curr_len = 0\n    return max_len\n"
+  },
+  "leetcodeId": 2419,
+  "leetcodeTitle": "Longest Subarray with Maximum Bitwise AND",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-longest-subarray-max-and/"
+}

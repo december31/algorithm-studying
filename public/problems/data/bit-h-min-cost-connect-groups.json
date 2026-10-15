@@ -1,0 +1,96 @@
+{
+  "id": "bit-h-min-cost-connect-groups",
+  "wingId": "bit-manipulation",
+  "floor": 577,
+  "title": "Minimum Cost to Connect Two Groups",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-bit-h-min-cost-connect-groups",
+    "name": "Bipartite Bridge Giant",
+    "title": "Binder of Disconnected Realities",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#10b981",
+    "attackName": "Group Tether",
+    "attackPower": 3,
+    "defeatQuote": "Every point on both sides must be bound to at least one counterpart!"
+  },
+  "description": "You are given two groups of points: group 1 with `sz1` points and group 2 with `sz2` points (`sz1 >= sz2`). `cost[i][j]` is the cost of connecting point `i` of group 1 to point `j` of group 2. Every point in both groups must be connected to at least one point in the other group. Return the minimum cost to achieve this.",
+  "examples": [
+    {
+      "input": "cost = [[15,96],[36,2]]",
+      "output": "17"
+    },
+    {
+      "input": "cost = [[1,3,5],[4,1,1],[1,5,3]]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= sz1 <= 12",
+    "1 <= sz2 <= 12",
+    "1 <= cost[i][j] <= 100"
+  ],
+  "starterCode": "def connectTwoGroups(cost: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def connectTwoGroups(cost: list[list[int]]) -> int:\n    sz1 = len(cost)\n    sz2 = len(cost[0])\n    min_group2 = [min(cost[i][j] for i in range(sz1)) for j in range(sz2)]\n    memo = {}\n    def dp(i, mask):\n        state = (i, mask)\n        if state in memo: return memo[state]\n        if i == sz1:\n            ans = 0\n            for j in range(sz2):\n                if not (mask & (1 << j)):\n                    ans += min_group2[j]\n            return ans\n        res = float('inf')\n        for j in range(sz2):\n            res = min(res, cost[i][j] + dp(i + 1, mask | (1 << j)))\n        memo[state] = res\n        return res\n    return dp(0, 0)\n",
+  "functionName": "connectTwoGroups",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            15,
+            96
+          ],
+          [
+            36,
+            2
+          ]
+        ]
+      ],
+      "expected": 17,
+      "inputDisplay": "[[15, 96], [36, 2]]",
+      "expectedDisplay": "17",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            4,
+            1,
+            1
+          ],
+          [
+            1,
+            5,
+            3
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1, 3, 5], [4, 1, 1], [1, 5, 3]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use DP dp(i, mask) where i is group 1 index and mask is group 2 visited nodes. When i reaches sz1, add min connecting cost for remaining unvisited group 2 nodes."
+  ],
+  "python": {
+    "starterCode": "def connectTwoGroups(cost: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def connectTwoGroups(cost: list[list[int]]) -> int:\n    sz1 = len(cost)\n    sz2 = len(cost[0])\n    min_group2 = [min(cost[i][j] for i in range(sz1)) for j in range(sz2)]\n    memo = {}\n    def dp(i, mask):\n        state = (i, mask)\n        if state in memo: return memo[state]\n        if i == sz1:\n            ans = 0\n            for j in range(sz2):\n                if not (mask & (1 << j)):\n                    ans += min_group2[j]\n            return ans\n        res = float('inf')\n        for j in range(sz2):\n            res = min(res, cost[i][j] + dp(i + 1, mask | (1 << j)))\n        memo[state] = res\n        return res\n    return dp(0, 0)\n"
+  },
+  "leetcodeId": 1595,
+  "leetcodeTitle": "Minimum Cost to Connect Two Groups",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-min-cost-connect-groups/"
+}

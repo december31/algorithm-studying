@@ -1,0 +1,123 @@
+{
+  "id": "graph-m-all-ancestors-dag",
+  "wingId": "graphs",
+  "floor": 364,
+  "title": "All Ancestors of Each Node in DAG",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-all-ancestors-dag",
+    "name": "Ancestral Spirit",
+    "title": "Keeper of Lineage Trees",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Lineage Echo",
+    "attackPower": 2,
+    "defeatQuote": "Full list of sorted ancestor nodes for every DAG vertex established!"
+  },
+  "description": "You are given a positive integer `n` representing the number of nodes of a Directed Acyclic Graph (DAG) labeled from 0 to `n - 1`. You are also given a 2D integer array `edges` where `edges[i] = [fromi, toi]`. Return a list `answer` of size `n`, where `answer[i]` is the list of ancestors of the `i`-th node, sorted in ascending order.",
+  "examples": [
+    {
+      "input": "n = 8, edges = [[0,3],[0,4],[1,3],[2,4],[2,7],[3,5],[3,6],[3,7],[4,6]]",
+      "output": "[[],[],[],[0,1],[0,2],[0,1,3],[0,1,2,3,4],[0,1,2,3]]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 1000"
+  ],
+  "starterCode": "def getAncestors(n: int, edges: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def getAncestors(n: int, edges: list[list[int]]) -> list[list[int]]:\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in edges:\n        adj[u].append(v)\n    ans = [[] for _ in range(n)]\n    def dfs(curr, ancestor, visited):\n        for nxt in adj[curr]:\n            if nxt not in visited:\n                visited.add(nxt)\n                ans[nxt].append(ancestor)\n                dfs(nxt, ancestor, visited)\n    for i in range(n):\n        dfs(i, i, set())\n    return [sorted(anc) for anc in ans]\n",
+  "functionName": "getAncestors",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        8,
+        [
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ]
+        ]
+      ],
+      "expected": [
+        [],
+        [],
+        [],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "inputDisplay": "args=[8, [[0, 3], [0, 4], [1, 3], [2, 4], [2, 7], [3, 5], [3, 6], [3, 7], [4, 6]",
+      "expectedDisplay": "[[], [], [], [0, 1], [0, 2], [0, 1, 3], [0, 1, 2, 3, 4], [0, 1, 2, 3]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Run DFS from each node i to mark i as an ancestor for all reachable descendants."
+  ],
+  "python": {
+    "starterCode": "def getAncestors(n: int, edges: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def getAncestors(n: int, edges: list[list[int]]) -> list[list[int]]:\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in edges:\n        adj[u].append(v)\n    ans = [[] for _ in range(n)]\n    def dfs(curr, ancestor, visited):\n        for nxt in adj[curr]:\n            if nxt not in visited:\n                visited.add(nxt)\n                ans[nxt].append(ancestor)\n                dfs(nxt, ancestor, visited)\n    for i in range(n):\n        dfs(i, i, set())\n    return [sorted(anc) for anc in ans]\n"
+  },
+  "leetcodeId": 2192,
+  "leetcodeTitle": "All Ancestors of Each Node in DAG",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-all-ancestors-dag/"
+}

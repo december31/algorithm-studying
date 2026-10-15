@@ -1,0 +1,121 @@
+{
+  "id": "ds-m-asteroid-collision",
+  "wingId": "data-structures",
+  "floor": 120,
+  "title": "Asteroid Collision Simulation",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-asteroid-collision",
+    "name": "Cosmic Crusher",
+    "title": "Smasher of Orbiting Debris",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#e11d48",
+    "attackName": "Meteor Crash",
+    "attackPower": 2,
+    "defeatQuote": "My colliding rocks pulverized themselves on your stack!"
+  },
+  "description": "We are given an array `asteroids` of integers representing asteroids in a row. The absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). If two asteroids meet, the smaller one explodes. If both are the same size, both explode. Two asteroids moving in the same direction will never meet. Return the state of the asteroids after all collisions.",
+  "examples": [
+    {
+      "input": "asteroids = [5,10,-5]",
+      "output": "[5,10]"
+    },
+    {
+      "input": "asteroids = [8,-8]",
+      "output": "[]"
+    },
+    {
+      "input": "asteroids = [10,2,-5]",
+      "output": "[10]"
+    }
+  ],
+  "constraints": [
+    "2 <= len(asteroids) <= 10^4",
+    "-1000 <= asteroids[i] <= 1000",
+    "asteroids[i] != 0"
+  ],
+  "starterCode": "def asteroidCollision(asteroids: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def asteroidCollision(asteroids: list[int]) -> list[int]:\n    stack = []\n    for ast in asteroids:\n        alive = True\n        while alive and ast < 0 and stack and stack[-1] > 0:\n            if stack[-1] < -ast:\n                stack.pop()\n            elif stack[-1] == -ast:\n                stack.pop()\n                alive = False\n            else:\n                alive = False\n        if alive:\n            stack.append(ast)\n    return stack\n",
+  "functionName": "asteroidCollision",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          5,
+          10,
+          -5
+        ]
+      ],
+      "expected": [
+        5,
+        10
+      ],
+      "inputDisplay": "[5, 10, -5]",
+      "expectedDisplay": "[5, 10]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          8,
+          -8
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "[8, -8]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          10,
+          2,
+          -5
+        ]
+      ],
+      "expected": [
+        10
+      ],
+      "inputDisplay": "[10, 2, -5]",
+      "expectedDisplay": "[10]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          -2,
+          -1,
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        -2,
+        -1,
+        1,
+        2
+      ],
+      "inputDisplay": "[-2, -1, 1, 2]",
+      "expectedDisplay": "[-2, -1, 1, 2]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use a stack to simulate collisions between right-moving and left-moving asteroids."
+  ],
+  "python": {
+    "starterCode": "def asteroidCollision(asteroids: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def asteroidCollision(asteroids: list[int]) -> list[int]:\n    stack = []\n    for ast in asteroids:\n        alive = True\n        while alive and ast < 0 and stack and stack[-1] > 0:\n            if stack[-1] < -ast:\n                stack.pop()\n            elif stack[-1] == -ast:\n                stack.pop()\n                alive = False\n            else:\n                alive = False\n        if alive:\n            stack.append(ast)\n    return stack\n"
+  },
+  "leetcodeId": 735,
+  "leetcodeTitle": "Asteroid Collision Simulation",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-asteroid-collision/"
+}

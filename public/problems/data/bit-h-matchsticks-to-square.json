@@ -1,0 +1,82 @@
+{
+  "id": "bit-h-matchsticks-to-square",
+  "wingId": "bit-manipulation",
+  "floor": 595,
+  "title": "Matchsticks to Square",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-matchsticks-to-square",
+    "name": "Quadrilateral Pyromancer",
+    "title": "Architect of Four Identical Edges",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#ef4444",
+    "attackName": "Square Flame Wall",
+    "attackPower": 3,
+    "defeatQuote": "Every stick must be consumed to forge four sides of exact equal measure!"
+  },
+  "description": "You are given an integer array `matchsticks` where `matchsticks[i]` is the length of the `i-th` matchstick. You want to use all the matchsticks to make one square. You should not break any stick, but you can link them up, and each matchstick must be used exactly once. Return `True` if you can make this square and `False` otherwise.",
+  "examples": [
+    {
+      "input": "matchsticks = [1,1,2,2,2]",
+      "output": "True"
+    },
+    {
+      "input": "matchsticks = [3,3,3,3,4]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= matchsticks.length <= 15",
+    "1 <= matchsticks[i] <= 10^8"
+  ],
+  "starterCode": "def makesquare(matchsticks: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def makesquare(matchsticks: list[int]) -> bool:\n    total = sum(matchsticks)\n    if total % 4 != 0: return False\n    side = total // 4\n    matchsticks.sort(reverse=True)\n    if matchsticks[0] > side: return False\n    sides = [0] * 4\n    def backtrack(idx):\n        if idx == len(matchsticks):\n            return True\n        for i in range(4):\n            if sides[i] + matchsticks[idx] <= side:\n                sides[i] += matchsticks[idx]\n                if backtrack(idx + 1): return True\n                sides[i] -= matchsticks[idx]\n            if sides[i] == 0: break\n        return False\n    return backtrack(0)\n",
+  "functionName": "makesquare",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          1,
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1, 1, 2, 2, 2]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          3,
+          3,
+          3,
+          4
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[3, 3, 3, 3, 4]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Total sum must be divisible by 4. Sort matchsticks descending and use backtracking with early pruning on empty sides."
+  ],
+  "python": {
+    "starterCode": "def makesquare(matchsticks: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def makesquare(matchsticks: list[int]) -> bool:\n    total = sum(matchsticks)\n    if total % 4 != 0: return False\n    side = total // 4\n    matchsticks.sort(reverse=True)\n    if matchsticks[0] > side: return False\n    sides = [0] * 4\n    def backtrack(idx):\n        if idx == len(matchsticks):\n            return True\n        for i in range(4):\n            if sides[i] + matchsticks[idx] <= side:\n                sides[i] += matchsticks[idx]\n                if backtrack(idx + 1): return True\n                sides[i] -= matchsticks[idx]\n            if sides[i] == 0: break\n        return False\n    return backtrack(0)\n"
+  },
+  "leetcodeId": 473,
+  "leetcodeTitle": "Matchsticks to Square",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-matchsticks-to-square/"
+}

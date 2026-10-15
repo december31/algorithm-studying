@@ -1,0 +1,95 @@
+{
+  "id": "graph-e-has-self-loop",
+  "wingId": "graphs",
+  "floor": 307,
+  "title": "Detect Self-Loops in Directed Graph",
+  "difficulty": "easy",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-e-has-self-loop",
+    "name": "Ouroboros Worm",
+    "title": "Devourer of Its Own Tail",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "skeleton",
+    "color": "#ef4444",
+    "attackName": "Loop Fang",
+    "attackPower": 1,
+    "defeatQuote": "Self-directed edge (u, u) found!"
+  },
+  "description": "Given a list of directed `edges` where each edge is represented as `[u, v]`, return `True` if any edge forms a self-loop (an edge connecting a vertex to itself), or `False` otherwise.",
+  "examples": [
+    {
+      "input": "edges = [[0,1],[1,2],[2,2]]",
+      "output": "True"
+    },
+    {
+      "input": "edges = [[0,1],[1,2],[2,0]]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= edges.length <= 1000"
+  ],
+  "starterCode": "def hasSelfLoop(edges: list[list[int]]) -> bool:\n    pass\n",
+  "solutionCode": "def hasSelfLoop(edges: list[list[int]]) -> bool:\n    return any(u == v for u, v in edges)\n",
+  "functionName": "hasSelfLoop",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[[0, 1], [1, 2], [2, 2]]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            0
+          ]
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[[0, 1], [1, 2], [2, 0]]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "A self loop simply means u == v in edge [u, v]."
+  ],
+  "python": {
+    "starterCode": "def hasSelfLoop(edges: list[list[int]]) -> bool:\n    pass\n",
+    "solutionCode": "def hasSelfLoop(edges: list[list[int]]) -> bool:\n    return any(u == v for u, v in edges)\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "Detect Self-Loops in Directed Graph",
+  "leetcodeUrl": null
+}

@@ -1,0 +1,91 @@
+{
+  "id": "bt-h-expression-add-operators",
+  "wingId": "backtracking",
+  "floor": 279,
+  "title": "Expression Add Operators",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-expression-add-operators",
+    "name": "Arithmetical Arch-Lich",
+    "title": "Injector of Precedence Glyphs",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#8b5cf6",
+    "attackName": "Precedence Beam",
+    "attackPower": 3,
+    "defeatQuote": "Multiplication precedence tracking evaluated target expressions!"
+  },
+  "description": "Given a string `num` that contains only digits and an integer `target`, return all possibilities to insert binary operators `'+'`, `'-'`, and/or `'*'` between the digits of `num` so that the resultant expression evaluates to the `target` value in sorted order.",
+  "examples": [
+    {
+      "input": "num = \"123\", target = 6",
+      "output": "[\"1*2*3\",\"1+2+3\"]"
+    },
+    {
+      "input": "num = \"232\", target = 8",
+      "output": "[\"2*3+2\",\"2+3*2\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(num) <= 10"
+  ],
+  "starterCode": "def addOperators(num: str, target: int) -> list[str]:\n    pass\n",
+  "solutionCode": "def addOperators(num: str, target: int) -> list[str]:\n    res = []\n    def backtrack(idx, prev_val, curr_val, path):\n        if idx == len(num):\n            if curr_val == target:\n                res.append(path)\n            return\n        for j in range(idx + 1, len(num) + 1):\n            if j > idx + 1 and num[idx] == '0': break\n            sub = num[idx:j]\n            val = int(sub)\n            if idx == 0:\n                backtrack(j, val, val, sub)\n            else:\n                backtrack(j, val, curr_val + val, path + '+' + sub)\n                backtrack(j, -val, curr_val - val, path + '-' + sub)\n                backtrack(j, prev_val * val, curr_val - prev_val + prev_val * val, path + '*' + sub)\n    backtrack(0, 0, 0, '')\n    return sorted(res)\n",
+  "functionName": "addOperators",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "123",
+        6
+      ],
+      "expected": [
+        "1*2*3",
+        "1+2+3"
+      ],
+      "inputDisplay": "args=['123', 6]",
+      "expectedDisplay": "['1*2*3', '1+2+3']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "232",
+        8
+      ],
+      "expected": [
+        "2*3+2",
+        "2+3*2"
+      ],
+      "inputDisplay": "args=['232', 8]",
+      "expectedDisplay": "['2*3+2', '2+3*2']",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "105",
+        5
+      ],
+      "expected": [
+        "1*0+5",
+        "10-5"
+      ],
+      "inputDisplay": "args=['105', 5]",
+      "expectedDisplay": "['1*0+5', '10-5']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "To handle multiplication precedence, pass prev_val and update curr_val - prev_val + prev_val * val."
+  ],
+  "python": {
+    "starterCode": "def addOperators(num: str, target: int) -> list[str]:\n    pass\n",
+    "solutionCode": "def addOperators(num: str, target: int) -> list[str]:\n    res = []\n    def backtrack(idx, prev_val, curr_val, path):\n        if idx == len(num):\n            if curr_val == target:\n                res.append(path)\n            return\n        for j in range(idx + 1, len(num) + 1):\n            if j > idx + 1 and num[idx] == '0': break\n            sub = num[idx:j]\n            val = int(sub)\n            if idx == 0:\n                backtrack(j, val, val, sub)\n            else:\n                backtrack(j, val, curr_val + val, path + '+' + sub)\n                backtrack(j, -val, curr_val - val, path + '-' + sub)\n                backtrack(j, prev_val * val, curr_val - prev_val + prev_val * val, path + '*' + sub)\n    backtrack(0, 0, 0, '')\n    return sorted(res)\n"
+  },
+  "leetcodeId": 282,
+  "leetcodeTitle": "Expression Add Operators",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-expression-add-operators/"
+}

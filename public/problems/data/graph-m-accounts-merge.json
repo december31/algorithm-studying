@@ -1,0 +1,89 @@
+{
+  "id": "graph-m-accounts-merge",
+  "wingId": "graphs",
+  "floor": 347,
+  "title": "Accounts Merge (Email Graph Components)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-accounts-merge",
+    "name": "Identity Chimera",
+    "title": "Consolidator of Alias Personas",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "manticore",
+    "color": "#ec4899",
+    "attackName": "Alias Union",
+    "attackPower": 2,
+    "defeatQuote": "All connected email aliases merged under unified account names!"
+  },
+  "description": "Given a list of `accounts` where each element `accounts[i]` is a list of strings, where the first element `accounts[i][0]` is a name, and the rest of the elements are emails representing emails of the account. Two accounts belong to the same person if there is some common email. Merge the accounts: each merged account will have the name followed by sorted emails.",
+  "examples": [
+    {
+      "input": "accounts = [[\"John\",\"johnsmith@mail.com\",\"john_newyork@mail.com\"],[\"John\",\"johnsmith@mail.com\",\"john00@mail.com\"],[\"Mary\",\"mary@mail.com\"],[\"John\",\"johnnybravo@mail.com\"]]",
+      "output": "[[\"John\",\"john00@mail.com\",\"john_newyork@mail.com\",\"johnsmith@mail.com\"],[\"Mary\",\"mary@mail.com\"],[\"John\",\"johnnybravo@mail.com\"]]"
+    }
+  ],
+  "constraints": [
+    "1 <= accounts.length <= 1000"
+  ],
+  "starterCode": "def accountsMerge(accounts: list[list[str]]) -> list[list[str]]:\n    pass\n",
+  "solutionCode": "def accountsMerge(accounts: list[list[str]]) -> list[list[str]]:\n    from collections import defaultdict\n    parent = {}\n    email_to_name = {}\n    def find(x):\n        if parent[x] == x: return x\n        parent[x] = find(parent[x])\n        return parent[x]\n    for acc in accounts:\n        name = acc[0]\n        first_email = acc[1]\n        for email in acc[1:]:\n            if email not in parent: parent[email] = email\n            email_to_name[email] = name\n            parent[find(email)] = find(first_email)\n    groups = defaultdict(list)\n    for email in parent:\n        groups[find(email)].append(email)\n    res = []\n    for root, emails in groups.items():\n        res.append([email_to_name[root]] + sorted(emails))\n    return sorted(res)\n",
+  "functionName": "accountsMerge",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "John",
+            "johnsmith@mail.com",
+            "john_newyork@mail.com"
+          ],
+          [
+            "John",
+            "johnsmith@mail.com",
+            "john00@mail.com"
+          ],
+          [
+            "Mary",
+            "mary@mail.com"
+          ],
+          [
+            "John",
+            "johnnybravo@mail.com"
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          "John",
+          "john00@mail.com",
+          "john_newyork@mail.com",
+          "johnsmith@mail.com"
+        ],
+        [
+          "John",
+          "johnnybravo@mail.com"
+        ],
+        [
+          "Mary",
+          "mary@mail.com"
+        ]
+      ],
+      "inputDisplay": "[['John', 'johnsmith@mail.com', 'john_newyork@mail.com'], ['John', 'johnsmith@ma",
+      "expectedDisplay": "[['John', 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com'], ['J",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Union emails within each account. Group all emails by set representative."
+  ],
+  "python": {
+    "starterCode": "def accountsMerge(accounts: list[list[str]]) -> list[list[str]]:\n    pass\n",
+    "solutionCode": "def accountsMerge(accounts: list[list[str]]) -> list[list[str]]:\n    from collections import defaultdict\n    parent = {}\n    email_to_name = {}\n    def find(x):\n        if parent[x] == x: return x\n        parent[x] = find(parent[x])\n        return parent[x]\n    for acc in accounts:\n        name = acc[0]\n        first_email = acc[1]\n        for email in acc[1:]:\n            if email not in parent: parent[email] = email\n            email_to_name[email] = name\n            parent[find(email)] = find(first_email)\n    groups = defaultdict(list)\n    for email in parent:\n        groups[find(email)].append(email)\n    res = []\n    for root, emails in groups.items():\n        res.append([email_to_name[root]] + sorted(emails))\n    return sorted(res)\n"
+  },
+  "leetcodeId": 721,
+  "leetcodeTitle": "Accounts Merge (Email Graph Components)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-accounts-merge/"
+}

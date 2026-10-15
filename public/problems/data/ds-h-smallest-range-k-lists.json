@@ -1,0 +1,113 @@
+{
+  "id": "ds-h-smallest-range-k-lists",
+  "wingId": "data-structures",
+  "floor": 181,
+  "title": "Smallest Range from K Lists",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-h-smallest-range-k-lists",
+    "name": "Span Strangler",
+    "title": "Compressor of Multi-Stream Intervals",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Tight Span",
+    "attackPower": 3,
+    "defeatQuote": "Min-heap sliding window found the minimal spanning interval!"
+  },
+  "description": "You have `k` lists of sorted integers in non-decreasing order. Find the smallest range `[a, b]` that includes at least one number from each of the `k` lists.",
+  "examples": [
+    {
+      "input": "nums = [[4,10,15,24,26],[0,9,12,20],[5,18,22,30]]",
+      "output": "[20,24]"
+    },
+    {
+      "input": "nums = [[1,2,3],[1,2,3],[1,2,3]]",
+      "output": "[1,1]"
+    }
+  ],
+  "constraints": [
+    "nums.length == k",
+    "1 <= k <= 3500",
+    "1 <= len(nums[i]) <= 50"
+  ],
+  "starterCode": "def smallestRangeKLists(nums: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def smallestRangeKLists(nums: list[list[int]]) -> list[int]:\n    import heapq\n    heap = []\n    curr_max = float('-inf')\n    for i, lst in enumerate(nums):\n        heapq.heappush(heap, (lst[0], i, 0))\n        curr_max = max(curr_max, lst[0])\n    best_range = [heap[0][0], curr_max]\n    while True:\n        val, list_idx, elem_idx = heapq.heappop(heap)\n        if curr_max - val < best_range[1] - best_range[0]:\n            best_range = [val, curr_max]\n        if elem_idx + 1 == len(nums[list_idx]):\n            break\n        next_val = nums[list_idx][elem_idx + 1]\n        heapq.heappush(heap, (next_val, list_idx, elem_idx + 1))\n        curr_max = max(curr_max, next_val)\n    return best_range\n",
+  "functionName": "smallestRangeKLists",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            4,
+            10,
+            15,
+            24,
+            26
+          ],
+          [
+            0,
+            9,
+            12,
+            20
+          ],
+          [
+            5,
+            18,
+            22,
+            30
+          ]
+        ]
+      ],
+      "expected": [
+        20,
+        24
+      ],
+      "inputDisplay": "[[4, 10, 15, 24, 26], [0, 9, 12, 20], [5, 18, 22, 30]]",
+      "expectedDisplay": "[20, 24]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        1
+      ],
+      "inputDisplay": "[[1, 2, 3], [1, 2, 3], [1, 2, 3]]",
+      "expectedDisplay": "[1, 1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Min-heap tracks current minimum among current pointers while a variable tracks current maximum."
+  ],
+  "python": {
+    "starterCode": "def smallestRangeKLists(nums: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def smallestRangeKLists(nums: list[list[int]]) -> list[int]:\n    import heapq\n    heap = []\n    curr_max = float('-inf')\n    for i, lst in enumerate(nums):\n        heapq.heappush(heap, (lst[0], i, 0))\n        curr_max = max(curr_max, lst[0])\n    best_range = [heap[0][0], curr_max]\n    while True:\n        val, list_idx, elem_idx = heapq.heappop(heap)\n        if curr_max - val < best_range[1] - best_range[0]:\n            best_range = [val, curr_max]\n        if elem_idx + 1 == len(nums[list_idx]):\n            break\n        next_val = nums[list_idx][elem_idx + 1]\n        heapq.heappush(heap, (next_val, list_idx, elem_idx + 1))\n        curr_max = max(curr_max, next_val)\n    return best_range\n"
+  },
+  "leetcodeId": 632,
+  "leetcodeTitle": "Smallest Range from K Lists",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-smallest-range-k-lists/"
+}

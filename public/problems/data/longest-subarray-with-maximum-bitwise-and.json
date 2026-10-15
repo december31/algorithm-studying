@@ -32,8 +32,8 @@
     "1 <= nums.length <= 10^5",
     "1 <= nums[i] <= 10^6"
   ],
-  "starterCode": "function longestSubarray(nums) {\n  return 0;\n}",
-  "solutionCode": "function longestSubarray(nums) {\n  const maxVal = Math.max(...nums);\n  let maxLen = 0;\n  let currentLen = 0;\n  for (const n of nums) {\n    if (n === maxVal) {\n      currentLen++;\n      maxLen = Math.max(maxLen, currentLen);\n    } else {\n      currentLen = 0;\n    }\n  }\n  return maxLen;\n}",
+  "starterCode": "def longestSubarray(nums):\n    return 0\n",
+  "solutionCode": "def longestSubarray(nums):\n    max_val = max(nums)\n    max_len = 0\n    curr_len = 0\n    for n in nums:\n        if n == max_val:\n            curr_len += 1\n            max_len = max(max_len, curr_len)\n        else:\n            curr_len = 0\n    return max_len\n",
   "functionName": "longestSubarray",
   "testCases": [
     {

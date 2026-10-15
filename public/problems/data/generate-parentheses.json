@@ -31,8 +31,8 @@
   "constraints": [
     "1 <= n <= 8"
   ],
-  "starterCode": "function generateParenthesis(n) {\n  return [];\n}",
-  "solutionCode": "function generateParenthesis(n) {\n  const result = [];\n  function backtrack(open, close, current) {\n    if (current.length === 2 * n) {\n      result.push(current);\n      return;\n    }\n    if (open < n) backtrack(open + 1, close, current + '(');\n    if (close < open) backtrack(open, close + 1, current + ')');\n  }\n  backtrack(0, 0, '');\n  return result;\n}",
+  "starterCode": "def generateParenthesis(n):\n    return []\n",
+  "solutionCode": "def generateParenthesis(n):\n    res = []\n    def backtrack(open_c, close_c, curr):\n        if len(curr) == 2 * n:\n            res.append(curr)\n            return\n        if open_c < n:\n            backtrack(open_c + 1, close_c, curr + \"(\")\n        if close_c < open_c:\n            backtrack(open_c, close_c + 1, curr + \")\")\n    backtrack(0, 0, \"\")\n    return res\n",
   "functionName": "generateParenthesis",
   "testCases": [
     {

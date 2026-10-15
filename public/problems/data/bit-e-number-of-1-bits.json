@@ -1,0 +1,83 @@
+{
+  "id": "bit-e-number-of-1-bits",
+  "wingId": "bit-manipulation",
+  "floor": 502,
+  "title": "Number of 1 Bits (Hamming Weight)",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-e-number-of-1-bits",
+    "name": "Binary Imp",
+    "title": "Counter of Set Bits",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "imp",
+    "color": "#10b981",
+    "attackName": "Bit Spark",
+    "attackPower": 1,
+    "defeatQuote": "Hamming weight (number of set 1-bits) computed!"
+  },
+  "description": "Write a function that takes the binary representation of a positive integer and returns the number of set bits it has (also known as the Hamming weight).",
+  "examples": [
+    {
+      "input": "n = 11",
+      "output": "3"
+    },
+    {
+      "input": "n = 128",
+      "output": "1"
+    },
+    {
+      "input": "n = 2147483645",
+      "output": "30"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 2^31 - 1"
+  ],
+  "starterCode": "def hammingWeight(n: int) -> int:\n    pass\n",
+  "solutionCode": "def hammingWeight(n: int) -> int:\n    count = 0\n    while n > 0:\n        n &= (n - 1)\n        count += 1\n    return count\n",
+  "functionName": "hammingWeight",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        11
+      ],
+      "expected": 3,
+      "inputDisplay": "11",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        128
+      ],
+      "expected": 1,
+      "inputDisplay": "128",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        2147483645
+      ],
+      "expected": 30,
+      "inputDisplay": "2147483645",
+      "expectedDisplay": "30",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Brian Kernighan's trick: `n &= (n - 1)` clears the lowest set bit in O(1)."
+  ],
+  "python": {
+    "starterCode": "def hammingWeight(n: int) -> int:\n    pass\n",
+    "solutionCode": "def hammingWeight(n: int) -> int:\n    count = 0\n    while n > 0:\n        n &= (n - 1)\n        count += 1\n    return count\n"
+  },
+  "leetcodeId": 191,
+  "leetcodeTitle": "Number of 1 Bits (Hamming Weight)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-e-number-of-1-bits/"
+}

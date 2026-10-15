@@ -1,0 +1,137 @@
+{
+  "id": "bsg-m-min-swaps-binary-grid",
+  "wingId": "binary-search-greedy",
+  "floor": 492,
+  "title": "Minimum Swaps to Arrange Binary Grid",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-bsg-m-min-swaps-binary-grid",
+    "name": "Matrix Rotator",
+    "title": "Bubbler of Upper-Triangular Rows",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#06b6d4",
+    "attackName": "Row Inversion",
+    "attackPower": 3,
+    "defeatQuote": "Minimum adjacent row swaps to form all-zero upper triangular matrix!"
+  },
+  "description": "Given an `n x n` binary `grid`, in one step you can choose two adjacent rows of the grid and swap them. A grid is said to be valid if all the cells above the main diagonal are zeros. Return the minimum number of steps needed to make the grid valid, or -1 if impossible.",
+  "examples": [
+    {
+      "input": "grid = [[0,0,1],[1,1,0],[1,0,0]]",
+      "output": "3"
+    },
+    {
+      "input": "grid = [[0,1,1,0],[0,1,1,0],[0,1,1,0],[0,1,1,0]]",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "n == grid.length",
+    "1 <= n <= 200"
+  ],
+  "starterCode": "def minSwaps(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minSwaps(grid: list[list[int]]) -> int:\n    n = len(grid)\n    trailing_zeros = []\n    for row in grid:\n        count = 0\n        for val in reversed(row):\n            if val == 0: count += 1\n            else: break\n        trailing_zeros.append(count)\n    swaps = 0\n    for i in range(n):\n        req = n - 1 - i\n        found = -1\n        for j in range(i, n):\n            if trailing_zeros[j] >= req:\n                found = j\n                break\n        if found == -1: return -1\n        swaps += found - i\n        val = trailing_zeros.pop(found)\n        trailing_zeros.insert(i, val)\n    return swaps\n",
+  "functionName": "minSwaps",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[[0, 0, 1], [1, 1, 0], [1, 0, 0]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "[[0, 1, 1, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 1, 1, 0]]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[[1, 0, 0], [1, 1, 0], [1, 1, 1]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Compute trailing zeroes per row. Row i requires >= n - 1 - i trailing zeroes. Greedily bubble the first qualifying row upwards."
+  ],
+  "python": {
+    "starterCode": "def minSwaps(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minSwaps(grid: list[list[int]]) -> int:\n    n = len(grid)\n    trailing_zeros = []\n    for row in grid:\n        count = 0\n        for val in reversed(row):\n            if val == 0: count += 1\n            else: break\n        trailing_zeros.append(count)\n    swaps = 0\n    for i in range(n):\n        req = n - 1 - i\n        found = -1\n        for j in range(i, n):\n            if trailing_zeros[j] >= req:\n                found = j\n                break\n        if found == -1: return -1\n        swaps += found - i\n        val = trailing_zeros.pop(found)\n        trailing_zeros.insert(i, val)\n    return swaps\n"
+  },
+  "leetcodeId": 1536,
+  "leetcodeTitle": "Minimum Swaps to Arrange Binary Grid",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-min-swaps-binary-grid/"
+}

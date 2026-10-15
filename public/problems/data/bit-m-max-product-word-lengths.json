@@ -1,0 +1,104 @@
+{
+  "id": "bit-m-max-product-word-lengths",
+  "wingId": "bit-manipulation",
+  "floor": 517,
+  "title": "Max Product of Word Lengths",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-max-product-word-lengths",
+    "name": "Lexical Mask Sphinx",
+    "title": "Tester of Disjoint Alphabet Sets",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "sphinx",
+    "color": "#06b6d4",
+    "attackName": "Disjoint Flare",
+    "attackPower": 2,
+    "defeatQuote": "Maximum length product of two words sharing no common letters!"
+  },
+  "description": "Given a string array `words`, return the maximum value of `length(word[i]) * length(word[j])` where the two words do not share common letters. If no such two words exist, return 0.",
+  "examples": [
+    {
+      "input": "words = [\"abcw\",\"baz\",\"foo\",\"bar\",\"xtfn\",\"abcdef\"]",
+      "output": "16"
+    },
+    {
+      "input": "words = [\"a\",\"ab\",\"abc\",\"d\",\"cd\",\"bcd\",\"abcd\"]",
+      "output": "4"
+    },
+    {
+      "input": "words = [\"a\",\"aa\",\"aaa\",\"aaaa\"]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "2 <= words.length <= 1000",
+    "1 <= words[i].length <= 1000"
+  ],
+  "starterCode": "def maxProduct(words: list[str]) -> int:\n    pass\n",
+  "solutionCode": "def maxProduct(words: list[str]) -> int:\n    masks = {}\n    for w in words:\n        mask = 0\n        for c in w: mask |= (1 << (ord(c) - ord('a')))\n        masks[mask] = max(masks.get(mask, 0), len(w))\n    max_prod = 0\n    for m1, len1 in masks.items():\n        for m2, len2 in masks.items():\n            if (m1 & m2) == 0:\n                max_prod = max(max_prod, len1 * len2)\n    return max_prod\n",
+  "functionName": "maxProduct",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "abcw",
+          "baz",
+          "foo",
+          "bar",
+          "xtfn",
+          "abcdef"
+        ]
+      ],
+      "expected": 16,
+      "inputDisplay": "['abcw', 'baz', 'foo', 'bar', 'xtfn', 'abcdef']",
+      "expectedDisplay": "16",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "a",
+          "ab",
+          "abc",
+          "d",
+          "cd",
+          "bcd",
+          "abcd"
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "['a', 'ab', 'abc', 'd', 'cd', 'bcd', 'abcd']",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "a",
+          "aa",
+          "aaa",
+          "aaaa"
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "['a', 'aa', 'aaa', 'aaaa']",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Encode character sets of each word as a 26-bit bitmask. Two words are disjoint if mask1 & mask2 == 0."
+  ],
+  "python": {
+    "starterCode": "def maxProduct(words: list[str]) -> int:\n    pass\n",
+    "solutionCode": "def maxProduct(words: list[str]) -> int:\n    masks = {}\n    for w in words:\n        mask = 0\n        for c in w: mask |= (1 << (ord(c) - ord('a')))\n        masks[mask] = max(masks.get(mask, 0), len(w))\n    max_prod = 0\n    for m1, len1 in masks.items():\n        for m2, len2 in masks.items():\n            if (m1 & m2) == 0:\n                max_prod = max(max_prod, len1 * len2)\n    return max_prod\n"
+  },
+  "leetcodeId": 318,
+  "leetcodeTitle": "Max Product of Word Lengths",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-max-product-word-lengths/"
+}

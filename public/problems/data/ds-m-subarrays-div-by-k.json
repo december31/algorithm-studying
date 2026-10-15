@@ -1,0 +1,111 @@
+{
+  "id": "ds-m-subarrays-div-by-k",
+  "wingId": "data-structures",
+  "floor": 148,
+  "title": "Subarray Sums Divisible by K",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-subarrays-div-by-k",
+    "name": "Ring Divisor Demon",
+    "title": "Harvester of Exact Modular Cycles",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#8b5cf6",
+    "attackName": "Cycle Drain",
+    "attackPower": 2,
+    "defeatQuote": "Combinations of identical remainders summed up all divisible subarrays!"
+  },
+  "description": "Given an integer array `nums` and an integer `k`, return the number of non-empty subarrays that have a sum divisible by `k`.",
+  "examples": [
+    {
+      "input": "nums = [4,5,0,-2,-3,1], k = 5",
+      "output": "7"
+    },
+    {
+      "input": "nums = [5], k = 9",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 3 * 10^4",
+    "-10^4 <= nums[i] <= 10^4",
+    "2 <= k <= 10^4"
+  ],
+  "starterCode": "def subarraysDivByK(nums: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def subarraysDivByK(nums: list[int], k: int) -> int:\n    from collections import defaultdict\n    count = defaultdict(int)\n    count[0] = 1\n    curr = 0\n    ans = 0\n    for n in nums:\n        curr = (curr + n) % k\n        ans += count[curr]\n        count[curr] += 1\n    return ans\n",
+  "functionName": "subarraysDivByK",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          4,
+          5,
+          0,
+          -2,
+          -3,
+          1
+        ],
+        5
+      ],
+      "expected": 7,
+      "inputDisplay": "args=[[4, 5, 0, -2, -3, 1], 5]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5
+        ],
+        9
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[5], 9]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          -1,
+          2,
+          9
+        ],
+        2
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[-1, 2, 9], 2]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          0,
+          0
+        ],
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[0, 0], 3]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Keep a count of prefix sum remainders modulo k."
+  ],
+  "python": {
+    "starterCode": "def subarraysDivByK(nums: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def subarraysDivByK(nums: list[int], k: int) -> int:\n    from collections import defaultdict\n    count = defaultdict(int)\n    count[0] = 1\n    curr = 0\n    ans = 0\n    for n in nums:\n        curr = (curr + n) % k\n        ans += count[curr]\n        count[curr] += 1\n    return ans\n"
+  },
+  "leetcodeId": 974,
+  "leetcodeTitle": "Subarray Sums Divisible by K",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-subarrays-div-by-k/"
+}

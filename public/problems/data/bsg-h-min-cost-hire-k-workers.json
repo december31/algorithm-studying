@@ -1,0 +1,93 @@
+{
+  "id": "bsg-h-min-cost-hire-k-workers",
+  "wingId": "binary-search-greedy",
+  "floor": 483,
+  "title": "Min Cost to Hire K Workers (Ratio Sort + Heap)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-min-cost-hire-k-workers",
+    "name": "Guild Treasurer",
+    "title": "Equator of Proportional Wages",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#eab308",
+    "attackName": "Wage Equilibrium",
+    "attackPower": 3,
+    "defeatQuote": "Least total wage spent to hire k workers proportionally!"
+  },
+  "description": "There are `n` workers. Given `quality` and `wage`. You want to hire exactly `k` workers. Every worker must be paid at least their minimum wage expectation and in direct proportion to their quality. Return the least amount of money needed to form a paying group satisfying these conditions.",
+  "examples": [
+    {
+      "input": "quality = [10,20,5], wage = [70,50,30], k = 2",
+      "output": "105.0"
+    },
+    {
+      "input": "quality = [3,1,10,10,1], wage = [4,8,2,2,7], k = 3",
+      "output": "30.66667"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= quality.length == wage.length <= 10000"
+  ],
+  "starterCode": "def mincostToHireWorkers(quality: list[int], wage: list[int], k: int) -> float:\n    pass\n",
+  "solutionCode": "def mincostToHireWorkers(quality: list[int], wage: list[int], k: int) -> float:\n    import heapq\n    workers = sorted([(w / q, q) for w, q in zip(wage, quality)])\n    pq = []\n    sum_q = 0\n    min_cost = float('inf')\n    for ratio, q in workers:\n        heapq.heappush(pq, -q)\n        sum_q += q\n        if len(pq) > k:\n            sum_q += heapq.heappop(pq)\n        if len(pq) == k:\n            min_cost = min(min_cost, ratio * sum_q)\n    return round(min_cost, 5)\n",
+  "functionName": "mincostToHireWorkers",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          10,
+          20,
+          5
+        ],
+        [
+          70,
+          50,
+          30
+        ],
+        2
+      ],
+      "expected": 105.0,
+      "inputDisplay": "args=[[10, 20, 5], [70, 50, 30], 2]",
+      "expectedDisplay": "105.0",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          1,
+          10,
+          10,
+          1
+        ],
+        [
+          4,
+          8,
+          2,
+          2,
+          7
+        ],
+        3
+      ],
+      "expected": 30.66667,
+      "inputDisplay": "args=[[3, 1, 10, 10, 1], [4, 8, 2, 2, 7], 3]",
+      "expectedDisplay": "30.66667",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort by wage/quality ratio. The worker with the highest ratio sets the scale; choose k workers with lowest qualities using a max-heap."
+  ],
+  "python": {
+    "starterCode": "def mincostToHireWorkers(quality: list[int], wage: list[int], k: int) -> float:\n    pass\n",
+    "solutionCode": "def mincostToHireWorkers(quality: list[int], wage: list[int], k: int) -> float:\n    import heapq\n    workers = sorted([(w / q, q) for w, q in zip(wage, quality)])\n    pq = []\n    sum_q = 0\n    min_cost = float('inf')\n    for ratio, q in workers:\n        heapq.heappush(pq, -q)\n        sum_q += q\n        if len(pq) > k:\n            sum_q += heapq.heappop(pq)\n        if len(pq) == k:\n            min_cost = min(min_cost, ratio * sum_q)\n    return round(min_cost, 5)\n"
+  },
+  "leetcodeId": 857,
+  "leetcodeTitle": "Min Cost to Hire K Workers (Ratio Sort + Heap)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-min-cost-hire-k-workers/"
+}

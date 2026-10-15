@@ -1,0 +1,109 @@
+{
+  "id": "graph-m-jump-game-iii",
+  "wingId": "graphs",
+  "floor": 349,
+  "title": "Jump Game III (Reach Zero Value)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-graph-m-jump-game-iii",
+    "name": "Hopping Spectre",
+    "title": "Leaper of Symmetric Offsets",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#38bdf8",
+    "attackName": "Elastic Warp",
+    "attackPower": 2,
+    "defeatQuote": "Can an element of value 0 be reached via +/- arr[i] leaps?"
+  },
+  "description": "Given an array of non-negative integers `arr`, and you are initially positioned at `start` index of the array. When you are at index `i`, you can jump to `i + arr[i]` or `i - arr[i]`. Check if you can reach any index with the value 0.",
+  "examples": [
+    {
+      "input": "arr = [4,2,3,0,3,1,2], start = 5",
+      "output": "True"
+    },
+    {
+      "input": "arr = [4,2,3,0,3,1,2], start = 0",
+      "output": "True"
+    },
+    {
+      "input": "arr = [3,0,2,1,2], start = 2",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= arr.length <= 50000",
+    "0 <= start < arr.length"
+  ],
+  "starterCode": "def canReach(arr: list[int], start: int) -> bool:\n    pass\n",
+  "solutionCode": "def canReach(arr: list[int], start: int) -> bool:\n    from collections import deque\n    n = len(arr)\n    q = deque([start])\n    visited = {start}\n    while q:\n        curr = q.popleft()\n        if arr[curr] == 0: return True\n        for nxt in (curr + arr[curr], curr - arr[curr]):\n            if 0 <= nxt < n and nxt not in visited:\n                visited.add(nxt)\n                q.append(nxt)\n    return False\n",
+  "functionName": "canReach",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          4,
+          2,
+          3,
+          0,
+          3,
+          1,
+          2
+        ],
+        5
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[4, 2, 3, 0, 3, 1, 2], 5]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          4,
+          2,
+          3,
+          0,
+          3,
+          1,
+          2
+        ],
+        0
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[4, 2, 3, 0, 3, 1, 2], 0]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          3,
+          0,
+          2,
+          1,
+          2
+        ],
+        2
+      ],
+      "expected": false,
+      "inputDisplay": "args=[[3, 0, 2, 1, 2], 2]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Standard BFS/DFS on directed graph where each node i has edges to i + arr[i] and i - arr[i]."
+  ],
+  "python": {
+    "starterCode": "def canReach(arr: list[int], start: int) -> bool:\n    pass\n",
+    "solutionCode": "def canReach(arr: list[int], start: int) -> bool:\n    from collections import deque\n    n = len(arr)\n    q = deque([start])\n    visited = {start}\n    while q:\n        curr = q.popleft()\n        if arr[curr] == 0: return True\n        for nxt in (curr + arr[curr], curr - arr[curr]):\n            if 0 <= nxt < n and nxt not in visited:\n                visited.add(nxt)\n                q.append(nxt)\n    return False\n"
+  },
+  "leetcodeId": 1306,
+  "leetcodeTitle": "Jump Game III (Reach Zero Value)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-jump-game-iii/"
+}

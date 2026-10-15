@@ -32,8 +32,8 @@
     "1 <= heights.length <= 10^5",
     "0 <= heights[i] <= 10^4"
   ],
-  "starterCode": "function largestRectangleArea(heights) {\n  return 0;\n}",
-  "solutionCode": "function largestRectangleArea(heights) {\n  const stack = [];\n  let maxArea = 0;\n  const ext = [...heights, 0];\n  for (let i = 0; i < ext.length; i++) {\n    while (stack.length > 0 && ext[i] < ext[stack[stack.length - 1]]) {\n      const h = ext[stack.pop()];\n      const w = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;\n      maxArea = Math.max(maxArea, h * w);\n    }\n    stack.push(i);\n  }\n  return maxArea;\n}",
+  "starterCode": "def largestRectangleArea(heights):\n    return 0\n",
+  "solutionCode": "def largestRectangleArea(heights):\n    stack = []\n    max_area = 0\n    ext = heights + [0]\n    for i, h in enumerate(ext):\n        while stack and h < ext[stack[-1]]:\n            top_h = ext[stack.pop()]\n            w = i if not stack else i - stack[-1] - 1\n            max_area = max(max_area, top_h * w)\n        stack.append(i)\n    return max_area\n",
   "functionName": "largestRectangleArea",
   "testCases": [
     {

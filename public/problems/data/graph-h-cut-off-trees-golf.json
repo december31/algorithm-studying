@@ -1,0 +1,101 @@
+{
+  "id": "graph-h-cut-off-trees-golf",
+  "wingId": "graphs",
+  "floor": 377,
+  "title": "Cut Off Trees for Golf Event",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-h-cut-off-trees-golf",
+    "name": "Forest Golem",
+    "title": "Keeper of Ordered Timber",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#22c55e",
+    "attackName": "Lumber Quake",
+    "attackPower": 3,
+    "defeatQuote": "Minimum steps walking to cut trees in ascending height order!"
+  },
+  "description": "You are given an `m x n` grid of non-negative integers representing the coordinates of a forest: 0 is an obstacle, 1 is empty flat ground, values > 1 are trees with their height. You must cut down all trees in order from shortest to tallest, starting from (0, 0). Return the minimum steps you need to walk to cut off all trees, or -1 if impossible.",
+  "examples": [
+    {
+      "input": "forest = [[1,2,3],[0,0,4],[7,6,5]]",
+      "output": "6"
+    },
+    {
+      "input": "forest = [[1,2,3],[0,0,0],[7,6,5]]",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 50"
+  ],
+  "starterCode": "def cutOffTree(forest: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def cutOffTree(forest: list[list[int]]) -> int:\n    R, C = len(forest), len(forest[0])\n    trees = []\n    for r in range(R):\n        for c in range(C):\n            if forest[r][c] > 1:\n                trees.append((forest[r][c], r, c))\n    trees.sort()\n    from collections import deque\n    def bfs(sr, sc, tr, tc):\n        if sr == tr and sc == tc: return 0\n        q = deque([(sr, sc, 0)])\n        visited = {(sr, sc)}\n        while q:\n            r, c, d = q.popleft()\n            if r == tr and c == tc: return d\n            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n                nr, nc = r + dr, c + dc\n                if 0 <= nr < R and 0 <= nc < C and forest[nr][nc] != 0 and (nr, nc) not in visited:\n                    visited.add((nr, nc))\n                    q.append((nr, nc, d + 1))\n        return -1\n    curr_r, curr_c = 0, 0\n    total_steps = 0\n    for h, tr, tc in trees:\n        d = bfs(curr_r, curr_c, tr, tc)\n        if d == -1: return -1\n        total_steps += d\n        curr_r, curr_c = tr, tc\n    return total_steps\n",
+  "functionName": "cutOffTree",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            0,
+            4
+          ],
+          [
+            7,
+            6,
+            5
+          ]
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "[[1, 2, 3], [0, 0, 4], [7, 6, 5]]",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            7,
+            6,
+            5
+          ]
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "[[1, 2, 3], [0, 0, 0], [7, 6, 5]]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort trees by height. Run BFS between consecutive target trees to compute travel distances."
+  ],
+  "python": {
+    "starterCode": "def cutOffTree(forest: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def cutOffTree(forest: list[list[int]]) -> int:\n    R, C = len(forest), len(forest[0])\n    trees = []\n    for r in range(R):\n        for c in range(C):\n            if forest[r][c] > 1:\n                trees.append((forest[r][c], r, c))\n    trees.sort()\n    from collections import deque\n    def bfs(sr, sc, tr, tc):\n        if sr == tr and sc == tc: return 0\n        q = deque([(sr, sc, 0)])\n        visited = {(sr, sc)}\n        while q:\n            r, c, d = q.popleft()\n            if r == tr and c == tc: return d\n            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n                nr, nc = r + dr, c + dc\n                if 0 <= nr < R and 0 <= nc < C and forest[nr][nc] != 0 and (nr, nc) not in visited:\n                    visited.add((nr, nc))\n                    q.append((nr, nc, d + 1))\n        return -1\n    curr_r, curr_c = 0, 0\n    total_steps = 0\n    for h, tr, tc in trees:\n        d = bfs(curr_r, curr_c, tr, tc)\n        if d == -1: return -1\n        total_steps += d\n        curr_r, curr_c = tr, tc\n    return total_steps\n"
+  },
+  "leetcodeId": 675,
+  "leetcodeTitle": "Cut Off Trees for Golf Event",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-cut-off-trees-golf/"
+}

@@ -1,0 +1,80 @@
+{
+  "id": "bit-m-count-number-of-teams",
+  "wingId": "bit-manipulation",
+  "floor": 567,
+  "title": "Count Number of Teams (Binary Indexed Tree / Triplet)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-count-number-of-teams",
+    "name": "Regiment Archon",
+    "title": "Counter of Strictly Monotonic Trios",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "gargoyle",
+    "color": "#f59e0b",
+    "attackName": "Formation Surge",
+    "attackPower": 2,
+    "defeatQuote": "Triplets (i < j < k) where rating[i] < rating[j] < rating[k] (or reversed) counted!"
+  },
+  "description": "There are `n` soldiers standing in a line. Each soldier is assigned a unique `rating` value. A team of 3 soldiers `(i, j, k)` is valid if: `(rating[i] < rating[j] < rating[k])` or `(rating[i] > rating[j] > rating[k])` with `0 <= i < j < k < n`. Return the number of teams you can form.",
+  "examples": [
+    {
+      "input": "rating = [2,5,3,4,1]",
+      "output": "3"
+    },
+    {
+      "input": "rating = [2,1,3]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "n == rating.length",
+    "3 <= n <= 1000"
+  ],
+  "starterCode": "def numTeams(rating: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def numTeams(rating: list[int]) -> int:\n    n = len(rating)\n    ans = 0\n    for j in range(1, n - 1):\n        left_less = sum(1 for i in range(j) if rating[i] < rating[j])\n        left_greater = j - left_less\n        right_less = sum(1 for k in range(j + 1, n) if rating[k] < rating[j])\n        right_greater = (n - 1 - j) - right_less\n        ans += left_less * right_greater + left_greater * right_less\n    return ans\n",
+  "functionName": "numTeams",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          5,
+          3,
+          4,
+          1
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[2, 5, 3, 4, 1]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          1,
+          3
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[2, 1, 3]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Fix middle soldier j. Multiply counts of smaller on left by greater on right, and greater on left by smaller on right."
+  ],
+  "python": {
+    "starterCode": "def numTeams(rating: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def numTeams(rating: list[int]) -> int:\n    n = len(rating)\n    ans = 0\n    for j in range(1, n - 1):\n        left_less = sum(1 for i in range(j) if rating[i] < rating[j])\n        left_greater = j - left_less\n        right_less = sum(1 for k in range(j + 1, n) if rating[k] < rating[j])\n        right_greater = (n - 1 - j) - right_less\n        ans += left_less * right_greater + left_greater * right_less\n    return ans\n"
+  },
+  "leetcodeId": 1395,
+  "leetcodeTitle": "Count Number of Teams (Binary Indexed Tree / Triplet)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-count-number-of-teams/"
+}

@@ -1,0 +1,111 @@
+{
+  "id": "ds-h-first-missing-positive",
+  "wingId": "data-structures",
+  "floor": 176,
+  "title": "First Missing Positive (O(n) In-place)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-h-first-missing-positive",
+    "name": "Cyclic Inversion Wraith",
+    "title": "Hider of the Smallest Omitted Positive",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Omission Curse",
+    "attackPower": 3,
+    "defeatQuote": "Cyclic indexing placed every positive integer at index val - 1!"
+  },
+  "description": "Given an unsorted integer array `nums`, return the smallest positive integer that is not present in `nums`. You must implement an algorithm that runs in O(n) time and uses O(1) auxiliary space.",
+  "examples": [
+    {
+      "input": "nums = [1,2,0]",
+      "output": "3"
+    },
+    {
+      "input": "nums = [3,4,-1,1]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [7,8,9,11,12]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 10^5",
+    "-2^31 <= nums[i] <= 2^31 - 1"
+  ],
+  "starterCode": "def firstMissingPositive(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def firstMissingPositive(nums: list[int]) -> int:\n    n = len(nums)\n    for i in range(n):\n        while 1 <= nums[i] <= n and nums[nums[i] - 1] != nums[i]:\n            target = nums[i] - 1\n            nums[i], nums[target] = nums[target], nums[i]\n    for i in range(n):\n        if nums[i] != i + 1:\n            return i + 1\n    return n + 1\n",
+  "functionName": "firstMissingPositive",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[1, 2, 0]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          4,
+          -1,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[3, 4, -1, 1]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          7,
+          8,
+          9,
+          11,
+          12
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[7, 8, 9, 11, 12]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "2",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Cyclic sort: put each number x into nums[x - 1] if 1 <= x <= n."
+  ],
+  "python": {
+    "starterCode": "def firstMissingPositive(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def firstMissingPositive(nums: list[int]) -> int:\n    n = len(nums)\n    for i in range(n):\n        while 1 <= nums[i] <= n and nums[nums[i] - 1] != nums[i]:\n            target = nums[i] - 1\n            nums[i], nums[target] = nums[target], nums[i]\n    for i in range(n):\n        if nums[i] != i + 1:\n            return i + 1\n    return n + 1\n"
+  },
+  "leetcodeId": 41,
+  "leetcodeTitle": "First Missing Positive (O(n) In-place)",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-first-missing-positive/"
+}

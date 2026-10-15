@@ -1,0 +1,99 @@
+{
+  "id": "graph-m-flower-planting-4-color",
+  "wingId": "graphs",
+  "floor": 359,
+  "title": "Garden 4-Coloring with No Adjacent",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-flower-planting-4-color",
+    "name": "Floral Sylph",
+    "title": "Harmonizer of Quadrant Blooms",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#22c55e",
+    "attackName": "Pollen Swarm",
+    "attackPower": 2,
+    "defeatQuote": "4-flower assignment with zero adjacent conflicts completed!"
+  },
+  "description": "You have `n` gardens, labeled from 1 to `n`, and an array `paths` where `paths[i] = [x, y]` describes a bidirectional path. Every garden has at most 3 paths coming into or out of it. Choose a flower type from 1 to 4 for each garden such that no two adjacent gardens have the same flower type. Return an array of size `n` representing flower types.",
+  "examples": [
+    {
+      "input": "n = 3, paths = [[1,2],[2,3],[3,1]]",
+      "output": "[1,2,3]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 10000",
+    "0 <= paths.length <= 20000"
+  ],
+  "starterCode": "def gardenNoAdj(n: int, paths: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def gardenNoAdj(n: int, paths: list[list[int]]) -> list[int]:\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in paths:\n        adj[u].append(v)\n        adj[v].append(u)\n    ans = [0] * n\n    for i in range(1, n + 1):\n        used = {ans[neighbor - 1] for neighbor in adj[i]}\n        for color in range(1, 5):\n            if color not in used:\n                ans[i - 1] = color\n                break\n    return ans\n",
+  "functionName": "gardenNoAdj",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "inputDisplay": "args=[3, [[1, 2], [2, 3], [3, 1]]]",
+      "expectedDisplay": "[1, 2, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        4,
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        1,
+        2
+      ],
+      "inputDisplay": "args=[4, [[1, 2], [3, 4]]]",
+      "expectedDisplay": "[1, 2, 1, 2]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Since each node has at most 3 neighbors, by the Pigeonhole Principle there is always an available color from {1, 2, 3, 4}."
+  ],
+  "python": {
+    "starterCode": "def gardenNoAdj(n: int, paths: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def gardenNoAdj(n: int, paths: list[list[int]]) -> list[int]:\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in paths:\n        adj[u].append(v)\n        adj[v].append(u)\n    ans = [0] * n\n    for i in range(1, n + 1):\n        used = {ans[neighbor - 1] for neighbor in adj[i]}\n        for color in range(1, 5):\n            if color not in used:\n                ans[i - 1] = color\n                break\n    return ans\n"
+  },
+  "leetcodeId": 1042,
+  "leetcodeTitle": "Garden 4-Coloring with No Adjacent",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-flower-planting-4-color/"
+}

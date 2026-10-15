@@ -1,0 +1,84 @@
+{
+  "id": "bsg-h-split-array-largest-sum",
+  "wingId": "binary-search-greedy",
+  "floor": 472,
+  "title": "Split Array Largest Sum",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-split-array-largest-sum",
+    "name": "Bifurcation Behemoth",
+    "title": "Minimizer of Maximal Subarray Sums",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#ef4444",
+    "attackName": "Subarray Crush",
+    "attackPower": 3,
+    "defeatQuote": "Minimized maximum subarray sum for k partitions found!"
+  },
+  "description": "Given an integer array `nums` and an integer `k`, split `nums` into `k` non-empty subarrays such that the largest sum of any subarray is minimized. Return the minimized largest sum of the split.",
+  "examples": [
+    {
+      "input": "nums = [7,2,5,10,8], k = 2",
+      "output": "18"
+    },
+    {
+      "input": "nums = [1,2,3,4,5], k = 2",
+      "output": "9"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 1000",
+    "1 <= k <= min(50, nums.length)"
+  ],
+  "starterCode": "def splitArray(nums: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def splitArray(nums: list[int], k: int) -> int:\n    lo, hi = max(nums), sum(nums)\n    ans = hi\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        splits = 1\n        curr = 0\n        for x in nums:\n            if curr + x > mid:\n                splits += 1\n                curr = x\n            else:\n                curr += x\n        if splits <= k:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n",
+  "functionName": "splitArray",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          7,
+          2,
+          5,
+          10,
+          8
+        ],
+        2
+      ],
+      "expected": 18,
+      "inputDisplay": "args=[[7, 2, 5, 10, 8], 2]",
+      "expectedDisplay": "18",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        2
+      ],
+      "expected": 9,
+      "inputDisplay": "args=[[1, 2, 3, 4, 5], 2]",
+      "expectedDisplay": "9",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search target sum in [max(nums), sum(nums)]. Greedily pack subarrays."
+  ],
+  "python": {
+    "starterCode": "def splitArray(nums: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def splitArray(nums: list[int], k: int) -> int:\n    lo, hi = max(nums), sum(nums)\n    ans = hi\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        splits = 1\n        curr = 0\n        for x in nums:\n            if curr + x > mid:\n                splits += 1\n                curr = x\n            else:\n                curr += x\n        if splits <= k:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n"
+  },
+  "leetcodeId": 410,
+  "leetcodeTitle": "Split Array Largest Sum",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-split-array-largest-sum/"
+}

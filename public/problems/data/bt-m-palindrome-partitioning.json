@@ -1,0 +1,84 @@
+{
+  "id": "bt-m-palindrome-partitioning",
+  "wingId": "backtracking",
+  "floor": 221,
+  "title": "Palindrome Partitioning",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-palindrome-partitioning",
+    "name": "Mirror Hydra",
+    "title": "Splitter of Palindromic Segments",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "hydra",
+    "color": "#ec4899",
+    "attackName": "Mirror Sever",
+    "attackPower": 2,
+    "defeatQuote": "All substrings checked for palindromes at every partition point!"
+  },
+  "description": "Given a string `s`, partition `s` such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of `s`.",
+  "examples": [
+    {
+      "input": "s = \"aab\"",
+      "output": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]"
+    },
+    {
+      "input": "s = \"a\"",
+      "output": "[[\"a\"]]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 16",
+    "s contains only lowercase English letters"
+  ],
+  "starterCode": "def partitionPalindromes(s: str) -> list[list[str]]:\n    pass\n",
+  "solutionCode": "def partitionPalindromes(s: str) -> list[list[str]]:\n    res = []\n    def is_pal(sub): return sub == sub[::-1]\n    def backtrack(start, path):\n        if start == len(s):\n            res.append(list(path))\n            return\n        for end in range(start + 1, len(s) + 1):\n            sub = s[start:end]\n            if is_pal(sub):\n                path.append(sub)\n                backtrack(end, path)\n                path.pop()\n    backtrack(0, [])\n    return res\n",
+  "functionName": "partitionPalindromes",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "aab"
+      ],
+      "expected": [
+        [
+          "a",
+          "a",
+          "b"
+        ],
+        [
+          "aa",
+          "b"
+        ]
+      ],
+      "inputDisplay": "aab",
+      "expectedDisplay": "[['a', 'a', 'b'], ['aa', 'b']]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "a"
+      ],
+      "expected": [
+        [
+          "a"
+        ]
+      ],
+      "inputDisplay": "a",
+      "expectedDisplay": "[['a']]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Backtrack over prefix lengths. If prefix is palindrome, recursively partition remaining string."
+  ],
+  "python": {
+    "starterCode": "def partitionPalindromes(s: str) -> list[list[str]]:\n    pass\n",
+    "solutionCode": "def partitionPalindromes(s: str) -> list[list[str]]:\n    res = []\n    def is_pal(sub): return sub == sub[::-1]\n    def backtrack(start, path):\n        if start == len(s):\n            res.append(list(path))\n            return\n        for end in range(start + 1, len(s) + 1):\n            sub = s[start:end]\n            if is_pal(sub):\n                path.append(sub)\n                backtrack(end, path)\n                path.pop()\n    backtrack(0, [])\n    return res\n"
+  },
+  "leetcodeId": 131,
+  "leetcodeTitle": "Palindrome Partitioning",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-palindrome-partitioning/"
+}

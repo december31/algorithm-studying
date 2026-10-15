@@ -1,0 +1,104 @@
+{
+  "id": "bit-m-single-number-ii",
+  "wingId": "bit-manipulation",
+  "floor": 511,
+  "title": "Single Number II (Modulo 3 Bit Count)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-single-number-ii",
+    "name": "Triad Golem",
+    "title": "Canceler of Triplicate Bits",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#8b5cf6",
+    "attackName": "Triad Cleave",
+    "attackPower": 2,
+    "defeatQuote": "Single number appearing once amid elements appearing three times found!"
+  },
+  "description": "Given an integer array `nums` where every element appears three times except for one, which appears exactly once. Find the single element and return it.",
+  "examples": [
+    {
+      "input": "nums = [2,2,3,2]",
+      "output": "3"
+    },
+    {
+      "input": "nums = [0,1,0,1,0,1,99]",
+      "output": "99"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 30000",
+    "-2^31 <= nums[i] <= 2^31 - 1"
+  ],
+  "starterCode": "def singleNumberII(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def singleNumberII(nums: list[int]) -> int:\n    ones = twos = 0\n    for x in nums:\n        ones = (ones ^ x) & ~twos\n        twos = (twos ^ x) & ~ones\n    return ones\n",
+  "functionName": "singleNumberII",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          2,
+          3,
+          2
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[2, 2, 3, 2]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          99
+        ]
+      ],
+      "expected": 99,
+      "inputDisplay": "[0, 1, 0, 1, 0, 1, 99]",
+      "expectedDisplay": "99",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          -2,
+          -2,
+          1,
+          1,
+          -3,
+          1,
+          -3,
+          -3,
+          -4,
+          -2
+        ]
+      ],
+      "expected": -4,
+      "inputDisplay": "[-2, -2, 1, 1, -3, 1, -3, -3, -4, -2]",
+      "expectedDisplay": "-4",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Digital logic state machine: track bits appearing 1 time (ones) and 2 times (twos). Modulo 3 resets both."
+  ],
+  "python": {
+    "starterCode": "def singleNumberII(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def singleNumberII(nums: list[int]) -> int:\n    ones = twos = 0\n    for x in nums:\n        ones = (ones ^ x) & ~twos\n        twos = (twos ^ x) & ~ones\n    return ones\n"
+  },
+  "leetcodeId": 137,
+  "leetcodeTitle": "Single Number II (Modulo 3 Bit Count)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-single-number-ii/"
+}

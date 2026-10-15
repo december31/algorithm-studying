@@ -1,0 +1,83 @@
+{
+  "id": "bt-e-count-paths-leaf",
+  "wingId": "backtracking",
+  "floor": 209,
+  "title": "Count Root-to-Leaf Paths",
+  "difficulty": "easy",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "mon-bt-e-count-paths-leaf",
+    "name": "Canopy Shade",
+    "title": "Dweller of Binary Termini",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "wraith",
+    "color": "#38bdf8",
+    "attackName": "Root Hex",
+    "attackPower": 1,
+    "defeatQuote": "All paths from root to leaves counted successfully!"
+  },
+  "description": "Given a complete binary tree array where node `i` has children `2*i + 1` and `2*i + 2`, return the number of distinct root-to-leaf paths.",
+  "examples": [
+    {
+      "input": "tree = [1,2,3,None,5]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "0 <= len(tree) <= 100"
+  ],
+  "starterCode": "def countPathsToLeaf(tree: list) -> int:\n    pass\n",
+  "solutionCode": "def countPathsToLeaf(tree: list) -> int:\n    if not tree or tree[0] is None: return 0\n    def dfs(idx):\n        if idx >= len(tree) or tree[idx] is None: return 0\n        left, right = 2 * idx + 1, 2 * idx + 2\n        has_left = left < len(tree) and tree[left] is not None\n        has_right = right < len(tree) and tree[right] is not None\n        if not has_left and not has_right: return 1\n        return dfs(left) + dfs(right)\n    return dfs(0)\n",
+  "functionName": "countPathsToLeaf",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          null,
+          5
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 2, 3, None, 5]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        []
+      ],
+      "expected": 0,
+      "inputDisplay": "[]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "A leaf has neither a valid left nor right child."
+  ],
+  "python": {
+    "starterCode": "def countPathsToLeaf(tree: list) -> int:\n    pass\n",
+    "solutionCode": "def countPathsToLeaf(tree: list) -> int:\n    if not tree or tree[0] is None: return 0\n    def dfs(idx):\n        if idx >= len(tree) or tree[idx] is None: return 0\n        left, right = 2 * idx + 1, 2 * idx + 2\n        has_left = left < len(tree) and tree[left] is not None\n        has_right = right < len(tree) and tree[right] is not None\n        if not has_left and not has_right: return 1\n        return dfs(left) + dfs(right)\n    return dfs(0)\n"
+  },
+  "leetcodeId": 257,
+  "leetcodeTitle": "Count Root-to-Leaf Paths",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-e-count-paths-leaf/"
+}

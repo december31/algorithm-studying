@@ -1,0 +1,75 @@
+{
+  "id": "bit-m-smallest-sufficient-team",
+  "wingId": "bit-manipulation",
+  "floor": 550,
+  "title": "Smallest Sufficient Team (Set Cover Bitmask DP)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-smallest-sufficient-team",
+    "name": "Synergy Sovereign",
+    "title": "Recruiter of Minimal Cover Teams",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#8b5cf6",
+    "attackName": "Synergy Alignment",
+    "attackPower": 2,
+    "defeatQuote": "Smallest team of people covering all required skills assembled!"
+  },
+  "description": "In a project, you have a list of `req_skills`, and a list of `people`. The `i`-th person `people[i]` contains a list of skills that the person has. A sufficient team is a set of people such that for every required skill, there is at least one person with that skill. Return any sufficient team of the smallest possible size.",
+  "examples": [
+    {
+      "input": "req_skills = [\"java\",\"nodejs\",\"reactjs\"], people = [[\"java\"],[\"nodejs\"],[\"nodejs\",\"reactjs\"]]",
+      "output": "[0,2]"
+    }
+  ],
+  "constraints": [
+    "1 <= req_skills.length <= 16",
+    "1 <= people.length <= 60"
+  ],
+  "starterCode": "def smallestSufficientTeam(req_skills: list[str], people: list[list[str]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def smallestSufficientTeam(req_skills: list[str], people: list[list[str]]) -> list[int]:\n    skill_map = {s: i for i, s in enumerate(req_skills)}\n    target = (1 << len(req_skills)) - 1\n    dp = {0: []}\n    for person_idx, skills in enumerate(people):\n        p_mask = 0\n        for s in skills:\n            if s in skill_map: p_mask |= (1 << skill_map[s])\n        if p_mask == 0: continue\n        curr_items = list(dp.items())\n        for mask, team in curr_items:\n            comb = mask | p_mask\n            if comb not in dp or len(team) + 1 < len(dp[comb]):\n                dp[comb] = team + [person_idx]\n    return sorted(dp[target])\n",
+  "functionName": "smallestSufficientTeam",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "java",
+          "nodejs",
+          "reactjs"
+        ],
+        [
+          [
+            "java"
+          ],
+          [
+            "nodejs"
+          ],
+          [
+            "nodejs",
+            "reactjs"
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        2
+      ],
+      "inputDisplay": "args=[['java', 'nodejs', 'reactjs'], [['java'], ['nodejs'], ['nodejs', 'reactjs'",
+      "expectedDisplay": "[0, 2]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Bitmask DP: dp[skill_mask] = minimum list of people covering skill_mask."
+  ],
+  "python": {
+    "starterCode": "def smallestSufficientTeam(req_skills: list[str], people: list[list[str]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def smallestSufficientTeam(req_skills: list[str], people: list[list[str]]) -> list[int]:\n    skill_map = {s: i for i, s in enumerate(req_skills)}\n    target = (1 << len(req_skills)) - 1\n    dp = {0: []}\n    for person_idx, skills in enumerate(people):\n        p_mask = 0\n        for s in skills:\n            if s in skill_map: p_mask |= (1 << skill_map[s])\n        if p_mask == 0: continue\n        curr_items = list(dp.items())\n        for mask, team in curr_items:\n            comb = mask | p_mask\n            if comb not in dp or len(team) + 1 < len(dp[comb]):\n                dp[comb] = team + [person_idx]\n    return sorted(dp[target])\n"
+  },
+  "leetcodeId": 1125,
+  "leetcodeTitle": "Smallest Sufficient Team (Set Cover Bitmask DP)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-smallest-sufficient-team/"
+}

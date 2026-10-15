@@ -1,0 +1,115 @@
+{
+  "id": "graph-m-remove-stones-row-col",
+  "wingId": "graphs",
+  "floor": 360,
+  "title": "Most Stones Removed with Same Row or Col",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-remove-stones-row-col",
+    "name": "Quarry Behemoth",
+    "title": "Crusher of Co-linear Monoliths",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Megalith Cleave",
+    "attackPower": 2,
+    "defeatQuote": "Maximum stones removed leaving 1 per connected coordinate component!"
+  },
+  "description": "On a 2D plane, we place `n` stones at some integer coordinate points. Each coordinate point may have at most one stone. A stone can be removed if it shares either the same row or the same column as another stone that has not been removed. Given an array `stones`, return the largest possible number of stones that can be removed.",
+  "examples": [
+    {
+      "input": "stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]",
+      "output": "5"
+    },
+    {
+      "input": "stones = [[0,0],[0,2],[1,1],[2,0],[2,2]]",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= stones.length <= 1000"
+  ],
+  "starterCode": "def removeStones(stones: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def removeStones(stones: list[list[int]]) -> int:\n    parent = {}\n    def find(x):\n        if parent[x] == x: return x\n        parent[x] = find(parent[x])\n        return parent[x]\n    for r, c in stones:\n        c_key = ~c\n        if r not in parent: parent[r] = r\n        if c_key not in parent: parent[c_key] = c_key\n        parent[find(r)] = find(c_key)\n    roots = {find(x) for x in parent}\n    return len(stones) - len(roots)\n",
+  "functionName": "removeStones",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[[0, 0], [0, 1], [1, 0], [1, 2], [2, 1], [2, 2]]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[[0, 0], [0, 2], [1, 1], [2, 0], [2, 2]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Stones that share a row or col form a connected component. Total removable stones is n minus number of components."
+  ],
+  "python": {
+    "starterCode": "def removeStones(stones: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def removeStones(stones: list[list[int]]) -> int:\n    parent = {}\n    def find(x):\n        if parent[x] == x: return x\n        parent[x] = find(parent[x])\n        return parent[x]\n    for r, c in stones:\n        c_key = ~c\n        if r not in parent: parent[r] = r\n        if c_key not in parent: parent[c_key] = c_key\n        parent[find(r)] = find(c_key)\n    roots = {find(x) for x in parent}\n    return len(stones) - len(roots)\n"
+  },
+  "leetcodeId": 947,
+  "leetcodeTitle": "Most Stones Removed with Same Row or Col",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-remove-stones-row-col/"
+}

@@ -1,0 +1,97 @@
+{
+  "id": "bsg-m-bag-of-tokens",
+  "wingId": "binary-search-greedy",
+  "floor": 432,
+  "title": "Bag of Tokens (Power and Score Trade)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-bag-of-tokens",
+    "name": "Token Gambler",
+    "title": "Arbitrager of Energy and Points",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "goblin",
+    "color": "#f59e0b",
+    "attackName": "Token Cascade",
+    "attackPower": 2,
+    "defeatQuote": "Max score achieved by buying cheap tokens and selling expensive ones!"
+  },
+  "description": "You have initial `power`, initial `score = 0`, and `tokens`. Face-up: spend `tokens[i]` power to gain 1 score. Face-down: spend 1 score to gain `tokens[i]` power. Return the maximum possible score you can achieve.",
+  "examples": [
+    {
+      "input": "tokens = [100], power = 50",
+      "output": "0"
+    },
+    {
+      "input": "tokens = [100,200], power = 150",
+      "output": "1"
+    },
+    {
+      "input": "tokens = [100,200,300,400], power = 200",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "0 <= tokens.length <= 1000",
+    "0 <= power <= 10000"
+  ],
+  "starterCode": "def bagOfTokensScore(tokens: list[int], power: int) -> int:\n    pass\n",
+  "solutionCode": "def bagOfTokensScore(tokens: list[int], power: int) -> int:\n    tokens.sort()\n    i, j = 0, len(tokens) - 1\n    score = max_score = 0\n    while i <= j:\n        if power >= tokens[i]:\n            power -= tokens[i]\n            score += 1\n            i += 1\n            max_score = max(max_score, score)\n        elif score > 0:\n            power += tokens[j]\n            score -= 1\n            j -= 1\n        else:\n            break\n    return max_score\n",
+  "functionName": "bagOfTokensScore",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          100
+        ],
+        50
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[100], 50]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          100,
+          200
+        ],
+        150
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[100, 200], 150]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          100,
+          200,
+          300,
+          400
+        ],
+        200
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[100, 200, 300, 400], 200]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Two pointers: buy cheapest token at i with power, sell most expensive token at j for power."
+  ],
+  "python": {
+    "starterCode": "def bagOfTokensScore(tokens: list[int], power: int) -> int:\n    pass\n",
+    "solutionCode": "def bagOfTokensScore(tokens: list[int], power: int) -> int:\n    tokens.sort()\n    i, j = 0, len(tokens) - 1\n    score = max_score = 0\n    while i <= j:\n        if power >= tokens[i]:\n            power -= tokens[i]\n            score += 1\n            i += 1\n            max_score = max(max_score, score)\n        elif score > 0:\n            power += tokens[j]\n            score -= 1\n            j -= 1\n        else:\n            break\n    return max_score\n"
+  },
+  "leetcodeId": 948,
+  "leetcodeTitle": "Bag of Tokens (Power and Score Trade)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-bag-of-tokens/"
+}

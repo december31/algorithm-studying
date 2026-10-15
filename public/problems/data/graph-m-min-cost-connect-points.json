@@ -1,0 +1,104 @@
+{
+  "id": "graph-m-min-cost-connect-points",
+  "wingId": "graphs",
+  "floor": 341,
+  "title": "Min Cost to Connect All Points (Prim's MST)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-min-cost-connect-points",
+    "name": "Magnetic Colossus",
+    "title": "Forging Minimum Spanning Networks",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#8b5cf6",
+    "attackName": "Manhattan Pulse",
+    "attackPower": 2,
+    "defeatQuote": "Minimum Manhattan spanning tree constructed across all coordinates!"
+  },
+  "description": "You are given an array `points` representing integer coordinates of some points on a 2D-plane, where `points[i] = [xi, yi]`. The cost of connecting two points `[xi, yi]` and `[xj, yj]` is the Manhattan distance: `|xi - xj| + |yi - yj|`. Return the minimum cost to make all points connected.",
+  "examples": [
+    {
+      "input": "points = [[0,0],[2,2],[3,10],[5,2],[7,0]]",
+      "output": "20"
+    },
+    {
+      "input": "points = [[3,12],[-2,5],[-4,1]]",
+      "output": "18"
+    }
+  ],
+  "constraints": [
+    "1 <= points.length <= 1000",
+    "-10^6 <= xi, yi <= 10^6"
+  ],
+  "starterCode": "def minCostConnectPoints(points: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minCostConnectPoints(points: list[list[int]]) -> int:\n    n = len(points)\n    import heapq\n    visited = [False] * n\n    pq = [(0, 0)]\n    total_cost = 0\n    connected = 0\n    while pq and connected < n:\n        cost, u = heapq.heappop(pq)\n        if visited[u]: continue\n        visited[u] = True\n        total_cost += cost\n        connected += 1\n        x1, y1 = points[u]\n        for v in range(n):\n            if not visited[v]:\n                x2, y2 = points[v]\n                heapq.heappush(pq, (abs(x1 - x2) + abs(y1 - y2), v))\n    return total_cost\n",
+  "functionName": "minCostConnectPoints",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            0
+          ]
+        ]
+      ],
+      "expected": 20,
+      "inputDisplay": "[[0, 0], [2, 2], [3, 10], [5, 2], [7, 0]]",
+      "expectedDisplay": "20",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            3,
+            12
+          ],
+          [
+            -2,
+            5
+          ],
+          [
+            -4,
+            1
+          ]
+        ]
+      ],
+      "expected": 18,
+      "inputDisplay": "[[3, 12], [-2, 5], [-4, 1]]",
+      "expectedDisplay": "18",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Prim's or Kruskal's algorithm on complete graph with Manhattan weights."
+  ],
+  "python": {
+    "starterCode": "def minCostConnectPoints(points: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minCostConnectPoints(points: list[list[int]]) -> int:\n    n = len(points)\n    import heapq\n    visited = [False] * n\n    pq = [(0, 0)]\n    total_cost = 0\n    connected = 0\n    while pq and connected < n:\n        cost, u = heapq.heappop(pq)\n        if visited[u]: continue\n        visited[u] = True\n        total_cost += cost\n        connected += 1\n        x1, y1 = points[u]\n        for v in range(n):\n            if not visited[v]:\n                x2, y2 = points[v]\n                heapq.heappush(pq, (abs(x1 - x2) + abs(y1 - y2), v))\n    return total_cost\n"
+  },
+  "leetcodeId": 1584,
+  "leetcodeTitle": "Min Cost to Connect All Points (Prim's MST)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-min-cost-connect-points/"
+}

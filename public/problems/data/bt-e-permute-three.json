@@ -1,0 +1,128 @@
+{
+  "id": "bt-e-permute-three",
+  "wingId": "backtracking",
+  "floor": 205,
+  "title": "Fixed Element Permutations",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-e-permute-three",
+    "name": "Shuffle Imp",
+    "title": "Scrambler of Tiny Arrays",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "goblin",
+    "color": "#f97316",
+    "attackName": "Shuffle Toss",
+    "attackPower": 1,
+    "defeatQuote": "Every permutation of the small set was generated!"
+  },
+  "description": "Given an array `nums` of distinct integers, return all the possible permutations in lexicographical order.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3]",
+      "output": "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 4"
+  ],
+  "starterCode": "def permuteThree(nums: list[int]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def permuteThree(nums: list[int]) -> list[list[int]]:\n    res = []\n    def backtrack(curr, used):\n        if len(curr) == len(nums):\n            res.append(list(curr))\n            return\n        for i, val in enumerate(nums):\n            if not used[i]:\n                used[i] = True\n                curr.append(val)\n                backtrack(curr, used)\n                curr.pop()\n                used[i] = False\n    backtrack([], [False] * len(nums))\n    return sorted(res)\n",
+  "functionName": "permuteThree",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "inputDisplay": "[1, 2, 3]",
+      "expectedDisplay": "[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "inputDisplay": "[1, 2]",
+      "expectedDisplay": "[[1, 2], [2, 1]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ],
+      "inputDisplay": "[1]",
+      "expectedDisplay": "[[1]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use a boolean used array to track which elements are already in the current permutation."
+  ],
+  "python": {
+    "starterCode": "def permuteThree(nums: list[int]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def permuteThree(nums: list[int]) -> list[list[int]]:\n    res = []\n    def backtrack(curr, used):\n        if len(curr) == len(nums):\n            res.append(list(curr))\n            return\n        for i, val in enumerate(nums):\n            if not used[i]:\n                used[i] = True\n                curr.append(val)\n                backtrack(curr, used)\n                curr.pop()\n                used[i] = False\n    backtrack([], [False] * len(nums))\n    return sorted(res)\n"
+  },
+  "leetcodeId": 46,
+  "leetcodeTitle": "Fixed Element Permutations",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-e-permute-three/"
+}

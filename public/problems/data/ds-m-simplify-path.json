@@ -1,0 +1,108 @@
+{
+  "id": "ds-m-simplify-path",
+  "wingId": "data-structures",
+  "floor": 114,
+  "title": "Simplify Unix Path",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-simplify-path",
+    "name": "Directory Golem",
+    "title": "Warden of Nested Folders",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#6366f1",
+    "attackName": "Path Truncation",
+    "attackPower": 2,
+    "defeatQuote": "Canonical paths leave no room for directory recursion!"
+  },
+  "description": "Given a string `path`, which is an absolute path to a file or directory in a Unix-style file system, convert it to the simplified canonical path.",
+  "examples": [
+    {
+      "input": "path = \"/home/\"",
+      "output": "\"/home\""
+    },
+    {
+      "input": "path = \"/../\"",
+      "output": "\"/\""
+    },
+    {
+      "input": "path = \"/home//foo/\"",
+      "output": "\"/home/foo\""
+    },
+    {
+      "input": "path = \"/a/./b/../../c/\"",
+      "output": "\"/c\""
+    }
+  ],
+  "constraints": [
+    "1 <= len(path) <= 3000",
+    "path consists of English letters, digits, '.', '/', or '_'"
+  ],
+  "starterCode": "def simplifyPath(path: str) -> str:\n    pass\n",
+  "solutionCode": "def simplifyPath(path: str) -> str:\n    parts = path.split('/')\n    stack = []\n    for p in parts:\n        if p == '' or p == '.':\n            continue\n        if p == '..':\n            if stack:\n                stack.pop()\n        else:\n            stack.append(p)\n    return '/' + '/'.join(stack)\n",
+  "functionName": "simplifyPath",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "/home/"
+      ],
+      "expected": "/home",
+      "inputDisplay": "/home/",
+      "expectedDisplay": "/home",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "/../"
+      ],
+      "expected": "/",
+      "inputDisplay": "/../",
+      "expectedDisplay": "/",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "/home//foo/"
+      ],
+      "expected": "/home/foo",
+      "inputDisplay": "/home//foo/",
+      "expectedDisplay": "/home/foo",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "/a/./b/../../c/"
+      ],
+      "expected": "/c",
+      "inputDisplay": "/a/./b/../../c/",
+      "expectedDisplay": "/c",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        "/a/../../b/../c//.//"
+      ],
+      "expected": "/c",
+      "inputDisplay": "/a/../../b/../c//.//",
+      "expectedDisplay": "/c",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Split by '/' and use a stack to push directories or pop on '..'."
+  ],
+  "python": {
+    "starterCode": "def simplifyPath(path: str) -> str:\n    pass\n",
+    "solutionCode": "def simplifyPath(path: str) -> str:\n    parts = path.split('/')\n    stack = []\n    for p in parts:\n        if p == '' or p == '.':\n            continue\n        if p == '..':\n            if stack:\n                stack.pop()\n        else:\n            stack.append(p)\n    return '/' + '/'.join(stack)\n"
+  },
+  "leetcodeId": 71,
+  "leetcodeTitle": "Simplify Unix Path",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-simplify-path/"
+}

@@ -1,0 +1,93 @@
+{
+  "id": "graph-m-equality-equations",
+  "wingId": "graphs",
+  "floor": 344,
+  "title": "Satisfiability of Equality Equations",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-equality-equations",
+    "name": "Logic Arbiter",
+    "title": "Evaluator of Transitive Equivalence",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wizard",
+    "color": "#38bdf8",
+    "attackName": "Identity Collapse",
+    "attackPower": 2,
+    "defeatQuote": "Equivalence classes and inequality contradictions analyzed!"
+  },
+  "description": "You are given an array of strings `equations` that represent relationships between variables where each string has length 4: `\"a==b\"` or `\"a!=b\"`. Here `a` and `b` are lowercase letters. Return `True` if it is possible to assign integers to variable names so as to satisfy all the given equations, or `False` otherwise.",
+  "examples": [
+    {
+      "input": "equations = [\"a==b\",\"b!=a\"]",
+      "output": "False"
+    },
+    {
+      "input": "equations = [\"b==a\",\"a==b\"]",
+      "output": "True"
+    },
+    {
+      "input": "equations = [\"a==b\",\"b==c\",\"a==c\"]",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= equations.length <= 500"
+  ],
+  "starterCode": "def equationsPossible(equations: list[str]) -> bool:\n    pass\n",
+  "solutionCode": "def equationsPossible(equations: list[str]) -> bool:\n    parent = {chr(c): chr(c) for c in range(ord('a'), ord('z') + 1)}\n    def find(x):\n        if parent[x] == x: return x\n        parent[x] = find(parent[x])\n        return parent[x]\n    for eq in equations:\n        if eq[1] == '=':\n            parent[find(eq[0])] = find(eq[3])\n    for eq in equations:\n        if eq[1] == '!':\n            if find(eq[0]) == find(eq[3]):\n                return False\n    return True\n",
+  "functionName": "equationsPossible",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "a==b",
+          "b!=a"
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "['a==b', 'b!=a']",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "b==a",
+          "a==b"
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "['b==a', 'a==b']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "a==b",
+          "b==c",
+          "a==c"
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "['a==b', 'b==c', 'a==c']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Union all equality pairs first, then check if any inequality pair belongs to the same set."
+  ],
+  "python": {
+    "starterCode": "def equationsPossible(equations: list[str]) -> bool:\n    pass\n",
+    "solutionCode": "def equationsPossible(equations: list[str]) -> bool:\n    parent = {chr(c): chr(c) for c in range(ord('a'), ord('z') + 1)}\n    def find(x):\n        if parent[x] == x: return x\n        parent[x] = find(parent[x])\n        return parent[x]\n    for eq in equations:\n        if eq[1] == '=':\n            parent[find(eq[0])] = find(eq[3])\n    for eq in equations:\n        if eq[1] == '!':\n            if find(eq[0]) == find(eq[3]):\n                return False\n    return True\n"
+  },
+  "leetcodeId": 990,
+  "leetcodeTitle": "Satisfiability of Equality Equations",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-equality-equations/"
+}

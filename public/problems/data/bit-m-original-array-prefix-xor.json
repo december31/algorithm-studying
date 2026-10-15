@@ -1,0 +1,85 @@
+{
+  "id": "bit-m-original-array-prefix-xor",
+  "wingId": "bit-manipulation",
+  "floor": 523,
+  "title": "Find Original Array from Prefix XOR",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-original-array-prefix-xor",
+    "name": "Inverse Prefix Drake",
+    "title": "Differentiator of Cumulative XOR",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#06b6d4",
+    "attackName": "Cumulative Slash",
+    "attackPower": 2,
+    "defeatQuote": "Original array reconstructed from prefix XOR values!"
+  },
+  "description": "You are given an integer array `pref` of size `n`. Find and return the array `arr` of size `n` that satisfies: `pref[i] = arr[0] ^ arr[1] ^ ... ^ arr[i]`. It can be proven that the answer is unique.",
+  "examples": [
+    {
+      "input": "pref = [5,2,0,3,1]",
+      "output": "[5,7,2,3,2]"
+    },
+    {
+      "input": "pref = [13]",
+      "output": "[13]"
+    }
+  ],
+  "constraints": [
+    "1 <= pref.length <= 100000"
+  ],
+  "starterCode": "def findArray(pref: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def findArray(pref: list[int]) -> list[int]:\n    res = [pref[0]]\n    for i in range(1, len(pref)):\n        res.append(pref[i] ^ pref[i - 1])\n    return res\n",
+  "functionName": "findArray",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          5,
+          2,
+          0,
+          3,
+          1
+        ]
+      ],
+      "expected": [
+        5,
+        7,
+        2,
+        3,
+        2
+      ],
+      "inputDisplay": "[5, 2, 0, 3, 1]",
+      "expectedDisplay": "[5, 7, 2, 3, 2]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          13
+        ]
+      ],
+      "expected": [
+        13
+      ],
+      "inputDisplay": "[13]",
+      "expectedDisplay": "[13]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Since pref[i] = pref[i - 1] ^ arr[i], XORing both sides by pref[i - 1] gives arr[i] = pref[i] ^ pref[i - 1]."
+  ],
+  "python": {
+    "starterCode": "def findArray(pref: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def findArray(pref: list[int]) -> list[int]:\n    res = [pref[0]]\n    for i in range(1, len(pref)):\n        res.append(pref[i] ^ pref[i - 1])\n    return res\n"
+  },
+  "leetcodeId": 2433,
+  "leetcodeTitle": "Find Original Array from Prefix XOR",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-original-array-prefix-xor/"
+}

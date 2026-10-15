@@ -1,0 +1,79 @@
+{
+  "id": "bsg-m-max-candies-k-children",
+  "wingId": "binary-search-greedy",
+  "floor": 445,
+  "title": "Maximum Candies Allocated to K Children",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-max-candies-k-children",
+    "name": "Confection Colossus",
+    "title": "Distributor of Equal Sugar Heaps",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#ec4899",
+    "attackName": "Caramel Deluge",
+    "attackPower": 2,
+    "defeatQuote": "Maximum equal candy pile size that can be given to all k children!"
+  },
+  "description": "You are given a 0-indexed integer array `candies`. Each element in the array denotes a pile of candies of size `candies[i]`. You can divide each pile into any number of sub piles. You have `k` children. You want to allocate to each child an equal number of candies from a sub pile. Return the maximum number of candies each child can get.",
+  "examples": [
+    {
+      "input": "candies = [5,8,6], k = 3",
+      "output": "5"
+    },
+    {
+      "input": "candies = [2,5], k = 11",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= candies.length <= 100000",
+    "1 <= k <= 10^12"
+  ],
+  "starterCode": "def maximumCandies(candies: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def maximumCandies(candies: list[int], k: int) -> int:\n    lo, hi = 1, max(candies)\n    ans = 0\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        piles = sum(c // mid for c in candies)\n        if piles >= k:\n            ans = mid\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return ans\n",
+  "functionName": "maximumCandies",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          5,
+          8,
+          6
+        ],
+        3
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[[5, 8, 6], 3]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          5
+        ],
+        11
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[2, 5], 11]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search on answer pile size mid in [1, max(candies)]. Count sum(c // mid)."
+  ],
+  "python": {
+    "starterCode": "def maximumCandies(candies: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def maximumCandies(candies: list[int], k: int) -> int:\n    lo, hi = 1, max(candies)\n    ans = 0\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        piles = sum(c // mid for c in candies)\n        if piles >= k:\n            ans = mid\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return ans\n"
+  },
+  "leetcodeId": 2226,
+  "leetcodeTitle": "Maximum Candies Allocated to K Children",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-max-candies-k-children/"
+}

@@ -1,0 +1,101 @@
+{
+  "id": "ds-m-insert-into-bst",
+  "wingId": "data-structures",
+  "floor": 165,
+  "title": "Insert Value into BST",
+  "difficulty": "medium",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "mon-ds-m-insert-into-bst",
+    "name": "Root Scribe",
+    "title": "Placer of Binary Runes",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Rune Press",
+    "attackPower": 2,
+    "defeatQuote": "The new element slotted into its sorted BST position!"
+  },
+  "description": "Given the sorted values of a BST, insert a new integer `val` into the BST such that the resulting inorder traversal remains strictly sorted.",
+  "examples": [
+    {
+      "input": "inorder = [1,2,3,5,7], val = 4",
+      "output": "[1,2,3,4,5,7]"
+    }
+  ],
+  "constraints": [
+    "0 <= len(inorder) <= 10^4",
+    "all values are unique"
+  ],
+  "starterCode": "def insertIntoBST(inorder: list[int], val: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def insertIntoBST(inorder: list[int], val: int) -> list[int]:\n    import bisect\n    res = list(inorder)\n    bisect.insort(res, val)\n    return res\n",
+  "functionName": "insertIntoBST",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          5,
+          7
+        ],
+        4
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "inputDisplay": "args=[[1, 2, 3, 5, 7], 4]",
+      "expectedDisplay": "[1, 2, 3, 4, 5, 7]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [],
+        5
+      ],
+      "expected": [
+        5
+      ],
+      "inputDisplay": "args=[[], 5]",
+      "expectedDisplay": "[5]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          10,
+          20
+        ],
+        5
+      ],
+      "expected": [
+        5,
+        10,
+        20
+      ],
+      "inputDisplay": "args=[[10, 20], 5]",
+      "expectedDisplay": "[5, 10, 20]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "BST inorder traversal is strictly ascending, so insertion maintains sorted order."
+  ],
+  "python": {
+    "starterCode": "def insertIntoBST(inorder: list[int], val: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def insertIntoBST(inorder: list[int], val: int) -> list[int]:\n    import bisect\n    res = list(inorder)\n    bisect.insort(res, val)\n    return res\n"
+  },
+  "leetcodeId": 701,
+  "leetcodeTitle": "Insert Value into BST",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-insert-into-bst/"
+}

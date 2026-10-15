@@ -1,0 +1,82 @@
+{
+  "id": "bt-m-combination-lock-turns",
+  "wingId": "backtracking",
+  "floor": 265,
+  "title": "Minimum Turns to Unlock Code",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-combination-lock-turns",
+    "name": "Dial Fiend",
+    "title": "Tumbler of Multi-Dial Tumblers",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Dial Twist",
+    "attackPower": 2,
+    "defeatQuote": "Circular rotation distance on each dial minimized!"
+  },
+  "description": "A circular dial has digits `0` through `9`. Given a starting code `start` and a target code `target` of the same length, return the minimum total turns needed to rotate the dials from start to target.",
+  "examples": [
+    {
+      "input": "start = \"1234\", target = \"2468\"",
+      "output": "10"
+    },
+    {
+      "input": "start = \"0000\", target = \"5555\"",
+      "output": "20"
+    }
+  ],
+  "constraints": [
+    "len(start) == len(target) <= 10"
+  ],
+  "starterCode": "def minTurnsLock(start: str, target: str) -> int:\n    pass\n",
+  "solutionCode": "def minTurnsLock(start: str, target: str) -> int:\n    total = 0\n    for s, t in zip(start, target):\n        diff = abs(int(s) - int(t))\n        total += min(diff, 10 - diff)\n    return total\n",
+  "functionName": "minTurnsLock",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "1234",
+        "2468"
+      ],
+      "expected": 10,
+      "inputDisplay": "args=['1234', '2468']",
+      "expectedDisplay": "10",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "0000",
+        "5555"
+      ],
+      "expected": 20,
+      "inputDisplay": "args=['0000', '5555']",
+      "expectedDisplay": "20",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "0",
+        "9"
+      ],
+      "expected": 1,
+      "inputDisplay": "args=['0', '9']",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Distance between digits a and b on circular 0-9 dial is min(abs(a-b), 10 - abs(a-b))."
+  ],
+  "python": {
+    "starterCode": "def minTurnsLock(start: str, target: str) -> int:\n    pass\n",
+    "solutionCode": "def minTurnsLock(start: str, target: str) -> int:\n    total = 0\n    for s, t in zip(start, target):\n        diff = abs(int(s) - int(t))\n        total += min(diff, 10 - diff)\n    return total\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Minimum Turns to Unlock Code",
+  "leetcodeUrl": null
+}

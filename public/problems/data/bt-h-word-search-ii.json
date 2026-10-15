@@ -1,0 +1,112 @@
+{
+  "id": "bt-h-word-search-ii",
+  "wingId": "backtracking",
+  "floor": 274,
+  "title": "Word Search II (Grid Trie Traversal)",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-h-word-search-ii",
+    "name": "Trie Gorgon",
+    "title": "Seeker of Multi-Word Vocabulary",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#06b6d4",
+    "attackName": "Vocabulary Wave",
+    "attackPower": 3,
+    "defeatQuote": "Prefix Trie pruning found all matching dictionary words!"
+  },
+  "description": "Given an `m x n` `board` of characters and a list of strings `words`, return all words on the board in sorted order.",
+  "examples": [
+    {
+      "input": "board = [[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]], words = [\"oath\",\"pea\",\"eat\",\"rain\"]",
+      "output": "[\"eat\",\"oath\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(board), len(board[0]) <= 12",
+    "1 <= len(words) <= 300"
+  ],
+  "starterCode": "def findWordsInGrid(board: list[list[str]], words: list[str]) -> list[str]:\n    pass\n",
+  "solutionCode": "def findWordsInGrid(board: list[list[str]], words: list[str]) -> list[str]:\n    trie = {}\n    for w in words:\n        node = trie\n        for ch in w:\n            node = node.setdefault(ch, {})\n        node['#'] = w\n    m, n = len(board), len(board[0])\n    found = set()\n    def dfs(r, c, node):\n        ch = board[r][c]\n        if ch not in node: return\n        curr = node[ch]\n        if '#' in curr:\n            found.add(curr['#'])\n        board[r][c] = '*'\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < m and 0 <= nc < n and board[nr][nc] != '*':\n                dfs(nr, nc, curr)\n        board[r][c] = ch\n    for i in range(m):\n        for j in range(n):\n            dfs(i, j, trie)\n    return sorted(list(found))\n",
+  "functionName": "findWordsInGrid",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "o",
+            "a",
+            "a",
+            "n"
+          ],
+          [
+            "e",
+            "t",
+            "a",
+            "e"
+          ],
+          [
+            "i",
+            "h",
+            "k",
+            "r"
+          ],
+          [
+            "i",
+            "f",
+            "l",
+            "v"
+          ]
+        ],
+        [
+          "oath",
+          "pea",
+          "eat",
+          "rain"
+        ]
+      ],
+      "expected": [
+        "eat",
+        "oath"
+      ],
+      "inputDisplay": "args=[[['o', 'a', 'a', 'n'], ['e', 't', 'a', 'e'], ['i', 'h', 'k', 'r'], ['i', '",
+      "expectedDisplay": "['eat', 'oath']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ],
+        [
+          "abcb"
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "args=[[['a', 'b'], ['c', 'd']], ['abcb']]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Insert all words into a prefix trie, then DFS from each cell following trie branches."
+  ],
+  "python": {
+    "starterCode": "def findWordsInGrid(board: list[list[str]], words: list[str]) -> list[str]:\n    pass\n",
+    "solutionCode": "def findWordsInGrid(board: list[list[str]], words: list[str]) -> list[str]:\n    trie = {}\n    for w in words:\n        node = trie\n        for ch in w:\n            node = node.setdefault(ch, {})\n        node['#'] = w\n    m, n = len(board), len(board[0])\n    found = set()\n    def dfs(r, c, node):\n        ch = board[r][c]\n        if ch not in node: return\n        curr = node[ch]\n        if '#' in curr:\n            found.add(curr['#'])\n        board[r][c] = '*'\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < m and 0 <= nc < n and board[nr][nc] != '*':\n                dfs(nr, nc, curr)\n        board[r][c] = ch\n    for i in range(m):\n        for j in range(n):\n            dfs(i, j, trie)\n    return sorted(list(found))\n"
+  },
+  "leetcodeId": 212,
+  "leetcodeTitle": "Word Search II (Grid Trie Traversal)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-word-search-ii/"
+}

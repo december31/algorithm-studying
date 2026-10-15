@@ -31,8 +31,8 @@
   "constraints": [
     "0 <= x, y <= 2^31 - 1"
   ],
-  "starterCode": "function hammingDistance(x, y) {\n  return 0;\n}",
-  "solutionCode": "function hammingDistance(x, y) {\n  let xor = x ^ y;\n  let dist = 0;\n  while (xor > 0) {\n    xor &= (xor - 1);\n    dist++;\n  }\n  return dist;\n}",
+  "starterCode": "def hammingDistance(x, y):\n    return 0\n",
+  "solutionCode": "def hammingDistance(x, y):\n    xor = x ^ y\n    count = 0\n    while xor:\n        xor &= (xor - 1)\n        count += 1\n    return count\n",
   "functionName": "hammingDistance",
   "testCases": [
     {

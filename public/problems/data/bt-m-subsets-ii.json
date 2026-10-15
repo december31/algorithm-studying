@@ -1,0 +1,97 @@
+{
+  "id": "bt-m-subsets-ii",
+  "wingId": "backtracking",
+  "floor": 212,
+  "title": "Subsets II (Unique Subsets with Duplicates)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-subsets-ii",
+    "name": "Duplicate Fiend",
+    "title": "Purifier of Redundant Sets",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#ef4444",
+    "attackName": "Duplicate Pierce",
+    "attackPower": 2,
+    "defeatQuote": "Duplicate branches pruned whenever nums[i] == nums[i-1]!"
+  },
+  "description": "Given an integer array `nums` that may contain duplicates, return all possible subsets (the power set). The solution set must not contain duplicate subsets. Return the solution sorted by length and then elements.",
+  "examples": [
+    {
+      "input": "nums = [1,2,2]",
+      "output": "[[],[1],[2],[1,2],[2,2],[1,2,2]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 10"
+  ],
+  "starterCode": "def subsetsWithDup(nums: list[int]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def subsetsWithDup(nums: list[int]) -> list[list[int]]:\n    nums.sort()\n    res = []\n    def backtrack(idx, path):\n        res.append(list(path))\n        for i in range(idx, len(nums)):\n            if i > idx and nums[i] == nums[i - 1]:\n                continue\n            path.append(nums[i])\n            backtrack(i + 1, path)\n            path.pop()\n    backtrack(0, [])\n    res.sort(key=lambda s: (len(s), s))\n    return res\n",
+  "functionName": "subsetsWithDup",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "inputDisplay": "[1, 2, 2]",
+      "expectedDisplay": "[[], [1], [2], [1, 2], [2, 2], [1, 2, 2]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          0
+        ]
+      ],
+      "inputDisplay": "[0]",
+      "expectedDisplay": "[[], [0]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort first, and skip duplicate elements at the same recursion depth: if i > idx and nums[i] == nums[i-1]."
+  ],
+  "python": {
+    "starterCode": "def subsetsWithDup(nums: list[int]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def subsetsWithDup(nums: list[int]) -> list[list[int]]:\n    nums.sort()\n    res = []\n    def backtrack(idx, path):\n        res.append(list(path))\n        for i in range(idx, len(nums)):\n            if i > idx and nums[i] == nums[i - 1]:\n                continue\n            path.append(nums[i])\n            backtrack(i + 1, path)\n            path.pop()\n    backtrack(0, [])\n    res.sort(key=lambda s: (len(s), s))\n    return res\n"
+  },
+  "leetcodeId": 90,
+  "leetcodeTitle": "Subsets II (Unique Subsets with Duplicates)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-subsets-ii/"
+}

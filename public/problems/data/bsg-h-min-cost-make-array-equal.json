@@ -1,0 +1,94 @@
+{
+  "id": "bsg-h-min-cost-make-array-equal",
+  "wingId": "binary-search-greedy",
+  "floor": 490,
+  "title": "Min Cost to Make Array Equal (Weighted Median)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-min-cost-make-array-equal",
+    "name": "Equilibrium Archon",
+    "title": "Aligner of Weighted Centroids",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wizard",
+    "color": "#10b981",
+    "attackName": "Centroid Convergence",
+    "attackPower": 3,
+    "defeatQuote": "Minimum cost to equalize all elements to weighted median computed!"
+  },
+  "description": "You are given two 0-indexed integer arrays `nums` and `cost`, both of size `n`. You can increase or decrease any element in `nums` by 1. The cost of doing this on `nums[i]` is `cost[i]`. Return the minimum total cost to make all elements of `nums` equal.",
+  "examples": [
+    {
+      "input": "nums = [1,3,5,2], cost = [2,3,1,14]",
+      "output": "8"
+    },
+    {
+      "input": "nums = [2,2,2,2,2], cost = [4,2,8,1,3]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "n == nums.length == cost.length",
+    "1 <= n <= 100000"
+  ],
+  "starterCode": "def minCost(nums: list[int], cost: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minCost(nums: list[int], cost: list[int]) -> int:\n    pairs = sorted(zip(nums, cost))\n    total_cost = sum(cost)\n    median = 0\n    cum = 0\n    for x, c in pairs:\n        cum += c\n        if cum >= (total_cost + 1) // 2:\n            median = x\n            break\n    return sum(abs(x - median) * c for x, c in zip(nums, cost))\n",
+  "functionName": "minCost",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3,
+          5,
+          2
+        ],
+        [
+          2,
+          3,
+          1,
+          14
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "args=[[1, 3, 5, 2], [2, 3, 1, 14]]",
+      "expectedDisplay": "8",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        [
+          4,
+          2,
+          8,
+          1,
+          3
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[2, 2, 2, 2, 2], [4, 2, 8, 1, 3]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "The optimal target value is the weighted median of nums."
+  ],
+  "python": {
+    "starterCode": "def minCost(nums: list[int], cost: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minCost(nums: list[int], cost: list[int]) -> int:\n    pairs = sorted(zip(nums, cost))\n    total_cost = sum(cost)\n    median = 0\n    cum = 0\n    for x, c in pairs:\n        cum += c\n        if cum >= (total_cost + 1) // 2:\n            median = x\n            break\n    return sum(abs(x - median) * c for x, c in zip(nums, cost))\n"
+  },
+  "leetcodeId": 2448,
+  "leetcodeTitle": "Min Cost to Make Array Equal (Weighted Median)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-min-cost-make-array-equal/"
+}

@@ -1,0 +1,132 @@
+{
+  "id": "ds-m-next-larger-nodes",
+  "wingId": "data-structures",
+  "floor": 128,
+  "title": "Next Greater Value in Sequence",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-next-larger-nodes",
+    "name": "Chain Phantom",
+    "title": "Lookahead Wraith of Linked Links",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#a855f7",
+    "attackName": "Chain Drain",
+    "attackPower": 2,
+    "defeatQuote": "The next strictly greater value was spotted down the line!"
+  },
+  "description": "You are given an integer array `values` representing node values in a singly linked list. Return an array of integers `answer` where `answer[i]` is the value of the next greater node for the `i-th` node. If no greater node exists, `answer[i] = 0`.",
+  "examples": [
+    {
+      "input": "values = [2,1,5]",
+      "output": "[5,5,0]"
+    },
+    {
+      "input": "values = [2,7,4,3,5]",
+      "output": "[7,0,5,5,0]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(values) <= 10^4",
+    "1 <= values[i] <= 10^9"
+  ],
+  "starterCode": "def nextLargerNodes(values: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def nextLargerNodes(values: list[int]) -> list[int]:\n    res = [0] * len(values)\n    stack = []\n    for i, v in enumerate(values):\n        while stack and values[stack[-1]] < v:\n            idx = stack.pop()\n            res[idx] = v\n        stack.append(i)\n    return res\n",
+  "functionName": "nextLargerNodes",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          1,
+          5
+        ]
+      ],
+      "expected": [
+        5,
+        5,
+        0
+      ],
+      "inputDisplay": "[2, 1, 5]",
+      "expectedDisplay": "[5, 5, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          7,
+          4,
+          3,
+          5
+        ]
+      ],
+      "expected": [
+        7,
+        0,
+        5,
+        5,
+        0
+      ],
+      "inputDisplay": "[2, 7, 4, 3, 5]",
+      "expectedDisplay": "[7, 0, 5, 5, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          7,
+          5,
+          1,
+          9,
+          2,
+          5,
+          1
+        ]
+      ],
+      "expected": [
+        7,
+        9,
+        9,
+        9,
+        0,
+        5,
+        0,
+        0
+      ],
+      "inputDisplay": "[1, 7, 5, 1, 9, 2, 5, 1]",
+      "expectedDisplay": "[7, 9, 9, 9, 0, 5, 0, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          3
+        ]
+      ],
+      "expected": [
+        0
+      ],
+      "inputDisplay": "[3]",
+      "expectedDisplay": "[0]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Store indices in a decreasing monotonic stack."
+  ],
+  "python": {
+    "starterCode": "def nextLargerNodes(values: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def nextLargerNodes(values: list[int]) -> list[int]:\n    res = [0] * len(values)\n    stack = []\n    for i, v in enumerate(values):\n        while stack and values[stack[-1]] < v:\n            idx = stack.pop()\n            res[idx] = v\n        stack.append(i)\n    return res\n"
+  },
+  "leetcodeId": 1019,
+  "leetcodeTitle": "Next Greater Value in Sequence",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-next-larger-nodes/"
+}

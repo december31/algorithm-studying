@@ -1,0 +1,91 @@
+{
+  "id": "bt-m-restore-ip-addresses",
+  "wingId": "backtracking",
+  "floor": 222,
+  "title": "Restore IP Addresses",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-restore-ip-addresses",
+    "name": "IPv4 Warden",
+    "title": "Validator of Octet Ranges",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#38bdf8",
+    "attackName": "Packet Drop",
+    "attackPower": 2,
+    "defeatQuote": "Every 4-octet valid IP address reconstructed without leading zeroes!"
+  },
+  "description": "A valid IP address consists of exactly four integers separated by single dots. Each integer is between `0` and `255` (inclusive) and cannot have leading zeros. Given a string `s` containing only digits, return all possible valid IP addresses in sorted order.",
+  "examples": [
+    {
+      "input": "s = \"25525511135\"",
+      "output": "[\"255.255.11.135\",\"255.255.111.35\"]"
+    },
+    {
+      "input": "s = \"0000\"",
+      "output": "[\"0.0.0.0\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 20",
+    "s consists of digits only"
+  ],
+  "starterCode": "def restoreIpAddresses(s: str) -> list[str]:\n    pass\n",
+  "solutionCode": "def restoreIpAddresses(s: str) -> list[str]:\n    res = []\n    def backtrack(start, parts):\n        if len(parts) == 4:\n            if start == len(s): res.append('.'.join(parts))\n            return\n        for length in range(1, 4):\n            if start + length > len(s): break\n            part = s[start:start + length]\n            if (len(part) > 1 and part[0] == '0') or int(part) > 255: continue\n            parts.append(part)\n            backtrack(start + length, parts)\n            parts.pop()\n    backtrack(0, [])\n    return sorted(res)\n",
+  "functionName": "restoreIpAddresses",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "25525511135"
+      ],
+      "expected": [
+        "255.255.11.135",
+        "255.255.111.35"
+      ],
+      "inputDisplay": "25525511135",
+      "expectedDisplay": "['255.255.11.135', '255.255.111.35']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "0000"
+      ],
+      "expected": [
+        "0.0.0.0"
+      ],
+      "inputDisplay": "0000",
+      "expectedDisplay": "['0.0.0.0']",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "101023"
+      ],
+      "expected": [
+        "1.0.10.23",
+        "1.0.102.3",
+        "10.1.0.23",
+        "10.10.2.3",
+        "101.0.2.3"
+      ],
+      "inputDisplay": "101023",
+      "expectedDisplay": "['1.0.10.23', '1.0.102.3', '10.1.0.23', '10.10.2.3', '101.0.2.3']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "4 segments. Each segment has length 1 to 3, must not have leading zero, and value <= 255."
+  ],
+  "python": {
+    "starterCode": "def restoreIpAddresses(s: str) -> list[str]:\n    pass\n",
+    "solutionCode": "def restoreIpAddresses(s: str) -> list[str]:\n    res = []\n    def backtrack(start, parts):\n        if len(parts) == 4:\n            if start == len(s): res.append('.'.join(parts))\n            return\n        for length in range(1, 4):\n            if start + length > len(s): break\n            part = s[start:start + length]\n            if (len(part) > 1 and part[0] == '0') or int(part) > 255: continue\n            parts.append(part)\n            backtrack(start + length, parts)\n            parts.pop()\n    backtrack(0, [])\n    return sorted(res)\n"
+  },
+  "leetcodeId": 93,
+  "leetcodeTitle": "Restore IP Addresses",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-restore-ip-addresses/"
+}

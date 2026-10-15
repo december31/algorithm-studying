@@ -37,8 +37,8 @@
     "nums.length == n + 1",
     "1 <= nums[i] <= n"
   ],
-  "starterCode": "function findDuplicate(nums) {\n  return 0;\n}",
-  "solutionCode": "function findDuplicate(nums) {\n  let slow = nums[0], fast = nums[0];\n  do {\n    slow = nums[slow];\n    fast = nums[nums[fast]];\n  } while (slow !== fast);\n  slow = nums[0];\n  while (slow !== fast) {\n    slow = nums[slow];\n    fast = nums[fast];\n  }\n  return slow;\n}",
+  "starterCode": "def findDuplicate(nums):\n    return 0\n",
+  "solutionCode": "def findDuplicate(nums):\n    slow, fast = nums[0], nums[0]\n    while True:\n        slow = nums[slow]\n        fast = nums[nums[fast]]\n        if slow == fast:\n            break\n    slow = nums[0]\n    while slow != fast:\n        slow = nums[slow]\n        fast = nums[fast]\n    return slow\n",
   "functionName": "findDuplicate",
   "testCases": [
     {

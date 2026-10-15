@@ -1,0 +1,79 @@
+{
+  "id": "bsg-m-min-add-parentheses-valid",
+  "wingId": "binary-search-greedy",
+  "floor": 458,
+  "title": "Min Add to Make Parentheses Valid",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-bsg-m-min-add-parentheses-valid",
+    "name": "Balance Sylph",
+    "title": "Weaver of Missing Brackets",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#10b981",
+    "attackName": "Parenthesis Bind",
+    "attackPower": 2,
+    "defeatQuote": "Minimum number of '(' or ')' added to make string balanced!"
+  },
+  "description": "A parentheses string is valid if and only if it is the empty string, can be written as AB, or can be written as (A). Given a parentheses string `s`, return the minimum number of parentheses we must add to make the resulting string valid.",
+  "examples": [
+    {
+      "input": "s = \"())\"",
+      "output": "1"
+    },
+    {
+      "input": "s = \"(((\"",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 1000"
+  ],
+  "starterCode": "def minAddToMakeValid(s: str) -> int:\n    pass\n",
+  "solutionCode": "def minAddToMakeValid(s: str) -> int:\n    open_needed = 0\n    close_needed = 0\n    for ch in s:\n        if ch == '(': close_needed += 1\n        elif ch == ')':\n            if close_needed > 0: close_needed -= 1\n            else: open_needed += 1\n    return open_needed + close_needed\n",
+  "functionName": "minAddToMakeValid",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "())"
+      ],
+      "expected": 1,
+      "inputDisplay": "())",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "((("
+      ],
+      "expected": 3,
+      "inputDisplay": "(((",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "()"
+      ],
+      "expected": 0,
+      "inputDisplay": "()",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Track unmatched closing parentheses and unmatched opening parentheses."
+  ],
+  "python": {
+    "starterCode": "def minAddToMakeValid(s: str) -> int:\n    pass\n",
+    "solutionCode": "def minAddToMakeValid(s: str) -> int:\n    open_needed = 0\n    close_needed = 0\n    for ch in s:\n        if ch == '(': close_needed += 1\n        elif ch == ')':\n            if close_needed > 0: close_needed -= 1\n            else: open_needed += 1\n    return open_needed + close_needed\n"
+  },
+  "leetcodeId": 921,
+  "leetcodeTitle": "Min Add to Make Parentheses Valid",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-min-add-parentheses-valid/"
+}

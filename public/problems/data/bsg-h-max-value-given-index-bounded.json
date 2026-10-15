@@ -1,0 +1,74 @@
+{
+  "id": "bsg-h-max-value-given-index-bounded",
+  "wingId": "binary-search-greedy",
+  "floor": 491,
+  "title": "Maximum Value at Given Index in Bounded Array",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-max-value-given-index-bounded",
+    "name": "Pyramidal Behemoth",
+    "title": "Architect of the Monotonic Peak",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#f59e0b",
+    "attackName": "Apex Quake",
+    "attackPower": 3,
+    "defeatQuote": "Max peak value at index such that adjacent diffs <= 1 and sum <= maxSum!"
+  },
+  "description": "You are given three positive integers: `n`, `index`, and `maxSum`. Construct an array `nums` of length `n` of positive integers such that `|nums[i] - nums[i+1]| <= 1` and `sum(nums) <= maxSum`. Return the maximum value of `nums[index]`.",
+  "examples": [
+    {
+      "input": "n = 4, index = 2, maxSum = 6",
+      "output": "2"
+    },
+    {
+      "input": "n = 6, index = 1, maxSum = 10",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= maxSum <= 10^9",
+    "0 <= index < n"
+  ],
+  "starterCode": "def maxValue(n: int, index: int, maxSum: int) -> int:\n    pass\n",
+  "solutionCode": "def maxValue(n: int, index: int, maxSum: int) -> int:\n    def get_sum(peak, count):\n        if count == 0: return 0\n        if peak >= count:\n            return (peak + peak - count + 1) * count // 2\n        return (peak + 1) * peak // 2 + (count - peak)\n    lo, hi = 1, maxSum\n    ans = 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        left_sum = get_sum(mid - 1, index)\n        right_sum = get_sum(mid - 1, n - 1 - index)\n        if left_sum + mid + right_sum <= maxSum:\n            ans = mid\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return ans\n",
+  "functionName": "maxValue",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        2,
+        6
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[4, 2, 6]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        6,
+        1,
+        10
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[6, 1, 10]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search peak value mid in [1, maxSum]. Use arithmetic progression sum on left and right wings."
+  ],
+  "python": {
+    "starterCode": "def maxValue(n: int, index: int, maxSum: int) -> int:\n    pass\n",
+    "solutionCode": "def maxValue(n: int, index: int, maxSum: int) -> int:\n    def get_sum(peak, count):\n        if count == 0: return 0\n        if peak >= count:\n            return (peak + peak - count + 1) * count // 2\n        return (peak + 1) * peak // 2 + (count - peak)\n    lo, hi = 1, maxSum\n    ans = 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        left_sum = get_sum(mid - 1, index)\n        right_sum = get_sum(mid - 1, n - 1 - index)\n        if left_sum + mid + right_sum <= maxSum:\n            ans = mid\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return ans\n"
+  },
+  "leetcodeId": 1802,
+  "leetcodeTitle": "Maximum Value at Given Index in Bounded Array",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-max-value-given-index-bounded/"
+}

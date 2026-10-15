@@ -1,0 +1,102 @@
+{
+  "id": "graph-h-scc-count-tarjan",
+  "wingId": "graphs",
+  "floor": 396,
+  "title": "Strongly Connected Components (Tarjan SCC)",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-h-scc-count-tarjan",
+    "name": "Tarjan Wyrm",
+    "title": "Surveyor of Mutually Reachable Subgraphs",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#ec4899",
+    "attackName": "Cyclic Condensation",
+    "attackPower": 3,
+    "defeatQuote": "Count of maximal strongly connected components calculated!"
+  },
+  "description": "Given a directed graph with `n` nodes (0 to n - 1) and directed `edges`, return the number of strongly connected components (SCCs) in the graph.",
+  "examples": [
+    {
+      "input": "n = 5, edges = [[0,1],[1,2],[2,0],[1,3],[3,4],[4,3]]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 1000",
+    "0 <= edges.length <= 5000"
+  ],
+  "starterCode": "def countStronglyConnectedComponents(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def countStronglyConnectedComponents(n: int, edges: list[list[int]]) -> int:\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in edges:\n        adj[u].append(v)\n    tin = [-1] * n\n    low = [-1] * n\n    on_stack = [False] * n\n    stack = []\n    timer = [0]\n    scc_count = [0]\n    def dfs(u):\n        tin[u] = low[u] = timer[0]\n        timer[0] += 1\n        stack.append(u)\n        on_stack[u] = True\n        for v in adj[u]:\n            if tin[v] == -1:\n                dfs(v)\n                low[u] = min(low[u], low[v])\n            elif on_stack[v]:\n                low[u] = min(low[u], tin[v])\n        if low[u] == tin[u]:\n            scc_count[0] += 1\n            while True:\n                w = stack.pop()\n                on_stack[w] = False\n                if w == u: break\n    for i in range(n):\n        if tin[i] == -1:\n            dfs(i)\n    return scc_count[0]\n",
+  "functionName": "countStronglyConnectedComponents",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        5,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            3
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[5, [[0, 1], [1, 2], [2, 0], [1, 3], [3, 4], [4, 3]]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[3, [[0, 1], [1, 2]]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Tarjan's SCC algorithm with dfs timestamps, low links, and an exploration stack."
+  ],
+  "python": {
+    "starterCode": "def countStronglyConnectedComponents(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def countStronglyConnectedComponents(n: int, edges: list[list[int]]) -> int:\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in edges:\n        adj[u].append(v)\n    tin = [-1] * n\n    low = [-1] * n\n    on_stack = [False] * n\n    stack = []\n    timer = [0]\n    scc_count = [0]\n    def dfs(u):\n        tin[u] = low[u] = timer[0]\n        timer[0] += 1\n        stack.append(u)\n        on_stack[u] = True\n        for v in adj[u]:\n            if tin[v] == -1:\n                dfs(v)\n                low[u] = min(low[u], low[v])\n            elif on_stack[v]:\n                low[u] = min(low[u], tin[v])\n        if low[u] == tin[u]:\n            scc_count[0] += 1\n            while True:\n                w = stack.pop()\n                on_stack[w] = False\n                if w == u: break\n    for i in range(n):\n        if tin[i] == -1:\n            dfs(i)\n    return scc_count[0]\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "Strongly Connected Components (Tarjan SCC)",
+  "leetcodeUrl": null
+}

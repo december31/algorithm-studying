@@ -1,0 +1,101 @@
+{
+  "id": "bsg-m-advantage-shuffle",
+  "wingId": "binary-search-greedy",
+  "floor": 430,
+  "title": "Advantage Shuffle (Tian Ji Horse Race)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-advantage-shuffle",
+    "name": "Tournament Master",
+    "title": "Orchestrator of the Steed Jousts",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#eab308",
+    "attackName": "Joust Gambit",
+    "attackPower": 2,
+    "defeatQuote": "Permutation of nums1 maximizing elements exceeding nums2 created!"
+  },
+  "description": "You are given two integer arrays `nums1` and `nums2` both of the same length. The advantage of `nums1` with respect to `nums2` is the number of indices `i` for which `nums1[i] > nums2[i]`. Return any permutation of `nums1` that maximizes its advantage with respect to `nums2`.",
+  "examples": [
+    {
+      "input": "nums1 = [2,7,11,15], nums2 = [1,10,4,11]",
+      "output": "[2,11,7,15]"
+    },
+    {
+      "input": "nums1 = [12,24,8,32], nums2 = [13,25,32,11]",
+      "output": "[24,32,8,12]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums1.length == nums2.length <= 100000"
+  ],
+  "starterCode": "def advantageCount(nums1: list[int], nums2: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def advantageCount(nums1: list[int], nums2: list[int]) -> list[int]:\n    from collections import deque\n    sorted1 = deque(sorted(nums1))\n    order2 = sorted(range(len(nums2)), key=lambda x: nums2[x])\n    res = [0] * len(nums1)\n    for idx in order2:\n        if sorted1[-1] > nums2[idx]:\n            # find smallest in sorted1 > nums2[idx]\n            for i in range(len(sorted1)):\n                if sorted1[i] > nums2[idx]:\n                    res[idx] = sorted1[i]\n                    del sorted1[i]\n                    break\n        else:\n            res[idx] = sorted1.popleft()\n    return res\n",
+  "functionName": "advantageCount",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          7,
+          11,
+          15
+        ],
+        [
+          1,
+          10,
+          4,
+          11
+        ]
+      ],
+      "expected": [
+        2,
+        11,
+        7,
+        15
+      ],
+      "inputDisplay": "args=[[2, 7, 11, 15], [1, 10, 4, 11]]",
+      "expectedDisplay": "[2, 11, 7, 15]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          12,
+          24,
+          8,
+          32
+        ],
+        [
+          13,
+          25,
+          32,
+          11
+        ]
+      ],
+      "expected": [
+        24,
+        32,
+        8,
+        12
+      ],
+      "inputDisplay": "args=[[12, 24, 8, 32], [13, 25, 32, 11]]",
+      "expectedDisplay": "[24, 32, 8, 12]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Tian Ji's horse racing strategy: match smallest winning card, otherwise sacrifice smallest losing card."
+  ],
+  "python": {
+    "starterCode": "def advantageCount(nums1: list[int], nums2: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def advantageCount(nums1: list[int], nums2: list[int]) -> list[int]:\n    from collections import deque\n    sorted1 = deque(sorted(nums1))\n    order2 = sorted(range(len(nums2)), key=lambda x: nums2[x])\n    res = [0] * len(nums1)\n    for idx in order2:\n        if sorted1[-1] > nums2[idx]:\n            # find smallest in sorted1 > nums2[idx]\n            for i in range(len(sorted1)):\n                if sorted1[i] > nums2[idx]:\n                    res[idx] = sorted1[i]\n                    del sorted1[i]\n                    break\n        else:\n            res[idx] = sorted1.popleft()\n    return res\n"
+  },
+  "leetcodeId": 870,
+  "leetcodeTitle": "Advantage Shuffle (Tian Ji Horse Race)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-advantage-shuffle/"
+}

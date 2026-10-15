@@ -35,8 +35,8 @@
   "constraints": [
     "1 <= n <= 2^31 - 1"
   ],
-  "starterCode": "function hammingWeight(n) {\n  return 0;\n}",
-  "solutionCode": "function hammingWeight(n) {\n  let count = 0;\n  while (n > 0) {\n    n = n & (n - 1);\n    count++;\n  }\n  return count;\n}",
+  "starterCode": "def hammingWeight(n):\n    return 0\n",
+  "solutionCode": "def hammingWeight(n):\n    count = 0\n    while n:\n        n &= (n - 1)\n        count += 1\n    return count\n",
   "functionName": "hammingWeight",
   "testCases": [
     {

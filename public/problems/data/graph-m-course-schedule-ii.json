@@ -1,0 +1,121 @@
+{
+  "id": "graph-m-course-schedule-ii",
+  "wingId": "graphs",
+  "floor": 317,
+  "title": "Course Schedule II (Topological Order)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-course-schedule-ii",
+    "name": "Grand Chronomancer",
+    "title": "Architect of Valid Sequences",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wizard",
+    "color": "#8b5cf6",
+    "attackName": "Linear Order Ray",
+    "attackPower": 2,
+    "defeatQuote": "Valid topological sorting order of all courses established!"
+  },
+  "description": "Return the ordering of courses you should take to finish all courses. If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.",
+  "examples": [
+    {
+      "input": "numCourses = 2, prerequisites = [[1,0]]",
+      "output": "[0,1]"
+    },
+    {
+      "input": "numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]",
+      "output": "[0,1,2,3]"
+    }
+  ],
+  "constraints": [
+    "1 <= numCourses <= 2000"
+  ],
+  "starterCode": "def findOrder(numCourses: int, prerequisites: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def findOrder(numCourses: int, prerequisites: list[list[int]]) -> list[int]:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    in_deg = [0] * numCourses\n    for u, v in prerequisites:\n        adj[v].append(u)\n        in_deg[u] += 1\n    q = deque([i for i in range(numCourses) if in_deg[i] == 0])\n    order = []\n    while q:\n        curr = q.popleft()\n        order.append(curr)\n        for nxt in adj[curr]:\n            in_deg[nxt] -= 1\n            if in_deg[nxt] == 0: q.append(nxt)\n    return order if len(order) == numCourses else []\n",
+  "functionName": "findOrder",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2,
+        [
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "inputDisplay": "args=[2, [[1, 0]]]",
+      "expectedDisplay": "[0, 1]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        4,
+        [
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "inputDisplay": "args=[4, [[1, 0], [2, 0], [3, 1], [3, 2]]]",
+      "expectedDisplay": "[0, 1, 2, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        2,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "args=[2, [[0, 1], [1, 0]]]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Accumulate the popped elements in Kahn's algorithm."
+  ],
+  "python": {
+    "starterCode": "def findOrder(numCourses: int, prerequisites: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def findOrder(numCourses: int, prerequisites: list[list[int]]) -> list[int]:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    in_deg = [0] * numCourses\n    for u, v in prerequisites:\n        adj[v].append(u)\n        in_deg[u] += 1\n    q = deque([i for i in range(numCourses) if in_deg[i] == 0])\n    order = []\n    while q:\n        curr = q.popleft()\n        order.append(curr)\n        for nxt in adj[curr]:\n            in_deg[nxt] -= 1\n            if in_deg[nxt] == 0: q.append(nxt)\n    return order if len(order) == numCourses else []\n"
+  },
+  "leetcodeId": 210,
+  "leetcodeTitle": "Course Schedule II (Topological Order)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-course-schedule-ii/"
+}

@@ -1,0 +1,92 @@
+{
+  "id": "bsg-m-min-cost-move-chips",
+  "wingId": "binary-search-greedy",
+  "floor": 459,
+  "title": "Move Chips to Same Position (Parity Counting)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-min-cost-move-chips",
+    "name": "Parity Goblin",
+    "title": "Mover of 2-Step Free Chips",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "goblin",
+    "color": "#f59e0b",
+    "attackName": "Parity Slap",
+    "attackPower": 2,
+    "defeatQuote": "Least coin cost to move all chips to a single position!"
+  },
+  "description": "We have `n` chips. Moving chip from `position[i]` to `position[i] + 2` or `position[i] - 2` costs 0. Moving 1 step costs 1. Return the minimum cost needed to move all chips to the same position.",
+  "examples": [
+    {
+      "input": "position = [1,2,3]",
+      "output": "1"
+    },
+    {
+      "input": "position = [2,2,2,3,3]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= position.length <= 100"
+  ],
+  "starterCode": "def minCostToMoveChips(position: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minCostToMoveChips(position: list[int]) -> int:\n    odd = sum(1 for p in position if p % 2 == 1)\n    even = len(position) - odd\n    return min(odd, even)\n",
+  "functionName": "minCostToMoveChips",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1, 2, 3]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          2,
+          2,
+          3,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[2, 2, 2, 3, 3]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          1000000000
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1, 1000000000]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Moving between same parities is free. The answer is min(count(even), count(odd))."
+  ],
+  "python": {
+    "starterCode": "def minCostToMoveChips(position: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minCostToMoveChips(position: list[int]) -> int:\n    odd = sum(1 for p in position if p % 2 == 1)\n    even = len(position) - odd\n    return min(odd, even)\n"
+  },
+  "leetcodeId": 1217,
+  "leetcodeTitle": "Move Chips to Same Position (Parity Counting)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-min-cost-move-chips/"
+}

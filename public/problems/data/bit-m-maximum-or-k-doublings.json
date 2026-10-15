@@ -1,0 +1,79 @@
+{
+  "id": "bit-m-maximum-or-k-doublings",
+  "wingId": "bit-manipulation",
+  "floor": 548,
+  "title": "Maximum OR of Array with K Shifts",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-maximum-or-k-doublings",
+    "name": "Bit Shift Titan",
+    "title": "Multiplier of Binary Values",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "titan",
+    "color": "#ef4444",
+    "attackName": "Bit Shift Surge",
+    "attackPower": 2,
+    "defeatQuote": "Maximum bitwise OR achieved by shifting one element left by k bits!"
+  },
+  "description": "You are given a 0-indexed integer array `nums` of length `n` and an integer `k`. In an operation, you can multiply any `nums[i]` by 2. Return the maximum possible value of `nums[0] | nums[1] | ... | nums[n - 1]` that can be obtained after applying the operation at most `k` times.",
+  "examples": [
+    {
+      "input": "nums = [12,9], k = 1",
+      "output": "30"
+    },
+    {
+      "input": "nums = [8,1,2], k = 2",
+      "output": "35"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 100000",
+    "1 <= k <= 15"
+  ],
+  "starterCode": "def maximumOr(nums: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def maximumOr(nums: list[int], k: int) -> int:\n    n = len(nums)\n    pref = [0] * (n + 1)\n    suff = [0] * (n + 1)\n    for i in range(n): pref[i + 1] = pref[i] | nums[i]\n    for i in range(n - 1, -1, -1): suff[i] = suff[i + 1] | nums[i]\n    ans = 0\n    for i in range(n):\n        ans = max(ans, pref[i] | (nums[i] << k) | suff[i + 1])\n    return ans\n",
+  "functionName": "maximumOr",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          12,
+          9
+        ],
+        1
+      ],
+      "expected": 30,
+      "inputDisplay": "args=[[12, 9], 1]",
+      "expectedDisplay": "30",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          8,
+          1,
+          2
+        ],
+        2
+      ],
+      "expected": 35,
+      "inputDisplay": "args=[[8, 1, 2], 2]",
+      "expectedDisplay": "35",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Greedy property: all k multiplications by 2 (left shifts) should be applied to the same single number."
+  ],
+  "python": {
+    "starterCode": "def maximumOr(nums: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def maximumOr(nums: list[int], k: int) -> int:\n    n = len(nums)\n    pref = [0] * (n + 1)\n    suff = [0] * (n + 1)\n    for i in range(n): pref[i + 1] = pref[i] | nums[i]\n    for i in range(n - 1, -1, -1): suff[i] = suff[i + 1] | nums[i]\n    ans = 0\n    for i in range(n):\n        ans = max(ans, pref[i] | (nums[i] << k) | suff[i + 1])\n    return ans\n"
+  },
+  "leetcodeId": 2680,
+  "leetcodeTitle": "Maximum OR of Array with K Shifts",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-maximum-or-k-doublings/"
+}

@@ -33,8 +33,8 @@
     "1 <= n <= 2 * 10^4",
     "0 <= height[i] <= 10^5"
   ],
-  "starterCode": "function trap(height) {\n  return 0;\n}",
-  "solutionCode": "function trap(height) {\n  if (!height || height.length === 0) return 0;\n  let left = 0, right = height.length - 1;\n  let leftMax = 0, rightMax = 0;\n  let totalWater = 0;\n  while (left < right) {\n    if (height[left] < height[right]) {\n      if (height[left] >= leftMax) leftMax = height[left];\n      else totalWater += leftMax - height[left];\n      left++;\n    } else {\n      if (height[right] >= rightMax) rightMax = height[right];\n      else totalWater += rightMax - height[right];\n      right--;\n    }\n  }\n  return totalWater;\n}",
+  "starterCode": "def trap(height):\n    return 0\n",
+  "solutionCode": "def trap(height):\n    if not height:\n        return 0\n    left, right = 0, len(height) - 1\n    left_max, right_max = 0, 0\n    water = 0\n    while left < right:\n        if height[left] < height[right]:\n            if height[left] >= left_max:\n                left_max = height[left]\n            else:\n                water += left_max - height[left]\n            left += 1\n        else:\n            if height[right] >= right_max:\n                right_max = height[right]\n            else:\n                water += right_max - height[right]\n            right -= 1\n    return water\n",
   "functionName": "trap",
   "testCases": [
     {

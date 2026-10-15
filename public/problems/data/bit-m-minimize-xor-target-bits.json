@@ -1,0 +1,71 @@
+{
+  "id": "bit-m-minimize-xor-target-bits",
+  "wingId": "bit-manipulation",
+  "floor": 557,
+  "title": "Minimize XOR with Target Bit Count",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-minimize-xor-target-bits",
+    "name": "Hamming Matcher",
+    "title": "Aligner of Set Bits with Target",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Hamming Beam",
+    "attackPower": 2,
+    "defeatQuote": "Integer x constructed with popcount(num2) bits minimizing x ^ num1!"
+  },
+  "description": "Given two positive integers `num1` and `num2`, find the positive integer `x` such that: 1. `x` has the same number of set bits as `num2`, and 2. The value `x XOR num1` is minimal.",
+  "examples": [
+    {
+      "input": "num1 = 3, num2 = 5",
+      "output": "3"
+    },
+    {
+      "input": "num1 = 1, num2 = 12",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= num1, num2 <= 10^9"
+  ],
+  "starterCode": "def minimizeXor(num1: int, num2: int) -> int:\n    pass\n",
+  "solutionCode": "def minimizeXor(num1: int, num2: int) -> int:\n    target_bits = bin(num2).count('1')\n    curr_bits = bin(num1).count('1')\n    res = num1\n    for i in range(32):\n        if curr_bits > target_bits and (res & (1 << i)):\n            res ^= (1 << i)\n            curr_bits -= 1\n        elif curr_bits < target_bits and not (res & (1 << i)):\n            res |= (1 << i)\n            curr_bits += 1\n    return res\n",
+  "functionName": "minimizeXor",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        5
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[3, 5]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1,
+        12
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[1, 12]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Match num1's bits from highest to lowest. Clear lowest bits if count is too high, set lowest 0-bits if count is too low."
+  ],
+  "python": {
+    "starterCode": "def minimizeXor(num1: int, num2: int) -> int:\n    pass\n",
+    "solutionCode": "def minimizeXor(num1: int, num2: int) -> int:\n    target_bits = bin(num2).count('1')\n    curr_bits = bin(num1).count('1')\n    res = num1\n    for i in range(32):\n        if curr_bits > target_bits and (res & (1 << i)):\n            res ^= (1 << i)\n            curr_bits -= 1\n        elif curr_bits < target_bits and not (res & (1 << i)):\n            res |= (1 << i)\n            curr_bits += 1\n    return res\n"
+  },
+  "leetcodeId": 2429,
+  "leetcodeTitle": "Minimize XOR with Target Bit Count",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-minimize-xor-target-bits/"
+}

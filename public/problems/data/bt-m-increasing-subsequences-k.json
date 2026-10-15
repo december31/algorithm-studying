@@ -1,0 +1,102 @@
+{
+  "id": "bt-m-increasing-subsequences-k",
+  "wingId": "backtracking",
+  "floor": 243,
+  "title": "Increasing Subsequences of Length K",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-increasing-subsequences-k",
+    "name": "Strict Order Drake",
+    "title": "Watcher of Length-K Ascents",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#38bdf8",
+    "attackName": "Ascent Claw",
+    "attackPower": 2,
+    "defeatQuote": "All length-k strictly ascending subsequences gathered!"
+  },
+  "description": "Given an integer array `nums` and an integer `k`, return all strictly increasing subsequences of length `k` in lexicographical order.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,4], k = 2",
+      "output": "[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= len(nums) <= 12"
+  ],
+  "starterCode": "def increasingSubsequencesK(nums: list[int], k: int) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def increasingSubsequencesK(nums: list[int], k: int) -> list[list[int]]:\n    res = []\n    def backtrack(idx, path):\n        if len(path) == k:\n            res.append(list(path))\n            return\n        for i in range(idx, len(nums)):\n            if not path or nums[i] > path[-1]:\n                backtrack(i + 1, path + [nums[i]])\n    backtrack(0, [])\n    return res\n",
+  "functionName": "increasingSubsequencesK",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        2
+      ],
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "inputDisplay": "args=[[1, 2, 3, 4], 2]",
+      "expectedDisplay": "[[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          4,
+          3,
+          2,
+          1
+        ],
+        2
+      ],
+      "expected": [],
+      "inputDisplay": "args=[[4, 3, 2, 1], 2]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Backtrack maintaining strictly greater than previous element until length equals k."
+  ],
+  "python": {
+    "starterCode": "def increasingSubsequencesK(nums: list[int], k: int) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def increasingSubsequencesK(nums: list[int], k: int) -> list[list[int]]:\n    res = []\n    def backtrack(idx, path):\n        if len(path) == k:\n            res.append(list(path))\n            return\n        for i in range(idx, len(nums)):\n            if not path or nums[i] > path[-1]:\n                backtrack(i + 1, path + [nums[i]])\n    backtrack(0, [])\n    return res\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Increasing Subsequences of Length K",
+  "leetcodeUrl": null
+}

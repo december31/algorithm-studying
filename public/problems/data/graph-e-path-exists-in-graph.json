@@ -1,0 +1,106 @@
+{
+  "id": "graph-e-path-exists-in-graph",
+  "wingId": "graphs",
+  "floor": 304,
+  "title": "Find if Path Exists in Graph",
+  "difficulty": "easy",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-e-path-exists-in-graph",
+    "name": "Wandering Imp",
+    "title": "Strider of Connected Trails",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "imp",
+    "color": "#f59e0b",
+    "attackName": "Trail Snare",
+    "attackPower": 1,
+    "defeatQuote": "Connectivity between source and destination verified!"
+  },
+  "description": "There is a bi-directional graph with `n` vertices, where each vertex is labeled from `0` to `n - 1`. Given a 2D integer array `edges` where each `edges[i] = [ui, vi]`, determine if there is a valid path that exists from `source` to `destination`.",
+  "examples": [
+    {
+      "input": "n = 3, edges = [[0,1],[1,2],[2,0]], source = 0, destination = 2",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 200000",
+    "0 <= edges.length <= 200000"
+  ],
+  "starterCode": "def validPath(n: int, edges: list[list[int]], source: int, destination: int) -> bool:\n    pass\n",
+  "solutionCode": "def validPath(n: int, edges: list[list[int]], source: int, destination: int) -> bool:\n    if source == destination: return True\n    parent = list(range(n))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    for u, v in edges:\n        parent[find(u)] = find(v)\n    return find(source) == find(destination)\n",
+  "functionName": "validPath",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        0,
+        2
+      ],
+      "expected": true,
+      "inputDisplay": "args=[3, [[0, 1], [1, 2], [2, 0]], 0, 2]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        6,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            4,
+            3
+          ]
+        ],
+        0,
+        5
+      ],
+      "expected": false,
+      "inputDisplay": "args=[6, [[0, 1], [0, 2], [3, 5], [5, 4], [4, 3]], 0, 5]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Disjoint Set Union (Union-Find) or BFS/DFS determines if source and destination share a component."
+  ],
+  "python": {
+    "starterCode": "def validPath(n: int, edges: list[list[int]], source: int, destination: int) -> bool:\n    pass\n",
+    "solutionCode": "def validPath(n: int, edges: list[list[int]], source: int, destination: int) -> bool:\n    if source == destination: return True\n    parent = list(range(n))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    for u, v in edges:\n        parent[find(u)] = find(v)\n    return find(source) == find(destination)\n"
+  },
+  "leetcodeId": 1971,
+  "leetcodeTitle": "Find if Path Exists in Graph",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-e-path-exists-in-graph/"
+}

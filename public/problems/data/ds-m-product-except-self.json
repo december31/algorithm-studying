@@ -1,0 +1,108 @@
+{
+  "id": "ds-m-product-except-self",
+  "wingId": "data-structures",
+  "floor": 131,
+  "title": "Product of Array Except Self",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-product-except-self",
+    "name": "Multiplicative Gorgon",
+    "title": "Drainer of Single Factors",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "slime",
+    "color": "#06b6d4",
+    "attackName": "Product Beam",
+    "attackPower": 2,
+    "defeatQuote": "Prefix and suffix products dissolved my immunity!"
+  },
+  "description": "Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`. Do it in O(n) without division.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,4]",
+      "output": "[24,12,8,6]"
+    },
+    {
+      "input": "nums = [-1,1,0,-3,3]",
+      "output": "[0,0,9,0,0]"
+    }
+  ],
+  "constraints": [
+    "2 <= len(nums) <= 10^5",
+    "-30 <= nums[i] <= 30"
+  ],
+  "starterCode": "def productExceptSelf(nums: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def productExceptSelf(nums: list[int]) -> list[int]:\n    n = len(nums)\n    res = [1] * n\n    p = 1\n    for i in range(n):\n        res[i] = p\n        p *= nums[i]\n    s = 1\n    for i in range(n - 1, -1, -1):\n        res[i] *= s\n        s *= nums[i]\n    return res\n",
+  "functionName": "productExceptSelf",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        24,
+        12,
+        8,
+        6
+      ],
+      "inputDisplay": "[1, 2, 3, 4]",
+      "expectedDisplay": "[24, 12, 8, 6]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          -1,
+          1,
+          0,
+          -3,
+          3
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        9,
+        0,
+        0
+      ],
+      "inputDisplay": "[-1, 1, 0, -3, 3]",
+      "expectedDisplay": "[0, 0, 9, 0, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        3,
+        2
+      ],
+      "inputDisplay": "[2, 3]",
+      "expectedDisplay": "[3, 2]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Maintain running prefix and suffix product accumulators."
+  ],
+  "python": {
+    "starterCode": "def productExceptSelf(nums: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def productExceptSelf(nums: list[int]) -> list[int]:\n    n = len(nums)\n    res = [1] * n\n    p = 1\n    for i in range(n):\n        res[i] = p\n        p *= nums[i]\n    s = 1\n    for i in range(n - 1, -1, -1):\n        res[i] *= s\n        s *= nums[i]\n    return res\n"
+  },
+  "leetcodeId": 238,
+  "leetcodeTitle": "Product of Array Except Self",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-product-except-self/"
+}

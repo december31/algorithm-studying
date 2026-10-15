@@ -1,0 +1,92 @@
+{
+  "id": "bit-m-score-flipping-matrix",
+  "wingId": "bit-manipulation",
+  "floor": 534,
+  "title": "Score After Flipping Matrix (Row/Col Flips)",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-bit-m-score-flipping-matrix",
+    "name": "Inversion Sovereign",
+    "title": "Maximizer of Binary Row Scores",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#f59e0b",
+    "attackName": "Matrix Inversion",
+    "attackPower": 2,
+    "defeatQuote": "Maximum binary row score achieved after optimal row and column flips!"
+  },
+  "description": "You are given an `m x n` binary matrix `grid`. A move consists of choosing any row or column and toggling each value. Every row of the matrix is interpreted as a binary number, and the score is the sum of these numbers. Return the highest possible score.",
+  "examples": [
+    {
+      "input": "grid = [[0,0,1,1],[1,0,1,0],[1,1,0,0]]",
+      "output": "39"
+    },
+    {
+      "input": "grid = [[0]]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 20"
+  ],
+  "starterCode": "def matrixScore(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def matrixScore(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    # Flip any row whose first element is 0\n    for r in range(R):\n        if grid[r][0] == 0:\n            for c in range(C): grid[r][c] ^= 1\n    ans = 0\n    for c in range(C):\n        col_ones = sum(grid[r][c] for r in range(R))\n        best_ones = max(col_ones, R - col_ones)\n        ans += best_ones * (1 << (C - 1 - c))\n    return ans\n",
+  "functionName": "matrixScore",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 39,
+      "inputDisplay": "[[0, 0, 1, 1], [1, 0, 1, 0], [1, 1, 0, 0]]",
+      "expectedDisplay": "39",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[0]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Ensure every row starts with 1 by flipping if needed. For subsequent columns, choose max(col_ones, R - col_ones)."
+  ],
+  "python": {
+    "starterCode": "def matrixScore(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def matrixScore(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    # Flip any row whose first element is 0\n    for r in range(R):\n        if grid[r][0] == 0:\n            for c in range(C): grid[r][c] ^= 1\n    ans = 0\n    for c in range(C):\n        col_ones = sum(grid[r][c] for r in range(R))\n        best_ones = max(col_ones, R - col_ones)\n        ans += best_ones * (1 << (C - 1 - c))\n    return ans\n"
+  },
+  "leetcodeId": 861,
+  "leetcodeTitle": "Score After Flipping Matrix (Row/Col Flips)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-score-flipping-matrix/"
+}

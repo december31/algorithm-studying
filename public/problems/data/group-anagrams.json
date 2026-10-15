@@ -37,8 +37,8 @@
     "0 <= strs[i].length <= 100",
     "strs[i] consists of lowercase English letters."
   ],
-  "starterCode": "function groupAnagrams(strs) {\n  return [];\n}",
-  "solutionCode": "function groupAnagrams(strs) {\n  const map = {};\n  for (const s of strs) {\n    const key = s.split('').sort().join('');\n    if (!map[key]) map[key] = [];\n    map[key].push(s);\n  }\n  return Object.values(map);\n}",
+  "starterCode": "def groupAnagrams(strs):\n    return []\n",
+  "solutionCode": "def groupAnagrams(strs):\n    groups = {}\n    for s in strs:\n        key = \"\".join(sorted(s))\n        if key not in groups:\n            groups[key] = []\n        groups[key].append(s)\n    return list(groups.values())\n",
   "functionName": "groupAnagrams",
   "testCases": [
     {

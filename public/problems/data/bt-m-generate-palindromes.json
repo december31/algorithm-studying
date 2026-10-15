@@ -1,0 +1,84 @@
+{
+  "id": "bt-m-generate-palindromes",
+  "wingId": "backtracking",
+  "floor": 262,
+  "title": "Palindromic Permutations Generator",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-generate-palindromes",
+    "name": "Mirror Banshee",
+    "title": "Reconstructor of Symmetric Words",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Mirror Wail",
+    "attackPower": 2,
+    "defeatQuote": "All palindromic permutations assembled around the central axis!"
+  },
+  "description": "Given a string `s`, return all the palindromic permutations (without duplicates) of `s`. If no palindromic permutation could be form, return an empty list.",
+  "examples": [
+    {
+      "input": "s = \"aabb\"",
+      "output": "[\"abba\",\"baab\"]"
+    },
+    {
+      "input": "s = \"abc\"",
+      "output": "[]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 12"
+  ],
+  "starterCode": "def generatePalindromes(s: str) -> list[str]:\n    pass\n",
+  "solutionCode": "def generatePalindromes(s: str) -> list[str]:\n    from collections import Counter\n    counts = Counter(s)\n    odd_chars = [ch for ch, c in counts.items() if c % 2 == 1]\n    if len(odd_chars) > 1: return []\n    mid = odd_chars[0] if odd_chars else ''\n    half = []\n    for ch, c in counts.items():\n        half.extend([ch] * (c // 2))\n    half.sort()\n    res = []\n    used = [False] * len(half)\n    def backtrack(curr):\n        if len(curr) == len(half):\n            prefix = ''.join(curr)\n            res.append(prefix + mid + prefix[::-1])\n            return\n        for i in range(len(half)):\n            if used[i]: continue\n            if i > 0 and half[i] == half[i - 1] and not used[i - 1]: continue\n            used[i] = True\n            curr.append(half[i])\n            backtrack(curr)\n            curr.pop()\n            used[i] = False\n    backtrack([])\n    return res\n",
+  "functionName": "generatePalindromes",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "aabb"
+      ],
+      "expected": [
+        "abba",
+        "baab"
+      ],
+      "inputDisplay": "aabb",
+      "expectedDisplay": "['abba', 'baab']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "abc"
+      ],
+      "expected": [],
+      "inputDisplay": "abc",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "a"
+      ],
+      "expected": [
+        "a"
+      ],
+      "inputDisplay": "a",
+      "expectedDisplay": "['a']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Permute the first half of the characters and mirror across the single odd character."
+  ],
+  "python": {
+    "starterCode": "def generatePalindromes(s: str) -> list[str]:\n    pass\n",
+    "solutionCode": "def generatePalindromes(s: str) -> list[str]:\n    from collections import Counter\n    counts = Counter(s)\n    odd_chars = [ch for ch, c in counts.items() if c % 2 == 1]\n    if len(odd_chars) > 1: return []\n    mid = odd_chars[0] if odd_chars else ''\n    half = []\n    for ch, c in counts.items():\n        half.extend([ch] * (c // 2))\n    half.sort()\n    res = []\n    used = [False] * len(half)\n    def backtrack(curr):\n        if len(curr) == len(half):\n            prefix = ''.join(curr)\n            res.append(prefix + mid + prefix[::-1])\n            return\n        for i in range(len(half)):\n            if used[i]: continue\n            if i > 0 and half[i] == half[i - 1] and not used[i - 1]: continue\n            used[i] = True\n            curr.append(half[i])\n            backtrack(curr)\n            curr.pop()\n            used[i] = False\n    backtrack([])\n    return res\n"
+  },
+  "leetcodeId": 267,
+  "leetcodeTitle": "Palindromic Permutations Generator",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-generate-palindromes/"
+}

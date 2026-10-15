@@ -1,0 +1,89 @@
+{
+  "id": "bit-m-min-flips-or-equal-c",
+  "wingId": "bit-manipulation",
+  "floor": 522,
+  "title": "Minimum Flips to Make (a OR b == c)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-min-flips-or-equal-c",
+    "name": "Logic Gatekeeper",
+    "title": "Aligner of Binary OR Gates",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#f59e0b",
+    "attackName": "Bit Inversion",
+    "attackPower": 2,
+    "defeatQuote": "Minimum bit flips in a and b to satisfy a | b == c!"
+  },
+  "description": "Given 3 positives numbers `a`, `b` and `c`. Return the minimum flips needed in some bits of `a` and to make `(a OR b == c)`. Flip operation consists of change any single bit 1 to 0 or change the bit 0 to 1 in their binary representation.",
+  "examples": [
+    {
+      "input": "a = 2, b = 6, c = 5",
+      "output": "3"
+    },
+    {
+      "input": "a = 4, b = 2, c = 7",
+      "output": "1"
+    },
+    {
+      "input": "a = 1, b = 2, c = 3",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= a, b, c <= 10^9"
+  ],
+  "starterCode": "def minFlips(a: int, b: int, c: int) -> int:\n    pass\n",
+  "solutionCode": "def minFlips(a: int, b: int, c: int) -> int:\n    flips = 0\n    for i in range(32):\n        bit_a = (a >> i) & 1\n        bit_b = (b >> i) & 1\n        bit_c = (c >> i) & 1\n        if bit_c == 1:\n            if bit_a == 0 and bit_b == 0: flips += 1\n        else:\n            flips += bit_a + bit_b\n    return flips\n",
+  "functionName": "minFlips",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2,
+        6,
+        5
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[2, 6, 5]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        4,
+        2,
+        7
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[4, 2, 7]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        1,
+        2,
+        3
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[1, 2, 3]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Examine each bit: if bit_c == 1 and neither a nor b has 1, add 1. If bit_c == 0, add bit_a + bit_b."
+  ],
+  "python": {
+    "starterCode": "def minFlips(a: int, b: int, c: int) -> int:\n    pass\n",
+    "solutionCode": "def minFlips(a: int, b: int, c: int) -> int:\n    flips = 0\n    for i in range(32):\n        bit_a = (a >> i) & 1\n        bit_b = (b >> i) & 1\n        bit_c = (c >> i) & 1\n        if bit_c == 1:\n            if bit_a == 0 and bit_b == 0: flips += 1\n        else:\n            flips += bit_a + bit_b\n    return flips\n"
+  },
+  "leetcodeId": 1318,
+  "leetcodeTitle": "Minimum Flips to Make (a OR b == c)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-min-flips-or-equal-c/"
+}

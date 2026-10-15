@@ -1,0 +1,107 @@
+{
+  "id": "graph-h-reachable-nodes-subdivided",
+  "wingId": "graphs",
+  "floor": 379,
+  "title": "Reachable Nodes in Subdivided Graph",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-h-reachable-nodes-subdivided",
+    "name": "Micro-Node Spectre",
+    "title": "Surveyor of Subdivided Edge Nodes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Subdivision Swarm",
+    "attackPower": 3,
+    "defeatQuote": "Total original and subdivision nodes reachable within maxMoves!"
+  },
+  "description": "You are given an undirected graph of `n` nodes (0 to n - 1). Each `edges[i] = [ui, vi, cnti]` indicates an edge subdivided into `cnti` new nodes. You start at node 0 and have `maxMoves` moves. Return the number of nodes you can reach in the subdivided graph.",
+  "examples": [
+    {
+      "input": "edges = [[0,1,10],[0,2,1],[1,2,2]], maxMoves = 6, n = 3",
+      "output": "13"
+    }
+  ],
+  "constraints": [
+    "0 <= edges.length <= 10000",
+    "1 <= n <= 3000"
+  ],
+  "starterCode": "def reachableNodes(edges: list[list[int]], maxMoves: int, n: int) -> int:\n    pass\n",
+  "solutionCode": "def reachableNodes(edges: list[list[int]], maxMoves: int, n: int) -> int:\n    import heapq\n    from collections import defaultdict\n    graph = defaultdict(dict)\n    for u, v, w in edges:\n        graph[u][v] = w\n        graph[v][u] = w\n    pq = [(0, 0)]\n    dist = {}\n    while pq:\n        d, u = heapq.heappop(pq)\n        if u in dist: continue\n        dist[u] = d\n        for v, w in graph[u].items():\n            if v not in dist and d + w + 1 <= maxMoves:\n                heapq.heappush(pq, (d + w + 1, v))\n    ans = len(dist)\n    for u, v, w in edges:\n        c1 = max(0, maxMoves - dist[u]) if u in dist else 0\n        c2 = max(0, maxMoves - dist[v]) if v in dist else 0\n        ans += min(w, c1 + c2)\n    return ans\n",
+  "functionName": "reachableNodes",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1,
+            10
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            1,
+            2,
+            2
+          ]
+        ],
+        6,
+        3
+      ],
+      "expected": 13,
+      "inputDisplay": "args=[[[0, 1, 10], [0, 2, 1], [1, 2, 2]], 6, 3]",
+      "expectedDisplay": "13",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            0,
+            2,
+            8
+          ],
+          [
+            1,
+            3,
+            1
+          ]
+        ],
+        10,
+        4
+      ],
+      "expected": 23,
+      "inputDisplay": "args=[[[0, 1, 4], [1, 2, 6], [0, 2, 8], [1, 3, 1]], 10, 4]",
+      "expectedDisplay": "23",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Run Dijkstra on major nodes where edge weight is cnt + 1. Then calculate remaining steps used along each edge."
+  ],
+  "python": {
+    "starterCode": "def reachableNodes(edges: list[list[int]], maxMoves: int, n: int) -> int:\n    pass\n",
+    "solutionCode": "def reachableNodes(edges: list[list[int]], maxMoves: int, n: int) -> int:\n    import heapq\n    from collections import defaultdict\n    graph = defaultdict(dict)\n    for u, v, w in edges:\n        graph[u][v] = w\n        graph[v][u] = w\n    pq = [(0, 0)]\n    dist = {}\n    while pq:\n        d, u = heapq.heappop(pq)\n        if u in dist: continue\n        dist[u] = d\n        for v, w in graph[u].items():\n            if v not in dist and d + w + 1 <= maxMoves:\n                heapq.heappush(pq, (d + w + 1, v))\n    ans = len(dist)\n    for u, v, w in edges:\n        c1 = max(0, maxMoves - dist[u]) if u in dist else 0\n        c2 = max(0, maxMoves - dist[v]) if v in dist else 0\n        ans += min(w, c1 + c2)\n    return ans\n"
+  },
+  "leetcodeId": 882,
+  "leetcodeTitle": "Reachable Nodes in Subdivided Graph",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-reachable-nodes-subdivided/"
+}

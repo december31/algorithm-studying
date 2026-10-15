@@ -1,0 +1,105 @@
+{
+  "id": "ds-m-reorder-list",
+  "wingId": "data-structures",
+  "floor": 161,
+  "title": "Fold Reordered List",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-reorder-list",
+    "name": "Interleaving Phantom",
+    "title": "Weaver of Folded Head-Tails",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#14b8a6",
+    "attackName": "Fold Bind",
+    "attackPower": 2,
+    "defeatQuote": "Interleaving the first half and reversed second half succeeded!"
+  },
+  "description": "You are given an array of node values representing a singly linked-list: `L0 → L1 → … → Ln - 1 → Ln`. Reorder the list to be: `L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …`. Return the reordered array of values.",
+  "examples": [
+    {
+      "input": "head = [1,2,3,4]",
+      "output": "[1,4,2,3]"
+    },
+    {
+      "input": "head = [1,2,3,4,5]",
+      "output": "[1,5,2,4,3]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(head) <= 5 * 10^4"
+  ],
+  "starterCode": "def reorderList(head: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def reorderList(head: list[int]) -> list[int]:\n    if len(head) <= 2: return head\n    left, right = 0, len(head) - 1\n    res = []\n    while left <= right:\n        if left == right:\n            res.append(head[left])\n            break\n        res.append(head[left])\n        res.append(head[right])\n        left += 1\n        right -= 1\n    return res\n",
+  "functionName": "reorderList",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        1,
+        4,
+        2,
+        3
+      ],
+      "inputDisplay": "[1, 2, 3, 4]",
+      "expectedDisplay": "[1, 4, 2, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        1,
+        5,
+        2,
+        4,
+        3
+      ],
+      "inputDisplay": "[1, 2, 3, 4, 5]",
+      "expectedDisplay": "[1, 5, 2, 4, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[1]",
+      "expectedDisplay": "[1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Find middle, reverse the second half, and interleave nodes."
+  ],
+  "python": {
+    "starterCode": "def reorderList(head: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def reorderList(head: list[int]) -> list[int]:\n    if len(head) <= 2: return head\n    left, right = 0, len(head) - 1\n    res = []\n    while left <= right:\n        if left == right:\n            res.append(head[left])\n            break\n        res.append(head[left])\n        res.append(head[right])\n        left += 1\n        right -= 1\n    return res\n"
+  },
+  "leetcodeId": 143,
+  "leetcodeTitle": "Fold Reordered List",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-reorder-list/"
+}

@@ -1,0 +1,146 @@
+{
+  "id": "ds-m-spiral-matrix",
+  "wingId": "data-structures",
+  "floor": 140,
+  "title": "Spiral Matrix Order",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-spiral-matrix",
+    "name": "Vortex Titan",
+    "title": "Guardian of Inward Spirals",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Centripetal Slam",
+    "attackPower": 2,
+    "defeatQuote": "The concentric boundaries wound inwards without missing a tile!"
+  },
+  "description": "Given an `m x n` `matrix`, return all elements of the `matrix` in spiral order.",
+  "examples": [
+    {
+      "input": "matrix = [[1,2,3],[4,5,6],[7,8,9]]",
+      "output": "[1,2,3,6,9,8,7,4,5]"
+    },
+    {
+      "input": "matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]",
+      "output": "[1,2,3,4,8,12,11,10,9,5,6,7]"
+    }
+  ],
+  "constraints": [
+    "m == len(matrix)",
+    "n == len(matrix[i])",
+    "1 <= m, n <= 10",
+    "-100 <= matrix[i][j] <= 100"
+  ],
+  "starterCode": "def spiralOrder(matrix: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def spiralOrder(matrix: list[list[int]]) -> list[int]:\n    if not matrix or not matrix[0]: return []\n    res = []\n    top, bottom = 0, len(matrix) - 1\n    left, right = 0, len(matrix[0]) - 1\n    while top <= bottom and left <= right:\n        for c in range(left, right + 1): res.append(matrix[top][c])\n        top += 1\n        for r in range(top, bottom + 1): res.append(matrix[r][right])\n        right -= 1\n        if top <= bottom:\n            for c in range(right, left - 1, -1): res.append(matrix[bottom][c])\n            bottom -= 1\n        if left <= right:\n            for r in range(bottom, top - 1, -1): res.append(matrix[r][left])\n            left += 1\n    return res\n",
+  "functionName": "spiralOrder",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        6,
+        9,
+        8,
+        7,
+        4,
+        5
+      ],
+      "inputDisplay": "[[1, 2, 3], [4, 5, 6], [7, 8, 9]]",
+      "expectedDisplay": "[1, 2, 3, 6, 9, 8, 7, 4, 5]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            5,
+            6,
+            7,
+            8
+          ],
+          [
+            9,
+            10,
+            11,
+            12
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        8,
+        12,
+        11,
+        10,
+        9,
+        5,
+        6,
+        7
+      ],
+      "inputDisplay": "[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]",
+      "expectedDisplay": "[1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[[1]]",
+      "expectedDisplay": "[1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Maintain top, bottom, left, right bounds and shrink them inward after each direction."
+  ],
+  "python": {
+    "starterCode": "def spiralOrder(matrix: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def spiralOrder(matrix: list[list[int]]) -> list[int]:\n    if not matrix or not matrix[0]: return []\n    res = []\n    top, bottom = 0, len(matrix) - 1\n    left, right = 0, len(matrix[0]) - 1\n    while top <= bottom and left <= right:\n        for c in range(left, right + 1): res.append(matrix[top][c])\n        top += 1\n        for r in range(top, bottom + 1): res.append(matrix[r][right])\n        right -= 1\n        if top <= bottom:\n            for c in range(right, left - 1, -1): res.append(matrix[bottom][c])\n            bottom -= 1\n        if left <= right:\n            for r in range(bottom, top - 1, -1): res.append(matrix[r][left])\n            left += 1\n    return res\n"
+  },
+  "leetcodeId": 54,
+  "leetcodeTitle": "Spiral Matrix Order",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-spiral-matrix/"
+}

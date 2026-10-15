@@ -1,0 +1,92 @@
+{
+  "id": "bit-m-max-xor-each-query",
+  "wingId": "bit-manipulation",
+  "floor": 530,
+  "title": "Maximum XOR for Each Query",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-max-xor-each-query",
+    "name": "Bitwise Inverter",
+    "title": "Maximizer of Fixed-Bit Range XOR",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#ef4444",
+    "attackName": "Max Bit Inversion",
+    "attackPower": 2,
+    "defeatQuote": "Array of maximum k answers maximizing XOR with prefix values generated!"
+  },
+  "description": "You are given a sorted array `nums` of `n` non-negative integers and an integer `maximumBit`. For each query, find `k < 2^maximumBit` such that `(nums[0] ^ ... ^ nums[last]) ^ k` is maximized. Then remove last element. Return the answers to all queries.",
+  "examples": [
+    {
+      "input": "nums = [0,1,1,3], maximumBit = 2",
+      "output": "[0,3,2,3]"
+    },
+    {
+      "input": "nums = [2,3,4,7], maximumBit = 3",
+      "output": "[5,2,6,5]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 100000",
+    "1 <= maximumBit <= 20"
+  ],
+  "starterCode": "def getMaximumXor(nums: list[int], maximumBit: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def getMaximumXor(nums: list[int], maximumBit: int) -> list[int]:\n    max_val = (1 << maximumBit) - 1\n    curr_xor = 0\n    for x in nums: curr_xor ^= x\n    res = []\n    for x in reversed(nums):\n        res.append(curr_xor ^ max_val)\n        curr_xor ^= x\n    return res\n",
+  "functionName": "getMaximumXor",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          0,
+          1,
+          1,
+          3
+        ],
+        2
+      ],
+      "expected": [
+        0,
+        3,
+        2,
+        3
+      ],
+      "inputDisplay": "args=[[0, 1, 1, 3], 2]",
+      "expectedDisplay": "[0, 3, 2, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          3,
+          4,
+          7
+        ],
+        3
+      ],
+      "expected": [
+        5,
+        2,
+        6,
+        5
+      ],
+      "inputDisplay": "args=[[2, 3, 4, 7], 3]",
+      "expectedDisplay": "[5, 2, 6, 5]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "The optimal k is curr_xor ^ ((1 << maximumBit) - 1)."
+  ],
+  "python": {
+    "starterCode": "def getMaximumXor(nums: list[int], maximumBit: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def getMaximumXor(nums: list[int], maximumBit: int) -> list[int]:\n    max_val = (1 << maximumBit) - 1\n    curr_xor = 0\n    for x in nums: curr_xor ^= x\n    res = []\n    for x in reversed(nums):\n        res.append(curr_xor ^ max_val)\n        curr_xor ^= x\n    return res\n"
+  },
+  "leetcodeId": 1829,
+  "leetcodeTitle": "Maximum XOR for Each Query",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-max-xor-each-query/"
+}

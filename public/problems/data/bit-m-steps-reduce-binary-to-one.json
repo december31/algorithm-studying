@@ -1,0 +1,83 @@
+{
+  "id": "bit-m-steps-reduce-binary-to-one",
+  "wingId": "bit-manipulation",
+  "floor": 524,
+  "title": "Reduce Binary Representation to One",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-steps-reduce-binary-to-one",
+    "name": "Binary Collatz Imp",
+    "title": "Reducer of Binary Strings",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#ec4899",
+    "attackName": "Collatz Shift",
+    "attackPower": 2,
+    "defeatQuote": "Steps to reduce binary string to '1' using (if odd: +1, if even: /2)!"
+  },
+  "description": "Given a binary string `s` representing an integer, return the number of steps to reduce it to 1 under rules: If current number is even, divide by 2. If odd, add 1.",
+  "examples": [
+    {
+      "input": "s = \"1101\"",
+      "output": "6"
+    },
+    {
+      "input": "s = \"10\"",
+      "output": "1"
+    },
+    {
+      "input": "s = \"1\"",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 500"
+  ],
+  "starterCode": "def numSteps(s: str) -> int:\n    pass\n",
+  "solutionCode": "def numSteps(s: str) -> int:\n    carry = 0\n    steps = 0\n    for i in range(len(s) - 1, 0, -1):\n        digit = int(s[i]) + carry\n        if digit % 2 == 1:\n            steps += 2\n            carry = 1\n        else:\n            steps += 1\n    return steps + carry\n",
+  "functionName": "numSteps",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "1101"
+      ],
+      "expected": 6,
+      "inputDisplay": "1101",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "10"
+      ],
+      "expected": 1,
+      "inputDisplay": "10",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "1"
+      ],
+      "expected": 0,
+      "inputDisplay": "1",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Simulate backwards tracking carry: if current digit + carry is odd, +1 then /2 takes 2 steps and produces carry = 1."
+  ],
+  "python": {
+    "starterCode": "def numSteps(s: str) -> int:\n    pass\n",
+    "solutionCode": "def numSteps(s: str) -> int:\n    carry = 0\n    steps = 0\n    for i in range(len(s) - 1, 0, -1):\n        digit = int(s[i]) + carry\n        if digit % 2 == 1:\n            steps += 2\n            carry = 1\n        else:\n            steps += 1\n    return steps + carry\n"
+  },
+  "leetcodeId": 1404,
+  "leetcodeTitle": "Reduce Binary Representation to One",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-steps-reduce-binary-to-one/"
+}

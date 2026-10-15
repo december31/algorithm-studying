@@ -32,8 +32,8 @@
     "The number of nodes in the tree is in the range [0, 10^4].",
     "-100 <= Node.val <= 100"
   ],
-  "starterCode": "function maxDepth(root) {\n  return 0;\n}",
-  "solutionCode": "function maxDepth(root) {\n  if (!root || root.length === 0 || root[0] === null) return 0;\n  function getDepth(idx) {\n    if (idx >= root.length || root[idx] === null || root[idx] === undefined) return 0;\n    return 1 + Math.max(getDepth(2 * idx + 1), getDepth(2 * idx + 2));\n  }\n  return getDepth(0);\n}",
+  "starterCode": "def maxDepth(root):\n    return 0\n",
+  "solutionCode": "def maxDepth(root):\n    if not root or root[0] is None:\n        return 0\n    def get_depth(idx):\n        if idx >= len(root) or root[idx] is None:\n            return 0\n        return 1 + max(get_depth(2 * idx + 1), get_depth(2 * idx + 2))\n    return get_depth(0)\n",
   "functionName": "maxDepth",
   "testCases": [
     {

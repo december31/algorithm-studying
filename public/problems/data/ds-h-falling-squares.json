@@ -1,0 +1,100 @@
+{
+  "id": "ds-h-falling-squares",
+  "wingId": "data-structures",
+  "floor": 193,
+  "title": "Falling Squares Simulation",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-h-falling-squares",
+    "name": "Tetris Golem",
+    "title": "Stacker of Heavy Cubes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#a855f7",
+    "attackName": "Square Drop",
+    "attackPower": 3,
+    "defeatQuote": "Interval coordinate height compression tracked max elevation!"
+  },
+  "description": "There are several squares being dropped onto an X-axis. You are given a 2D integer array `positions` where `positions[i] = [left_i, sideLength_i]`. Return an array of the maximum height of the stack of squares after each square is dropped.",
+  "examples": [
+    {
+      "input": "positions = [[1,2],[2,3],[6,1]]",
+      "output": "[2,5,5]"
+    },
+    {
+      "input": "positions = [[100,100],[200,100]]",
+      "output": "[100,100]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(positions) <= 1000",
+    "1 <= left <= 10^8",
+    "1 <= sideLength <= 10^6"
+  ],
+  "starterCode": "def fallingSquaresSimulator(positions: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def fallingSquaresSimulator(positions: list[list[int]]) -> list[int]:\n    intervals = []\n    res = []\n    max_h = 0\n    for left, size in positions:\n        right = left + size\n        h = size\n        for l, r, prev_h in intervals:\n            if not (right <= l or left >= r):\n                h = max(h, prev_h + size)\n        intervals.append((left, right, h))\n        max_h = max(max_h, h)\n        res.append(max_h)\n    return res\n",
+  "functionName": "fallingSquaresSimulator",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            6,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        2,
+        5,
+        5
+      ],
+      "inputDisplay": "[[1, 2], [2, 3], [6, 1]]",
+      "expectedDisplay": "[2, 5, 5]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            100,
+            100
+          ],
+          [
+            200,
+            100
+          ]
+        ]
+      ],
+      "expected": [
+        100,
+        100
+      ],
+      "inputDisplay": "[[100, 100], [200, 100]]",
+      "expectedDisplay": "[100, 100]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Track interval heights. When dropping [left, right], base height is max overlapping interval height."
+  ],
+  "python": {
+    "starterCode": "def fallingSquaresSimulator(positions: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def fallingSquaresSimulator(positions: list[list[int]]) -> list[int]:\n    intervals = []\n    res = []\n    max_h = 0\n    for left, size in positions:\n        right = left + size\n        h = size\n        for l, r, prev_h in intervals:\n            if not (right <= l or left >= r):\n                h = max(h, prev_h + size)\n        intervals.append((left, right, h))\n        max_h = max(max_h, h)\n        res.append(max_h)\n    return res\n"
+  },
+  "leetcodeId": 699,
+  "leetcodeTitle": "Falling Squares Simulation",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-falling-squares/"
+}

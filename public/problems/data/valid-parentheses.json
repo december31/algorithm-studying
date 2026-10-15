@@ -36,8 +36,8 @@
     "1 <= s.length <= 10^4",
     "s consists of parentheses only '()[]{}'."
   ],
-  "starterCode": "function isValid(s) {\n  return true;\n}",
-  "solutionCode": "function isValid(s) {\n  const stack = [];\n  const map = { ')': '(', '}': '{', ']': '[' };\n  for (const c of s) {\n    if (c === '(' || c === '{' || c === '[') {\n      stack.push(c);\n    } else {\n      if (stack.length === 0 || stack.pop() !== map[c]) return false;\n    }\n  }\n  return stack.length === 0;\n}",
+  "starterCode": "def isValid(s):\n    return True\n",
+  "solutionCode": "def isValid(s):\n    stack = []\n    mapping = {\")\": \"(\", \"}\": \"{\", \"]\": \"[\"}\n    for char in s:\n        if char in mapping.values():\n            stack.append(char)\n        elif char in mapping:\n            if not stack or stack.pop() != mapping[char]:\n                return False\n    return not stack\n",
   "functionName": "isValid",
   "testCases": [
     {

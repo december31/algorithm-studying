@@ -36,8 +36,8 @@
     "1 <= numCourses <= 2000",
     "0 <= prerequisites.length <= numCourses * (numCourses - 1)"
   ],
-  "starterCode": "function findOrder(numCourses, prerequisites) {\n  return [];\n}",
-  "solutionCode": "function findOrder(numCourses, prerequisites) {\n  const inDegree = new Array(numCourses).fill(0);\n  const adj = Array.from({ length: numCourses }, () => []);\n  for (const [dest, src] of prerequisites) {\n    adj[src].push(dest);\n    inDegree[dest]++;\n  }\n  const queue = [];\n  for (let i = 0; i < numCourses; i++) {\n    if (inDegree[i] === 0) queue.push(i);\n  }\n  const order = [];\n  while (queue.length > 0) {\n    const u = queue.shift();\n    order.push(u);\n    for (const v of adj[u]) {\n      inDegree[v]--;\n      if (inDegree[v] === 0) queue.push(v);\n    }\n  }\n  return order.length === numCourses ? order : [];\n}",
+  "starterCode": "def findOrder(numCourses, prerequisites):\n    return []\n",
+  "solutionCode": "def findOrder(numCourses, prerequisites):\n    from collections import deque\n    in_degree = [0] * numCourses\n    adj = [[] for _ in range(numCourses)]\n    for dest, src in prerequisites:\n        adj[src].append(dest)\n        in_degree[dest] += 1\n    queue = deque([i for i in range(numCourses) if in_degree[i] == 0])\n    order = []\n    while queue:\n        u = queue.popleft()\n        order.append(u)\n        for v in adj[u]:\n            in_degree[v] -= 1\n            if in_degree[v] == 0:\n                queue.append(v)\n    return order if len(order) == numCourses else []\n",
   "functionName": "findOrder",
   "testCases": [
     {

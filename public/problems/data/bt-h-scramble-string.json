@@ -1,0 +1,87 @@
+{
+  "id": "bt-h-scramble-string",
+  "wingId": "backtracking",
+  "floor": 292,
+  "title": "Scramble String Partitioning",
+  "difficulty": "hard",
+  "visualizerType": "binary-tree",
+  "monster": {
+    "id": "mon-bt-h-scramble-string",
+    "name": "Entropic Chimera",
+    "title": "Swapper of Substring Trees",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "manticore",
+    "color": "#ec4899",
+    "attackName": "Scramble Tempest",
+    "attackPower": 3,
+    "defeatQuote": "Recursive binary tree partitions tested for scrambling!"
+  },
+  "description": "We can scramble a string s to get a string t using the following algorithm: If the length of the string is 1, stop. If length > 1: split string into two non-empty substrings at random index. At random, decide whether to swap the two substrings. Apply this algorithm recursively. Given two strings `s1` and `s2` of the same length, return `True` if `s2` is a scrambled string of `s1`, or `False` otherwise.",
+  "examples": [
+    {
+      "input": "s1 = \"great\", s2 = \"rgeat\"",
+      "output": "True"
+    },
+    {
+      "input": "s1 = \"abcde\", s2 = \"caebd\"",
+      "output": "False"
+    },
+    {
+      "input": "s1 = \"a\", s2 = \"a\"",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "s1.length == s2.length",
+    "1 <= s1.length <= 30"
+  ],
+  "starterCode": "def isScramble(s1: str, s2: str) -> bool:\n    pass\n",
+  "solutionCode": "def isScramble(s1: str, s2: str) -> bool:\n    memo = {}\n    def dfs(a, b):\n        if (a, b) in memo: return memo[(a, b)]\n        if a == b: return True\n        if sorted(a) != sorted(b): return False\n        n = len(a)\n        for i in range(1, n):\n            if dfs(a[:i], b[:i]) and dfs(a[i:], b[i:]):\n                memo[(a, b)] = True\n                return True\n            if dfs(a[:i], b[n-i:]) and dfs(a[i:], b[:n-i]):\n                memo[(a, b)] = True\n                return True\n        memo[(a, b)] = False\n        return False\n    return dfs(s1, s2)\n",
+  "functionName": "isScramble",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "great",
+        "rgeat"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['great', 'rgeat']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "abcde",
+        "caebd"
+      ],
+      "expected": false,
+      "inputDisplay": "args=['abcde', 'caebd']",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "a",
+        "a"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['a', 'a']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Memoize pairs of substrings (s1, s2). Early prune when sorted letter frequencies differ."
+  ],
+  "python": {
+    "starterCode": "def isScramble(s1: str, s2: str) -> bool:\n    pass\n",
+    "solutionCode": "def isScramble(s1: str, s2: str) -> bool:\n    memo = {}\n    def dfs(a, b):\n        if (a, b) in memo: return memo[(a, b)]\n        if a == b: return True\n        if sorted(a) != sorted(b): return False\n        n = len(a)\n        for i in range(1, n):\n            if dfs(a[:i], b[:i]) and dfs(a[i:], b[i:]):\n                memo[(a, b)] = True\n                return True\n            if dfs(a[:i], b[n-i:]) and dfs(a[i:], b[:n-i]):\n                memo[(a, b)] = True\n                return True\n        memo[(a, b)] = False\n        return False\n    return dfs(s1, s2)\n"
+  },
+  "leetcodeId": 87,
+  "leetcodeTitle": "Scramble String Partitioning",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-scramble-string/"
+}

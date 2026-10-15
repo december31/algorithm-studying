@@ -1,0 +1,91 @@
+{
+  "id": "bt-m-subset-sums-target-range",
+  "wingId": "backtracking",
+  "floor": 266,
+  "title": "Subsets in Sum Range [L, R]",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-subset-sums-target-range",
+    "name": "Bandpass Specter",
+    "title": "Filterer of Interval Energy",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Bandpass Flare",
+    "attackPower": 2,
+    "defeatQuote": "Subsets falling strictly between L and R counted!"
+  },
+  "description": "Given an array of integers `nums` and two integers `low` and `high`, return the number of non-empty subsets whose sum lies in `[low, high]` inclusive.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3], low = 3, high = 5",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 12",
+    "low <= high"
+  ],
+  "starterCode": "def subsetsInSumRange(nums: list[int], low: int, high: int) -> int:\n    pass\n",
+  "solutionCode": "def subsetsInSumRange(nums: list[int], low: int, high: int) -> int:\n    count = 0\n    def dfs(idx, curr_sum, picked):\n        nonlocal count\n        if idx == len(nums):\n            if picked and low <= curr_sum <= high: count += 1\n            return\n        dfs(idx + 1, curr_sum, picked)\n        dfs(idx + 1, curr_sum + nums[idx], True)\n    dfs(0, 0, False)\n    return count\n",
+  "functionName": "subsetsInSumRange",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        3,
+        5
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[[1, 2, 3], 3, 5]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          4
+        ],
+        1,
+        3
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[2, 4], 1, 3]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5
+        ],
+        6,
+        10
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[5], 6, 10]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Track sum of picked elements. Verify low <= sum <= high at terminal state."
+  ],
+  "python": {
+    "starterCode": "def subsetsInSumRange(nums: list[int], low: int, high: int) -> int:\n    pass\n",
+    "solutionCode": "def subsetsInSumRange(nums: list[int], low: int, high: int) -> int:\n    count = 0\n    def dfs(idx, curr_sum, picked):\n        nonlocal count\n        if idx == len(nums):\n            if picked and low <= curr_sum <= high: count += 1\n            return\n        dfs(idx + 1, curr_sum, picked)\n        dfs(idx + 1, curr_sum + nums[idx], True)\n    dfs(0, 0, False)\n    return count\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Subsets in Sum Range [L, R]",
+  "leetcodeUrl": null
+}

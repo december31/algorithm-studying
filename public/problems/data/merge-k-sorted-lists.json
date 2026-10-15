@@ -38,8 +38,8 @@
     "0 <= lists[i].length <= 500",
     "-10^4 <= lists[i][j] <= 10^4"
   ],
-  "starterCode": "function mergeKLists(lists) {\n  return [];\n}",
-  "solutionCode": "function mergeKLists(lists) {\n  if (!lists || lists.length === 0) return [];\n  const mergeTwo = (a, b) => {\n    const res = [];\n    let i = 0, j = 0;\n    while (i < a.length && j < b.length) {\n      if (a[i] <= b[j]) res.push(a[i++]);\n      else res.push(b[j++]);\n    }\n    while (i < a.length) res.push(a[i++]);\n    while (j < b.length) res.push(b[j++]);\n    return res;\n  };\n  while (lists.length > 1) {\n    const merged = [];\n    for (let i = 0; i < lists.length; i += 2) {\n      if (i + 1 < lists.length) merged.push(mergeTwo(lists[i], lists[i + 1]));\n      else merged.push(lists[i]);\n    }\n    lists = merged;\n  }\n  return lists[0] || [];\n}",
+  "starterCode": "def mergeKLists(lists):\n    return []\n",
+  "solutionCode": "def mergeKLists(lists):\n    if not lists:\n        return []\n    import heapq\n    heap = []\n    res = []\n    for i, arr in enumerate(lists):\n        if arr:\n            heapq.heappush(heap, (arr[0], i, 0))\n    while heap:\n        val, arr_idx, elem_idx = heapq.heappop(heap)\n        res.append(val)\n        if elem_idx + 1 < len(lists[arr_idx]):\n            heapq.heappush(heap, (lists[arr_idx][elem_idx + 1], arr_idx, elem_idx + 1))\n    return res\n",
   "functionName": "mergeKLists",
   "testCases": [
     {

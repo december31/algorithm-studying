@@ -1,0 +1,83 @@
+{
+  "id": "bit-m-gray-to-binary-converter",
+  "wingId": "bit-manipulation",
+  "floor": 565,
+  "title": "Gray Code to Binary Conversion",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-gray-to-binary-converter",
+    "name": "Decryption Drake",
+    "title": "Inverter of Reflected Code",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#8b5cf6",
+    "attackName": "Binary Decode",
+    "attackPower": 2,
+    "defeatQuote": "Gray code integer converted back to natural binary integer!"
+  },
+  "description": "Given a non-negative integer `gray` representing an n-bit Gray code value, return its corresponding standard binary integer representation.",
+  "examples": [
+    {
+      "input": "gray = 3",
+      "output": "2"
+    },
+    {
+      "input": "gray = 6",
+      "output": "4"
+    },
+    {
+      "input": "gray = 0",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "0 <= gray <= 2^31 - 1"
+  ],
+  "starterCode": "def grayToBinary(gray: int) -> int:\n    pass\n",
+  "solutionCode": "def grayToBinary(gray: int) -> int:\n    binary = 0\n    while gray > 0:\n        binary ^= gray\n        gray >>= 1\n    return binary\n",
+  "functionName": "grayToBinary",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3
+      ],
+      "expected": 2,
+      "inputDisplay": "3",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        6
+      ],
+      "expected": 4,
+      "inputDisplay": "6",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        0
+      ],
+      "expected": 0,
+      "inputDisplay": "0",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary = gray ^ (gray >> 1) ^ (gray >> 2) ^ ..."
+  ],
+  "python": {
+    "starterCode": "def grayToBinary(gray: int) -> int:\n    pass\n",
+    "solutionCode": "def grayToBinary(gray: int) -> int:\n    binary = 0\n    while gray > 0:\n        binary ^= gray\n        gray >>= 1\n    return binary\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "Gray Code to Binary Conversion",
+  "leetcodeUrl": null
+}

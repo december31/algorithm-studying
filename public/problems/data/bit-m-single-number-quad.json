@@ -1,0 +1,81 @@
+{
+  "id": "bit-m-single-number-quad",
+  "wingId": "bit-manipulation",
+  "floor": 555,
+  "title": "Single Number Among Quadruplicates (Mod 4)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-single-number-quad",
+    "name": "Quadruple Warden",
+    "title": "Canceler of 4-Fold Bit Repetitions",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#ef4444",
+    "attackName": "Quad Cleave",
+    "attackPower": 2,
+    "defeatQuote": "Single unique element located among values appearing 4 times!"
+  },
+  "description": "Given an integer array `nums` where every element appears four times except for one which appears exactly once. Find and return the single element.",
+  "examples": [
+    {
+      "input": "nums = [1,1,1,1,5]",
+      "output": "5"
+    },
+    {
+      "input": "nums = [7,2,2,2,2]",
+      "output": "7"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 50000"
+  ],
+  "starterCode": "def singleNumberQuad(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def singleNumberQuad(nums: list[int]) -> int:\n    ans = 0\n    for bit in range(32):\n        cnt = sum((x >> bit) & 1 for x in nums)\n        if cnt % 4 != 0:\n            ans |= (1 << bit)\n    return ans\n",
+  "functionName": "singleNumberQuad",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          1,
+          5
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[1, 1, 1, 1, 5]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          7,
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": 7,
+      "inputDisplay": "[7, 2, 2, 2, 2]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Accumulate set bit counts modulo 4 across each bit position."
+  ],
+  "python": {
+    "starterCode": "def singleNumberQuad(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def singleNumberQuad(nums: list[int]) -> int:\n    ans = 0\n    for bit in range(32):\n        cnt = sum((x >> bit) & 1 for x in nums)\n        if cnt % 4 != 0:\n            ans |= (1 << bit)\n    return ans\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "Single Number Among Quadruplicates (Mod 4)",
+  "leetcodeUrl": null
+}

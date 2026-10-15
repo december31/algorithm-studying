@@ -1,0 +1,80 @@
+{
+  "id": "bsg-m-find-min-rotated-duplicates",
+  "wingId": "binary-search-greedy",
+  "floor": 437,
+  "title": "Find Minimum in Rotated Sorted Array II",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-find-min-rotated-duplicates",
+    "name": "Duplicate Mirage",
+    "title": "Obscurer of the True Minimal Point",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#64748b",
+    "attackName": "Mirage Shift",
+    "attackPower": 2,
+    "defeatQuote": "True minimal element found despite plateau duplicates!"
+  },
+  "description": "Given the sorted rotated array `nums` that may contain duplicates, return the minimum element of this array.",
+  "examples": [
+    {
+      "input": "nums = [1,3,5]",
+      "output": "1"
+    },
+    {
+      "input": "nums = [2,2,2,0,1]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "n == nums.length",
+    "1 <= n <= 5000"
+  ],
+  "starterCode": "def findMinWithDuplicates(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def findMinWithDuplicates(nums: list[int]) -> int:\n    lo, hi = 0, len(nums) - 1\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if nums[mid] > nums[hi]:\n            lo = mid + 1\n        elif nums[mid] < nums[hi]:\n            hi = mid\n        else:\n            hi -= 1\n    return nums[lo]\n",
+  "functionName": "findMinWithDuplicates",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3,
+          5
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1, 3, 5]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          2,
+          2,
+          0,
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[2, 2, 2, 0, 1]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "When nums[mid] == nums[hi], safely decrement hi."
+  ],
+  "python": {
+    "starterCode": "def findMinWithDuplicates(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def findMinWithDuplicates(nums: list[int]) -> int:\n    lo, hi = 0, len(nums) - 1\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if nums[mid] > nums[hi]:\n            lo = mid + 1\n        elif nums[mid] < nums[hi]:\n            hi = mid\n        else:\n            hi -= 1\n    return nums[lo]\n"
+  },
+  "leetcodeId": 154,
+  "leetcodeTitle": "Find Minimum in Rotated Sorted Array II",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-find-min-rotated-duplicates/"
+}

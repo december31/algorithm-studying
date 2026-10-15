@@ -1,0 +1,82 @@
+{
+  "id": "bit-h-min-time-finish-jobs",
+  "wingId": "bit-manipulation",
+  "floor": 583,
+  "title": "Minimum Time to Finish All Jobs",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-min-time-finish-jobs",
+    "name": "Workload Arbiter",
+    "title": "Equalizer of Labor Shifts",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#e11d48",
+    "attackName": "Load Balancing Strike",
+    "attackPower": 3,
+    "defeatQuote": "Distribute all burdens across k workers to minimize the maximum load!"
+  },
+  "description": "You are given an integer array `jobs`, where `jobs[i]` is the amount of time it takes to complete the `i-th` job, and an integer `k`. There are `k` workers. Every job should be assigned to exactly one worker. A worker's working time is the sum of times of all jobs assigned to that worker. Return the minimum possible maximum working time of any assignment.",
+  "examples": [
+    {
+      "input": "jobs = [3,2,3], k = 3",
+      "output": "3"
+    },
+    {
+      "input": "jobs = [1,2,4,7,8], k = 2",
+      "output": "11"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= jobs.length <= 12",
+    "1 <= jobs[i] <= 10^7"
+  ],
+  "starterCode": "def minimumTimeRequired(jobs: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def minimumTimeRequired(jobs: list[int], k: int) -> int:\n    jobs.sort(reverse=True)\n    workers = [0] * k\n    best = sum(jobs)\n    def backtrack(idx):\n        nonlocal best\n        if idx == len(jobs):\n            best = min(best, max(workers))\n            return\n        seen = set()\n        for w in range(k):\n            if workers[w] in seen or workers[w] + jobs[idx] >= best:\n                continue\n            seen.add(workers[w])\n            workers[w] += jobs[idx]\n            backtrack(idx + 1)\n            workers[w] -= jobs[idx]\n            if workers[w] == 0: break\n    backtrack(0)\n    return best\n",
+  "functionName": "minimumTimeRequired",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          2,
+          3
+        ],
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[3, 2, 3], 3]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          4,
+          7,
+          8
+        ],
+        2
+      ],
+      "expected": 11,
+      "inputDisplay": "args=[[1, 2, 4, 7, 8], 2]",
+      "expectedDisplay": "11",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort jobs descending. Backtrack across workers with symmetry breaking (skip empty workers if one already failed, and prune by current best)."
+  ],
+  "python": {
+    "starterCode": "def minimumTimeRequired(jobs: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def minimumTimeRequired(jobs: list[int], k: int) -> int:\n    jobs.sort(reverse=True)\n    workers = [0] * k\n    best = sum(jobs)\n    def backtrack(idx):\n        nonlocal best\n        if idx == len(jobs):\n            best = min(best, max(workers))\n            return\n        seen = set()\n        for w in range(k):\n            if workers[w] in seen or workers[w] + jobs[idx] >= best:\n                continue\n            seen.add(workers[w])\n            workers[w] += jobs[idx]\n            backtrack(idx + 1)\n            workers[w] -= jobs[idx]\n            if workers[w] == 0: break\n    backtrack(0)\n    return best\n"
+  },
+  "leetcodeId": 1723,
+  "leetcodeTitle": "Minimum Time to Finish All Jobs",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-min-time-finish-jobs/"
+}

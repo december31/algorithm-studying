@@ -32,8 +32,8 @@
     "The number of nodes in the tree is in the range [1, 100].",
     "-100 <= Node.val <= 100"
   ],
-  "starterCode": "function binaryTreePaths(root) {\n  return [];\n}",
-  "solutionCode": "function binaryTreePaths(root) {\n  if (!root || root.length === 0 || root[0] === null) return [];\n  const paths = [];\n  function dfs(idx, currPath) {\n    if (idx >= root.length || root[idx] === null || root[idx] === undefined) return;\n    const next = currPath === '' ? String(root[idx]) : currPath + '->' + root[idx];\n    const leftIdx = 2 * idx + 1;\n    const rightIdx = 2 * idx + 2;\n    const isLeaf = (leftIdx >= root.length || root[leftIdx] === null || root[leftIdx] === undefined) &&\n                   (rightIdx >= root.length || root[rightIdx] === null || root[rightIdx] === undefined);\n    if (isLeaf) {\n      paths.push(next);\n      return;\n    }\n    dfs(leftIdx, next);\n    dfs(rightIdx, next);\n  }\n  dfs(0, '');\n  return paths;\n}",
+  "starterCode": "def binaryTreePaths(root):\n    return []\n",
+  "solutionCode": "def binaryTreePaths(root):\n    if not root or root[0] is None:\n        return []\n    paths = []\n    def dfs(idx, curr):\n        if idx >= len(root) or root[idx] is None:\n            return\n        nxt = str(root[idx]) if not curr else curr + \"->\" + str(root[idx])\n        left = 2 * idx + 1\n        right = 2 * idx + 2\n        is_leaf = (left >= len(root) or root[left] is None) and (right >= len(root) or root[right] is None)\n        if is_leaf:\n            paths.append(nxt)\n            return\n        dfs(left, nxt)\n        dfs(right, nxt)\n    dfs(0, \"\")\n    return paths\n",
   "functionName": "binaryTreePaths",
   "testCases": [
     {

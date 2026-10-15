@@ -1,0 +1,85 @@
+{
+  "id": "bit-m-distribute-repeating-integers",
+  "wingId": "bit-manipulation",
+  "floor": 552,
+  "title": "Distribute Repeating Integers (Subset Sum DP)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-distribute-repeating-integers",
+    "name": "Quota Golem",
+    "title": "Fulfiller of Customer Demands",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Quota Slam",
+    "attackPower": 2,
+    "defeatQuote": "Can all customer quantity demands be satisfied by integer frequencies?"
+  },
+  "description": "You are given an array of `n` integers `nums` and an array of `m` customer orders `quantity` where the `i`-th customer requires `quantity[i]` copies of any single value. Return `True` if it is possible to distribute `nums` such that the `i`-th customer is satisfied.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,4], quantity = [2]",
+      "output": "False"
+    },
+    {
+      "input": "nums = [1,2,3,3], quantity = [2]",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= quantity.length <= 10"
+  ],
+  "starterCode": "def canDistribute(nums: list[int], quantity: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def canDistribute(nums: list[int], quantity: list[int]) -> bool:\n    from collections import Counter\n    counts = sorted(Counter(nums).values(), reverse=True)\n    m = len(quantity)\n    quantity.sort(reverse=True)\n    def backtrack(cust_idx):\n        if cust_idx == m: return True\n        q = quantity[cust_idx]\n        for i in range(len(counts)):\n            if counts[i] >= q:\n                counts[i] -= q\n                if backtrack(cust_idx + 1): return True\n                counts[i] += q\n            if counts[i] == 0: break\n        return False\n    return backtrack(0)\n",
+  "functionName": "canDistribute",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "args=[[1, 2, 3, 4], [2]]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          3
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[1, 2, 3, 3], [2]]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort customer demands descending and backtrack over frequency buckets with pruning."
+  ],
+  "python": {
+    "starterCode": "def canDistribute(nums: list[int], quantity: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def canDistribute(nums: list[int], quantity: list[int]) -> bool:\n    from collections import Counter\n    counts = sorted(Counter(nums).values(), reverse=True)\n    m = len(quantity)\n    quantity.sort(reverse=True)\n    def backtrack(cust_idx):\n        if cust_idx == m: return True\n        q = quantity[cust_idx]\n        for i in range(len(counts)):\n            if counts[i] >= q:\n                counts[i] -= q\n                if backtrack(cust_idx + 1): return True\n                counts[i] += q\n            if counts[i] == 0: break\n        return False\n    return backtrack(0)\n"
+  },
+  "leetcodeId": 1655,
+  "leetcodeTitle": "Distribute Repeating Integers (Subset Sum DP)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-distribute-repeating-integers/"
+}

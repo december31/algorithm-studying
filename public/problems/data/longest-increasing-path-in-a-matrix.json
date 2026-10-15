@@ -40,8 +40,8 @@
     "1 <= m, n <= 200",
     "0 <= matrix[i][j] <= 2^31 - 1"
   ],
-  "starterCode": "function longestIncreasingPath(matrix) {\n  return 0;\n}",
-  "solutionCode": "function longestIncreasingPath(matrix) {\n  if (!matrix || matrix.length === 0) return 0;\n  const m = matrix.length, n = matrix[0].length;\n  const memo = Array.from({ length: m }, () => new Array(n).fill(0));\n  const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];\n  let maxPath = 0;\n  function dfs(r, c) {\n    if (memo[r][c] !== 0) return memo[r][c];\n    let len = 1;\n    for (const [dr, dc] of dirs) {\n      const nr = r + dr, nc = c + dc;\n      if (nr >= 0 && nr < m && nc >= 0 && nc < n && matrix[nr][nc] > matrix[r][c]) {\n        len = Math.max(len, 1 + dfs(nr, nc));\n      }\n    }\n    memo[r][c] = len;\n    return len;\n  }\n  for (let i = 0; i < m; i++) {\n    for (let j = 0; j < n; j++) {\n      maxPath = Math.max(maxPath, dfs(i, j));\n    }\n  }\n  return maxPath;\n}",
+  "starterCode": "def longestIncreasingPath(matrix):\n    return 0\n",
+  "solutionCode": "def longestIncreasingPath(matrix):\n    if not matrix:\n        return 0\n    m, n = len(matrix), len(matrix[0])\n    memo = [[0] * n for _ in range(m)]\n    dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    def dfs(r, c):\n        if memo[r][c] != 0:\n            return memo[r][c]\n        length = 1\n        for dr, dc in dirs:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < m and 0 <= nc < n and matrix[nr][nc] > matrix[r][c]:\n                length = max(length, 1 + dfs(nr, nc))\n        memo[r][c] = length\n        return length\n    return max(dfs(r, c) for r in range(m) for c in range(n))\n",
   "functionName": "longestIncreasingPath",
   "testCases": [
     {

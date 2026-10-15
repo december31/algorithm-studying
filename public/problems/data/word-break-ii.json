@@ -37,8 +37,8 @@
     "1 <= wordDict.length <= 1000",
     "1 <= wordDict[i].length <= 10"
   ],
-  "starterCode": "function wordBreak(s, wordDict) {\n  return [];\n}",
-  "solutionCode": "function wordBreak(s, wordDict) {\n  const dict = new Set(wordDict);\n  const memo = new Map();\n  function dfs(str) {\n    if (memo.has(str)) return memo.get(str);\n    if (str.length === 0) return [''];\n    const res = [];\n    for (const word of dict) {\n      if (str.startsWith(word)) {\n        const subList = dfs(str.slice(word.length));\n        for (const sub of subList) {\n          res.push(sub.length === 0 ? word : word + ' ' + sub);\n        }\n      }\n    }\n    memo.set(str, res);\n    return res;\n  }\n  return dfs(s);\n}",
+  "starterCode": "def wordBreak(s, wordDict):\n    return []\n",
+  "solutionCode": "def wordBreak(s, wordDict):\n    d = set(wordDict)\n    memo = {}\n    def dfs(rem):\n        if rem in memo:\n            return memo[rem]\n        if not rem:\n            return [\"\"]\n        res = []\n        for word in wordDict:\n            if rem.startswith(word):\n                sub_res = dfs(rem[len(word):])\n                for sub in sub_res:\n                    res.append(word if not sub else word + \" \" + sub)\n        memo[rem] = res\n        return res\n    return dfs(s)\n",
   "functionName": "wordBreak",
   "testCases": [
     {

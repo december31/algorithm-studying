@@ -1,0 +1,146 @@
+{
+  "id": "bt-m-word-search",
+  "wingId": "backtracking",
+  "floor": 223,
+  "title": "Word Search in Grid",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-m-word-search",
+    "name": "Grid Basilisk",
+    "title": "Stalker of 4-Directional Word Trails",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#10b981",
+    "attackName": "Grid Venom",
+    "attackPower": 2,
+    "defeatQuote": "DFS backtracking traversed the word without reusing cells!"
+  },
+  "description": "Given an `m x n` grid of characters `board` and a string `word`, return `True` if `word` exists in the grid. The word can be constructed from letters of sequentially adjacent cells (horizontally or vertically). The same letter cell may not be used more than once.",
+  "examples": [
+    {
+      "input": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCCED\"",
+      "output": "True"
+    },
+    {
+      "input": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"SEE\"",
+      "output": "True"
+    },
+    {
+      "input": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCB\"",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "m == len(board)",
+    "n == len(board[0])",
+    "1 <= m, n <= 6",
+    "1 <= len(word) <= 15"
+  ],
+  "starterCode": "def existWord(board: list[list[str]], word: str) -> bool:\n    pass\n",
+  "solutionCode": "def existWord(board: list[list[str]], word: str) -> bool:\n    m, n = len(board), len(board[0])\n    def dfs(r, c, idx):\n        if idx == len(word): return True\n        if r < 0 or r >= m or c < 0 or c >= n or board[r][c] != word[idx]: return False\n        temp = board[r][c]\n        board[r][c] = '#'\n        found = dfs(r+1, c, idx+1) or dfs(r-1, c, idx+1) or dfs(r, c+1, idx+1) or dfs(r, c-1, idx+1)\n        board[r][c] = temp\n        return found\n    for i in range(m):\n        for j in range(n):\n            if dfs(i, j, 0): return True\n    return False\n",
+  "functionName": "existWord",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "A",
+            "B",
+            "C",
+            "E"
+          ],
+          [
+            "S",
+            "F",
+            "C",
+            "S"
+          ],
+          [
+            "A",
+            "D",
+            "E",
+            "E"
+          ]
+        ],
+        "ABCCED"
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[['A', 'B', 'C', 'E'], ['S', 'F', 'C', 'S'], ['A', 'D', 'E', 'E']], 'ABCCE",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            "A",
+            "B",
+            "C",
+            "E"
+          ],
+          [
+            "S",
+            "F",
+            "C",
+            "S"
+          ],
+          [
+            "A",
+            "D",
+            "E",
+            "E"
+          ]
+        ],
+        "SEE"
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[['A', 'B', 'C', 'E'], ['S', 'F', 'C', 'S'], ['A', 'D', 'E', 'E']], 'SEE']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            "A",
+            "B",
+            "C",
+            "E"
+          ],
+          [
+            "S",
+            "F",
+            "C",
+            "S"
+          ],
+          [
+            "A",
+            "D",
+            "E",
+            "E"
+          ]
+        ],
+        "ABCB"
+      ],
+      "expected": false,
+      "inputDisplay": "args=[[['A', 'B', 'C', 'E'], ['S', 'F', 'C', 'S'], ['A', 'D', 'E', 'E']], 'ABCB'",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Mark visited cells with '#' during recursion and restore back upon return."
+  ],
+  "python": {
+    "starterCode": "def existWord(board: list[list[str]], word: str) -> bool:\n    pass\n",
+    "solutionCode": "def existWord(board: list[list[str]], word: str) -> bool:\n    m, n = len(board), len(board[0])\n    def dfs(r, c, idx):\n        if idx == len(word): return True\n        if r < 0 or r >= m or c < 0 or c >= n or board[r][c] != word[idx]: return False\n        temp = board[r][c]\n        board[r][c] = '#'\n        found = dfs(r+1, c, idx+1) or dfs(r-1, c, idx+1) or dfs(r, c+1, idx+1) or dfs(r, c-1, idx+1)\n        board[r][c] = temp\n        return found\n    for i in range(m):\n        for j in range(n):\n            if dfs(i, j, 0): return True\n    return False\n"
+  },
+  "leetcodeId": 79,
+  "leetcodeTitle": "Word Search in Grid",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-word-search/"
+}

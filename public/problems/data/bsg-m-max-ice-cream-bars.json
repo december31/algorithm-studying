@@ -1,0 +1,85 @@
+{
+  "id": "bsg-m-max-ice-cream-bars",
+  "wingId": "binary-search-greedy",
+  "floor": 451,
+  "title": "Maximum Ice Cream Bars (Greedy Purchase)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-max-ice-cream-bars",
+    "name": "Frost Merchant",
+    "title": "Vendor of Subzero Delicacies",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "goblin",
+    "color": "#06b6d4",
+    "attackName": "Frostbite Bargain",
+    "attackPower": 2,
+    "defeatQuote": "Maximum number of ice cream bars acquired within budget coins!"
+  },
+  "description": "A boy wants to buy ice cream bars. You are given an array `costs` of length `n` and integer `coins`. Return the maximum number of ice cream bars the boy can buy with `coins` coins.",
+  "examples": [
+    {
+      "input": "costs = [1,3,2,4,1], coins = 7",
+      "output": "4"
+    },
+    {
+      "input": "costs = [10,6,8,7,7,8], coins = 5",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= costs.length <= 100000",
+    "1 <= coins <= 10^8"
+  ],
+  "starterCode": "def maxIceCream(costs: list[int], coins: int) -> int:\n    pass\n",
+  "solutionCode": "def maxIceCream(costs: list[int], coins: int) -> int:\n    costs.sort()\n    count = 0\n    for c in costs:\n        if coins >= c:\n            coins -= c\n            count += 1\n        else: break\n    return count\n",
+  "functionName": "maxIceCream",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        7
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[[1, 3, 2, 4, 1], 7]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          10,
+          6,
+          8,
+          7,
+          7,
+          8
+        ],
+        5
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[10, 6, 8, 7, 7, 8], 5]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Greedily buy cheapest ice cream bars first after sorting costs."
+  ],
+  "python": {
+    "starterCode": "def maxIceCream(costs: list[int], coins: int) -> int:\n    pass\n",
+    "solutionCode": "def maxIceCream(costs: list[int], coins: int) -> int:\n    costs.sort()\n    count = 0\n    for c in costs:\n        if coins >= c:\n            coins -= c\n            count += 1\n        else: break\n    return count\n"
+  },
+  "leetcodeId": 1833,
+  "leetcodeTitle": "Maximum Ice Cream Bars (Greedy Purchase)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-max-ice-cream-bars/"
+}

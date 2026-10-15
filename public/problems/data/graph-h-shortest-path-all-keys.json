@@ -1,0 +1,73 @@
+{
+  "id": "graph-h-shortest-path-all-keys",
+  "wingId": "graphs",
+  "floor": 384,
+  "title": "Shortest Path to Get All Keys (Bitmask Maze)",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-h-shortest-path-all-keys",
+    "name": "Keymaster Behemoth",
+    "title": "Keeper of Alphabetic Vaults",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#ef4444",
+    "attackName": "Master Key Smite",
+    "attackPower": 3,
+    "defeatQuote": "Least steps to collect all lowercase keys avoiding uppercase doors!"
+  },
+  "description": "You are given an `m x n` grid of strings `grid` where '@' is starting point, '.' empty, '#' wall, 'a'-'f' keys, 'A'-'F' locks. Return the lowest number of moves to acquire all keys. If impossible, return -1.",
+  "examples": [
+    {
+      "input": "grid = [\"@.a..\",\"###.#\",\"b.A.B\"]",
+      "output": "8"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 30"
+  ],
+  "starterCode": "def shortestPathAllKeys(grid: list[str]) -> int:\n    pass\n",
+  "solutionCode": "def shortestPathAllKeys(grid: list[str]) -> int:\n    R, C = len(grid), len(grid[0])\n    from collections import deque\n    total_keys = 0\n    sr = sc = 0\n    for r in range(R):\n        for c in range(C):\n            ch = grid[r][c]\n            if ch == '@': sr, sc = r, c\n            elif ch.islower(): total_keys += 1\n    target_mask = (1 << total_keys) - 1\n    q = deque([(sr, sc, 0, 0)])  # (r, c, keys_mask, steps)\n    visited = {(sr, sc, 0)}\n    while q:\n        r, c, mask, d = q.popleft()\n        if mask == target_mask: return d\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C:\n                ch = grid[nr][nc]\n                if ch == '#': continue\n                if ch.isupper() and not (mask & (1 << (ord(ch) - ord('A')))):\n                    continue\n                nxt_mask = mask\n                if ch.islower():\n                    nxt_mask |= (1 << (ord(ch) - ord('a')))\n                if (nr, nc, nxt_mask) not in visited:\n                    visited.add((nr, nc, nxt_mask))\n                    q.append((nr, nc, nxt_mask, d + 1))\n    return -1\n",
+  "functionName": "shortestPathAllKeys",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "@.a..",
+          "###.#",
+          "b.A.B"
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "['@.a..', '###.#', 'b.A.B']",
+      "expectedDisplay": "8",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "@..aA",
+          "..B#.",
+          "....b"
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "['@..aA', '..B#.', '....b']",
+      "expectedDisplay": "6",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "State BFS with (r, c, collected_keys_bitmask)."
+  ],
+  "python": {
+    "starterCode": "def shortestPathAllKeys(grid: list[str]) -> int:\n    pass\n",
+    "solutionCode": "def shortestPathAllKeys(grid: list[str]) -> int:\n    R, C = len(grid), len(grid[0])\n    from collections import deque\n    total_keys = 0\n    sr = sc = 0\n    for r in range(R):\n        for c in range(C):\n            ch = grid[r][c]\n            if ch == '@': sr, sc = r, c\n            elif ch.islower(): total_keys += 1\n    target_mask = (1 << total_keys) - 1\n    q = deque([(sr, sc, 0, 0)])  # (r, c, keys_mask, steps)\n    visited = {(sr, sc, 0)}\n    while q:\n        r, c, mask, d = q.popleft()\n        if mask == target_mask: return d\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C:\n                ch = grid[nr][nc]\n                if ch == '#': continue\n                if ch.isupper() and not (mask & (1 << (ord(ch) - ord('A')))):\n                    continue\n                nxt_mask = mask\n                if ch.islower():\n                    nxt_mask |= (1 << (ord(ch) - ord('a')))\n                if (nr, nc, nxt_mask) not in visited:\n                    visited.add((nr, nc, nxt_mask))\n                    q.append((nr, nc, nxt_mask, d + 1))\n    return -1\n"
+  },
+  "leetcodeId": 864,
+  "leetcodeTitle": "Shortest Path to Get All Keys (Bitmask Maze)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-shortest-path-all-keys/"
+}

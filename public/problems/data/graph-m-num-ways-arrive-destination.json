@@ -1,0 +1,125 @@
+{
+  "id": "graph-m-num-ways-arrive-destination",
+  "wingId": "graphs",
+  "floor": 357,
+  "title": "Number of Ways to Arrive at Destination",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-num-ways-arrive-destination",
+    "name": "Nexus Sovereign",
+    "title": "Counter of Equidistant Trajectories",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#38bdf8",
+    "attackName": "Nexus Flash",
+    "attackPower": 2,
+    "defeatQuote": "Ways to reach node n - 1 with minimum travel time computed modulo 10^9 + 7!"
+  },
+  "description": "You are in a city that consists of `n` intersections numbered from 0 to `n - 1` with bi-directional roads `roads` where `roads[i] = [ui, vi, timei]`. You want to find how many ways there are to travel from intersection 0 to intersection `n - 1` in the shortest amount of time. Return the number of ways modulo `10^9 + 7`.",
+  "examples": [
+    {
+      "input": "n = 7, roads = [[0,6,7],[0,1,2],[1,2,3],[1,3,3],[6,3,3],[3,5,1],[6,5,1],[2,5,1],[0,4,5],[4,6,2]]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 200",
+    "n - 1 <= roads.length <= n * (n - 1) / 2"
+  ],
+  "starterCode": "def countPaths(n: int, roads: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def countPaths(n: int, roads: list[list[int]]) -> int:\n    import heapq\n    from collections import defaultdict\n    MOD = 10**9 + 7\n    graph = defaultdict(list)\n    for u, v, t in roads:\n        graph[u].append((v, t))\n        graph[v].append((u, t))\n    dist = [float('inf')] * n\n    ways = [0] * n\n    dist[0] = 0\n    ways[0] = 1\n    pq = [(0, 0)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > dist[u]: continue\n        for v, t in graph[u]:\n            if d + t < dist[v]:\n                dist[v] = d + t\n                ways[v] = ways[u]\n                heapq.heappush(pq, (dist[v], v))\n            elif d + t == dist[v]:\n                ways[v] = (ways[v] + ways[u]) % MOD\n    return ways[n - 1]\n",
+  "functionName": "countPaths",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        7,
+        [
+          [
+            0,
+            6,
+            7
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            3,
+            3
+          ],
+          [
+            6,
+            3,
+            3
+          ],
+          [
+            3,
+            5,
+            1
+          ],
+          [
+            6,
+            5,
+            1
+          ],
+          [
+            2,
+            5,
+            1
+          ],
+          [
+            0,
+            4,
+            5
+          ],
+          [
+            4,
+            6,
+            2
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[7, [[0, 6, 7], [0, 1, 2], [1, 2, 3], [1, 3, 3], [6, 3, 3], [3, 5, 1], [6, ",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        2,
+        [
+          [
+            1,
+            0,
+            10
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[2, [[1, 0, 10]]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Dijkstra tracking both minimum distance and number of shortest paths to each vertex."
+  ],
+  "python": {
+    "starterCode": "def countPaths(n: int, roads: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def countPaths(n: int, roads: list[list[int]]) -> int:\n    import heapq\n    from collections import defaultdict\n    MOD = 10**9 + 7\n    graph = defaultdict(list)\n    for u, v, t in roads:\n        graph[u].append((v, t))\n        graph[v].append((u, t))\n    dist = [float('inf')] * n\n    ways = [0] * n\n    dist[0] = 0\n    ways[0] = 1\n    pq = [(0, 0)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > dist[u]: continue\n        for v, t in graph[u]:\n            if d + t < dist[v]:\n                dist[v] = d + t\n                ways[v] = ways[u]\n                heapq.heappush(pq, (dist[v], v))\n            elif d + t == dist[v]:\n                ways[v] = (ways[v] + ways[u]) % MOD\n    return ways[n - 1]\n"
+  },
+  "leetcodeId": 1976,
+  "leetcodeTitle": "Number of Ways to Arrive at Destination",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-num-ways-arrive-destination/"
+}

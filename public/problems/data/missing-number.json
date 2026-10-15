@@ -38,8 +38,8 @@
     "0 <= nums[i] <= n",
     "All numbers in nums are unique."
   ],
-  "starterCode": "function missingNumber(nums) {\n  return 0;\n}",
-  "solutionCode": "function missingNumber(nums) {\n  const n = nums.length;\n  const expectedSum = (n * (n + 1)) / 2;\n  const actualSum = nums.reduce((a, b) => a + b, 0);\n  return expectedSum - actualSum;\n}",
+  "starterCode": "def missingNumber(nums):\n    return 0\n",
+  "solutionCode": "def missingNumber(nums):\n    n = len(nums)\n    return (n * (n + 1)) // 2 - sum(nums)\n",
   "functionName": "missingNumber",
   "testCases": [
     {

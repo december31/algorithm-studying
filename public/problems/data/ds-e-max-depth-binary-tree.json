@@ -1,0 +1,103 @@
+{
+  "id": "ds-e-max-depth-binary-tree",
+  "wingId": "data-structures",
+  "floor": 110,
+  "title": "Tree Depth Surveyor",
+  "difficulty": "easy",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "mon-ds-e-max-depth-binary-tree",
+    "name": "Abyssal Canopy",
+    "title": "Arbiter of Branching Heights",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "lich",
+    "color": "#84cc16",
+    "attackName": "Branch Spikes",
+    "attackPower": 1,
+    "defeatQuote": "My deepest roots have been measured accurately!"
+  },
+  "description": "Given a binary tree represented as a level-order array where `None` indicates empty leaves, return its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.",
+  "examples": [
+    {
+      "input": "tree = [3,9,20,None,None,15,7]",
+      "output": "3"
+    },
+    {
+      "input": "tree = [1,None,2]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "0 <= len(tree) <= 10^4"
+  ],
+  "starterCode": "def maxTreeDepth(tree: list) -> int:\n    pass\n",
+  "solutionCode": "def maxTreeDepth(tree: list) -> int:\n    if not tree or tree[0] is None:\n        return 0\n    # Convert level-order array into depth\n    # Node at index i has children 2*i + 1 and 2*i + 2\n    def dfs(idx):\n        if idx >= len(tree) or tree[idx] is None:\n            return 0\n        return 1 + max(dfs(2 * idx + 1), dfs(2 * idx + 2))\n    return dfs(0)\n",
+  "functionName": "maxTreeDepth",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          9,
+          20,
+          null,
+          null,
+          15,
+          7
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[3, 9, 20, None, None, 15, 7]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, None, 2]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        []
+      ],
+      "expected": 0,
+      "inputDisplay": "[]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Depth is 1 + max(depth(left), depth(right))."
+  ],
+  "python": {
+    "starterCode": "def maxTreeDepth(tree: list) -> int:\n    pass\n",
+    "solutionCode": "def maxTreeDepth(tree: list) -> int:\n    if not tree or tree[0] is None:\n        return 0\n    # Convert level-order array into depth\n    # Node at index i has children 2*i + 1 and 2*i + 2\n    def dfs(idx):\n        if idx >= len(tree) or tree[idx] is None:\n            return 0\n        return 1 + max(dfs(2 * idx + 1), dfs(2 * idx + 2))\n    return dfs(0)\n"
+  },
+  "leetcodeId": 104,
+  "leetcodeTitle": "Tree Depth Surveyor",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-e-max-depth-binary-tree/"
+}

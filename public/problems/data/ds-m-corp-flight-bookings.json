@@ -1,0 +1,108 @@
+{
+  "id": "ds-m-corp-flight-bookings",
+  "wingId": "data-structures",
+  "floor": 153,
+  "title": "Flight Booking Differential",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-corp-flight-bookings",
+    "name": "Aero Drake",
+    "title": "Auditor of Continuous Seat Reservations",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#38bdf8",
+    "attackName": "Turbulence Gust",
+    "attackPower": 2,
+    "defeatQuote": "Prefix sum prefix reconstruction totaled seat counts in O(n)!"
+  },
+  "description": "There are `n` flights that are labeled from `1` to `n`. You are given an array of flight bookings `bookings`, where `bookings[i] = [first, last, seats]` represents a booking for flights `first` through `last` of `seats` seats reserved for each flight in the range. Return an array `answer` of length `n`, where `answer[i]` is the total number of seats reserved for flight `i + 1`.",
+  "examples": [
+    {
+      "input": "bookings = [[1,2,10],[2,3,20],[2,5,25]], n = 5",
+      "output": "[10,55,45,25,25]"
+    },
+    {
+      "input": "bookings = [[1,2,10],[2,2,15]], n = 2",
+      "output": "[10,25]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 2 * 10^4",
+    "1 <= len(bookings) <= 2 * 10^4"
+  ],
+  "starterCode": "def corpFlightBookings(bookings: list[list[int]], n: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def corpFlightBookings(bookings: list[list[int]], n: int) -> list[int]:\n    diff = [0] * (n + 1)\n    for first, last, seats in bookings:\n        diff[first - 1] += seats\n        diff[last] -= seats\n    res = [0] * n\n    curr = 0\n    for i in range(n):\n        curr += diff[i]\n        res[i] = curr\n    return res\n",
+  "functionName": "corpFlightBookings",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2,
+            10
+          ],
+          [
+            2,
+            3,
+            20
+          ],
+          [
+            2,
+            5,
+            25
+          ]
+        ],
+        5
+      ],
+      "expected": [
+        10,
+        55,
+        45,
+        25,
+        25
+      ],
+      "inputDisplay": "args=[[[1, 2, 10], [2, 3, 20], [2, 5, 25]], 5]",
+      "expectedDisplay": "[10, 55, 45, 25, 25]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2,
+            10
+          ],
+          [
+            2,
+            2,
+            15
+          ]
+        ],
+        2
+      ],
+      "expected": [
+        10,
+        25
+      ],
+      "inputDisplay": "args=[[[1, 2, 10], [2, 2, 15]], 2]",
+      "expectedDisplay": "[10, 25]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Apply range update O(1) by marking +seats at start and -seats at end + 1."
+  ],
+  "python": {
+    "starterCode": "def corpFlightBookings(bookings: list[list[int]], n: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def corpFlightBookings(bookings: list[list[int]], n: int) -> list[int]:\n    diff = [0] * (n + 1)\n    for first, last, seats in bookings:\n        diff[first - 1] += seats\n        diff[last] -= seats\n    res = [0] * n\n    curr = 0\n    for i in range(n):\n        curr += diff[i]\n        res[i] = curr\n    return res\n"
+  },
+  "leetcodeId": 1109,
+  "leetcodeTitle": "Flight Booking Differential",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-corp-flight-bookings/"
+}

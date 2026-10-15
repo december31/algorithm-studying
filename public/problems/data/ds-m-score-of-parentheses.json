@@ -1,0 +1,98 @@
+{
+  "id": "ds-m-score-of-parentheses",
+  "wingId": "data-structures",
+  "floor": 126,
+  "title": "Score of Parentheses",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-score-of-parentheses",
+    "name": "Nesting Sprite",
+    "title": "Multiplier of Balanced Depths",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "slime",
+    "color": "#ec4899",
+    "attackName": "Depth Shock",
+    "attackPower": 2,
+    "defeatQuote": "Balanced parentheses evaluated to their correct score!"
+  },
+  "description": "Given a balanced parentheses string `s`, return the score of the string. `()` has score 1, `AB` has score `A + B`, and `(A)` has score `2 * A`.",
+  "examples": [
+    {
+      "input": "s = \"()\"",
+      "output": "1"
+    },
+    {
+      "input": "s = \"(())\"",
+      "output": "2"
+    },
+    {
+      "input": "s = \"()()\"",
+      "output": "2"
+    },
+    {
+      "input": "s = \"(()(()))\"",
+      "output": "6"
+    }
+  ],
+  "constraints": [
+    "2 <= len(s) <= 50",
+    "s is a balanced parentheses string"
+  ],
+  "starterCode": "def scoreOfParentheses(s: str) -> int:\n    pass\n",
+  "solutionCode": "def scoreOfParentheses(s: str) -> int:\n    stack = [0]\n    for ch in s:\n        if ch == '(':\n            stack.append(0)\n        else:\n            v = stack.pop()\n            stack[-1] += max(2 * v, 1)\n    return stack[0]\n",
+  "functionName": "scoreOfParentheses",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "()"
+      ],
+      "expected": 1,
+      "inputDisplay": "()",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "(())"
+      ],
+      "expected": 2,
+      "inputDisplay": "(())",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "()()"
+      ],
+      "expected": 2,
+      "inputDisplay": "()()",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "(()(()))"
+      ],
+      "expected": 6,
+      "inputDisplay": "(()(()))",
+      "expectedDisplay": "6",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use a stack to accumulate scores at each parenthesis nesting depth."
+  ],
+  "python": {
+    "starterCode": "def scoreOfParentheses(s: str) -> int:\n    pass\n",
+    "solutionCode": "def scoreOfParentheses(s: str) -> int:\n    stack = [0]\n    for ch in s:\n        if ch == '(':\n            stack.append(0)\n        else:\n            v = stack.pop()\n            stack[-1] += max(2 * v, 1)\n    return stack[0]\n"
+  },
+  "leetcodeId": 856,
+  "leetcodeTitle": "Score of Parentheses",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-score-of-parentheses/"
+}

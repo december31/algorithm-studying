@@ -1,0 +1,104 @@
+{
+  "id": "graph-m-loud-and-rich",
+  "wingId": "graphs",
+  "floor": 366,
+  "title": "Loud and Rich (Quiet Person in Wealthy Subgraph)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-loud-and-rich",
+    "name": "Aristocrat Lich",
+    "title": "Weigher of Fortunes and Whispers",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#f59e0b",
+    "attackName": "Golden Silence",
+    "attackPower": 2,
+    "defeatQuote": "Quietest person among all equally or wealthier peers identified!"
+  },
+  "description": "There is a group of `n` people labeled 0 to `n - 1`. You are given `richer` where `richer[i] = [ai, bi]` indicates that `ai` has more money than `bi`, and `quiet` where `quiet[i]` indicates quietness of person `i`. Return an integer array `answer` where `answer[x]` is the least quiet person among all people who have at least as much money as `x`.",
+  "examples": [
+    {
+      "input": "richer = [[1,0],[2,1],[3,1],[3,7],[4,3],[5,3],[6,3]], quiet = [3,2,5,4,6,1,7,0]",
+      "output": "[5,5,2,5,4,5,6,7]"
+    }
+  ],
+  "constraints": [
+    "n == quiet.length",
+    "1 <= n <= 500"
+  ],
+  "starterCode": "def loudAndRich(richer: list[list[int]], quiet: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def loudAndRich(richer: list[list[int]], quiet: list[int]) -> list[int]:\n    n = len(quiet)\n    from collections import defaultdict\n    graph = defaultdict(list)\n    for u, v in richer:\n        graph[v].append(u)\n    ans = [-1] * n\n    def dfs(u):\n        if ans[u] != -1: return ans[u]\n        ans[u] = u\n        for v in graph[u]:\n            cand = dfs(v)\n            if quiet[cand] < quiet[ans[u]]:\n                ans[u] = cand\n        return ans[u]\n    for i in range(n):\n        dfs(i)\n    return ans\n",
+  "functionName": "loudAndRich",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            6,
+            3
+          ]
+        ],
+        [
+          3,
+          2,
+          5,
+          4,
+          6,
+          1,
+          7,
+          0
+        ]
+      ],
+      "expected": [
+        5,
+        5,
+        2,
+        5,
+        4,
+        5,
+        6,
+        7
+      ],
+      "inputDisplay": "args=[[[1, 0], [2, 1], [3, 1], [3, 7], [4, 3], [5, 3], [6, 3]], [3, 2, 5, 4, 6, ",
+      "expectedDisplay": "[5, 5, 2, 5, 4, 5, 6, 7]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Memoized DFS traversing directed edges from poorer to richer person."
+  ],
+  "python": {
+    "starterCode": "def loudAndRich(richer: list[list[int]], quiet: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def loudAndRich(richer: list[list[int]], quiet: list[int]) -> list[int]:\n    n = len(quiet)\n    from collections import defaultdict\n    graph = defaultdict(list)\n    for u, v in richer:\n        graph[v].append(u)\n    ans = [-1] * n\n    def dfs(u):\n        if ans[u] != -1: return ans[u]\n        ans[u] = u\n        for v in graph[u]:\n            cand = dfs(v)\n            if quiet[cand] < quiet[ans[u]]:\n                ans[u] = cand\n        return ans[u]\n    for i in range(n):\n        dfs(i)\n    return ans\n"
+  },
+  "leetcodeId": 851,
+  "leetcodeTitle": "Loud and Rich (Quiet Person in Wealthy Subgraph)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-loud-and-rich/"
+}

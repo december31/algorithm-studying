@@ -1,0 +1,79 @@
+{
+  "id": "bt-h-palindrome-partitioning-iv",
+  "wingId": "backtracking",
+  "floor": 284,
+  "title": "Palindrome Partitioning IV (Exactly 3 Parts)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-palindrome-partitioning-iv",
+    "name": "Tri-Fold Sphinx",
+    "title": "Validator of 3 Palindromic Cuts",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "beholder",
+    "color": "#ec4899",
+    "attackName": "Tri-Fold Ray",
+    "attackPower": 3,
+    "defeatQuote": "String split into exactly 3 non-empty palindromic substrings!"
+  },
+  "description": "Given a string `s`, return `True` if it is possible to split the string `s` into three non-empty palindromic substrings, or `False` otherwise.",
+  "examples": [
+    {
+      "input": "s = \"abcbdd\"",
+      "output": "True"
+    },
+    {
+      "input": "s = \"bcbddxy\"",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "3 <= len(s) <= 2000"
+  ],
+  "starterCode": "def checkPartitioning(s: str) -> bool:\n    pass\n",
+  "solutionCode": "def checkPartitioning(s: str) -> bool:\n    n = len(s)\n    dp = [[False] * n for _ in range(n)]\n    for i in range(n - 1, -1, -1):\n        for j in range(i, n):\n            if s[i] == s[j]:\n                dp[i][j] = True if j - i <= 2 else dp[i + 1][j - 1]\n    for i in range(n - 2):\n        if dp[0][i]:\n            for j in range(i + 1, n - 1):\n                if dp[i + 1][j] and dp[j + 1][n - 1]:\n                    return True\n    return False\n",
+  "functionName": "checkPartitioning",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "abcbdd"
+      ],
+      "expected": true,
+      "inputDisplay": "abcbdd",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "bcbddxy"
+      ],
+      "expected": false,
+      "inputDisplay": "bcbddxy",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "aaa"
+      ],
+      "expected": true,
+      "inputDisplay": "aaa",
+      "expectedDisplay": "True",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Precompute 2D palindrome table in O(n^2), then iterate over the two cut indices i and j."
+  ],
+  "python": {
+    "starterCode": "def checkPartitioning(s: str) -> bool:\n    pass\n",
+    "solutionCode": "def checkPartitioning(s: str) -> bool:\n    n = len(s)\n    dp = [[False] * n for _ in range(n)]\n    for i in range(n - 1, -1, -1):\n        for j in range(i, n):\n            if s[i] == s[j]:\n                dp[i][j] = True if j - i <= 2 else dp[i + 1][j - 1]\n    for i in range(n - 2):\n        if dp[0][i]:\n            for j in range(i + 1, n - 1):\n                if dp[i + 1][j] and dp[j + 1][n - 1]:\n                    return True\n    return False\n"
+  },
+  "leetcodeId": 1745,
+  "leetcodeTitle": "Palindrome Partitioning IV (Exactly 3 Parts)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-palindrome-partitioning-iv/"
+}

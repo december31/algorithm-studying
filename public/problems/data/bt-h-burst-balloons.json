@@ -1,0 +1,91 @@
+{
+  "id": "bt-h-burst-balloons",
+  "wingId": "backtracking",
+  "floor": 290,
+  "title": "Burst Balloons Maximal Coins",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-burst-balloons",
+    "name": "Pneumatic Titan",
+    "title": "Grand Arch-Boss of Backtracking",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#ef4444",
+    "attackName": "Pneumatic Shatter",
+    "attackPower": 3,
+    "defeatQuote": "Thinking in reverse—deciding which balloon to burst LAST—yielded the global maximum coins!"
+  },
+  "description": "You are given `n` balloons, indexed from `0` to `n - 1`. Each balloon is painted with a number on it represented by an array `nums`. You are asked to burst all the balloons. If you burst balloon `i` you will get `nums[i - 1] * nums[i] * nums[i + 1]` coins. Return the maximum coins you can collect by bursting the balloons wisely.",
+  "examples": [
+    {
+      "input": "nums = [3,1,5,8]",
+      "output": "167"
+    },
+    {
+      "input": "nums = [1,5]",
+      "output": "10"
+    }
+  ],
+  "constraints": [
+    "n == len(nums)",
+    "1 <= n <= 300",
+    "0 <= nums[i] <= 100"
+  ],
+  "starterCode": "def maxCoins(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def maxCoins(nums: list[int]) -> int:\n    val = [1] + [x for x in nums if x > 0] + [1]\n    n = len(val)\n    dp = [[0] * n for _ in range(n)]\n    for length in range(2, n):\n        for i in range(n - length):\n            j = i + length\n            for k in range(i + 1, j):\n                dp[i][j] = max(dp[i][j], dp[i][k] + dp[k][j] + val[i] * val[k] * val[j])\n    return dp[0][n - 1]\n",
+  "functionName": "maxCoins",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          1,
+          5,
+          8
+        ]
+      ],
+      "expected": 167,
+      "inputDisplay": "[3, 1, 5, 8]",
+      "expectedDisplay": "167",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          5
+        ]
+      ],
+      "expected": 10,
+      "inputDisplay": "[1, 5]",
+      "expectedDisplay": "10",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          7
+        ]
+      ],
+      "expected": 7,
+      "inputDisplay": "[7]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Interval DP: choose which balloon k to burst LAST in the interval (i, j)."
+  ],
+  "python": {
+    "starterCode": "def maxCoins(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def maxCoins(nums: list[int]) -> int:\n    val = [1] + [x for x in nums if x > 0] + [1]\n    n = len(val)\n    dp = [[0] * n for _ in range(n)]\n    for length in range(2, n):\n        for i in range(n - length):\n            j = i + length\n            for k in range(i + 1, j):\n                dp[i][j] = max(dp[i][j], dp[i][k] + dp[k][j] + val[i] * val[k] * val[j])\n    return dp[0][n - 1]\n"
+  },
+  "leetcodeId": 312,
+  "leetcodeTitle": "Burst Balloons Maximal Coins",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-burst-balloons/"
+}

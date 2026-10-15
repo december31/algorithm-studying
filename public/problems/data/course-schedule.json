@@ -32,8 +32,8 @@
     "1 <= numCourses <= 2000",
     "0 <= prerequisites.length <= 5000"
   ],
-  "starterCode": "function canFinish(numCourses, prerequisites) {\n  return true;\n}",
-  "solutionCode": "function canFinish(numCourses, prerequisites) {\n  const inDegree = new Array(numCourses).fill(0);\n  const adj = Array.from({ length: numCourses }, () => []);\n  for (const [course, pre] of prerequisites) {\n    adj[pre].push(course);\n    inDegree[course]++;\n  }\n  const queue = [];\n  for (let i = 0; i < numCourses; i++) {\n    if (inDegree[i] === 0) queue.push(i);\n  }\n  let count = 0;\n  while (queue.length > 0) {\n    const curr = queue.shift();\n    count++;\n    for (const next of adj[curr]) {\n      inDegree[next]--;\n      if (inDegree[next] === 0) queue.push(next);\n    }\n  }\n  return count === numCourses;\n}",
+  "starterCode": "def canFinish(numCourses, prerequisites):\n    return True\n",
+  "solutionCode": "from collections import deque\ndef canFinish(numCourses, prerequisites):\n    in_degree = [0] * numCourses\n    adj = [[] for _ in range(numCourses)]\n    for course, pre in prerequisites:\n        adj[pre].append(course)\n        in_degree[course] += 1\n    q = deque([i for i in range(numCourses) if in_degree[i] == 0])\n    count = 0\n    while q:\n        curr = q.popleft()\n        count += 1\n        for nxt in adj[curr]:\n            in_degree[nxt] -= 1\n            if in_degree[nxt] == 0:\n                q.append(nxt)\n    return count == numCourses\n",
   "functionName": "canFinish",
   "testCases": [
     {

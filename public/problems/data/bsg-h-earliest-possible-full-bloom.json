@@ -1,0 +1,90 @@
+{
+  "id": "bsg-h-earliest-possible-full-bloom",
+  "wingId": "binary-search-greedy",
+  "floor": 494,
+  "title": "Earliest Possible Day of Full Bloom",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-earliest-possible-full-bloom",
+    "name": "Botanical Archon",
+    "title": "Optimizer of Concurrent Growth Days",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "spectre",
+    "color": "#22c55e",
+    "attackName": "Bloom Burst",
+    "attackPower": 3,
+    "defeatQuote": "Earliest day when every seed has bloomed achieved!"
+  },
+  "description": "You have `n` flower seeds. To plant seed `i`, you need `plantTime[i]` continuous days. Once planted, it takes `growTime[i]` days to bloom (grows concurrently with other activities). Return the earliest possible day where all seeds are blooming.",
+  "examples": [
+    {
+      "input": "plantTime = [1,4,3], growTime = [2,3,1]",
+      "output": "9"
+    },
+    {
+      "input": "plantTime = [1,2,3,2], growTime = [2,1,2,1]",
+      "output": "9"
+    }
+  ],
+  "constraints": [
+    "n == plantTime.length == growTime.length",
+    "1 <= n <= 100000"
+  ],
+  "starterCode": "def earliestFullBloom(plantTime: list[int], growTime: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def earliestFullBloom(plantTime: list[int], growTime: list[int]) -> int:\n    seeds = sorted(zip(growTime, plantTime), reverse=True)\n    curr_day = 0\n    max_bloom = 0\n    for g, p in seeds:\n        curr_day += p\n        max_bloom = max(max_bloom, curr_day + g)\n    return max_bloom\n",
+  "functionName": "earliestFullBloom",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          4,
+          3
+        ],
+        [
+          2,
+          3,
+          1
+        ]
+      ],
+      "expected": 9,
+      "inputDisplay": "args=[[1, 4, 3], [2, 3, 1]]",
+      "expectedDisplay": "9",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          2
+        ],
+        [
+          2,
+          1,
+          2,
+          1
+        ]
+      ],
+      "expected": 9,
+      "inputDisplay": "args=[[1, 2, 3, 2], [2, 1, 2, 1]]",
+      "expectedDisplay": "9",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Greedy strategy: always plant the seed with the longest growth time first."
+  ],
+  "python": {
+    "starterCode": "def earliestFullBloom(plantTime: list[int], growTime: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def earliestFullBloom(plantTime: list[int], growTime: list[int]) -> int:\n    seeds = sorted(zip(growTime, plantTime), reverse=True)\n    curr_day = 0\n    max_bloom = 0\n    for g, p in seeds:\n        curr_day += p\n        max_bloom = max(max_bloom, curr_day + g)\n    return max_bloom\n"
+  },
+  "leetcodeId": 2136,
+  "leetcodeTitle": "Earliest Possible Day of Full Bloom",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-earliest-possible-full-bloom/"
+}

@@ -1,0 +1,110 @@
+{
+  "id": "bit-m-max-achievable-transfers",
+  "wingId": "bit-manipulation",
+  "floor": 549,
+  "title": "Max Achievable Transfer Requests",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-max-achievable-transfers",
+    "name": "Relocation Specter",
+    "title": "Balancer of Net Building Capacities",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#38bdf8",
+    "attackName": "Relocation Loop",
+    "attackPower": 2,
+    "defeatQuote": "Maximum subset of transfer requests maintaining zero net building changes!"
+  },
+  "description": "We have `n` buildings numbered from 0 to `n - 1`. Each building has a number of employees. Given `requests` where `requests[i] = [fromi, toi]`. Return the maximum number of achievable requests where every building ends up with the same net number of employees.",
+  "examples": [
+    {
+      "input": "n = 5, requests = [[0,1],[1,0],[0,1],[1,2],[2,0],[3,4]]",
+      "output": "5"
+    },
+    {
+      "input": "n = 3, requests = [[0,0],[1,2],[2,1]]",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 20",
+    "1 <= requests.length <= 16"
+  ],
+  "starterCode": "def maximumRequests(n: int, requests: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def maximumRequests(n: int, requests: list[list[int]]) -> int:\n    m = len(requests)\n    ans = 0\n    for mask in range(1 << m):\n        net = [0] * n\n        count = 0\n        for i in range(m):\n            if (mask & (1 << i)):\n                count += 1\n                net[requests[i][0]] -= 1\n                net[requests[i][1]] += 1\n        if all(x == 0 for x in net):\n            ans = max(ans, count)\n    return ans\n",
+  "functionName": "maximumRequests",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        5,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[5, [[0, 1], [1, 0], [0, 1], [1, 2], [2, 0], [3, 4]]]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[3, [[0, 0], [1, 2], [2, 1]]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Since requests.length <= 16, iterate all 2^16 subsets of requests and verify all building net changes are 0."
+  ],
+  "python": {
+    "starterCode": "def maximumRequests(n: int, requests: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def maximumRequests(n: int, requests: list[list[int]]) -> int:\n    m = len(requests)\n    ans = 0\n    for mask in range(1 << m):\n        net = [0] * n\n        count = 0\n        for i in range(m):\n            if (mask & (1 << i)):\n                count += 1\n                net[requests[i][0]] -= 1\n                net[requests[i][1]] += 1\n        if all(x == 0 for x in net):\n            ans = max(ans, count)\n    return ans\n"
+  },
+  "leetcodeId": 1601,
+  "leetcodeTitle": "Max Achievable Transfer Requests",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-max-achievable-transfers/"
+}

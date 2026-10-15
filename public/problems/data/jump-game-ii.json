@@ -33,8 +33,8 @@
     "1 <= nums.length <= 10^4",
     "0 <= nums[i] <= 1000"
   ],
-  "starterCode": "function jump(nums) {\n  return 0;\n}",
-  "solutionCode": "function jump(nums) {\n  let jumps = 0, currentEnd = 0, farthest = 0;\n  for (let i = 0; i < nums.length - 1; i++) {\n    farthest = Math.max(farthest, i + nums[i]);\n    if (i === currentEnd) {\n      jumps++;\n      currentEnd = farthest;\n    }\n  }\n  return jumps;\n}",
+  "starterCode": "def jump(nums):\n    return 0\n",
+  "solutionCode": "def jump(nums):\n    jumps, curr_end, farthest = 0, 0, 0\n    for i in range(len(nums) - 1):\n        farthest = max(farthest, i + nums[i])\n        if i == curr_end:\n            jumps += 1\n            curr_end = farthest\n    return jumps\n",
   "functionName": "jump",
   "testCases": [
     {

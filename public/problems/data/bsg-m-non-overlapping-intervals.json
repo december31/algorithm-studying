@@ -1,0 +1,118 @@
+{
+  "id": "bsg-m-non-overlapping-intervals",
+  "wingId": "binary-search-greedy",
+  "floor": 425,
+  "title": "Non-overlapping Intervals (Min Removals)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-non-overlapping-intervals",
+    "name": "Chrono Pruner",
+    "title": "Cutter of Overlapping Spans",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#ef4444",
+    "attackName": "Interval Shear",
+    "attackPower": 2,
+    "defeatQuote": "Minimum intervals removed to make remainder mutually non-overlapping!"
+  },
+  "description": "Given an array of intervals `intervals` where `intervals[i] = [starti, endi]`, return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.",
+  "examples": [
+    {
+      "input": "intervals = [[1,2],[2,3],[3,4],[1,3]]",
+      "output": "1"
+    },
+    {
+      "input": "intervals = [[1,2],[1,2],[1,2]]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= intervals.length <= 100000"
+  ],
+  "starterCode": "def eraseOverlapIntervals(intervals: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def eraseOverlapIntervals(intervals: list[list[int]]) -> int:\n    if not intervals: return 0\n    intervals.sort(key=lambda x: x[1])\n    removals = 0\n    end = intervals[0][1]\n    for i in range(1, len(intervals)):\n        if intervals[i][0] < end:\n            removals += 1\n        else:\n            end = intervals[i][1]\n    return removals\n",
+  "functionName": "eraseOverlapIntervals",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[1, 2], [2, 3], [3, 4], [1, 3]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[[1, 2], [1, 2], [1, 2]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[[1, 2], [2, 3]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort by end time (interval scheduling). Keep greedily the interval finishing earliest."
+  ],
+  "python": {
+    "starterCode": "def eraseOverlapIntervals(intervals: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def eraseOverlapIntervals(intervals: list[list[int]]) -> int:\n    if not intervals: return 0\n    intervals.sort(key=lambda x: x[1])\n    removals = 0\n    end = intervals[0][1]\n    for i in range(1, len(intervals)):\n        if intervals[i][0] < end:\n            removals += 1\n        else:\n            end = intervals[i][1]\n    return removals\n"
+  },
+  "leetcodeId": 435,
+  "leetcodeTitle": "Non-overlapping Intervals (Min Removals)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-non-overlapping-intervals/"
+}

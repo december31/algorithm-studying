@@ -1,0 +1,97 @@
+{
+  "id": "bt-h-regular-expression-matching",
+  "wingId": "backtracking",
+  "floor": 277,
+  "title": "Regular Expression Matching (. and *)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-regular-expression-matching",
+    "name": "Kleene Star Fiend",
+    "title": "Master of Zero-or-More Repeats",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "demon",
+    "color": "#e11d48",
+    "attackName": "Kleene Lash",
+    "attackPower": 3,
+    "defeatQuote": "Regex pattern matches validated with top-down memoization!"
+  },
+  "description": "Given an input string `s` and a pattern `p`, implement regular expression matching with support for `'.'` (matches any single character) and `'*'` (matches zero or more of the preceding element).",
+  "examples": [
+    {
+      "input": "s = \"aa\", p = \"a*\"",
+      "output": "True"
+    },
+    {
+      "input": "s = \"ab\", p = \".*\"",
+      "output": "True"
+    },
+    {
+      "input": "s = \"aab\", p = \"c*a*b\"",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s), len(p) <= 30"
+  ],
+  "starterCode": "def isMatchRegex(s: str, p: str) -> bool:\n    pass\n",
+  "solutionCode": "def isMatchRegex(s: str, p: str) -> bool:\n    memo = {}\n    def dp(i, j):\n        if (i, j) in memo: return memo[(i, j)]\n        if j == len(p): return i == len(s)\n        first_match = i < len(s) and (p[j] == s[i] or p[j] == '.')\n        if j + 1 < len(p) and p[j + 1] == '*':\n            ans = dp(i, j + 2) or (first_match and dp(i + 1, j))\n        else:\n            ans = first_match and dp(i + 1, j + 1)\n        memo[(i, j)] = ans\n        return ans\n    return dp(0, 0)\n",
+  "functionName": "isMatchRegex",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "aa",
+        "a*"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['aa', 'a*']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "ab",
+        ".*"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['ab', '.*']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "aab",
+        "c*a*b"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['aab', 'c*a*b']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "mississippi",
+        "mis*is*p*."
+      ],
+      "expected": false,
+      "inputDisplay": "args=['mississippi', 'mis*is*p*.']",
+      "expectedDisplay": "False",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Branch on '*': zero occurrences (skip 2 characters in pattern) or 1+ occurrences if first matches."
+  ],
+  "python": {
+    "starterCode": "def isMatchRegex(s: str, p: str) -> bool:\n    pass\n",
+    "solutionCode": "def isMatchRegex(s: str, p: str) -> bool:\n    memo = {}\n    def dp(i, j):\n        if (i, j) in memo: return memo[(i, j)]\n        if j == len(p): return i == len(s)\n        first_match = i < len(s) and (p[j] == s[i] or p[j] == '.')\n        if j + 1 < len(p) and p[j + 1] == '*':\n            ans = dp(i, j + 2) or (first_match and dp(i + 1, j))\n        else:\n            ans = first_match and dp(i + 1, j + 1)\n        memo[(i, j)] = ans\n        return ans\n    return dp(0, 0)\n"
+  },
+  "leetcodeId": 10,
+  "leetcodeTitle": "Regular Expression Matching (. and *)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-regular-expression-matching/"
+}

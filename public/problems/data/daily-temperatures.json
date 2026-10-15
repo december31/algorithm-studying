@@ -32,8 +32,8 @@
     "1 <= temperatures.length <= 10^5",
     "30 <= temperatures[i] <= 100"
   ],
-  "starterCode": "function dailyTemperatures(temperatures) {\n  return new Array(temperatures.length).fill(0);\n}",
-  "solutionCode": "function dailyTemperatures(temperatures) {\n  const n = temperatures.length;\n  const res = new Array(n).fill(0);\n  const stack = [];\n  for (let i = 0; i < n; i++) {\n    while (stack.length > 0 && temperatures[i] > temperatures[stack[stack.length - 1]]) {\n      const prev = stack.pop();\n      res[prev] = i - prev;\n    }\n    stack.push(i);\n  }\n  return res;\n}",
+  "starterCode": "def dailyTemperatures(temperatures):\n    return [0] * len(temperatures)\n",
+  "solutionCode": "def dailyTemperatures(temperatures):\n    n = len(temperatures)\n    res = [0] * n\n    stack = []\n    for i, t in enumerate(temperatures):\n        while stack and t > temperatures[stack[-1]]:\n            prev = stack.pop()\n            res[prev] = i - prev\n        stack.append(i)\n    return res\n",
   "functionName": "dailyTemperatures",
   "testCases": [
     {

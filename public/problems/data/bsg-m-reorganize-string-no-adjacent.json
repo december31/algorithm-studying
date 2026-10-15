@@ -1,0 +1,69 @@
+{
+  "id": "bsg-m-reorganize-string-no-adjacent",
+  "wingId": "binary-search-greedy",
+  "floor": 466,
+  "title": "Reorganize String with No Adjacent Duplicates",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-reorganize-string-no-adjacent",
+    "name": "Entropy Drake",
+    "title": "Separator of Adjacent Monograms",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#ec4899",
+    "attackName": "Discord Breath",
+    "attackPower": 2,
+    "defeatQuote": "String rearranged so no two adjacent letters match!"
+  },
+  "description": "Given a string `s`, rearrange the characters of `s` so that any two adjacent characters are not the same. Return any possible rearrangement of `s` or `\"\"` if not possible.",
+  "examples": [
+    {
+      "input": "s = \"aab\"",
+      "output": "\"aba\""
+    },
+    {
+      "input": "s = \"aaab\"",
+      "output": "\"\""
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 500"
+  ],
+  "starterCode": "def reorganizeString(s: str) -> str:\n    pass\n",
+  "solutionCode": "def reorganizeString(s: str) -> str:\n    from collections import Counter\n    import heapq\n    counts = Counter(s)\n    if max(counts.values()) > (len(s) + 1) // 2: return \"\"\n    pq = [(-cnt, ch) for ch, cnt in counts.items()]\n    heapq.heapify(pq)\n    res = []\n    prev_cnt, prev_ch = 0, ''\n    while pq:\n        cnt, ch = heapq.heappop(pq)\n        res.append(ch)\n        if prev_cnt < 0:\n            heapq.heappush(pq, (prev_cnt, prev_ch))\n        prev_cnt, prev_ch = cnt + 1, ch\n    return \"\".join(res)\n",
+  "functionName": "reorganizeString",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "aab"
+      ],
+      "expected": "aba",
+      "inputDisplay": "aab",
+      "expectedDisplay": "aba",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "aaab"
+      ],
+      "expected": "",
+      "inputDisplay": "aaab",
+      "expectedDisplay": "",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Max-heap by letter frequency. Always pull the most frequent letter that is not equal to the previous character."
+  ],
+  "python": {
+    "starterCode": "def reorganizeString(s: str) -> str:\n    pass\n",
+    "solutionCode": "def reorganizeString(s: str) -> str:\n    from collections import Counter\n    import heapq\n    counts = Counter(s)\n    if max(counts.values()) > (len(s) + 1) // 2: return \"\"\n    pq = [(-cnt, ch) for ch, cnt in counts.items()]\n    heapq.heapify(pq)\n    res = []\n    prev_cnt, prev_ch = 0, ''\n    while pq:\n        cnt, ch = heapq.heappop(pq)\n        res.append(ch)\n        if prev_cnt < 0:\n            heapq.heappush(pq, (prev_cnt, prev_ch))\n        prev_cnt, prev_ch = cnt + 1, ch\n    return \"\".join(res)\n"
+  },
+  "leetcodeId": 767,
+  "leetcodeTitle": "Reorganize String with No Adjacent Duplicates",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-reorganize-string-no-adjacent/"
+}

@@ -1,0 +1,107 @@
+{
+  "id": "bsg-m-days-make-m-bouquets",
+  "wingId": "binary-search-greedy",
+  "floor": 419,
+  "title": "Minimum Days to Make m Bouquets",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-days-make-m-bouquets",
+    "name": "Floral Reaper",
+    "title": "Harvester of Contiguous Blooms",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#22c55e",
+    "attackName": "Petal Cyclone",
+    "attackPower": 2,
+    "defeatQuote": "Minimum bloom day to gather m bouquets of k adjacent flowers!"
+  },
+  "description": "You are given an integer array `bloomDay`, an integer `m` and an integer `k`. You want to make `m` bouquets. To make a bouquet, you need to use `k` adjacent flowers from the garden. Return the minimum number of days you need to wait to be able to make `m` bouquets from the garden. If it is impossible, return `-1`.",
+  "examples": [
+    {
+      "input": "bloomDay = [1,10,3,10,2], m = 3, k = 1",
+      "output": "3"
+    },
+    {
+      "input": "bloomDay = [1,10,3,10,2], m = 3, k = 2",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= bloomDay.length <= 100000",
+    "1 <= m <= 10^6",
+    "1 <= k <= bloomDay.length"
+  ],
+  "starterCode": "def minDays(bloomDay: list[int], m: int, k: int) -> int:\n    pass\n",
+  "solutionCode": "def minDays(bloomDay: list[int], m: int, k: int) -> int:\n    if m * k > len(bloomDay): return -1\n    lo, hi = min(bloomDay), max(bloomDay)\n    ans = hi\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        bouquets = 0\n        flowers = 0\n        for day in bloomDay:\n            if day <= mid:\n                flowers += 1\n                if flowers == k:\n                    bouquets += 1\n                    flowers = 0\n            else:\n                flowers = 0\n        if bouquets >= m:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n",
+  "functionName": "minDays",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          10,
+          3,
+          10,
+          2
+        ],
+        3,
+        1
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[1, 10, 3, 10, 2], 3, 1]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          10,
+          3,
+          10,
+          2
+        ],
+        3,
+        2
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[[1, 10, 3, 10, 2], 3, 2]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          7,
+          7,
+          7,
+          7,
+          12,
+          7,
+          7
+        ],
+        2,
+        3
+      ],
+      "expected": 12,
+      "inputDisplay": "args=[[7, 7, 7, 7, 12, 7, 7], 2, 3]",
+      "expectedDisplay": "12",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search on days in [min(bloomDay), max(bloomDay)]. Count greedily formed k-contiguous bouquets."
+  ],
+  "python": {
+    "starterCode": "def minDays(bloomDay: list[int], m: int, k: int) -> int:\n    pass\n",
+    "solutionCode": "def minDays(bloomDay: list[int], m: int, k: int) -> int:\n    if m * k > len(bloomDay): return -1\n    lo, hi = min(bloomDay), max(bloomDay)\n    ans = hi\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        bouquets = 0\n        flowers = 0\n        for day in bloomDay:\n            if day <= mid:\n                flowers += 1\n                if flowers == k:\n                    bouquets += 1\n                    flowers = 0\n            else:\n                flowers = 0\n        if bouquets >= m:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n"
+  },
+  "leetcodeId": 1482,
+  "leetcodeTitle": "Minimum Days to Make m Bouquets",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-days-make-m-bouquets/"
+}

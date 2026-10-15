@@ -32,8 +32,8 @@
     "1 <= prices.length <= 10^5",
     "0 <= prices[i] <= 10^4"
   ],
-  "starterCode": "function maxProfit(prices) {\n  return 0;\n}",
-  "solutionCode": "function maxProfit(prices) {\n  let minPrice = Infinity;\n  let maxProfit = 0;\n  for (const p of prices) {\n    if (p < minPrice) minPrice = p;\n    else if (p - minPrice > maxProfit) maxProfit = p - minPrice;\n  }\n  return maxProfit;\n}",
+  "starterCode": "def maxProfit(prices):\n    return 0\n",
+  "solutionCode": "def maxProfit(prices):\n    min_price = float(\"inf\")\n    max_p = 0\n    for p in prices:\n        if p < min_price:\n            min_price = p\n        elif p - min_price > max_p:\n            max_p = p - min_price\n    return max_p\n",
   "functionName": "maxProfit",
   "testCases": [
     {

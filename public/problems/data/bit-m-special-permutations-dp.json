@@ -1,0 +1,77 @@
+{
+  "id": "bit-m-special-permutations-dp",
+  "wingId": "bit-manipulation",
+  "floor": 542,
+  "title": "Special Permutations (Bitmask Hamiltonian DP)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-special-permutations-dp",
+    "name": "Divisibility Lich",
+    "title": "Weaver of Permutational Divisibility",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#8b5cf6",
+    "attackName": "Divisibility Beam",
+    "attackPower": 2,
+    "defeatQuote": "Count of special permutations where every adjacent pair divides modulo 10^9+7!"
+  },
+  "description": "Given an array `nums` of `n` distinct positive integers. A permutation is special if for all adjacent indices `i`: `nums[i] % nums[i+1] == 0` or `nums[i+1] % nums[i] == 0`. Return the total number of special permutations modulo `10^9 + 7`.",
+  "examples": [
+    {
+      "input": "nums = [2,3,6]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [1,4,3]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "2 <= nums.length <= 14"
+  ],
+  "starterCode": "def specialPerm(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def specialPerm(nums: list[int]) -> int:\n    n = len(nums)\n    MOD = 10**9 + 7\n    memo = {}\n    def dfs(mask, last_idx):\n        if mask == (1 << n) - 1: return 1\n        state = (mask, last_idx)\n        if state in memo: return memo[state]\n        res = 0\n        for j in range(n):\n            if not (mask & (1 << j)):\n                if last_idx == -1 or nums[j] % nums[last_idx] == 0 or nums[last_idx] % nums[j] == 0:\n                    res = (res + dfs(mask | (1 << j), j)) % MOD\n        memo[state] = res\n        return res\n    return dfs(0, -1)\n",
+  "functionName": "specialPerm",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          6
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[2, 3, 6]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          4,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 4, 3]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "DP state is (visited_mask, last_index)."
+  ],
+  "python": {
+    "starterCode": "def specialPerm(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def specialPerm(nums: list[int]) -> int:\n    n = len(nums)\n    MOD = 10**9 + 7\n    memo = {}\n    def dfs(mask, last_idx):\n        if mask == (1 << n) - 1: return 1\n        state = (mask, last_idx)\n        if state in memo: return memo[state]\n        res = 0\n        for j in range(n):\n            if not (mask & (1 << j)):\n                if last_idx == -1 or nums[j] % nums[last_idx] == 0 or nums[last_idx] % nums[j] == 0:\n                    res = (res + dfs(mask | (1 << j), j)) % MOD\n        memo[state] = res\n        return res\n    return dfs(0, -1)\n"
+  },
+  "leetcodeId": 2741,
+  "leetcodeTitle": "Special Permutations (Bitmask Hamiltonian DP)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-special-permutations-dp/"
+}

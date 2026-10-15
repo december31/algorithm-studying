@@ -1,0 +1,86 @@
+{
+  "id": "bt-h-distribute-repeating-integers",
+  "wingId": "backtracking",
+  "floor": 287,
+  "title": "Distribute Repeating Integers",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-distribute-repeating-integers",
+    "name": "Inventory Drake",
+    "title": "Fulfiller of Customer Batch Demands",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#38bdf8",
+    "attackName": "Batch Fire",
+    "attackPower": 3,
+    "defeatQuote": "Every customer requirement satisfied from single item frequency pools!"
+  },
+  "description": "You are given an array of `n` integers, `nums`, where there are at most 50 unique values in the array. You are also given an array of `m` customer order quantities, `quantity`, where the `i-th` customer requires `quantity[i]` equal numbers. Return `True` if you can satisfy all customer orders.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,4], quantity = [2]",
+      "output": "False"
+    },
+    {
+      "input": "nums = [1,2,3,3], quantity = [2]",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 10^5",
+    "1 <= len(quantity) <= 10"
+  ],
+  "starterCode": "def canDistribute(nums: list[int], quantity: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def canDistribute(nums: list[int], quantity: list[int]) -> bool:\n    from collections import Counter\n    counts = sorted(Counter(nums).values(), reverse=True)\n    quantity.sort(reverse=True)\n    def backtrack(cust_idx):\n        if cust_idx == len(quantity): return True\n        for i in range(len(counts)):\n            if counts[i] >= quantity[cust_idx]:\n                counts[i] -= quantity[cust_idx]\n                if backtrack(cust_idx + 1): return True\n                counts[i] += quantity[cust_idx]\n            if counts[i] == 0: break\n        return False\n    return backtrack(0)\n",
+  "functionName": "canDistribute",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "args=[[1, 2, 3, 4], [2]]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          3
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[1, 2, 3, 3], [2]]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort both item counts and customer quantities in descending order to fail fast."
+  ],
+  "python": {
+    "starterCode": "def canDistribute(nums: list[int], quantity: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def canDistribute(nums: list[int], quantity: list[int]) -> bool:\n    from collections import Counter\n    counts = sorted(Counter(nums).values(), reverse=True)\n    quantity.sort(reverse=True)\n    def backtrack(cust_idx):\n        if cust_idx == len(quantity): return True\n        for i in range(len(counts)):\n            if counts[i] >= quantity[cust_idx]:\n                counts[i] -= quantity[cust_idx]\n                if backtrack(cust_idx + 1): return True\n                counts[i] += quantity[cust_idx]\n            if counts[i] == 0: break\n        return False\n    return backtrack(0)\n"
+  },
+  "leetcodeId": 1655,
+  "leetcodeTitle": "Distribute Repeating Integers",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-distribute-repeating-integers/"
+}

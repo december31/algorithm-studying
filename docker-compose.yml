@@ -1,0 +1,81 @@
+services:
+  # =================================================================
+  # Frontend Service (Algo-Dungeon Vite React App)
+  # =================================================================
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    image: algo-dungeon-frontend:dev
+    container_name: algo-dungeon-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+      - VITE_BACKEND_URL=${VITE_BACKEND_URL:-http://backend:8000}
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  # =================================================================
+  # Backend Service (FastAPI Python Backend)
+  # =================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: algo-dungeon-backend:latest
+    container_name: algo-dungeon-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-algo_dungeon}
+      - CORS_ORIGINS=["http://localhost:5173","http://localhost:80","http://localhost"]
+    volumes:
+      - ./backend:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # =================================================================
+  # Database Service (PostgreSQL 16)
+  # =================================================================
+  db:
+    image: postgres:16-alpine
+    container_name: algo-dungeon-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-algo_dungeon}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-algo_dungeon}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local

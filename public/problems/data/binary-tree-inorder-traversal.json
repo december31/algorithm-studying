@@ -35,8 +35,8 @@
   "constraints": [
     "The number of nodes in the tree is in the range [0, 100]."
   ],
-  "starterCode": "function inorderTraversal(root) {\n  return [];\n}",
-  "solutionCode": "function inorderTraversal(root) {\n  if (!root || root.length === 0 || root[0] === null) return [];\n  const result = [];\n  function traverse(idx) {\n    if (idx >= root.length || root[idx] === null || root[idx] === undefined) return;\n    traverse(2 * idx + 1);\n    result.push(root[idx]);\n    traverse(2 * idx + 2);\n  }\n  traverse(0);\n  return result;\n}",
+  "starterCode": "def inorderTraversal(root):\n    return []\n",
+  "solutionCode": "def inorderTraversal(root):\n    if not root or root[0] is None:\n        return []\n    res = []\n    def traverse(idx):\n        if idx >= len(root) or root[idx] is None:\n            return\n        traverse(2 * idx + 1)\n        res.append(root[idx])\n        traverse(2 * idx + 2)\n    traverse(0)\n    return res\n",
   "functionName": "inorderTraversal",
   "testCases": [
     {

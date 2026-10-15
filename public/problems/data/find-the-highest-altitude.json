@@ -33,8 +33,8 @@
     "1 <= n <= 100",
     "-100 <= gain[i] <= 100"
   ],
-  "starterCode": "function largestAltitude(gain) {\n  return 0;\n}",
-  "solutionCode": "function largestAltitude(gain) {\n  let maxAlt = 0;\n  let curr = 0;\n  for (const g of gain) {\n    curr += g;\n    maxAlt = Math.max(maxAlt, curr);\n  }\n  return maxAlt;\n}",
+  "starterCode": "def largestAltitude(gain):\n    return 0\n",
+  "solutionCode": "def largestAltitude(gain):\n    max_alt = 0\n    curr = 0\n    for g in gain:\n        curr += g\n        max_alt = max(max_alt, curr)\n    return max_alt\n",
   "functionName": "largestAltitude",
   "testCases": [
     {

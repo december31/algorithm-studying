@@ -32,8 +32,8 @@
     "1 <= nums.length <= 10",
     "-10 <= nums[i] <= 10"
   ],
-  "starterCode": "function subsetsWithDup(nums) {\n  return [];\n}",
-  "solutionCode": "function subsetsWithDup(nums) {\n  const result = [];\n  nums.sort((a, b) => a - b);\n  function backtrack(start, current) {\n    result.push([...current]);\n    for (let i = start; i < nums.length; i++) {\n      if (i > start && nums[i] === nums[i - 1]) continue;\n      current.push(nums[i]);\n      backtrack(i + 1, current);\n      current.pop();\n    }\n  }\n  backtrack(0, []);\n  return result;\n}",
+  "starterCode": "def subsetsWithDup(nums):\n    return []\n",
+  "solutionCode": "def subsetsWithDup(nums):\n    nums.sort()\n    res = []\n    def backtrack(start, curr):\n        res.append(list(curr))\n        for i in range(start, len(nums)):\n            if i > start and nums[i] == nums[i - 1]:\n                continue\n            curr.append(nums[i])\n            backtrack(i + 1, curr)\n            curr.pop()\n    backtrack(0, [])\n    return res\n",
   "functionName": "subsetsWithDup",
   "testCases": [
     {

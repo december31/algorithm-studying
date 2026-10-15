@@ -31,8 +31,8 @@
   "constraints": [
     "The number of nodes in the tree is in the range [1, 100]."
   ],
-  "starterCode": "function isUnivalTree(root) {\n  return true;\n}",
-  "solutionCode": "function isUnivalTree(root) {\n  if (!root || root.length === 0 || root[0] === null) return true;\n  const val = root[0];\n  for (let i = 0; i < root.length; i++) {\n    if (root[i] !== null && root[i] !== undefined && root[i] !== val) return false;\n  }\n  return true;\n}",
+  "starterCode": "def isUnivalTree(root):\n    return True\n",
+  "solutionCode": "def isUnivalTree(root):\n    if not root or root[0] is None:\n        return True\n    val = root[0]\n    return all(x is None or x == val for x in root)\n",
   "functionName": "isUnivalTree",
   "testCases": [
     {

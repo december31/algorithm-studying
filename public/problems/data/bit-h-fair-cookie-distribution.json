@@ -1,0 +1,87 @@
+{
+  "id": "bit-h-fair-cookie-distribution",
+  "wingId": "bit-manipulation",
+  "floor": 596,
+  "title": "Fair Distribution of Cookies",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-fair-cookie-distribution",
+    "name": "Confectioner Goblin",
+    "title": "Distributor of Sugary Spoils",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "goblin",
+    "color": "#ca8a04",
+    "attackName": "Cookie Avalanche",
+    "attackPower": 3,
+    "defeatQuote": "Divide all cookie bags among k children to minimize the maximum burden!"
+  },
+  "description": "You are given an integer array `cookies`, where `cookies[i]` denotes the number of cookies in the `i-th` bag. You are also given an integer `k` that denotes the number of children. All cookies must be distributed. The unfairness of a distribution is the maximum total cookies obtained by any child. Return the minimum unfairness of all distributions.",
+  "examples": [
+    {
+      "input": "cookies = [8,15,10,20,8], k = 2",
+      "output": "31"
+    },
+    {
+      "input": "cookies = [6,1,3,2,2,4,1,2], k = 3",
+      "output": "7"
+    }
+  ],
+  "constraints": [
+    "2 <= cookies.length <= 8",
+    "2 <= k <= cookies.length"
+  ],
+  "starterCode": "def distributeCookies(cookies: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def distributeCookies(cookies: list[int], k: int) -> int:\n    n = len(cookies)\n    submask_sum = [0] * (1 << n)\n    for mask in range(1 << n):\n        for i in range(n):\n            if mask & (1 << i):\n                submask_sum[mask] += cookies[i]\n    dp = submask_sum[:]\n    for child in range(2, k + 1):\n        nxt_dp = [float('inf')] * (1 << n)\n        for mask in range(1 << n):\n            submask = mask\n            while submask > 0:\n                val = max(dp[mask ^ submask], submask_sum[submask])\n                if val < nxt_dp[mask]: nxt_dp[mask] = val\n                submask = (submask - 1) & mask\n        dp = nxt_dp\n    return dp[(1 << n) - 1]\n",
+  "functionName": "distributeCookies",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          8,
+          15,
+          10,
+          20,
+          8
+        ],
+        2
+      ],
+      "expected": 31,
+      "inputDisplay": "args=[[8, 15, 10, 20, 8], 2]",
+      "expectedDisplay": "31",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          6,
+          1,
+          3,
+          2,
+          2,
+          4,
+          1,
+          2
+        ],
+        3
+      ],
+      "expected": 7,
+      "inputDisplay": "args=[[6, 1, 3, 2, 2, 4, 1, 2], 3]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Submask enumeration DP: dp[child][mask] = min over submask of max(dp[child-1][mask ^ submask], sum(submask))."
+  ],
+  "python": {
+    "starterCode": "def distributeCookies(cookies: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def distributeCookies(cookies: list[int], k: int) -> int:\n    n = len(cookies)\n    submask_sum = [0] * (1 << n)\n    for mask in range(1 << n):\n        for i in range(n):\n            if mask & (1 << i):\n                submask_sum[mask] += cookies[i]\n    dp = submask_sum[:]\n    for child in range(2, k + 1):\n        nxt_dp = [float('inf')] * (1 << n)\n        for mask in range(1 << n):\n            submask = mask\n            while submask > 0:\n                val = max(dp[mask ^ submask], submask_sum[submask])\n                if val < nxt_dp[mask]: nxt_dp[mask] = val\n                submask = (submask - 1) & mask\n        dp = nxt_dp\n    return dp[(1 << n) - 1]\n"
+  },
+  "leetcodeId": 2305,
+  "leetcodeTitle": "Fair Distribution of Cookies",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-fair-cookie-distribution/"
+}

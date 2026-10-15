@@ -33,8 +33,8 @@
     "-10^4 <= nums[i] <= 10^4",
     "1 <= k <= nums.length"
   ],
-  "starterCode": "function maxSlidingWindow(nums, k) {\n  return [];\n}",
-  "solutionCode": "function maxSlidingWindow(nums, k) {\n  const q = []; // monotonic deque storing indices\n  const res = [];\n  for (let i = 0; i < nums.length; i++) {\n    // Remove indices outside current window\n    while (q.length > 0 && q[0] <= i - k) q.shift();\n    // Maintain decreasing order in deque\n    while (q.length > 0 && nums[q[q.length - 1]] <= nums[i]) q.pop();\n    q.push(i);\n    if (i >= k - 1) res.push(nums[q[0]]);\n  }\n  return res;\n}",
+  "starterCode": "def maxSlidingWindow(nums, k):\n    return []\n",
+  "solutionCode": "from collections import deque\ndef maxSlidingWindow(nums, k):\n    q = deque()\n    res = []\n    for i, n in enumerate(nums):\n        while q and q[0] <= i - k:\n            q.popleft()\n        while q and nums[q[-1]] <= n:\n            q.pop()\n        q.append(i)\n        if i >= k - 1:\n            res.append(nums[q[0]])\n    return res\n",
   "functionName": "maxSlidingWindow",
   "testCases": [
     {

@@ -1,0 +1,120 @@
+{
+  "id": "ds-e-middle-linked-list",
+  "wingId": "data-structures",
+  "floor": 104,
+  "title": "Middle of Linked List Values",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-e-middle-linked-list",
+    "name": "Bifurcating Serpent",
+    "title": "Splitter of Linked Arteries",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "slime",
+    "color": "#10b981",
+    "attackName": "Midway Constrict",
+    "attackPower": 1,
+    "defeatQuote": "The fast and slow runners have rendezvoused at my core!"
+  },
+  "description": "Given the head values of a singly linked list as an array `values`, return the values from the middle node to the end of the list. If there are two middle nodes, return the second middle node onwards.",
+  "examples": [
+    {
+      "input": "values = [1,2,3,4,5]",
+      "output": "[3,4,5]"
+    },
+    {
+      "input": "values = [1,2,3,4,5,6]",
+      "output": "[4,5,6]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(values) <= 1000",
+    "0 <= values[i] <= 1000"
+  ],
+  "starterCode": "def middleNodeValues(values: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def middleNodeValues(values: list[int]) -> list[int]:\n    # Simulate slow and fast pointer: fast moves 2, slow moves 1\n    slow = 0\n    fast = 0\n    while fast < len(values) and fast + 1 < len(values):\n        slow += 1\n        fast += 2\n    return values[slow:]\n",
+  "functionName": "middleNodeValues",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        3,
+        4,
+        5
+      ],
+      "inputDisplay": "[1, 2, 3, 4, 5]",
+      "expectedDisplay": "[3, 4, 5]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "expected": [
+        4,
+        5,
+        6
+      ],
+      "inputDisplay": "[1, 2, 3, 4, 5, 6]",
+      "expectedDisplay": "[4, 5, 6]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          42
+        ]
+      ],
+      "expected": [
+        42
+      ],
+      "inputDisplay": "[42]",
+      "expectedDisplay": "[42]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        2
+      ],
+      "inputDisplay": "[1, 2]",
+      "expectedDisplay": "[2]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use two pointers: fast moves two steps while slow moves one step."
+  ],
+  "python": {
+    "starterCode": "def middleNodeValues(values: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def middleNodeValues(values: list[int]) -> list[int]:\n    # Simulate slow and fast pointer: fast moves 2, slow moves 1\n    slow = 0\n    fast = 0\n    while fast < len(values) and fast + 1 < len(values):\n        slow += 1\n        fast += 2\n    return values[slow:]\n"
+  },
+  "leetcodeId": 876,
+  "leetcodeTitle": "Middle of Linked List Values",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-e-middle-linked-list/"
+}

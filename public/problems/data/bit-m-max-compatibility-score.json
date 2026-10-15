@@ -1,0 +1,126 @@
+{
+  "id": "bit-m-max-compatibility-score",
+  "wingId": "bit-manipulation",
+  "floor": 541,
+  "title": "Maximum Compatibility Score (Bitmask Assignment)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-max-compatibility-score",
+    "name": "Affinity Spectre",
+    "title": "Harmonizer of Binary Profiles",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#38bdf8",
+    "attackName": "Affinity Pulse",
+    "attackPower": 2,
+    "defeatQuote": "Max total compatibility score across paired student-mentor masks!"
+  },
+  "description": "There is a survey with `m` binary questions. Given `students` and `mentors` (both `m x n`). The score of a pair is the number of matching answers. Return the maximum compatibility score sum assigning each student to one mentor.",
+  "examples": [
+    {
+      "input": "students = [[1,1,0],[1,0,1],[0,0,1]], mentors = [[1,0,0],[0,0,1],[1,1,0]]",
+      "output": "8"
+    }
+  ],
+  "constraints": [
+    "m == students.length == mentors.length <= 8",
+    "1 <= n <= 8"
+  ],
+  "starterCode": "def maxCompatibilityMatch(students: list[list[int]], mentors: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def maxCompatibilityMatch(students: list[list[int]], mentors: list[list[int]]) -> int:\n    m, n = len(students), len(students[0])\n    scores = [[sum(students[i][k] == mentors[j][k] for k in range(n)) for j in range(m)] for i in range(m)]\n    memo = {}\n    def dfs(s_idx, mask):\n        if s_idx == m: return 0\n        if mask in memo: return memo[mask]\n        res = 0\n        for j in range(m):\n            if not (mask & (1 << j)):\n                res = max(res, scores[s_idx][j] + dfs(s_idx + 1, mask | (1 << j)))\n        memo[mask] = res\n        return res\n    return dfs(0, 0)\n",
+  "functionName": "maxCompatibilityMatch",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "args=[[[1, 1, 0], [1, 0, 1], [0, 0, 1]], [[1, 0, 0], [0, 0, 1], [1, 1, 0]]]",
+      "expectedDisplay": "8",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[[0, 0], [0, 0], [0, 0]], [[1, 1], [1, 1], [1, 1]]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Bitmask memoization over assigned mentors mask with current student index."
+  ],
+  "python": {
+    "starterCode": "def maxCompatibilityMatch(students: list[list[int]], mentors: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def maxCompatibilityMatch(students: list[list[int]], mentors: list[list[int]]) -> int:\n    m, n = len(students), len(students[0])\n    scores = [[sum(students[i][k] == mentors[j][k] for k in range(n)) for j in range(m)] for i in range(m)]\n    memo = {}\n    def dfs(s_idx, mask):\n        if s_idx == m: return 0\n        if mask in memo: return memo[mask]\n        res = 0\n        for j in range(m):\n            if not (mask & (1 << j)):\n                res = max(res, scores[s_idx][j] + dfs(s_idx + 1, mask | (1 << j)))\n        memo[mask] = res\n        return res\n    return dfs(0, 0)\n"
+  },
+  "leetcodeId": 1947,
+  "leetcodeTitle": "Maximum Compatibility Score (Bitmask Assignment)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-max-compatibility-score/"
+}

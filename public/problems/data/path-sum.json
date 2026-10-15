@@ -32,8 +32,8 @@
     "The number of nodes in the tree is in the range [0, 5000].",
     "-1000 <= targetSum <= 1000"
   ],
-  "starterCode": "function hasPathSum(root, targetSum) {\n  return false;\n}",
-  "solutionCode": "function hasPathSum(root, targetSum) {\n  if (!root || root.length === 0 || root[0] === null) return false;\n  function dfs(idx, remaining) {\n    if (idx >= root.length || root[idx] === null || root[idx] === undefined) return false;\n    const current = remaining - root[idx];\n    const left = 2 * idx + 1;\n    const right = 2 * idx + 2;\n    const isLeaf = (left >= root.length || root[left] === null || root[left] === undefined) &&\n                   (right >= root.length || root[right] === null || root[right] === undefined);\n    if (isLeaf) return current === 0;\n    return dfs(left, current) || dfs(right, current);\n  }\n  return dfs(0, targetSum);\n}",
+  "starterCode": "def hasPathSum(root, targetSum):\n    return False\n",
+  "solutionCode": "def hasPathSum(root, targetSum):\n    if not root or root[0] is None:\n        return False\n    def dfs(idx, remain):\n        if idx >= len(root) or root[idx] is None:\n            return False\n        curr = remain - root[idx]\n        left = 2 * idx + 1\n        right = 2 * idx + 2\n        is_leaf = (left >= len(root) or root[left] is None) and (right >= len(root) or root[right] is None)\n        if is_leaf:\n            return curr == 0\n        return dfs(left, curr) or dfs(right, curr)\n    return dfs(0, targetSum)\n",
   "functionName": "hasPathSum",
   "testCases": [
     {

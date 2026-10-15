@@ -1,0 +1,93 @@
+{
+  "id": "ds-h-calculate-basic",
+  "wingId": "data-structures",
+  "floor": 178,
+  "title": "Basic Calculator",
+  "difficulty": "hard",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-h-calculate-basic",
+    "name": "Math Drake",
+    "title": "Solver of Nested Signed Expressions",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#10b981",
+    "attackName": "Parenthesis Flare",
+    "attackPower": 3,
+    "defeatQuote": "Stack saved intermediate signs across nested parentheses!"
+  },
+  "description": "Given a string `s` representing a valid expression with `+`, `-`, non-negative integers, and parentheses `(`, `)`, implement a basic calculator to evaluate it.",
+  "examples": [
+    {
+      "input": "s = \"1 + 1\"",
+      "output": "2"
+    },
+    {
+      "input": "s = \" 2-1 + 2 \"",
+      "output": "3"
+    },
+    {
+      "input": "s = \"(1+(4+5+2)-3)+(6+8)\"",
+      "output": "23"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 3 * 10^4"
+  ],
+  "starterCode": "def calculateExpression(s: str) -> int:\n    pass\n",
+  "solutionCode": "def calculateExpression(s: str) -> int:\n    stack = []\n    res = 0\n    num = 0\n    sign = 1\n    for ch in s:\n        if ch.isdigit():\n            num = num * 10 + int(ch)\n        elif ch in '+-':\n            res += sign * num\n            num = 0\n            sign = 1 if ch == '+' else -1\n        elif ch == '(':\n            stack.append(res)\n            stack.append(sign)\n            res = 0\n            sign = 1\n        elif ch == ')':\n            res += sign * num\n            num = 0\n            res *= stack.pop()\n            res += stack.pop()\n    res += sign * num\n    return res\n",
+  "functionName": "calculateExpression",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "1 + 1"
+      ],
+      "expected": 2,
+      "inputDisplay": "1 + 1",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        " 2-1 + 2 "
+      ],
+      "expected": 3,
+      "inputDisplay": " 2-1 + 2 ",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "(1+(4+5+2)-3)+(6+8)"
+      ],
+      "expected": 23,
+      "inputDisplay": "(1+(4+5+2)-3)+(6+8)",
+      "expectedDisplay": "23",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "- (3 + (4 + 5))"
+      ],
+      "expected": -12,
+      "inputDisplay": "- (3 + (4 + 5))",
+      "expectedDisplay": "-12",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Maintain running result and current sign. On '(', push result and sign; on ')', pop and combine."
+  ],
+  "python": {
+    "starterCode": "def calculateExpression(s: str) -> int:\n    pass\n",
+    "solutionCode": "def calculateExpression(s: str) -> int:\n    stack = []\n    res = 0\n    num = 0\n    sign = 1\n    for ch in s:\n        if ch.isdigit():\n            num = num * 10 + int(ch)\n        elif ch in '+-':\n            res += sign * num\n            num = 0\n            sign = 1 if ch == '+' else -1\n        elif ch == '(':\n            stack.append(res)\n            stack.append(sign)\n            res = 0\n            sign = 1\n        elif ch == ')':\n            res += sign * num\n            num = 0\n            res *= stack.pop()\n            res += stack.pop()\n    res += sign * num\n    return res\n"
+  },
+  "leetcodeId": 224,
+  "leetcodeTitle": "Basic Calculator",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-calculate-basic/"
+}

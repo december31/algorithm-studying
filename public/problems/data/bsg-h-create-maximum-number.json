@@ -1,0 +1,100 @@
+{
+  "id": "bsg-h-create-maximum-number",
+  "wingId": "binary-search-greedy",
+  "floor": 475,
+  "title": "Create Maximum Number",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-create-maximum-number",
+    "name": "Greedy Synthesizer",
+    "title": "Extractor of Maximal Sub-digits",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "demon",
+    "color": "#ef4444",
+    "attackName": "Digit Extrusion",
+    "attackPower": 3,
+    "defeatQuote": "Lexicographically largest k-digit number combined from two arrays!"
+  },
+  "description": "You are given two integer arrays `nums1` and `nums2` of lengths `m` and `n` representing digits of two numbers. You are also given an integer `k <= m + n`. Create the maximum number of length `k` from digits of the two numbers preserving relative order within each array.",
+  "examples": [
+    {
+      "input": "nums1 = [3,4,6,5], nums2 = [9,1,2,5,8,3], k = 5",
+      "output": "[9,8,6,5,3]"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= len(nums1) + len(nums2) <= 1000"
+  ],
+  "starterCode": "def maxNumber(nums1: list[int], nums2: list[int], k: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def maxNumber(nums1: list[int], nums2: list[int], k: int) -> list[int]:\n    def max_sub(nums, length):\n        stack = []\n        drop = len(nums) - length\n        for num in nums:\n            while drop and stack and stack[-1] < num:\n                stack.pop()\n                drop -= 1\n            stack.append(num)\n        return stack[:length]\n    def merge(s1, s2):\n        res = []\n        i = j = 0\n        while i < len(s1) or j < len(s2):\n            if s1[i:] > s2[j:]:\n                res.append(s1[i])\n                i += 1\n            else:\n                res.append(s2[j])\n                j += 1\n        return res\n    best = []\n    for len1 in range(max(0, k - len(nums2)), min(k, len(nums1)) + 1):\n        len2 = k - len1\n        s1 = max_sub(nums1, len1)\n        s2 = max_sub(nums2, len2)\n        cand = merge(s1, s2)\n        if cand > best:\n            best = cand\n    return best\n",
+  "functionName": "maxNumber",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          4,
+          6,
+          5
+        ],
+        [
+          9,
+          1,
+          2,
+          5,
+          8,
+          3
+        ],
+        5
+      ],
+      "expected": [
+        9,
+        8,
+        6,
+        5,
+        3
+      ],
+      "inputDisplay": "args=[[3, 4, 6, 5], [9, 1, 2, 5, 8, 3], 5]",
+      "expectedDisplay": "[9, 8, 6, 5, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          0,
+          4
+        ],
+        5
+      ],
+      "expected": [
+        6,
+        7,
+        6,
+        0,
+        4
+      ],
+      "inputDisplay": "args=[[6, 7], [6, 0, 4], 5]",
+      "expectedDisplay": "[6, 7, 6, 0, 4]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Iterate partition sizes (i, k - i). Use monotonic stack to extract best sub-sequence from each array and merge greedily."
+  ],
+  "python": {
+    "starterCode": "def maxNumber(nums1: list[int], nums2: list[int], k: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def maxNumber(nums1: list[int], nums2: list[int], k: int) -> list[int]:\n    def max_sub(nums, length):\n        stack = []\n        drop = len(nums) - length\n        for num in nums:\n            while drop and stack and stack[-1] < num:\n                stack.pop()\n                drop -= 1\n            stack.append(num)\n        return stack[:length]\n    def merge(s1, s2):\n        res = []\n        i = j = 0\n        while i < len(s1) or j < len(s2):\n            if s1[i:] > s2[j:]:\n                res.append(s1[i])\n                i += 1\n            else:\n                res.append(s2[j])\n                j += 1\n        return res\n    best = []\n    for len1 in range(max(0, k - len(nums2)), min(k, len(nums1)) + 1):\n        len2 = k - len1\n        s1 = max_sub(nums1, len1)\n        s2 = max_sub(nums2, len2)\n        cand = merge(s1, s2)\n        if cand > best:\n            best = cand\n    return best\n"
+  },
+  "leetcodeId": 321,
+  "leetcodeTitle": "Create Maximum Number",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-create-maximum-number/"
+}

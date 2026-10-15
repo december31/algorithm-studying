@@ -1,0 +1,96 @@
+{
+  "id": "graph-h-contain-virus",
+  "wingId": "graphs",
+  "floor": 392,
+  "title": "Contain Virus (Quarantine Firewall Walls)",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-h-contain-virus",
+    "name": "Quarantine Sentinel",
+    "title": "Builder of Antiviral Firewalls",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#ef4444",
+    "attackName": "Firewall Barrier",
+    "attackPower": 3,
+    "defeatQuote": "Number of firewall sections erected to neutralize pandemic outbreaks!"
+  },
+  "description": "A virus is spreading in an `m x n` grid where 0 is uninfected and 1 is infected. Each day, you can install firewall walls around the single infected region that threatens the most uninfected cells. Uncontained regions then expand into adjacent uninfected cells. Return the number of walls installed until the virus is completely contained.",
+  "examples": [
+    {
+      "input": "isInfected = [[0,1,0,0,0,0,0,1],[0,1,0,0,0,0,0,1],[0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0]]",
+      "output": "10"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 50"
+  ],
+  "starterCode": "def containVirus(isInfected: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def containVirus(isInfected: list[list[int]]) -> int:\n    R, C = len(isInfected), len(isInfected[0])\n    def get_regions():\n        visited = set()\n        regions = []\n        for r in range(R):\n            for c in range(C):\n                if isInfected[r][c] == 1 and (r, c) not in visited:\n                    cells = set()\n                    threatened = set()\n                    walls = 0\n                    stack = [(r, c)]\n                    visited.add((r, c))\n                    while stack:\n                        cr, cc = stack.pop()\n                        cells.add((cr, cc))\n                        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n                            nr, nc = cr + dr, cc + dc\n                            if 0 <= nr < R and 0 <= nc < C:\n                                if isInfected[nr][nc] == 1 and (nr, nc) not in visited:\n                                    visited.add((nr, nc))\n                                    stack.append((nr, nc))\n                                elif isInfected[nr][nc] == 0:\n                                    walls += 1\n                                    threatened.add((nr, nc))\n                    regions.append((cells, threatened, walls))\n        return regions\n    total_walls = 0\n    while True:\n        regions = get_regions()\n        if not regions: break\n        regions.sort(key=lambda x: len(x[1]))\n        target = regions.pop()\n        total_walls += target[2]\n        for r, c in target[0]:\n            isInfected[r][c] = -1\n        if not regions: break\n        for cells, threatened, _ in regions:\n            for r, c in threatened:\n                isInfected[r][c] = 1\n    return total_walls\n",
+  "functionName": "containVirus",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 10,
+      "inputDisplay": "[[0, 1, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 1], [",
+      "expectedDisplay": "10",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Simulate day by day. Greedily quarantine the cluster threatening the most unique uninfected cells."
+  ],
+  "python": {
+    "starterCode": "def containVirus(isInfected: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def containVirus(isInfected: list[list[int]]) -> int:\n    R, C = len(isInfected), len(isInfected[0])\n    def get_regions():\n        visited = set()\n        regions = []\n        for r in range(R):\n            for c in range(C):\n                if isInfected[r][c] == 1 and (r, c) not in visited:\n                    cells = set()\n                    threatened = set()\n                    walls = 0\n                    stack = [(r, c)]\n                    visited.add((r, c))\n                    while stack:\n                        cr, cc = stack.pop()\n                        cells.add((cr, cc))\n                        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n                            nr, nc = cr + dr, cc + dc\n                            if 0 <= nr < R and 0 <= nc < C:\n                                if isInfected[nr][nc] == 1 and (nr, nc) not in visited:\n                                    visited.add((nr, nc))\n                                    stack.append((nr, nc))\n                                elif isInfected[nr][nc] == 0:\n                                    walls += 1\n                                    threatened.add((nr, nc))\n                    regions.append((cells, threatened, walls))\n        return regions\n    total_walls = 0\n    while True:\n        regions = get_regions()\n        if not regions: break\n        regions.sort(key=lambda x: len(x[1]))\n        target = regions.pop()\n        total_walls += target[2]\n        for r, c in target[0]:\n            isInfected[r][c] = -1\n        if not regions: break\n        for cells, threatened, _ in regions:\n            for r, c in threatened:\n                isInfected[r][c] = 1\n    return total_walls\n"
+  },
+  "leetcodeId": 749,
+  "leetcodeTitle": "Contain Virus (Quarantine Firewall Walls)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-contain-virus/"
+}

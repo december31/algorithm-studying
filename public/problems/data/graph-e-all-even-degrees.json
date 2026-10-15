@@ -1,0 +1,94 @@
+{
+  "id": "graph-e-all-even-degrees",
+  "wingId": "graphs",
+  "floor": 310,
+  "title": "Eulerian Cycle Precondition Check",
+  "difficulty": "easy",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-e-all-even-degrees",
+    "name": "Ring Keeper",
+    "title": "Guardian of Closed Loops",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "boss",
+    "color": "#f97316",
+    "attackName": "Loop Convergence",
+    "attackPower": 1,
+    "defeatQuote": "Eulerian degree condition checked across all graph vertices!"
+  },
+  "description": "Given `n` vertices (0 to n - 1) and an undirected edge list `edges`, determine whether all vertices in the graph have an even degree. (This is a necessary condition for an undirected graph to contain an Eulerian circuit).",
+  "examples": [
+    {
+      "input": "n = 3, edges = [[0,1],[1,2],[2,0]]",
+      "output": "True"
+    },
+    {
+      "input": "n = 3, edges = [[0,1],[1,2]]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 1000",
+    "0 <= edges.length <= 5000"
+  ],
+  "starterCode": "def allEvenDegrees(n: int, edges: list[list[int]]) -> bool:\n    pass\n",
+  "solutionCode": "def allEvenDegrees(n: int, edges: list[list[int]]) -> bool:\n    deg = [0] * n\n    for u, v in edges:\n        deg[u] += 1\n        deg[v] += 1\n    return all(d % 2 == 0 for d in deg)\n",
+  "functionName": "allEvenDegrees",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            0
+          ]
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "args=[3, [[0, 1], [1, 2], [2, 0]]]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "args=[3, [[0, 1], [1, 2]]]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Check if degree % 2 == 0 for every vertex 0 through n - 1."
+  ],
+  "python": {
+    "starterCode": "def allEvenDegrees(n: int, edges: list[list[int]]) -> bool:\n    pass\n",
+    "solutionCode": "def allEvenDegrees(n: int, edges: list[list[int]]) -> bool:\n    deg = [0] * n\n    for u, v in edges:\n        deg[u] += 1\n        deg[v] += 1\n    return all(d % 2 == 0 for d in deg)\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "Eulerian Cycle Precondition Check",
+  "leetcodeUrl": null
+}

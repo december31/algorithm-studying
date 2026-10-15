@@ -1,0 +1,102 @@
+{
+  "id": "ds-m-wiggle-sort",
+  "wingId": "data-structures",
+  "floor": 159,
+  "title": "Wiggle Sort Sequence",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-wiggle-sort",
+    "name": "Wave Serpent",
+    "title": "Oscillator of Alternating Amplitudes",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "slime",
+    "color": "#06b6d4",
+    "attackName": "Wave Ripple",
+    "attackPower": 2,
+    "defeatQuote": "Every odd index was guaranteed greater than adjacent evens!"
+  },
+  "description": "Given an integer array `nums`, reorder it in-place such that `nums[0] <= nums[1] >= nums[2] <= nums[3]...`. Return the reordered array.",
+  "examples": [
+    {
+      "input": "nums = [3,5,2,1,6,4]",
+      "output": "[3,5,1,6,2,4]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 5 * 10^4",
+    "0 <= nums[i] <= 10^4"
+  ],
+  "starterCode": "def wiggleSort(nums: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def wiggleSort(nums: list[int]) -> list[int]:\n    for i in range(len(nums) - 1):\n        if (i % 2 == 0 and nums[i] > nums[i + 1]) or (i % 2 == 1 and nums[i] < nums[i + 1]):\n            nums[i], nums[i + 1] = nums[i + 1], nums[i]\n    return nums\n",
+  "functionName": "wiggleSort",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          5,
+          2,
+          1,
+          6,
+          4
+        ]
+      ],
+      "expected": [
+        3,
+        5,
+        1,
+        6,
+        2,
+        4
+      ],
+      "inputDisplay": "[3, 5, 2, 1, 6, 4]",
+      "expectedDisplay": "[3, 5, 1, 6, 2, 4]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        3,
+        2
+      ],
+      "inputDisplay": "[1, 2, 3]",
+      "expectedDisplay": "[1, 3, 2]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[1]",
+      "expectedDisplay": "[1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Single pass: swap adjacent elements if condition nums[i] <= nums[i+1] is violated."
+  ],
+  "python": {
+    "starterCode": "def wiggleSort(nums: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def wiggleSort(nums: list[int]) -> list[int]:\n    for i in range(len(nums) - 1):\n        if (i % 2 == 0 and nums[i] > nums[i + 1]) or (i % 2 == 1 and nums[i] < nums[i + 1]):\n            nums[i], nums[i + 1] = nums[i + 1], nums[i]\n    return nums\n"
+  },
+  "leetcodeId": 280,
+  "leetcodeTitle": "Wiggle Sort Sequence",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-wiggle-sort/"
+}

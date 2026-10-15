@@ -1,0 +1,94 @@
+{
+  "id": "bt-m-letter-combinations-phone",
+  "wingId": "backtracking",
+  "floor": 219,
+  "title": "Phone Number Mnemonics",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-letter-combinations-phone",
+    "name": "Keypad Demon",
+    "title": "Transcriber of DTMF Tones",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#06b6d4",
+    "attackName": "Tone Blast",
+    "attackPower": 2,
+    "defeatQuote": "All phone mnemonic permutations matched the digits!"
+  },
+  "description": "Given a string containing digits from `2-9` inclusive, return all possible letter combinations that the number could represent. Return the answer in lexicographical order.",
+  "examples": [
+    {
+      "input": "digits = \"23\"",
+      "output": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]"
+    },
+    {
+      "input": "digits = \"\"",
+      "output": "[]"
+    }
+  ],
+  "constraints": [
+    "0 <= len(digits) <= 4",
+    "digits[i] is between '2' and '9'"
+  ],
+  "starterCode": "def letterCombinations(digits: str) -> list[str]:\n    pass\n",
+  "solutionCode": "def letterCombinations(digits: str) -> list[str]:\n    if not digits: return []\n    mapping = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}\n    res = []\n    def backtrack(idx, path):\n        if idx == len(digits):\n            res.append(''.join(path))\n            return\n        for ch in mapping[digits[idx]]:\n            path.append(ch)\n            backtrack(idx + 1, path)\n            path.pop()\n    backtrack(0, [])\n    return sorted(res)\n",
+  "functionName": "letterCombinations",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "23"
+      ],
+      "expected": [
+        "ad",
+        "ae",
+        "af",
+        "bd",
+        "be",
+        "bf",
+        "cd",
+        "ce",
+        "cf"
+      ],
+      "inputDisplay": "23",
+      "expectedDisplay": "['ad', 'ae', 'af', 'bd', 'be', 'bf', 'cd', 'ce', 'cf']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        ""
+      ],
+      "expected": [],
+      "inputDisplay": "",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "2"
+      ],
+      "expected": [
+        "a",
+        "b",
+        "c"
+      ],
+      "inputDisplay": "2",
+      "expectedDisplay": "['a', 'b', 'c']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Map each digit to letters and branch on each letter at index idx."
+  ],
+  "python": {
+    "starterCode": "def letterCombinations(digits: str) -> list[str]:\n    pass\n",
+    "solutionCode": "def letterCombinations(digits: str) -> list[str]:\n    if not digits: return []\n    mapping = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}\n    res = []\n    def backtrack(idx, path):\n        if idx == len(digits):\n            res.append(''.join(path))\n            return\n        for ch in mapping[digits[idx]]:\n            path.append(ch)\n            backtrack(idx + 1, path)\n            path.pop()\n    backtrack(0, [])\n    return sorted(res)\n"
+  },
+  "leetcodeId": 17,
+  "leetcodeTitle": "Phone Number Mnemonics",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-letter-combinations-phone/"
+}

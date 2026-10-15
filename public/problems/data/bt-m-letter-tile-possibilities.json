@@ -1,0 +1,83 @@
+{
+  "id": "bt-m-letter-tile-possibilities",
+  "wingId": "backtracking",
+  "floor": 237,
+  "title": "Letter Tile Possibilities",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-letter-tile-possibilities",
+    "name": "Tile Fiend",
+    "title": "Scrabbler of Multi-Length Sequences",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#ef4444",
+    "attackName": "Scrabble Strike",
+    "attackPower": 2,
+    "defeatQuote": "Every non-empty tile arrangement tallied without repetition!"
+  },
+  "description": "You have `n` tiles, where each tile has one letter `tiles[i]` printed on it. Return the number of possible non-empty sequences of letters you can make using the letters printed on those tiles.",
+  "examples": [
+    {
+      "input": "tiles = \"AAB\"",
+      "output": "8"
+    },
+    {
+      "input": "tiles = \"AAABBC\"",
+      "output": "188"
+    },
+    {
+      "input": "tiles = \"V\"",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= len(tiles) <= 7"
+  ],
+  "starterCode": "def numTilePossibilities(tiles: str) -> int:\n    pass\n",
+  "solutionCode": "def numTilePossibilities(tiles: str) -> int:\n    from collections import Counter\n    counts = Counter(tiles)\n    def backtrack():\n        total = 0\n        for ch in counts:\n            if counts[ch] > 0:\n                counts[ch] -= 1\n                total += 1 + backtrack()\n                counts[ch] += 1\n        return total\n    return backtrack()\n",
+  "functionName": "numTilePossibilities",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "AAB"
+      ],
+      "expected": 8,
+      "inputDisplay": "AAB",
+      "expectedDisplay": "8",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "AAABBC"
+      ],
+      "expected": 188,
+      "inputDisplay": "AAABBC",
+      "expectedDisplay": "188",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "V"
+      ],
+      "expected": 1,
+      "inputDisplay": "V",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use frequency counter of tiles. At each step, decrement count, add 1, recurse, and restore."
+  ],
+  "python": {
+    "starterCode": "def numTilePossibilities(tiles: str) -> int:\n    pass\n",
+    "solutionCode": "def numTilePossibilities(tiles: str) -> int:\n    from collections import Counter\n    counts = Counter(tiles)\n    def backtrack():\n        total = 0\n        for ch in counts:\n            if counts[ch] > 0:\n                counts[ch] -= 1\n                total += 1 + backtrack()\n                counts[ch] += 1\n        return total\n    return backtrack()\n"
+  },
+  "leetcodeId": 1079,
+  "leetcodeTitle": "Letter Tile Possibilities",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-letter-tile-possibilities/"
+}

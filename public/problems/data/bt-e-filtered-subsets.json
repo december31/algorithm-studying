@@ -1,0 +1,89 @@
+{
+  "id": "bt-e-filtered-subsets",
+  "wingId": "backtracking",
+  "floor": 208,
+  "title": "Subsets With Sum >= K",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-e-filtered-subsets",
+    "name": "Sum Sentry",
+    "title": "Gatekeeper of the Minimum Threshold",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "golem",
+    "color": "#10b981",
+    "attackName": "Threshold Bash",
+    "attackPower": 1,
+    "defeatQuote": "Filtered subsets met the target constraint exactly!"
+  },
+  "description": "Given an array of distinct integers `nums` and a threshold integer `k`, return the count of non-empty subsets whose sum is greater than or equal to `k`.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3], k = 3",
+      "output": "5"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 10",
+    "1 <= nums[i] <= 100",
+    "1 <= k <= 1000"
+  ],
+  "starterCode": "def filteredSubsets(nums: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def filteredSubsets(nums: list[int], k: int) -> int:\n    count = 0\n    def dfs(idx, curr_sum, count_items):\n        nonlocal count\n        if idx == len(nums):\n            if count_items > 0 and curr_sum >= k:\n                count += 1\n            return\n        dfs(idx + 1, curr_sum + nums[idx], count_items + 1)\n        dfs(idx + 1, curr_sum, count_items)\n    dfs(0, 0, 0)\n    return count\n",
+  "functionName": "filteredSubsets",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[[1, 2, 3], 3]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5
+        ],
+        5
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[5], 5]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          1
+        ],
+        10
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[1, 1], 10]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Explore pick/skip at each index, verifying sum >= k at the leaves."
+  ],
+  "python": {
+    "starterCode": "def filteredSubsets(nums: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def filteredSubsets(nums: list[int], k: int) -> int:\n    count = 0\n    def dfs(idx, curr_sum, count_items):\n        nonlocal count\n        if idx == len(nums):\n            if count_items > 0 and curr_sum >= k:\n                count += 1\n            return\n        dfs(idx + 1, curr_sum + nums[idx], count_items + 1)\n        dfs(idx + 1, curr_sum, count_items)\n    dfs(0, 0, 0)\n    return count\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Subsets With Sum >= K",
+  "leetcodeUrl": null
+}

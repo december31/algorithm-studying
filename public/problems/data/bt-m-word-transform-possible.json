@@ -1,0 +1,83 @@
+{
+  "id": "bt-m-word-transform-possible",
+  "wingId": "backtracking",
+  "floor": 258,
+  "title": "One-Letter Word Transform Path",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-m-word-transform-possible",
+    "name": "Lexical Chimera",
+    "title": "Shifter of Single Characters",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#38bdf8",
+    "attackName": "Mutation Claw",
+    "attackPower": 2,
+    "defeatQuote": "Valid one-letter mutation chain from start to end discovered!"
+  },
+  "description": "Given two words, `startWord` and `endWord`, and a dictionary of valid words `wordList`, return `True` if there exists a mutation sequence such that each adjacent word differs by exactly 1 character and all intermediate words are in `wordList`.",
+  "examples": [
+    {
+      "input": "startWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= len(startWord) <= 10",
+    "1 <= len(wordList) <= 50"
+  ],
+  "starterCode": "def wordTransformPossible(startWord: str, endWord: str, wordList: list[str]) -> bool:\n    pass\n",
+  "solutionCode": "def wordTransformPossible(startWord: str, endWord: str, wordList: list[str]) -> bool:\n    if endWord not in wordList: return False\n    from collections import deque\n    words = set(wordList)\n    queue = deque([startWord])\n    visited = {startWord}\n    while queue:\n        curr = queue.popleft()\n        if curr == endWord: return True\n        for i in range(len(curr)):\n            for c in 'abcdefghijklmnopqrstuvwxyz':\n                nxt = curr[:i] + c + curr[i+1:]\n                if nxt in words and nxt not in visited:\n                    visited.add(nxt)\n                    queue.append(nxt)\n    return False\n",
+  "functionName": "wordTransformPossible",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log",
+          "cog"
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "args=['hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log"
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "args=['hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log']]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Breadth-First Search (BFS) explores one-letter mutation neighbors level by level."
+  ],
+  "python": {
+    "starterCode": "def wordTransformPossible(startWord: str, endWord: str, wordList: list[str]) -> bool:\n    pass\n",
+    "solutionCode": "def wordTransformPossible(startWord: str, endWord: str, wordList: list[str]) -> bool:\n    if endWord not in wordList: return False\n    from collections import deque\n    words = set(wordList)\n    queue = deque([startWord])\n    visited = {startWord}\n    while queue:\n        curr = queue.popleft()\n        if curr == endWord: return True\n        for i in range(len(curr)):\n            for c in 'abcdefghijklmnopqrstuvwxyz':\n                nxt = curr[:i] + c + curr[i+1:]\n                if nxt in words and nxt not in visited:\n                    visited.add(nxt)\n                    queue.append(nxt)\n    return False\n"
+  },
+  "leetcodeId": 127,
+  "leetcodeTitle": "One-Letter Word Transform Path",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-word-transform-possible/"
+}

@@ -1,0 +1,98 @@
+{
+  "id": "bsg-h-patching-array",
+  "wingId": "binary-search-greedy",
+  "floor": 474,
+  "title": "Patching Array (Greedy Miss Doubling)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-patching-array",
+    "name": "Missing Sum Phantom",
+    "title": "Exploiter of Gaps in Reachable Sums",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "spectre",
+    "color": "#f59e0b",
+    "attackName": "Gap Fracture",
+    "attackPower": 3,
+    "defeatQuote": "Minimum numbers patched to cover all consecutive sums [1, n]!"
+  },
+  "description": "Given a sorted integer array `nums` and an integer `n`, add/patch elements to the array such that any number in the range `[1, n]` inclusive can be formed by the sum of some elements in the array. Return the minimum number of patches required.",
+  "examples": [
+    {
+      "input": "nums = [1,3], n = 6",
+      "output": "1"
+    },
+    {
+      "input": "nums = [1,5,10], n = 20",
+      "output": "2"
+    },
+    {
+      "input": "nums = [1,2,2], n = 5",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 1000",
+    "1 <= n <= 2^31 - 1"
+  ],
+  "starterCode": "def minPatches(nums: list[int], n: int) -> int:\n    pass\n",
+  "solutionCode": "def minPatches(nums: list[int], n: int) -> int:\n    miss = 1\n    patches = 0\n    i = 0\n    while miss <= n:\n        if i < len(nums) and nums[i] <= miss:\n            miss += nums[i]\n            i += 1\n        else:\n            miss += miss\n            patches += 1\n    return patches\n",
+  "functionName": "minPatches",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3
+        ],
+        6
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1, 3], 6]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          5,
+          10
+        ],
+        20
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[1, 5, 10], 20]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          2
+        ],
+        5
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[1, 2, 2], 5]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Maintain the smallest unreachable sum `miss`. If nums[i] <= miss, extend range to miss + nums[i]; otherwise patch `miss`."
+  ],
+  "python": {
+    "starterCode": "def minPatches(nums: list[int], n: int) -> int:\n    pass\n",
+    "solutionCode": "def minPatches(nums: list[int], n: int) -> int:\n    miss = 1\n    patches = 0\n    i = 0\n    while miss <= n:\n        if i < len(nums) and nums[i] <= miss:\n            miss += nums[i]\n            i += 1\n        else:\n            miss += miss\n            patches += 1\n    return patches\n"
+  },
+  "leetcodeId": 330,
+  "leetcodeTitle": "Patching Array (Greedy Miss Doubling)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-patching-array/"
+}

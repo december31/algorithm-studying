@@ -1,0 +1,109 @@
+{
+  "id": "graph-m-redundant-connection",
+  "wingId": "graphs",
+  "floor": 325,
+  "title": "Redundant Connection (Cycle Forming Edge)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-redundant-connection",
+    "name": "Ring Sentry",
+    "title": "Guardian of Spanning Trees",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "skeleton",
+    "color": "#ef4444",
+    "attackName": "Cycle Sever",
+    "attackPower": 2,
+    "defeatQuote": "The redundant edge completing the undirected cycle found!"
+  },
+  "description": "In this problem, a tree is an undirected graph that is connected and has no cycles. You are given a graph that started as a tree with `n` nodes labeled from 1 to `n`, with one additional edge added. The added edge has two different vertices chosen from 1 to `n`, and was not an edge that already existed. Return an edge that can be removed so that the resulting graph is a tree of `n` nodes. If there are multiple answers, return the answer that occurs last in the input.",
+  "examples": [
+    {
+      "input": "edges = [[1,2],[1,3],[2,3]]",
+      "output": "[2,3]"
+    },
+    {
+      "input": "edges = [[1,2],[2,3],[3,4],[1,4],[1,5]]",
+      "output": "[1,4]"
+    }
+  ],
+  "constraints": [
+    "3 <= edges.length <= 1000"
+  ],
+  "starterCode": "def findRedundantConnection(edges: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def findRedundantConnection(edges: list[list[int]]) -> list[int]:\n    n = len(edges)\n    parent = list(range(n + 1))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    for u, v in edges:\n        ru, rv = find(u), find(v)\n        if ru == rv: return [u, v]\n        parent[ru] = rv\n    return []\n",
+  "functionName": "findRedundantConnection",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        2,
+        3
+      ],
+      "inputDisplay": "[[1, 2], [1, 3], [2, 3]]",
+      "expectedDisplay": "[2, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        4
+      ],
+      "inputDisplay": "[[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]]",
+      "expectedDisplay": "[1, 4]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use Disjoint Set Union (Union-Find). The first edge whose vertices already share a root is the redundant edge."
+  ],
+  "python": {
+    "starterCode": "def findRedundantConnection(edges: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def findRedundantConnection(edges: list[list[int]]) -> list[int]:\n    n = len(edges)\n    parent = list(range(n + 1))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    for u, v in edges:\n        ru, rv = find(u), find(v)\n        if ru == rv: return [u, v]\n        parent[ru] = rv\n    return []\n"
+  },
+  "leetcodeId": 684,
+  "leetcodeTitle": "Redundant Connection (Cycle Forming Edge)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-redundant-connection/"
+}

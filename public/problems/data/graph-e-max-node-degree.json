@@ -1,0 +1,97 @@
+{
+  "id": "graph-e-max-node-degree",
+  "wingId": "graphs",
+  "floor": 308,
+  "title": "Maximum Vertex Degree in Graph",
+  "difficulty": "easy",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-e-max-node-degree",
+    "name": "Hydra Sentinel",
+    "title": "Bearer of Boundless Tendrils",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "gargoyle",
+    "color": "#06b6d4",
+    "attackName": "Tendril Lash",
+    "attackPower": 1,
+    "defeatQuote": "The maximum degree among all graph nodes computed!"
+  },
+  "description": "Given an integer `n` (the number of vertices from 0 to n - 1) and a list of undirected `edges`, return the maximum vertex degree in the graph.",
+  "examples": [
+    {
+      "input": "n = 4, edges = [[0,1],[0,2],[0,3]]",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 1000",
+    "0 <= edges.length <= 5000"
+  ],
+  "starterCode": "def maxDegree(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def maxDegree(n: int, edges: list[list[int]]) -> int:\n    if n == 0: return 0\n    deg = [0] * n\n    for u, v in edges:\n        deg[u] += 1\n        deg[v] += 1\n    return max(deg) if deg else 0\n",
+  "functionName": "maxDegree",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[4, [[0, 1], [0, 2], [0, 3]]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[3, [[0, 1]]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        2,
+        []
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[2, []]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Accumulate incident edges for each vertex."
+  ],
+  "python": {
+    "starterCode": "def maxDegree(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def maxDegree(n: int, edges: list[list[int]]) -> int:\n    if n == 0: return 0\n    deg = [0] * n\n    for u, v in edges:\n        deg[u] += 1\n        deg[v] += 1\n    return max(deg) if deg else 0\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "Maximum Vertex Degree in Graph",
+  "leetcodeUrl": null
+}

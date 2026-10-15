@@ -1,0 +1,87 @@
+{
+  "id": "bt-h-remove-invalid-parentheses",
+  "wingId": "backtracking",
+  "floor": 275,
+  "title": "Remove Invalid Parentheses",
+  "difficulty": "hard",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-bt-h-remove-invalid-parentheses",
+    "name": "Balance Archon",
+    "title": "Pruner of Asymmetric Brackets",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "beholder",
+    "color": "#10b981",
+    "attackName": "Equilibrium Shock",
+    "attackPower": 3,
+    "defeatQuote": "Minimum removals to achieve valid parentheses generated!"
+  },
+  "description": "Given a string `s` that contains parentheses and letters, remove the minimum number of invalid parentheses to make the input string valid. Return all unique possible results in sorted order.",
+  "examples": [
+    {
+      "input": "s = \"()())()\"",
+      "output": "[\"(())\",\"()()()\"]"
+    },
+    {
+      "input": "s = \"(a)())()\"",
+      "output": "[\"(a)()()\",\"(a())\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 25"
+  ],
+  "starterCode": "def removeInvalidParentheses(s: str) -> list[str]:\n    pass\n",
+  "solutionCode": "def removeInvalidParentheses(s: str) -> list[str]:\n    def is_valid(sub):\n        cnt = 0\n        for ch in sub:\n            if ch == '(': cnt += 1\n            elif ch == ')':\n                cnt -= 1\n                if cnt < 0: return False\n        return cnt == 0\n    from collections import deque\n    queue = deque([s])\n    visited = {s}\n    found = False\n    res = []\n    while queue:\n        curr = queue.popleft()\n        if is_valid(curr):\n            res.append(curr)\n            found = True\n        if found: continue\n        for i in range(len(curr)):\n            if curr[i] not in '()': continue\n            nxt = curr[:i] + curr[i + 1:]\n            if nxt not in visited:\n                visited.add(nxt)\n                queue.append(nxt)\n    return sorted(res)\n",
+  "functionName": "removeInvalidParentheses",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "()())()"
+      ],
+      "expected": [
+        "(())()",
+        "()()()"
+      ],
+      "inputDisplay": "()())()",
+      "expectedDisplay": "['(())()', '()()()']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "(a)())()"
+      ],
+      "expected": [
+        "(a())()",
+        "(a)()()"
+      ],
+      "inputDisplay": "(a)())()",
+      "expectedDisplay": "['(a())()', '(a)()()']",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        ")("
+      ],
+      "expected": [
+        ""
+      ],
+      "inputDisplay": ")(",
+      "expectedDisplay": "['']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Breadth-First Search level by level guarantees minimum removals."
+  ],
+  "python": {
+    "starterCode": "def removeInvalidParentheses(s: str) -> list[str]:\n    pass\n",
+    "solutionCode": "def removeInvalidParentheses(s: str) -> list[str]:\n    def is_valid(sub):\n        cnt = 0\n        for ch in sub:\n            if ch == '(': cnt += 1\n            elif ch == ')':\n                cnt -= 1\n                if cnt < 0: return False\n        return cnt == 0\n    from collections import deque\n    queue = deque([s])\n    visited = {s}\n    found = False\n    res = []\n    while queue:\n        curr = queue.popleft()\n        if is_valid(curr):\n            res.append(curr)\n            found = True\n        if found: continue\n        for i in range(len(curr)):\n            if curr[i] not in '()': continue\n            nxt = curr[:i] + curr[i + 1:]\n            if nxt not in visited:\n                visited.add(nxt)\n                queue.append(nxt)\n    return sorted(res)\n"
+  },
+  "leetcodeId": 301,
+  "leetcodeTitle": "Remove Invalid Parentheses",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-remove-invalid-parentheses/"
+}

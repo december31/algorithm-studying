@@ -1,0 +1,92 @@
+{
+  "id": "bsg-m-gas-station-tour",
+  "wingId": "binary-search-greedy",
+  "floor": 423,
+  "title": "Gas Station Circular Tour",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-gas-station-tour",
+    "name": "Fuel Warden",
+    "title": "Keeper of Circular Reserves",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#f97316",
+    "attackName": "Fuel Exhaustion",
+    "attackPower": 2,
+    "defeatQuote": "Starting gas station index to complete circular tour found!"
+  },
+  "description": "There are `n` gas stations along a circular route, where the amount of gas at the `i`-th station is `gas[i]`. Cost to travel to next station is `cost[i]`. Return the starting gas station's index if you can travel around the circuit once in the clockwise direction, otherwise return `-1`.",
+  "examples": [
+    {
+      "input": "gas = [1,2,3,4,5], cost = [3,4,5,1,2]",
+      "output": "3"
+    },
+    {
+      "input": "gas = [2,3,4], cost = [3,4,3]",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "n == gas.length == cost.length",
+    "1 <= n <= 100000"
+  ],
+  "starterCode": "def canCompleteCircuit(gas: list[int], cost: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def canCompleteCircuit(gas: list[int], cost: list[int]) -> int:\n    if sum(gas) < sum(cost): return -1\n    total_tank = curr_tank = 0\n    start = 0\n    for i in range(len(gas)):\n        diff = gas[i] - cost[i]\n        total_tank += diff\n        curr_tank += diff\n        if curr_tank < 0:\n            start = i + 1\n            curr_tank = 0\n    return start\n",
+  "functionName": "canCompleteCircuit",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          3,
+          4,
+          5,
+          1,
+          2
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[1, 2, 3, 4, 5], [3, 4, 5, 1, 2]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          3,
+          4,
+          3
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[[2, 3, 4], [3, 4, 3]]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "If total gas < total cost, completion is impossible. Whenever running tank drops < 0, reset start to i + 1."
+  ],
+  "python": {
+    "starterCode": "def canCompleteCircuit(gas: list[int], cost: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def canCompleteCircuit(gas: list[int], cost: list[int]) -> int:\n    if sum(gas) < sum(cost): return -1\n    total_tank = curr_tank = 0\n    start = 0\n    for i in range(len(gas)):\n        diff = gas[i] - cost[i]\n        total_tank += diff\n        curr_tank += diff\n        if curr_tank < 0:\n            start = i + 1\n            curr_tank = 0\n    return start\n"
+  },
+  "leetcodeId": 134,
+  "leetcodeTitle": "Gas Station Circular Tour",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-gas-station-tour/"
+}

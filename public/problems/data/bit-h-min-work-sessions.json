@@ -1,0 +1,104 @@
+{
+  "id": "bit-h-min-work-sessions",
+  "wingId": "bit-manipulation",
+  "floor": 594,
+  "title": "Minimum Work Sessions for Tasks",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-min-work-sessions",
+    "name": "Session Time Overlord",
+    "title": "Scheduler of Compact Intervals",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#475569",
+    "attackName": "Time Box Compression",
+    "attackPower": 3,
+    "defeatQuote": "Pack tasks into sessions of length sessionTime; minimize the session count!"
+  },
+  "description": "There are `n` tasks assigned to you. The task times are represented as an integer array `tasks` of length `n`, where the `i-th` task takes `tasks[i]` hours. You are also given an integer `sessionTime`. You can work on multiple tasks in a session as long as the total time does not exceed `sessionTime`. Return the minimum number of work sessions needed to finish all tasks.",
+  "examples": [
+    {
+      "input": "tasks = [1,2,3], sessionTime = 3",
+      "output": "2"
+    },
+    {
+      "input": "tasks = [3,1,3,1,1], sessionTime = 8",
+      "output": "2"
+    },
+    {
+      "input": "tasks = [1,2,3,4,5], sessionTime = 15",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "n == tasks.length <= 14",
+    "1 <= tasks[i] <= 10",
+    "max(tasks[i]) <= sessionTime <= 15"
+  ],
+  "starterCode": "def minSessions(tasks: list[int], sessionTime: int) -> int:\n    pass\n",
+  "solutionCode": "def minSessions(tasks: list[int], sessionTime: int) -> int:\n    n = len(tasks)\n    dp = [(float('inf'), float('inf'))] * (1 << n)\n    dp[0] = (1, 0)\n    for mask in range(1 << n):\n        sessions, rem = dp[mask]\n        if sessions == float('inf'): continue\n        for i in range(n):\n            if not (mask & (1 << i)):\n                nxt = mask | (1 << i)\n                if rem + tasks[i] <= sessionTime:\n                    cand = (sessions, rem + tasks[i])\n                else:\n                    cand = (sessions + 1, tasks[i])\n                if cand < dp[nxt]:\n                    dp[nxt] = cand\n    return dp[(1 << n) - 1][0]\n",
+  "functionName": "minSessions",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[1, 2, 3], 3]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          1,
+          3,
+          1,
+          1
+        ],
+        8
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[3, 1, 3, 1, 1], 8]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        15
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1, 2, 3, 4, 5], 15]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "DP state dp[mask] = (sessions_count, last_session_duration). Choose transitions that minimize (sessions_count, last_session_duration) lexicographically."
+  ],
+  "python": {
+    "starterCode": "def minSessions(tasks: list[int], sessionTime: int) -> int:\n    pass\n",
+    "solutionCode": "def minSessions(tasks: list[int], sessionTime: int) -> int:\n    n = len(tasks)\n    dp = [(float('inf'), float('inf'))] * (1 << n)\n    dp[0] = (1, 0)\n    for mask in range(1 << n):\n        sessions, rem = dp[mask]\n        if sessions == float('inf'): continue\n        for i in range(n):\n            if not (mask & (1 << i)):\n                nxt = mask | (1 << i)\n                if rem + tasks[i] <= sessionTime:\n                    cand = (sessions, rem + tasks[i])\n                else:\n                    cand = (sessions + 1, tasks[i])\n                if cand < dp[nxt]:\n                    dp[nxt] = cand\n    return dp[(1 << n) - 1][0]\n"
+  },
+  "leetcodeId": 1986,
+  "leetcodeTitle": "Minimum Work Sessions for Tasks",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-min-work-sessions/"
+}

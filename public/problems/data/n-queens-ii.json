@@ -31,8 +31,8 @@
   "constraints": [
     "1 <= n <= 9"
   ],
-  "starterCode": "function totalNQueens(n) {\n  return 0;\n}",
-  "solutionCode": "function totalNQueens(n) {\n  let count = 0;\n  const cols = new Set();\n  const diag1 = new Set();\n  const diag2 = new Set();\n\n  function backtrack(row) {\n    if (row === n) {\n      count++;\n      return;\n    }\n    for (let col = 0; col < n; col++) {\n      if (cols.has(col) || diag1.has(row - col) || diag2.has(row + col)) continue;\n      cols.add(col);\n      diag1.add(row - col);\n      diag2.add(row + col);\n      backtrack(row + 1);\n      cols.delete(col);\n      diag1.delete(row - col);\n      diag2.delete(row + col);\n    }\n  }\n  backtrack(0);\n  return count;\n}",
+  "starterCode": "def totalNQueens(n):\n    return 0\n",
+  "solutionCode": "def totalNQueens(n):\n    count = 0\n    cols, diag1, diag2 = set(), set(), set()\n    def backtrack(r):\n        nonlocal count\n        if r == n:\n            count += 1\n            return\n        for c in range(n):\n            if c in cols or (r - c) in diag1 or (r + c) in diag2:\n                continue\n            cols.add(c)\n            diag1.add(r - c)\n            diag2.add(r + c)\n            backtrack(r + 1)\n            cols.remove(c)\n            diag1.remove(r - c)\n            diag2.remove(r + c)\n    backtrack(0)\n    return count\n",
   "functionName": "totalNQueens",
   "testCases": [
     {

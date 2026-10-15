@@ -1,0 +1,96 @@
+{
+  "id": "bsg-m-robot-homecoming-cost",
+  "wingId": "binary-search-greedy",
+  "floor": 462,
+  "title": "Minimum Cost Homecoming of Robot",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-bsg-m-robot-homecoming-cost",
+    "name": "Pathway Sentinel",
+    "title": "Surveyor of Coordinate Tolls",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "gargoyle",
+    "color": "#06b6d4",
+    "attackName": "Toll Gate",
+    "attackPower": 2,
+    "defeatQuote": "Cost independent of path geometry computed along monotonic axis lines!"
+  },
+  "description": "A robot starts at `startPos = [startRow, startCol]` and must reach `homePos = [homeRow, homeCol]`. Traveling into row r costs `rowCosts[r]`, into col c costs `colCosts[c]`. Return the minimum cost to reach home.",
+  "examples": [
+    {
+      "input": "startPos = [1,0], homePos = [2,3], rowCosts = [5,4,3], colCosts = [8,2,6,7]",
+      "output": "18"
+    }
+  ],
+  "constraints": [
+    "1 <= rowCosts.length, colCosts.length <= 100000"
+  ],
+  "starterCode": "def minCost(startPos: list[int], homePos: list[int], rowCosts: list[int], colCosts: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minCost(startPos: list[int], homePos: list[int], rowCosts: list[int], colCosts: list[int]) -> int:\n    r1, c1 = startPos\n    r2, c2 = homePos\n    ans = 0\n    step_r = 1 if r2 >= r1 else -1\n    for r in range(r1 + step_r, r2 + step_r, step_r):\n        ans += rowCosts[r]\n    step_c = 1 if c2 >= c1 else -1\n    for c in range(c1 + step_c, c2 + step_c, step_c):\n        ans += colCosts[c]\n    return ans\n",
+  "functionName": "minCost",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          5,
+          4,
+          3
+        ],
+        [
+          8,
+          2,
+          6,
+          7
+        ]
+      ],
+      "expected": 18,
+      "inputDisplay": "args=[[1, 0], [2, 3], [5, 4, 3], [8, 2, 6, 7]]",
+      "expectedDisplay": "18",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[0, 0], [0, 0], [5], [5]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Because costs are non-negative, any monotonic Manhattan path pays exactly for every intermediate row and column."
+  ],
+  "python": {
+    "starterCode": "def minCost(startPos: list[int], homePos: list[int], rowCosts: list[int], colCosts: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minCost(startPos: list[int], homePos: list[int], rowCosts: list[int], colCosts: list[int]) -> int:\n    r1, c1 = startPos\n    r2, c2 = homePos\n    ans = 0\n    step_r = 1 if r2 >= r1 else -1\n    for r in range(r1 + step_r, r2 + step_r, step_r):\n        ans += rowCosts[r]\n    step_c = 1 if c2 >= c1 else -1\n    for c in range(c1 + step_c, c2 + step_c, step_c):\n        ans += colCosts[c]\n    return ans\n"
+  },
+  "leetcodeId": 2087,
+  "leetcodeTitle": "Minimum Cost Homecoming of Robot",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-robot-homecoming-cost/"
+}

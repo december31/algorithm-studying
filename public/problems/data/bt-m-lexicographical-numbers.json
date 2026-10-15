@@ -1,0 +1,86 @@
+{
+  "id": "bt-m-lexicographical-numbers",
+  "wingId": "backtracking",
+  "floor": 246,
+  "title": "Lexicographical Numbers (1 to N)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-lexicographical-numbers",
+    "name": "Alphabetical Golem",
+    "title": "Traverser of Decimal Tries",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#64748b",
+    "attackName": "Lexical Stomp",
+    "attackPower": 2,
+    "defeatQuote": "Preorder traversal of the base-10 trie produced order in O(n)!"
+  },
+  "description": "Given an integer `n`, return all the numbers in the range `[1, n]` sorted in lexicographical order in O(n) time.",
+  "examples": [
+    {
+      "input": "n = 13",
+      "output": "[1,10,11,12,13,2,3,4,5,6,7,8,9]"
+    },
+    {
+      "input": "n = 2",
+      "output": "[1,2]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 5 * 10^4"
+  ],
+  "starterCode": "def lexicalOrder(n: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def lexicalOrder(n: int) -> list[int]:\n    res = []\n    def dfs(curr):\n        if curr > n: return\n        res.append(curr)\n        for d in range(10):\n            if curr * 10 + d <= n:\n                dfs(curr * 10 + d)\n            else:\n                break\n    for start in range(1, 10):\n        dfs(start)\n    return res\n",
+  "functionName": "lexicalOrder",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        13
+      ],
+      "expected": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "inputDisplay": "13",
+      "expectedDisplay": "[1, 10, 11, 12, 13, 2, 3, 4, 5, 6, 7, 8, 9]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        2
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "inputDisplay": "2",
+      "expectedDisplay": "[1, 2]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Treat numbers 1..n as a 10-ary tree and do preorder DFS starting from 1..9."
+  ],
+  "python": {
+    "starterCode": "def lexicalOrder(n: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def lexicalOrder(n: int) -> list[int]:\n    res = []\n    def dfs(curr):\n        if curr > n: return\n        res.append(curr)\n        for d in range(10):\n            if curr * 10 + d <= n:\n                dfs(curr * 10 + d)\n            else:\n                break\n    for start in range(1, 10):\n        dfs(start)\n    return res\n"
+  },
+  "leetcodeId": 386,
+  "leetcodeTitle": "Lexicographical Numbers (1 to N)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-lexicographical-numbers/"
+}

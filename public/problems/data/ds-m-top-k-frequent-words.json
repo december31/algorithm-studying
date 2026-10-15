@@ -1,0 +1,98 @@
+{
+  "id": "ds-m-top-k-frequent-words",
+  "wingId": "data-structures",
+  "floor": 157,
+  "title": "Top K Frequent Words",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-top-k-frequent-words",
+    "name": "Lexicon Shade",
+    "title": "Sorter of Lexical Frequencies",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#a855f7",
+    "attackName": "Lexical Curse",
+    "attackPower": 2,
+    "defeatQuote": "Ties were broken alphabetically with custom comparator sorting!"
+  },
+  "description": "Given an array of strings `words` and an integer `k`, return the `k` most frequent strings sorted by frequency from highest to lowest, breaking ties by lower alphabetical order.",
+  "examples": [
+    {
+      "input": "words = [\"i\",\"love\",\"leetcode\",\"i\",\"love\",\"coding\"], k = 2",
+      "output": "[\"i\",\"love\"]"
+    },
+    {
+      "input": "words = [\"the\",\"day\",\"is\",\"sunny\",\"the\",\"the\",\"the\",\"sunny\",\"is\",\"is\"], k = 4",
+      "output": "[\"the\",\"is\",\"sunny\",\"day\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(words) <= 500",
+    "1 <= k <= unique words"
+  ],
+  "starterCode": "def topKFrequentWords(words: list[str], k: int) -> list[str]:\n    pass\n",
+  "solutionCode": "def topKFrequentWords(words: list[str], k: int) -> list[str]:\n    from collections import Counter\n    counts = Counter(words)\n    sorted_words = sorted(counts.keys(), key=lambda w: (-counts[w], w))\n    return sorted_words[:k]\n",
+  "functionName": "topKFrequentWords",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "i",
+          "love",
+          "leetcode",
+          "i",
+          "love",
+          "coding"
+        ],
+        2
+      ],
+      "expected": [
+        "i",
+        "love"
+      ],
+      "inputDisplay": "args=[['i', 'love', 'leetcode', 'i', 'love', 'coding'], 2]",
+      "expectedDisplay": "['i', 'love']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "the",
+          "day",
+          "is",
+          "sunny",
+          "the",
+          "the",
+          "the",
+          "sunny",
+          "is",
+          "is"
+        ],
+        4
+      ],
+      "expected": [
+        "the",
+        "is",
+        "sunny",
+        "day"
+      ],
+      "inputDisplay": "args=[['the', 'day', 'is', 'sunny', 'the', 'the', 'the', 'sunny', 'is', 'is'], 4",
+      "expectedDisplay": "['the', 'is', 'sunny', 'day']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Count words with Counter, then sort by key (-count, word)."
+  ],
+  "python": {
+    "starterCode": "def topKFrequentWords(words: list[str], k: int) -> list[str]:\n    pass\n",
+    "solutionCode": "def topKFrequentWords(words: list[str], k: int) -> list[str]:\n    from collections import Counter\n    counts = Counter(words)\n    sorted_words = sorted(counts.keys(), key=lambda w: (-counts[w], w))\n    return sorted_words[:k]\n"
+  },
+  "leetcodeId": 692,
+  "leetcodeTitle": "Top K Frequent Words",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-top-k-frequent-words/"
+}

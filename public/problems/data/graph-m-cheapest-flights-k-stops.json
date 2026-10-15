@@ -1,0 +1,116 @@
+{
+  "id": "graph-m-cheapest-flights-k-stops",
+  "wingId": "graphs",
+  "floor": 327,
+  "title": "Cheapest Flights Within K Stops",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-cheapest-flights-k-stops",
+    "name": "Aero Harpy",
+    "title": "Navigator of Constrained Airspace",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#f59e0b",
+    "attackName": "Sky Turbulance",
+    "attackPower": 2,
+    "defeatQuote": "Cheapest transit cost under K flight stops evaluated!"
+  },
+  "description": "There are `n` cities connected by some number of flights. You are given an array `flights` where `flights[i] = [fromi, toi, pricei]`. You are also given three integers `src`, `dst`, and `k`. Return the cheapest price from `src` to `dst` with at most `k` stops. If there is no such route, return -1.",
+  "examples": [
+    {
+      "input": "n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], src = 0, dst = 3, k = 1",
+      "output": "700"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 100",
+    "0 <= k <= n"
+  ],
+  "starterCode": "def findCheapestPrice(n: int, flights: list[list[int]], src: int, dst: int, k: int) -> int:\n    pass\n",
+  "solutionCode": "def findCheapestPrice(n: int, flights: list[list[int]], src: int, dst: int, k: int) -> int:\n    cost = [float('inf')] * n\n    cost[src] = 0\n    for _ in range(k + 1):\n        temp = list(cost)\n        for u, v, p in flights:\n            if cost[u] != float('inf') and cost[u] + p < temp[v]:\n                temp[v] = cost[u] + p\n        cost = temp\n    return cost[dst] if cost[dst] != float('inf') else -1\n",
+  "functionName": "findCheapestPrice",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [
+          [
+            0,
+            1,
+            100
+          ],
+          [
+            1,
+            2,
+            100
+          ],
+          [
+            2,
+            0,
+            100
+          ],
+          [
+            1,
+            3,
+            600
+          ],
+          [
+            2,
+            3,
+            200
+          ]
+        ],
+        0,
+        3,
+        1
+      ],
+      "expected": 700,
+      "inputDisplay": "args=[4, [[0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600], [2, 3, 200]], 0, 3",
+      "expectedDisplay": "700",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1,
+            100
+          ],
+          [
+            1,
+            2,
+            100
+          ],
+          [
+            0,
+            2,
+            500
+          ]
+        ],
+        0,
+        2,
+        1
+      ],
+      "expected": 200,
+      "inputDisplay": "args=[3, [[0, 1, 100], [1, 2, 100], [0, 2, 500]], 0, 2, 1]",
+      "expectedDisplay": "200",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Bellman-Ford relaxation with k + 1 iterations."
+  ],
+  "python": {
+    "starterCode": "def findCheapestPrice(n: int, flights: list[list[int]], src: int, dst: int, k: int) -> int:\n    pass\n",
+    "solutionCode": "def findCheapestPrice(n: int, flights: list[list[int]], src: int, dst: int, k: int) -> int:\n    cost = [float('inf')] * n\n    cost[src] = 0\n    for _ in range(k + 1):\n        temp = list(cost)\n        for u, v, p in flights:\n            if cost[u] != float('inf') and cost[u] + p < temp[v]:\n                temp[v] = cost[u] + p\n        cost = temp\n    return cost[dst] if cost[dst] != float('inf') else -1\n"
+  },
+  "leetcodeId": 787,
+  "leetcodeTitle": "Cheapest Flights Within K Stops",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-cheapest-flights-k-stops/"
+}

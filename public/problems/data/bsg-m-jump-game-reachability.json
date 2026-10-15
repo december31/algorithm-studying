@@ -1,0 +1,81 @@
+{
+  "id": "bsg-m-jump-game-reachability",
+  "wingId": "binary-search-greedy",
+  "floor": 421,
+  "title": "Jump Game (Furthest Reach)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-jump-game-reachability",
+    "name": "Horizon Stalker",
+    "title": "Extender of the Boundary Line",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "goblin",
+    "color": "#f59e0b",
+    "attackName": "Leaping Blitz",
+    "attackPower": 2,
+    "defeatQuote": "Can the terminal index be reached via forward leaps?"
+  },
+  "description": "You are given an integer array `nums`. You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position. Return `True` if you can reach the last index, or `False` otherwise.",
+  "examples": [
+    {
+      "input": "nums = [2,3,1,1,4]",
+      "output": "True"
+    },
+    {
+      "input": "nums = [3,2,1,0,4]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10000"
+  ],
+  "starterCode": "def canJump(nums: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def canJump(nums: list[int]) -> bool:\n    max_reach = 0\n    for i, jump in enumerate(nums):\n        if i > max_reach: return False\n        max_reach = max(max_reach, i + jump)\n    return True\n",
+  "functionName": "canJump",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          1,
+          1,
+          4
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[2, 3, 1, 1, 4]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          2,
+          1,
+          0,
+          4
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[3, 2, 1, 0, 4]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Track max_reach. If current index i exceeds max_reach, return False."
+  ],
+  "python": {
+    "starterCode": "def canJump(nums: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def canJump(nums: list[int]) -> bool:\n    max_reach = 0\n    for i, jump in enumerate(nums):\n        if i > max_reach: return False\n        max_reach = max(max_reach, i + jump)\n    return True\n"
+  },
+  "leetcodeId": 55,
+  "leetcodeTitle": "Jump Game (Furthest Reach)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-jump-game-reachability/"
+}

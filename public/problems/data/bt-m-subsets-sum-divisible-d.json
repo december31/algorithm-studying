@@ -1,0 +1,94 @@
+{
+  "id": "bt-m-subsets-sum-divisible-d",
+  "wingId": "backtracking",
+  "floor": 259,
+  "title": "Subsets with Sum Divisible by D",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-subsets-sum-divisible-d",
+    "name": "Divisor Golem",
+    "title": "Tallyman of Modular Partitions",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Modulo Hammer",
+    "attackPower": 2,
+    "defeatQuote": "Every subset with sum divisible by d accounted for!"
+  },
+  "description": "Given an array of integers `nums` and an integer `d`, return the number of non-empty subsets whose sum is divisible by `d`.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3], d = 3",
+      "output": "3"
+    },
+    {
+      "input": "nums = [2,4,6], d = 2",
+      "output": "7"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 12",
+    "1 <= nums[i] <= 100",
+    "1 <= d <= 100"
+  ],
+  "starterCode": "def subsetsSumDivD(nums: list[int], d: int) -> int:\n    pass\n",
+  "solutionCode": "def subsetsSumDivD(nums: list[int], d: int) -> int:\n    count = 0\n    def dfs(idx, curr_sum, picked):\n        nonlocal count\n        if idx == len(nums):\n            if picked and curr_sum % d == 0: count += 1\n            return\n        dfs(idx + 1, curr_sum, picked)\n        dfs(idx + 1, curr_sum + nums[idx], True)\n    dfs(0, 0, False)\n    return count\n",
+  "functionName": "subsetsSumDivD",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[1, 2, 3], 3]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          4,
+          6
+        ],
+        2
+      ],
+      "expected": 7,
+      "inputDisplay": "args=[[2, 4, 6], 2]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5
+        ],
+        2
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[5], 2]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Track running sum mod d and count when picked is True and sum % d == 0."
+  ],
+  "python": {
+    "starterCode": "def subsetsSumDivD(nums: list[int], d: int) -> int:\n    pass\n",
+    "solutionCode": "def subsetsSumDivD(nums: list[int], d: int) -> int:\n    count = 0\n    def dfs(idx, curr_sum, picked):\n        nonlocal count\n        if idx == len(nums):\n            if picked and curr_sum % d == 0: count += 1\n            return\n        dfs(idx + 1, curr_sum, picked)\n        dfs(idx + 1, curr_sum + nums[idx], True)\n    dfs(0, 0, False)\n    return count\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Subsets with Sum Divisible by D",
+  "leetcodeUrl": null
+}

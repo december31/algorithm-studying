@@ -1,0 +1,141 @@
+{
+  "id": "maximum-parentheses",
+  "wingId": "maximum-parentheses-trial",
+  "floor": 5,
+  "title": "Maximum parentheses",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-maximum-parentheses-boss",
+    "name": "Equilibria the Parity Overlord",
+    "title": "Arch-Master of Slope-Trick Matching",
+    "maxHp": 18,
+    "hp": 18,
+    "sprite": "lich",
+    "color": "#8b5cf6",
+    "attackName": "Singularity Inversion Wave",
+    "attackPower": 4,
+    "defeatQuote": "The balance is unbroken... You achieved optimal parentheses subsequence profit!"
+  },
+  "description": "### Backstory\nAt the apex of the Citadel of Equilibrium sits **Equilibria the Parity Overlord**. The chamber's gateway is sealed by an ancient oscillating crystal array. To destabilize Equilibria's shield, you must extract a sequence of harmonious vibrations—a balanced subsequence of parentheses from a stream of cosmic pulses—that maximizes the total harmonic energy.\n\n### Problem Statement\nA string composed only of `'('` and `')'` is called **balanced** (or valid) if it satisfies one of the following:\n* It is an empty string `\"\"`.\n* It is a concatenation of two non-empty balanced strings $A$ and $B$, i.e. $A + B$.\n* It has the form `'(' + A + ')'`, where $A$ is a balanced string.\n\nYou are given:\n* An integer $n$, the length of string $S$ and array $V$.\n* A string $S$ of length $n$, consisting only of the characters `'('` and `')'`.\n* An integer array $V$ of length $n$, where $V[i]$ is the value (which may be positive, zero, or negative) associated with the character $S[i]$.\n\nYou may choose zero or more indices $1 \\le i_1 < i_2 < \\dots < i_k \\le n$ and form a new subsequence:\n$$T = S[i_1] S[i_2] \\dots S[i_k]$$\n\n**Your Task:**\nChoose such indices so that:\n1. The chosen subsequence $T$ is a **balanced parentheses string**.\n2. The total sum of chosen values $V[i_1] + V[i_2] + \\dots + V[i_k]$ is **maximized**.\n\n*Note:* Choosing zero indices corresponds to the empty string $T = \"\"$, which is balanced and has sum $0$. Hence, the maximum possible sum is always $\\ge 0$.",
+  "examples": [
+    {
+      "input": "n = 2, s = \"()\", v = [1, 3]",
+      "output": "4",
+      "explanation": "S is already valid balanced parentheses. Choosing all characters yields sum 1 + 3 = 4."
+    },
+    {
+      "input": "n = 5, s = \"(()()\", v = [4, -1, 3, -999, 4]",
+      "output": "10",
+      "explanation": "Choose indices 0, 1, 2, 4 (0-based) corresponding to characters '(', '(', ')', ')'. Subsequence is \"(())\" which is balanced, and the sum of values is 4 + (-1) + 3 + 4 = 10."
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 10^5",
+    "-10^9 <= V[i] <= 10^9",
+    "S contains only '(' and ')' characters"
+  ],
+  "starterCode": "def maxParentheses(n: int, s: str, v: list[int]) -> int:\n    \"\"\"\n    Calculate maximum possible sum of a balanced parentheses subsequence.\n    \n    :param n: length of string and array\n    :param s: string containing only '(' and ')'\n    :param v: list of values associated with each character in s\n    :return: maximum possible sum (>= 0)\n    \"\"\"\n    pass\n",
+  "solutionCode": "def maxParentheses(n: int, s: str, v: list[int]) -> int:\n    import heapq\n    pq = []\n    ans = 0\n    for char, val in zip(s, v):\n        if char == '(':\n            heapq.heappush(pq, -val)\n        else:\n            if pq and (-pq[0] + val > 0):\n                top = -heapq.heappop(pq)\n                ans += top + val\n                heapq.heappush(pq, -(-val))\n    return ans\n",
+  "functionName": "maxParentheses",
+  "hints": [
+    "Subsequence Balance Condition: A subsequence is valid if and only if prefix count of '(' >= count of ')' at all points, and total count of '(' == count of ')'. This is equivalent to matching every chosen ')' with an earlier chosen '('.",
+    "Greedy Regret / Slope-Trick: When '(' arrives with value V[i], push it into a max-heap of available openers. When ')' arrives with value V[j], tentatively pair it with the best available '(' if the pair sum (-top + V[j]) > 0.",
+    "Regret Replacement: When you pair '(' at i with ')' at j, push -V[j] back into the heap as a 'virtual opener'. If a future ')' arrives at k with higher value V[k] > V[j], pairing with the virtual opener yields V[k] - V[j], upgrading the match in O(log n) time!"
+  ],
+  "testCases": [
+    {
+      "id": 1,
+      "input": [2, "()", [1, 3]],
+      "expected": 4,
+      "inputDisplay": "n=2, S=\"()\", V=[1, 3]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [5, "(()()", [4, -1, 3, -999, 4]],
+      "expected": 10,
+      "inputDisplay": "n=5, S=\"(()()\", V=[4, -1, 3, -999, 4]",
+      "expectedDisplay": "10",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [2, ")(", [10, 10]],
+      "expected": 0,
+      "inputDisplay": "n=2, S=\")(\", V=[10, 10] (No valid bracket pairing)",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [4, "(())", [-10, -20, -30, -40]],
+      "expected": 0,
+      "inputDisplay": "n=4, S=\"(())\", All negative weights (empty string optimal)",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [6, "((()))", [1, 2, 3, 4, 5, 6]],
+      "expected": 21,
+      "inputDisplay": "n=6, S=\"((()))\", All positive (take full string)",
+      "expectedDisplay": "21",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [4, "()()", [10, -15, 10, 20]],
+      "expected": 30,
+      "inputDisplay": "n=4, S=\"()()\", V=[10, -15, 10, 20] (First pair negative profit, skipped)",
+      "expectedDisplay": "30",
+      "isHidden": true
+    },
+    {
+      "id": 7,
+      "input": [6, "(()())", [10, -50, 100, 20, 10, -100]],
+      "expected": 140,
+      "inputDisplay": "n=6, S=\"(()())\", Subsequence \"()()\" with sum 140",
+      "expectedDisplay": "140",
+      "isHidden": true
+    },
+    {
+      "id": 8,
+      "input": [8, "((())())", [5, -2, 10, 8, 3, -1, 15, -4]],
+      "expected": 40,
+      "inputDisplay": "n=8, S=\"((())())\", Interleaved pairs with optimal matches",
+      "expectedDisplay": "40",
+      "isHidden": true
+    },
+    {
+      "id": 9,
+      "input": [
+        19,
+        "())(()((())()())(()",
+        [10, -20, 30, -40, 50, 60, -70, 80, 90, 100, -10, 20, -30, 40, -50, 60, -70, 80, -90]
+      ],
+      "expected": 510,
+      "inputDisplay": "n=19, Complex mixed-sign stream with multiple regrets",
+      "expectedDisplay": "510",
+      "isHidden": true
+    },
+    {
+      "id": 10,
+      "input": [
+        20,
+        "(((((((((())))))))))",
+        [
+          1000000000, -1000000000, 1000000000, -1000000000, 1000000000,
+          -1000000000, 1000000000, -1000000000, 1000000000, -1000000000,
+          1000000000, -1000000000, 1000000000, -1000000000, 1000000000,
+          -1000000000, 1000000000, -1000000000, 1000000000, -1000000000
+        ]
+      ],
+      "expected": 10000000000,
+      "inputDisplay": "n=20, Large 64-bit integer values (10^9 scale)",
+      "expectedDisplay": "10000000000",
+      "isHidden": true
+    }
+  ]
+}

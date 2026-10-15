@@ -1,0 +1,94 @@
+{
+  "id": "ds-m-right-side-view",
+  "wingId": "data-structures",
+  "floor": 169,
+  "title": "Binary Tree Right Side View",
+  "difficulty": "medium",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "mon-ds-m-right-side-view",
+    "name": "Right-Flank Cyclops",
+    "title": "Observer of the Eastern Canopy",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Right Ray",
+    "attackPower": 2,
+    "defeatQuote": "Taking the last element of every BFS layer revealed the right view!"
+  },
+  "description": "Given the root of a binary tree as an array, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.",
+  "examples": [
+    {
+      "input": "tree = [1,2,3,None,5,None,4]",
+      "output": "[1,3,4]"
+    }
+  ],
+  "constraints": [
+    "0 <= len(tree) <= 2000"
+  ],
+  "starterCode": "def rightSideView(tree: list) -> list[int]:\n    pass\n",
+  "solutionCode": "def rightSideView(tree: list) -> list[int]:\n    if not tree or tree[0] is None: return []\n    from collections import deque\n    res = []\n    queue = deque([0])\n    while queue:\n        last_val = None\n        for _ in range(len(queue)):\n            idx = queue.popleft()\n            if idx < len(tree) and tree[idx] is not None:\n                last_val = tree[idx]\n                left, right = 2 * idx + 1, 2 * idx + 2\n                if left < len(tree) and tree[left] is not None: queue.append(left)\n                if right < len(tree) and tree[right] is not None: queue.append(right)\n        if last_val is not None:\n            res.append(last_val)\n    return res\n",
+  "functionName": "rightSideView",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          null,
+          5,
+          null,
+          4
+        ]
+      ],
+      "expected": [
+        1,
+        3,
+        4
+      ],
+      "inputDisplay": "[1, 2, 3, None, 5, None, 4]",
+      "expectedDisplay": "[1, 3, 4]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          null,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        3
+      ],
+      "inputDisplay": "[1, None, 3]",
+      "expectedDisplay": "[1, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        []
+      ],
+      "expected": [],
+      "inputDisplay": "[]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "In BFS level order, the last node processed in each level is the rightmost visible node."
+  ],
+  "python": {
+    "starterCode": "def rightSideView(tree: list) -> list[int]:\n    pass\n",
+    "solutionCode": "def rightSideView(tree: list) -> list[int]:\n    if not tree or tree[0] is None: return []\n    from collections import deque\n    res = []\n    queue = deque([0])\n    while queue:\n        last_val = None\n        for _ in range(len(queue)):\n            idx = queue.popleft()\n            if idx < len(tree) and tree[idx] is not None:\n                last_val = tree[idx]\n                left, right = 2 * idx + 1, 2 * idx + 2\n                if left < len(tree) and tree[left] is not None: queue.append(left)\n                if right < len(tree) and tree[right] is not None: queue.append(right)\n        if last_val is not None:\n            res.append(last_val)\n    return res\n"
+  },
+  "leetcodeId": 199,
+  "leetcodeTitle": "Binary Tree Right Side View",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-right-side-view/"
+}

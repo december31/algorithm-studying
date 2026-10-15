@@ -1,0 +1,109 @@
+{
+  "id": "bt-m-climbing-stairs-variable",
+  "wingId": "backtracking",
+  "floor": 267,
+  "title": "Climbing Stairs with Custom Steps",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-climbing-stairs-variable",
+    "name": "Stairway Chimera",
+    "title": "Leaper of Multi-Step Risers",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#10b981",
+    "attackName": "Riser Strike",
+    "attackPower": 2,
+    "defeatQuote": "All distinct step sequences reaching the top floor found!"
+  },
+  "description": "You are climbing a staircase of `n` steps. You are given an array of allowed step sizes `steps`. In each step, you can climb any number of steps listed in `steps`. Return all unique paths to reach step `n` sorted lexicographically.",
+  "examples": [
+    {
+      "input": "n = 4, steps = [1,2]",
+      "output": "[[1,1,1,1],[1,1,2],[1,2,1],[2,1,1],[2,2]]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 10",
+    "1 <= len(steps) <= 4"
+  ],
+  "starterCode": "def climbStairsVariable(n: int, steps: list[int]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def climbStairsVariable(n: int, steps: list[int]) -> list[list[int]]:\n    steps.sort()\n    res = []\n    def dfs(rem, path):\n        if rem == 0:\n            res.append(list(path))\n            return\n        for s in steps:\n            if s <= rem:\n                dfs(rem - s, path + [s])\n    dfs(n, [])\n    return res\n",
+  "functionName": "climbStairsVariable",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "inputDisplay": "args=[4, [1, 2]]",
+      "expectedDisplay": "[[1, 1, 1, 1], [1, 1, 2], [1, 2, 1], [2, 1, 1], [2, 2]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          1,
+          3
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          3
+        ]
+      ],
+      "inputDisplay": "args=[3, [1, 3]]",
+      "expectedDisplay": "[[1, 1, 1], [3]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Backtrack over allowed step sizes until rem == 0."
+  ],
+  "python": {
+    "starterCode": "def climbStairsVariable(n: int, steps: list[int]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def climbStairsVariable(n: int, steps: list[int]) -> list[list[int]]:\n    steps.sort()\n    res = []\n    def dfs(rem, path):\n        if rem == 0:\n            res.append(list(path))\n            return\n        for s in steps:\n            if s <= rem:\n                dfs(rem - s, path + [s])\n    dfs(n, [])\n    return res\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Climbing Stairs with Custom Steps",
+  "leetcodeUrl": null
+}

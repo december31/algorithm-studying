@@ -1,0 +1,97 @@
+{
+  "id": "ds-h-freq-stack",
+  "wingId": "data-structures",
+  "floor": 194,
+  "title": "Maximum Frequency Stack Simulator",
+  "difficulty": "hard",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-h-freq-stack",
+    "name": "Resonance Lich",
+    "title": "Drainer of Most Frequent Echoes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#ec4899",
+    "attackName": "Frequency Drain",
+    "attackPower": 3,
+    "defeatQuote": "Map of stacks by frequency returned highest-frequency elements first!"
+  },
+  "description": "Design a stack-like data structure to push elements, and pop the most frequent element from the stack. If there is a tie for the most frequent element, the element closest to the stack's top is removed and returned. Given a list of operations `[\"push\", x]` or `[\"pop\"]`, return the outputs of `pop`.",
+  "examples": [
+    {
+      "input": "commands = [[\"push\",5],[\"push\",7],[\"push\",5],[\"push\",7],[\"push\",4],[\"push\",5],[\"pop\"],[\"pop\"],[\"pop\"],[\"pop\"]]",
+      "output": "[5,7,5,4]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(commands) <= 10^4"
+  ],
+  "starterCode": "def freqStackSimulator(commands: list) -> list[int]:\n    pass\n",
+  "solutionCode": "def freqStackSimulator(commands: list) -> list[int]:\n    from collections import defaultdict\n    freq = defaultdict(int)\n    group = defaultdict(list)\n    max_f = 0\n    res = []\n    for cmd in commands:\n        if cmd[0] == 'push':\n            val = cmd[1]\n            f = freq[val] + 1\n            freq[val] = f\n            if f > max_f: max_f = f\n            group[f].append(val)\n        elif cmd[0] == 'pop':\n            x = group[max_f].pop()\n            freq[x] -= 1\n            if not group[max_f]:\n                max_f -= 1\n            res.append(x)\n    return res\n",
+  "functionName": "freqStackSimulator",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "push",
+            5
+          ],
+          [
+            "push",
+            7
+          ],
+          [
+            "push",
+            5
+          ],
+          [
+            "push",
+            7
+          ],
+          [
+            "push",
+            4
+          ],
+          [
+            "push",
+            5
+          ],
+          [
+            "pop"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "pop"
+          ]
+        ]
+      ],
+      "expected": [
+        5,
+        7,
+        5,
+        4
+      ],
+      "inputDisplay": "[['push', 5], ['push', 7], ['push', 5], ['push', 7], ['push', 4], ['push', 5], [",
+      "expectedDisplay": "[5, 7, 5, 4]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Maintain a map from frequency to a stack of elements having that frequency."
+  ],
+  "python": {
+    "starterCode": "def freqStackSimulator(commands: list) -> list[int]:\n    pass\n",
+    "solutionCode": "def freqStackSimulator(commands: list) -> list[int]:\n    from collections import defaultdict\n    freq = defaultdict(int)\n    group = defaultdict(list)\n    max_f = 0\n    res = []\n    for cmd in commands:\n        if cmd[0] == 'push':\n            val = cmd[1]\n            f = freq[val] + 1\n            freq[val] = f\n            if f > max_f: max_f = f\n            group[f].append(val)\n        elif cmd[0] == 'pop':\n            x = group[max_f].pop()\n            freq[x] -= 1\n            if not group[max_f]:\n                max_f -= 1\n            res.append(x)\n    return res\n"
+  },
+  "leetcodeId": 895,
+  "leetcodeTitle": "Maximum Frequency Stack Simulator",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-freq-stack/"
+}

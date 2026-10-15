@@ -1,0 +1,104 @@
+{
+  "id": "ds-m-is-valid-bst",
+  "wingId": "data-structures",
+  "floor": 166,
+  "title": "Validate Binary Search Tree Inorder",
+  "difficulty": "medium",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "mon-ds-m-is-valid-bst",
+    "name": "BST Inquisitor",
+    "title": "Detector of Illicit Branch Inversions",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "beholder",
+    "color": "#ec4899",
+    "attackName": "Ascending Glare",
+    "attackPower": 2,
+    "defeatQuote": "Strictly ascending verification proved the tree's BST validity!"
+  },
+  "description": "Given an array `values` representing the inorder traversal of a binary tree, return `True` if it represents a valid BST (strictly increasing), or `False` otherwise.",
+  "examples": [
+    {
+      "input": "values = [1,2,3,4,5]",
+      "output": "True"
+    },
+    {
+      "input": "values = [5,1,4,None,None,3,6]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= len(values) <= 10^4"
+  ],
+  "starterCode": "def isValidBST(values: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def isValidBST(values: list[int]) -> bool:\n    for i in range(1, len(values)):\n        if values[i] <= values[i - 1]:\n            return False\n    return True\n",
+  "functionName": "isValidBST",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1, 2, 3, 4, 5]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5,
+          1,
+          4
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[5, 1, 4]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1, 1]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          10
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[10]",
+      "expectedDisplay": "True",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "An inorder traversal of a valid BST must be strictly increasing without duplicates."
+  ],
+  "python": {
+    "starterCode": "def isValidBST(values: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def isValidBST(values: list[int]) -> bool:\n    for i in range(1, len(values)):\n        if values[i] <= values[i - 1]:\n            return False\n    return True\n"
+  },
+  "leetcodeId": 98,
+  "leetcodeTitle": "Validate Binary Search Tree Inorder",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-is-valid-bst/"
+}

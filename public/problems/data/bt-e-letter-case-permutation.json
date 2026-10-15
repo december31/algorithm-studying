@@ -1,0 +1,90 @@
+{
+  "id": "bt-e-letter-case-permutation",
+  "wingId": "backtracking",
+  "floor": 202,
+  "title": "Letter Case Permutation",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-e-letter-case-permutation",
+    "name": "Case Shifter",
+    "title": "Twister of Capital Runes",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "slime",
+    "color": "#06b6d4",
+    "attackName": "Case Shift",
+    "attackPower": 1,
+    "defeatQuote": "Every branching casing path was explored recursively!"
+  },
+  "description": "Given a string `s`, you can transform every letter individually to be lowercase or uppercase to create another string. Return a list of all possible strings we could create in lexicographical order.",
+  "examples": [
+    {
+      "input": "s = \"a1b2\"",
+      "output": "[\"a1b2\",\"a1B2\",\"A1b2\",\"A1B2\"]"
+    },
+    {
+      "input": "s = \"3z4\"",
+      "output": "[\"3z4\",\"3Z4\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 12",
+    "s consists of lowercase English letters, uppercase English letters, and digits"
+  ],
+  "starterCode": "def letterCasePermutation(s: str) -> list[str]:\n    pass\n",
+  "solutionCode": "def letterCasePermutation(s: str) -> list[str]:\n    res = []\n    def backtrack(idx, path):\n        if idx == len(s):\n            res.append(''.join(path))\n            return\n        if s[idx].isalpha():\n            backtrack(idx + 1, path + [s[idx].lower()])\n            backtrack(idx + 1, path + [s[idx].upper()])\n        else:\n            backtrack(idx + 1, path + [s[idx]])\n    backtrack(0, [])\n    return sorted(res)\n",
+  "functionName": "letterCasePermutation",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "a1b2"
+      ],
+      "expected": [
+        "A1B2",
+        "A1b2",
+        "a1B2",
+        "a1b2"
+      ],
+      "inputDisplay": "a1b2",
+      "expectedDisplay": "['A1B2', 'A1b2', 'a1B2', 'a1b2']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "3z4"
+      ],
+      "expected": [
+        "3Z4",
+        "3z4"
+      ],
+      "inputDisplay": "3z4",
+      "expectedDisplay": "['3Z4', '3z4']",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "123"
+      ],
+      "expected": [
+        "123"
+      ],
+      "inputDisplay": "123",
+      "expectedDisplay": "['123']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Branch on letters with lower and upper cases; leave digits unchanged."
+  ],
+  "python": {
+    "starterCode": "def letterCasePermutation(s: str) -> list[str]:\n    pass\n",
+    "solutionCode": "def letterCasePermutation(s: str) -> list[str]:\n    res = []\n    def backtrack(idx, path):\n        if idx == len(s):\n            res.append(''.join(path))\n            return\n        if s[idx].isalpha():\n            backtrack(idx + 1, path + [s[idx].lower()])\n            backtrack(idx + 1, path + [s[idx].upper()])\n        else:\n            backtrack(idx + 1, path + [s[idx]])\n    backtrack(0, [])\n    return sorted(res)\n"
+  },
+  "leetcodeId": 784,
+  "leetcodeTitle": "Letter Case Permutation",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-e-letter-case-permutation/"
+}

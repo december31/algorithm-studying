@@ -31,8 +31,8 @@
   "constraints": [
     "1 <= num < 2^31"
   ],
-  "starterCode": "function findComplement(num) {\n  return 0;\n}",
-  "solutionCode": "function findComplement(num) {\n  let mask = 1;\n  while (mask < num) {\n    mask = (mask << 1) | 1;\n  }\n  return num ^ mask;\n}",
+  "starterCode": "def findComplement(num):\n    return 0\n",
+  "solutionCode": "def findComplement(num):\n    mask = 1\n    while mask < num:\n        mask = (mask << 1) | 1\n    return num ^ mask\n",
   "functionName": "findComplement",
   "testCases": [
     {

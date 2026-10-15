@@ -32,8 +32,8 @@
     "m == grid.length, n == grid[i].length",
     "1 <= m, n <= 50"
   ],
-  "starterCode": "function maxAreaOfIsland(grid) {\n  return 0;\n}",
-  "solutionCode": "function maxAreaOfIsland(grid) {\n  const m = grid.length, n = grid[0].length;\n  let maxArea = 0;\n  function dfs(r, c) {\n    if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] === 0) return 0;\n    grid[r][c] = 0;\n    return 1 + dfs(r + 1, c) + dfs(r - 1, c) + dfs(r, c + 1) + dfs(r, c - 1);\n  }\n  for (let r = 0; r < m; r++) {\n    for (let c = 0; c < n; c++) {\n      if (grid[r][c] === 1) {\n        maxArea = Math.max(maxArea, dfs(r, c));\n      }\n    }\n  }\n  return maxArea;\n}",
+  "starterCode": "def maxAreaOfIsland(grid):\n    return 0\n",
+  "solutionCode": "def maxAreaOfIsland(grid):\n    m, n = len(grid), len(grid[0])\n    def dfs(r, c):\n        if r < 0 or r >= m or c < 0 or c >= n or grid[r][c] == 0:\n            return 0\n        grid[r][c] = 0\n        return 1 + dfs(r + 1, c) + dfs(r - 1, c) + dfs(r, c + 1) + dfs(r, c - 1)\n    max_area = 0\n    for r in range(m):\n        for c in range(n):\n            if grid[r][c] == 1:\n                max_area = max(max_area, dfs(r, c))\n    return max_area\n",
   "functionName": "maxAreaOfIsland",
   "testCases": [
     {

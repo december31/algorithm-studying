@@ -1,0 +1,82 @@
+{
+  "id": "bsg-e-lemonade-change",
+  "wingId": "binary-search-greedy",
+  "floor": 405,
+  "title": "Lemonade Change (Greedy Cashier)",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-e-lemonade-change",
+    "name": "Cashier Goblin",
+    "title": "Tender of Exact Change",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "goblin",
+    "color": "#f59e0b",
+    "attackName": "Coin Shower",
+    "attackPower": 1,
+    "defeatQuote": "Can change be provided for every customer in sequence?"
+  },
+  "description": "At a lemonade stand, each lemonade costs $5. Customers stand in a queue and order one at a time, paying with a $5, $10, or $20 bill. You must provide the correct change to each customer, initially starting with no change. Return `True` if you can provide every customer with correct change, or `False` otherwise.",
+  "examples": [
+    {
+      "input": "bills = [5,5,5,10,20]",
+      "output": "True"
+    },
+    {
+      "input": "bills = [5,5,10,10,20]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= bills.length <= 100000",
+    "bills[i] is 5, 10, or 20"
+  ],
+  "starterCode": "def lemonadeChange(bills: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def lemonadeChange(bills: list[int]) -> bool:\n    five = ten = 0\n    for b in bills:\n        if b == 5: five += 1\n        elif b == 10:\n            if five == 0: return False\n            five -= 1\n            ten += 1\n        else:\n            if ten > 0 and five > 0:\n                ten -= 1\n                five -= 1\n            elif five >= 3:\n                five -= 3\n            else:\n                return False\n    return True\n",
+  "functionName": "lemonadeChange",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          5,
+          5,
+          5,
+          10,
+          20
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[5, 5, 5, 10, 20]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5,
+          5,
+          10,
+          10,
+          20
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[5, 5, 10, 10, 20]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Greedily use a $10 bill and a $5 bill to give change for $20 before falling back to three $5 bills."
+  ],
+  "python": {
+    "starterCode": "def lemonadeChange(bills: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def lemonadeChange(bills: list[int]) -> bool:\n    five = ten = 0\n    for b in bills:\n        if b == 5: five += 1\n        elif b == 10:\n            if five == 0: return False\n            five -= 1\n            ten += 1\n        else:\n            if ten > 0 and five > 0:\n                ten -= 1\n                five -= 1\n            elif five >= 3:\n                five -= 3\n            else:\n                return False\n    return True\n"
+  },
+  "leetcodeId": 860,
+  "leetcodeTitle": "Lemonade Change (Greedy Cashier)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-e-lemonade-change/"
+}

@@ -35,8 +35,8 @@
     "puzzles[i].length == 7",
     "words[i] and puzzles[i] consist of lowercase English letters."
   ],
-  "starterCode": "function findNumOfValidWords(words, puzzles) {\n  return [];\n}",
-  "solutionCode": "function findNumOfValidWords(words, puzzles) {\n  const wordCount = new Map();\n  for (const w of words) {\n    let mask = 0;\n    for (let i = 0; i < w.length; i++) {\n      mask |= (1 << (w.charCodeAt(i) - 97));\n    }\n    wordCount.set(mask, (wordCount.get(mask) || 0) + 1);\n  }\n  const res = [];\n  for (const p of puzzles) {\n    const firstBit = 1 << (p.charCodeAt(0) - 97);\n    let mask = 0;\n    for (let i = 0; i < p.length; i++) {\n      mask |= (1 << (p.charCodeAt(i) - 97));\n    }\n    let count = 0;\n    let submask = mask;\n    while (submask > 0) {\n      if ((submask & firstBit) !== 0) {\n        count += wordCount.get(submask) || 0;\n      }\n      submask = (submask - 1) & mask;\n    }\n    res.push(count);\n  }\n  return res;\n}",
+  "starterCode": "def findNumOfValidWords(words, puzzles):\n    return []\n",
+  "solutionCode": "def findNumOfValidWords(words, puzzles):\n    from collections import Counter\n    word_count = Counter()\n    for w in words:\n        mask = 0\n        for ch in w:\n            mask |= 1 << (ord(ch) - 97)\n        word_count[mask] += 1\n    res = []\n    for p in puzzles:\n        first_bit = 1 << (ord(p[0]) - 97)\n        mask = 0\n        for ch in p:\n            mask |= 1 << (ord(ch) - 97)\n        count = 0\n        submask = mask\n        while submask > 0:\n            if submask & first_bit:\n                count += word_count[submask]\n            submask = (submask - 1) & mask\n        res.append(count)\n    return res\n",
   "functionName": "findNumOfValidWords",
   "testCases": [
     {

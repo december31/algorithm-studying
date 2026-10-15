@@ -1,0 +1,71 @@
+{
+  "id": "bit-e-hamming-distance",
+  "wingId": "bit-manipulation",
+  "floor": 508,
+  "title": "Hamming Distance",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-e-hamming-distance",
+    "name": "Disparity Imp",
+    "title": "Counter of Differing Bit Positions",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "imp",
+    "color": "#38bdf8",
+    "attackName": "XOR Disparity",
+    "attackPower": 1,
+    "defeatQuote": "Number of bit positions where x and y differ computed!"
+  },
+  "description": "The Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers `x` and `y`, return the Hamming distance between them.",
+  "examples": [
+    {
+      "input": "x = 1, y = 4",
+      "output": "2"
+    },
+    {
+      "input": "x = 3, y = 1",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "0 <= x, y <= 2^31 - 1"
+  ],
+  "starterCode": "def hammingDistance(x: int, y: int) -> int:\n    pass\n",
+  "solutionCode": "def hammingDistance(x: int, y: int) -> int:\n    xor = x ^ y\n    count = 0\n    while xor > 0:\n        xor &= (xor - 1)\n        count += 1\n    return count\n",
+  "functionName": "hammingDistance",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1,
+        4
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[1, 4]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[3, 1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Compute x ^ y to isolate differing bits, then count set bits."
+  ],
+  "python": {
+    "starterCode": "def hammingDistance(x: int, y: int) -> int:\n    pass\n",
+    "solutionCode": "def hammingDistance(x: int, y: int) -> int:\n    xor = x ^ y\n    count = 0\n    while xor > 0:\n        xor &= (xor - 1)\n        count += 1\n    return count\n"
+  },
+  "leetcodeId": 461,
+  "leetcodeTitle": "Hamming Distance",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-e-hamming-distance/"
+}

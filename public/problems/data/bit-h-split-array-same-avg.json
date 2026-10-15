@@ -1,0 +1,82 @@
+{
+  "id": "bit-h-split-array-same-avg",
+  "wingId": "bit-manipulation",
+  "floor": 586,
+  "title": "Split Array with Same Average",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-split-array-same-avg",
+    "name": "Equi-Average Chimera",
+    "title": "Harmonizer of Mean Values",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#ef4444",
+    "attackName": "Balanced Partition Surge",
+    "attackPower": 3,
+    "defeatQuote": "Divide the hoard in two non-empty tribes of identical average!"
+  },
+  "description": "You are given an integer array `nums`. You want to split the array into two non-empty arrays `A` and `B` such that `average(A) == average(B)`. Return `True` if you can achieve that, or `False` otherwise.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,4,5,6,7,8]",
+      "output": "True"
+    },
+    {
+      "input": "nums = [3,1]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 30",
+    "0 <= nums[i] <= 10^4"
+  ],
+  "starterCode": "def splitArraySameAverage(nums: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def splitArraySameAverage(nums: list[int]) -> bool:\n    n = len(nums)\n    if n <= 1: return False\n    total = sum(nums)\n    mid = n // 2\n    left, right = nums[:mid], nums[mid:]\n    left_sums = [set() for _ in range(len(left) + 1)]\n    left_sums[0].add(0)\n    for x in left:\n        for sz in range(len(left_sums) - 1, 0, -1):\n            for s in left_sums[sz - 1]:\n                left_sums[sz].add(s + x)\n    right_sums = [set() for _ in range(len(right) + 1)]\n    right_sums[0].add(0)\n    for x in right:\n        for sz in range(len(right_sums) - 1, 0, -1):\n            for s in right_sums[sz - 1]:\n                right_sums[sz].add(s + x)\n    for k in range(1, mid + 1):\n        if (total * k) % n == 0:\n            target = (total * k) // n\n            for l_sz in range(min(k, len(left)) + 1):\n                r_sz = k - l_sz\n                if r_sz <= len(right):\n                    for s1 in left_sums[l_sz]:\n                        if (target - s1) in right_sums[r_sz]:\n                            return True\n    return False\n",
+  "functionName": "splitArraySameAverage",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1, 2, 3, 4, 5, 6, 7, 8]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          1
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[3, 1]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Condition average(A) == total / n implies sum(A) = total * len(A) / n must be an integer. Check subset sums with meet-in-the-middle."
+  ],
+  "python": {
+    "starterCode": "def splitArraySameAverage(nums: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def splitArraySameAverage(nums: list[int]) -> bool:\n    n = len(nums)\n    if n <= 1: return False\n    total = sum(nums)\n    mid = n // 2\n    left, right = nums[:mid], nums[mid:]\n    left_sums = [set() for _ in range(len(left) + 1)]\n    left_sums[0].add(0)\n    for x in left:\n        for sz in range(len(left_sums) - 1, 0, -1):\n            for s in left_sums[sz - 1]:\n                left_sums[sz].add(s + x)\n    right_sums = [set() for _ in range(len(right) + 1)]\n    right_sums[0].add(0)\n    for x in right:\n        for sz in range(len(right_sums) - 1, 0, -1):\n            for s in right_sums[sz - 1]:\n                right_sums[sz].add(s + x)\n    for k in range(1, mid + 1):\n        if (total * k) % n == 0:\n            target = (total * k) // n\n            for l_sz in range(min(k, len(left)) + 1):\n                r_sz = k - l_sz\n                if r_sz <= len(right):\n                    for s1 in left_sums[l_sz]:\n                        if (target - s1) in right_sums[r_sz]:\n                            return True\n    return False\n"
+  },
+  "leetcodeId": 805,
+  "leetcodeTitle": "Split Array with Same Average",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-split-array-same-avg/"
+}

@@ -1,0 +1,106 @@
+{
+  "id": "bit-h-linear-basis-rank-max",
+  "wingId": "bit-manipulation",
+  "floor": 600,
+  "title": "Universal Linear Basis Sovereign",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-linear-basis-rank-max",
+    "name": "XOR Monarch of the 600th Abyss",
+    "title": "Omniscient Master of Bitwise Vector Spaces",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#7c3aed",
+    "attackName": "Universal GF(2) Annihilation",
+    "attackPower": 3,
+    "defeatQuote": "I am the Sovereign of GF(2)! Behold the rank of your basis and the zenith of bitwise XOR!"
+  },
+  "description": "Given an array of integers `nums`, construct the canonical Linear Basis over GF(2). Return a list `[rank, maxXor]` where `rank` is the number of linearly independent elements in the basis (the dimension of the vector space spanned by `nums`), and `maxXor` is the maximum XOR value obtainable from any subset of `nums`.",
+  "examples": [
+    {
+      "input": "nums = [2, 4, 5]",
+      "output": "[3, 7]"
+    },
+    {
+      "input": "nums = [1, 2, 3]",
+      "output": "[2, 3]"
+    },
+    {
+      "input": "nums = [10, 15, 20, 25]",
+      "output": "[4, 30]"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10^5",
+    "0 <= nums[i] <= 10^9"
+  ],
+  "starterCode": "def linearBasisRankAndMax(nums: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def linearBasisRankAndMax(nums: list[int]) -> list[int]:\n    basis = [0] * 32\n    rank = 0\n    for x in nums:\n        for b in range(31, -1, -1):\n            if (x >> b) & 1:\n                if not basis[b]:\n                    basis[b] = x\n                    rank += 1\n                    break\n                x ^= basis[b]\n    max_xor = 0\n    for b in range(31, -1, -1):\n        if (max_xor ^ basis[b]) > max_xor:\n            max_xor ^= basis[b]\n    return [rank, max_xor]\n",
+  "functionName": "linearBasisRankAndMax",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        3,
+        7
+      ],
+      "inputDisplay": "[2, 4, 5]",
+      "expectedDisplay": "[3, 7]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        2,
+        3
+      ],
+      "inputDisplay": "[1, 2, 3]",
+      "expectedDisplay": "[2, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          10,
+          15,
+          20,
+          25
+        ]
+      ],
+      "expected": [
+        4,
+        30
+      ],
+      "inputDisplay": "[10, 15, 20, 25]",
+      "expectedDisplay": "[4, 30]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Insert elements into linear basis. Count number of successful insertions for rank. Greedily maximize XOR for maxXor."
+  ],
+  "python": {
+    "starterCode": "def linearBasisRankAndMax(nums: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def linearBasisRankAndMax(nums: list[int]) -> list[int]:\n    basis = [0] * 32\n    rank = 0\n    for x in nums:\n        for b in range(31, -1, -1):\n            if (x >> b) & 1:\n                if not basis[b]:\n                    basis[b] = x\n                    rank += 1\n                    break\n                x ^= basis[b]\n    max_xor = 0\n    for b in range(31, -1, -1):\n        if (max_xor ^ basis[b]) > max_xor:\n            max_xor ^= basis[b]\n    return [rank, max_xor]\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "Universal Linear Basis Sovereign",
+  "leetcodeUrl": null
+}

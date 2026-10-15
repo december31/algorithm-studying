@@ -1,0 +1,84 @@
+{
+  "id": "bsg-e-can-place-flowers",
+  "wingId": "binary-search-greedy",
+  "floor": 407,
+  "title": "Can Place Flowers (No-Adjacent Planting)",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-e-can-place-flowers",
+    "name": "Flora Sylph",
+    "title": "Planter in Non-Adjacent Soil",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "spectre",
+    "color": "#22c55e",
+    "attackName": "Thorn Sprout",
+    "attackPower": 1,
+    "defeatQuote": "Can n new flowers be planted without violating adjacency rules?"
+  },
+  "description": "You have a long flowerbed in which some plots are planted (1) and some are not (0). Flowers cannot be planted in adjacent plots. Given an integer array `flowerbed` and an integer `n`, return `True` if `n` new flowers can be planted without violating the no-adjacent-flowers rule.",
+  "examples": [
+    {
+      "input": "flowerbed = [1,0,0,0,1], n = 1",
+      "output": "True"
+    },
+    {
+      "input": "flowerbed = [1,0,0,0,1], n = 2",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= flowerbed.length <= 20000",
+    "0 <= n <= flowerbed.length"
+  ],
+  "starterCode": "def canPlaceFlowers(flowerbed: list[int], n: int) -> bool:\n    pass\n",
+  "solutionCode": "def canPlaceFlowers(flowerbed: list[int], n: int) -> bool:\n    count = 0\n    for i in range(len(flowerbed)):\n        if flowerbed[i] == 0:\n            prev_empty = (i == 0 or flowerbed[i - 1] == 0)\n            next_empty = (i == len(flowerbed) - 1 or flowerbed[i + 1] == 0)\n            if prev_empty and next_empty:\n                flowerbed[i] = 1\n                count += 1\n    return count >= n\n",
+  "functionName": "canPlaceFlowers",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        1
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[1, 0, 0, 0, 1], 1]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        2
+      ],
+      "expected": false,
+      "inputDisplay": "args=[[1, 0, 0, 0, 1], 2]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Greedily place a flower as early as possible whenever plot and both neighbors are 0."
+  ],
+  "python": {
+    "starterCode": "def canPlaceFlowers(flowerbed: list[int], n: int) -> bool:\n    pass\n",
+    "solutionCode": "def canPlaceFlowers(flowerbed: list[int], n: int) -> bool:\n    count = 0\n    for i in range(len(flowerbed)):\n        if flowerbed[i] == 0:\n            prev_empty = (i == 0 or flowerbed[i - 1] == 0)\n            next_empty = (i == len(flowerbed) - 1 or flowerbed[i + 1] == 0)\n            if prev_empty and next_empty:\n                flowerbed[i] = 1\n                count += 1\n    return count >= n\n"
+  },
+  "leetcodeId": 605,
+  "leetcodeTitle": "Can Place Flowers (No-Adjacent Planting)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-e-can-place-flowers/"
+}

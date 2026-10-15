@@ -32,8 +32,8 @@
     "1 <= tokens.length <= 10^4",
     "tokens[i] is either an operator or an integer in the range [-200, 200]."
   ],
-  "starterCode": "function evalRPN(tokens) {\n  return 0;\n}",
-  "solutionCode": "function evalRPN(tokens) {\n  const stack = [];\n  for (const t of tokens) {\n    if (t === '+' || t === '-' || t === '*' || t === '/') {\n      const b = stack.pop();\n      const a = stack.pop();\n      if (t === '+') stack.push(a + b);\n      else if (t === '-') stack.push(a - b);\n      else if (t === '*') stack.push(a * b);\n      else if (t === '/') stack.push(Math.trunc(a / b));\n    } else {\n      stack.push(Number(t));\n    }\n  }\n  return stack[0];\n}",
+  "starterCode": "def evalRPN(tokens):\n    return 0\n",
+  "solutionCode": "def evalRPN(tokens):\n    stack = []\n    for t in tokens:\n        if t in \"+-*/\":\n            b = stack.pop()\n            a = stack.pop()\n            if t == \"+\": stack.append(a + b)\n            elif t == \"-\": stack.append(a - b)\n            elif t == \"*\": stack.append(a * b)\n            elif t == \"/\": stack.append(int(a / b))\n        else:\n            stack.append(int(t))\n    return stack[0]\n",
   "functionName": "evalRPN",
   "testCases": [
     {

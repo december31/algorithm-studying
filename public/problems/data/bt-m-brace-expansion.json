@@ -1,0 +1,76 @@
+{
+  "id": "bt-m-brace-expansion",
+  "wingId": "backtracking",
+  "floor": 242,
+  "title": "Brace Expansion",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-brace-expansion",
+    "name": "Expansion Gargoyle",
+    "title": "Expander of Grouped Options",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#10b981",
+    "attackName": "Expansion Pulse",
+    "attackPower": 2,
+    "defeatQuote": "Cartesian product of brace groups generated in alphabetical order!"
+  },
+  "description": "You are given a string `s` representing a list of words. Each letter in the word has one or more options. If there are multiple options, the options are given in braces like `\"{a,b,c}\"`. Return all words that can be formed, in lexicographical order.",
+  "examples": [
+    {
+      "input": "s = \"{a,b}c{d,e}f\"",
+      "output": "[\"acdf\",\"acef\",\"bcdf\",\"bcef\"]"
+    },
+    {
+      "input": "s = \"abcd\"",
+      "output": "[\"abcd\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 50"
+  ],
+  "starterCode": "def expandBraces(s: str) -> list[str]:\n    pass\n",
+  "solutionCode": "def expandBraces(s: str) -> list[str]:\n    groups = []\n    i = 0\n    while i < len(s):\n        if s[i] == '{':\n            j = s.index('}', i)\n            groups.append(sorted(s[i + 1:j].split(',')))\n            i = j + 1\n        else:\n            groups.append([s[i]])\n            i += 1\n    res = []\n    def backtrack(idx, path):\n        if idx == len(groups):\n            res.append(''.join(path))\n            return\n        for opt in groups[idx]:\n            backtrack(idx + 1, path + [opt])\n    backtrack(0, [])\n    return res\n",
+  "functionName": "expandBraces",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "{a,b}c{d,e}f"
+      ],
+      "expected": [
+        "acdf",
+        "acef",
+        "bcdf",
+        "bcef"
+      ],
+      "inputDisplay": "{a,b}c{d,e}f",
+      "expectedDisplay": "['acdf', 'acef', 'bcdf', 'bcef']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "abcd"
+      ],
+      "expected": [
+        "abcd"
+      ],
+      "inputDisplay": "abcd",
+      "expectedDisplay": "['abcd']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Parse string into groups of choices and compute their Cartesian product."
+  ],
+  "python": {
+    "starterCode": "def expandBraces(s: str) -> list[str]:\n    pass\n",
+    "solutionCode": "def expandBraces(s: str) -> list[str]:\n    groups = []\n    i = 0\n    while i < len(s):\n        if s[i] == '{':\n            j = s.index('}', i)\n            groups.append(sorted(s[i + 1:j].split(',')))\n            i = j + 1\n        else:\n            groups.append([s[i]])\n            i += 1\n    res = []\n    def backtrack(idx, path):\n        if idx == len(groups):\n            res.append(''.join(path))\n            return\n        for opt in groups[idx]:\n            backtrack(idx + 1, path + [opt])\n    backtrack(0, [])\n    return res\n"
+  },
+  "leetcodeId": 1087,
+  "leetcodeTitle": "Brace Expansion",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-brace-expansion/"
+}

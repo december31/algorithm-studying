@@ -1,0 +1,99 @@
+{
+  "id": "bsg-m-max-events-attended",
+  "wingId": "binary-search-greedy",
+  "floor": 447,
+  "title": "Max Events That Can Be Attended",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-max-events-attended",
+    "name": "Calendar Wraith",
+    "title": "Scheduler of Fleeting Days",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#10b981",
+    "attackName": "Schedule Lock",
+    "attackPower": 2,
+    "defeatQuote": "Maximum distinct events attended on distinct days!"
+  },
+  "description": "You are given an array of `events` where `events[i] = [startDayi, endDayi]`. You can attend event `i` at any day where `startDayi <= d <= endDayi`. You can only attend one event at any given day. Return the maximum number of events you can attend.",
+  "examples": [
+    {
+      "input": "events = [[1,2],[2,3],[3,4]]",
+      "output": "3"
+    },
+    {
+      "input": "events = [[1,2],[2,3],[3,4],[1,2]]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= events.length <= 100000"
+  ],
+  "starterCode": "def maxEvents(events: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def maxEvents(events: list[list[int]]) -> int:\n    import heapq\n    events.sort(key=lambda x: x[0])\n    pq = []\n    attended = 0\n    day = 0\n    i = 0\n    n = len(events)\n    while i < n or pq:\n        if not pq:\n            day = events[i][0]\n        while i < n and events[i][0] <= day:\n            heapq.heappush(pq, events[i][1])\n            i += 1\n        while pq and pq[0] < day:\n            heapq.heappop(pq)\n        if pq:\n            heapq.heappop(pq)\n            attended += 1\n            day += 1\n    return attended\n",
+  "functionName": "maxEvents",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[[1, 2], [2, 3], [3, 4]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1, 2], [2, 3], [3, 4], [1, 2]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Simulate day by day. On each day, greedily attend the open event that finishes earliest (min-heap)."
+  ],
+  "python": {
+    "starterCode": "def maxEvents(events: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def maxEvents(events: list[list[int]]) -> int:\n    import heapq\n    events.sort(key=lambda x: x[0])\n    pq = []\n    attended = 0\n    day = 0\n    i = 0\n    n = len(events)\n    while i < n or pq:\n        if not pq:\n            day = events[i][0]\n        while i < n and events[i][0] <= day:\n            heapq.heappush(pq, events[i][1])\n            i += 1\n        while pq and pq[0] < day:\n            heapq.heappop(pq)\n        if pq:\n            heapq.heappop(pq)\n            attended += 1\n            day += 1\n    return attended\n"
+  },
+  "leetcodeId": 1353,
+  "leetcodeTitle": "Max Events That Can Be Attended",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-max-events-attended/"
+}

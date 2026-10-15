@@ -32,8 +32,8 @@
     "1 <= intervals.length <= 10^5",
     "intervals[i].length == 2"
   ],
-  "starterCode": "function eraseOverlapIntervals(intervals) {\n  return 0;\n}",
-  "solutionCode": "function eraseOverlapIntervals(intervals) {\n  if (intervals.length <= 1) return 0;\n  // Greedy interval scheduling: sort by end time\n  intervals.sort((a, b) => a[1] - b[1]);\n  let removed = 0;\n  let prevEnd = intervals[0][1];\n  for (let i = 1; i < intervals.length; i++) {\n    if (intervals[i][0] < prevEnd) {\n      removed++;\n    } else {\n      prevEnd = intervals[i][1];\n    }\n  }\n  return removed;\n}",
+  "starterCode": "def eraseOverlapIntervals(intervals):\n    return 0\n",
+  "solutionCode": "def eraseOverlapIntervals(intervals):\n    if len(intervals) <= 1:\n        return 0\n    intervals.sort(key=lambda x: x[1])\n    removed = 0\n    prev_end = intervals[0][1]\n    for curr in intervals[1:]:\n        if curr[0] < prev_end:\n            removed += 1\n        else:\n            prev_end = curr[1]\n    return removed\n",
   "functionName": "eraseOverlapIntervals",
   "testCases": [
     {

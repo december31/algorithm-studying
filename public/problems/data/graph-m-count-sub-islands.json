@@ -1,0 +1,128 @@
+{
+  "id": "graph-m-count-sub-islands",
+  "wingId": "graphs",
+  "floor": 340,
+  "title": "Count Sub Islands",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-count-sub-islands",
+    "name": "Concentric Hydra",
+    "title": "Subsumer of Nested Landmasses",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "gargoyle",
+    "color": "#06b6d4",
+    "attackName": "Enclosing Tide",
+    "attackPower": 2,
+    "defeatQuote": "All grid2 islands wholly contained within grid1 islands counted!"
+  },
+  "description": "You are given two `m x n` binary matrices `grid1` and `grid2` containing only 0's and 1's. An island is a group of 1's connected 4-directionally. An island in `grid2` is considered a sub-island if there is an island in `grid1` that contains all the cells that make up this island in `grid2`. Return the number of islands in `grid2` that are considered sub-islands.",
+  "examples": [
+    {
+      "input": "grid1 = [[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1]], grid2 = [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],[0,1,0,1,0]]",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 500"
+  ],
+  "starterCode": "def countSubIslands(grid1: list[list[int]], grid2: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def countSubIslands(grid1: list[list[int]], grid2: list[list[int]]) -> int:\n    R, C = len(grid1), len(grid1[0])\n    def dfs(r, c):\n        if r < 0 or r >= R or c < 0 or c >= C or grid2[r][c] == 0:\n            return True\n        grid2[r][c] = 0\n        is_sub = (grid1[r][c] == 1)\n        d1 = dfs(r + 1, c)\n        d2 = dfs(r - 1, c)\n        d3 = dfs(r, c + 1)\n        d4 = dfs(r, c - 1)\n        return is_sub and d1 and d2 and d3 and d4\n    ans = 0\n    for r in range(R):\n        for c in range(C):\n            if grid2[r][c] == 1:\n                if dfs(r, c): ans += 1\n    return ans\n",
+  "functionName": "countSubIslands",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            1,
+            1
+          ]
+        ],
+        [
+          [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[[1, 1, 1, 0, 0], [0, 1, 1, 1, 1], [0, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 1",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "DFS grid2 and sink the island. Verify every cell in grid2's island is also 1 in grid1."
+  ],
+  "python": {
+    "starterCode": "def countSubIslands(grid1: list[list[int]], grid2: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def countSubIslands(grid1: list[list[int]], grid2: list[list[int]]) -> int:\n    R, C = len(grid1), len(grid1[0])\n    def dfs(r, c):\n        if r < 0 or r >= R or c < 0 or c >= C or grid2[r][c] == 0:\n            return True\n        grid2[r][c] = 0\n        is_sub = (grid1[r][c] == 1)\n        d1 = dfs(r + 1, c)\n        d2 = dfs(r - 1, c)\n        d3 = dfs(r, c + 1)\n        d4 = dfs(r, c - 1)\n        return is_sub and d1 and d2 and d3 and d4\n    ans = 0\n    for r in range(R):\n        for c in range(C):\n            if grid2[r][c] == 1:\n                if dfs(r, c): ans += 1\n    return ans\n"
+  },
+  "leetcodeId": 1905,
+  "leetcodeTitle": "Count Sub Islands",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-count-sub-islands/"
+}

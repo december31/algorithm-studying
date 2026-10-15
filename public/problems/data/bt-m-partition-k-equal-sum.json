@@ -1,0 +1,85 @@
+{
+  "id": "bt-m-partition-k-equal-sum",
+  "wingId": "backtracking",
+  "floor": 229,
+  "title": "Partition to K Equal Sum Subsets",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-partition-k-equal-sum",
+    "name": "Bucket Chimera",
+    "title": "Distributor of K Equal Troughs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#ef4444",
+    "attackName": "Partition Claw",
+    "attackPower": 2,
+    "defeatQuote": "Elements partitioned into k equal subsets seamlessly!"
+  },
+  "description": "Given an integer array `nums` and an integer `k`, return `True` if it is possible to divide this array into `k` non-empty subsets whose sums are all equal.",
+  "examples": [
+    {
+      "input": "nums = [4,3,2,3,5,2,1], k = 4",
+      "output": "True"
+    },
+    {
+      "input": "nums = [1,2,3,4], k = 3",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= len(nums) <= 16",
+    "1 <= nums[i] <= 10^4"
+  ],
+  "starterCode": "def canPartitionKSubsets(nums: list[int], k: int) -> bool:\n    pass\n",
+  "solutionCode": "def canPartitionKSubsets(nums: list[int], k: int) -> bool:\n    total = sum(nums)\n    if total % k != 0: return False\n    target = total // k\n    nums.sort(reverse=True)\n    buckets = [0] * k\n    def backtrack(idx):\n        if idx == len(nums): return True\n        for i in range(k):\n            if buckets[i] + nums[idx] <= target:\n                buckets[i] += nums[idx]\n                if backtrack(idx + 1): return True\n                buckets[i] -= nums[idx]\n            if buckets[i] == 0: break\n        return False\n    return backtrack(0)\n",
+  "functionName": "canPartitionKSubsets",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          4,
+          3,
+          2,
+          3,
+          5,
+          2,
+          1
+        ],
+        4
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[4, 3, 2, 3, 5, 2, 1], 4]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        3
+      ],
+      "expected": false,
+      "inputDisplay": "args=[[1, 2, 3, 4], 3]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort descending and break when buckets[i] == 0 to eliminate duplicate symmetric bucket assignments."
+  ],
+  "python": {
+    "starterCode": "def canPartitionKSubsets(nums: list[int], k: int) -> bool:\n    pass\n",
+    "solutionCode": "def canPartitionKSubsets(nums: list[int], k: int) -> bool:\n    total = sum(nums)\n    if total % k != 0: return False\n    target = total // k\n    nums.sort(reverse=True)\n    buckets = [0] * k\n    def backtrack(idx):\n        if idx == len(nums): return True\n        for i in range(k):\n            if buckets[i] + nums[idx] <= target:\n                buckets[i] += nums[idx]\n                if backtrack(idx + 1): return True\n                buckets[i] -= nums[idx]\n            if buckets[i] == 0: break\n        return False\n    return backtrack(0)\n"
+  },
+  "leetcodeId": 698,
+  "leetcodeTitle": "Partition to K Equal Sum Subsets",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-partition-k-equal-sum/"
+}

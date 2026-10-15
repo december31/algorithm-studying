@@ -1,0 +1,126 @@
+{
+  "id": "graph-m-sequence-reconstruction",
+  "wingId": "graphs",
+  "floor": 358,
+  "title": "Sequence Reconstruction (Unique Topological Sort)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-sequence-reconstruction",
+    "name": "Linear Arbiter",
+    "title": "Verifier of Unambiguous Orders",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wizard",
+    "color": "#ec4899",
+    "attackName": "Singular Path Wave",
+    "attackPower": 2,
+    "defeatQuote": "Does there exist a unique topological reconstruction of nums?"
+  },
+  "description": "You are given an integer array `nums` of length `n` where `nums` is a permutation of integers in the range `[1, n]`. You are also given a 2D integer array `sequences`. Check whether `nums` is the unique shortest supersequence of `sequences`.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3], sequences = [[1,2],[1,3]]",
+      "output": "False"
+    },
+    {
+      "input": "nums = [1,2,3], sequences = [[1,2],[2,3]]",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "n == nums.length",
+    "1 <= n <= 10000"
+  ],
+  "starterCode": "def sequenceReconstruction(nums: list[int], sequences: list[list[int]]) -> bool:\n    pass\n",
+  "solutionCode": "def sequenceReconstruction(nums: list[int], sequences: list[list[int]]) -> bool:\n    from collections import defaultdict, deque\n    n = len(nums)\n    adj = defaultdict(set)\n    in_deg = [0] * (n + 1)\n    for seq in sequences:\n        for i in range(len(seq) - 1):\n            u, v = seq[i], seq[i + 1]\n            if 1 <= u <= n and 1 <= v <= n:\n                if v not in adj[u]:\n                    adj[u].add(v)\n                    in_deg[v] += 1\n    q = deque([i for i in range(1, n + 1) if in_deg[i] == 0])\n    res = []\n    while q:\n        if len(q) > 1: return False\n        curr = q.popleft()\n        res.append(curr)\n        for nxt in adj[curr]:\n            in_deg[nxt] -= 1\n            if in_deg[nxt] == 0:\n                q.append(nxt)\n    return res == nums\n",
+  "functionName": "sequenceReconstruction",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "args=[[1, 2, 3], [[1, 2], [1, 3]]]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[1, 2, 3], [[1, 2], [2, 3]]]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[1, 2, 3], [[1, 2], [1, 3], [2, 3]]]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "During Kahn's topological sort, the queue must never have size greater than 1."
+  ],
+  "python": {
+    "starterCode": "def sequenceReconstruction(nums: list[int], sequences: list[list[int]]) -> bool:\n    pass\n",
+    "solutionCode": "def sequenceReconstruction(nums: list[int], sequences: list[list[int]]) -> bool:\n    from collections import defaultdict, deque\n    n = len(nums)\n    adj = defaultdict(set)\n    in_deg = [0] * (n + 1)\n    for seq in sequences:\n        for i in range(len(seq) - 1):\n            u, v = seq[i], seq[i + 1]\n            if 1 <= u <= n and 1 <= v <= n:\n                if v not in adj[u]:\n                    adj[u].add(v)\n                    in_deg[v] += 1\n    q = deque([i for i in range(1, n + 1) if in_deg[i] == 0])\n    res = []\n    while q:\n        if len(q) > 1: return False\n        curr = q.popleft()\n        res.append(curr)\n        for nxt in adj[curr]:\n            in_deg[nxt] -= 1\n            if in_deg[nxt] == 0:\n                q.append(nxt)\n    return res == nums\n"
+  },
+  "leetcodeId": 444,
+  "leetcodeTitle": "Sequence Reconstruction (Unique Topological Sort)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-sequence-reconstruction/"
+}

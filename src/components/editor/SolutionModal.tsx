@@ -6,7 +6,7 @@ interface SolutionModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  language: 'python' | 'javascript';
+  language?: 'python' | 'javascript';
   currentHp: number;
   monsterName: string;
   cost?: number;
@@ -91,7 +91,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
               THE FORBIDDEN SCROLL OF SHAME
             </h2>
             <div className="text-center font-mono text-[11px] text-purple-300/80 mb-4">
-              Deal with the Algo-Demons for canonical {language === 'python' ? '🐍 Python' : '⚡ JavaScript'} solution
+              Deal with the Algo-Demons for canonical 🐍 Python 3 solution
             </div>
 
             {/* Roast Box */}
@@ -105,7 +105,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
             </div>
 
             {/* HP Sacrifice Cost Breakdown */}
-            <div className="bg-dungeon-card p-3 rounded-xl border border-slate-800 mb-5 space-y-1.5 text-xs font-mono">
+            <div className="bg-dungeon-card p-3 rounded-xl border border-slate-800 mb-3 space-y-1.5 text-xs font-mono">
               <div className="flex justify-between items-center text-slate-400">
                 <span>Current Vitality:</span>
                 <span className="text-slate-200 font-bold">{currentHp} HP</span>
@@ -122,6 +122,11 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
                   {canAfford ? `${currentHp - cost} HP` : 'LETHAL (Forbidden)'}
                 </span>
               </div>
+            </div>
+
+            {/* Replay Notice */}
+            <div className="bg-purple-950/40 border border-purple-500/30 rounded-xl p-2.5 mb-5 text-[11px] font-mono text-purple-300 text-center">
+              📜 <strong>Sacrifice Pact:</strong> This trial will <strong>not be marked conquered</strong> and can challenge you again in future dungeon runs.
             </div>
 
             {/* Action Buttons */}

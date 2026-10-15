@@ -1,0 +1,89 @@
+{
+  "id": "graph-m-regions-cut-by-slashes",
+  "wingId": "graphs",
+  "floor": 361,
+  "title": "Regions Cut By Slashes",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-regions-cut-by-slashes",
+    "name": "Fracture Drake",
+    "title": "Divider of Diagonal Subdivisions",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#06b6d4",
+    "attackName": "Slash Fracture",
+    "attackPower": 2,
+    "defeatQuote": "Number of contiguous regions formed by '/' and '\\' slashes counted!"
+  },
+  "description": "An `n x n` grid is composed of `1 x 1` squares where each square consists of `'/'`, `'\\'`, or blank space `' '`. These characters divide the square into contiguous regions. Given the `grid` represented as a string array, return the number of regions.",
+  "examples": [
+    {
+      "input": "grid = [\" /\",\"/ \"]",
+      "output": "2"
+    },
+    {
+      "input": "grid = [\" /\",\"  \"]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "n == grid.length",
+    "1 <= n <= 30"
+  ],
+  "starterCode": "def regionsBySlashes(grid: list[str]) -> int:\n    pass\n",
+  "solutionCode": "def regionsBySlashes(grid: list[str]) -> int:\n    n = len(grid)\n    size = 3 * n\n    matrix = [[0] * size for _ in range(size)]\n    for r in range(n):\n        for c in range(n):\n            ch = grid[r][c]\n            if ch == '/':\n                matrix[r * 3][c * 3 + 2] = 1\n                matrix[r * 3 + 1][c * 3 + 1] = 1\n                matrix[r * 3 + 2][c * 3] = 1\n            elif ch == chr(92):\n                matrix[r * 3][c * 3] = 1\n                matrix[r * 3 + 1][c * 3 + 1] = 1\n                matrix[r * 3 + 2][c * 3 + 2] = 1\n    def dfs(r, c):\n        if 0 <= r < size and 0 <= c < size and matrix[r][c] == 0:\n            matrix[r][c] = 1\n            dfs(r + 1, c)\n            dfs(r - 1, c)\n            dfs(r, c + 1)\n            dfs(r, c - 1)\n    regions = 0\n    for r in range(size):\n        for c in range(size):\n            if matrix[r][c] == 0:\n                regions += 1\n                dfs(r, c)\n    return regions\n",
+  "functionName": "regionsBySlashes",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          " /",
+          "/ "
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[' /', '/ ']",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          " /",
+          "  "
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[' /', '  ']",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "/\\",
+          "\\/"
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "['/\\\\', '\\\\/']",
+      "expectedDisplay": "5",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Upscale each 1x1 cell into a 3x3 pixel matrix and count connected 0-components."
+  ],
+  "python": {
+    "starterCode": "def regionsBySlashes(grid: list[str]) -> int:\n    pass\n",
+    "solutionCode": "def regionsBySlashes(grid: list[str]) -> int:\n    n = len(grid)\n    size = 3 * n\n    matrix = [[0] * size for _ in range(size)]\n    for r in range(n):\n        for c in range(n):\n            ch = grid[r][c]\n            if ch == '/':\n                matrix[r * 3][c * 3 + 2] = 1\n                matrix[r * 3 + 1][c * 3 + 1] = 1\n                matrix[r * 3 + 2][c * 3] = 1\n            elif ch == chr(92):\n                matrix[r * 3][c * 3] = 1\n                matrix[r * 3 + 1][c * 3 + 1] = 1\n                matrix[r * 3 + 2][c * 3 + 2] = 1\n    def dfs(r, c):\n        if 0 <= r < size and 0 <= c < size and matrix[r][c] == 0:\n            matrix[r][c] = 1\n            dfs(r + 1, c)\n            dfs(r - 1, c)\n            dfs(r, c + 1)\n            dfs(r, c - 1)\n    regions = 0\n    for r in range(size):\n        for c in range(size):\n            if matrix[r][c] == 0:\n                regions += 1\n                dfs(r, c)\n    return regions\n"
+  },
+  "leetcodeId": 959,
+  "leetcodeTitle": "Regions Cut By Slashes",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-regions-cut-by-slashes/"
+}

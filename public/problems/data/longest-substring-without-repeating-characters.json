@@ -39,8 +39,8 @@
     "0 <= s.length <= 5 * 10^4",
     "s consists of English letters, digits, symbols and spaces."
   ],
-  "starterCode": "function lengthOfLongestSubstring(s) {\n  return 0;\n}",
-  "solutionCode": "function lengthOfLongestSubstring(s) {\n  const map = new Map();\n  let maxLen = 0, left = 0;\n  for (let right = 0; right < s.length; right++) {\n    const c = s[right];\n    if (map.has(c) && map.get(c) >= left) {\n      left = map.get(c) + 1;\n    }\n    map.set(c, right);\n    maxLen = Math.max(maxLen, right - left + 1);\n  }\n  return maxLen;\n}",
+  "starterCode": "def lengthOfLongestSubstring(s):\n    return 0\n",
+  "solutionCode": "def lengthOfLongestSubstring(s):\n    seen = {}\n    max_len = 0\n    left = 0\n    for right, c in enumerate(s):\n        if c in seen and seen[c] >= left:\n            left = seen[c] + 1\n        seen[c] = right\n        max_len = max(max_len, right - left + 1)\n    return max_len\n",
   "functionName": "lengthOfLongestSubstring",
   "testCases": [
     {

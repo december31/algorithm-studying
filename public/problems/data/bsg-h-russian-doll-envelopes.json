@@ -1,0 +1,99 @@
+{
+  "id": "bsg-h-russian-doll-envelopes",
+  "wingId": "binary-search-greedy",
+  "floor": 473,
+  "title": "Russian Doll Envelopes (2D LIS)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-russian-doll-envelopes",
+    "name": "Nesting Empress",
+    "title": "Embalmer of Nested Dimensions",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#ec4899",
+    "attackName": "Nesting Seal",
+    "attackPower": 3,
+    "defeatQuote": "Maximum nesting sequence length of strictly smaller envelopes computed!"
+  },
+  "description": "You are given a 2D array of integers `envelopes` where `envelopes[i] = [wi, hi]` represents the width and height of an envelope. One envelope can fit into another if and only if both the width and height of one envelope are strictly greater than the other envelope. Return the maximum number of envelopes you can Russian doll.",
+  "examples": [
+    {
+      "input": "envelopes = [[5,4],[6,4],[6,7],[2,3]]",
+      "output": "3"
+    },
+    {
+      "input": "envelopes = [[1,1],[1,1],[1,1]]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= envelopes.length <= 100000"
+  ],
+  "starterCode": "def maxEnvelopes(envelopes: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def maxEnvelopes(envelopes: list[list[int]]) -> int:\n    import bisect\n    # Sort ascending by width, descending by height for ties\n    envelopes.sort(key=lambda x: (x[0], -x[1]))\n    tails = []\n    for _, h in envelopes:\n        idx = bisect.bisect_left(tails, h)\n        if idx == len(tails):\n            tails.append(h)\n        else:\n            tails[idx] = h\n    return len(tails)\n",
+  "functionName": "maxEnvelopes",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[[5, 4], [6, 4], [6, 7], [2, 3]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[1, 1], [1, 1], [1, 1]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort width ascending, height descending. Then compute LIS on heights using patience sorting (bisect_left)."
+  ],
+  "python": {
+    "starterCode": "def maxEnvelopes(envelopes: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def maxEnvelopes(envelopes: list[list[int]]) -> int:\n    import bisect\n    # Sort ascending by width, descending by height for ties\n    envelopes.sort(key=lambda x: (x[0], -x[1]))\n    tails = []\n    for _, h in envelopes:\n        idx = bisect.bisect_left(tails, h)\n        if idx == len(tails):\n            tails.append(h)\n        else:\n            tails[idx] = h\n    return len(tails)\n"
+  },
+  "leetcodeId": 354,
+  "leetcodeTitle": "Russian Doll Envelopes (2D LIS)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-russian-doll-envelopes/"
+}

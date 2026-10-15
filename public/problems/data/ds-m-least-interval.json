@@ -1,0 +1,128 @@
+{
+  "id": "ds-m-least-interval",
+  "wingId": "data-structures",
+  "floor": 130,
+  "title": "Task Scheduler Minimum Time",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-least-interval",
+    "name": "Chrono Taskmaster",
+    "title": "Overlord of Idle CPU Slots",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#e11d48",
+    "attackName": "Idle Stasis",
+    "attackPower": 2,
+    "defeatQuote": "The mathematical idle calculation minimized CPU downtime!"
+  },
+  "description": "Given a characters array `tasks`, representing the tasks a CPU needs to do, where each letter represents a different task. Each task is done in one unit of time. For each unit of time, the CPU could complete either one task or just be idle. However, there is a non-negative integer `n` that represents the cooldown period between two same tasks. Return the least number of units of times that the CPU will take to finish all the given tasks.",
+  "examples": [
+    {
+      "input": "tasks = [\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"], n = 2",
+      "output": "8"
+    },
+    {
+      "input": "tasks = [\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"], n = 0",
+      "output": "6"
+    },
+    {
+      "input": "tasks = [\"A\",\"A\",\"A\",\"A\",\"A\",\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\"], n = 2",
+      "output": "16"
+    }
+  ],
+  "constraints": [
+    "1 <= len(tasks) <= 10^4",
+    "0 <= n <= 100",
+    "tasks[i] is uppercase English letter"
+  ],
+  "starterCode": "def leastInterval(tasks: list[str], n: int) -> int:\n    pass\n",
+  "solutionCode": "def leastInterval(tasks: list[str], n: int) -> int:\n    from collections import Counter\n    counts = Counter(tasks)\n    max_f = max(counts.values())\n    count_max_f = sum(1 for v in counts.values() if v == max_f)\n    empty_slots = (max_f - 1) * (n + 1) + count_max_f\n    return max(len(tasks), empty_slots)\n",
+  "functionName": "leastInterval",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "A",
+          "A",
+          "A",
+          "B",
+          "B",
+          "B"
+        ],
+        2
+      ],
+      "expected": 8,
+      "inputDisplay": "args=[['A', 'A', 'A', 'B', 'B', 'B'], 2]",
+      "expectedDisplay": "8",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "A",
+          "A",
+          "A",
+          "B",
+          "B",
+          "B"
+        ],
+        0
+      ],
+      "expected": 6,
+      "inputDisplay": "args=[['A', 'A', 'A', 'B', 'B', 'B'], 0]",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G"
+        ],
+        2
+      ],
+      "expected": 16,
+      "inputDisplay": "args=[['A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'], 2]",
+      "expectedDisplay": "16",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          "A"
+        ],
+        2
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[['A'], 2]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Calculate based on the most frequent task: (max_f - 1) * (n + 1) + count_of_max_f."
+  ],
+  "python": {
+    "starterCode": "def leastInterval(tasks: list[str], n: int) -> int:\n    pass\n",
+    "solutionCode": "def leastInterval(tasks: list[str], n: int) -> int:\n    from collections import Counter\n    counts = Counter(tasks)\n    max_f = max(counts.values())\n    count_max_f = sum(1 for v in counts.values() if v == max_f)\n    empty_slots = (max_f - 1) * (n + 1) + count_max_f\n    return max(len(tasks), empty_slots)\n"
+  },
+  "leetcodeId": 621,
+  "leetcodeTitle": "Task Scheduler Minimum Time",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-least-interval/"
+}

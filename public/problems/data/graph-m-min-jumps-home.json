@@ -1,0 +1,89 @@
+{
+  "id": "graph-m-min-jumps-home",
+  "wingId": "graphs",
+  "floor": 350,
+  "title": "Minimum Jumps to Reach Home (Forward/Backward)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-graph-m-min-jumps-home",
+    "name": "Bounder Goblin",
+    "title": "Skipper of Forbidden Trapdoors",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "goblin",
+    "color": "#10b981",
+    "attackName": "Leaping Trample",
+    "attackPower": 2,
+    "defeatQuote": "Shortest jump sequence to target location x without double back-jumps!"
+  },
+  "description": "A certain bug's home is at position `x` on the number line. It starts at position 0. It can jump forward `a` steps or backward `b` steps. It cannot jump backward twice in a row. It cannot visit positions in `forbidden` or negative positions. Return the minimum number of jumps needed to reach `x`, or -1 if impossible.",
+  "examples": [
+    {
+      "input": "forbidden = [14,4,18,1,15], a = 3, b = 15, x = 9",
+      "output": "3"
+    },
+    {
+      "input": "forbidden = [8,3,16,6,12,20], a = 15, b = 13, x = 11",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= forbidden.length <= 1000",
+    "1 <= a, b, x <= 2000"
+  ],
+  "starterCode": "def minimumJumps(forbidden: list[int], a: int, b: int, x: int) -> int:\n    pass\n",
+  "solutionCode": "def minimumJumps(forbidden: list[int], a: int, b: int, x: int) -> int:\n    from collections import deque\n    forbid = set(forbidden)\n    limit = 6000\n    q = deque([(0, 0, False)])  # (pos, steps, just_backed)\n    visited = {(0, False)}\n    while q:\n        pos, steps, backed = q.popleft()\n        if pos == x: return steps\n        # Jump forward\n        nxt_f = pos + a\n        if nxt_f <= limit and nxt_f not in forbid and (nxt_f, False) not in visited:\n            visited.add((nxt_f, False))\n            q.append((nxt_f, steps + 1, False))\n        # Jump backward\n        if not backed:\n            nxt_b = pos - b\n            if nxt_b >= 0 and nxt_b not in forbid and (nxt_b, True) not in visited:\n                visited.add((nxt_b, True))\n                q.append((nxt_b, steps + 1, True))\n    return -1\n",
+  "functionName": "minimumJumps",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          14,
+          4,
+          18,
+          1,
+          15
+        ],
+        3,
+        15,
+        9
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[14, 4, 18, 1, 15], 3, 15, 9]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          8,
+          3,
+          16,
+          6,
+          12,
+          20
+        ],
+        15,
+        13,
+        11
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[[8, 3, 16, 6, 12, 20], 15, 13, 11]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "BFS state is (position, did_jump_back_just_now). Upper bound is max(x, max(forbidden)) + a + b."
+  ],
+  "python": {
+    "starterCode": "def minimumJumps(forbidden: list[int], a: int, b: int, x: int) -> int:\n    pass\n",
+    "solutionCode": "def minimumJumps(forbidden: list[int], a: int, b: int, x: int) -> int:\n    from collections import deque\n    forbid = set(forbidden)\n    limit = 6000\n    q = deque([(0, 0, False)])  # (pos, steps, just_backed)\n    visited = {(0, False)}\n    while q:\n        pos, steps, backed = q.popleft()\n        if pos == x: return steps\n        # Jump forward\n        nxt_f = pos + a\n        if nxt_f <= limit and nxt_f not in forbid and (nxt_f, False) not in visited:\n            visited.add((nxt_f, False))\n            q.append((nxt_f, steps + 1, False))\n        # Jump backward\n        if not backed:\n            nxt_b = pos - b\n            if nxt_b >= 0 and nxt_b not in forbid and (nxt_b, True) not in visited:\n                visited.add((nxt_b, True))\n                q.append((nxt_b, steps + 1, True))\n    return -1\n"
+  },
+  "leetcodeId": 1654,
+  "leetcodeTitle": "Minimum Jumps to Reach Home (Forward/Backward)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-min-jumps-home/"
+}

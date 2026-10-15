@@ -1,0 +1,110 @@
+{
+  "id": "graph-e-island-perimeter",
+  "wingId": "graphs",
+  "floor": 302,
+  "title": "Island Coastline Perimeter",
+  "difficulty": "easy",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-e-island-perimeter",
+    "name": "Reef Lurker",
+    "title": "Surveyor of Submerged Boundaries",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "goblin",
+    "color": "#3b82f6",
+    "attackName": "Tidal Erosion",
+    "attackPower": 1,
+    "defeatQuote": "Perimeter length along land-water edges measured!"
+  },
+  "description": "You are given `row x col` `grid` representing a map where `grid[i][j] = 1` represents land and `grid[i][j] = 0` represents water. Grid cells are connected horizontally/vertically. The grid is completely surrounded by water. There is exactly one island. Determine the perimeter of the island.",
+  "examples": [
+    {
+      "input": "grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]",
+      "output": "16"
+    }
+  ],
+  "constraints": [
+    "1 <= row, col <= 100",
+    "grid[i][j] is 0 or 1"
+  ],
+  "starterCode": "def islandPerimeter(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def islandPerimeter(grid: list[list[int]]) -> int:\n    ans = 0\n    R, C = len(grid), len(grid[0])\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == 1:\n                ans += 4\n                if r > 0 and grid[r - 1][c] == 1: ans -= 2\n                if c > 0 and grid[r][c - 1] == 1: ans -= 2\n    return ans\n",
+  "functionName": "islandPerimeter",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 16,
+      "inputDisplay": "[[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 0], [1, 1, 0, 0]]",
+      "expectedDisplay": "16",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1, 0]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Each land cell adds 4 edges, minus 2 for every adjacent neighbor sharing an edge."
+  ],
+  "python": {
+    "starterCode": "def islandPerimeter(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def islandPerimeter(grid: list[list[int]]) -> int:\n    ans = 0\n    R, C = len(grid), len(grid[0])\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == 1:\n                ans += 4\n                if r > 0 and grid[r - 1][c] == 1: ans -= 2\n                if c > 0 and grid[r][c - 1] == 1: ans -= 2\n    return ans\n"
+  },
+  "leetcodeId": 463,
+  "leetcodeTitle": "Island Coastline Perimeter",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-e-island-perimeter/"
+}

@@ -1,0 +1,81 @@
+{
+  "id": "bit-m-count-triplets-equal-xor",
+  "wingId": "bit-manipulation",
+  "floor": 519,
+  "title": "Count Triplets of Equal Subarray XOR",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-count-triplets-equal-xor",
+    "name": "Tri-XOR Drake",
+    "title": "Balancing Equal XOR Partitions",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#8b5cf6",
+    "attackName": "Null Subarray Beam",
+    "attackPower": 2,
+    "defeatQuote": "Triplets (i < j <= k) where XOR(i..j-1) == XOR(j..k) counted!"
+  },
+  "description": "Given an array of integers `arr`. We want to select three indices `i`, `j` and `k` with `0 <= i < j <= k < arr.length`. Where `a = arr[i] ^ ... ^ arr[j - 1]` and `b = arr[j] ^ ... ^ arr[k]`. Return the number of triplets such that `a == b`.",
+  "examples": [
+    {
+      "input": "arr = [2,3,1,6,7]",
+      "output": "4"
+    },
+    {
+      "input": "arr = [1,1,1,1,1]",
+      "output": "10"
+    }
+  ],
+  "constraints": [
+    "1 <= arr.length <= 300"
+  ],
+  "starterCode": "def countTriplets(arr: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def countTriplets(arr: list[int]) -> int:\n    n = len(arr)\n    prefix = [0] * (n + 1)\n    for i in range(n): prefix[i + 1] = prefix[i] ^ arr[i]\n    count = 0\n    for i in range(n):\n        for k in range(i + 1, n):\n            if prefix[i] == prefix[k + 1]:\n                count += (k - i)\n    return count\n",
+  "functionName": "countTriplets",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          1,
+          6,
+          7
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[2, 3, 1, 6, 7]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 10,
+      "inputDisplay": "[1, 1, 1, 1, 1]",
+      "expectedDisplay": "10",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "a == b is equivalent to a ^ b == 0, which means prefix[i] == prefix[k + 1]. Any j between i+1 and k works (k - i choices)."
+  ],
+  "python": {
+    "starterCode": "def countTriplets(arr: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def countTriplets(arr: list[int]) -> int:\n    n = len(arr)\n    prefix = [0] * (n + 1)\n    for i in range(n): prefix[i + 1] = prefix[i] ^ arr[i]\n    count = 0\n    for i in range(n):\n        for k in range(i + 1, n):\n            if prefix[i] == prefix[k + 1]:\n                count += (k - i)\n    return count\n"
+  },
+  "leetcodeId": 1442,
+  "leetcodeTitle": "Count Triplets of Equal Subarray XOR",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-count-triplets-equal-xor/"
+}

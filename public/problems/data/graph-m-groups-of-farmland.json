@@ -1,0 +1,103 @@
+{
+  "id": "graph-m-groups-of-farmland",
+  "wingId": "graphs",
+  "floor": 353,
+  "title": "Find All Groups of Farmland",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-groups-of-farmland",
+    "name": "Harvest Fiend",
+    "title": "Reaper of Rectangular Plots",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#22c55e",
+    "attackName": "Scythe Cleave",
+    "attackPower": 2,
+    "defeatQuote": "Bounding coordinates [r1, c1, r2, c2] for every farmland rectangular plot mapped!"
+  },
+  "description": "You are given an `m x n` binary matrix `land` where 0 represents forest and 1 represents farmland. Farmland forms contiguous rectangular groups. Return a 2D array containing the 4-index coordinates `[r1, c1, r2, c2]` of each farmland group in sorted order.",
+  "examples": [
+    {
+      "input": "land = [[1,0,0],[0,1,1],[0,1,1]]",
+      "output": "[[0,0,0,0],[1,1,2,2]]"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 300"
+  ],
+  "starterCode": "def findFarmland(land: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def findFarmland(land: list[list[int]]) -> list[list[int]]:\n    R, C = len(land), len(land[0])\n    res = []\n    for r in range(R):\n        for c in range(C):\n            if land[r][c] == 1:\n                if (r > 0 and land[r - 1][c] == 1) or (c > 0 and land[r][c - 1] == 1):\n                    continue\n                r2, c2 = r, c\n                while r2 + 1 < R and land[r2 + 1][c] == 1: r2 += 1\n                while c2 + 1 < C and land[r][c2 + 1] == 1: c2 += 1\n                res.append([r, c, r2, c2])\n    return res\n",
+  "functionName": "findFarmland",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          2,
+          2
+        ]
+      ],
+      "inputDisplay": "[[1, 0, 0], [0, 1, 1], [0, 1, 1]]",
+      "expectedDisplay": "[[0, 0, 0, 0], [1, 1, 2, 2]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "[[0, 0], [0, 0]]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Identify the top-left corner of each rectangle (has 0 or border above and left) and extend down and right."
+  ],
+  "python": {
+    "starterCode": "def findFarmland(land: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def findFarmland(land: list[list[int]]) -> list[list[int]]:\n    R, C = len(land), len(land[0])\n    res = []\n    for r in range(R):\n        for c in range(C):\n            if land[r][c] == 1:\n                if (r > 0 and land[r - 1][c] == 1) or (c > 0 and land[r][c - 1] == 1):\n                    continue\n                r2, c2 = r, c\n                while r2 + 1 < R and land[r2 + 1][c] == 1: r2 += 1\n                while c2 + 1 < C and land[r][c2 + 1] == 1: c2 += 1\n                res.append([r, c, r2, c2])\n    return res\n"
+  },
+  "leetcodeId": 1992,
+  "leetcodeTitle": "Find All Groups of Farmland",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-groups-of-farmland/"
+}

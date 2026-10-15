@@ -1,0 +1,87 @@
+{
+  "id": "bt-m-word-break-ii-subset",
+  "wingId": "backtracking",
+  "floor": 249,
+  "title": "Word Break Reconstruction",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-word-break-ii-subset",
+    "name": "Token Carver",
+    "title": "Dissector of Continuous Strings",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Token Sever",
+    "attackPower": 2,
+    "defeatQuote": "All space-separated word combinations reconstructed!"
+  },
+  "description": "Given a string `s` and a dictionary of strings `wordDict`, add spaces in `s` to construct a sentence where each word is a valid dictionary word. Return all such possible sentences in sorted order.",
+  "examples": [
+    {
+      "input": "s = \"catsanddog\", wordDict = [\"cat\",\"cats\",\"and\",\"sand\",\"dog\"]",
+      "output": "[\"cat sand dog\",\"cats and dog\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 20",
+    "1 <= len(wordDict) <= 1000"
+  ],
+  "starterCode": "def wordBreakList(s: str, wordDict: list[str]) -> list[str]:\n    pass\n",
+  "solutionCode": "def wordBreakList(s: str, wordDict: list[str]) -> list[str]:\n    words = set(wordDict)\n    memo = {}\n    def dfs(sub):\n        if sub in memo: return memo[sub]\n        if not sub: return [\"\"]\n        res = []\n        for w in words:\n            if sub.startswith(w):\n                sub_res = dfs(sub[len(w):])\n                for rest in sub_res:\n                    res.append(w + (\" \" + rest if rest else \"\"))\n        memo[sub] = res\n        return res\n    return sorted(dfs(s))\n",
+  "functionName": "wordBreakList",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "catsanddog",
+        [
+          "cat",
+          "cats",
+          "and",
+          "sand",
+          "dog"
+        ]
+      ],
+      "expected": [
+        "cat sand dog",
+        "cats and dog"
+      ],
+      "inputDisplay": "args=['catsanddog', ['cat', 'cats', 'and', 'sand', 'dog']]",
+      "expectedDisplay": "['cat sand dog', 'cats and dog']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "pineapplepenapple",
+        [
+          "apple",
+          "pen",
+          "applepen",
+          "pine",
+          "pineapple"
+        ]
+      ],
+      "expected": [
+        "pine apple pen apple",
+        "pine applepen apple",
+        "pineapple pen apple"
+      ],
+      "inputDisplay": "args=['pineapplepenapple', ['apple', 'pen', 'applepen', 'pine', 'pineapple']]",
+      "expectedDisplay": "['pine apple pen apple', 'pine applepen apple', 'pineapple pen apple']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Memoized recursion: partition prefix that is in wordDict and combine with suffix partitions."
+  ],
+  "python": {
+    "starterCode": "def wordBreakList(s: str, wordDict: list[str]) -> list[str]:\n    pass\n",
+    "solutionCode": "def wordBreakList(s: str, wordDict: list[str]) -> list[str]:\n    words = set(wordDict)\n    memo = {}\n    def dfs(sub):\n        if sub in memo: return memo[sub]\n        if not sub: return [\"\"]\n        res = []\n        for w in words:\n            if sub.startswith(w):\n                sub_res = dfs(sub[len(w):])\n                for rest in sub_res:\n                    res.append(w + (\" \" + rest if rest else \"\"))\n        memo[sub] = res\n        return res\n    return sorted(dfs(s))\n"
+  },
+  "leetcodeId": 140,
+  "leetcodeTitle": "Word Break Reconstruction",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-word-break-ii-subset/"
+}

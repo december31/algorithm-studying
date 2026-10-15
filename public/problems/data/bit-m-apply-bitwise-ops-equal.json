@@ -1,0 +1,71 @@
+{
+  "id": "bit-m-apply-bitwise-ops-equal",
+  "wingId": "bit-manipulation",
+  "floor": 558,
+  "title": "Make Binary Strings Equal via (OR, XOR)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-apply-bitwise-ops-equal",
+    "name": "Transition Specter",
+    "title": "Transformer of Binary Pairs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#10b981",
+    "attackName": "Bit Transition",
+    "attackPower": 2,
+    "defeatQuote": "Can s be transformed into target via (s[i]|s[j], s[i]^s[j]) operations?"
+  },
+  "description": "You are given two 0-indexed binary strings `s` and `target` of the same length. You can choose two distinct indices `i` and `j` and simultaneously replace `s[i]` with `(s[i] OR s[j])` and `s[j]` with `(s[i] XOR s[j])`. Return `True` if you can make `s` equal to `target`, or `False` otherwise.",
+  "examples": [
+    {
+      "input": "s = \"1010\", target = \"0110\"",
+      "output": "True"
+    },
+    {
+      "input": "s = \"00\", target = \"11\"",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "n == s.length == target.length <= 100000"
+  ],
+  "starterCode": "def makeStringsEqual(s: str, target: str) -> bool:\n    pass\n",
+  "solutionCode": "def makeStringsEqual(s: str, target: str) -> bool:\n    return ('1' in s) == ('1' in target)\n",
+  "functionName": "makeStringsEqual",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "1010",
+        "0110"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['1010', '0110']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "00",
+        "11"
+      ],
+      "expected": false,
+      "inputDisplay": "args=['00', '11']",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "The operation can change 10 -> 11, 01 -> 11, 11 -> 10. As long as at least one '1' exists in both strings (or both have no 1s), transformation is possible."
+  ],
+  "python": {
+    "starterCode": "def makeStringsEqual(s: str, target: str) -> bool:\n    pass\n",
+    "solutionCode": "def makeStringsEqual(s: str, target: str) -> bool:\n    return ('1' in s) == ('1' in target)\n"
+  },
+  "leetcodeId": 2546,
+  "leetcodeTitle": "Make Binary Strings Equal via (OR, XOR)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-apply-bitwise-ops-equal/"
+}

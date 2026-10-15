@@ -1,0 +1,123 @@
+{
+  "id": "graph-m-surrounded-regions",
+  "wingId": "graphs",
+  "floor": 315,
+  "title": "Surrounded Regions (Capture O's)",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-surrounded-regions",
+    "name": "Siege Gorgon",
+    "title": "Encircler of Enclosed Domains",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#a855f7",
+    "attackName": "Encirclement",
+    "attackPower": 2,
+    "defeatQuote": "All 'O' regions not connected to matrix boundaries captured to 'X'!"
+  },
+  "description": "Given an `m x n` matrix `board` containing `'X'` and `'O'`, capture all regions that are 4-directionally surrounded by `'X'`. A region is captured by flipping all `'O'`s into `'X'`s in that surrounded region. Return the modified board.",
+  "examples": [
+    {
+      "input": "board = [[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"O\",\"X\"],[\"X\",\"X\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]",
+      "output": "[[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 200"
+  ],
+  "starterCode": "def solveSurroundedRegions(board: list[list[str]]) -> list[list[str]]:\n    pass\n",
+  "solutionCode": "def solveSurroundedRegions(board: list[list[str]]) -> list[list[str]]:\n    if not board: return board\n    R, C = len(board), len(board[0])\n    def dfs(r, c):\n        if 0 <= r < R and 0 <= c < C and board[r][c] == 'O':\n            board[r][c] = 'E'\n            dfs(r + 1, c)\n            dfs(r - 1, c)\n            dfs(r, c + 1)\n            dfs(r, c - 1)\n    for r in range(R):\n        dfs(r, 0)\n        dfs(r, C - 1)\n    for c in range(C):\n        dfs(0, c)\n        dfs(R - 1, c)\n    for r in range(R):\n        for c in range(C):\n            if board[r][c] == 'O': board[r][c] = 'X'\n            elif board[r][c] == 'E': board[r][c] = 'O'\n    return board\n",
+  "functionName": "solveSurroundedRegions",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "X",
+            "X"
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          "X",
+          "X",
+          "X",
+          "X"
+        ],
+        [
+          "X",
+          "X",
+          "X",
+          "X"
+        ],
+        [
+          "X",
+          "X",
+          "X",
+          "X"
+        ],
+        [
+          "X",
+          "O",
+          "X",
+          "X"
+        ]
+      ],
+      "inputDisplay": "[['X', 'X', 'X', 'X'], ['X', 'O', 'O', 'X'], ['X', 'X', 'O', 'X'], ['X', 'O', 'X",
+      "expectedDisplay": "[['X', 'X', 'X', 'X'], ['X', 'X', 'X', 'X'], ['X', 'X', 'X', 'X'], ['X', 'O', 'X",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            "X"
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          "X"
+        ]
+      ],
+      "inputDisplay": "[['X']]",
+      "expectedDisplay": "[['X']]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Mark border-connected 'O's as escapees 'E'. Flip remaining 'O's to 'X', then 'E' back to 'O'."
+  ],
+  "python": {
+    "starterCode": "def solveSurroundedRegions(board: list[list[str]]) -> list[list[str]]:\n    pass\n",
+    "solutionCode": "def solveSurroundedRegions(board: list[list[str]]) -> list[list[str]]:\n    if not board: return board\n    R, C = len(board), len(board[0])\n    def dfs(r, c):\n        if 0 <= r < R and 0 <= c < C and board[r][c] == 'O':\n            board[r][c] = 'E'\n            dfs(r + 1, c)\n            dfs(r - 1, c)\n            dfs(r, c + 1)\n            dfs(r, c - 1)\n    for r in range(R):\n        dfs(r, 0)\n        dfs(r, C - 1)\n    for c in range(C):\n        dfs(0, c)\n        dfs(R - 1, c)\n    for r in range(R):\n        for c in range(C):\n            if board[r][c] == 'O': board[r][c] = 'X'\n            elif board[r][c] == 'E': board[r][c] = 'O'\n    return board\n"
+  },
+  "leetcodeId": 130,
+  "leetcodeTitle": "Surrounded Regions (Capture O's)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-surrounded-regions/"
+}

@@ -1,0 +1,123 @@
+{
+  "id": "graph-m-snakes-and-ladders",
+  "wingId": "graphs",
+  "floor": 348,
+  "title": "Snakes and Ladders BFS",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-snakes-and-ladders",
+    "name": "Viper King",
+    "title": "Coiler of Boustrophedon Boards",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#eab308",
+    "attackName": "Venomous Slide",
+    "attackPower": 2,
+    "defeatQuote": "Least dice rolls to reach the final square computed!"
+  },
+  "description": "You are given an `n x n` integer matrix `board` where the cells are labeled from 1 to `n^2` in a Boustrophedon (zigzag) style from bottom-left. Return the least number of dice rolls required to reach cell `n^2`. If it is not possible, return -1.",
+  "examples": [
+    {
+      "input": "board = [[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,15,-1,-1,-1,-1]]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "2 <= n <= 20"
+  ],
+  "starterCode": "def snakesAndLadders(board: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def snakesAndLadders(board: list[list[int]]) -> int:\n    n = len(board)\n    def get_rc(sq):\n        r = (sq - 1) // n\n        c = (sq - 1) % n\n        if r % 2 == 1: c = n - 1 - c\n        return n - 1 - r, c\n    from collections import deque\n    q = deque([(1, 0)])\n    visited = {1}\n    while q:\n        sq, moves = q.popleft()\n        if sq == n * n: return moves\n        for nxt in range(sq + 1, min(sq + 6, n * n) + 1):\n            r, c = get_rc(nxt)\n            dest = board[r][c] if board[r][c] != -1 else nxt\n            if dest not in visited:\n                visited.add(dest)\n                q.append((dest, moves + 1))\n    return -1\n",
+  "functionName": "snakesAndLadders",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            35,
+            -1,
+            -1,
+            13,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            15,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[-1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1], [",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            3
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[-1, -1], [-1, 3]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "BFS from square 1. Convert square index to (row, col) handling alternating directions."
+  ],
+  "python": {
+    "starterCode": "def snakesAndLadders(board: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def snakesAndLadders(board: list[list[int]]) -> int:\n    n = len(board)\n    def get_rc(sq):\n        r = (sq - 1) // n\n        c = (sq - 1) % n\n        if r % 2 == 1: c = n - 1 - c\n        return n - 1 - r, c\n    from collections import deque\n    q = deque([(1, 0)])\n    visited = {1}\n    while q:\n        sq, moves = q.popleft()\n        if sq == n * n: return moves\n        for nxt in range(sq + 1, min(sq + 6, n * n) + 1):\n            r, c = get_rc(nxt)\n            dest = board[r][c] if board[r][c] != -1 else nxt\n            if dest not in visited:\n                visited.add(dest)\n                q.append((dest, moves + 1))\n    return -1\n"
+  },
+  "leetcodeId": 909,
+  "leetcodeTitle": "Snakes and Ladders BFS",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-snakes-and-ladders/"
+}

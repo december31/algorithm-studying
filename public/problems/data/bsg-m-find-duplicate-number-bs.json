@@ -1,0 +1,82 @@
+{
+  "id": "bsg-m-find-duplicate-number-bs",
+  "wingId": "binary-search-greedy",
+  "floor": 434,
+  "title": "Find Duplicate Number (Range Bisection)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-find-duplicate-number-bs",
+    "name": "Clone Apparition",
+    "title": "Harbinger of Duplicate Identities",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#8b5cf6",
+    "attackName": "Clone Shock",
+    "attackPower": 2,
+    "defeatQuote": "Duplicate integer in [1, n] isolated without modifying array!"
+  },
+  "description": "Given an array of integers `nums` containing `n + 1` integers where each integer is in the range `[1, n]` inclusive. There is only one repeated number in `nums`, return this repeated number without modifying the array `nums` and using only constant extra space.",
+  "examples": [
+    {
+      "input": "nums = [1,3,4,2,2]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [3,1,3,4,2]",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 100000",
+    "nums.length == n + 1"
+  ],
+  "starterCode": "def findDuplicate(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def findDuplicate(nums: list[int]) -> int:\n    lo, hi = 1, len(nums) - 1\n    ans = -1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        count = sum(1 for x in nums if x <= mid)\n        if count > mid:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n",
+  "functionName": "findDuplicate",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3,
+          4,
+          2,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 3, 4, 2, 2]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          1,
+          3,
+          4,
+          2
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[3, 1, 3, 4, 2]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search the value domain [1, n]. Count elements <= mid. If count > mid, duplicate is <= mid."
+  ],
+  "python": {
+    "starterCode": "def findDuplicate(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def findDuplicate(nums: list[int]) -> int:\n    lo, hi = 1, len(nums) - 1\n    ans = -1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        count = sum(1 for x in nums if x <= mid)\n        if count > mid:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n"
+  },
+  "leetcodeId": 287,
+  "leetcodeTitle": "Find Duplicate Number (Range Bisection)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-find-duplicate-number-bs/"
+}

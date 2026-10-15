@@ -1,0 +1,79 @@
+{
+  "id": "bit-m-beautiful-arrangement-bitmask",
+  "wingId": "bit-manipulation",
+  "floor": 545,
+  "title": "Beautiful Arrangement (Bitmask DP)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-beautiful-arrangement-bitmask",
+    "name": "Permutational Golem",
+    "title": "Builder of Divisible Alignments",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#10b981",
+    "attackName": "Divisibility Lock",
+    "attackPower": 2,
+    "defeatQuote": "Number of beautiful 1..n arrangements satisfying index divisibility!"
+  },
+  "description": "Suppose you have `n` integers labeled 1 through `n`. A permutation of those `n` integers `perm` is considered a beautiful arrangement if for every `i` (1 <= i <= n): `perm[i] % i == 0` or `i % perm[i] == 0`. Given `n`, return the number of the beautiful arrangements.",
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "2"
+    },
+    {
+      "input": "n = 1",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 15"
+  ],
+  "starterCode": "def countArrangementBitmask(n: int) -> int:\n    pass\n",
+  "solutionCode": "def countArrangementBitmask(n: int) -> int:\n    memo = {}\n    def dfs(mask):\n        if mask == (1 << n) - 1: return 1\n        if mask in memo: return memo[mask]\n        pos = bin(mask).count('1') + 1\n        ans = 0\n        for num in range(1, n + 1):\n            if not (mask & (1 << (num - 1))):\n                if num % pos == 0 or pos % num == 0:\n                    ans += dfs(mask | (1 << (num - 1)))\n        memo[mask] = ans\n        return ans\n    return dfs(0)\n",
+  "functionName": "countArrangementBitmask",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2
+      ],
+      "expected": 2,
+      "inputDisplay": "2",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "1",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "3",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Bitmask DP: current placement position is bit_count(mask) + 1."
+  ],
+  "python": {
+    "starterCode": "def countArrangementBitmask(n: int) -> int:\n    pass\n",
+    "solutionCode": "def countArrangementBitmask(n: int) -> int:\n    memo = {}\n    def dfs(mask):\n        if mask == (1 << n) - 1: return 1\n        if mask in memo: return memo[mask]\n        pos = bin(mask).count('1') + 1\n        ans = 0\n        for num in range(1, n + 1):\n            if not (mask & (1 << (num - 1))):\n                if num % pos == 0 or pos % num == 0:\n                    ans += dfs(mask | (1 << (num - 1)))\n        memo[mask] = ans\n        return ans\n    return dfs(0)\n"
+  },
+  "leetcodeId": 526,
+  "leetcodeTitle": "Beautiful Arrangement (Bitmask DP)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-beautiful-arrangement-bitmask/"
+}

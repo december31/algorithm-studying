@@ -1,0 +1,126 @@
+{
+  "id": "graph-e-flood-fill",
+  "wingId": "graphs",
+  "floor": 301,
+  "title": "Flood Fill Pixel Canvas",
+  "difficulty": "easy",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-e-flood-fill",
+    "name": "Slime Ooze",
+    "title": "Spreader of Corrosive Pigment",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "slime",
+    "color": "#10b981",
+    "attackName": "Pigment Surge",
+    "attackPower": 1,
+    "defeatQuote": "All 4-directionally connected matching pixels transformed!"
+  },
+  "description": "An image is represented by an `m x n` integer grid `image` where `image[i][j]` represents the pixel value. You are also given three integers `sr`, `sc`, and `color`. Perform a flood fill on the image starting from the pixel `image[sr][sc]`. Change the color of the starting pixel and all adjacent pixels of the same starting color.",
+  "examples": [
+    {
+      "input": "image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2",
+      "output": "[[2,2,2],[2,2,0],[2,0,1]]"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 50",
+    "0 <= image[i][j], color < 65536"
+  ],
+  "starterCode": "def floodFill(image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def floodFill(image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:\n    orig = image[sr][sc]\n    if orig == color: return image\n    R, C = len(image), len(image[0])\n    def dfs(r, c):\n        if 0 <= r < R and 0 <= c < C and image[r][c] == orig:\n            image[r][c] = color\n            dfs(r + 1, c)\n            dfs(r - 1, c)\n            dfs(r, c + 1)\n            dfs(r, c - 1)\n    dfs(sr, sc)\n    return image\n",
+  "functionName": "floodFill",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ],
+        1,
+        1,
+        2
+      ],
+      "expected": [
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "inputDisplay": "args=[[[1, 1, 1], [1, 1, 0], [1, 0, 1]], 1, 1, 2]",
+      "expectedDisplay": "[[2, 2, 2], [2, 2, 0], [2, 0, 1]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "inputDisplay": "args=[[[0, 0, 0], [0, 0, 0]], 0, 0, 0]",
+      "expectedDisplay": "[[0, 0, 0], [0, 0, 0]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use DFS or BFS. Guard against the infinite recursion case where original color equals target color."
+  ],
+  "python": {
+    "starterCode": "def floodFill(image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def floodFill(image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:\n    orig = image[sr][sc]\n    if orig == color: return image\n    R, C = len(image), len(image[0])\n    def dfs(r, c):\n        if 0 <= r < R and 0 <= c < C and image[r][c] == orig:\n            image[r][c] = color\n            dfs(r + 1, c)\n            dfs(r - 1, c)\n            dfs(r, c + 1)\n            dfs(r, c - 1)\n    dfs(sr, sc)\n    return image\n"
+  },
+  "leetcodeId": 733,
+  "leetcodeTitle": "Flood Fill Pixel Canvas",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-e-flood-fill/"
+}

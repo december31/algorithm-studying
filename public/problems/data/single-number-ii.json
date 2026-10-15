@@ -32,8 +32,8 @@
     "1 <= nums.length <= 3 * 10^4",
     "-2^31 <= nums[i] <= 2^31 - 1"
   ],
-  "starterCode": "function singleNumberII(nums) {\n  return 0;\n}",
-  "solutionCode": "function singleNumberII(nums) {\n  let ones = 0, twos = 0;\n  for (const n of nums) {\n    ones = (ones ^ n) & ~twos;\n    twos = (twos ^ n) & ~ones;\n  }\n  return ones;\n}",
+  "starterCode": "def singleNumberII(nums):\n    return 0\n",
+  "solutionCode": "def singleNumberII(nums):\n    ones, twos = 0, 0\n    for n in nums:\n        ones = (ones ^ n) & ~twos\n        twos = (twos ^ n) & ~ones\n    return ones\n",
   "functionName": "singleNumberII",
   "testCases": [
     {

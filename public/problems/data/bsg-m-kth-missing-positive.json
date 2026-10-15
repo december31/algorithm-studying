@@ -1,0 +1,84 @@
+{
+  "id": "bsg-m-kth-missing-positive",
+  "wingId": "binary-search-greedy",
+  "floor": 443,
+  "title": "Kth Missing Positive Number",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-kth-missing-positive",
+    "name": "Gap Golem",
+    "title": "Overseer of Absent Integers",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Omission Void",
+    "attackPower": 2,
+    "defeatQuote": "The k-th positive integer missing from sorted array found!"
+  },
+  "description": "Given an array `arr` of positive integers sorted in a strictly increasing order, and an integer `k`. Return the `k`-th positive integer that is missing from this array.",
+  "examples": [
+    {
+      "input": "arr = [2,3,4,7,11], k = 5",
+      "output": "9"
+    },
+    {
+      "input": "arr = [1,2,3,4], k = 2",
+      "output": "6"
+    }
+  ],
+  "constraints": [
+    "1 <= arr.length <= 1000",
+    "1 <= arr[i] <= 1000",
+    "1 <= k <= 1000"
+  ],
+  "starterCode": "def findKthPositive(arr: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def findKthPositive(arr: list[int], k: int) -> int:\n    lo, hi = 0, len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        missing = arr[mid] - (mid + 1)\n        if missing < k:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return lo + k\n",
+  "functionName": "findKthPositive",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          4,
+          7,
+          11
+        ],
+        5
+      ],
+      "expected": 9,
+      "inputDisplay": "args=[[2, 3, 4, 7, 11], 5]",
+      "expectedDisplay": "9",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        2
+      ],
+      "expected": 6,
+      "inputDisplay": "args=[[1, 2, 3, 4], 2]",
+      "expectedDisplay": "6",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Missing numbers before index mid is arr[mid] - (mid + 1). Binary search for the first index where missing >= k."
+  ],
+  "python": {
+    "starterCode": "def findKthPositive(arr: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def findKthPositive(arr: list[int], k: int) -> int:\n    lo, hi = 0, len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        missing = arr[mid] - (mid + 1)\n        if missing < k:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return lo + k\n"
+  },
+  "leetcodeId": 1539,
+  "leetcodeTitle": "Kth Missing Positive Number",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-kth-missing-positive/"
+}

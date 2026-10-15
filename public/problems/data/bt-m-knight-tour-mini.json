@@ -1,0 +1,89 @@
+{
+  "id": "bt-m-knight-tour-mini",
+  "wingId": "backtracking",
+  "floor": 260,
+  "title": "Knight Moves Reachability",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-m-knight-tour-mini",
+    "name": "Equestrian Shade",
+    "title": "Rider of the L-Shaped Leap",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Knight Trample",
+    "attackPower": 2,
+    "defeatQuote": "L-shaped chess leaps traversed all reachable grid tiles!"
+  },
+  "description": "Given an `n x n` chessboard and starting coordinate `(r, c)`, return the number of distinct squares a knight can reach in at most `k` moves.",
+  "examples": [
+    {
+      "input": "n = 3, r = 0, c = 0, k = 1",
+      "output": "3"
+    },
+    {
+      "input": "n = 3, r = 0, c = 0, k = 2",
+      "output": "5"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 8",
+    "0 <= k <= 4"
+  ],
+  "starterCode": "def knightTourSmall(n: int, r: int, c: int, k: int) -> int:\n    pass\n",
+  "solutionCode": "def knightTourSmall(n: int, r: int, c: int, k: int) -> int:\n    visited = {(r, c)}\n    moves = [(-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)]\n    curr_level = {(r, c)}\n    for _ in range(k):\n        next_level = set()\n        for cr, cc in curr_level:\n            for dr, dc in moves:\n                nr, nc = cr + dr, cc + dc\n                if 0 <= nr < n and 0 <= nc < n:\n                    next_level.add((nr, nc))\n                    visited.add((nr, nc))\n        curr_level = next_level\n    return len(visited)\n",
+  "functionName": "knightTourSmall",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        0,
+        0,
+        1
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[3, 0, 0, 1]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        0,
+        0,
+        2
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[3, 0, 0, 2]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[1, 0, 0, 1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Simulate BFS step-by-step applying the 8 standard knight moves."
+  ],
+  "python": {
+    "starterCode": "def knightTourSmall(n: int, r: int, c: int, k: int) -> int:\n    pass\n",
+    "solutionCode": "def knightTourSmall(n: int, r: int, c: int, k: int) -> int:\n    visited = {(r, c)}\n    moves = [(-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)]\n    curr_level = {(r, c)}\n    for _ in range(k):\n        next_level = set()\n        for cr, cc in curr_level:\n            for dr, dc in moves:\n                nr, nc = cr + dr, cc + dc\n                if 0 <= nr < n and 0 <= nc < n:\n                    next_level.add((nr, nc))\n                    visited.add((nr, nc))\n        curr_level = next_level\n    return len(visited)\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Knight Moves Reachability",
+  "leetcodeUrl": null
+}

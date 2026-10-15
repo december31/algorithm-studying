@@ -1,0 +1,83 @@
+{
+  "id": "bit-h-max-product-palindromic-subseq",
+  "wingId": "bit-manipulation",
+  "floor": 593,
+  "title": "Product of Disjoint Palindromic Subsequences",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-max-product-palindromic-subseq",
+    "name": "Mirror Pair Hydra",
+    "title": "Twin Stalker of Disjoint Palindromes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "snake",
+    "color": "#06b6d4",
+    "attackName": "Reflective Resonance",
+    "attackPower": 3,
+    "defeatQuote": "Two disjoint submasks, both reading identically forwards and backwards!"
+  },
+  "description": "Given a string `s`, find two disjoint palindromic subsequences of `s` such that the product of their lengths is maximized. Return the maximum possible product.",
+  "examples": [
+    {
+      "input": "s = \"leetcodecom\"",
+      "output": "9"
+    },
+    {
+      "input": "s = \"bb\"",
+      "output": "1"
+    },
+    {
+      "input": "s = \"accbcaxxcxx\"",
+      "output": "25"
+    }
+  ],
+  "constraints": [
+    "2 <= s.length <= 12"
+  ],
+  "starterCode": "def maxProduct(s: str) -> int:\n    pass\n",
+  "solutionCode": "def maxProduct(s: str) -> int:\n    n = len(s)\n    palindromes = {}\n    for mask in range(1, 1 << n):\n        subseq = [s[i] for i in range(n) if (mask & (1 << i))]\n        if subseq == subseq[::-1]:\n            palindromes[mask] = len(subseq)\n    ans = 0\n    p_items = list(palindromes.items())\n    for i in range(len(p_items)):\n        m1, l1 = p_items[i]\n        for j in range(i + 1, len(p_items)):\n            m2, l2 = p_items[j]\n            if (m1 & m2) == 0:\n                prod = l1 * l2\n                if prod > ans:\n                    ans = prod\n    return ans\n",
+  "functionName": "maxProduct",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "leetcodecom"
+      ],
+      "expected": 9,
+      "inputDisplay": "leetcodecom",
+      "expectedDisplay": "9",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "bb"
+      ],
+      "expected": 1,
+      "inputDisplay": "bb",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "accbcaxxcxx"
+      ],
+      "expected": 25,
+      "inputDisplay": "accbcaxxcxx",
+      "expectedDisplay": "25",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Since n <= 12, identify all bitmasks that form palindromes, then find pair of non-overlapping masks (mask1 & mask2 == 0) with max product of lengths."
+  ],
+  "python": {
+    "starterCode": "def maxProduct(s: str) -> int:\n    pass\n",
+    "solutionCode": "def maxProduct(s: str) -> int:\n    n = len(s)\n    palindromes = {}\n    for mask in range(1, 1 << n):\n        subseq = [s[i] for i in range(n) if (mask & (1 << i))]\n        if subseq == subseq[::-1]:\n            palindromes[mask] = len(subseq)\n    ans = 0\n    p_items = list(palindromes.items())\n    for i in range(len(p_items)):\n        m1, l1 = p_items[i]\n        for j in range(i + 1, len(p_items)):\n            m2, l2 = p_items[j]\n            if (m1 & m2) == 0:\n                prod = l1 * l2\n                if prod > ans:\n                    ans = prod\n    return ans\n"
+  },
+  "leetcodeId": 2002,
+  "leetcodeTitle": "Product of Disjoint Palindromic Subsequences",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-max-product-palindromic-subseq/"
+}

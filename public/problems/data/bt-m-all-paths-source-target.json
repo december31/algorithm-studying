@@ -1,0 +1,135 @@
+{
+  "id": "bt-m-all-paths-source-target",
+  "wingId": "backtracking",
+  "floor": 231,
+  "title": "All Paths Source to Target",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-m-all-paths-source-target",
+    "name": "DAG Phantom",
+    "title": "Guider of Directed Acyclic Trails",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#06b6d4",
+    "attackName": "DAG Pierce",
+    "attackPower": 2,
+    "defeatQuote": "All topological paths from source to sink verified!"
+  },
+  "description": "Given a directed acyclic graph (DAG) of `n` nodes labeled from `0` to `n - 1`, find all possible paths from node `0` to node `n - 1` and return them in sorted order.",
+  "examples": [
+    {
+      "input": "graph = [[1,2],[3],[3],[]]",
+      "output": "[[0,1,3],[0,2,3]]"
+    }
+  ],
+  "constraints": [
+    "n == len(graph)",
+    "2 <= n <= 15"
+  ],
+  "starterCode": "def allPathsSourceTarget(graph: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def allPathsSourceTarget(graph: list[list[int]]) -> list[list[int]]:\n    target = len(graph) - 1\n    res = []\n    def dfs(curr, path):\n        if curr == target:\n            res.append(list(path))\n            return\n        for nxt in graph[curr]:\n            dfs(nxt, path + [nxt])\n    dfs(0, [0])\n    return sorted(res)\n",
+  "functionName": "allPathsSourceTarget",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ]
+      ],
+      "inputDisplay": "[[1, 2], [3], [3], []]",
+      "expectedDisplay": "[[0, 1, 3], [0, 2, 3]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            4,
+            3,
+            1
+          ],
+          [
+            3,
+            2,
+            4
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          3,
+          4
+        ],
+        [
+          0,
+          4
+        ]
+      ],
+      "inputDisplay": "[[4, 3, 1], [3, 2, 4], [3], [4], []]",
+      "expectedDisplay": "[[0, 1, 2, 3, 4], [0, 1, 3, 4], [0, 1, 4], [0, 3, 4], [0, 4]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "DFS from node 0 to target on DAG. No visited set needed because DAG has no cycles."
+  ],
+  "python": {
+    "starterCode": "def allPathsSourceTarget(graph: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def allPathsSourceTarget(graph: list[list[int]]) -> list[list[int]]:\n    target = len(graph) - 1\n    res = []\n    def dfs(curr, path):\n        if curr == target:\n            res.append(list(path))\n            return\n        for nxt in graph[curr]:\n            dfs(nxt, path + [nxt])\n    dfs(0, [0])\n    return sorted(res)\n"
+  },
+  "leetcodeId": 797,
+  "leetcodeTitle": "All Paths Source to Target",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-all-paths-source-target/"
+}

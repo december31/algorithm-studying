@@ -1,0 +1,74 @@
+{
+  "id": "bit-m-number-wonderful-substrings",
+  "wingId": "bit-manipulation",
+  "floor": 546,
+  "title": "Number of Wonderful Substrings (At Most 1 Odd)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-number-wonderful-substrings",
+    "name": "Parity Chimera",
+    "title": "Seeker of At-Most-One Odd Letter Frequencies",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "manticore",
+    "color": "#f59e0b",
+    "attackName": "Parity Claws",
+    "attackPower": 2,
+    "defeatQuote": "Substrings where at most one letter appears an odd number of times counted!"
+  },
+  "description": "A wonderful string is a string where at most one letter appears an odd number of times. Given a string `word` that consists of the first ten lowercase English letters ('a' through 'j'), return the number of wonderful non-empty substrings in `word`.",
+  "examples": [
+    {
+      "input": "word = \"aba\"",
+      "output": "4"
+    },
+    {
+      "input": "word = \"aabb\"",
+      "output": "9"
+    },
+    {
+      "input": "word = \"he\"",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= word.length <= 100000",
+    "word consists only of letters 'a' to 'j'"
+  ],
+  "starterCode": "def wonderfulSubstrings(word: str) -> int:\n    pass\n",
+  "solutionCode": "def wonderfulSubstrings(word: str) -> int:\n    from collections import defaultdict\n    count = [0] * 1024\n    count[0] = 1\n    mask = 0\n    ans = 0\n    for ch in word:\n        mask ^= (1 << (ord(ch) - ord('a')))\n        ans += count[mask]\n        for i in range(10):\n            ans += count[mask ^ (1 << i)]\n        count[mask] += 1\n    return ans\n",
+  "functionName": "wonderfulSubstrings",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "aba"
+      ],
+      "expected": 4,
+      "inputDisplay": "aba",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "aabb"
+      ],
+      "expected": 9,
+      "inputDisplay": "aabb",
+      "expectedDisplay": "9",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "10-bit prefix parity mask: check matching prefix (0 odd) and masks differing by 1 bit (1 odd)."
+  ],
+  "python": {
+    "starterCode": "def wonderfulSubstrings(word: str) -> int:\n    pass\n",
+    "solutionCode": "def wonderfulSubstrings(word: str) -> int:\n    from collections import defaultdict\n    count = [0] * 1024\n    count[0] = 1\n    mask = 0\n    ans = 0\n    for ch in word:\n        mask ^= (1 << (ord(ch) - ord('a')))\n        ans += count[mask]\n        for i in range(10):\n            ans += count[mask ^ (1 << i)]\n        count[mask] += 1\n    return ans\n"
+  },
+  "leetcodeId": 1915,
+  "leetcodeTitle": "Number of Wonderful Substrings (At Most 1 Odd)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-number-wonderful-substrings/"
+}

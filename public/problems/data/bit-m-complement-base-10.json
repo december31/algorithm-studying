@@ -1,0 +1,93 @@
+{
+  "id": "bit-m-complement-base-10",
+  "wingId": "bit-manipulation",
+  "floor": 562,
+  "title": "Complement of Base 10 Integer",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-complement-base-10",
+    "name": "Bit Inversion Imp",
+    "title": "Inverter of Binary Representation",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#ec4899",
+    "attackName": "Invert Flash",
+    "attackPower": 2,
+    "defeatQuote": "Binary complement converted back to base 10 integer!"
+  },
+  "description": "The complement of an integer is the integer you get when you flip all the 0's to 1's and all the 1's to 0's in its binary representation. Given an integer `n`, return its complement.",
+  "examples": [
+    {
+      "input": "n = 5",
+      "output": "2"
+    },
+    {
+      "input": "n = 7",
+      "output": "0"
+    },
+    {
+      "input": "n = 10",
+      "output": "5"
+    }
+  ],
+  "constraints": [
+    "0 <= n < 10^9"
+  ],
+  "starterCode": "def bitwiseComplement(n: int) -> int:\n    pass\n",
+  "solutionCode": "def bitwiseComplement(n: int) -> int:\n    if n == 0: return 1\n    mask = (1 << n.bit_length()) - 1\n    return n ^ mask\n",
+  "functionName": "bitwiseComplement",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        5
+      ],
+      "expected": 2,
+      "inputDisplay": "5",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        7
+      ],
+      "expected": 0,
+      "inputDisplay": "7",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        10
+      ],
+      "expected": 5,
+      "inputDisplay": "10",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        0
+      ],
+      "expected": 1,
+      "inputDisplay": "0",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "XOR with a mask of all 1s having length n.bit_length()."
+  ],
+  "python": {
+    "starterCode": "def bitwiseComplement(n: int) -> int:\n    pass\n",
+    "solutionCode": "def bitwiseComplement(n: int) -> int:\n    if n == 0: return 1\n    mask = (1 << n.bit_length()) - 1\n    return n ^ mask\n"
+  },
+  "leetcodeId": 1009,
+  "leetcodeTitle": "Complement of Base 10 Integer",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-complement-base-10/"
+}

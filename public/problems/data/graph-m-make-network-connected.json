@@ -1,0 +1,138 @@
+{
+  "id": "graph-m-make-network-connected",
+  "wingId": "graphs",
+  "floor": 346,
+  "title": "Make Network Connected (Cable Transfer)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-make-network-connected",
+    "name": "Conduit Weaver",
+    "title": "Re-Router of Spare Relays",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#10b981",
+    "attackName": "Network Patch",
+    "attackPower": 2,
+    "defeatQuote": "Redundant cables moved to connect disconnected server clusters!"
+  },
+  "description": "There are `n` computers numbered from 0 to `n - 1` connected by ethernet cables `connections`. You can extract in-place redundant cables and re-route them between any pair of disconnected computers. Return the minimum number of times you need to do this to make all computers connected. If it is impossible, return -1.",
+  "examples": [
+    {
+      "input": "n = 4, connections = [[0,1],[0,2],[1,2]]",
+      "output": "1"
+    },
+    {
+      "input": "n = 6, connections = [[0,1],[0,2],[0,3],[1,2],[1,3]]",
+      "output": "2"
+    },
+    {
+      "input": "n = 6, connections = [[0,1],[0,2],[0,3],[1,2]]",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 100000",
+    "1 <= connections.length <= 100000"
+  ],
+  "starterCode": "def makeConnected(n: int, connections: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def makeConnected(n: int, connections: list[list[int]]) -> int:\n    if len(connections) < n - 1: return -1\n    parent = list(range(n))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    components = n\n    for u, v in connections:\n        ru, rv = find(u), find(v)\n        if ru != rv:\n            parent[ru] = rv\n            components -= 1\n    return components - 1\n",
+  "functionName": "makeConnected",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[4, [[0, 1], [0, 2], [1, 2]]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        6,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[6, [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3]]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        6,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[6, [[0, 1], [0, 2], [0, 3], [1, 2]]]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Need at least n - 1 cables. Result is the number of disconnected components minus 1."
+  ],
+  "python": {
+    "starterCode": "def makeConnected(n: int, connections: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def makeConnected(n: int, connections: list[list[int]]) -> int:\n    if len(connections) < n - 1: return -1\n    parent = list(range(n))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    components = n\n    for u, v in connections:\n        ru, rv = find(u), find(v)\n        if ru != rv:\n            parent[ru] = rv\n            components -= 1\n    return components - 1\n"
+  },
+  "leetcodeId": 1319,
+  "leetcodeTitle": "Make Network Connected (Cable Transfer)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-make-network-connected/"
+}

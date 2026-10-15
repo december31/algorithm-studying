@@ -1,0 +1,111 @@
+{
+  "id": "graph-h-making-large-island",
+  "wingId": "graphs",
+  "floor": 374,
+  "title": "Making A Large Island (Single Flip)",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-h-making-large-island",
+    "name": "Pangea Overlord",
+    "title": "Uniter of Separated Continents",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#10b981",
+    "attackName": "Continental Shift",
+    "attackPower": 3,
+    "defeatQuote": "Maximum island area formed by changing at most one 0 to 1!"
+  },
+  "description": "You are given an `n x n` binary matrix `grid`. You are allowed to change at most one `0` to be `1`. Return the size of the largest island in `grid` after applying this operation.",
+  "examples": [
+    {
+      "input": "grid = [[1,0],[0,1]]",
+      "output": "3"
+    },
+    {
+      "input": "grid = [[1,1],[1,0]]",
+      "output": "4"
+    },
+    {
+      "input": "grid = [[1,1],[1,1]]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "n == grid.length",
+    "1 <= n <= 500"
+  ],
+  "starterCode": "def largestIsland(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def largestIsland(grid: list[list[int]]) -> int:\n    n = len(grid)\n    island_id = 2\n    area = {}\n    def dfs(r, c, i_id):\n        grid[r][c] = i_id\n        size = 1\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < n and 0 <= nc < n and grid[nr][nc] == 1:\n                size += dfs(nr, nc, i_id)\n        return size\n    for r in range(n):\n        for c in range(n):\n            if grid[r][c] == 1:\n                area[island_id] = dfs(r, c, island_id)\n                island_id += 1\n    ans = max(area.values(), default=0)\n    if ans < n * n: ans = max(ans, 1)\n    for r in range(n):\n        for c in range(n):\n            if grid[r][c] == 0:\n                seen_islands = set()\n                for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n                    nr, nc = r + dr, c + dc\n                    if 0 <= nr < n and 0 <= nc < n and grid[nr][nc] > 1:\n                        seen_islands.add(grid[nr][nc])\n                potential = 1 + sum(area[i] for i in seen_islands)\n                ans = max(ans, potential)\n    return ans\n",
+  "functionName": "largestIsland",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[[1, 0], [0, 1]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1, 1], [1, 0]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1, 1], [1, 1]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Label existing islands with unique IDs and compute their areas. For each 0 cell, sum the areas of adjacent unique islands plus 1."
+  ],
+  "python": {
+    "starterCode": "def largestIsland(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def largestIsland(grid: list[list[int]]) -> int:\n    n = len(grid)\n    island_id = 2\n    area = {}\n    def dfs(r, c, i_id):\n        grid[r][c] = i_id\n        size = 1\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < n and 0 <= nc < n and grid[nr][nc] == 1:\n                size += dfs(nr, nc, i_id)\n        return size\n    for r in range(n):\n        for c in range(n):\n            if grid[r][c] == 1:\n                area[island_id] = dfs(r, c, island_id)\n                island_id += 1\n    ans = max(area.values(), default=0)\n    if ans < n * n: ans = max(ans, 1)\n    for r in range(n):\n        for c in range(n):\n            if grid[r][c] == 0:\n                seen_islands = set()\n                for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n                    nr, nc = r + dr, c + dc\n                    if 0 <= nr < n and 0 <= nc < n and grid[nr][nc] > 1:\n                        seen_islands.add(grid[nr][nc])\n                potential = 1 + sum(area[i] for i in seen_islands)\n                ans = max(ans, potential)\n    return ans\n"
+  },
+  "leetcodeId": 827,
+  "leetcodeTitle": "Making A Large Island (Single Flip)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-making-large-island/"
+}

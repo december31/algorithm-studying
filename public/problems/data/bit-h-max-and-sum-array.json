@@ -1,0 +1,87 @@
+{
+  "id": "bit-h-max-and-sum-array",
+  "wingId": "bit-manipulation",
+  "floor": 580,
+  "title": "Maximum AND Sum of Array",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-max-and-sum-array",
+    "name": "Trit Slot Overlord",
+    "title": "Keeper of Base-3 Compartments",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#f97316",
+    "attackName": "Bitwise Slot Fusion",
+    "attackPower": 3,
+    "defeatQuote": "Each slot holds at most two runes, blending powers under bitwise AND!"
+  },
+  "description": "You are given an integer array `nums` and an integer `numSlots` such that `2 * numSlots >= nums.length`. There are `numSlots` slots numbered `1` to `numSlots`. Each slot can hold at most `2` numbers. The AND sum of an allocation is the sum of `(x & slot)` for each number `x` placed in slot `slot`. Return the maximum possible AND sum.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,4,5,6], numSlots = 3",
+      "output": "9"
+    },
+    {
+      "input": "nums = [1,3,10,4,7,1], numSlots = 9",
+      "output": "24"
+    }
+  ],
+  "constraints": [
+    "1 <= numSlots <= 9",
+    "1 <= nums.length <= 2 * numSlots",
+    "1 <= nums[i] <= 15"
+  ],
+  "starterCode": "def maximumANDSum(nums: list[int], numSlots: int) -> int:\n    pass\n",
+  "solutionCode": "def maximumANDSum(nums: list[int], numSlots: int) -> int:\n    memo = {}\n    n = len(nums)\n    def dp(i, mask):\n        if i == n: return 0\n        state = (i, mask)\n        if state in memo: return memo[state]\n        ans = 0\n        for slot in range(1, numSlots + 1):\n            slot_base = 3 ** (slot - 1)\n            slot_count = (mask // slot_base) % 3\n            if slot_count < 2:\n                val = (nums[i] & slot) + dp(i + 1, mask + slot_base)\n                if val > ans: ans = val\n        memo[state] = ans\n        return ans\n    return dp(0, 0)\n",
+  "functionName": "maximumANDSum",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        3
+      ],
+      "expected": 9,
+      "inputDisplay": "args=[[1, 2, 3, 4, 5, 6], 3]",
+      "expectedDisplay": "9",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          3,
+          10,
+          4,
+          7,
+          1
+        ],
+        9
+      ],
+      "expected": 24,
+      "inputDisplay": "args=[[1, 3, 10, 4, 7, 1], 9]",
+      "expectedDisplay": "24",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Represent slot occupancy in base-3 (values 0, 1, or 2). Memoize dp(i, base3_mask)."
+  ],
+  "python": {
+    "starterCode": "def maximumANDSum(nums: list[int], numSlots: int) -> int:\n    pass\n",
+    "solutionCode": "def maximumANDSum(nums: list[int], numSlots: int) -> int:\n    memo = {}\n    n = len(nums)\n    def dp(i, mask):\n        if i == n: return 0\n        state = (i, mask)\n        if state in memo: return memo[state]\n        ans = 0\n        for slot in range(1, numSlots + 1):\n            slot_base = 3 ** (slot - 1)\n            slot_count = (mask // slot_base) % 3\n            if slot_count < 2:\n                val = (nums[i] & slot) + dp(i + 1, mask + slot_base)\n                if val > ans: ans = val\n        memo[state] = ans\n        return ans\n    return dp(0, 0)\n"
+  },
+  "leetcodeId": 2172,
+  "leetcodeTitle": "Maximum AND Sum of Array",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-max-and-sum-array/"
+}

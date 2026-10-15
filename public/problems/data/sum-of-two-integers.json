@@ -31,8 +31,8 @@
   "constraints": [
     "-1000 <= a, b <= 1000"
   ],
-  "starterCode": "function getSum(a, b) {\n  return 0;\n}",
-  "solutionCode": "function getSum(a, b) {\n  while (b !== 0) {\n    const carry = (a & b) << 1;\n    a = a ^ b;\n    b = carry;\n  }\n  return a;\n}",
+  "starterCode": "def getSum(a, b):\n    return 0\n",
+  "solutionCode": "def getSum(a, b):\n    mask = 0xFFFFFFFF\n    while (b & mask) > 0:\n        carry = (a & b) << 1\n        a = a ^ b\n        b = carry\n    return (a & mask) if b > 0 else a\n",
   "functionName": "getSum",
   "testCases": [
     {

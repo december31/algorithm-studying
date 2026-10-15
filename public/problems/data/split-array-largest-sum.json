@@ -33,8 +33,8 @@
     "0 <= nums[i] <= 10^6",
     "1 <= k <= min(50, nums.length)"
   ],
-  "starterCode": "function splitArray(nums, k) {\n  return 0;\n}",
-  "solutionCode": "function splitArray(nums, k) {\n  let left = Math.max(...nums);\n  let right = nums.reduce((a, b) => a + b, 0);\n\n  function canSplit(maxSum) {\n    let pieces = 1;\n    let curr = 0;\n    for (const num of nums) {\n      if (curr + num > maxSum) {\n        pieces++;\n        curr = num;\n      } else {\n        curr += num;\n      }\n    }\n    return pieces <= k;\n  }\n\n  let ans = right;\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n    if (canSplit(mid)) {\n      ans = mid;\n      right = mid - 1;\n    } else {\n      left = mid + 1;\n    }\n  }\n  return ans;\n}",
+  "starterCode": "def splitArray(nums, k):\n    return 0\n",
+  "solutionCode": "def splitArray(nums, k):\n    left = max(nums)\n    right = sum(nums)\n    def can_split(max_s):\n        pieces, curr = 1, 0\n        for n in nums:\n            if curr + n > max_s:\n                pieces += 1\n                curr = n\n            else:\n                curr += n\n        return pieces <= k\n    ans = right\n    while left <= right:\n        mid = (left + right) // 2\n        if can_split(mid):\n            ans = mid\n            right = mid - 1\n        else:\n            left = mid + 1\n    return ans\n",
   "functionName": "splitArray",
   "testCases": [
     {

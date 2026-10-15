@@ -1,0 +1,88 @@
+{
+  "id": "bit-m-decode-xored-permutation",
+  "wingId": "bit-manipulation",
+  "floor": 520,
+  "title": "Decode XORed Permutation",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-decode-xored-permutation",
+    "name": "Decryption Archon",
+    "title": "Reconstructor of the 1 to N Permutation",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#ef4444",
+    "attackName": "Decryption Ray",
+    "attackPower": 2,
+    "defeatQuote": "Original permutation of [1, n] decoded from adjacent XOR differences!"
+  },
+  "description": "There is an integer array `perm` that is a permutation of the first `n` positive integers, where `n` is always odd. It was encoded into an array `encoded` of length `n - 1` where `encoded[i] = perm[i] ^ perm[i + 1]`. Given `encoded`, return original `perm`.",
+  "examples": [
+    {
+      "input": "encoded = [3,1]",
+      "output": "[1,2,3]"
+    },
+    {
+      "input": "encoded = [6,5,4,6]",
+      "output": "[2,4,1,5,3]"
+    }
+  ],
+  "constraints": [
+    "3 <= encoded.length <= 100000",
+    "encoded.length is even"
+  ],
+  "starterCode": "def decode(encoded: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def decode(encoded: list[int]) -> list[int]:\n    n = len(encoded) + 1\n    total_xor = 0\n    for i in range(1, n + 1): total_xor ^= i\n    odd_xor = 0\n    for i in range(1, len(encoded), 2):\n        odd_xor ^= encoded[i]\n    perm0 = total_xor ^ odd_xor\n    res = [perm0]\n    for x in encoded:\n        res.append(res[-1] ^ x)\n    return res\n",
+  "functionName": "decode",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "inputDisplay": "[3, 1]",
+      "expectedDisplay": "[1, 2, 3]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          6,
+          5,
+          4,
+          6
+        ]
+      ],
+      "expected": [
+        2,
+        4,
+        1,
+        5,
+        3
+      ],
+      "inputDisplay": "[6, 5, 4, 6]",
+      "expectedDisplay": "[2, 4, 1, 5, 3]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "total_xor is XOR(1..n). XOR of encoded[1], encoded[3], ... gives XOR(perm[1..n-1]). Thus perm[0] = total_xor ^ odd_xor."
+  ],
+  "python": {
+    "starterCode": "def decode(encoded: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def decode(encoded: list[int]) -> list[int]:\n    n = len(encoded) + 1\n    total_xor = 0\n    for i in range(1, n + 1): total_xor ^= i\n    odd_xor = 0\n    for i in range(1, len(encoded), 2):\n        odd_xor ^= encoded[i]\n    perm0 = total_xor ^ odd_xor\n    res = [perm0]\n    for x in encoded:\n        res.append(res[-1] ^ x)\n    return res\n"
+  },
+  "leetcodeId": 1734,
+  "leetcodeTitle": "Decode XORed Permutation",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-decode-xored-permutation/"
+}

@@ -1,0 +1,99 @@
+{
+  "id": "bit-m-min-subarray-or-k",
+  "wingId": "bit-manipulation",
+  "floor": 554,
+  "title": "Shortest Subarray with OR at Least K",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-min-subarray-or-k",
+    "name": "Threshold Drake",
+    "title": "Accumulator of Bit Capacity Thresholds",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#ec4899",
+    "attackName": "Threshold Flare",
+    "attackPower": 2,
+    "defeatQuote": "Shortest subarray whose bitwise OR meets or exceeds k!"
+  },
+  "description": "You are given an array `nums` of non-negative integers and an integer `k`. A subarray is called special if the bitwise OR of all its elements is at least `k`. Return the minimum length of a special non-empty subarray, or `-1` if none exists.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3], k = 2",
+      "output": "1"
+    },
+    {
+      "input": "nums = [2,1,8], k = 10",
+      "output": "3"
+    },
+    {
+      "input": "nums = [1,2], k = 0",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 50",
+    "0 <= nums[i] <= 50",
+    "0 <= k <= 64"
+  ],
+  "starterCode": "def minimumSubarrayLength(nums: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def minimumSubarrayLength(nums: list[int], k: int) -> int:\n    n = len(nums)\n    ans = float('inf')\n    for i in range(n):\n        curr_or = 0\n        for j in range(i, n):\n            curr_or |= nums[j]\n            if curr_or >= k:\n                ans = min(ans, j - i + 1)\n                break\n    return ans if ans != float('inf') else -1\n",
+  "functionName": "minimumSubarrayLength",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        2
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1, 2, 3], 2]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          1,
+          8
+        ],
+        10
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[2, 1, 8], 10]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2
+        ],
+        0
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1, 2], 0]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Slide window tracking 32-bit count array to maintain bitwise OR dynamically."
+  ],
+  "python": {
+    "starterCode": "def minimumSubarrayLength(nums: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def minimumSubarrayLength(nums: list[int], k: int) -> int:\n    n = len(nums)\n    ans = float('inf')\n    for i in range(n):\n        curr_or = 0\n        for j in range(i, n):\n            curr_or |= nums[j]\n            if curr_or >= k:\n                ans = min(ans, j - i + 1)\n                break\n    return ans if ans != float('inf') else -1\n"
+  },
+  "leetcodeId": 3097,
+  "leetcodeTitle": "Shortest Subarray with OR at Least K",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-min-subarray-or-k/"
+}

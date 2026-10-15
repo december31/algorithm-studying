@@ -1,0 +1,93 @@
+{
+  "id": "bt-m-subsets-product-k",
+  "wingId": "backtracking",
+  "floor": 255,
+  "title": "Subsets with Product < K",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-subsets-product-k",
+    "name": "Product Banshee",
+    "title": "Keeper of Multiplicative Bounds",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#06b6d4",
+    "attackName": "Product Hex",
+    "attackPower": 2,
+    "defeatQuote": "All subsets strictly bounded by product k counted!"
+  },
+  "description": "Given an array of positive integers `nums` and an integer `k`, return the number of non-empty subsets whose product of elements is strictly less than `k`.",
+  "examples": [
+    {
+      "input": "nums = [2,3,5], k = 15",
+      "output": "5"
+    },
+    {
+      "input": "nums = [2,3], k = 5",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 12",
+    "1 <= nums[i] <= 100",
+    "1 <= k <= 10^5"
+  ],
+  "starterCode": "def subsetsProductK(nums: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def subsetsProductK(nums: list[int], k: int) -> int:\n    count = 0\n    def dfs(idx, curr_prod, picked):\n        nonlocal count\n        if idx == len(nums):\n            if picked and curr_prod < k:\n                count += 1\n            return\n        dfs(idx + 1, curr_prod, picked)\n        if curr_prod * nums[idx] < k:\n            dfs(idx + 1, curr_prod * nums[idx], True)\n    dfs(0, 1, False)\n    return count\n",
+  "functionName": "subsetsProductK",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          5
+        ],
+        15
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[[2, 3, 5], 15]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          3
+        ],
+        5
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[2, 3], 5]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          10
+        ],
+        5
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[10], 5]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Recursive branching with pick and skip; prune whenever curr_prod * nums[idx] >= k."
+  ],
+  "python": {
+    "starterCode": "def subsetsProductK(nums: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def subsetsProductK(nums: list[int], k: int) -> int:\n    count = 0\n    def dfs(idx, curr_prod, picked):\n        nonlocal count\n        if idx == len(nums):\n            if picked and curr_prod < k:\n                count += 1\n            return\n        dfs(idx + 1, curr_prod, picked)\n        if curr_prod * nums[idx] < k:\n            dfs(idx + 1, curr_prod * nums[idx], True)\n    dfs(0, 1, False)\n    return count\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Subsets with Product < K",
+  "leetcodeUrl": null
+}

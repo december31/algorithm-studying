@@ -34,8 +34,8 @@
     "1 <= m, n <= 200",
     "0 <= heights[r][c] <= 10^5"
   ],
-  "starterCode": "function pacificAtlantic(heights) {\n  return [];\n}",
-  "solutionCode": "function pacificAtlantic(heights) {\n  if (!heights || heights.length === 0) return [];\n  const m = heights.length, n = heights[0].length;\n  const pac = Array.from({ length: m }, () => new Array(n).fill(false));\n  const atl = Array.from({ length: m }, () => new Array(n).fill(false));\n  const dfs = (r, c, visited, prevHeight) => {\n    if (r < 0 || r >= m || c < 0 || c >= n || visited[r][c] || heights[r][c] < prevHeight) return;\n    visited[r][c] = true;\n    dfs(r + 1, c, visited, heights[r][c]);\n    dfs(r - 1, c, visited, heights[r][c]);\n    dfs(r, c + 1, visited, heights[r][c]);\n    dfs(r, c - 1, visited, heights[r][c]);\n  };\n  for (let i = 0; i < m; i++) {\n    dfs(i, 0, pac, heights[i][0]);\n    dfs(i, n - 1, atl, heights[i][n - 1]);\n  }\n  for (let j = 0; j < n; j++) {\n    dfs(0, j, pac, heights[0][j]);\n    dfs(m - 1, j, atl, heights[m - 1][j]);\n  }\n  const res = [];\n  for (let i = 0; i < m; i++) {\n    for (let j = 0; j < n; j++) {\n      if (pac[i][j] && atl[i][j]) res.push([i, j]);\n    }\n  }\n  return res;\n}",
+  "starterCode": "def pacificAtlantic(heights):\n    return []\n",
+  "solutionCode": "def pacificAtlantic(heights):\n    if not heights:\n        return []\n    m, n = len(heights), len(heights[0])\n    pac = [[False] * n for _ in range(m)]\n    atl = [[False] * n for _ in range(m)]\n    def dfs(r, c, vis, prev_h):\n        if r < 0 or r >= m or c < 0 or c >= n or vis[r][c] or heights[r][c] < prev_h:\n            return\n        vis[r][c] = True\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            dfs(r + dr, c + dc, vis, heights[r][c])\n    for i in range(m):\n        dfs(i, 0, pac, heights[i][0])\n        dfs(i, n - 1, atl, heights[i][n - 1])\n    for j in range(n):\n        dfs(0, j, pac, heights[0][j])\n        dfs(m - 1, j, atl, heights[m - 1][j])\n    return [[i, j] for i in range(m) for j in range(n) if pac[i][j] and atl[i][j]]\n",
   "functionName": "pacificAtlantic",
   "testCases": [
     {

@@ -1,0 +1,127 @@
+{
+  "id": "ds-m-game-of-life",
+  "wingId": "data-structures",
+  "floor": 143,
+  "title": "Game of Life Next State",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-game-of-life",
+    "name": "Conway Cell Core",
+    "title": "Automaton of Birth and Death",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "slime",
+    "color": "#06b6d4",
+    "attackName": "Cellular Pulse",
+    "attackPower": 2,
+    "defeatQuote": "In-place bit transitions calculated the next generation perfectly!"
+  },
+  "description": "Given an `m x n` grid of 0s (dead) and 1s (live), compute the next state according to Conway's Game of Life: any live cell with fewer than 2 or more than 3 live neighbors dies; with 2 or 3 live neighbors lives; any dead cell with exactly 3 live neighbors becomes a live cell. Return the updated grid.",
+  "examples": [
+    {
+      "input": "board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]",
+      "output": "[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]"
+    }
+  ],
+  "constraints": [
+    "m == len(board)",
+    "n == len(board[i])",
+    "1 <= m, n <= 25"
+  ],
+  "starterCode": "def gameOfLifeNext(board: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def gameOfLifeNext(board: list[list[int]]) -> list[list[int]]:\n    m, n = len(board), len(board[0])\n    # Encode transitions: 0->0: 0, 1->1: 1, 1->0: 2, 0->1: 3\n    for r in range(m):\n        for c in range(n):\n            live_neighbors = 0\n            for dr in [-1, 0, 1]:\n                for dc in [-1, 0, 1]:\n                    if dr == 0 and dc == 0: continue\n                    nr, nc = r + dr, c + dc\n                    if 0 <= nr < m and 0 <= nc < n and board[nr][nc] in (1, 2):\n                        live_neighbors += 1\n            if board[r][c] == 1 and (live_neighbors < 2 or live_neighbors > 3):\n                board[r][c] = 2\n            elif board[r][c] == 0 and live_neighbors == 3:\n                board[r][c] = 3\n    for r in range(m):\n        for c in range(n):\n            board[r][c] = 1 if board[r][c] in (1, 3) else 0\n    return board\n",
+  "functionName": "gameOfLifeNext",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "inputDisplay": "[[0, 1, 0], [0, 0, 1], [1, 1, 1], [0, 0, 0]]",
+      "expectedDisplay": "[[0, 0, 0], [1, 0, 1], [0, 1, 1], [0, 1, 0]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "inputDisplay": "[[1, 1], [1, 0]]",
+      "expectedDisplay": "[[1, 1], [1, 1]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use 2-bit states to encode both past and future states in-place."
+  ],
+  "python": {
+    "starterCode": "def gameOfLifeNext(board: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def gameOfLifeNext(board: list[list[int]]) -> list[list[int]]:\n    m, n = len(board), len(board[0])\n    # Encode transitions: 0->0: 0, 1->1: 1, 1->0: 2, 0->1: 3\n    for r in range(m):\n        for c in range(n):\n            live_neighbors = 0\n            for dr in [-1, 0, 1]:\n                for dc in [-1, 0, 1]:\n                    if dr == 0 and dc == 0: continue\n                    nr, nc = r + dr, c + dc\n                    if 0 <= nr < m and 0 <= nc < n and board[nr][nc] in (1, 2):\n                        live_neighbors += 1\n            if board[r][c] == 1 and (live_neighbors < 2 or live_neighbors > 3):\n                board[r][c] = 2\n            elif board[r][c] == 0 and live_neighbors == 3:\n                board[r][c] = 3\n    for r in range(m):\n        for c in range(n):\n            board[r][c] = 1 if board[r][c] in (1, 3) else 0\n    return board\n"
+  },
+  "leetcodeId": 289,
+  "leetcodeTitle": "Game of Life Next State",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-game-of-life/"
+}

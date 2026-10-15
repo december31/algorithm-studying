@@ -1,0 +1,90 @@
+{
+  "id": "bit-m-max-xor-two-numbers",
+  "wingId": "bit-manipulation",
+  "floor": 526,
+  "title": "Maximum XOR of Two Numbers in Array",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-max-xor-two-numbers",
+    "name": "XOR Titan",
+    "title": "Maximizer of Opposite Bit Alignments",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "titan",
+    "color": "#8b5cf6",
+    "attackName": "Max XOR Smash",
+    "attackPower": 2,
+    "defeatQuote": "Maximum pairwise XOR value constructed bit by bit!"
+  },
+  "description": "Given an integer array `nums`, return the maximum result of `nums[i] XOR nums[j]`, where `0 <= i <= j < n`.",
+  "examples": [
+    {
+      "input": "nums = [3,10,5,25,2,8]",
+      "output": "28"
+    },
+    {
+      "input": "nums = [14,70,53,83,49,91,36,80,92,51,66,70]",
+      "output": "127"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 200000",
+    "0 <= nums[i] <= 2^31 - 1"
+  ],
+  "starterCode": "def findMaximumXOR(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def findMaximumXOR(nums: list[int]) -> int:\n    max_xor = 0\n    mask = 0\n    for i in range(31, -1, -1):\n        mask |= (1 << i)\n        prefixes = {num & mask for num in nums}\n        candidate = max_xor | (1 << i)\n        if any(candidate ^ p in prefixes for p in prefixes):\n            max_xor = candidate\n    return max_xor\n",
+  "functionName": "findMaximumXOR",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          10,
+          5,
+          25,
+          2,
+          8
+        ]
+      ],
+      "expected": 28,
+      "inputDisplay": "[3, 10, 5, 25, 2, 8]",
+      "expectedDisplay": "28",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          14,
+          70,
+          53,
+          83,
+          49,
+          91,
+          36,
+          80,
+          92,
+          51,
+          66,
+          70
+        ]
+      ],
+      "expected": 127,
+      "inputDisplay": "[14, 70, 53, 83, 49, 91, 36, 80, 92, 51, 66, 70]",
+      "expectedDisplay": "127",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Bitwise greedy search from bit 31 down to 0 using prefix sets. Target candidate ^ prefix in prefixes."
+  ],
+  "python": {
+    "starterCode": "def findMaximumXOR(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def findMaximumXOR(nums: list[int]) -> int:\n    max_xor = 0\n    mask = 0\n    for i in range(31, -1, -1):\n        mask |= (1 << i)\n        prefixes = {num & mask for num in nums}\n        candidate = max_xor | (1 << i)\n        if any(candidate ^ p in prefixes for p in prefixes):\n            max_xor = candidate\n    return max_xor\n"
+  },
+  "leetcodeId": 421,
+  "leetcodeTitle": "Maximum XOR of Two Numbers in Array",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-max-xor-two-numbers/"
+}

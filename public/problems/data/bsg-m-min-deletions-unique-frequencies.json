@@ -1,0 +1,83 @@
+{
+  "id": "bsg-m-min-deletions-unique-frequencies",
+  "wingId": "binary-search-greedy",
+  "floor": 449,
+  "title": "Min Deletions for Unique Frequencies",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-min-deletions-unique-frequencies",
+    "name": "Frequency Archon",
+    "title": "Enforcer of Non-Colliding Multiplicities",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#8b5cf6",
+    "attackName": "Collision Erasure",
+    "attackPower": 2,
+    "defeatQuote": "Minimum characters deleted so all letter frequencies are distinct!"
+  },
+  "description": "A string `s` is called good if there are no two different characters in `s` that have the same frequency. Given a string `s`, return the minimum number of characters you need to delete to make `s` good.",
+  "examples": [
+    {
+      "input": "s = \"aab\"",
+      "output": "0"
+    },
+    {
+      "input": "s = \"aaabbbcc\"",
+      "output": "2"
+    },
+    {
+      "input": "s = \"ceabaacb\"",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 100000"
+  ],
+  "starterCode": "def minDeletions(s: str) -> int:\n    pass\n",
+  "solutionCode": "def minDeletions(s: str) -> int:\n    from collections import Counter\n    counts = Counter(s)\n    seen = set()\n    deletions = 0\n    for freq in counts.values():\n        while freq > 0 and freq in seen:\n            freq -= 1\n            deletions += 1\n        if freq > 0:\n            seen.add(freq)\n    return deletions\n",
+  "functionName": "minDeletions",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "aab"
+      ],
+      "expected": 0,
+      "inputDisplay": "aab",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "aaabbbcc"
+      ],
+      "expected": 2,
+      "inputDisplay": "aaabbbcc",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "ceabaacb"
+      ],
+      "expected": 2,
+      "inputDisplay": "ceabaacb",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Track occupied frequencies in a set. Greedily decrement duplicate frequencies until reaching an unused number or 0."
+  ],
+  "python": {
+    "starterCode": "def minDeletions(s: str) -> int:\n    pass\n",
+    "solutionCode": "def minDeletions(s: str) -> int:\n    from collections import Counter\n    counts = Counter(s)\n    seen = set()\n    deletions = 0\n    for freq in counts.values():\n        while freq > 0 and freq in seen:\n            freq -= 1\n            deletions += 1\n        if freq > 0:\n            seen.add(freq)\n    return deletions\n"
+  },
+  "leetcodeId": 1647,
+  "leetcodeTitle": "Min Deletions for Unique Frequencies",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-min-deletions-unique-frequencies/"
+}

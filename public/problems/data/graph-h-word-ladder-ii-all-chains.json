@@ -1,0 +1,98 @@
+{
+  "id": "graph-h-word-ladder-ii-all-chains",
+  "wingId": "graphs",
+  "floor": 387,
+  "title": "Word Ladder II (All Shortest Transformation Chains)",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-h-word-ladder-ii-all-chains",
+    "name": "Polyglot Hydra",
+    "title": "Weaver of All Optimal Lexical Bridges",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "manticore",
+    "color": "#ec4899",
+    "attackName": "Mutation Tempest",
+    "attackPower": 3,
+    "defeatQuote": "Every minimal-length transformation chain from beginWord to endWord assembled!"
+  },
+  "description": "A transformation sequence from `beginWord` to `endWord` using a dictionary `wordList` is a sequence of words `beginWord -> s1 -> s2 -> ... -> sk` such that every adjacent pair differs by a single letter. Given `beginWord`, `endWord` and `wordList`, return all the shortest transformation sequences from `beginWord` to `endWord` in lexicographical order.",
+  "examples": [
+    {
+      "input": "beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+      "output": "[[\"hit\",\"hot\",\"dot\",\"dog\",\"cog\"],[\"hit\",\"hot\",\"lot\",\"log\",\"cog\"]]"
+    }
+  ],
+  "constraints": [
+    "1 <= beginWord.length <= 5",
+    "1 <= wordList.length <= 500"
+  ],
+  "starterCode": "def findLadders(beginWord: str, endWord: str, wordList: list[str]) -> list[list[str]]:\n    pass\n",
+  "solutionCode": "def findLadders(beginWord: str, endWord: str, wordList: list[str]) -> list[list[str]]:\n    word_set = set(wordList)\n    if endWord not in word_set: return []\n    from collections import defaultdict, deque\n    parents = defaultdict(set)\n    dist = {beginWord: 0}\n    q = deque([beginWord])\n    found = False\n    while q and not found:\n        for _ in range(len(q)):\n            w = q.popleft()\n            if w == endWord: found = True\n            for i in range(len(w)):\n                for c in 'abcdefghijklmnopqrstuvwxyz':\n                    nxt = w[:i] + c + w[i+1:]\n                    if nxt in word_set:\n                        if nxt not in dist:\n                            dist[nxt] = dist[w] + 1\n                            parents[nxt].add(w)\n                            q.append(nxt)\n                        elif dist[nxt] == dist[w] + 1:\n                            parents[nxt].add(w)\n    if not found: return []\n    res = []\n    def backtrack(curr, path):\n        if curr == beginWord:\n            res.append(path[::-1])\n            return\n        for p in parents[curr]:\n            backtrack(p, path + [p])\n    backtrack(endWord, [endWord])\n    return sorted(res)\n",
+  "functionName": "findLadders",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log",
+          "cog"
+        ]
+      ],
+      "expected": [
+        [
+          "hit",
+          "hot",
+          "dot",
+          "dog",
+          "cog"
+        ],
+        [
+          "hit",
+          "hot",
+          "lot",
+          "log",
+          "cog"
+        ]
+      ],
+      "inputDisplay": "args=['hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']]",
+      "expectedDisplay": "[['hit', 'hot', 'dot', 'dog', 'cog'], ['hit', 'hot', 'lot', 'log', 'cog']]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log"
+        ]
+      ],
+      "expected": [],
+      "inputDisplay": "args=['hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log']]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use level-by-level BFS to construct DAG of predecessor pointers, then backtrack from endWord."
+  ],
+  "python": {
+    "starterCode": "def findLadders(beginWord: str, endWord: str, wordList: list[str]) -> list[list[str]]:\n    pass\n",
+    "solutionCode": "def findLadders(beginWord: str, endWord: str, wordList: list[str]) -> list[list[str]]:\n    word_set = set(wordList)\n    if endWord not in word_set: return []\n    from collections import defaultdict, deque\n    parents = defaultdict(set)\n    dist = {beginWord: 0}\n    q = deque([beginWord])\n    found = False\n    while q and not found:\n        for _ in range(len(q)):\n            w = q.popleft()\n            if w == endWord: found = True\n            for i in range(len(w)):\n                for c in 'abcdefghijklmnopqrstuvwxyz':\n                    nxt = w[:i] + c + w[i+1:]\n                    if nxt in word_set:\n                        if nxt not in dist:\n                            dist[nxt] = dist[w] + 1\n                            parents[nxt].add(w)\n                            q.append(nxt)\n                        elif dist[nxt] == dist[w] + 1:\n                            parents[nxt].add(w)\n    if not found: return []\n    res = []\n    def backtrack(curr, path):\n        if curr == beginWord:\n            res.append(path[::-1])\n            return\n        for p in parents[curr]:\n            backtrack(p, path + [p])\n    backtrack(endWord, [endWord])\n    return sorted(res)\n"
+  },
+  "leetcodeId": 126,
+  "leetcodeTitle": "Word Ladder II (All Shortest Transformation Chains)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-word-ladder-ii-all-chains/"
+}

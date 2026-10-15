@@ -32,8 +32,8 @@
     "n == graph.length",
     "1 <= n <= 12"
   ],
-  "starterCode": "function shortestPathLength(graph) {\n  return 0;\n}",
-  "solutionCode": "function shortestPathLength(graph) {\n  const n = graph.length;\n  if (n <= 1) return 0;\n  const targetMask = (1 << n) - 1;\n  const queue = [];\n  const visited = new Set();\n\n  for (let i = 0; i < n; i++) {\n    const mask = 1 << i;\n    queue.push([i, mask, 0]);\n    visited.add(i + '-' + mask);\n  }\n\n  while (queue.length > 0) {\n    const [node, mask, dist] = queue.shift();\n    if (mask === targetMask) return dist;\n    for (const next of graph[node]) {\n      const nextMask = mask | (1 << next);\n      const key = next + '-' + nextMask;\n      if (!visited.has(key)) {\n        visited.add(key);\n        queue.push([next, nextMask, dist + 1]);\n      }\n    }\n  }\n  return 0;\n}",
+  "starterCode": "def shortestPathLength(graph):\n    return 0\n",
+  "solutionCode": "from collections import deque\ndef shortestPathLength(graph):\n    n = len(graph)\n    if n <= 1:\n        return 0\n    target = (1 << n) - 1\n    q = deque()\n    visited = set()\n    for i in range(n):\n        mask = 1 << i\n        q.append((i, mask, 0))\n        visited.add((i, mask))\n    while q:\n        u, mask, dist = q.popleft()\n        if mask == target:\n            return dist\n        for v in graph[u]:\n            next_mask = mask | (1 << v)\n            if (v, next_mask) not in visited:\n                visited.add((v, next_mask))\n                q.append((v, next_mask, dist + 1))\n    return 0\n",
   "functionName": "shortestPathLength",
   "testCases": [
     {

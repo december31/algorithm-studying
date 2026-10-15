@@ -32,8 +32,8 @@
     "1 <= nums.length <= 12",
     "1 <= nums[i] <= 20"
   ],
-  "starterCode": "function subsetXORSum(nums) {\n  return 0;\n}",
-  "solutionCode": "function subsetXORSum(nums) {\n  let total = 0;\n  function backtrack(idx, currentXor) {\n    if (idx === nums.length) {\n      total += currentXor;\n      return;\n    }\n    // Include nums[idx]\n    backtrack(idx + 1, currentXor ^ nums[idx]);\n    // Exclude nums[idx]\n    backtrack(idx + 1, currentXor);\n  }\n  backtrack(0, 0);\n  return total;\n}",
+  "starterCode": "def subsetXORSum(nums):\n    return 0\n",
+  "solutionCode": "def subsetXORSum(nums):\n    total = 0\n    def backtrack(idx, curr):\n        nonlocal total\n        if idx == len(nums):\n            total += curr\n            return\n        backtrack(idx + 1, curr ^ nums[idx])\n        backtrack(idx + 1, curr)\n    backtrack(0, 0)\n    return total\n",
   "functionName": "subsetXORSum",
   "testCases": [
     {

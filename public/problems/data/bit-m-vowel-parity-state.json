@@ -1,0 +1,69 @@
+{
+  "id": "bit-m-vowel-parity-state",
+  "wingId": "bit-manipulation",
+  "floor": 570,
+  "title": "State Bitmask of Vowel Parity",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-vowel-parity-state",
+    "name": "Vocal Harmony Sentinel",
+    "title": "Watcher of All-Even Vowel Parities",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#38bdf8",
+    "attackName": "Harmonic Pulse",
+    "attackPower": 2,
+    "defeatQuote": "Smallest index where 5-vowel parity mask resets to zero!"
+  },
+  "description": "Given a string `s`, return the index of the first character where all 5 vowels ('a', 'e', 'i', 'o', 'u') up to that index have appeared an even number of times (including zero). If never, return -1.",
+  "examples": [
+    {
+      "input": "s = \"aaeioou\"",
+      "output": "1"
+    },
+    {
+      "input": "s = \"aeiou\"",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 10000"
+  ],
+  "starterCode": "def firstEvenVowelIndex(s: str) -> int:\n    pass\n",
+  "solutionCode": "def firstEvenVowelIndex(s: str) -> int:\n    vowels = {'a': 0, 'e': 1, 'i': 2, 'o': 3, 'u': 4}\n    mask = 0\n    for i, ch in enumerate(s):\n        if ch in vowels:\n            mask ^= (1 << vowels[ch])\n        if mask == 0:\n            return i\n    return -1\n",
+  "functionName": "firstEvenVowelIndex",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "aaeioou"
+      ],
+      "expected": 1,
+      "inputDisplay": "aaeioou",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "aeiou"
+      ],
+      "expected": -1,
+      "inputDisplay": "aeiou",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Track 5-bit vowel parity mask. Return first index i where mask == 0."
+  ],
+  "python": {
+    "starterCode": "def firstEvenVowelIndex(s: str) -> int:\n    pass\n",
+    "solutionCode": "def firstEvenVowelIndex(s: str) -> int:\n    vowels = {'a': 0, 'e': 1, 'i': 2, 'o': 3, 'u': 4}\n    mask = 0\n    for i, ch in enumerate(s):\n        if ch in vowels:\n            mask ^= (1 << vowels[ch])\n        if mask == 0:\n            return i\n    return -1\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "State Bitmask of Vowel Parity",
+  "leetcodeUrl": null
+}

@@ -1,0 +1,107 @@
+{
+  "id": "bsg-m-search-2d-matrix",
+  "wingId": "binary-search-greedy",
+  "floor": 414,
+  "title": "Search a 2D Matrix (Flattened Bisection)",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-bsg-m-search-2d-matrix",
+    "name": "Matrix Automaton",
+    "title": "Surveyor of Monotonic Rows",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#10b981",
+    "attackName": "Grid Pulse",
+    "attackPower": 2,
+    "defeatQuote": "Target presence within strictly sorted 2D grid verified!"
+  },
+  "description": "You are given an `m x n` integer matrix `matrix` with the following two properties: Each row is sorted in non-decreasing order. The first integer of each row is greater than the last integer of the previous row. Given an integer `target`, return `True` if `target` is in `matrix` or `False` otherwise.",
+  "examples": [
+    {
+      "input": "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "m == matrix.length",
+    "n == matrix[i].length",
+    "1 <= m, n <= 100"
+  ],
+  "starterCode": "def searchMatrix(matrix: list[list[int]], target: int) -> bool:\n    pass\n",
+  "solutionCode": "def searchMatrix(matrix: list[list[int]], target: int) -> bool:\n    if not matrix or not matrix[0]: return False\n    R, C = len(matrix), len(matrix[0])\n    lo, hi = 0, R * C - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        val = matrix[mid // C][mid % C]\n        if val == target: return True\n        elif val < target: lo = mid + 1\n        else: hi = mid - 1\n    return False\n",
+  "functionName": "searchMatrix",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            3,
+            5,
+            7
+          ],
+          [
+            10,
+            11,
+            16,
+            20
+          ],
+          [
+            23,
+            30,
+            34,
+            60
+          ]
+        ],
+        3
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 3]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            3,
+            5,
+            7
+          ],
+          [
+            10,
+            11,
+            16,
+            20
+          ],
+          [
+            23,
+            30,
+            34,
+            60
+          ]
+        ],
+        13
+      ],
+      "expected": false,
+      "inputDisplay": "args=[[[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 13]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Treat the m x n matrix as a virtual 1D array of length m * n, indexing row = mid // C and col = mid % C."
+  ],
+  "python": {
+    "starterCode": "def searchMatrix(matrix: list[list[int]], target: int) -> bool:\n    pass\n",
+    "solutionCode": "def searchMatrix(matrix: list[list[int]], target: int) -> bool:\n    if not matrix or not matrix[0]: return False\n    R, C = len(matrix), len(matrix[0])\n    lo, hi = 0, R * C - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        val = matrix[mid // C][mid % C]\n        if val == target: return True\n        elif val < target: lo = mid + 1\n        else: hi = mid - 1\n    return False\n"
+  },
+  "leetcodeId": 74,
+  "leetcodeTitle": "Search a 2D Matrix (Flattened Bisection)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-search-2d-matrix/"
+}

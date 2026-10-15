@@ -1,0 +1,83 @@
+{
+  "id": "bit-m-min-bit-flips-alternating",
+  "wingId": "bit-manipulation",
+  "floor": 540,
+  "title": "Min Flips to Make Binary String Alternating",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-min-bit-flips-alternating",
+    "name": "Chrono Flipping Imp",
+    "title": "Rotator of Type 1 and Type 2 Flips",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#8b5cf6",
+    "attackName": "Type-2 Inversion",
+    "attackPower": 2,
+    "defeatQuote": "Minimum Type-2 character flips to make string alternating under cyclic shifts!"
+  },
+  "description": "Given a binary string `s`. You are allowed to: 1. Move first character to end. 2. Flip any '0' to '1' or '1' to '0'. Return the minimum number of Type-2 flips to make `s` alternating.",
+  "examples": [
+    {
+      "input": "s = \"111000\"",
+      "output": "2"
+    },
+    {
+      "input": "s = \"010\"",
+      "output": "0"
+    },
+    {
+      "input": "s = \"1110\"",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 100000"
+  ],
+  "starterCode": "def minFlipsAlternating(s: str) -> int:\n    pass\n",
+  "solutionCode": "def minFlipsAlternating(s: str) -> int:\n    n = len(s)\n    s2 = s + s\n    target1 = \"01\" * n\n    target2 = \"10\" * n\n    diff1 = diff2 = 0\n    ans = n\n    for i in range(2 * n):\n        if s2[i] != target1[i]: diff1 += 1\n        if s2[i] != target2[i]: diff2 += 1\n        if i >= n:\n            if s2[i - n] != target1[i - n]: diff1 -= 1\n            if s2[i - n] != target2[i - n]: diff2 -= 1\n        if i >= n - 1:\n            ans = min(ans, diff1, diff2)\n    return ans\n",
+  "functionName": "minFlipsAlternating",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "111000"
+      ],
+      "expected": 2,
+      "inputDisplay": "111000",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "010"
+      ],
+      "expected": 0,
+      "inputDisplay": "010",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "1110"
+      ],
+      "expected": 1,
+      "inputDisplay": "1110",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Double string to s + s to simulate cyclic rotations. Slide a window of length n comparing to \"010101...\" and \"101010...\"."
+  ],
+  "python": {
+    "starterCode": "def minFlipsAlternating(s: str) -> int:\n    pass\n",
+    "solutionCode": "def minFlipsAlternating(s: str) -> int:\n    n = len(s)\n    s2 = s + s\n    target1 = \"01\" * n\n    target2 = \"10\" * n\n    diff1 = diff2 = 0\n    ans = n\n    for i in range(2 * n):\n        if s2[i] != target1[i]: diff1 += 1\n        if s2[i] != target2[i]: diff2 += 1\n        if i >= n:\n            if s2[i - n] != target1[i - n]: diff1 -= 1\n            if s2[i - n] != target2[i - n]: diff2 -= 1\n        if i >= n - 1:\n            ans = min(ans, diff1, diff2)\n    return ans\n"
+  },
+  "leetcodeId": 1888,
+  "leetcodeTitle": "Min Flips to Make Binary String Alternating",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-min-bit-flips-alternating/"
+}

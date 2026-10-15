@@ -1,0 +1,73 @@
+{
+  "id": "graph-h-cracking-the-safe",
+  "wingId": "graphs",
+  "floor": 390,
+  "title": "Cracking the Safe (De Bruijn Euler Walk)",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-h-cracking-the-safe",
+    "name": "Vault Sovereign",
+    "title": "Opener of De Bruijn Torus Codes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "demon",
+    "color": "#38bdf8",
+    "attackName": "Vault Breaker",
+    "attackPower": 3,
+    "defeatQuote": "Shortest string containing all k^n combinations of length n constructed!"
+  },
+  "description": "There is a safe protected by a password with `n` digits where each digit is one of `k` digits: `0, 1, ..., k - 1`. The safe unlocks if the password is entered as a substring of recent keystrokes. Return any sequence of keystrokes of minimum length that is guaranteed to unlock the safe.",
+  "examples": [
+    {
+      "input": "n = 1, k = 2",
+      "output": "\"10\""
+    },
+    {
+      "input": "n = 2, k = 2",
+      "output": "\"01100\""
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 4",
+    "1 <= k <= 10",
+    "k^n <= 4096"
+  ],
+  "starterCode": "def crackSafe(n: int, k: int) -> str:\n    pass\n",
+  "solutionCode": "def crackSafe(n: int, k: int) -> str:\n    if n == 1:\n        return \"\".join(str(i) for i in range(k))\n    visited = set()\n    res = []\n    def dfs(node):\n        for x in range(k):\n            edge = node + str(x)\n            if edge not in visited:\n                visited.add(edge)\n                dfs(edge[1:])\n                res.append(str(x))\n    start = \"0\" * (n - 1)\n    dfs(start)\n    return start + \"\".join(res[::-1])\n",
+  "functionName": "crackSafe",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1,
+        2
+      ],
+      "expected": "01",
+      "inputDisplay": "args=[1, 2]",
+      "expectedDisplay": "01",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        2,
+        2
+      ],
+      "expected": "00110",
+      "inputDisplay": "args=[2, 2]",
+      "expectedDisplay": "00110",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Eulerian circuit on De Bruijn graph where nodes are prefixes of length n-1 and edges are transitions."
+  ],
+  "python": {
+    "starterCode": "def crackSafe(n: int, k: int) -> str:\n    pass\n",
+    "solutionCode": "def crackSafe(n: int, k: int) -> str:\n    if n == 1:\n        return \"\".join(str(i) for i in range(k))\n    visited = set()\n    res = []\n    def dfs(node):\n        for x in range(k):\n            edge = node + str(x)\n            if edge not in visited:\n                visited.add(edge)\n                dfs(edge[1:])\n                res.append(str(x))\n    start = \"0\" * (n - 1)\n    dfs(start)\n    return start + \"\".join(res[::-1])\n"
+  },
+  "leetcodeId": 753,
+  "leetcodeTitle": "Cracking the Safe (De Bruijn Euler Walk)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-cracking-the-safe/"
+}

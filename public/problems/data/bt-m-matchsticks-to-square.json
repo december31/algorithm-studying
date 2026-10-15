@@ -1,0 +1,97 @@
+{
+  "id": "bt-m-matchsticks-to-square",
+  "wingId": "backtracking",
+  "floor": 228,
+  "title": "Matchsticks to Square",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-matchsticks-to-square",
+    "name": "Pyromancer Golem",
+    "title": "Builder of 4-Sided Perimeters",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f97316",
+    "attackName": "Flame Perimeter",
+    "attackPower": 2,
+    "defeatQuote": "The 4 perimeter sides summed to perimeter / 4 exactly!"
+  },
+  "description": "You are given an integer array `matchsticks` where `matchsticks[i]` is the length of the `i-th` matchstick. You want to use all the matchsticks to make one square without breaking any stick. Return `True` if you can make this square and `False` otherwise.",
+  "examples": [
+    {
+      "input": "matchsticks = [1,1,2,2,2]",
+      "output": "True"
+    },
+    {
+      "input": "matchsticks = [3,3,3,3,4]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= len(matchsticks) <= 15",
+    "1 <= matchsticks[i] <= 10^8"
+  ],
+  "starterCode": "def makesquare(matchsticks: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def makesquare(matchsticks: list[int]) -> bool:\n    total = sum(matchsticks)\n    if total % 4 != 0: return False\n    target = total // 4\n    matchsticks.sort(reverse=True)\n    sides = [0] * 4\n    def backtrack(idx):\n        if idx == len(matchsticks):\n            return sides[0] == sides[1] == sides[2] == target\n        for i in range(4):\n            if sides[i] + matchsticks[idx] <= target:\n                sides[i] += matchsticks[idx]\n                if backtrack(idx + 1): return True\n                sides[i] -= matchsticks[idx]\n            if sides[i] == 0: break\n        return False\n    return backtrack(0)\n",
+  "functionName": "makesquare",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          1,
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1, 1, 2, 2, 2]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          3,
+          3,
+          3,
+          4
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[3, 3, 3, 3, 4]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5,
+          5,
+          5,
+          5
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[5, 5, 5, 5]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort descending to prune early. Maintain 4 side sums up to total // 4."
+  ],
+  "python": {
+    "starterCode": "def makesquare(matchsticks: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def makesquare(matchsticks: list[int]) -> bool:\n    total = sum(matchsticks)\n    if total % 4 != 0: return False\n    target = total // 4\n    matchsticks.sort(reverse=True)\n    sides = [0] * 4\n    def backtrack(idx):\n        if idx == len(matchsticks):\n            return sides[0] == sides[1] == sides[2] == target\n        for i in range(4):\n            if sides[i] + matchsticks[idx] <= target:\n                sides[i] += matchsticks[idx]\n                if backtrack(idx + 1): return True\n                sides[i] -= matchsticks[idx]\n            if sides[i] == 0: break\n        return False\n    return backtrack(0)\n"
+  },
+  "leetcodeId": 473,
+  "leetcodeTitle": "Matchsticks to Square",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-matchsticks-to-square/"
+}

@@ -34,8 +34,8 @@
     "-2^31 <= dividend, divisor <= 2^31 - 1",
     "divisor != 0"
   ],
-  "starterCode": "function divide(dividend, divisor) {\n  return 0;\n}",
-  "solutionCode": "function divide(dividend, divisor) {\n  const MAX = 2147483647;\n  const MIN = -2147483648;\n  if (dividend === MIN && divisor === -1) return MAX;\n  const negative = (dividend < 0) !== (divisor < 0);\n  let a = Math.abs(dividend);\n  let b = Math.abs(divisor);\n  let quotient = 0;\n  while (a >= b) {\n    let temp = b, multiple = 1;\n    while (a >= temp * 2 && temp * 2 > 0) {\n      temp *= 2;\n      multiple *= 2;\n    }\n    a -= temp;\n    quotient += multiple;\n  }\n  return negative ? -quotient : quotient;\n}",
+  "starterCode": "def divide(dividend, divisor):\n    return 0\n",
+  "solutionCode": "def divide(dividend, divisor):\n    MAX = 2147483647\n    MIN = -2147483648\n    if dividend == MIN and divisor == -1:\n        return MAX\n    negative = (dividend < 0) ^ (divisor < 0)\n    a, b = abs(dividend), abs(divisor)\n    quotient = 0\n    while a >= b:\n        temp, mult = b, 1\n        while a >= (temp << 1):\n            temp <<= 1\n            mult <<= 1\n        a -= temp\n        quotient += mult\n    return -quotient if negative else quotient\n",
   "functionName": "divide",
   "testCases": [
     {

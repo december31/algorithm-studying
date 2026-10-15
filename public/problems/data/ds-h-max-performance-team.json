@@ -1,0 +1,103 @@
+{
+  "id": "ds-h-max-performance-team",
+  "wingId": "data-structures",
+  "floor": 197,
+  "title": "Maximum Performance of a Team",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-h-max-performance-team",
+    "name": "Synergy Colossus",
+    "title": "Multiplier of Team Efficiencies",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#38bdf8",
+    "attackName": "Synergy Slam",
+    "attackPower": 3,
+    "defeatQuote": "Sorting by decreasing efficiency and min-heap of speeds maximized score!"
+  },
+  "description": "You are given two integers `n` and `k` and two integer arrays `speed` and `efficiency` both of length `n`. There are `n` engineers. The performance of a team is the sum of their engineers' speeds multiplied by the minimum efficiency among their engineers. Return the maximum performance of this team at most `k` engineers modulo `10^9 + 7`.",
+  "examples": [
+    {
+      "input": "n = 6, speed = [2,10,3,1,5,8], efficiency = [5,4,3,9,7,2], k = 2",
+      "output": "60"
+    },
+    {
+      "input": "n = 6, speed = [2,10,3,1,5,8], efficiency = [5,4,3,9,7,2], k = 3",
+      "output": "68"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= n <= 10^5"
+  ],
+  "starterCode": "def maxPerformance(n: int, speed: list[int], efficiency: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def maxPerformance(n: int, speed: list[int], efficiency: list[int], k: int) -> int:\n    import heapq\n    MOD = 10**9 + 7\n    engineers = sorted(zip(efficiency, speed), reverse=True)\n    speed_heap = []\n    speed_sum = 0\n    max_perf = 0\n    for eff, spd in engineers:\n        heapq.heappush(speed_heap, spd)\n        speed_sum += spd\n        if len(speed_heap) > k:\n            speed_sum -= heapq.heappop(speed_heap)\n        max_perf = max(max_perf, speed_sum * eff)\n    return max_perf % MOD\n",
+  "functionName": "maxPerformance",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        6,
+        [
+          2,
+          10,
+          3,
+          1,
+          5,
+          8
+        ],
+        [
+          5,
+          4,
+          3,
+          9,
+          7,
+          2
+        ],
+        2
+      ],
+      "expected": 60,
+      "inputDisplay": "args=[6, [2, 10, 3, 1, 5, 8], [5, 4, 3, 9, 7, 2], 2]",
+      "expectedDisplay": "60",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        6,
+        [
+          2,
+          10,
+          3,
+          1,
+          5,
+          8
+        ],
+        [
+          5,
+          4,
+          3,
+          9,
+          7,
+          2
+        ],
+        3
+      ],
+      "expected": 68,
+      "inputDisplay": "args=[6, [2, 10, 3, 1, 5, 8], [5, 4, 3, 9, 7, 2], 3]",
+      "expectedDisplay": "68",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort by decreasing efficiency. Use min-heap of size at most k for speeds."
+  ],
+  "python": {
+    "starterCode": "def maxPerformance(n: int, speed: list[int], efficiency: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def maxPerformance(n: int, speed: list[int], efficiency: list[int], k: int) -> int:\n    import heapq\n    MOD = 10**9 + 7\n    engineers = sorted(zip(efficiency, speed), reverse=True)\n    speed_heap = []\n    speed_sum = 0\n    max_perf = 0\n    for eff, spd in engineers:\n        heapq.heappush(speed_heap, spd)\n        speed_sum += spd\n        if len(speed_heap) > k:\n            speed_sum -= heapq.heappop(speed_heap)\n        max_perf = max(max_perf, speed_sum * eff)\n    return max_perf % MOD\n"
+  },
+  "leetcodeId": 1383,
+  "leetcodeTitle": "Maximum Performance of a Team",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-max-performance-team/"
+}

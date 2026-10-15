@@ -1,0 +1,88 @@
+{
+  "id": "bsg-m-max-split-even-integers",
+  "wingId": "binary-search-greedy",
+  "floor": 456,
+  "title": "Max Split of Positive Even Integers",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-max-split-even-integers",
+    "name": "Even Splitting Fiend",
+    "title": "Divider into Distinct Even Addends",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#ef4444",
+    "attackName": "Even Fracture",
+    "attackPower": 2,
+    "defeatQuote": "FinalSum decomposed into maximum count of unique even integers!"
+  },
+  "description": "You are given an integer `finalSum`. Split it into a sum of a maximum number of unique positive even integers. Return a list of integers that represent a valid split, or `[]` if impossible.",
+  "examples": [
+    {
+      "input": "finalSum = 12",
+      "output": "[2,4,6]"
+    },
+    {
+      "input": "finalSum = 7",
+      "output": "[]"
+    }
+  ],
+  "constraints": [
+    "1 <= finalSum <= 10^10"
+  ],
+  "starterCode": "def maximumEvenSplit(finalSum: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def maximumEvenSplit(finalSum: int) -> list[int]:\n    if finalSum % 2 == 1: return []\n    res = []\n    curr = 2\n    while finalSum >= curr:\n        res.append(curr)\n        finalSum -= curr\n        curr += 2\n    res[-1] += finalSum\n    return res\n",
+  "functionName": "maximumEvenSplit",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        12
+      ],
+      "expected": [
+        2,
+        4,
+        6
+      ],
+      "inputDisplay": "12",
+      "expectedDisplay": "[2, 4, 6]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        7
+      ],
+      "expected": [],
+      "inputDisplay": "7",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        28
+      ],
+      "expected": [
+        2,
+        4,
+        6,
+        16
+      ],
+      "inputDisplay": "28",
+      "expectedDisplay": "[2, 4, 6, 16]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Greedily take smallest even numbers 2, 4, 6, ... and add remaining surplus to the last number."
+  ],
+  "python": {
+    "starterCode": "def maximumEvenSplit(finalSum: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def maximumEvenSplit(finalSum: int) -> list[int]:\n    if finalSum % 2 == 1: return []\n    res = []\n    curr = 2\n    while finalSum >= curr:\n        res.append(curr)\n        finalSum -= curr\n        curr += 2\n    res[-1] += finalSum\n    return res\n"
+  },
+  "leetcodeId": 2178,
+  "leetcodeTitle": "Max Split of Positive Even Integers",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-max-split-even-integers/"
+}

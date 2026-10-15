@@ -1,0 +1,110 @@
+{
+  "id": "bt-m-combination-sum-ii",
+  "wingId": "backtracking",
+  "floor": 217,
+  "title": "Combination Sum II (Single Use)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-combination-sum-ii",
+    "name": "Coin Specter",
+    "title": "Auditor of Single-Use Shards",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Coin Drain",
+    "attackPower": 2,
+    "defeatQuote": "Single-use candidates with duplicate skips matched target!"
+  },
+  "description": "Given a collection of candidate numbers (`candidates`) and a target number (`target`), find all unique combinations in `candidates` where the candidate numbers sum to `target`. Each number in `candidates` may only be used once in the combination.",
+  "examples": [
+    {
+      "input": "candidates = [10,1,2,7,6,1,5], target = 8",
+      "output": "[[1,1,6],[1,2,5],[1,7],[2,6]]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(candidates) <= 100",
+    "1 <= target <= 30"
+  ],
+  "starterCode": "def combinationSum2(candidates: list[int], target: int) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def combinationSum2(candidates: list[int], target: int) -> list[list[int]]:\n    candidates.sort()\n    res = []\n    def backtrack(idx, rem, path):\n        if rem == 0:\n            res.append(list(path))\n            return\n        for i in range(idx, len(candidates)):\n            if candidates[i] > rem: break\n            if i > idx and candidates[i] == candidates[i - 1]: continue\n            path.append(candidates[i])\n            backtrack(i + 1, rem - candidates[i], path)\n            path.pop()\n    backtrack(0, target, [])\n    return res\n",
+  "functionName": "combinationSum2",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          10,
+          1,
+          2,
+          7,
+          6,
+          1,
+          5
+        ],
+        8
+      ],
+      "expected": [
+        [
+          1,
+          1,
+          6
+        ],
+        [
+          1,
+          2,
+          5
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "inputDisplay": "args=[[10, 1, 2, 7, 6, 1, 5], 8]",
+      "expectedDisplay": "[[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          5,
+          2,
+          1,
+          2
+        ],
+        5
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          5
+        ]
+      ],
+      "inputDisplay": "args=[[2, 5, 2, 1, 2], 5]",
+      "expectedDisplay": "[[1, 2, 2], [5]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort, pass i + 1 for single use, and skip duplicates when i > idx and candidates[i] == candidates[i-1]."
+  ],
+  "python": {
+    "starterCode": "def combinationSum2(candidates: list[int], target: int) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def combinationSum2(candidates: list[int], target: int) -> list[list[int]]:\n    candidates.sort()\n    res = []\n    def backtrack(idx, rem, path):\n        if rem == 0:\n            res.append(list(path))\n            return\n        for i in range(idx, len(candidates)):\n            if candidates[i] > rem: break\n            if i > idx and candidates[i] == candidates[i - 1]: continue\n            path.append(candidates[i])\n            backtrack(i + 1, rem - candidates[i], path)\n            path.pop()\n    backtrack(0, target, [])\n    return res\n"
+  },
+  "leetcodeId": 40,
+  "leetcodeTitle": "Combination Sum II (Single Use)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-combination-sum-ii/"
+}

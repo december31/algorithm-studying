@@ -1,0 +1,78 @@
+{
+  "id": "bit-m-utf8-validation",
+  "wingId": "bit-manipulation",
+  "floor": 529,
+  "title": "UTF-8 Validation (Byte Masking)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-utf8-validation",
+    "name": "Encoding Sentinel",
+    "title": "Validator of Multi-Byte Byte Sequences",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#10b981",
+    "attackName": "Byte Check",
+    "attackPower": 2,
+    "defeatQuote": "UTF-8 multi-byte encoding validity verified!"
+  },
+  "description": "Given an integer array `data` representing the data, return whether it is a valid utf-8 encoding. A character in UTF8 can be from 1 to 4 bytes long.",
+  "examples": [
+    {
+      "input": "data = [197,130,1]",
+      "output": "True"
+    },
+    {
+      "input": "data = [235,140,4]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= data.length <= 20000",
+    "0 <= data[i] <= 255"
+  ],
+  "starterCode": "def validUtf8(data: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def validUtf8(data: list[int]) -> bool:\n    remaining = 0\n    for byte in data:\n        byte &= 0xFF\n        if remaining == 0:\n            if (byte >> 7) == 0: continue\n            elif (byte >> 5) == 0b110: remaining = 1\n            elif (byte >> 4) == 0b1110: remaining = 2\n            elif (byte >> 3) == 0b11110: remaining = 3\n            else: return False\n        else:\n            if (byte >> 6) != 0b10: return False\n            remaining -= 1\n    return remaining == 0\n",
+  "functionName": "validUtf8",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          197,
+          130,
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[197, 130, 1]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          235,
+          140,
+          4
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[235, 140, 4]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Check leading bits of header byte: 0xxxxxxx (1 byte), 110xxxxx (2 bytes), 1110xxxx (3 bytes), 11110xxx (4 bytes). Continuation bytes start with 10xxxxxx."
+  ],
+  "python": {
+    "starterCode": "def validUtf8(data: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def validUtf8(data: list[int]) -> bool:\n    remaining = 0\n    for byte in data:\n        byte &= 0xFF\n        if remaining == 0:\n            if (byte >> 7) == 0: continue\n            elif (byte >> 5) == 0b110: remaining = 1\n            elif (byte >> 4) == 0b1110: remaining = 2\n            elif (byte >> 3) == 0b11110: remaining = 3\n            else: return False\n        else:\n            if (byte >> 6) != 0b10: return False\n            remaining -= 1\n    return remaining == 0\n"
+  },
+  "leetcodeId": 393,
+  "leetcodeTitle": "UTF-8 Validation (Byte Masking)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-utf8-validation/"
+}

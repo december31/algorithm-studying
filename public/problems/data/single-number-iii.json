@@ -32,8 +32,8 @@
     "2 <= nums.length <= 3 * 10^4",
     "Each value fits in 32-bit integer."
   ],
-  "starterCode": "function singleNumberIII(nums) {\n  return [];\n}",
-  "solutionCode": "function singleNumberIII(nums) {\n  let diff = 0;\n  for (const n of nums) diff ^= n;\n  // Isolate lowest set bit\n  const diffBit = diff & (-diff);\n  let a = 0, b = 0;\n  for (const n of nums) {\n    if ((n & diffBit) !== 0) a ^= n;\n    else b ^= n;\n  }\n  return a < b ? [a, b] : [b, a];\n}",
+  "starterCode": "def singleNumberIII(nums):\n    return []\n",
+  "solutionCode": "def singleNumberIII(nums):\n    diff = 0\n    for n in nums:\n        diff ^= n\n    diff_bit = diff & (-diff)\n    a, b = 0, 0\n    for n in nums:\n        if n & diff_bit:\n            a ^= n\n        else:\n            b ^= n\n    return [a, b] if a < b else [b, a]\n",
   "functionName": "singleNumberIII",
   "testCases": [
     {

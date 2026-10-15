@@ -1,0 +1,114 @@
+{
+  "id": "bt-m-path-max-gold",
+  "wingId": "backtracking",
+  "floor": 225,
+  "title": "Path with Maximum Gold",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-m-path-max-gold",
+    "name": "Gold Vein Golem",
+    "title": "Hoarder of Subterranean Nuggets",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#eab308",
+    "attackName": "Gold Shock",
+    "attackPower": 2,
+    "defeatQuote": "Backtracking visited non-zero cells and gathered maximum gold!"
+  },
+  "description": "In a gold mine grid of size `m x n`, each cell has an integer representing the amount of gold in that cell (0 if empty). From a cell with gold, you can walk 4 directions to other gold cells without visiting any cell more than once. Return the maximum amount of gold you can collect starting from any position.",
+  "examples": [
+    {
+      "input": "grid = [[0,6,0],[5,8,7],[0,9,0]]",
+      "output": "24"
+    },
+    {
+      "input": "grid = [[1,0,7],[2,0,6],[3,4,5],[0,3,0],[9,0,20]]",
+      "output": "28"
+    }
+  ],
+  "constraints": [
+    "m == len(grid)",
+    "n == len(grid[i])",
+    "1 <= m, n <= 15",
+    "0 <= grid[i][j] <= 100"
+  ],
+  "starterCode": "def getMaximumGold(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def getMaximumGold(grid: list[list[int]]) -> int:\n    m, n = len(grid), len(grid[0])\n    def dfs(r, c):\n        if r < 0 or r >= m or c < 0 or c >= n or grid[r][c] == 0: return 0\n        gold = grid[r][c]\n        grid[r][c] = 0\n        best = max(dfs(r+1, c), dfs(r-1, c), dfs(r, c+1), dfs(r, c-1))\n        grid[r][c] = gold\n        return gold + best\n    ans = 0\n    for i in range(m):\n        for j in range(n):\n            if grid[i][j] > 0: ans = max(ans, dfs(i, j))\n    return ans\n",
+  "functionName": "getMaximumGold",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            6,
+            0
+          ],
+          [
+            5,
+            8,
+            7
+          ],
+          [
+            0,
+            9,
+            0
+          ]
+        ]
+      ],
+      "expected": 24,
+      "inputDisplay": "[[0, 6, 0], [5, 8, 7], [0, 9, 0]]",
+      "expectedDisplay": "24",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            0,
+            7
+          ],
+          [
+            2,
+            0,
+            6
+          ],
+          [
+            3,
+            4,
+            5
+          ],
+          [
+            0,
+            3,
+            0
+          ],
+          [
+            9,
+            0,
+            20
+          ]
+        ]
+      ],
+      "expected": 28,
+      "inputDisplay": "[[1, 0, 7], [2, 0, 6], [3, 4, 5], [0, 3, 0], [9, 0, 20]]",
+      "expectedDisplay": "28",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Temporarily zero out grid[r][c] to prevent cycle, restore on backtracking."
+  ],
+  "python": {
+    "starterCode": "def getMaximumGold(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def getMaximumGold(grid: list[list[int]]) -> int:\n    m, n = len(grid), len(grid[0])\n    def dfs(r, c):\n        if r < 0 or r >= m or c < 0 or c >= n or grid[r][c] == 0: return 0\n        gold = grid[r][c]\n        grid[r][c] = 0\n        best = max(dfs(r+1, c), dfs(r-1, c), dfs(r, c+1), dfs(r, c-1))\n        grid[r][c] = gold\n        return gold + best\n    ans = 0\n    for i in range(m):\n        for j in range(n):\n            if grid[i][j] > 0: ans = max(ans, dfs(i, j))\n    return ans\n"
+  },
+  "leetcodeId": 1219,
+  "leetcodeTitle": "Path with Maximum Gold",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-path-max-gold/"
+}

@@ -73,6 +73,19 @@ export function createDefaultFrames(p: Partial<Problem>, tc: TestCase): Visualiz
     ];
   }
 
+  if (p.id === 'maximum-parentheses' && tc.input && Array.isArray(tc.input[2])) {
+    const chars = typeof tc.input[1] === 'string' ? tc.input[1].split('') : [];
+    const vals = tc.input[2];
+    return [
+      {
+        type: 'array',
+        array: chars.length <= 15 ? chars : chars.slice(0, 15),
+        secondaryArray: vals.length <= 15 ? vals : vals.slice(0, 15),
+        message: `Evaluating parentheses case: ${tc.inputDisplay}`,
+      },
+    ];
+  }
+
   // Default array visualizer frame
   return [
     {
@@ -98,24 +111,292 @@ function shuffle<T>(array: T[]): T[] {
  * Generates a randomized 10-floor roguelike dungeon run using the lightweight catalog.
  * Executes instantly without any network fetch.
  */
-export function generateDungeonRunCatalog(topic: DungeonTopic): CatalogEntry[] {
+export function generateDungeonRunCatalog(
+  topic: DungeonTopic,
+  excludeProblemIds: Set<string> = new Set()
+): CatalogEntry[] {
+  if (topic === 'security-sectors-trial') {
+    return [
+      {
+        id: 'koko-eating-bananas',
+        wingId: 'security-sectors-trial',
+        floor: 1,
+        title: 'Trial 1: Koko Eating Bananas (Binary Search on Answer)',
+        difficulty: 'medium',
+        visualizerType: 'array',
+        leetcodeId: 875,
+        leetcodeTitle: 'Koko Eating Bananas',
+        leetcodeUrl: 'https://leetcode.com/problems/koko-eating-bananas/',
+        monster: {
+          id: 'mon-trial-koko',
+          name: 'King Kong the Hoarder',
+          title: 'Guardian of Threshold Capacity',
+          maxHp: 8,
+          hp: 8,
+          sprite: 'golem',
+          color: '#06b6d4',
+          attackName: 'Banana Barrage',
+          attackPower: 1,
+          defeatQuote: 'Optimal eating speed found! You mastered Binary Search on Answer.',
+        },
+      },
+      {
+        id: 'graph-m-cheapest-flights-k-stops',
+        wingId: 'security-sectors-trial',
+        floor: 2,
+        title: 'Trial 2: Cheapest Flights Within K Stops (Budget Constraints)',
+        difficulty: 'medium',
+        visualizerType: 'graph',
+        leetcodeId: 787,
+        leetcodeTitle: 'Cheapest Flights Within K Stops',
+        leetcodeUrl: 'https://leetcode.com/problems/cheapest-flights-within-k-stops/',
+        monster: {
+          id: 'mon-trial-flights',
+          name: 'Aero Harpy',
+          title: 'Navigator of Constrained Airspace',
+          maxHp: 10,
+          hp: 10,
+          sprite: 'wraith',
+          color: '#f59e0b',
+          attackName: 'Sky Turbulence',
+          attackPower: 2,
+          defeatQuote: 'You learned how to prune and track budgeted hops (at most K steps)!',
+        },
+      },
+      {
+        id: 'graph-m-path-min-effort',
+        wingId: 'security-sectors-trial',
+        floor: 3,
+        title: 'Trial 3: Path with Minimum Effort (Graph Thresholding)',
+        difficulty: 'medium',
+        visualizerType: 'grid',
+        leetcodeId: 1631,
+        leetcodeTitle: 'Path with Minimum Effort',
+        leetcodeUrl: 'https://leetcode.com/problems/path-with-minimum-effort/',
+        monster: {
+          id: 'mon-trial-effort',
+          name: 'Crag Wyrm',
+          title: 'Sentinel of Maximum Edge Heights',
+          maxHp: 12,
+          hp: 12,
+          sprite: 'dragon',
+          color: '#8b5cf6',
+          attackName: 'Altitude Shear',
+          attackPower: 2,
+          defeatQuote: 'You conquered graph thresholding! Minimizing the maximum edge weight.',
+        },
+      },
+      {
+        id: 'graph-h-shortest-path-all-keys',
+        wingId: 'security-sectors-trial',
+        floor: 4,
+        title: 'Trial 4: Shortest Path to Get All Keys (Multi-State Bitmask BFS)',
+        difficulty: 'hard',
+        visualizerType: 'grid',
+        leetcodeId: 864,
+        leetcodeTitle: 'Shortest Path to Get All Keys',
+        leetcodeUrl: 'https://leetcode.com/problems/shortest-path-to-get-all-keys/',
+        monster: {
+          id: 'mon-trial-keys',
+          name: 'Keymaster Behemoth',
+          title: 'Keeper of Sector Bitmasks',
+          maxHp: 14,
+          hp: 14,
+          sprite: 'boss',
+          color: '#ec4899',
+          attackName: 'Cipher Wave',
+          attackPower: 3,
+          defeatQuote: 'You mastered state expansion (node, bitmask) in BFS!',
+        },
+      },
+      {
+        id: 'the-security-sectors-path-of-trials',
+        wingId: 'security-sectors-trial',
+        floor: 5,
+        title: 'Final Boss: The Security Sectors & Path of Trials',
+        difficulty: 'hard',
+        visualizerType: 'graph',
+        leetcodeId: null,
+        leetcodeTitle: 'The Security Sectors & Path of Trials (HackerRank Contest)',
+        leetcodeUrl: 'https://www.hackerrank.com/contests/spct2026batch-3-pretest-1/challenges/the-security-sectors-path-of-trials/problem',
+        monster: {
+          id: 'mon-security-overlord',
+          name: 'Malcor the Citadel Core',
+          title: 'Grand Sentinel of the High Firewall',
+          maxHp: 18,
+          hp: 18,
+          sprite: 'lich',
+          color: '#f43f5e',
+          attackName: 'Firewall Purge Pulse',
+          attackPower: 4,
+          defeatQuote: 'All 10 security sectors breached... the core firewall is conquered!',
+        },
+      },
+    ];
+  }
+
+  if (topic === 'maximum-parentheses-trial') {
+    return [
+      {
+        id: 'valid-parentheses',
+        wingId: 'maximum-parentheses-trial',
+        floor: 1,
+        title: 'Trial 1: Valid Parentheses (Prefix Balance & LIFO Stack)',
+        difficulty: 'easy',
+        visualizerType: 'stack',
+        leetcodeId: 20,
+        leetcodeTitle: 'Valid Parentheses',
+        leetcodeUrl: 'https://leetcode.com/problems/valid-parentheses/',
+        monster: {
+          id: 'mon-trial-valid-paren',
+          name: 'Gargoyle of the Outer Gate',
+          title: 'Sentinel of Balanced Enclosures',
+          maxHp: 8,
+          hp: 8,
+          sprite: 'golem',
+          color: '#06b6d4',
+          attackName: 'Brace Crush',
+          attackPower: 1,
+          defeatQuote: 'You understand the core law: brackets must open and close in exact parity!',
+        },
+      },
+      {
+        id: 'bsg-m-min-add-parentheses-valid',
+        wingId: 'maximum-parentheses-trial',
+        floor: 2,
+        title: 'Trial 2: Minimum Add to Make Parentheses Valid (Greedy Balance)',
+        difficulty: 'medium',
+        visualizerType: 'array',
+        leetcodeId: 921,
+        leetcodeTitle: 'Minimum Add to Make Parentheses Valid',
+        leetcodeUrl: 'https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/',
+        monster: {
+          id: 'mon-trial-min-add',
+          name: 'Specter of Stray Brackets',
+          title: 'Weaver of Deficit Counts',
+          maxHp: 10,
+          hp: 10,
+          sprite: 'wraith',
+          color: '#f59e0b',
+          attackName: 'Unpaired Strike',
+          attackPower: 2,
+          defeatQuote: 'You mastered greedy balance tracking of unmatched open and close counts!',
+        },
+      },
+      {
+        id: 'ds-h-longest-valid-parentheses',
+        wingId: 'maximum-parentheses-trial',
+        floor: 3,
+        title: 'Trial 3: Longest Valid Parentheses (Boundary Tracking)',
+        difficulty: 'hard',
+        visualizerType: 'stack',
+        leetcodeId: 32,
+        leetcodeTitle: 'Longest Valid Parentheses',
+        leetcodeUrl: 'https://leetcode.com/problems/longest-valid-parentheses/',
+        monster: {
+          id: 'mon-trial-longest-paren',
+          name: 'Hydra of Nested Spans',
+          title: 'Guardian of Substring Continuity',
+          maxHp: 12,
+          hp: 12,
+          sprite: 'dragon',
+          color: '#8b5cf6',
+          attackName: 'Cascading Parenthesis Surge',
+          attackPower: 2,
+          defeatQuote: 'Contiguous valid intervals mastered under dynamic stack boundaries!',
+        },
+      },
+      {
+        id: 'bsg-h-course-schedule-iii',
+        wingId: 'maximum-parentheses-trial',
+        floor: 4,
+        title: 'Trial 4: Course Schedule III (Priority Queue Regret Greedy)',
+        difficulty: 'hard',
+        visualizerType: 'array',
+        leetcodeId: 630,
+        leetcodeTitle: 'Course Schedule III',
+        leetcodeUrl: 'https://leetcode.com/problems/course-schedule-iii/',
+        monster: {
+          id: 'mon-trial-course-regret',
+          name: 'Chronos the Regret Sentinel',
+          title: 'Keeper of Optimal Replacements',
+          maxHp: 14,
+          hp: 14,
+          sprite: 'boss',
+          color: '#ec4899',
+          attackName: 'Temporal Eviction',
+          attackPower: 3,
+          defeatQuote: 'You mastered the Regret Greedy pattern with Max-Heaps!',
+        },
+      },
+      {
+        id: 'maximum-parentheses',
+        wingId: 'maximum-parentheses-trial',
+        floor: 5,
+        title: 'Final Boss: Maximum Parentheses',
+        difficulty: 'hard',
+        visualizerType: 'array',
+        leetcodeId: null,
+        leetcodeTitle: 'Maximum parentheses (HackerRank Contest)',
+        leetcodeUrl: 'https://www.hackerrank.com/contests/spct2026batch-1-pretest-1/challenges/maximum-parentheses/problem',
+        monster: {
+          id: 'mon-maximum-parentheses-boss',
+          name: 'Equilibria the Parity Overlord',
+          title: 'Arch-Master of Slope-Trick Matching',
+          maxHp: 18,
+          hp: 18,
+          sprite: 'lich',
+          color: '#8b5cf6',
+          attackName: 'Singularity Inversion Wave',
+          attackPower: 4,
+          defeatQuote: 'The balance is unbroken... You achieved optimal parentheses subsequence profit!',
+        },
+      },
+    ];
+  }
+
   const pool = problemCatalog.filter((p) => p.wingId === topic);
   const fallback = problemCatalog.filter((p) => p.wingId === 'data-structures');
-  const activePool = pool.length >= 10 ? pool : fallback;
+  const basePool = pool.length >= 10 ? pool : fallback;
+
+  // Filter out problems that the user has already passed
+  const unpassed = basePool.filter((p) => !excludeProblemIds.has(p.id));
+
+  // If there are enough unpassed problems in this wing, prioritize them!
+  // If the user conquered nearly all, supplement with mastered problems so a full 10-floor run completes.
+  let activePool: CatalogEntry[];
+  if (unpassed.length >= 10) {
+    activePool = unpassed;
+  } else if (unpassed.length > 0) {
+    const passed = basePool.filter((p) => excludeProblemIds.has(p.id));
+    activePool = [...unpassed, ...shuffle(passed)].slice(0, Math.max(10, unpassed.length));
+  } else {
+    // All problems in this wing have been conquered!
+    activePool = basePool;
+  }
 
   const easyPool = activePool.filter((p) => p.difficulty === 'easy');
   const mediumPool = activePool.filter((p) => p.difficulty === 'medium');
   const hardPool = activePool.filter((p) => p.difficulty === 'hard');
 
-  const hardCount = Math.min(hardPool.length, Math.random() < 0.5 ? 2 : 3);
-  const mediumCount = Math.min(mediumPool.length, 10 - hardCount >= 8 ? 4 : 3);
-  const easyCount = 10 - hardCount - mediumCount;
+  // Progression: Heavily weighted toward Medium and Hard (1-2 Easy, 5-6 Medium, 3-4 Hard)
+  const hardCount = Math.min(hardPool.length, Math.random() < 0.5 ? 4 : 3);
+  const easyCount = Math.min(easyPool.length, Math.random() < 0.5 ? 1 : 2);
+  const mediumCount = Math.max(0, 10 - hardCount - easyCount);
 
   const selectedEasy = shuffle(easyPool).slice(0, easyCount);
   const selectedMedium = shuffle(mediumPool).slice(0, mediumCount);
   const selectedHard = shuffle(hardPool).slice(0, hardCount);
 
-  const rawSelection = [...selectedEasy, ...selectedMedium, ...selectedHard];
+  // Progressive dungeon difficulty order: Easy -> Medium -> Hard
+  let rawSelection = [...selectedEasy, ...selectedMedium, ...selectedHard];
+
+  // If counts were short due to pool size, pad from activePool
+  if (rawSelection.length < 10) {
+    const existingIds = new Set(rawSelection.map((p) => p.id));
+    const remainder = shuffle(activePool.filter((p) => !existingIds.has(p.id)));
+    rawSelection = [...rawSelection, ...remainder].slice(0, 10);
+  }
 
   return rawSelection.map((p, idx) => {
     const floorNum = idx + 1;
@@ -230,9 +511,9 @@ export const defaultInitialProblem: Problem = {
     '-10^9 <= nums[i] <= 10^9',
     'Exactly one valid answer exists.',
   ],
-  starterCode: 'function twoSum(nums, target) {\n  return [];\n}',
+  starterCode: 'def twoSum(nums: list[int], target: int) -> list[int]:\n    return []\n',
   solutionCode:
-    'function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const complement = target - nums[i];\n    if (map.has(complement)) {\n      return [map.get(complement), i];\n    }\n    map.set(nums[i], i);\n  }\n  return [];\n}',
+    'def twoSum(nums: list[int], target: int) -> list[int]:\n    seen = {}\n    for i, num in enumerate(nums):\n        comp = target - num\n        if comp in seen:\n            return [seen[comp], i]\n        seen[num] = i\n    return []\n',
   functionName: 'twoSum',
   testCases: [
     {

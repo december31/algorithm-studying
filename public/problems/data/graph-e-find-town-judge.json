@@ -1,0 +1,114 @@
+{
+  "id": "graph-e-find-town-judge",
+  "wingId": "graphs",
+  "floor": 303,
+  "title": "Find the Town Judge",
+  "difficulty": "easy",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-e-find-town-judge",
+    "name": "Shadow Magistrate",
+    "title": "Unanimous Arbiter of Trust",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "ghost",
+    "color": "#8b5cf6",
+    "attackName": "Verdict of Silence",
+    "attackPower": 1,
+    "defeatQuote": "The sole citizen trusted by all who trusts none uncovered!"
+  },
+  "description": "In a town of `n` people labeled `1` to `n`, there is a rumor that one of these people is secretly the town judge. If the judge exists: 1. The town judge trusts nobody. 2. Everybody else trusts the town judge. 3. There is exactly one person that satisfies properties 1 and 2. Given `trust` array where `trust[i] = [ai, bi]`, return the label of the town judge if they exist, or `-1`.",
+  "examples": [
+    {
+      "input": "n = 2, trust = [[1,2]]",
+      "output": "2"
+    },
+    {
+      "input": "n = 3, trust = [[1,3],[2,3]]",
+      "output": "3"
+    },
+    {
+      "input": "n = 3, trust = [[1,3],[2,3],[3,1]]",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 1000",
+    "0 <= trust.length <= 10000"
+  ],
+  "starterCode": "def findJudge(n: int, trust: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def findJudge(n: int, trust: list[list[int]]) -> int:\n    net_trust = [0] * (n + 1)\n    for a, b in trust:\n        net_trust[a] -= 1\n        net_trust[b] += 1\n    for i in range(1, n + 1):\n        if net_trust[i] == n - 1:\n            return i\n    return -1\n",
+  "functionName": "findJudge",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2,
+        [
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[2, [[1, 2]]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[3, [[1, 3], [2, 3]]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        3,
+        [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            1
+          ]
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[3, [[1, 3], [2, 3], [3, 1]]]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Track in-degree minus out-degree for each person. The judge must have net degree n - 1."
+  ],
+  "python": {
+    "starterCode": "def findJudge(n: int, trust: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def findJudge(n: int, trust: list[list[int]]) -> int:\n    net_trust = [0] * (n + 1)\n    for a, b in trust:\n        net_trust[a] -= 1\n        net_trust[b] += 1\n    for i in range(1, n + 1):\n        if net_trust[i] == n - 1:\n            return i\n    return -1\n"
+  },
+  "leetcodeId": 997,
+  "leetcodeTitle": "Find the Town Judge",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-e-find-town-judge/"
+}

@@ -33,8 +33,8 @@
     "0 <= s.length <= 3 * 10^4",
     "1 <= g[i], s[j] <= 2^31 - 1"
   ],
-  "starterCode": "function findContentChildren(g, s) {\n  return 0;\n}",
-  "solutionCode": "function findContentChildren(g, s) {\n  g.sort((a, b) => a - b);\n  s.sort((a, b) => a - b);\n  let child = 0, cookie = 0;\n  while (child < g.length && cookie < s.length) {\n    if (s[cookie] >= g[child]) {\n      child++;\n    }\n    cookie++;\n  }\n  return child;\n}",
+  "starterCode": "def findContentChildren(g, s):\n    return 0\n",
+  "solutionCode": "def findContentChildren(g, s):\n    g.sort()\n    s.sort()\n    child, cookie = 0, 0\n    while child < len(g) and cookie < len(s):\n        if s[cookie] >= g[child]:\n            child += 1\n        cookie += 1\n    return child\n",
   "functionName": "findContentChildren",
   "testCases": [
     {

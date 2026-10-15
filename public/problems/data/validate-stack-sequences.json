@@ -33,8 +33,8 @@
     "0 <= pushed[i] <= 1000",
     "pushed.length == popped.length"
   ],
-  "starterCode": "function validateStackSequences(pushed, popped) {\n  return false;\n}",
-  "solutionCode": "function validateStackSequences(pushed, popped) {\n  const stack = [];\n  let j = 0;\n  for (const x of pushed) {\n    stack.push(x);\n    while (stack.length > 0 && j < popped.length && stack[stack.length - 1] === popped[j]) {\n      stack.pop();\n      j++;\n    }\n  }\n  return j === popped.length;\n}",
+  "starterCode": "def validateStackSequences(pushed, popped):\n    return False\n",
+  "solutionCode": "def validateStackSequences(pushed, popped):\n    stack = []\n    j = 0\n    for x in pushed:\n        stack.append(x)\n        while stack and j < len(popped) and stack[-1] == popped[j]:\n            stack.pop()\n            j += 1\n    return j == len(popped)\n",
   "functionName": "validateStackSequences",
   "testCases": [
     {

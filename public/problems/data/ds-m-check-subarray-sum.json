@@ -1,0 +1,122 @@
+{
+  "id": "ds-m-check-subarray-sum",
+  "wingId": "data-structures",
+  "floor": 147,
+  "title": "Continuous Subarray Sum Multiple",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-check-subarray-sum",
+    "name": "Modular Golem",
+    "title": "Clockwork Keeper of Modulo Rings",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Modulo Quake",
+    "attackPower": 2,
+    "defeatQuote": "Matching remainder seen at least 2 steps prior proved divisibility!"
+  },
+  "description": "Given an integer array `nums` and an integer `k`, return `True` if `nums` has a good subarray of length at least 2 whose sum is a multiple of `k`, or `False` otherwise.",
+  "examples": [
+    {
+      "input": "nums = [23,2,4,6,7], k = 6",
+      "output": "True"
+    },
+    {
+      "input": "nums = [23,2,6,4,7], k = 6",
+      "output": "True"
+    },
+    {
+      "input": "nums = [23,2,6,4,7], k = 13",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 10^5",
+    "0 <= nums[i] <= 10^9",
+    "1 <= k <= 2^31 - 1"
+  ],
+  "starterCode": "def checkSubarraySum(nums: list[int], k: int) -> bool:\n    pass\n",
+  "solutionCode": "def checkSubarraySum(nums: list[int], k: int) -> bool:\n    rem_map = {0: -1}\n    curr = 0\n    for i, n in enumerate(nums):\n        curr = (curr + n) % k\n        if curr in rem_map:\n            if i - rem_map[curr] >= 2:\n                return True\n        else:\n            rem_map[curr] = i\n    return False\n",
+  "functionName": "checkSubarraySum",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          23,
+          2,
+          4,
+          6,
+          7
+        ],
+        6
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[23, 2, 4, 6, 7], 6]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          23,
+          2,
+          6,
+          4,
+          7
+        ],
+        6
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[23, 2, 6, 4, 7], 6]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          23,
+          2,
+          6,
+          4,
+          7
+        ],
+        13
+      ],
+      "expected": false,
+      "inputDisplay": "args=[[23, 2, 6, 4, 7], 13]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          5,
+          0,
+          0,
+          0
+        ],
+        3
+      ],
+      "expected": true,
+      "inputDisplay": "args=[[5, 0, 0, 0], 3]",
+      "expectedDisplay": "True",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Store earliest index of each prefix remainder mod k. If same remainder occurs at index j with j - i >= 2, the subarray sum is divisible by k."
+  ],
+  "python": {
+    "starterCode": "def checkSubarraySum(nums: list[int], k: int) -> bool:\n    pass\n",
+    "solutionCode": "def checkSubarraySum(nums: list[int], k: int) -> bool:\n    rem_map = {0: -1}\n    curr = 0\n    for i, n in enumerate(nums):\n        curr = (curr + n) % k\n        if curr in rem_map:\n            if i - rem_map[curr] >= 2:\n                return True\n        else:\n            rem_map[curr] = i\n    return False\n"
+  },
+  "leetcodeId": 523,
+  "leetcodeTitle": "Continuous Subarray Sum Multiple",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-check-subarray-sum/"
+}

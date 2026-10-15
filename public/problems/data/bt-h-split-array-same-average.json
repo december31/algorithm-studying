@@ -1,0 +1,82 @@
+{
+  "id": "bt-h-split-array-same-average",
+  "wingId": "backtracking",
+  "floor": 285,
+  "title": "Split Array With Same Average",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-split-array-same-average",
+    "name": "Equi-Average Golem",
+    "title": "Balancer of Subset Means",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Average Slam",
+    "attackPower": 3,
+    "defeatQuote": "Subsets A and B had identical averages!"
+  },
+  "description": "You are given an integer array `nums`. You should move each element of `nums` into either the array `A` or the array `B` such that `A` and `B` are non-empty, and `average(A) == average(B)`. Return `True` if it is possible to achieve that and `False` otherwise.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,4,5,6,7,8]",
+      "output": "True"
+    },
+    {
+      "input": "nums = [3,1]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 30",
+    "0 <= nums[i] <= 10^4"
+  ],
+  "starterCode": "def splitArraySameAverage(nums: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def splitArraySameAverage(nums: list[int]) -> bool:\n    n = len(nums)\n    total = sum(nums)\n    m = n // 2\n    # sum(A) / len(A) == total / n  => sum(A) = total * len(A) / n (must be integer)\n    possible = any((total * k) % n == 0 for k in range(1, m + 1))\n    if not possible: return False\n    dp = [set() for _ in range(m + 1)]\n    dp[0].add(0)\n    for num in nums:\n        for k in range(m, 0, -1):\n            for s in dp[k - 1]:\n                dp[k].add(s + num)\n    for k in range(1, m + 1):\n        if (total * k) % n == 0 and (total * k) // n in dp[k]:\n            return True\n    return False\n",
+  "functionName": "splitArraySameAverage",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1, 2, 3, 4, 5, 6, 7, 8]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          1
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[3, 1]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "sum(A) = (total * k) / n. Check if any subset of size k has this sum using set DP."
+  ],
+  "python": {
+    "starterCode": "def splitArraySameAverage(nums: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def splitArraySameAverage(nums: list[int]) -> bool:\n    n = len(nums)\n    total = sum(nums)\n    m = n // 2\n    # sum(A) / len(A) == total / n  => sum(A) = total * len(A) / n (must be integer)\n    possible = any((total * k) % n == 0 for k in range(1, m + 1))\n    if not possible: return False\n    dp = [set() for _ in range(m + 1)]\n    dp[0].add(0)\n    for num in nums:\n        for k in range(m, 0, -1):\n            for s in dp[k - 1]:\n                dp[k].add(s + num)\n    for k in range(1, m + 1):\n        if (total * k) % n == 0 and (total * k) // n in dp[k]:\n            return True\n    return False\n"
+  },
+  "leetcodeId": 805,
+  "leetcodeTitle": "Split Array With Same Average",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-split-array-same-average/"
+}

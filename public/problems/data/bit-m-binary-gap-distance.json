@@ -1,0 +1,83 @@
+{
+  "id": "bit-m-binary-gap-distance",
+  "wingId": "bit-manipulation",
+  "floor": 561,
+  "title": "Binary Gap (Longest Consecutive 1-Bit Distance)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-binary-gap-distance",
+    "name": "Gap Wyrm",
+    "title": "Surveyor of Gaps Between Set Bits",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#06b6d4",
+    "attackName": "Gap Stride",
+    "attackPower": 2,
+    "defeatQuote": "Maximum distance between two consecutive 1-bits found!"
+  },
+  "description": "Given a positive integer `n`, find and return the longest distance between any two adjacent 1's in the binary representation of `n`. If there are no two adjacent 1's, return 0.",
+  "examples": [
+    {
+      "input": "n = 22",
+      "output": "2"
+    },
+    {
+      "input": "n = 8",
+      "output": "0"
+    },
+    {
+      "input": "n = 5",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 10^9"
+  ],
+  "starterCode": "def binaryGap(n: int) -> int:\n    pass\n",
+  "solutionCode": "def binaryGap(n: int) -> int:\n    last = -1\n    max_gap = 0\n    for i in range(32):\n        if (n >> i) & 1:\n            if last != -1:\n                max_gap = max(max_gap, i - last)\n            last = i\n    return max_gap\n",
+  "functionName": "binaryGap",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        22
+      ],
+      "expected": 2,
+      "inputDisplay": "22",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        8
+      ],
+      "expected": 0,
+      "inputDisplay": "8",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        5
+      ],
+      "expected": 2,
+      "inputDisplay": "5",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Iterate bit indices tracking position of the previous set bit."
+  ],
+  "python": {
+    "starterCode": "def binaryGap(n: int) -> int:\n    pass\n",
+    "solutionCode": "def binaryGap(n: int) -> int:\n    last = -1\n    max_gap = 0\n    for i in range(32):\n        if (n >> i) & 1:\n            if last != -1:\n                max_gap = max(max_gap, i - last)\n            last = i\n    return max_gap\n"
+  },
+  "leetcodeId": 868,
+  "leetcodeTitle": "Binary Gap (Longest Consecutive 1-Bit Distance)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-binary-gap-distance/"
+}

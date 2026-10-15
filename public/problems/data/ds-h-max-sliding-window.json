@@ -1,0 +1,126 @@
+{
+  "id": "ds-h-max-sliding-window",
+  "wingId": "data-structures",
+  "floor": 174,
+  "title": "Sliding Window Maximum",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-h-max-sliding-window",
+    "name": "Apex Wyrm",
+    "title": "Culler of Non-Maximal Nodes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#f59e0b",
+    "attackName": "Apex Flare",
+    "attackPower": 3,
+    "defeatQuote": "Monotonic deque maintained the rolling maximum in O(n)!"
+  },
+  "description": "You are given an array of integers `nums`, there is a sliding window of size `k` which is moving from the very left of the array to the very right. You can only see the `k` numbers in the window. Return the max sliding window.",
+  "examples": [
+    {
+      "input": "nums = [1,3,-1,-3,5,3,6,7], k = 3",
+      "output": "[3,3,5,5,6,7]"
+    },
+    {
+      "input": "nums = [1], k = 1",
+      "output": "[1]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 10^5",
+    "-10^4 <= nums[i] <= 10^4",
+    "1 <= k <= len(nums)"
+  ],
+  "starterCode": "def maxSlidingWindow(nums: list[int], k: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def maxSlidingWindow(nums: list[int], k: int) -> list[int]:\n    from collections import deque\n    q = deque()\n    res = []\n    for i, n in enumerate(nums):\n        while q and nums[q[-1]] <= n:\n            q.pop()\n        q.append(i)\n        if q[0] <= i - k:\n            q.popleft()\n        if i >= k - 1:\n            res.append(nums[q[0]])\n    return res\n",
+  "functionName": "maxSlidingWindow",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3,
+          -1,
+          -3,
+          5,
+          3,
+          6,
+          7
+        ],
+        3
+      ],
+      "expected": [
+        3,
+        3,
+        5,
+        5,
+        6,
+        7
+      ],
+      "inputDisplay": "args=[[1, 3, -1, -3, 5, 3, 6, 7], 3]",
+      "expectedDisplay": "[3, 3, 5, 5, 6, 7]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "args=[[1], 1]",
+      "expectedDisplay": "[1]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          -1
+        ],
+        1
+      ],
+      "expected": [
+        1,
+        -1
+      ],
+      "inputDisplay": "args=[[1, -1], 1]",
+      "expectedDisplay": "[1, -1]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          9,
+          11
+        ],
+        2
+      ],
+      "expected": [
+        11
+      ],
+      "inputDisplay": "args=[[9, 11], 2]",
+      "expectedDisplay": "[11]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use a monotonic decreasing deque storing indices. The front always holds the maximum."
+  ],
+  "python": {
+    "starterCode": "def maxSlidingWindow(nums: list[int], k: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def maxSlidingWindow(nums: list[int], k: int) -> list[int]:\n    from collections import deque\n    q = deque()\n    res = []\n    for i, n in enumerate(nums):\n        while q and nums[q[-1]] <= n:\n            q.pop()\n        q.append(i)\n        if q[0] <= i - k:\n            q.popleft()\n        if i >= k - 1:\n            res.append(nums[q[0]])\n    return res\n"
+  },
+  "leetcodeId": 239,
+  "leetcodeTitle": "Sliding Window Maximum",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-max-sliding-window/"
+}

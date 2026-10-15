@@ -1,0 +1,77 @@
+{
+  "id": "bit-m-gray-code-sequence",
+  "wingId": "bit-manipulation",
+  "floor": 515,
+  "title": "Gray Code (Single Bit Flips)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-gray-code-sequence",
+    "name": "Reflected Code Archon",
+    "title": "Architect of Single-Bit Transitions",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wizard",
+    "color": "#f59e0b",
+    "attackName": "Gray Pulse",
+    "attackPower": 2,
+    "defeatQuote": "N-bit Gray code sequence where successive values differ by exactly 1 bit!"
+  },
+  "description": "An n-bit Gray code sequence is a sequence of `2^n` integers where: 1. Every integer is in the inclusive range `[0, 2^n - 1]`. 2. The first integer is 0. 3. The binary representation of adjacent integers differs by exactly one bit. Given an integer `n`, return any valid n-bit Gray code sequence.",
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "[0,1,3,2]"
+    },
+    {
+      "input": "n = 1",
+      "output": "[0,1]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 16"
+  ],
+  "starterCode": "def grayCode(n: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def grayCode(n: int) -> list[int]:\n    return [i ^ (i >> 1) for i in range(1 << n)]\n",
+  "functionName": "grayCode",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2
+      ],
+      "expected": [
+        0,
+        1,
+        3,
+        2
+      ],
+      "inputDisplay": "2",
+      "expectedDisplay": "[0, 1, 3, 2]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "[0, 1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Direct formula: the i-th Gray code element is i ^ (i >> 1)."
+  ],
+  "python": {
+    "starterCode": "def grayCode(n: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def grayCode(n: int) -> list[int]:\n    return [i ^ (i >> 1) for i in range(1 << n)]\n"
+  },
+  "leetcodeId": 89,
+  "leetcodeTitle": "Gray Code (Single Bit Flips)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-gray-code-sequence/"
+}

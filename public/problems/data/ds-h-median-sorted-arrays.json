@@ -1,0 +1,100 @@
+{
+  "id": "ds-h-median-sorted-arrays",
+  "wingId": "data-structures",
+  "floor": 199,
+  "title": "Median of Two Sorted Arrays",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-h-median-sorted-arrays",
+    "name": "Dual-Stream Sphinx",
+    "title": "Gatekeeper of the Halfway Partition",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "beholder",
+    "color": "#8b5cf6",
+    "attackName": "Binary Partition Gaze",
+    "attackPower": 3,
+    "defeatQuote": "Binary searching the partition of the shorter array solved in O(log(min(m, n)))!"
+  },
+  "description": "Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the median of the two sorted arrays. The overall run time complexity should be `O(log (m+n))`.",
+  "examples": [
+    {
+      "input": "nums1 = [1,3], nums2 = [2]",
+      "output": "2.0"
+    },
+    {
+      "input": "nums1 = [1,2], nums2 = [3,4]",
+      "output": "2.5"
+    }
+  ],
+  "constraints": [
+    "0 <= len(nums1), len(nums2) <= 1000",
+    "1 <= len(nums1) + len(nums2) <= 2000"
+  ],
+  "starterCode": "def findMedianSortedArrays(nums1: list[int], nums2: list[int]) -> float:\n    pass\n",
+  "solutionCode": "def findMedianSortedArrays(nums1: list[int], nums2: list[int]) -> float:\n    A, B = nums1, nums2\n    total = len(nums1) + len(nums2)\n    half = total // 2\n    if len(B) < len(A): A, B = B, A\n    l, r = 0, len(A) - 1\n    while True:\n        i = (l + r) // 2\n        j = half - i - 2\n        Aleft = A[i] if i >= 0 else float('-inf')\n        Aright = A[i + 1] if (i + 1) < len(A) else float('inf')\n        Bleft = B[j] if j >= 0 else float('-inf')\n        Bright = B[j + 1] if (j + 1) < len(B) else float('inf')\n        if Aleft <= Bright and Bleft <= Aright:\n            if total % 2:\n                return float(min(Aright, Bright))\n            return (max(Aleft, Bleft) + min(Aright, Bright)) / 2.0\n        elif Aleft > Bright:\n            r = i - 1\n        else:\n            l = i + 1\n",
+  "functionName": "findMedianSortedArrays",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": 2.0,
+      "inputDisplay": "args=[[1, 3], [2]]",
+      "expectedDisplay": "2.0",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "expected": 2.5,
+      "inputDisplay": "args=[[1, 2], [3, 4]]",
+      "expectedDisplay": "2.5",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 0.0,
+      "inputDisplay": "args=[[0, 0], [0, 0]]",
+      "expectedDisplay": "0.0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search partition in the smaller array such that max(left) <= min(right)."
+  ],
+  "python": {
+    "starterCode": "def findMedianSortedArrays(nums1: list[int], nums2: list[int]) -> float:\n    pass\n",
+    "solutionCode": "def findMedianSortedArrays(nums1: list[int], nums2: list[int]) -> float:\n    A, B = nums1, nums2\n    total = len(nums1) + len(nums2)\n    half = total // 2\n    if len(B) < len(A): A, B = B, A\n    l, r = 0, len(A) - 1\n    while True:\n        i = (l + r) // 2\n        j = half - i - 2\n        Aleft = A[i] if i >= 0 else float('-inf')\n        Aright = A[i + 1] if (i + 1) < len(A) else float('inf')\n        Bleft = B[j] if j >= 0 else float('-inf')\n        Bright = B[j + 1] if (j + 1) < len(B) else float('inf')\n        if Aleft <= Bright and Bleft <= Aright:\n            if total % 2:\n                return float(min(Aright, Bright))\n            return (max(Aleft, Bleft) + min(Aright, Bright)) / 2.0\n        elif Aleft > Bright:\n            r = i - 1\n        else:\n            l = i + 1\n"
+  },
+  "leetcodeId": 4,
+  "leetcodeTitle": "Median of Two Sorted Arrays",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-median-sorted-arrays/"
+}

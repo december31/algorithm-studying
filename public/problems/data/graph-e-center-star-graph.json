@@ -1,0 +1,100 @@
+{
+  "id": "graph-e-center-star-graph",
+  "wingId": "graphs",
+  "floor": 305,
+  "title": "Find Center of Star Graph",
+  "difficulty": "easy",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-e-center-star-graph",
+    "name": "Astral Core",
+    "title": "Nexus of Radiant Edges",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "spectre",
+    "color": "#ec4899",
+    "attackName": "Star Flare",
+    "attackPower": 1,
+    "defeatQuote": "Universal hub node connected to all other nodes identified!"
+  },
+  "description": "There is an undirected star graph consisting of `n` nodes labeled from `1` to `n`. A star graph is a graph where there is one center node and exactly `n - 1` edges that connect the center node with every other node. Given the 2D integer array `edges` where each `edges[i] = [ui, vi]`, return the center of the given star graph.",
+  "examples": [
+    {
+      "input": "edges = [[1,2],[2,3],[4,2]]",
+      "output": "2"
+    },
+    {
+      "input": "edges = [[1,2],[5,1],[1,3],[1,4]]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "3 <= n <= 100000",
+    "edges.length == n - 1"
+  ],
+  "starterCode": "def findCenter(edges: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def findCenter(edges: list[list[int]]) -> int:\n    if edges[0][0] == edges[1][0] or edges[0][0] == edges[1][1]:\n        return edges[0][0]\n    return edges[0][1]\n",
+  "functionName": "findCenter",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            2
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[[1, 2], [2, 3], [4, 2]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[1, 2], [5, 1], [1, 3], [1, 4]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "The center node must appear in every edge, so it appears in both the first and second edge."
+  ],
+  "python": {
+    "starterCode": "def findCenter(edges: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def findCenter(edges: list[list[int]]) -> int:\n    if edges[0][0] == edges[1][0] or edges[0][0] == edges[1][1]:\n        return edges[0][0]\n    return edges[0][1]\n"
+  },
+  "leetcodeId": 1791,
+  "leetcodeTitle": "Find Center of Star Graph",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-e-center-star-graph/"
+}

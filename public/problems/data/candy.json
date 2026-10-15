@@ -33,8 +33,8 @@
     "1 <= n <= 2 * 10^4",
     "0 <= ratings[i] <= 2 * 10^4"
   ],
-  "starterCode": "function candy(ratings) {\n  return 0;\n}",
-  "solutionCode": "function candy(ratings) {\n  const n = ratings.length;\n  const candies = new Array(n).fill(1);\n  // Left-to-right pass\n  for (let i = 1; i < n; i++) {\n    if (ratings[i] > ratings[i - 1]) candies[i] = candies[i - 1] + 1;\n  }\n  // Right-to-left pass\n  for (let i = n - 2; i >= 0; i--) {\n    if (ratings[i] > ratings[i + 1]) candies[i] = Math.max(candies[i], candies[i + 1] + 1);\n  }\n  return candies.reduce((a, b) => a + b, 0);\n}",
+  "starterCode": "def candy(ratings):\n    return 0\n",
+  "solutionCode": "def candy(ratings):\n    n = len(ratings)\n    candies = [1] * n\n    for i in range(1, n):\n        if ratings[i] > ratings[i - 1]:\n            candies[i] = candies[i - 1] + 1\n    for i in range(n - 2, -1, -1):\n        if ratings[i] > ratings[i + 1]:\n            candies[i] = max(candies[i], candies[i + 1] + 1)\n    return sum(candies)\n",
   "functionName": "candy",
   "testCases": [
     {

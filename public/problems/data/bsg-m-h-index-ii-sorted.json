@@ -1,0 +1,79 @@
+{
+  "id": "bsg-m-h-index-ii-sorted",
+  "wingId": "binary-search-greedy",
+  "floor": 438,
+  "title": "H-Index II (Sorted Citations)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-h-index-ii-sorted",
+    "name": "Citation Scholar",
+    "title": "Measurer of Academic Impact",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wizard",
+    "color": "#10b981",
+    "attackName": "Scholar Quill",
+    "attackPower": 2,
+    "defeatQuote": "H-Index computed in logarithmic time on pre-sorted citations!"
+  },
+  "description": "Given an array of integers `citations` where `citations[i]` is the number of citations a researcher received for their `i`-th paper and `citations` is sorted in ascending order, return the researcher's h-index.",
+  "examples": [
+    {
+      "input": "citations = [0,1,3,5,6]",
+      "output": "3"
+    },
+    {
+      "input": "citations = [1,2,100]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= citations.length <= 100000"
+  ],
+  "starterCode": "def hIndex(citations: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def hIndex(citations: list[int]) -> int:\n    n = len(citations)\n    lo, hi = 0, n - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if citations[mid] == n - mid:\n            return n - mid\n        elif citations[mid] < n - mid:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return n - lo\n",
+  "functionName": "hIndex",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          0,
+          1,
+          3,
+          5,
+          6
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[0, 1, 3, 5, 6]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          100
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 2, 100]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search for the index where citations[mid] >= n - mid."
+  ],
+  "python": {
+    "starterCode": "def hIndex(citations: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def hIndex(citations: list[int]) -> int:\n    n = len(citations)\n    lo, hi = 0, n - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if citations[mid] == n - mid:\n            return n - mid\n        elif citations[mid] < n - mid:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return n - lo\n"
+  },
+  "leetcodeId": 275,
+  "leetcodeTitle": "H-Index II (Sorted Citations)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-h-index-ii-sorted/"
+}

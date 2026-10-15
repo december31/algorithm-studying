@@ -1,0 +1,100 @@
+{
+  "id": "graph-m-mst-total-weight",
+  "wingId": "graphs",
+  "floor": 369,
+  "title": "Minimum Spanning Tree Total Weight (Kruskal)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-mst-total-weight",
+    "name": "Spanning Titan",
+    "title": "Binder of Minimal Undirected Trees",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "titan",
+    "color": "#38bdf8",
+    "attackName": "Granite Bond",
+    "attackPower": 2,
+    "defeatQuote": "Minimal total weight to span all vertices without cycles calculated!"
+  },
+  "description": "Given `n` vertices (0 to n - 1) and an undirected weighted edge list `edges` where `edges[i] = [ui, vi, weighti]`, return the total weight of the Minimum Spanning Tree (MST). If the graph is not connected, return -1.",
+  "examples": [
+    {
+      "input": "n = 4, edges = [[0,1,1],[1,2,2],[2,3,3],[0,3,4],[0,2,5]]",
+      "output": "6"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 1000",
+    "0 <= edges.length <= 5000"
+  ],
+  "starterCode": "def minSpanningTreeWeight(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minSpanningTreeWeight(n: int, edges: list[list[int]]) -> int:\n    if n <= 1: return 0\n    edges.sort(key=lambda x: x[2])\n    parent = list(range(n))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    mst_weight = 0\n    edges_count = 0\n    for u, v, w in edges:\n        ru, rv = find(u), find(v)\n        if ru != rv:\n            parent[ru] = rv\n            mst_weight += w\n            edges_count += 1\n            if edges_count == n - 1: return mst_weight\n    return -1\n",
+  "functionName": "minSpanningTreeWeight",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            2
+          ],
+          [
+            2,
+            3,
+            3
+          ],
+          [
+            0,
+            3,
+            4
+          ],
+          [
+            0,
+            2,
+            5
+          ]
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "args=[4, [[0, 1, 1], [1, 2, 2], [2, 3, 3], [0, 3, 4], [0, 2, 5]]]",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1,
+            5
+          ]
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[3, [[0, 1, 5]]]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Kruskal's algorithm with DSU. Verify n - 1 edges are accepted."
+  ],
+  "python": {
+    "starterCode": "def minSpanningTreeWeight(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minSpanningTreeWeight(n: int, edges: list[list[int]]) -> int:\n    if n <= 1: return 0\n    edges.sort(key=lambda x: x[2])\n    parent = list(range(n))\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    mst_weight = 0\n    edges_count = 0\n    for u, v, w in edges:\n        ru, rv = find(u), find(v)\n        if ru != rv:\n            parent[ru] = rv\n            mst_weight += w\n            edges_count += 1\n            if edges_count == n - 1: return mst_weight\n    return -1\n"
+  },
+  "leetcodeId": 1489,
+  "leetcodeTitle": "Minimum Spanning Tree Total Weight (Kruskal)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-mst-total-weight/"
+}

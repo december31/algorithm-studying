@@ -1,0 +1,86 @@
+{
+  "id": "graph-m-course-schedule-i",
+  "wingId": "graphs",
+  "floor": 316,
+  "title": "Course Schedule (Cycle Detection)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-course-schedule-i",
+    "name": "Academic Lich",
+    "title": "Enforcer of Circular Curricula",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#ef4444",
+    "attackName": "Paradox Curse",
+    "attackPower": 2,
+    "defeatQuote": "Curriculum graph analyzed for directed cycles!"
+  },
+  "description": "There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]` indicates that you must take course `bi` first if you want to take course `ai`. Return `True` if you can finish all courses. Otherwise, return `False`.",
+  "examples": [
+    {
+      "input": "numCourses = 2, prerequisites = [[1,0]]",
+      "output": "True"
+    },
+    {
+      "input": "numCourses = 2, prerequisites = [[1,0],[0,1]]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= numCourses <= 2000",
+    "0 <= prerequisites.length <= 5000"
+  ],
+  "starterCode": "def canFinish(numCourses: int, prerequisites: list[list[int]]) -> bool:\n    pass\n",
+  "solutionCode": "def canFinish(numCourses: int, prerequisites: list[list[int]]) -> bool:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    in_deg = [0] * numCourses\n    for u, v in prerequisites:\n        adj[v].append(u)\n        in_deg[u] += 1\n    q = deque([i for i in range(numCourses) if in_deg[i] == 0])\n    visited = 0\n    while q:\n        curr = q.popleft()\n        visited += 1\n        for nxt in adj[curr]:\n            in_deg[nxt] -= 1\n            if in_deg[nxt] == 0: q.append(nxt)\n    return visited == numCourses\n",
+  "functionName": "canFinish",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2,
+        [
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "args=[2, [[1, 0]]]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        2,
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "args=[2, [[1, 0], [0, 1]]]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Kahn's algorithm using in-degrees: if total processed nodes equals numCourses, no cycle exists."
+  ],
+  "python": {
+    "starterCode": "def canFinish(numCourses: int, prerequisites: list[list[int]]) -> bool:\n    pass\n",
+    "solutionCode": "def canFinish(numCourses: int, prerequisites: list[list[int]]) -> bool:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    in_deg = [0] * numCourses\n    for u, v in prerequisites:\n        adj[v].append(u)\n        in_deg[u] += 1\n    q = deque([i for i in range(numCourses) if in_deg[i] == 0])\n    visited = 0\n    while q:\n        curr = q.popleft()\n        visited += 1\n        for nxt in adj[curr]:\n            in_deg[nxt] -= 1\n            if in_deg[nxt] == 0: q.append(nxt)\n    return visited == numCourses\n"
+  },
+  "leetcodeId": 207,
+  "leetcodeTitle": "Course Schedule (Cycle Detection)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-course-schedule-i/"
+}

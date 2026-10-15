@@ -1,0 +1,78 @@
+{
+  "id": "graph-m-reconstruct-itinerary",
+  "wingId": "graphs",
+  "floor": 338,
+  "title": "Reconstruct Itinerary (Hierholzer Algorithm)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-reconstruct-itinerary",
+    "name": "Aero Drake Sovereign",
+    "title": "Flier of the Lexicographical Euler Trail",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#38bdf8",
+    "attackName": "Flight Vortex",
+    "attackPower": 2,
+    "defeatQuote": "Eulerian path visiting every flight ticket in lexical order created!"
+  },
+  "description": "You are given a list of airline `tickets` where `tickets[i] = [fromi, toi]`. Reconstruct the itinerary in order and return it. All tickets must be used. Itinerary must begin with `'JFK'`. If there are multiple valid itineraries, return the one with smallest lexical order.",
+  "examples": [
+    {
+      "input": "tickets = [[\"MUC\",\"LHR\"],[\"JFK\",\"MUC\"],[\"SFO\",\"SJC\"],[\"LHR\",\"SFO\"]]",
+      "output": "[\"JFK\",\"MUC\",\"LHR\",\"SFO\",\"SJC\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= tickets.length <= 300"
+  ],
+  "starterCode": "def findItinerary(tickets: list[list[str]]) -> list[str]:\n    pass\n",
+  "solutionCode": "def findItinerary(tickets: list[list[str]]) -> list[str]:\n    from collections import defaultdict\n    graph = defaultdict(list)\n    for u, v in sorted(tickets, reverse=True):\n        graph[u].append(v)\n    route = []\n    def dfs(curr):\n        while graph[curr]:\n            nxt = graph[curr].pop()\n            dfs(nxt)\n        route.append(curr)\n    dfs('JFK')\n    return route[::-1]\n",
+  "functionName": "findItinerary",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "MUC",
+            "LHR"
+          ],
+          [
+            "JFK",
+            "MUC"
+          ],
+          [
+            "SFO",
+            "SJC"
+          ],
+          [
+            "LHR",
+            "SFO"
+          ]
+        ]
+      ],
+      "expected": [
+        "JFK",
+        "MUC",
+        "LHR",
+        "SFO",
+        "SJC"
+      ],
+      "inputDisplay": "[['MUC', 'LHR'], ['JFK', 'MUC'], ['SFO', 'SJC'], ['LHR', 'SFO']]",
+      "expectedDisplay": "['JFK', 'MUC', 'LHR', 'SFO', 'SJC']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Hierholzer's algorithm: greedily follow smallest lexical edges and post-order reverse."
+  ],
+  "python": {
+    "starterCode": "def findItinerary(tickets: list[list[str]]) -> list[str]:\n    pass\n",
+    "solutionCode": "def findItinerary(tickets: list[list[str]]) -> list[str]:\n    from collections import defaultdict\n    graph = defaultdict(list)\n    for u, v in sorted(tickets, reverse=True):\n        graph[u].append(v)\n    route = []\n    def dfs(curr):\n        while graph[curr]:\n            nxt = graph[curr].pop()\n            dfs(nxt)\n        route.append(curr)\n    dfs('JFK')\n    return route[::-1]\n"
+  },
+  "leetcodeId": 332,
+  "leetcodeTitle": "Reconstruct Itinerary (Hierholzer Algorithm)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-reconstruct-itinerary/"
+}

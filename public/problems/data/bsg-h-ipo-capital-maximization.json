@@ -1,0 +1,92 @@
+{
+  "id": "bsg-h-ipo-capital-maximization",
+  "wingId": "binary-search-greedy",
+  "floor": 477,
+  "title": "IPO Capital Maximization",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-ipo-capital-maximization",
+    "name": "Venture Baron",
+    "title": "Maximizer of IPO Equity",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#f59e0b",
+    "attackName": "Capital Shock",
+    "attackPower": 3,
+    "defeatQuote": "Capital maximized after selecting at most k feasible projects!"
+  },
+  "description": "You have initial capital `w` and can complete at most `k` distinct projects. Given `profits` and `capital`, you can only start a project if your current capital is at least `capital[i]`. Finishing a project adds `profits[i]` to your capital. Return the maximized final capital.",
+  "examples": [
+    {
+      "input": "k = 2, w = 0, profits = [1,2,3], capital = [0,1,1]",
+      "output": "4"
+    },
+    {
+      "input": "k = 3, w = 0, profits = [1,2,3], capital = [0,1,2]",
+      "output": "6"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= 100000",
+    "0 <= w <= 10^9"
+  ],
+  "starterCode": "def findMaximizedCapital(k: int, w: int, profits: list[int], capital: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def findMaximizedCapital(k: int, w: int, profits: list[int], capital: list[int]) -> int:\n    import heapq\n    projects = sorted(zip(capital, profits))\n    pq = []\n    idx = 0\n    n = len(projects)\n    for _ in range(k):\n        while idx < n and projects[idx][0] <= w:\n            heapq.heappush(pq, -projects[idx][1])\n            idx += 1\n        if not pq: break\n        w += -heapq.heappop(pq)\n    return w\n",
+  "functionName": "findMaximizedCapital",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2,
+        0,
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[2, 0, [1, 2, 3], [0, 1, 1]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        0,
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "args=[3, 0, [1, 2, 3], [0, 1, 2]]",
+      "expectedDisplay": "6",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Two heaps / sorted array + max-heap: push all projects affordable with current capital into max-heap, then take highest profit."
+  ],
+  "python": {
+    "starterCode": "def findMaximizedCapital(k: int, w: int, profits: list[int], capital: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def findMaximizedCapital(k: int, w: int, profits: list[int], capital: list[int]) -> int:\n    import heapq\n    projects = sorted(zip(capital, profits))\n    pq = []\n    idx = 0\n    n = len(projects)\n    for _ in range(k):\n        while idx < n and projects[idx][0] <= w:\n            heapq.heappush(pq, -projects[idx][1])\n            idx += 1\n        if not pq: break\n        w += -heapq.heappop(pq)\n    return w\n"
+  },
+  "leetcodeId": 502,
+  "leetcodeTitle": "IPO Capital Maximization",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-ipo-capital-maximization/"
+}

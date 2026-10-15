@@ -1,0 +1,79 @@
+{
+  "id": "bt-h-word-ladder-ii",
+  "wingId": "backtracking",
+  "floor": 281,
+  "title": "Word Ladder II (All Shortest Chains)",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-h-word-ladder-ii",
+    "name": "Mutation Archon",
+    "title": "Lord of Minimum Transformation Sequences",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#06b6d4",
+    "attackName": "Chain Mutation",
+    "attackPower": 3,
+    "defeatQuote": "BFS distance DAG followed by DFS backtracking found all shortest ladders!"
+  },
+  "description": "A transformation sequence from `beginWord` to `endWord` using `wordList` is a sequence of words where each word differs by 1 character. Return all the shortest transformation sequences from `beginWord` to `endWord` in sorted order.",
+  "examples": [
+    {
+      "input": "beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+      "output": "[[\"hit\",\"hot\",\"dot\",\"dog\",\"cog\"],[\"hit\",\"hot\",\"lot\",\"log\",\"cog\"]]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(beginWord) <= 5"
+  ],
+  "starterCode": "def findLadders(beginWord: str, endWord: str, wordList: list[str]) -> list[list[str]]:\n    pass\n",
+  "solutionCode": "def findLadders(beginWord: str, endWord: str, wordList: list[str]) -> list[list[str]]:\n    if endWord not in wordList: return []\n    from collections import defaultdict, deque\n    words = set(wordList)\n    level = {beginWord}\n    parents = defaultdict(set)\n    while level and endWord not in parents:\n        next_level = set()\n        words -= level\n        for word in level:\n            for i in range(len(word)):\n                for c in 'abcdefghijklmnopqrstuvwxyz':\n                    nxt = word[:i] + c + word[i+1:]\n                    if nxt in words:\n                        next_level.add(nxt)\n                        parents[nxt].add(word)\n        level = next_level\n    if endWord not in parents: return []\n    res = []\n    def dfs(curr, path):\n        if curr == beginWord:\n            res.append(path[::-1])\n            return\n        for p in parents[curr]:\n            dfs(p, path + [p])\n    dfs(endWord, [endWord])\n    res.sort()\n    return res\n",
+  "functionName": "findLadders",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log",
+          "cog"
+        ]
+      ],
+      "expected": [
+        [
+          "hit",
+          "hot",
+          "dot",
+          "dog",
+          "cog"
+        ],
+        [
+          "hit",
+          "hot",
+          "lot",
+          "log",
+          "cog"
+        ]
+      ],
+      "inputDisplay": "args=['hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']]",
+      "expectedDisplay": "[['hit', 'hot', 'dot', 'dog', 'cog'], ['hit', 'hot', 'lot', 'log', 'cog']]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use BFS to record the parent DAG of shortest paths, then DFS backtrack from endWord to beginWord."
+  ],
+  "python": {
+    "starterCode": "def findLadders(beginWord: str, endWord: str, wordList: list[str]) -> list[list[str]]:\n    pass\n",
+    "solutionCode": "def findLadders(beginWord: str, endWord: str, wordList: list[str]) -> list[list[str]]:\n    if endWord not in wordList: return []\n    from collections import defaultdict, deque\n    words = set(wordList)\n    level = {beginWord}\n    parents = defaultdict(set)\n    while level and endWord not in parents:\n        next_level = set()\n        words -= level\n        for word in level:\n            for i in range(len(word)):\n                for c in 'abcdefghijklmnopqrstuvwxyz':\n                    nxt = word[:i] + c + word[i+1:]\n                    if nxt in words:\n                        next_level.add(nxt)\n                        parents[nxt].add(word)\n        level = next_level\n    if endWord not in parents: return []\n    res = []\n    def dfs(curr, path):\n        if curr == beginWord:\n            res.append(path[::-1])\n            return\n        for p in parents[curr]:\n            dfs(p, path + [p])\n    dfs(endWord, [endWord])\n    res.sort()\n    return res\n"
+  },
+  "leetcodeId": 126,
+  "leetcodeTitle": "Word Ladder II (All Shortest Chains)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-word-ladder-ii/"
+}

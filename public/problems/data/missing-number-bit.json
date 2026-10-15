@@ -33,8 +33,8 @@
     "1 <= n <= 10^4",
     "0 <= nums[i] <= n"
   ],
-  "starterCode": "function missingNumberBit(nums) {\n  return 0;\n}",
-  "solutionCode": "function missingNumberBit(nums) {\n  let xor = nums.length;\n  for (let i = 0; i < nums.length; i++) {\n    xor ^= i ^ nums[i];\n  }\n  return xor;\n}",
+  "starterCode": "def missingNumberBit(nums):\n    return 0\n",
+  "solutionCode": "def missingNumberBit(nums):\n    xor = len(nums)\n    for i, n in enumerate(nums):\n        xor ^= i ^ n\n    return xor\n",
   "functionName": "missingNumberBit",
   "testCases": [
     {

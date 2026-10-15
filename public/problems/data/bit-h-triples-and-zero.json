@@ -1,0 +1,78 @@
+{
+  "id": "bit-h-triples-and-zero",
+  "wingId": "bit-manipulation",
+  "floor": 587,
+  "title": "Triples with Bitwise AND Equal to Zero",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-triples-and-zero",
+    "name": "Null-AND Cerberus",
+    "title": "Eater of Triple Bitwise Conjunctions",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#8b5cf6",
+    "attackName": "Zero Bit Annihilation",
+    "attackPower": 3,
+    "defeatQuote": "Three numbers must share no common 1-bit when fused by bitwise AND!"
+  },
+  "description": "Given an integer array `nums`, return the number of AND triples `(i, j, k)` such that `0 <= i < nums.length`, `0 <= j < nums.length`, `0 <= k < nums.length`, and `nums[i] & nums[j] & nums[k] == 0`.",
+  "examples": [
+    {
+      "input": "nums = [2,1,3]",
+      "output": "12"
+    },
+    {
+      "input": "nums = [0,0,0]",
+      "output": "27"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 1000",
+    "0 <= nums[i] < 2^16"
+  ],
+  "starterCode": "def countTriplets(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def countTriplets(nums: list[int]) -> int:\n    from collections import Counter\n    pair_counts = Counter()\n    for x in nums:\n        for y in nums:\n            pair_counts[x & y] += 1\n    ans = 0\n    for z in nums:\n        for xy, count in pair_counts.items():\n            if (xy & z) == 0:\n                ans += count\n    return ans\n",
+  "functionName": "countTriplets",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          1,
+          3
+        ]
+      ],
+      "expected": 12,
+      "inputDisplay": "[2, 1, 3]",
+      "expectedDisplay": "12",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 27,
+      "inputDisplay": "[0, 0, 0]",
+      "expectedDisplay": "27",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Precompute the frequencies of all pair-wise bitwise ANDs nums[i] & nums[j], then check each number nums[k] against distinct pair values."
+  ],
+  "python": {
+    "starterCode": "def countTriplets(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def countTriplets(nums: list[int]) -> int:\n    from collections import Counter\n    pair_counts = Counter()\n    for x in nums:\n        for y in nums:\n            pair_counts[x & y] += 1\n    ans = 0\n    for z in nums:\n        for xy, count in pair_counts.items():\n            if (xy & z) == 0:\n                ans += count\n    return ans\n"
+  },
+  "leetcodeId": 982,
+  "leetcodeTitle": "Triples with Bitwise AND Equal to Zero",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-triples-and-zero/"
+}

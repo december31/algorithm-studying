@@ -1,0 +1,124 @@
+{
+  "id": "ds-m-online-stock-span",
+  "wingId": "data-structures",
+  "floor": 123,
+  "title": "Online Stock Span",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-online-stock-span",
+    "name": "Market Bull-Demon",
+    "title": "Charger of Consecutive Bull Runs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#10b981",
+    "attackName": "Trend Spike",
+    "attackPower": 2,
+    "defeatQuote": "You tracked every continuous price span with a monotonic stack!"
+  },
+  "description": "Design an algorithm that collects daily price quotes for some stock and returns the span of that stock's price for the current day. The span is the maximum number of consecutive days (starting today and going backwards) for which the price was less than or equal to today's price. Given a list of daily quotes `prices`, return the array of spans.",
+  "examples": [
+    {
+      "input": "prices = [100,80,60,70,60,75,85]",
+      "output": "[1,1,1,2,1,4,6]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(prices) <= 10^5",
+    "1 <= prices[i] <= 10^5"
+  ],
+  "starterCode": "def stockSpans(prices: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def stockSpans(prices: list[int]) -> list[int]:\n    stack = []\n    spans = []\n    for p in prices:\n        span = 1\n        while stack and stack[-1][0] <= p:\n            span += stack.pop()[1]\n        stack.append((p, span))\n        spans.append(span)\n    return spans\n",
+  "functionName": "stockSpans",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          100,
+          80,
+          60,
+          70,
+          60,
+          75,
+          85
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        4,
+        6
+      ],
+      "inputDisplay": "[100, 80, 60, 70, 60, 75, 85]",
+      "expectedDisplay": "[1, 1, 1, 2, 1, 4, 6]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          10,
+          20,
+          30,
+          40
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "inputDisplay": "[10, 20, 30, 40]",
+      "expectedDisplay": "[1, 2, 3, 4]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          50,
+          40,
+          30
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1
+      ],
+      "inputDisplay": "[50, 40, 30]",
+      "expectedDisplay": "[1, 1, 1]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          50
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "[50]",
+      "expectedDisplay": "[1]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Maintain a stack of pairs (price, span). Pop smaller or equal elements and add their spans."
+  ],
+  "python": {
+    "starterCode": "def stockSpans(prices: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def stockSpans(prices: list[int]) -> list[int]:\n    stack = []\n    spans = []\n    for p in prices:\n        span = 1\n        while stack and stack[-1][0] <= p:\n            span += stack.pop()[1]\n        stack.append((p, span))\n        spans.append(span)\n    return spans\n"
+  },
+  "leetcodeId": 901,
+  "leetcodeTitle": "Online Stock Span",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-online-stock-span/"
+}

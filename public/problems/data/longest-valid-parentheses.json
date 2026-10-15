@@ -36,8 +36,8 @@
     "0 <= s.length <= 3 * 10^4",
     "s[i] is '(', or ')'."
   ],
-  "starterCode": "function longestValidParentheses(s) {\n  return 0;\n}",
-  "solutionCode": "function longestValidParentheses(s) {\n  const stack = [-1];\n  let maxLen = 0;\n  for (let i = 0; i < s.length; i++) {\n    if (s[i] === '(') {\n      stack.push(i);\n    } else {\n      stack.pop();\n      if (stack.length === 0) {\n        stack.push(i);\n      } else {\n        maxLen = Math.max(maxLen, i - stack[stack.length - 1]);\n      }\n    }\n  }\n  return maxLen;\n}",
+  "starterCode": "def longestValidParentheses(s):\n    return 0\n",
+  "solutionCode": "def longestValidParentheses(s):\n    stack = [-1]\n    max_len = 0\n    for i, c in enumerate(s):\n        if c == \"(\":\n            stack.append(i)\n        else:\n            stack.pop()\n            if not stack:\n                stack.append(i)\n            else:\n                max_len = max(max_len, i - stack[-1])\n    return max_len\n",
   "functionName": "longestValidParentheses",
   "testCases": [
     {

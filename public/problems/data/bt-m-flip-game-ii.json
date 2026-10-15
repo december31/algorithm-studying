@@ -1,0 +1,79 @@
+{
+  "id": "bt-m-flip-game-ii",
+  "wingId": "backtracking",
+  "floor": 240,
+  "title": "Flip Game II (Can Win)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-flip-game-ii",
+    "name": "Plus-Minus Drake",
+    "title": "Strategist of Consecutive Inversions",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#ec4899",
+    "attackName": "Parity Breath",
+    "attackPower": 2,
+    "defeatQuote": "Minimax backtracking determined the winning initial state!"
+  },
+  "description": "You are playing a Flip Game with your friend. You are given a string `currentState` that contains only `'+'` and `'-'`. You and your friend take turns to flip two consecutive `\"++\"` into `\"--\"`. The game ends when a person can no longer make a move, and therefore the other person will be the winner. Return `True` if the starting player can guarantee a win, and `False` otherwise.",
+  "examples": [
+    {
+      "input": "currentState = \"++++\"",
+      "output": "True"
+    },
+    {
+      "input": "currentState = \"+\"",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= len(currentState) <= 30"
+  ],
+  "starterCode": "def canWinFlipGame(currentState: str) -> bool:\n    pass\n",
+  "solutionCode": "def canWinFlipGame(currentState: str) -> bool:\n    memo = {}\n    def can_win(s):\n        if s in memo: return memo[s]\n        for i in range(len(s) - 1):\n            if s[i:i + 2] == '++':\n                next_s = s[:i] + '--' + s[i + 2:]\n                if not can_win(next_s):\n                    memo[s] = True\n                    return True\n        memo[s] = False\n        return False\n    return can_win(currentState)\n",
+  "functionName": "canWinFlipGame",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "++++"
+      ],
+      "expected": true,
+      "inputDisplay": "++++",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "+"
+      ],
+      "expected": false,
+      "inputDisplay": "+",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "+++++"
+      ],
+      "expected": false,
+      "inputDisplay": "+++++",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Player can guarantee win if there exists a valid move leading to a state where the opponent cannot win."
+  ],
+  "python": {
+    "starterCode": "def canWinFlipGame(currentState: str) -> bool:\n    pass\n",
+    "solutionCode": "def canWinFlipGame(currentState: str) -> bool:\n    memo = {}\n    def can_win(s):\n        if s in memo: return memo[s]\n        for i in range(len(s) - 1):\n            if s[i:i + 2] == '++':\n                next_s = s[:i] + '--' + s[i + 2:]\n                if not can_win(next_s):\n                    memo[s] = True\n                    return True\n        memo[s] = False\n        return False\n    return can_win(currentState)\n"
+  },
+  "leetcodeId": 294,
+  "leetcodeTitle": "Flip Game II (Can Win)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-flip-game-ii/"
+}

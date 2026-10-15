@@ -1,0 +1,121 @@
+{
+  "id": "ds-m-total-fruit",
+  "wingId": "data-structures",
+  "floor": 136,
+  "title": "Fruit Into Baskets (Two Varieties)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-total-fruit",
+    "name": "Orchard Ogre",
+    "title": "Glutton of Two Tree Types",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "orc",
+    "color": "#eab308",
+    "attackName": "Club Bash",
+    "attackPower": 2,
+    "defeatQuote": "You restricted the pick to at most 2 distinct fruits perfectly!"
+  },
+  "description": "You are visiting a farm that has a single row of fruit trees represented by an integer array `fruits` where `fruits[i]` is the type of fruit the `i-th` tree produces. You have two baskets, and each basket can only hold a single type of fruit. Return the maximum number of fruits you can pick.",
+  "examples": [
+    {
+      "input": "fruits = [1,2,1]",
+      "output": "3"
+    },
+    {
+      "input": "fruits = [0,1,2,2]",
+      "output": "3"
+    },
+    {
+      "input": "fruits = [1,2,3,2,2]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= len(fruits) <= 10^5",
+    "0 <= fruits[i] < len(fruits)"
+  ],
+  "starterCode": "def totalFruit(fruits: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def totalFruit(fruits: list[int]) -> int:\n    from collections import defaultdict\n    count = defaultdict(int)\n    left = 0\n    res = 0\n    for right in range(len(fruits)):\n        count[fruits[right]] += 1\n        while len(count) > 2:\n            count[fruits[left]] -= 1\n            if count[fruits[left]] == 0:\n                del count[fruits[left]]\n            left += 1\n        res = max(res, right - left + 1)\n    return res\n",
+  "functionName": "totalFruit",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[1, 2, 1]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[0, 1, 2, 2]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          2,
+          2
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[1, 2, 3, 2, 2]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          3,
+          3,
+          3,
+          1,
+          2,
+          1,
+          1,
+          2,
+          3,
+          3,
+          4
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4]",
+      "expectedDisplay": "5",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Longest contiguous subarray with at most 2 distinct integers."
+  ],
+  "python": {
+    "starterCode": "def totalFruit(fruits: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def totalFruit(fruits: list[int]) -> int:\n    from collections import defaultdict\n    count = defaultdict(int)\n    left = 0\n    res = 0\n    for right in range(len(fruits)):\n        count[fruits[right]] += 1\n        while len(count) > 2:\n            count[fruits[left]] -= 1\n            if count[fruits[left]] == 0:\n                del count[fruits[left]]\n            left += 1\n        res = max(res, right - left + 1)\n    return res\n"
+  },
+  "leetcodeId": 904,
+  "leetcodeTitle": "Fruit Into Baskets (Two Varieties)",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-total-fruit/"
+}

@@ -1,0 +1,87 @@
+{
+  "id": "bsg-h-super-egg-drop",
+  "wingId": "binary-search-greedy",
+  "floor": 481,
+  "title": "Super Egg Drop (Binary Search / Inverted DP)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-super-egg-drop",
+    "name": "Ovoid Colossus",
+    "title": "Tester of Critical Impact Thresholds",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#10b981",
+    "attackName": "Egg Shell Shock",
+    "attackPower": 3,
+    "defeatQuote": "Minimum drop attempts needed to discover critical floor f with certainty!"
+  },
+  "description": "You are given `k` identical eggs and you have access to a building with `n` floors labeled from 1 to `n`. Return the minimum number of moves that you need to determine with certainty what the value of `f` is (the highest floor from which an egg does not break).",
+  "examples": [
+    {
+      "input": "k = 1, n = 2",
+      "output": "2"
+    },
+    {
+      "input": "k = 2, n = 6",
+      "output": "3"
+    },
+    {
+      "input": "k = 3, n = 14",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= 100",
+    "1 <= n <= 10000"
+  ],
+  "starterCode": "def superEggDrop(k: int, n: int) -> int:\n    pass\n",
+  "solutionCode": "def superEggDrop(k: int, n: int) -> int:\n    dp = [0] * (k + 1)\n    moves = 0\n    while dp[k] < n:\n        moves += 1\n        for i in range(k, 0, -1):\n            dp[i] = dp[i] + dp[i - 1] + 1\n    return moves\n",
+  "functionName": "superEggDrop",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1,
+        2
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[1, 2]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        2,
+        6
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[2, 6]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        3,
+        14
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[3, 14]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Invert the DP: dp[m][k] = maximum floors testable with m moves and k eggs. dp[m][k] = dp[m-1][k-1] + dp[m-1][k] + 1."
+  ],
+  "python": {
+    "starterCode": "def superEggDrop(k: int, n: int) -> int:\n    pass\n",
+    "solutionCode": "def superEggDrop(k: int, n: int) -> int:\n    dp = [0] * (k + 1)\n    moves = 0\n    while dp[k] < n:\n        moves += 1\n        for i in range(k, 0, -1):\n            dp[i] = dp[i] + dp[i - 1] + 1\n    return moves\n"
+  },
+  "leetcodeId": 887,
+  "leetcodeTitle": "Super Egg Drop (Binary Search / Inverted DP)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-super-egg-drop/"
+}

@@ -1,0 +1,87 @@
+{
+  "id": "bit-h-can-i-win",
+  "wingId": "bit-manipulation",
+  "floor": 589,
+  "title": "Can I Win (Forced Minimax)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-can-i-win",
+    "name": "Minimax Archon",
+    "title": "Strategist of Game Trees",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#f59e0b",
+    "attackName": "Deterministic Checkmate",
+    "attackPower": 3,
+    "defeatQuote": "Choose from 1 to maxChoosable without replacement; can you force the total?"
+  },
+  "description": "In the '100 game', two players take turns adding to a running total any integer from `1` to `maxChoosableInteger`. Each integer can only be used once. The player who first causes the running total to reach or exceed `desiredTotal` wins. Given `maxChoosableInteger` and `desiredTotal`, return `True` if the first player to move can force a win, otherwise `False`.",
+  "examples": [
+    {
+      "input": "maxChoosableInteger = 10, desiredTotal = 11",
+      "output": "False"
+    },
+    {
+      "input": "maxChoosableInteger = 10, desiredTotal = 0",
+      "output": "True"
+    },
+    {
+      "input": "maxChoosableInteger = 10, desiredTotal = 1",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= maxChoosableInteger <= 20",
+    "0 <= desiredTotal <= 300"
+  ],
+  "starterCode": "def canIWin(maxChoosableInteger: int, desiredTotal: int) -> bool:\n    pass\n",
+  "solutionCode": "def canIWin(maxChoosableInteger: int, desiredTotal: int) -> bool:\n    if desiredTotal <= 0: return True\n    total_sum = (maxChoosableInteger * (maxChoosableInteger + 1)) // 2\n    if total_sum < desiredTotal: return False\n    if total_sum == desiredTotal: return maxChoosableInteger % 2 == 1\n    memo = {}\n    def dp(mask, remaining):\n        if mask in memo: return memo[mask]\n        for i in range(1, maxChoosableInteger + 1):\n            bit = 1 << i\n            if not (mask & bit):\n                if i >= remaining or not dp(mask | bit, remaining - i):\n                    memo[mask] = True\n                    return True\n        memo[mask] = False\n        return False\n    return dp(0, desiredTotal)\n",
+  "functionName": "canIWin",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        10,
+        11
+      ],
+      "expected": false,
+      "inputDisplay": "args=[10, 11]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        10,
+        0
+      ],
+      "expected": true,
+      "inputDisplay": "args=[10, 0]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        10,
+        1
+      ],
+      "expected": true,
+      "inputDisplay": "args=[10, 1]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use a bitmask to record which numbers have already been chosen. Memoize dp(mask, remaining)."
+  ],
+  "python": {
+    "starterCode": "def canIWin(maxChoosableInteger: int, desiredTotal: int) -> bool:\n    pass\n",
+    "solutionCode": "def canIWin(maxChoosableInteger: int, desiredTotal: int) -> bool:\n    if desiredTotal <= 0: return True\n    total_sum = (maxChoosableInteger * (maxChoosableInteger + 1)) // 2\n    if total_sum < desiredTotal: return False\n    if total_sum == desiredTotal: return maxChoosableInteger % 2 == 1\n    memo = {}\n    def dp(mask, remaining):\n        if mask in memo: return memo[mask]\n        for i in range(1, maxChoosableInteger + 1):\n            bit = 1 << i\n            if not (mask & bit):\n                if i >= remaining or not dp(mask | bit, remaining - i):\n                    memo[mask] = True\n                    return True\n        memo[mask] = False\n        return False\n    return dp(0, desiredTotal)\n"
+  },
+  "leetcodeId": 464,
+  "leetcodeTitle": "Can I Win (Forced Minimax)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-can-i-win/"
+}

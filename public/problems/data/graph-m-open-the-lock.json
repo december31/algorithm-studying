@@ -1,0 +1,99 @@
+{
+  "id": "graph-m-open-the-lock",
+  "wingId": "graphs",
+  "floor": 332,
+  "title": "Open the Combination Lock",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-open-the-lock",
+    "name": "Cipher Gargoyle",
+    "title": "Guardian of Rotational Tumblers",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "gargoyle",
+    "color": "#64748b",
+    "attackName": "Tumbler Snap",
+    "attackPower": 2,
+    "defeatQuote": "Minimum 4-wheel tumbler turns to avoid deadends and reach target!"
+  },
+  "description": "You have a lock in front of you with 4 circular wheels. Each wheel has 10 slots: '0'-'9'. The lock starts at '0000'. You are given a list of `deadends` strings. If the lock displays any of these codes, the lock becomes dead and cannot be turned. Given a `target`, return the minimum total number of turns required to open the lock, or -1 if impossible.",
+  "examples": [
+    {
+      "input": "deadends = [\"0201\",\"0101\",\"0102\",\"1212\",\"2002\"], target = \"0202\"",
+      "output": "6"
+    },
+    {
+      "input": "deadends = [\"8888\"], target = \"0009\"",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= deadends.length <= 500"
+  ],
+  "starterCode": "def openLock(deadends: list[str], target: str) -> int:\n    pass\n",
+  "solutionCode": "def openLock(deadends: list[str], target: str) -> int:\n    dead = set(deadends)\n    if \"0000\" in dead: return -1\n    if target == \"0000\": return 0\n    from collections import deque\n    q = deque([(\"0000\", 0)])\n    visited = set([\"0000\"])\n    while q:\n        curr, d = q.popleft()\n        if curr == target: return d\n        for i in range(4):\n            digit = int(curr[i])\n            for delta in (-1, 1):\n                nxt_digit = (digit + delta) % 10\n                nxt = curr[:i] + str(nxt_digit) + curr[i+1:]\n                if nxt not in dead and nxt not in visited:\n                    visited.add(nxt)\n                    q.append((nxt, d + 1))\n    return -1\n",
+  "functionName": "openLock",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "0201",
+          "0101",
+          "0102",
+          "1212",
+          "2002"
+        ],
+        "0202"
+      ],
+      "expected": 6,
+      "inputDisplay": "args=[['0201', '0101', '0102', '1212', '2002'], '0202']",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "8888"
+        ],
+        "0009"
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[['8888'], '0009']",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "8887",
+          "8889",
+          "8878",
+          "8898",
+          "8788",
+          "8988",
+          "7888",
+          "9888"
+        ],
+        "8888"
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[['8887', '8889', '8878', '8898', '8788', '8988', '7888', '9888'], '8888']",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Treat each 4-digit string as a node with 8 neighbors in a BFS shortest path search."
+  ],
+  "python": {
+    "starterCode": "def openLock(deadends: list[str], target: str) -> int:\n    pass\n",
+    "solutionCode": "def openLock(deadends: list[str], target: str) -> int:\n    dead = set(deadends)\n    if \"0000\" in dead: return -1\n    if target == \"0000\": return 0\n    from collections import deque\n    q = deque([(\"0000\", 0)])\n    visited = set([\"0000\"])\n    while q:\n        curr, d = q.popleft()\n        if curr == target: return d\n        for i in range(4):\n            digit = int(curr[i])\n            for delta in (-1, 1):\n                nxt_digit = (digit + delta) % 10\n                nxt = curr[:i] + str(nxt_digit) + curr[i+1:]\n                if nxt not in dead and nxt not in visited:\n                    visited.add(nxt)\n                    q.append((nxt, d + 1))\n    return -1\n"
+  },
+  "leetcodeId": 752,
+  "leetcodeTitle": "Open the Combination Lock",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-open-the-lock/"
+}

@@ -36,8 +36,8 @@
     "1 <= nums.length <= 3 * 10^4",
     "-3 * 10^4 <= nums[i] <= 3 * 10^4"
   ],
-  "starterCode": "function singleNumber(nums) {\n  return 0;\n}",
-  "solutionCode": "function singleNumber(nums) {\n  let res = 0;\n  for (const n of nums) res ^= n;\n  return res;\n}",
+  "starterCode": "def singleNumber(nums):\n    return 0\n",
+  "solutionCode": "def singleNumber(nums):\n    res = 0\n    for n in nums:\n        res ^= n\n    return res\n",
   "functionName": "singleNumber",
   "testCases": [
     {

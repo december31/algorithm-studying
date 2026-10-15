@@ -1,0 +1,94 @@
+{
+  "id": "bt-m-target-sum",
+  "wingId": "backtracking",
+  "floor": 224,
+  "title": "Target Sum Expressions",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-target-sum",
+    "name": "Binary Sign Wraith",
+    "title": "Assigner of Plus and Minus Glyphs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#eab308",
+    "attackName": "Sign Hex",
+    "attackPower": 2,
+    "defeatQuote": "Every + and - configuration checked with memoization!"
+  },
+  "description": "You are given an integer array `nums` and an integer `target`. You want to build an expression out of nums by adding one of the symbols `'+'` and `'-'` before each integer. Return the number of different expressions that evaluate to `target`.",
+  "examples": [
+    {
+      "input": "nums = [1,1,1,1,1], target = 3",
+      "output": "5"
+    },
+    {
+      "input": "nums = [1], target = 1",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 20",
+    "0 <= nums[i] <= 1000",
+    "-1000 <= target <= 1000"
+  ],
+  "starterCode": "def findTargetSumWays(nums: list[int], target: int) -> int:\n    pass\n",
+  "solutionCode": "def findTargetSumWays(nums: list[int], target: int) -> int:\n    memo = {}\n    def dfs(idx, curr):\n        if idx == len(nums):\n            return 1 if curr == target else 0\n        state = (idx, curr)\n        if state in memo: return memo[state]\n        ans = dfs(idx + 1, curr + nums[idx]) + dfs(idx + 1, curr - nums[idx])\n        memo[state] = ans\n        return ans\n    return dfs(0, 0)\n",
+  "functionName": "findTargetSumWays",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        3
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[[1, 1, 1, 1, 1], 3]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1], 1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ],
+        2
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[1], 2]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Memoize state (index, current_sum). Branch on +num and -num."
+  ],
+  "python": {
+    "starterCode": "def findTargetSumWays(nums: list[int], target: int) -> int:\n    pass\n",
+    "solutionCode": "def findTargetSumWays(nums: list[int], target: int) -> int:\n    memo = {}\n    def dfs(idx, curr):\n        if idx == len(nums):\n            return 1 if curr == target else 0\n        state = (idx, curr)\n        if state in memo: return memo[state]\n        ans = dfs(idx + 1, curr + nums[idx]) + dfs(idx + 1, curr - nums[idx])\n        memo[state] = ans\n        return ans\n    return dfs(0, 0)\n"
+  },
+  "leetcodeId": 494,
+  "leetcodeTitle": "Target Sum Expressions",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-target-sum/"
+}

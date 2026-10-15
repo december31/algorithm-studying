@@ -1,0 +1,106 @@
+{
+  "id": "bsg-h-video-stitching",
+  "wingId": "binary-search-greedy",
+  "floor": 484,
+  "title": "Video Stitching (Minimum Overlapping Clips)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-video-stitching",
+    "name": "Film Director Spectre",
+    "title": "Splicer of Continuous Reels",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "spectre",
+    "color": "#38bdf8",
+    "attackName": "Splice Cut",
+    "attackPower": 3,
+    "defeatQuote": "Minimum clips stitched to cover time interval [0, time]!"
+  },
+  "description": "You are given a series of video clips from a sporting event that lasted `time` seconds. These video clips are represented as `clips` where `clips[i] = [starti, endi]`. Return the minimum number of clips needed so that we can cut the clips into a single continuous video covering `[0, time]`. If impossible, return -1.",
+  "examples": [
+    {
+      "input": "clips = [[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]], time = 10",
+      "output": "3"
+    },
+    {
+      "input": "clips = [[0,1],[1,2]], time = 5",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= clips.length <= 100",
+    "1 <= time <= 100"
+  ],
+  "starterCode": "def videoStitching(clips: list[list[int]], time: int) -> int:\n    pass\n",
+  "solutionCode": "def videoStitching(clips: list[list[int]], time: int) -> int:\n    max_reach = [0] * (time + 1)\n    for s, e in clips:\n        if s <= time:\n            max_reach[s] = max(max_reach[s], min(time, e))\n    curr_end = farthest = count = 0\n    for i in range(time):\n        farthest = max(farthest, max_reach[i])\n        if i == curr_end:\n            count += 1\n            curr_end = farthest\n            if curr_end <= i: return -1\n    return count\n",
+  "functionName": "videoStitching",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            5,
+            9
+          ]
+        ],
+        10
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[[0, 2], [4, 6], [8, 10], [1, 9], [1, 5], [5, 9]], 10]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        5
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[[[0, 1], [1, 2]], 5]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Jump Game II greedy window logic mapped to continuous intervals."
+  ],
+  "python": {
+    "starterCode": "def videoStitching(clips: list[list[int]], time: int) -> int:\n    pass\n",
+    "solutionCode": "def videoStitching(clips: list[list[int]], time: int) -> int:\n    max_reach = [0] * (time + 1)\n    for s, e in clips:\n        if s <= time:\n            max_reach[s] = max(max_reach[s], min(time, e))\n    curr_end = farthest = count = 0\n    for i in range(time):\n        farthest = max(farthest, max_reach[i])\n        if i == curr_end:\n            count += 1\n            curr_end = farthest\n            if curr_end <= i: return -1\n    return count\n"
+  },
+  "leetcodeId": 1024,
+  "leetcodeTitle": "Video Stitching (Minimum Overlapping Clips)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-video-stitching/"
+}

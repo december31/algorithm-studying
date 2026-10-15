@@ -1,0 +1,102 @@
+{
+  "id": "ds-m-delete-node-bst",
+  "wingId": "data-structures",
+  "floor": 164,
+  "title": "Delete Node in a BST (Inorder Successor)",
+  "difficulty": "medium",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "mon-ds-m-delete-node-bst",
+    "name": "BST Pruning Wight",
+    "title": "Rebalancer of Severed Branches",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#8b5cf6",
+    "attackName": "Prune Scythe",
+    "attackPower": 2,
+    "defeatQuote": "Replacing with the inorder successor preserved the BST property!"
+  },
+  "description": "Given an array of integers representing a BST in sorted order (inorder traversal), simulate deleting the node with value `key` and return the remaining BST inorder array.",
+  "examples": [
+    {
+      "input": "inorder = [2,3,4,5,6,7], key = 3",
+      "output": "[2,4,5,6,7]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(inorder) <= 10^4",
+    "inorder is strictly ascending"
+  ],
+  "starterCode": "def deleteNodeBST(inorder: list[int], key: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def deleteNodeBST(inorder: list[int], key: int) -> list[int]:\n    return [x for x in inorder if x != key]\n",
+  "functionName": "deleteNodeBST",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        3
+      ],
+      "expected": [
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "inputDisplay": "args=[[2, 3, 4, 5, 6, 7], 3]",
+      "expectedDisplay": "[2, 4, 5, 6, 7]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5
+        ],
+        5
+      ],
+      "expected": [],
+      "inputDisplay": "args=[[5], 5]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        4
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "inputDisplay": "args=[[1, 2, 3], 4]",
+      "expectedDisplay": "[1, 2, 3]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "In a BST, deletion replaces a node with 2 children with its inorder successor."
+  ],
+  "python": {
+    "starterCode": "def deleteNodeBST(inorder: list[int], key: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def deleteNodeBST(inorder: list[int], key: int) -> list[int]:\n    return [x for x in inorder if x != key]\n"
+  },
+  "leetcodeId": 450,
+  "leetcodeTitle": "Delete Node in a BST (Inorder Successor)",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-delete-node-bst/"
+}

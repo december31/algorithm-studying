@@ -1,0 +1,102 @@
+{
+  "id": "ds-m-find-kth-largest",
+  "wingId": "data-structures",
+  "floor": 156,
+  "title": "Kth Largest Element",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-find-kth-largest",
+    "name": "Colossus of Ranks",
+    "title": "Keeper of the Kth Highest Tier",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Rank Stomp",
+    "attackPower": 2,
+    "defeatQuote": "A min-heap of size k held the exact threshold!"
+  },
+  "description": "Given an integer array `nums` and an integer `k`, return the `k-th` largest element in the array.",
+  "examples": [
+    {
+      "input": "nums = [3,2,1,5,6,4], k = 2",
+      "output": "5"
+    },
+    {
+      "input": "nums = [3,2,3,1,2,4,5,5,6], k = 4",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= len(nums) <= 10^5",
+    "-10^4 <= nums[i] <= 10^4"
+  ],
+  "starterCode": "def findKthLargest(nums: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def findKthLargest(nums: list[int], k: int) -> int:\n    import heapq\n    min_heap = []\n    for n in nums:\n        heapq.heappush(min_heap, n)\n        if len(min_heap) > k:\n            heapq.heappop(min_heap)\n    return min_heap[0]\n",
+  "functionName": "findKthLargest",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          2,
+          1,
+          5,
+          6,
+          4
+        ],
+        2
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[[3, 2, 1, 5, 6, 4], 2]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          2,
+          3,
+          1,
+          2,
+          4,
+          5,
+          5,
+          6
+        ],
+        4
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[[3, 2, 3, 1, 2, 4, 5, 5, 6], 4]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1], 1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Maintain a min-heap of size k, pushing every element and evicting when size > k."
+  ],
+  "python": {
+    "starterCode": "def findKthLargest(nums: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def findKthLargest(nums: list[int], k: int) -> int:\n    import heapq\n    min_heap = []\n    for n in nums:\n        heapq.heappush(min_heap, n)\n        if len(min_heap) > k:\n            heapq.heappop(min_heap)\n    return min_heap[0]\n"
+  },
+  "leetcodeId": 215,
+  "leetcodeTitle": "Kth Largest Element",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-find-kth-largest/"
+}

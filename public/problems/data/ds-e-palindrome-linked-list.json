@@ -1,0 +1,122 @@
+{
+  "id": "ds-e-palindrome-linked-list",
+  "wingId": "data-structures",
+  "floor": 106,
+  "title": "Palindrome Sequence Check",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-e-palindrome-linked-list",
+    "name": "Mirror Drake",
+    "title": "Reflector of Symmetric Sequences",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "dragon",
+    "color": "#ec4899",
+    "attackName": "Reflection Flare",
+    "attackPower": 1,
+    "defeatQuote": "My symmetry was broken by your sharp eye!"
+  },
+  "description": "Given an array `head` of values representing a linked list, return `True` if the sequence is a palindrome, or `False` otherwise.",
+  "examples": [
+    {
+      "input": "head = [1,2,2,1]",
+      "output": "True"
+    },
+    {
+      "input": "head = [1,2]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= len(head) <= 10^5",
+    "0 <= head[i] <= 9"
+  ],
+  "starterCode": "def isPalindromeList(head: list[int]) -> bool:\n    pass\n",
+  "solutionCode": "def isPalindromeList(head: list[int]) -> bool:\n    left = 0\n    right = len(head) - 1\n    while left < right:\n        if head[left] != head[right]:\n            return False\n        left += 1\n        right -= 1\n    return True\n",
+  "functionName": "isPalindromeList",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          2,
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1, 2, 2, 1]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1, 2]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[1, 2, 3, 2, 1]",
+      "expectedDisplay": "True",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          1
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[1, 2, 3, 4, 1]",
+      "expectedDisplay": "False",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Find the middle with fast/slow pointers, reverse the second half, and compare with the first."
+  ],
+  "python": {
+    "starterCode": "def isPalindromeList(head: list[int]) -> bool:\n    pass\n",
+    "solutionCode": "def isPalindromeList(head: list[int]) -> bool:\n    left = 0\n    right = len(head) - 1\n    while left < right:\n        if head[left] != head[right]:\n            return False\n        left += 1\n        right -= 1\n    return True\n"
+  },
+  "leetcodeId": 234,
+  "leetcodeTitle": "Palindrome Sequence Check",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-e-palindrome-linked-list/"
+}

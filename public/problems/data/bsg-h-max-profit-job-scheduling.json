@@ -1,0 +1,106 @@
+{
+  "id": "bsg-h-max-profit-job-scheduling",
+  "wingId": "binary-search-greedy",
+  "floor": 486,
+  "title": "Job Scheduling (Binary Search DP)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-max-profit-job-scheduling",
+    "name": "Opportunity Lich",
+    "title": "Scheduler of Maximum Profit Intervals",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#8b5cf6",
+    "attackName": "Profit Nexus",
+    "attackPower": 3,
+    "defeatQuote": "Max non-overlapping job profit scheduled with binary search DP!"
+  },
+  "description": "We have `n` jobs, where every job is scheduled to be done from `startTime[i]` to `endTime[i]`, obtaining a profit of `profit[i]`. You're given the `startTime`, `endTime` and `profit` arrays, return the maximum profit you can take such that there are no two jobs in the subset with overlapping time range.",
+  "examples": [
+    {
+      "input": "startTime = [1,2,3,3], endTime = [3,4,5,6], profit = [50,10,40,70]",
+      "output": "120"
+    },
+    {
+      "input": "startTime = [1,2,3,4,6], endTime = [3,5,10,6,9], profit = [20,20,100,70,60]",
+      "output": "150"
+    }
+  ],
+  "constraints": [
+    "1 <= startTime.length == endTime.length == profit.length <= 50000"
+  ],
+  "starterCode": "def jobScheduling(startTime: list[int], endTime: list[int], profit: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def jobScheduling(startTime: list[int], endTime: list[int], profit: list[int]) -> int:\n    import bisect\n    jobs = sorted(zip(startTime, endTime, profit), key=lambda x: x[1])\n    dp = [(0, 0)]  # (endTime, maxProfit)\n    for s, e, p in jobs:\n        # Binary search for job finishing <= s\n        idx = bisect.bisect_right(dp, (s, float('inf'))) - 1\n        total_profit = dp[idx][1] + p\n        if total_profit > dp[-1][1]:\n            dp.append((e, total_profit))\n    return dp[-1][1]\n",
+  "functionName": "jobScheduling",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          3
+        ],
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          50,
+          10,
+          40,
+          70
+        ]
+      ],
+      "expected": 120,
+      "inputDisplay": "args=[[1, 2, 3, 3], [3, 4, 5, 6], [50, 10, 40, 70]]",
+      "expectedDisplay": "120",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        [
+          3,
+          5,
+          10,
+          6,
+          9
+        ],
+        [
+          20,
+          20,
+          100,
+          70,
+          60
+        ]
+      ],
+      "expected": 150,
+      "inputDisplay": "args=[[1, 2, 3, 4, 6], [3, 5, 10, 6, 9], [20, 20, 100, 70, 60]]",
+      "expectedDisplay": "150",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort by end times. For each job, binary search the latest non-overlapping job in DP array."
+  ],
+  "python": {
+    "starterCode": "def jobScheduling(startTime: list[int], endTime: list[int], profit: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def jobScheduling(startTime: list[int], endTime: list[int], profit: list[int]) -> int:\n    import bisect\n    jobs = sorted(zip(startTime, endTime, profit), key=lambda x: x[1])\n    dp = [(0, 0)]  # (endTime, maxProfit)\n    for s, e, p in jobs:\n        # Binary search for job finishing <= s\n        idx = bisect.bisect_right(dp, (s, float('inf'))) - 1\n        total_profit = dp[idx][1] + p\n        if total_profit > dp[-1][1]:\n            dp.append((e, total_profit))\n    return dp[-1][1]\n"
+  },
+  "leetcodeId": 1235,
+  "leetcodeTitle": "Job Scheduling (Binary Search DP)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-max-profit-job-scheduling/"
+}

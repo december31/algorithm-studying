@@ -37,8 +37,8 @@
     "1 <= n <= 5000",
     "-5000 <= nums[i] <= 5000"
   ],
-  "starterCode": "function findMin(nums) {\n  return 0;\n}",
-  "solutionCode": "function findMin(nums) {\n  let left = 0, right = nums.length - 1;\n  while (left < right) {\n    const mid = Math.floor((left + right) / 2);\n    if (nums[mid] > nums[right]) {\n      left = mid + 1;\n    } else {\n      right = mid;\n    }\n  }\n  return nums[left];\n}",
+  "starterCode": "def findMin(nums):\n    return 0\n",
+  "solutionCode": "def findMin(nums):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        mid = (left + right) // 2\n        if nums[mid] > nums[right]:\n            left = mid + 1\n        else:\n            right = mid\n    return nums[left]\n",
   "functionName": "findMin",
   "testCases": [
     {

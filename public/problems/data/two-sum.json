@@ -37,8 +37,8 @@
     "-10^9 <= nums[i] <= 10^9",
     "Exactly one valid answer exists."
   ],
-  "starterCode": "function twoSum(nums, target) {\n  return [];\n}",
-  "solutionCode": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const complement = target - nums[i];\n    if (map.has(complement)) {\n      return [map.get(complement), i];\n    }\n    map.set(nums[i], i);\n  }\n  return [];\n}",
+  "starterCode": "def twoSum(nums, target):\n    return []\n",
+  "solutionCode": "def twoSum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        comp = target - num\n        if comp in seen:\n            return [seen[comp], i]\n        seen[num] = i\n    return []\n",
   "functionName": "twoSum",
   "testCases": [
     {

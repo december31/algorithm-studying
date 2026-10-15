@@ -1,0 +1,96 @@
+{
+  "id": "bit-h-max-subset-xor",
+  "wingId": "bit-manipulation",
+  "floor": 598,
+  "title": "Maximum Subset XOR (Linear Basis)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-max-subset-xor",
+    "name": "Basis Matrix Golem",
+    "title": "Keeper of the GF(2) Vector Space",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#06b6d4",
+    "attackName": "Linear Elimination Pulse",
+    "attackPower": 3,
+    "defeatQuote": "Gaussian elimination over GF(2) extracts the absolute maximum XOR sum!"
+  },
+  "description": "Given an array of integers `nums`, find the maximum possible bitwise XOR value of any subset of `nums`.",
+  "examples": [
+    {
+      "input": "nums = [2, 4, 5]",
+      "output": "7"
+    },
+    {
+      "input": "nums = [1, 2, 3]",
+      "output": "3"
+    },
+    {
+      "input": "nums = [9, 8, 5]",
+      "output": "13"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10^5",
+    "0 <= nums[i] <= 10^9"
+  ],
+  "starterCode": "def maxSubsetXOR(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def maxSubsetXOR(nums: list[int]) -> int:\n    basis = [0] * 32\n    for x in nums:\n        for b in range(31, -1, -1):\n            if (x >> b) & 1:\n                if not basis[b]:\n                    basis[b] = x\n                    break\n                x ^= basis[b]\n    max_xor = 0\n    for b in range(31, -1, -1):\n        if (max_xor ^ basis[b]) > max_xor:\n            max_xor ^= basis[b]\n    return max_xor\n",
+  "functionName": "maxSubsetXOR",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          4,
+          5
+        ]
+      ],
+      "expected": 7,
+      "inputDisplay": "[2, 4, 5]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[1, 2, 3]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          9,
+          8,
+          5
+        ]
+      ],
+      "expected": 13,
+      "inputDisplay": "[9, 8, 5]",
+      "expectedDisplay": "13",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Insert every element into a Linear Basis over GF(2). Greedily XOR each basis vector into the answer if it increases the result."
+  ],
+  "python": {
+    "starterCode": "def maxSubsetXOR(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def maxSubsetXOR(nums: list[int]) -> int:\n    basis = [0] * 32\n    for x in nums:\n        for b in range(31, -1, -1):\n            if (x >> b) & 1:\n                if not basis[b]:\n                    basis[b] = x\n                    break\n                x ^= basis[b]\n    max_xor = 0\n    for b in range(31, -1, -1):\n        if (max_xor ^ basis[b]) > max_xor:\n            max_xor ^= basis[b]\n    return max_xor\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "Maximum Subset XOR (Linear Basis)",
+  "leetcodeUrl": null
+}

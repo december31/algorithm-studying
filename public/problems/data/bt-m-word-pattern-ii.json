@@ -1,0 +1,86 @@
+{
+  "id": "bt-m-word-pattern-ii",
+  "wingId": "backtracking",
+  "floor": 241,
+  "title": "Word Pattern II (Bijection Search)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-word-pattern-ii",
+    "name": "Bijection Gorgon",
+    "title": "Seeker of Arbitrary Word Mappings",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "slime",
+    "color": "#8b5cf6",
+    "attackName": "Mapping Petrification",
+    "attackPower": 2,
+    "defeatQuote": "One-to-one word mapping backtrack discovered the bijection!"
+  },
+  "description": "Given a `pattern` and a string `s`, return `True` if `s` matches the `pattern`. A string `s` matches a pattern if there is some bijective mapping of single characters to non-empty strings such that if each character in `pattern` is replaced with the string it maps to, then the resulting string is `s`.",
+  "examples": [
+    {
+      "input": "pattern = \"abab\", s = \"redblueredblue\"",
+      "output": "True"
+    },
+    {
+      "input": "pattern = \"aaaa\", s = \"asdasdasdasd\"",
+      "output": "True"
+    },
+    {
+      "input": "pattern = \"aabb\", s = \"xyzabcxzyabc\"",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= len(pattern), len(s) <= 20"
+  ],
+  "starterCode": "def wordPatternMatch(pattern: str, s: str) -> bool:\n    pass\n",
+  "solutionCode": "def wordPatternMatch(pattern: str, s: str) -> bool:\n    p2s = {}\n    s2p = set()\n    def backtrack(p_idx, s_idx):\n        if p_idx == len(pattern) and s_idx == len(s): return True\n        if p_idx == len(pattern) or s_idx == len(s): return False\n        ch = pattern[p_idx]\n        if ch in p2s:\n            word = p2s[ch]\n            if not s.startswith(word, s_idx): return False\n            return backtrack(p_idx + 1, s_idx + len(word))\n        for k in range(s_idx + 1, len(s) + 1):\n            sub = s[s_idx:k]\n            if sub in s2p: continue\n            p2s[ch] = sub\n            s2p.add(sub)\n            if backtrack(p_idx + 1, k): return True\n            del p2s[ch]\n            s2p.remove(sub)\n        return False\n    return backtrack(0, 0)\n",
+  "functionName": "wordPatternMatch",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "abab",
+        "redblueredblue"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['abab', 'redblueredblue']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "aaaa",
+        "asdasdasdasd"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['aaaa', 'asdasdasdasd']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "aabb",
+        "xyzabcxzyabc"
+      ],
+      "expected": false,
+      "inputDisplay": "args=['aabb', 'xyzabcxzyabc']",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use backtracking to match pattern characters to candidate substrings with bijective hash sets."
+  ],
+  "python": {
+    "starterCode": "def wordPatternMatch(pattern: str, s: str) -> bool:\n    pass\n",
+    "solutionCode": "def wordPatternMatch(pattern: str, s: str) -> bool:\n    p2s = {}\n    s2p = set()\n    def backtrack(p_idx, s_idx):\n        if p_idx == len(pattern) and s_idx == len(s): return True\n        if p_idx == len(pattern) or s_idx == len(s): return False\n        ch = pattern[p_idx]\n        if ch in p2s:\n            word = p2s[ch]\n            if not s.startswith(word, s_idx): return False\n            return backtrack(p_idx + 1, s_idx + len(word))\n        for k in range(s_idx + 1, len(s) + 1):\n            sub = s[s_idx:k]\n            if sub in s2p: continue\n            p2s[ch] = sub\n            s2p.add(sub)\n            if backtrack(p_idx + 1, k): return True\n            del p2s[ch]\n            s2p.remove(sub)\n        return False\n    return backtrack(0, 0)\n"
+  },
+  "leetcodeId": 291,
+  "leetcodeTitle": "Word Pattern II (Bijection Search)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-word-pattern-ii/"
+}

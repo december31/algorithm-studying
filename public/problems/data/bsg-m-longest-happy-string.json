@@ -1,0 +1,73 @@
+{
+  "id": "bsg-m-longest-happy-string",
+  "wingId": "binary-search-greedy",
+  "floor": 468,
+  "title": "Longest Happy String (Greedy Trigram Avoidance)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-longest-happy-string",
+    "name": "Trigram Sphinx",
+    "title": "Banisher of Triple Character Repeats",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "sphinx",
+    "color": "#f59e0b",
+    "attackName": "Trigram Ward",
+    "attackPower": 2,
+    "defeatQuote": "Longest valid string containing no 'aaa', 'bbb', or 'ccc' built!"
+  },
+  "description": "A string `s` is called happy if it contains only 'a', 'b', 'c' and does not contain \"aaa\", \"bbb\", or \"ccc\". Given integers `a`, `b`, and `c`, return the longest possible happy string.",
+  "examples": [
+    {
+      "input": "a = 1, b = 1, c = 7",
+      "output": "\"ccaccbcc\""
+    },
+    {
+      "input": "a = 7, b = 1, c = 0",
+      "output": "\"aabaa\""
+    }
+  ],
+  "constraints": [
+    "0 <= a, b, c <= 100"
+  ],
+  "starterCode": "def longestDiverseString(a: int, b: int, c: int) -> str:\n    pass\n",
+  "solutionCode": "def longestDiverseString(a: int, b: int, c: int) -> str:\n    import heapq\n    pq = []\n    for cnt, ch in [(-a, 'a'), (-b, 'b'), (-c, 'c')]:\n        if cnt < 0: heapq.heappush(pq, (cnt, ch))\n    res = []\n    while pq:\n        cnt1, ch1 = heapq.heappop(pq)\n        if len(res) >= 2 and res[-1] == res[-2] == ch1:\n            if not pq: break\n            cnt2, ch2 = heapq.heappop(pq)\n            res.append(ch2)\n            cnt2 += 1\n            if cnt2 < 0: heapq.heappush(pq, (cnt2, ch2))\n            heapq.heappush(pq, (cnt1, ch1))\n        else:\n            res.append(ch1)\n            cnt1 += 1\n            if cnt1 < 0: heapq.heappush(pq, (cnt1, ch1))\n    return \"\".join(res)\n",
+  "functionName": "longestDiverseString",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1,
+        1,
+        7
+      ],
+      "expected": "ccaccbcc",
+      "inputDisplay": "args=[1, 1, 7]",
+      "expectedDisplay": "ccaccbcc",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        7,
+        1,
+        0
+      ],
+      "expected": "aabaa",
+      "inputDisplay": "args=[7, 1, 0]",
+      "expectedDisplay": "aabaa",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Greedily pick the character with highest remaining count unless it would form three identical consecutive characters."
+  ],
+  "python": {
+    "starterCode": "def longestDiverseString(a: int, b: int, c: int) -> str:\n    pass\n",
+    "solutionCode": "def longestDiverseString(a: int, b: int, c: int) -> str:\n    import heapq\n    pq = []\n    for cnt, ch in [(-a, 'a'), (-b, 'b'), (-c, 'c')]:\n        if cnt < 0: heapq.heappush(pq, (cnt, ch))\n    res = []\n    while pq:\n        cnt1, ch1 = heapq.heappop(pq)\n        if len(res) >= 2 and res[-1] == res[-2] == ch1:\n            if not pq: break\n            cnt2, ch2 = heapq.heappop(pq)\n            res.append(ch2)\n            cnt2 += 1\n            if cnt2 < 0: heapq.heappush(pq, (cnt2, ch2))\n            heapq.heappush(pq, (cnt1, ch1))\n        else:\n            res.append(ch1)\n            cnt1 += 1\n            if cnt1 < 0: heapq.heappush(pq, (cnt1, ch1))\n    return \"\".join(res)\n"
+  },
+  "leetcodeId": 1405,
+  "leetcodeTitle": "Longest Happy String (Greedy Trigram Avoidance)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-longest-happy-string/"
+}

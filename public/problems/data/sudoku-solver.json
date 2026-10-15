@@ -28,8 +28,8 @@
     "board.length == 9, board[i].length == 9",
     "Each board contains only digits 1-9 and \".\""
   ],
-  "starterCode": "function solveSudoku(board) {\n  return board;\n}",
-  "solutionCode": "function solveSudoku(board) {\n  function isValid(r, c, ch) {\n    for (let i = 0; i < 9; i++) {\n      if (board[r][i] === ch) return false;\n      if (board[i][c] === ch) return false;\n      const boxR = 3 * Math.floor(r / 3) + Math.floor(i / 3);\n      const boxC = 3 * Math.floor(c / 3) + (i % 3);\n      if (board[boxR][boxC] === ch) return false;\n    }\n    return true;\n  }\n  function solve() {\n    for (let r = 0; r < 9; r++) {\n      for (let c = 0; c < 9; c++) {\n        if (board[r][c] === '.') {\n          for (let d = 1; d <= 9; d++) {\n            const ch = String(d);\n            if (isValid(r, c, ch)) {\n              board[r][c] = ch;\n              if (solve()) return true;\n              board[r][c] = '.';\n            }\n          }\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n  solve();\n  return board;\n}",
+  "starterCode": "def solveSudoku(board):\n    return board\n",
+  "solutionCode": "def solveSudoku(board):\n    def is_valid(r, c, ch):\n        for i in range(9):\n            if board[r][i] == ch or board[i][c] == ch:\n                return False\n            br, bc = 3 * (r // 3) + i // 3, 3 * (c // 3) + i % 3\n            if board[br][bc] == ch:\n                return False\n        return True\n    def solve():\n        for r in range(9):\n            for c in range(9):\n                if board[r][c] == \".\":\n                    for d in \"123456789\":\n                        if is_valid(r, c, d):\n                            board[r][c] = d\n                            if solve():\n                                return True\n                            board[r][c] = \".\"\n                    return False\n        return True\n    solve()\n    return board\n",
   "functionName": "solveSudoku",
   "testCases": [
     {

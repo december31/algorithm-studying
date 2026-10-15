@@ -1,0 +1,105 @@
+{
+  "id": "graph-m-longest-path-dag",
+  "wingId": "graphs",
+  "floor": 351,
+  "title": "Longest Path in Directed Acyclic Graph",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-longest-path-dag",
+    "name": "Chronos Wyrm",
+    "title": "Extender of Directed Temporal Horizons",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#8b5cf6",
+    "attackName": "Acyclic Stretch",
+    "attackPower": 2,
+    "defeatQuote": "Maximum length of a directed simple path in the DAG computed!"
+  },
+  "description": "Given a directed acyclic graph (DAG) of `n` nodes (0 to n - 1) and directed `edges`, return the maximum length (number of edges) of any directed path in the DAG.",
+  "examples": [
+    {
+      "input": "n = 4, edges = [[0,1],[1,2],[2,3],[0,2]]",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 1000",
+    "0 <= edges.length <= 5000"
+  ],
+  "starterCode": "def longestPathDAG(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def longestPathDAG(n: int, edges: list[list[int]]) -> int:\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in edges:\n        adj[u].append(v)\n    memo = {}\n    def dfs(u):\n        if u in memo: return memo[u]\n        ans = 0\n        for v in adj[u]:\n            ans = max(ans, 1 + dfs(v))\n        memo[u] = ans\n        return ans\n    return max([dfs(i) for i in range(n)], default=0)\n",
+  "functionName": "longestPathDAG",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[4, [[0, 1], [1, 2], [2, 3], [0, 2]]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[3, [[0, 1], [0, 2]]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        2,
+        []
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[2, []]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Memoized DFS or DP along topological ordering."
+  ],
+  "python": {
+    "starterCode": "def longestPathDAG(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def longestPathDAG(n: int, edges: list[list[int]]) -> int:\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in edges:\n        adj[u].append(v)\n    memo = {}\n    def dfs(u):\n        if u in memo: return memo[u]\n        ans = 0\n        for v in adj[u]:\n            ans = max(ans, 1 + dfs(v))\n        memo[u] = ans\n        return ans\n    return max([dfs(i) for i in range(n)], default=0)\n"
+  },
+  "leetcodeId": 0,
+  "leetcodeTitle": "Longest Path in Directed Acyclic Graph",
+  "leetcodeUrl": null
+}

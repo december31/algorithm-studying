@@ -1,0 +1,96 @@
+{
+  "id": "bt-h-stickers-spell-word",
+  "wingId": "backtracking",
+  "floor": 291,
+  "title": "Stickers to Spell Target Word",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-stickers-spell-word",
+    "name": "Adhesive Colossus",
+    "title": "Cutter of Lexical Glue",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Glue Splatter",
+    "attackPower": 3,
+    "defeatQuote": "Minimum sticker cutouts assembled to spell target!"
+  },
+  "description": "We are given `n` different types of `stickers`. Each sticker has a lowercase English word on it. You would like to spell out the given string `target` by cutting individual letters from your collection of stickers and rearranging them. You can use each sticker more than once if you want, and you have infinite quantities of each sticker. Return the minimum number of stickers that you need to spell out `target`. If the task is impossible, return `-1`.",
+  "examples": [
+    {
+      "input": "stickers = [\"with\",\"example\",\"science\"], target = \"thehat\"",
+      "output": "3"
+    },
+    {
+      "input": "stickers = [\"notice\",\"possible\"], target = \"basicbasic\"",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= len(stickers) <= 50",
+    "1 <= len(target) <= 15"
+  ],
+  "starterCode": "def minStickers(stickers: list[str], target: str) -> int:\n    pass\n",
+  "solutionCode": "def minStickers(stickers: list[str], target: str) -> int:\n    from collections import Counter\n    m = len(target)\n    memo = {(1 << m) - 1: 0}\n    def dfs(mask):\n        if mask in memo: return memo[mask]\n        first_char = ''\n        for i in range(m):\n            if not (mask & (1 << i)):\n                first_char = target[i]\n                break\n        ans = float('inf')\n        for st in stickers:\n            if first_char not in st:\n                continue\n            next_mask = mask\n            cnt = Counter(st)\n            for i in range(m):\n                if not (next_mask & (1 << i)) and cnt[target[i]] > 0:\n                    cnt[target[i]] -= 1\n                    next_mask |= (1 << i)\n            if next_mask != mask:\n                ans = min(ans, 1 + dfs(next_mask))\n        memo[mask] = ans\n        return ans\n    res = dfs(0)\n    return res if res != float('inf') else -1\n",
+  "functionName": "minStickers",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "with",
+          "example",
+          "science"
+        ],
+        "thehat"
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[['with', 'example', 'science'], 'thehat']",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "notice",
+          "possible"
+        ],
+        "basicbasic"
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[['notice', 'possible'], 'basicbasic']",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "these",
+          "guess",
+          "about",
+          "garden",
+          "him"
+        ],
+        "atomher"
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[['these', 'guess', 'about', 'garden', 'him'], 'atomher']",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use bitmask memoization on the characters of target. Prune by only choosing stickers containing the first uncovered letter."
+  ],
+  "python": {
+    "starterCode": "def minStickers(stickers: list[str], target: str) -> int:\n    pass\n",
+    "solutionCode": "def minStickers(stickers: list[str], target: str) -> int:\n    from collections import Counter\n    m = len(target)\n    memo = {(1 << m) - 1: 0}\n    def dfs(mask):\n        if mask in memo: return memo[mask]\n        first_char = ''\n        for i in range(m):\n            if not (mask & (1 << i)):\n                first_char = target[i]\n                break\n        ans = float('inf')\n        for st in stickers:\n            if first_char not in st:\n                continue\n            next_mask = mask\n            cnt = Counter(st)\n            for i in range(m):\n                if not (next_mask & (1 << i)) and cnt[target[i]] > 0:\n                    cnt[target[i]] -= 1\n                    next_mask |= (1 << i)\n            if next_mask != mask:\n                ans = min(ans, 1 + dfs(next_mask))\n        memo[mask] = ans\n        return ans\n    res = dfs(0)\n    return res if res != float('inf') else -1\n"
+  },
+  "leetcodeId": 691,
+  "leetcodeTitle": "Stickers to Spell Target Word",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-stickers-spell-word/"
+}

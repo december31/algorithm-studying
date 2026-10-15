@@ -1,0 +1,122 @@
+{
+  "id": "ds-m-number-of-subarrays",
+  "wingId": "data-structures",
+  "floor": 145,
+  "title": "Count Nice Subarrays (K Odd Numbers)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-number-of-subarrays",
+    "name": "Parity Specter",
+    "title": "Tallyman of Odd Number Pulses",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Odd Pulse",
+    "attackPower": 2,
+    "defeatQuote": "Prefix odd counts revealed all matching intervals!"
+  },
+  "description": "Given an array of integers `nums` and an integer `k`. A continuous subarray is called nice if there are `k` odd numbers on it. Return the number of nice sub-arrays.",
+  "examples": [
+    {
+      "input": "nums = [1,1,2,1,1], k = 3",
+      "output": "2"
+    },
+    {
+      "input": "nums = [2,4,6], k = 1",
+      "output": "0"
+    },
+    {
+      "input": "nums = [2,2,2,1,2,2,1,2,2,2], k = 2",
+      "output": "16"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 50000",
+    "1 <= nums[i] <= 10^5",
+    "1 <= k <= len(nums)"
+  ],
+  "starterCode": "def numberOfSubarrays(nums: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def numberOfSubarrays(nums: list[int], k: int) -> int:\n    from collections import defaultdict\n    count = defaultdict(int)\n    count[0] = 1\n    curr = 0\n    ans = 0\n    for n in nums:\n        curr += (n % 2)\n        ans += count[curr - k]\n        count[curr] += 1\n    return ans\n",
+  "functionName": "numberOfSubarrays",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          1,
+          2,
+          1,
+          1
+        ],
+        3
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[1, 1, 2, 1, 1], 3]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          4,
+          6
+        ],
+        1
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[2, 4, 6], 1]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2
+        ],
+        2
+      ],
+      "expected": 16,
+      "inputDisplay": "args=[[2, 2, 2, 1, 2, 2, 1, 2, 2, 2], 2]",
+      "expectedDisplay": "16",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1], 1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Convert to 0s and 1s (n % 2) and use a prefix sum map for sum equals k."
+  ],
+  "python": {
+    "starterCode": "def numberOfSubarrays(nums: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def numberOfSubarrays(nums: list[int], k: int) -> int:\n    from collections import defaultdict\n    count = defaultdict(int)\n    count[0] = 1\n    curr = 0\n    ans = 0\n    for n in nums:\n        curr += (n % 2)\n        ans += count[curr - k]\n        count[curr] += 1\n    return ans\n"
+  },
+  "leetcodeId": 1248,
+  "leetcodeTitle": "Count Nice Subarrays (K Odd Numbers)",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-number-of-subarrays/"
+}

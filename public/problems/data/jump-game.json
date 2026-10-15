@@ -32,8 +32,8 @@
     "1 <= nums.length <= 10^4",
     "0 <= nums[i] <= 10^5"
   ],
-  "starterCode": "function canJump(nums) {\n  return false;\n}",
-  "solutionCode": "function canJump(nums) {\n  let maxReach = 0;\n  for (let i = 0; i < nums.length; i++) {\n    if (i > maxReach) return false;\n    maxReach = Math.max(maxReach, i + nums[i]);\n    if (maxReach >= nums.length - 1) return true;\n  }\n  return true;\n}",
+  "starterCode": "def canJump(nums):\n    return False\n",
+  "solutionCode": "def canJump(nums):\n    max_reach = 0\n    for i, jump in enumerate(nums):\n        if i > max_reach:\n            return False\n        max_reach = max(max_reach, i + jump)\n        if max_reach >= len(nums) - 1:\n            return True\n    return True\n",
   "functionName": "canJump",
   "testCases": [
     {

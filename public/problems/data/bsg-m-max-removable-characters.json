@@ -1,0 +1,84 @@
+{
+  "id": "bsg-m-max-removable-characters",
+  "wingId": "binary-search-greedy",
+  "floor": 442,
+  "title": "Maximum Number of Removable Characters",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-max-removable-characters",
+    "name": "Redaction Specter",
+    "title": "Eraser of Substring Glyphs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#8b5cf6",
+    "attackName": "Glyph Erasure",
+    "attackPower": 2,
+    "defeatQuote": "Maximum k removals from s such that p remains a subsequence!"
+  },
+  "description": "You are given two strings `s` and `p` where `p` is a subsequence of `s`. You are also given a distinct 0-indexed integer array `removable` containing a subset of indices of `s`. You want to choose an integer `k` (`0 <= k <= removable.length`) such that, after removing characters at `removable[0], ..., removable[k - 1]`, `p` is still a subsequence of `s`. Return the maximum `k`.",
+  "examples": [
+    {
+      "input": "s = \"abcacb\", p = \"ab\", removable = [3,1,0]",
+      "output": "2"
+    },
+    {
+      "input": "s = \"abcbddddd\", p = \"abcd\", removable = [3,2,1,4,5,6]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= p.length <= s.length <= 100000"
+  ],
+  "starterCode": "def maximumRemovals(s: str, p: str, removable: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def maximumRemovals(s: str, p: str, removable: list[int]) -> int:\n    def is_subseq(k):\n        removed = set(removable[:k])\n        j = 0\n        for i, ch in enumerate(s):\n            if i not in removed and ch == p[j]:\n                j += 1\n                if j == len(p): return True\n        return False\n    lo, hi = 0, len(removable)\n    ans = 0\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if is_subseq(mid):\n            ans = mid\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return ans\n",
+  "functionName": "maximumRemovals",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "abcacb",
+        "ab",
+        [
+          3,
+          1,
+          0
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "args=['abcacb', 'ab', [3, 1, 0]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "abcbddddd",
+        "abcd",
+        [
+          3,
+          2,
+          1,
+          4,
+          5,
+          6
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=['abcbddddd', 'abcd', [3, 2, 1, 4, 5, 6]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search on k in [0, len(removable)]. Test subsequence validity in O(len(s))."
+  ],
+  "python": {
+    "starterCode": "def maximumRemovals(s: str, p: str, removable: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def maximumRemovals(s: str, p: str, removable: list[int]) -> int:\n    def is_subseq(k):\n        removed = set(removable[:k])\n        j = 0\n        for i, ch in enumerate(s):\n            if i not in removed and ch == p[j]:\n                j += 1\n                if j == len(p): return True\n        return False\n    lo, hi = 0, len(removable)\n    ans = 0\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if is_subseq(mid):\n            ans = mid\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return ans\n"
+  },
+  "leetcodeId": 1898,
+  "leetcodeTitle": "Maximum Number of Removable Characters",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-max-removable-characters/"
+}

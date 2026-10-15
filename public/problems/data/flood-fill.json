@@ -33,8 +33,8 @@
     "1 <= m, n <= 50",
     "0 <= color < 2^16"
   ],
-  "starterCode": "function floodFill(image, sr, sc, color) {\n  return image;\n}",
-  "solutionCode": "function floodFill(image, sr, sc, color) {\n  const orig = image[sr][sc];\n  if (orig === color) return image;\n  const m = image.length, n = image[0].length;\n  function dfs(r, c) {\n    if (r < 0 || r >= m || c < 0 || c >= n || image[r][c] !== orig) return;\n    image[r][c] = color;\n    dfs(r + 1, c);\n    dfs(r - 1, c);\n    dfs(r, c + 1);\n    dfs(r, c - 1);\n  }\n  dfs(sr, sc);\n  return image;\n}",
+  "starterCode": "def floodFill(image, sr, sc, color):\n    return image\n",
+  "solutionCode": "def floodFill(image, sr, sc, color):\n    orig = image[sr][sc]\n    if orig == color:\n        return image\n    m, n = len(image), len(image[0])\n    def dfs(r, c):\n        if r < 0 or r >= m or c < 0 or c >= n or image[r][c] != orig:\n            return\n        image[r][c] = color\n        dfs(r + 1, c)\n        dfs(r - 1, c)\n        dfs(r, c + 1)\n        dfs(r, c - 1)\n    dfs(sr, sc)\n    return image\n",
   "functionName": "floodFill",
   "testCases": [
     {

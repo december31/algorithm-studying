@@ -1,0 +1,86 @@
+{
+  "id": "bsg-m-min-swaps-strings-equal",
+  "wingId": "binary-search-greedy",
+  "floor": 457,
+  "title": "Min Swaps to Make Strings Equal (x and y)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-min-swaps-strings-equal",
+    "name": "Inversion Wraith",
+    "title": "Swapper of Asymmetric Pairs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#38bdf8",
+    "attackName": "Swap Shock",
+    "attackPower": 2,
+    "defeatQuote": "Minimum swaps between s1 and s2 to make both equal!"
+  },
+  "description": "You are given two strings `s1` and `s2` of equal length consisting of letters `'x'` and `'y'` only. Your task is to make these two strings equal to each other using minimum swaps. Return the minimum number of swaps, or -1 if impossible.",
+  "examples": [
+    {
+      "input": "s1 = \"xx\", s2 = \"yy\"",
+      "output": "1"
+    },
+    {
+      "input": "s1 = \"xy\", s2 = \"yx\"",
+      "output": "2"
+    },
+    {
+      "input": "s1 = \"xx\", s2 = \"xy\"",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= s1.length == s2.length <= 1000"
+  ],
+  "starterCode": "def minimumSwap(s1: str, s2: str) -> int:\n    pass\n",
+  "solutionCode": "def minimumSwap(s1: str, s2: str) -> int:\n    xy = yx = 0\n    for c1, c2 in zip(s1, s2):\n        if c1 == 'x' and c2 == 'y': xy += 1\n        elif c1 == 'y' and c2 == 'x': yx += 1\n    if (xy + yx) % 2 == 1: return -1\n    return xy // 2 + yx // 2 + (2 if xy % 2 == 1 else 0)\n",
+  "functionName": "minimumSwap",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "xx",
+        "yy"
+      ],
+      "expected": 1,
+      "inputDisplay": "args=['xx', 'yy']",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "xy",
+        "yx"
+      ],
+      "expected": 2,
+      "inputDisplay": "args=['xy', 'yx']",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "xx",
+        "xy"
+      ],
+      "expected": -1,
+      "inputDisplay": "args=['xx', 'xy']",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Two ('x','y') pairs resolve in 1 swap. One ('x','y') and one ('y','x') pair resolve in 2 swaps."
+  ],
+  "python": {
+    "starterCode": "def minimumSwap(s1: str, s2: str) -> int:\n    pass\n",
+    "solutionCode": "def minimumSwap(s1: str, s2: str) -> int:\n    xy = yx = 0\n    for c1, c2 in zip(s1, s2):\n        if c1 == 'x' and c2 == 'y': xy += 1\n        elif c1 == 'y' and c2 == 'x': yx += 1\n    if (xy + yx) % 2 == 1: return -1\n    return xy // 2 + yx // 2 + (2 if xy % 2 == 1 else 0)\n"
+  },
+  "leetcodeId": 1247,
+  "leetcodeTitle": "Min Swaps to Make Strings Equal (x and y)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-min-swaps-strings-equal/"
+}

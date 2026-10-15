@@ -33,8 +33,8 @@
     "1 <= m, n <= 6",
     "1 <= word.length <= 15"
   ],
-  "starterCode": "function exist(board, word) {\n  return false;\n}",
-  "solutionCode": "function exist(board, word) {\n  const m = board.length;\n  const n = board[0].length;\n  function dfs(r, c, idx) {\n    if (idx === word.length) return true;\n    if (r < 0 || r >= m || c < 0 || c >= n || board[r][c] !== word[idx]) return false;\n    const temp = board[r][c];\n    board[r][c] = '#';\n    const found = dfs(r + 1, c, idx + 1) ||\n                  dfs(r - 1, c, idx + 1) ||\n                  dfs(r, c + 1, idx + 1) ||\n                  dfs(r, c - 1, idx + 1);\n    board[r][c] = temp;\n    return found;\n  }\n  for (let r = 0; r < m; r++) {\n    for (let c = 0; c < n; c++) {\n      if (dfs(r, c, 0)) return true;\n    }\n  }\n  return false;\n}",
+  "starterCode": "def exist(board, word):\n    return False\n",
+  "solutionCode": "def exist(board, word):\n    m, n = len(board), len(board[0])\n    def dfs(r, c, idx):\n        if idx == len(word):\n            return True\n        if r < 0 or r >= m or c < 0 or c >= n or board[r][c] != word[idx]:\n            return False\n        temp = board[r][c]\n        board[r][c] = \"#\"\n        found = (dfs(r + 1, c, idx + 1) or\n                 dfs(r - 1, c, idx + 1) or\n                 dfs(r, c + 1, idx + 1) or\n                 dfs(r, c - 1, idx + 1))\n        board[r][c] = temp\n        return found\n    for r in range(m):\n        for c in range(n):\n            if dfs(r, c, 0):\n                return True\n    return False\n",
   "functionName": "exist",
   "testCases": [
     {

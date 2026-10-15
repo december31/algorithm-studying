@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
-import { javascript } from '@codemirror/lang-javascript';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { indentUnit } from '@codemirror/language';
 import { EditorState, Prec } from '@codemirror/state';
 import { keymap } from '@codemirror/view';
 import { indentMore, indentLess } from '@codemirror/commands';
 import { useGameStore, getStarterCode, getSolutionCode } from '../../store/useGameStore';
-import { executeSolution } from '../../engine/runner';
 import { executePythonSolution } from '../../engine/pythonRunner';
 import { Play, RotateCcw, Lightbulb, Code2, BookOpen, Swords, ExternalLink } from 'lucide-react';
 import { SolutionModal } from './SolutionModal';
@@ -42,8 +40,6 @@ export const CodeEditor: React.FC = () => {
     currentProblem,
     code,
     setCode,
-    language,
-    setLanguage,
     isRunning,
     setRunning,
     setExecutionReport,
@@ -56,23 +52,20 @@ export const CodeEditor: React.FC = () => {
   const [isSolutionModalOpen, setIsSolutionModalOpen] = useState(false);
 
   const editorExtensions = React.useMemo(() => {
-    const langExt = language === 'python' ? python() : javascript({ jsx: false, typescript: false });
     return [
-      langExt,
+      python(),
       indentUnit.of('    '),
       EditorState.tabSize.of(4),
       customTabKeymap,
     ];
-  }, [language]);
+  }, []);
 
   // Run Code (Safe Test on 3 Sample Cases)
   const handleRunCode = async () => {
     if (isRunning) return;
     setRunning(true);
     try {
-      const report = language === 'python'
-        ? await executePythonSolution(currentProblem, code, 'run')
-        : await executeSolution(currentProblem, code, 'run');
+      const report = await executePythonSolution(currentProblem, code, 'run');
       setExecutionReport(report);
     } catch (err: any) {
       setExecutionReport({
@@ -93,9 +86,7 @@ export const CodeEditor: React.FC = () => {
     if (isRunning) return;
     setRunning(true);
     try {
-      const report = language === 'python'
-        ? await executePythonSolution(currentProblem, code, 'submit')
-        : await executeSolution(currentProblem, code, 'submit');
+      const report = await executePythonSolution(currentProblem, code, 'submit');
       setExecutionReport(report);
     } catch (err: any) {
       setExecutionReport({
@@ -112,8 +103,8 @@ export const CodeEditor: React.FC = () => {
   };
 
   const handleReset = () => {
-    if (window.confirm('Reset code to starter template?')) {
-      setCode(getStarterCode(currentProblem, language));
+    if (window.confirm('Reset code to Python starter template?')) {
+      setCode(getStarterCode(currentProblem, 'python'));
     }
   };
 
@@ -123,7 +114,7 @@ export const CodeEditor: React.FC = () => {
 
   const handleConfirmSolution = () => {
     if (takeSacrificeHealth(25, 'Forbidden Solution')) {
-      setCode(getSolutionCode(currentProblem, language));
+      setCode(getSolutionCode(currentProblem, 'python'));
     }
   };
 
@@ -141,7 +132,7 @@ export const CodeEditor: React.FC = () => {
     <div className="w-full flex flex-col bg-dungeon-dark/95 border border-dungeon-border rounded-xl overflow-hidden shadow-xl">
       {/* Editor Header Navigation */}
       <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 bg-dungeon-darker/90 border-b border-dungeon-border">
-        {/* Left: Tab Toggle & Language Switcher */}
+        {/* Left: Tab Toggle & Python Badge */}
         <div className="flex items-center gap-2">
           {/* Code vs Description */}
           <div className="flex items-center gap-1">
@@ -169,30 +160,13 @@ export const CodeEditor: React.FC = () => {
             </button>
           </div>
 
-          {/* Language Selector (Python by default) */}
-          <div className="flex items-center bg-dungeon-darkest border border-slate-700/80 rounded-lg p-0.5 font-pixel text-[10px]">
-            <button
-              onClick={() => setLanguage('python')}
-              className={`px-2 py-1 rounded transition-colors ${
-                language === 'python'
-                  ? 'bg-amber-500 text-slate-950 font-bold shadow'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-              title="Python 3.12 (via Pyodide WebAssembly)"
-            >
-              🐍 Python
-            </button>
-            <button
-              onClick={() => setLanguage('javascript')}
-              className={`px-2 py-1 rounded transition-colors ${
-                language === 'javascript'
-                  ? 'bg-sky-500 text-slate-950 font-bold shadow'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-              title="JavaScript ES6"
-            >
-              ⚡ JS
-            </button>
+          {/* Locked Python 3 Badge */}
+          <div
+            className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-950/40 border border-amber-500/40 rounded-lg font-pixel text-[10px] text-amber-300 shadow-sm"
+            title="Python 3.12 (via Pyodide WebAssembly)"
+          >
+            <span className="text-sm">🐍</span>
+            <span className="font-bold tracking-wide">Python 3</span>
           </div>
         </div>
 
@@ -335,7 +309,7 @@ export const CodeEditor: React.FC = () => {
         isOpen={isSolutionModalOpen}
         onClose={() => setIsSolutionModalOpen(false)}
         onConfirm={handleConfirmSolution}
-        language={language}
+        language="python"
         currentHp={stats.hp}
         monsterName={currentProblem.monster.name}
         cost={25}

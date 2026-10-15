@@ -1,0 +1,80 @@
+{
+  "id": "bit-h-shortest-superstring-len",
+  "wingId": "bit-manipulation",
+  "floor": 572,
+  "title": "Shortest Superstring Length",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-shortest-superstring-len",
+    "name": "String Stitcher Wyrm",
+    "title": "Weaver of Overlapping Runes",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#a855f7",
+    "attackName": "Prefix Suffix Merge",
+    "attackPower": 3,
+    "defeatQuote": "Merge our ancient fragments with optimal bitmask overlap!"
+  },
+  "description": "Given an array of strings `words`, return the length of the shortest string that contains each string in `words` as a substring. (You may assume no string in `words` is a substring of another).",
+  "examples": [
+    {
+      "input": "words = [\"alex\",\"loves\",\"leetcode\"]",
+      "output": "17"
+    },
+    {
+      "input": "words = [\"catg\",\"ctaagt\",\"gcta\",\"ttca\",\"atgcatc\"]",
+      "output": "16"
+    }
+  ],
+  "constraints": [
+    "1 <= words.length <= 12",
+    "1 <= words[i].length <= 20"
+  ],
+  "starterCode": "def shortestSuperstringLength(words: list[str]) -> int:\n    pass\n",
+  "solutionCode": "def shortestSuperstringLength(words: list[str]) -> int:\n    n = len(words)\n    cost = [[0] * n for _ in range(n)]\n    for i in range(n):\n        for j in range(n):\n            if i != j:\n                for k in range(min(len(words[i]), len(words[j])), 0, -1):\n                    if words[i].endswith(words[j][:k]):\n                        cost[i][j] = k\n                        break\n    dp = [[float('inf')] * n for _ in range(1 << n)]\n    for i in range(n):\n        dp[1 << i][i] = len(words[i])\n    for mask in range(1 << n):\n        for last in range(n):\n            if not (mask & (1 << last)) or dp[mask][last] == float('inf'): continue\n            for nxt in range(n):\n                if not (mask & (1 << nxt)):\n                    new_mask = mask | (1 << nxt)\n                    new_len = dp[mask][last] + len(words[nxt]) - cost[last][nxt]\n                    if new_len < dp[new_mask][nxt]:\n                        dp[new_mask][nxt] = new_len\n    return min(dp[(1 << n) - 1])\n",
+  "functionName": "shortestSuperstringLength",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "alex",
+          "loves",
+          "leetcode"
+        ]
+      ],
+      "expected": 17,
+      "inputDisplay": "['alex', 'loves', 'leetcode']",
+      "expectedDisplay": "17",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "catg",
+          "ctaagt",
+          "gcta",
+          "ttca",
+          "atgcatc"
+        ]
+      ],
+      "expected": 16,
+      "inputDisplay": "['catg', 'ctaagt', 'gcta', 'ttca', 'atgcatc']",
+      "expectedDisplay": "16",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Precompute overlap between word pairs. Use bitmask DP dp[mask][last] representing min length visited mask ending with last."
+  ],
+  "python": {
+    "starterCode": "def shortestSuperstringLength(words: list[str]) -> int:\n    pass\n",
+    "solutionCode": "def shortestSuperstringLength(words: list[str]) -> int:\n    n = len(words)\n    cost = [[0] * n for _ in range(n)]\n    for i in range(n):\n        for j in range(n):\n            if i != j:\n                for k in range(min(len(words[i]), len(words[j])), 0, -1):\n                    if words[i].endswith(words[j][:k]):\n                        cost[i][j] = k\n                        break\n    dp = [[float('inf')] * n for _ in range(1 << n)]\n    for i in range(n):\n        dp[1 << i][i] = len(words[i])\n    for mask in range(1 << n):\n        for last in range(n):\n            if not (mask & (1 << last)) or dp[mask][last] == float('inf'): continue\n            for nxt in range(n):\n                if not (mask & (1 << nxt)):\n                    new_mask = mask | (1 << nxt)\n                    new_len = dp[mask][last] + len(words[nxt]) - cost[last][nxt]\n                    if new_len < dp[new_mask][nxt]:\n                        dp[new_mask][nxt] = new_len\n    return min(dp[(1 << n) - 1])\n"
+  },
+  "leetcodeId": 943,
+  "leetcodeTitle": "Shortest Superstring Length",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-shortest-superstring-len/"
+}

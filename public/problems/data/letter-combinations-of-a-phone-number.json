@@ -36,8 +36,8 @@
     "0 <= digits.length <= 4",
     "digits[i] is a digit in the range ['2', '9']."
   ],
-  "starterCode": "function letterCombinations(digits) {\n  return [];\n}",
-  "solutionCode": "function letterCombinations(digits) {\n  if (!digits) return [];\n  const map = {\n    '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',\n    '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'\n  };\n  const res = [];\n  function backtrack(idx, path) {\n    if (idx === digits.length) {\n      res.push(path);\n      return;\n    }\n    const letters = map[digits[idx]] || '';\n    for (let i = 0; i < letters.length; i++) {\n      backtrack(idx + 1, path + letters[i]);\n    }\n  }\n  backtrack(0, '');\n  return res;\n}",
+  "starterCode": "def letterCombinations(digits):\n    return []\n",
+  "solutionCode": "def letterCombinations(digits):\n    if not digits:\n        return []\n    mapping = {\n        '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',\n        '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'\n    }\n    res = []\n    def backtrack(idx, path):\n        if idx == len(digits):\n            res.append(path)\n            return\n        for char in mapping.get(digits[idx], ''):\n            backtrack(idx + 1, path + char)\n    backtrack(0, '')\n    return res\n",
   "functionName": "letterCombinations",
   "testCases": [
     {

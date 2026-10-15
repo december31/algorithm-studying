@@ -1,0 +1,97 @@
+{
+  "id": "bt-h-verbal-arithmetic-puzzle",
+  "wingId": "backtracking",
+  "floor": 295,
+  "title": "Verbal Arithmetic Puzzle (Cryptarithm)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-verbal-arithmetic-puzzle",
+    "name": "Cipher Sphinx",
+    "title": "Guardian of Alphabetic Equations",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "sphinx",
+    "color": "#e11d48",
+    "attackName": "Hieroglyphic Curse",
+    "attackPower": 3,
+    "defeatQuote": "Letter to digit bijection equation solved!"
+  },
+  "description": "Given an equation, represented by `words` on the left side and the `result` on the right side. You need to check if the equation is solvable under the following rules: Each character is decoded as one digit (0 - 9). Every character gets a different digit. No leading zero allowed for words of length > 1. Return `True` if the equation is solvable or `False` otherwise.",
+  "examples": [
+    {
+      "input": "words = [\"SEND\",\"MORE\"], result = \"MONEY\"",
+      "output": "True"
+    },
+    {
+      "input": "words = [\"SIX\",\"SEVEN\",\"SEVEN\"], result = \"TWENTY\"",
+      "output": "True"
+    },
+    {
+      "input": "words = [\"LEET\",\"CODE\"], result = \"POINT\"",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "2 <= words.length <= 5",
+    "1 <= words[i].length, result.length <= 7"
+  ],
+  "starterCode": "def isSolvable(words: list[str], result: str) -> bool:\n    pass\n",
+  "solutionCode": "def isSolvable(words: list[str], result: str) -> bool:\n    all_words = words + [result]\n    leading = set()\n    for w in all_words:\n        if len(w) > 1: leading.add(w[0])\n    char_weight = {}\n    for w in words:\n        for i, ch in enumerate(reversed(w)):\n            char_weight[ch] = char_weight.get(ch, 0) + (10 ** i)\n    for i, ch in enumerate(reversed(result)):\n        char_weight[ch] = char_weight.get(ch, 0) - (10 ** i)\n    chars = list(char_weight.keys())\n    weights = [char_weight[ch] for ch in chars]\n    n = len(chars)\n    used = [False] * 10\n    def backtrack(idx, current_sum):\n        if idx == n:\n            return current_sum == 0\n        ch = chars[idx]\n        w = weights[idx]\n        start_d = 1 if ch in leading else 0\n        for d in range(start_d, 10):\n            if not used[d]:\n                used[d] = True\n                if backtrack(idx + 1, current_sum + d * w):\n                    return True\n                used[d] = False\n        return False\n    return backtrack(0, 0)\n",
+  "functionName": "isSolvable",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "SEND",
+          "MORE"
+        ],
+        "MONEY"
+      ],
+      "expected": true,
+      "inputDisplay": "args=[['SEND', 'MORE'], 'MONEY']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "SIX",
+          "SEVEN",
+          "SEVEN"
+        ],
+        "TWENTY"
+      ],
+      "expected": true,
+      "inputDisplay": "args=[['SIX', 'SEVEN', 'SEVEN'], 'TWENTY']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "LEET",
+          "CODE"
+        ],
+        "POINT"
+      ],
+      "expected": false,
+      "inputDisplay": "args=[['LEET', 'CODE'], 'POINT']",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Consolidate each letter's total polynomial weight, then backtrack digit assignments to reach net sum 0."
+  ],
+  "python": {
+    "starterCode": "def isSolvable(words: list[str], result: str) -> bool:\n    pass\n",
+    "solutionCode": "def isSolvable(words: list[str], result: str) -> bool:\n    all_words = words + [result]\n    leading = set()\n    for w in all_words:\n        if len(w) > 1: leading.add(w[0])\n    char_weight = {}\n    for w in words:\n        for i, ch in enumerate(reversed(w)):\n            char_weight[ch] = char_weight.get(ch, 0) + (10 ** i)\n    for i, ch in enumerate(reversed(result)):\n        char_weight[ch] = char_weight.get(ch, 0) - (10 ** i)\n    chars = list(char_weight.keys())\n    weights = [char_weight[ch] for ch in chars]\n    n = len(chars)\n    used = [False] * 10\n    def backtrack(idx, current_sum):\n        if idx == n:\n            return current_sum == 0\n        ch = chars[idx]\n        w = weights[idx]\n        start_d = 1 if ch in leading else 0\n        for d in range(start_d, 10):\n            if not used[d]:\n                used[d] = True\n                if backtrack(idx + 1, current_sum + d * w):\n                    return True\n                used[d] = False\n        return False\n    return backtrack(0, 0)\n"
+  },
+  "leetcodeId": 1307,
+  "leetcodeTitle": "Verbal Arithmetic Puzzle (Cryptarithm)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-verbal-arithmetic-puzzle/"
+}

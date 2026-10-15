@@ -1,0 +1,102 @@
+{
+  "id": "bit-h-partition-min-sum-diff",
+  "wingId": "bit-manipulation",
+  "floor": 592,
+  "title": "Partition Array to Minimize Sum Difference",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-partition-min-sum-diff",
+    "name": "Equipartition Leviathan",
+    "title": "Twin Sunderer of Arrays",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#ca8a04",
+    "attackName": "Bipartite Balance Cleave",
+    "attackPower": 3,
+    "defeatQuote": "Partition 2*n items into two arrays of n elements each, minimizing difference!"
+  },
+  "description": "You are given an integer array `nums` of `2 * n` integers. You need to partition `nums` into two arrays of length `n` to minimize the absolute difference of their sums. Return the minimum possible absolute difference.",
+  "examples": [
+    {
+      "input": "nums = [3,9,7,3], n = 2",
+      "output": "2"
+    },
+    {
+      "input": "nums = [-36,36], n = 1",
+      "output": "72"
+    },
+    {
+      "input": "nums = [2,-1,0,4,-2,-9], n = 3",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 15",
+    "nums.length == 2 * n"
+  ],
+  "starterCode": "def minimumDifference(nums: list[int], n: int) -> int:\n    pass\n",
+  "solutionCode": "def minimumDifference(nums: list[int], n: int) -> int:\n    from bisect import bisect_left\n    total = sum(nums)\n    left, right = nums[:n], nums[n:]\n    left_sums = [[] for _ in range(n + 1)]\n    right_sums = [[] for _ in range(n + 1)]\n    for mask in range(1 << n):\n        sz = bin(mask).count('1')\n        l_s = sum(left[i] for i in range(n) if (mask & (1 << i)))\n        r_s = sum(right[i] for i in range(n) if (mask & (1 << i)))\n        left_sums[sz].append(l_s)\n        right_sums[sz].append(r_s)\n    for sz in range(n + 1):\n        right_sums[sz].sort()\n    ans = float('inf')\n    for sz in range(n + 1):\n        r_sz = n - sz\n        r_list = right_sums[r_sz]\n        for l_s in left_sums[sz]:\n            target = total / 2 - l_s\n            idx = bisect_left(r_list, target)\n            if idx < len(r_list):\n                s = l_s + r_list[idx]\n                ans = min(ans, abs(total - 2 * s))\n            if idx > 0:\n                s = l_s + r_list[idx - 1]\n                ans = min(ans, abs(total - 2 * s))\n    return ans\n",
+  "functionName": "minimumDifference",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          9,
+          7,
+          3
+        ],
+        2
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[3, 9, 7, 3], 2]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          -36,
+          36
+        ],
+        1
+      ],
+      "expected": 72,
+      "inputDisplay": "args=[[-36, 36], 1]",
+      "expectedDisplay": "72",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          2,
+          -1,
+          0,
+          4,
+          -2,
+          -9
+        ],
+        3
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[[2, -1, 0, 4, -2, -9], 3]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Meet-in-the-middle: group subset sums of left and right halves by their size k. For each k, binary search for the best complement in right_sums[n - k]."
+  ],
+  "python": {
+    "starterCode": "def minimumDifference(nums: list[int], n: int) -> int:\n    pass\n",
+    "solutionCode": "def minimumDifference(nums: list[int], n: int) -> int:\n    from bisect import bisect_left\n    total = sum(nums)\n    left, right = nums[:n], nums[n:]\n    left_sums = [[] for _ in range(n + 1)]\n    right_sums = [[] for _ in range(n + 1)]\n    for mask in range(1 << n):\n        sz = bin(mask).count('1')\n        l_s = sum(left[i] for i in range(n) if (mask & (1 << i)))\n        r_s = sum(right[i] for i in range(n) if (mask & (1 << i)))\n        left_sums[sz].append(l_s)\n        right_sums[sz].append(r_s)\n    for sz in range(n + 1):\n        right_sums[sz].sort()\n    ans = float('inf')\n    for sz in range(n + 1):\n        r_sz = n - sz\n        r_list = right_sums[r_sz]\n        for l_s in left_sums[sz]:\n            target = total / 2 - l_s\n            idx = bisect_left(r_list, target)\n            if idx < len(r_list):\n                s = l_s + r_list[idx]\n                ans = min(ans, abs(total - 2 * s))\n            if idx > 0:\n                s = l_s + r_list[idx - 1]\n                ans = min(ans, abs(total - 2 * s))\n    return ans\n"
+  },
+  "leetcodeId": 2035,
+  "leetcodeTitle": "Partition Array to Minimize Sum Difference",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-partition-min-sum-diff/"
+}

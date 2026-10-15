@@ -1,0 +1,86 @@
+{
+  "id": "bsg-e-binary-search",
+  "wingId": "binary-search-greedy",
+  "floor": 401,
+  "title": "Standard Binary Search",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-e-binary-search",
+    "name": "Bisection Imp",
+    "title": "Halver of Ordered Space",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "imp",
+    "color": "#38bdf8",
+    "attackName": "Half-Step Cleave",
+    "attackPower": 1,
+    "defeatQuote": "Target located in O(log n) logarithmic steps!"
+  },
+  "description": "Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, write a function to search `target` in `nums`. If `target` exists, then return its index. Otherwise, return `-1`.",
+  "examples": [
+    {
+      "input": "nums = [-1,0,3,5,9,12], target = 9",
+      "output": "4"
+    },
+    {
+      "input": "nums = [-1,0,3,5,9,12], target = 2",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10000",
+    "-10000 < nums[i], target < 10000"
+  ],
+  "starterCode": "def search(nums: list[int], target: int) -> int:\n    pass\n",
+  "solutionCode": "def search(nums: list[int], target: int) -> int:\n    lo, hi = 0, len(nums) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if nums[mid] == target: return mid\n        elif nums[mid] < target: lo = mid + 1\n        else: hi = mid - 1\n    return -1\n",
+  "functionName": "search",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          -1,
+          0,
+          3,
+          5,
+          9,
+          12
+        ],
+        9
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[[-1, 0, 3, 5, 9, 12], 9]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          -1,
+          0,
+          3,
+          5,
+          9,
+          12
+        ],
+        2
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[[-1, 0, 3, 5, 9, 12], 2]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Maintain [lo, hi] bounds, halving search space by comparing target to nums[mid]."
+  ],
+  "python": {
+    "starterCode": "def search(nums: list[int], target: int) -> int:\n    pass\n",
+    "solutionCode": "def search(nums: list[int], target: int) -> int:\n    lo, hi = 0, len(nums) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if nums[mid] == target: return mid\n        elif nums[mid] < target: lo = mid + 1\n        else: hi = mid - 1\n    return -1\n"
+  },
+  "leetcodeId": 704,
+  "leetcodeTitle": "Standard Binary Search",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-e-binary-search/"
+}

@@ -1,0 +1,83 @@
+{
+  "id": "bt-e-word-pattern-simple",
+  "wingId": "backtracking",
+  "floor": 207,
+  "title": "Word Pattern Bijection",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-e-word-pattern-simple",
+    "name": "Grammar Banshee",
+    "title": "Watcher of Structural Bijections",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "wraith",
+    "color": "#a855f7",
+    "attackName": "Grammar Wail",
+    "attackPower": 1,
+    "defeatQuote": "One-to-one character-to-word bijection verified!"
+  },
+  "description": "Given a `pattern` and a string `s`, find if `s` follows the same pattern. Follow means a full match, such that there is a bijection between a letter in `pattern` and a non-empty word in `s`.",
+  "examples": [
+    {
+      "input": "pattern = \"abba\", s = \"dog cat cat dog\"",
+      "output": "True"
+    },
+    {
+      "input": "pattern = \"abba\", s = \"dog cat cat fish\"",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= len(pattern) <= 300",
+    "1 <= len(s) <= 3000"
+  ],
+  "starterCode": "def wordPatternSimple(pattern: str, s: str) -> bool:\n    pass\n",
+  "solutionCode": "def wordPatternSimple(pattern: str, s: str) -> bool:\n    words = s.split()\n    if len(pattern) != len(words): return False\n    p2w, w2p = {}, {}\n    for p, w in zip(pattern, words):\n        if p in p2w and p2w[p] != w: return False\n        if w in w2p and w2p[w] != p: return False\n        p2w[p] = w\n        w2p[w] = p\n    return True\n",
+  "functionName": "wordPatternSimple",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "abba",
+        "dog cat cat dog"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['abba', 'dog cat cat dog']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "abba",
+        "dog cat cat fish"
+      ],
+      "expected": false,
+      "inputDisplay": "args=['abba', 'dog cat cat fish']",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "aaaa",
+        "dog cat cat dog"
+      ],
+      "expected": false,
+      "inputDisplay": "args=['aaaa', 'dog cat cat dog']",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use two hash maps to establish a two-way bijection between pattern letters and words."
+  ],
+  "python": {
+    "starterCode": "def wordPatternSimple(pattern: str, s: str) -> bool:\n    pass\n",
+    "solutionCode": "def wordPatternSimple(pattern: str, s: str) -> bool:\n    words = s.split()\n    if len(pattern) != len(words): return False\n    p2w, w2p = {}, {}\n    for p, w in zip(pattern, words):\n        if p in p2w and p2w[p] != w: return False\n        if w in w2p and w2p[w] != p: return False\n        p2w[p] = w\n        w2p[w] = p\n    return True\n"
+  },
+  "leetcodeId": 290,
+  "leetcodeTitle": "Word Pattern Bijection",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-e-word-pattern-simple/"
+}

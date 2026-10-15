@@ -1,0 +1,82 @@
+{
+  "id": "bit-m-sum-two-integers-bitwise",
+  "wingId": "bit-manipulation",
+  "floor": 527,
+  "title": "Sum of Two Integers (Bitwise Full Adder)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-sum-two-integers-bitwise",
+    "name": "Arithmetic Automaton",
+    "title": "Calculator Without Plus or Minus Operators",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Adder Pulse",
+    "attackPower": 2,
+    "defeatQuote": "Addition executed using bitwise XOR and carry AND shifts!"
+  },
+  "description": "Given two integers `a` and `b`, return the sum of the two integers without using the operators `+` and `-`.",
+  "examples": [
+    {
+      "input": "a = 1, b = 2",
+      "output": "3"
+    },
+    {
+      "input": "a = 2, b = 3",
+      "output": "5"
+    }
+  ],
+  "constraints": [
+    "-1000 <= a, b <= 1000"
+  ],
+  "starterCode": "def getSum(a: int, b: int) -> int:\n    pass\n",
+  "solutionCode": "def getSum(a: int, b: int) -> int:\n    MASK = 0xFFFFFFFF\n    MAX_INT = 0x7FFFFFFF\n    while b != 0:\n        carry = (a & b) << 1\n        a = (a ^ b) & MASK\n        b = carry & MASK\n    return a if a <= MAX_INT else ~(a ^ MASK)\n",
+  "functionName": "getSum",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1,
+        2
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[1, 2]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        2,
+        3
+      ],
+      "expected": 5,
+      "inputDisplay": "args=[2, 3]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        -1,
+        1
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[-1, 1]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Simulate hardware adder: sum_without_carry = a ^ b, carry = (a & b) << 1."
+  ],
+  "python": {
+    "starterCode": "def getSum(a: int, b: int) -> int:\n    pass\n",
+    "solutionCode": "def getSum(a: int, b: int) -> int:\n    MASK = 0xFFFFFFFF\n    MAX_INT = 0x7FFFFFFF\n    while b != 0:\n        carry = (a & b) << 1\n        a = (a ^ b) & MASK\n        b = carry & MASK\n    return a if a <= MAX_INT else ~(a ^ MASK)\n"
+  },
+  "leetcodeId": 371,
+  "leetcodeTitle": "Sum of Two Integers (Bitwise Full Adder)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-sum-two-integers-bitwise/"
+}

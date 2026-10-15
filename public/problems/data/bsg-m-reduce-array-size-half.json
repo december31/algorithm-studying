@@ -1,0 +1,88 @@
+{
+  "id": "bsg-m-reduce-array-size-half",
+  "wingId": "binary-search-greedy",
+  "floor": 448,
+  "title": "Reduce Array Size to The Half",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-reduce-array-size-half",
+    "name": "Decimation Imp",
+    "title": "Pruner of Dominant Elements",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#ef4444",
+    "attackName": "Halving Cleave",
+    "attackPower": 2,
+    "defeatQuote": "Minimum unique values removed to eliminate at least half the array!"
+  },
+  "description": "You are given an integer array `arr`. You can choose a set of integers and remove all the occurrences of these integers in the array. Return the minimum size of the set so that at least half of the integers of the array are removed.",
+  "examples": [
+    {
+      "input": "arr = [3,3,3,3,5,5,5,2,2,7]",
+      "output": "2"
+    },
+    {
+      "input": "arr = [7,7,7,7,7,7]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "2 <= arr.length <= 100000",
+    "arr.length is even"
+  ],
+  "starterCode": "def minSetSize(arr: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minSetSize(arr: list[int]) -> int:\n    from collections import Counter\n    counts = Counter(arr)\n    freqs = sorted(counts.values(), reverse=True)\n    removed = 0\n    ans = 0\n    half = len(arr) // 2\n    for f in freqs:\n        removed += f\n        ans += 1\n        if removed >= half: return ans\n    return ans\n",
+  "functionName": "minSetSize",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          3,
+          3,
+          3,
+          5,
+          5,
+          5,
+          2,
+          2,
+          7
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[3, 3, 3, 3, 5, 5, 5, 2, 2, 7]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[7, 7, 7, 7, 7, 7]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort value frequencies in descending order and greedily take the most frequent numbers."
+  ],
+  "python": {
+    "starterCode": "def minSetSize(arr: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minSetSize(arr: list[int]) -> int:\n    from collections import Counter\n    counts = Counter(arr)\n    freqs = sorted(counts.values(), reverse=True)\n    removed = 0\n    ans = 0\n    half = len(arr) // 2\n    for f in freqs:\n        removed += f\n        ans += 1\n        if removed >= half: return ans\n    return ans\n"
+  },
+  "leetcodeId": 1338,
+  "leetcodeTitle": "Reduce Array Size to The Half",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-reduce-array-size-half/"
+}

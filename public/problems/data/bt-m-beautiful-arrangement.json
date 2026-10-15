@@ -1,0 +1,79 @@
+{
+  "id": "bt-m-beautiful-arrangement",
+  "wingId": "backtracking",
+  "floor": 227,
+  "title": "Beautiful Arrangement",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-beautiful-arrangement",
+    "name": "Divisibility Sphinx",
+    "title": "Keeper of Divisible Alignments",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "beholder",
+    "color": "#ec4899",
+    "attackName": "Divisibility Gaze",
+    "attackPower": 2,
+    "defeatQuote": "Every index i satisfies (val % i == 0 or i % val == 0)!"
+  },
+  "description": "Suppose you have `n` integers labeled `1` through `n`. A permutation of these `n` integers is called a beautiful arrangement if for every `i` (1 <= i <= n): `perm[i] % i == 0` or `i % perm[i] == 0`. Return the number of the beautiful arrangements that you can construct.",
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "2"
+    },
+    {
+      "input": "n = 1",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 15"
+  ],
+  "starterCode": "def countArrangement(n: int) -> int:\n    pass\n",
+  "solutionCode": "def countArrangement(n: int) -> int:\n    count = 0\n    used = [False] * (n + 1)\n    def backtrack(pos):\n        nonlocal count\n        if pos > n:\n            count += 1\n            return\n        for num in range(1, n + 1):\n            if not used[num] and (num % pos == 0 or pos % num == 0):\n                used[num] = True\n                backtrack(pos + 1)\n                used[num] = False\n    backtrack(1)\n    return count\n",
+  "functionName": "countArrangement",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2
+      ],
+      "expected": 2,
+      "inputDisplay": "2",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "1",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "3",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Place numbers at position 1..n. Prune when neither num % pos == 0 nor pos % num == 0."
+  ],
+  "python": {
+    "starterCode": "def countArrangement(n: int) -> int:\n    pass\n",
+    "solutionCode": "def countArrangement(n: int) -> int:\n    count = 0\n    used = [False] * (n + 1)\n    def backtrack(pos):\n        nonlocal count\n        if pos > n:\n            count += 1\n            return\n        for num in range(1, n + 1):\n            if not used[num] and (num % pos == 0 or pos % num == 0):\n                used[num] = True\n                backtrack(pos + 1)\n                used[num] = False\n    backtrack(1)\n    return count\n"
+  },
+  "leetcodeId": 526,
+  "leetcodeTitle": "Beautiful Arrangement",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-beautiful-arrangement/"
+}

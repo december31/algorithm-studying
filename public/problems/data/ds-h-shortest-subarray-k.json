@@ -1,0 +1,114 @@
+{
+  "id": "ds-h-shortest-subarray-k",
+  "wingId": "data-structures",
+  "floor": 183,
+  "title": "Shortest Subarray with Sum >= K",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-h-shortest-subarray-k",
+    "name": "Sum Constrictor",
+    "title": "Crusher of Cumulative Thresholds",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#ef4444",
+    "attackName": "Threshold Slam",
+    "attackPower": 3,
+    "defeatQuote": "Monotonic deque on prefix sums handled negative elements in O(n)!"
+  },
+  "description": "Given an integer array `nums` and an integer `k`, return the length of the shortest non-empty subarray of `nums` with a sum of at least `k`. If there is no such subarray, return `-1`.",
+  "examples": [
+    {
+      "input": "nums = [1], k = 1",
+      "output": "1"
+    },
+    {
+      "input": "nums = [1,2], k = 4",
+      "output": "-1"
+    },
+    {
+      "input": "nums = [2,-1,2], k = 3",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 10^5",
+    "-10^5 <= nums[i] <= 10^5",
+    "1 <= k <= 10^9"
+  ],
+  "starterCode": "def shortestSubarraySumK(nums: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def shortestSubarraySumK(nums: list[int], k: int) -> int:\n    from collections import deque\n    P = [0]\n    for x in nums: P.append(P[-1] + x)\n    ans = float('inf')\n    monoq = deque()\n    for y, Py in enumerate(P):\n        while monoq and Py <= P[monoq[-1]]:\n            monoq.pop()\n        while monoq and Py - P[monoq[0]] >= k:\n            ans = min(ans, y - monoq.popleft())\n        monoq.append(y)\n    return ans if ans != float('inf') else -1\n",
+  "functionName": "shortestSubarraySumK",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1], 1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2
+        ],
+        4
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[[1, 2], 4]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          2,
+          -1,
+          2
+        ],
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[2, -1, 2], 3]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          84,
+          -37,
+          32,
+          40,
+          95
+        ],
+        167
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[84, -37, 32, 40, 95], 167]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Compute prefix sums and maintain a monotonic increasing deque of prefix sum indices."
+  ],
+  "python": {
+    "starterCode": "def shortestSubarraySumK(nums: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def shortestSubarraySumK(nums: list[int], k: int) -> int:\n    from collections import deque\n    P = [0]\n    for x in nums: P.append(P[-1] + x)\n    ans = float('inf')\n    monoq = deque()\n    for y, Py in enumerate(P):\n        while monoq and Py <= P[monoq[-1]]:\n            monoq.pop()\n        while monoq and Py - P[monoq[0]] >= k:\n            ans = min(ans, y - monoq.popleft())\n        monoq.append(y)\n    return ans if ans != float('inf') else -1\n"
+  },
+  "leetcodeId": 862,
+  "leetcodeTitle": "Shortest Subarray with Sum >= K",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-shortest-subarray-k/"
+}

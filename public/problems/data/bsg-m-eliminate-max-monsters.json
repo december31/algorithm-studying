@@ -1,0 +1,109 @@
+{
+  "id": "bsg-m-eliminate-max-monsters",
+  "wingId": "binary-search-greedy",
+  "floor": 450,
+  "title": "Eliminate Maximum Number of Monsters",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-eliminate-max-monsters",
+    "name": "Siege Gorgon",
+    "title": "Charger Against the City Gates",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#ef4444",
+    "attackName": "Stampede Rush",
+    "attackPower": 2,
+    "defeatQuote": "Monsters eliminated before any creature reaches city gates!"
+  },
+  "description": "You are playing a video game where monsters advance towards your city. Monster `i` starts at `dist[i]` and moves at `speed[i]`. Your weapon can vaporize one monster per minute. Return the maximum number of monsters that you can eliminate before you lose.",
+  "examples": [
+    {
+      "input": "dist = [1,3,4], speed = [1,1,1]",
+      "output": "3"
+    },
+    {
+      "input": "dist = [1,1,2,3], speed = [1,1,1,1]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "n == dist.length == speed.length",
+    "1 <= n <= 100000"
+  ],
+  "starterCode": "def eliminateMaximum(dist: list[int], speed: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def eliminateMaximum(dist: list[int], speed: list[int]) -> int:\n    import math\n    arrival = sorted(d / s for d, s in zip(dist, speed))\n    for minute, arr_time in enumerate(arrival):\n        if arr_time <= minute:\n            return minute\n    return len(dist)\n",
+  "functionName": "eliminateMaximum",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3,
+          4
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[1, 3, 4], [1, 1, 1]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1, 1, 2, 3], [1, 1, 1, 1]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          3,
+          2,
+          4
+        ],
+        [
+          5,
+          3,
+          2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[3, 2, 4], [5, 3, 2]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Calculate arrival times dist / speed, sort ascending, and check if arrival_time <= minute."
+  ],
+  "python": {
+    "starterCode": "def eliminateMaximum(dist: list[int], speed: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def eliminateMaximum(dist: list[int], speed: list[int]) -> int:\n    import math\n    arrival = sorted(d / s for d, s in zip(dist, speed))\n    for minute, arr_time in enumerate(arrival):\n        if arr_time <= minute:\n            return minute\n    return len(dist)\n"
+  },
+  "leetcodeId": 1921,
+  "leetcodeTitle": "Eliminate Maximum Number of Monsters",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-eliminate-max-monsters/"
+}

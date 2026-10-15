@@ -1,0 +1,106 @@
+{
+  "id": "ds-m-sum-subarray-mins",
+  "wingId": "data-structures",
+  "floor": 125,
+  "title": "Sum of Subarray Minimums",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-sum-subarray-mins",
+    "name": "Subarray Trough Fiend",
+    "title": "Accumulator of Valley Boundaries",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "slime",
+    "color": "#f97316",
+    "attackName": "Valley Compression",
+    "attackPower": 2,
+    "defeatQuote": "Contribution of every minimum calculated modulo 10^9 + 7!"
+  },
+  "description": "Given an array of integers `arr`, find the sum of `min(b)`, where `b` ranges over every (contiguous) subarray of `arr`. Since the answer may be large, return the answer modulo `10^9 + 7`.",
+  "examples": [
+    {
+      "input": "arr = [3,1,2,4]",
+      "output": "17"
+    },
+    {
+      "input": "arr = [11,81,94,43,3]",
+      "output": "444"
+    }
+  ],
+  "constraints": [
+    "1 <= len(arr) <= 3 * 10^4",
+    "1 <= arr[i] <= 3 * 10^4"
+  ],
+  "starterCode": "def sumSubarrayMins(arr: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def sumSubarrayMins(arr: list[int]) -> int:\n    MOD = 10**9 + 7\n    n = len(arr)\n    left = [0] * n\n    right = [0] * n\n    s1 = []\n    for i in range(n):\n        count = 1\n        while s1 and s1[-1][0] > arr[i]:\n            count += s1.pop()[1]\n        s1.append((arr[i], count))\n        left[i] = count\n    s2 = []\n    for i in range(n - 1, -1, -1):\n        count = 1\n        while s2 and s2[-1][0] >= arr[i]:\n            count += s2.pop()[1]\n        s2.append((arr[i], count))\n        right[i] = count\n    ans = sum(arr[i] * left[i] * right[i] for i in range(n)) % MOD\n    return ans\n",
+  "functionName": "sumSubarrayMins",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          1,
+          2,
+          4
+        ]
+      ],
+      "expected": 17,
+      "inputDisplay": "[3, 1, 2, 4]",
+      "expectedDisplay": "17",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          11,
+          81,
+          94,
+          43,
+          3
+        ]
+      ],
+      "expected": 444,
+      "inputDisplay": "[11, 81, 94, 43, 3]",
+      "expectedDisplay": "444",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[5]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          7,
+          7
+        ]
+      ],
+      "expected": 21,
+      "inputDisplay": "[7, 7]",
+      "expectedDisplay": "21",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Calculate number of subarrays where arr[i] is the minimum using monotonic stacks for left and right spans."
+  ],
+  "python": {
+    "starterCode": "def sumSubarrayMins(arr: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def sumSubarrayMins(arr: list[int]) -> int:\n    MOD = 10**9 + 7\n    n = len(arr)\n    left = [0] * n\n    right = [0] * n\n    s1 = []\n    for i in range(n):\n        count = 1\n        while s1 and s1[-1][0] > arr[i]:\n            count += s1.pop()[1]\n        s1.append((arr[i], count))\n        left[i] = count\n    s2 = []\n    for i in range(n - 1, -1, -1):\n        count = 1\n        while s2 and s2[-1][0] >= arr[i]:\n            count += s2.pop()[1]\n        s2.append((arr[i], count))\n        right[i] = count\n    ans = sum(arr[i] * left[i] * right[i] for i in range(n)) % MOD\n    return ans\n"
+  },
+  "leetcodeId": 907,
+  "leetcodeTitle": "Sum of Subarray Minimums",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-sum-subarray-mins/"
+}

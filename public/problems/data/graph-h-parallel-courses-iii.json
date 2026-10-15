@@ -1,0 +1,114 @@
+{
+  "id": "graph-h-parallel-courses-iii",
+  "wingId": "graphs",
+  "floor": 380,
+  "title": "Parallel Courses III (Critical Path Time)",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-h-parallel-courses-iii",
+    "name": "Concurrence Titan",
+    "title": "Scheduler of Critical Paths",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "titan",
+    "color": "#8b5cf6",
+    "attackName": "Critical Path Quake",
+    "attackPower": 3,
+    "defeatQuote": "Minimum total completion time under dependency graph constraints!"
+  },
+  "description": "You are given an integer `n`, which indicates that there are `n` courses labeled from 1 to `n`. You are also given a 2D integer array `relations` where `relations[j] = [prevCoursej, nextCoursej]` and an integer array `time` where `time[i]` denotes months to complete the `(i+1)`-th course. Any number of courses can be taken in parallel if prerequisites are met. Return the minimum number of months needed to complete all the courses.",
+  "examples": [
+    {
+      "input": "n = 3, relations = [[1,3],[2,3]], time = [3,2,5]",
+      "output": "8"
+    },
+    {
+      "input": "n = 5, relations = [[1,5],[2,5],[3,5],[3,4],[4,5]], time = [1,2,3,4,5]",
+      "output": "12"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 50000",
+    "0 <= relations.length <= 50000"
+  ],
+  "starterCode": "def minimumTime(n: int, relations: list[list[int]], time: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minimumTime(n: int, relations: list[list[int]], time: list[int]) -> int:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    in_deg = [0] * (n + 1)\n    for u, v in relations:\n        adj[u].append(v)\n        in_deg[v] += 1\n    dp = [0] * (n + 1)\n    q = deque([i for i in range(1, n + 1) if in_deg[i] == 0])\n    for i in q:\n        dp[i] = time[i - 1]\n    while q:\n        u = q.popleft()\n        for v in adj[u]:\n            dp[v] = max(dp[v], dp[u] + time[v - 1])\n            in_deg[v] -= 1\n            if in_deg[v] == 0:\n                q.append(v)\n    return max(dp)\n",
+  "functionName": "minimumTime",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        [
+          3,
+          2,
+          5
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "args=[3, [[1, 3], [2, 3]], [3, 2, 5]]",
+      "expectedDisplay": "8",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        5,
+        [
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": 12,
+      "inputDisplay": "args=[5, [[1, 5], [2, 5], [3, 5], [3, 4], [4, 5]], [1, 2, 3, 4, 5]]",
+      "expectedDisplay": "12",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Topological sort DP: dp[v] = max(dp[v], dp[u] + time[v])."
+  ],
+  "python": {
+    "starterCode": "def minimumTime(n: int, relations: list[list[int]], time: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minimumTime(n: int, relations: list[list[int]], time: list[int]) -> int:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    in_deg = [0] * (n + 1)\n    for u, v in relations:\n        adj[u].append(v)\n        in_deg[v] += 1\n    dp = [0] * (n + 1)\n    q = deque([i for i in range(1, n + 1) if in_deg[i] == 0])\n    for i in q:\n        dp[i] = time[i - 1]\n    while q:\n        u = q.popleft()\n        for v in adj[u]:\n            dp[v] = max(dp[v], dp[u] + time[v - 1])\n            in_deg[v] -= 1\n            if in_deg[v] == 0:\n                q.append(v)\n    return max(dp)\n"
+  },
+  "leetcodeId": 2050,
+  "leetcodeTitle": "Parallel Courses III (Critical Path Time)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-parallel-courses-iii/"
+}

@@ -1,0 +1,266 @@
+{
+  "id": "bt-m-sudoku-valid-board",
+  "wingId": "backtracking",
+  "floor": 253,
+  "title": "Validate Partial Sudoku Board",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-sudoku-valid-board",
+    "name": "Sudoku Arbiter",
+    "title": "Judge of 3x3 Grid Integrity",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#8b5cf6",
+    "attackName": "Sudoku Shield",
+    "attackPower": 2,
+    "defeatQuote": "Every row, column, and 3x3 box checked without duplicate digits!"
+  },
+  "description": "Determine if a `9 x 9` Sudoku board is valid. Only the filled cells need to be validated according to the standard Sudoku rules: each row must contain 1-9 without repetition, each column 1-9, and each 3x3 sub-box 1-9.",
+  "examples": [
+    {
+      "input": "board = [[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "board.length == 9",
+    "board[i].length == 9"
+  ],
+  "starterCode": "def isValidSudoku(board: list[list[str]]) -> bool:\n    pass\n",
+  "solutionCode": "def isValidSudoku(board: list[list[str]]) -> bool:\n    seen = set()\n    for r in range(9):\n        for c in range(9):\n            val = board[r][c]\n            if val != '.':\n                r_tag = (r, val)\n                c_tag = (val, c)\n                b_tag = (r // 3, c // 3, val)\n                if r_tag in seen or c_tag in seen or b_tag in seen:\n                    return False\n                seen.add(r_tag)\n                seen.add(c_tag)\n                seen.add(b_tag)\n    return True\n",
+  "functionName": "isValidSudoku",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "5",
+            "3",
+            ".",
+            ".",
+            "7",
+            ".",
+            ".",
+            ".",
+            "."
+          ],
+          [
+            "6",
+            ".",
+            ".",
+            "1",
+            "9",
+            "5",
+            ".",
+            ".",
+            "."
+          ],
+          [
+            ".",
+            "9",
+            "8",
+            ".",
+            ".",
+            ".",
+            ".",
+            "6",
+            "."
+          ],
+          [
+            "8",
+            ".",
+            ".",
+            ".",
+            "6",
+            ".",
+            ".",
+            ".",
+            "3"
+          ],
+          [
+            "4",
+            ".",
+            ".",
+            "8",
+            ".",
+            "3",
+            ".",
+            ".",
+            "1"
+          ],
+          [
+            "7",
+            ".",
+            ".",
+            ".",
+            "2",
+            ".",
+            ".",
+            ".",
+            "6"
+          ],
+          [
+            ".",
+            "6",
+            ".",
+            ".",
+            ".",
+            ".",
+            "2",
+            "8",
+            "."
+          ],
+          [
+            ".",
+            ".",
+            ".",
+            "4",
+            "1",
+            "9",
+            ".",
+            ".",
+            "5"
+          ],
+          [
+            ".",
+            ".",
+            ".",
+            ".",
+            "8",
+            ".",
+            ".",
+            "7",
+            "9"
+          ]
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "[['5', '3', '.', '.', '7', '.', '.', '.', '.'], ['6', '.', '.', '1', '9', '5', '",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            "8",
+            "3",
+            ".",
+            ".",
+            "7",
+            ".",
+            ".",
+            ".",
+            "."
+          ],
+          [
+            "6",
+            ".",
+            ".",
+            "1",
+            "9",
+            "5",
+            ".",
+            ".",
+            "."
+          ],
+          [
+            ".",
+            "9",
+            "8",
+            ".",
+            ".",
+            ".",
+            ".",
+            "6",
+            "."
+          ],
+          [
+            "8",
+            ".",
+            ".",
+            ".",
+            "6",
+            ".",
+            ".",
+            ".",
+            "3"
+          ],
+          [
+            "4",
+            ".",
+            ".",
+            "8",
+            ".",
+            "3",
+            ".",
+            ".",
+            "1"
+          ],
+          [
+            "7",
+            ".",
+            ".",
+            ".",
+            "2",
+            ".",
+            ".",
+            ".",
+            "6"
+          ],
+          [
+            ".",
+            "6",
+            ".",
+            ".",
+            ".",
+            ".",
+            "2",
+            "8",
+            "."
+          ],
+          [
+            ".",
+            ".",
+            ".",
+            "4",
+            "1",
+            "9",
+            ".",
+            ".",
+            "5"
+          ],
+          [
+            ".",
+            ".",
+            ".",
+            ".",
+            "8",
+            ".",
+            ".",
+            "7",
+            "9"
+          ]
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "[['8', '3', '.', '.', '7', '.', '.', '.', '.'], ['6', '.', '.', '1', '9', '5', '",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use tuple markers in a single set: (r, val), (val, c), (r//3, c//3, val)."
+  ],
+  "python": {
+    "starterCode": "def isValidSudoku(board: list[list[str]]) -> bool:\n    pass\n",
+    "solutionCode": "def isValidSudoku(board: list[list[str]]) -> bool:\n    seen = set()\n    for r in range(9):\n        for c in range(9):\n            val = board[r][c]\n            if val != '.':\n                r_tag = (r, val)\n                c_tag = (val, c)\n                b_tag = (r // 3, c // 3, val)\n                if r_tag in seen or c_tag in seen or b_tag in seen:\n                    return False\n                seen.add(r_tag)\n                seen.add(c_tag)\n                seen.add(b_tag)\n    return True\n"
+  },
+  "leetcodeId": 36,
+  "leetcodeTitle": "Validate Partial Sudoku Board",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-sudoku-valid-board/"
+}

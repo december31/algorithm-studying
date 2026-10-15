@@ -1,0 +1,98 @@
+{
+  "id": "ds-h-min-window-substring",
+  "wingId": "data-structures",
+  "floor": 175,
+  "title": "Minimum Window Substring",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-h-min-window-substring",
+    "name": "Substring Lich",
+    "title": "Extractor of the Leanest Cover",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#ec4899",
+    "attackName": "Constrict Hex",
+    "attackPower": 3,
+    "defeatQuote": "Character requirement count matched and shrunk to minimal span!"
+  },
+  "description": "Given two strings `s` and `t` of lengths `m` and `n` respectively, return the minimum window substring of `s` such that every character in `t` (including duplicates) is included in the window. If there is no such substring, return the empty string `\"\"`.",
+  "examples": [
+    {
+      "input": "s = \"ADOBECODEBANC\", t = \"ABC\"",
+      "output": "\"BANC\""
+    },
+    {
+      "input": "s = \"a\", t = \"a\"",
+      "output": "\"a\""
+    },
+    {
+      "input": "s = \"a\", t = \"aa\"",
+      "output": "\"\""
+    }
+  ],
+  "constraints": [
+    "m == len(s), n == len(t)",
+    "1 <= m, n <= 10^5"
+  ],
+  "starterCode": "def minWindow(s: str, t: str) -> str:\n    pass\n",
+  "solutionCode": "def minWindow(s: str, t: str) -> str:\n    from collections import Counter\n    target = Counter(t)\n    window = {}\n    have, need = 0, len(target)\n    res, min_len = (-1, -1), float('inf')\n    left = 0\n    for right, ch in enumerate(s):\n        window[ch] = window.get(ch, 0) + 1\n        if ch in target and window[ch] == target[ch]:\n            have += 1\n        while have == need:\n            if (right - left + 1) < min_len:\n                min_len = right - left + 1\n                res = (left, right)\n            window[s[left]] -= 1\n            if s[left] in target and window[s[left]] < target[s[left]]:\n                have -= 1\n            left += 1\n    l, r = res\n    return s[l:r + 1] if min_len != float('inf') else \"\"\n",
+  "functionName": "minWindow",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "ADOBECODEBANC",
+        "ABC"
+      ],
+      "expected": "BANC",
+      "inputDisplay": "args=['ADOBECODEBANC', 'ABC']",
+      "expectedDisplay": "BANC",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "a",
+        "a"
+      ],
+      "expected": "a",
+      "inputDisplay": "args=['a', 'a']",
+      "expectedDisplay": "a",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "a",
+        "aa"
+      ],
+      "expected": "",
+      "inputDisplay": "args=['a', 'aa']",
+      "expectedDisplay": "",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "ab",
+        "b"
+      ],
+      "expected": "b",
+      "inputDisplay": "args=['ab', 'b']",
+      "expectedDisplay": "b",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Two pointers with have/need counter variables to track full character satisfaction."
+  ],
+  "python": {
+    "starterCode": "def minWindow(s: str, t: str) -> str:\n    pass\n",
+    "solutionCode": "def minWindow(s: str, t: str) -> str:\n    from collections import Counter\n    target = Counter(t)\n    window = {}\n    have, need = 0, len(target)\n    res, min_len = (-1, -1), float('inf')\n    left = 0\n    for right, ch in enumerate(s):\n        window[ch] = window.get(ch, 0) + 1\n        if ch in target and window[ch] == target[ch]:\n            have += 1\n        while have == need:\n            if (right - left + 1) < min_len:\n                min_len = right - left + 1\n                res = (left, right)\n            window[s[left]] -= 1\n            if s[left] in target and window[s[left]] < target[s[left]]:\n                have -= 1\n            left += 1\n    l, r = res\n    return s[l:r + 1] if min_len != float('inf') else \"\"\n"
+  },
+  "leetcodeId": 76,
+  "leetcodeTitle": "Minimum Window Substring",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-min-window-substring/"
+}

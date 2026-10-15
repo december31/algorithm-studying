@@ -1,0 +1,78 @@
+{
+  "id": "bt-m-strobogrammatic-number-ii",
+  "wingId": "backtracking",
+  "floor": 244,
+  "title": "Strobogrammatic Numbers",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-strobogrammatic-number-ii",
+    "name": "Rotation Spectre",
+    "title": "Reflector of 180-Degree Digits",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#f59e0b",
+    "attackName": "180-Degree Inversion",
+    "attackPower": 2,
+    "defeatQuote": "Numbers that look the same rotated 180 degrees generated!"
+  },
+  "description": "Given an integer `n`, return all the strobogrammatic numbers that are of length `n` in sorted order. A strobogrammatic number is a number that looks the same when rotated 180 degrees (upside down: 0, 1, 8 map to self; 6 and 9 swap).",
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "[\"11\",\"69\",\"88\",\"96\"]"
+    },
+    {
+      "input": "n = 1",
+      "output": "[\"0\",\"1\",\"8\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 6"
+  ],
+  "starterCode": "def findStrobogrammatic(n: int) -> list[str]:\n    pass\n",
+  "solutionCode": "def findStrobogrammatic(n: int) -> list[str]:\n    pairs = [('0', '0'), ('1', '1'), ('8', '8'), ('6', '9'), ('9', '6')]\n    def helper(m):\n        if m == 0: return [\"\"]\n        if m == 1: return [\"0\", \"1\", \"8\"]\n        prev = helper(m - 2)\n        curr = []\n        for p in prev:\n            for l, r in pairs:\n                if m != n or l != '0':\n                    curr.append(l + p + r)\n        return curr\n    return sorted(helper(n))\n",
+  "functionName": "findStrobogrammatic",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2
+      ],
+      "expected": [
+        "11",
+        "69",
+        "88",
+        "96"
+      ],
+      "inputDisplay": "2",
+      "expectedDisplay": "['11', '69', '88', '96']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": [
+        "0",
+        "1",
+        "8"
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "['0', '1', '8']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Build from center outwards, avoiding leading zero on the outer layer."
+  ],
+  "python": {
+    "starterCode": "def findStrobogrammatic(n: int) -> list[str]:\n    pass\n",
+    "solutionCode": "def findStrobogrammatic(n: int) -> list[str]:\n    pairs = [('0', '0'), ('1', '1'), ('8', '8'), ('6', '9'), ('9', '6')]\n    def helper(m):\n        if m == 0: return [\"\"]\n        if m == 1: return [\"0\", \"1\", \"8\"]\n        prev = helper(m - 2)\n        curr = []\n        for p in prev:\n            for l, r in pairs:\n                if m != n or l != '0':\n                    curr.append(l + p + r)\n        return curr\n    return sorted(helper(n))\n"
+  },
+  "leetcodeId": 247,
+  "leetcodeTitle": "Strobogrammatic Numbers",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-strobogrammatic-number-ii/"
+}

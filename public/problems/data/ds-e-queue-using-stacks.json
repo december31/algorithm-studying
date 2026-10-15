@@ -1,0 +1,158 @@
+{
+  "id": "ds-e-queue-using-stacks",
+  "wingId": "data-structures",
+  "floor": 102,
+  "title": "Queue using Stacks Simulator",
+  "difficulty": "easy",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-e-queue-using-stacks",
+    "name": "Dual-Stack Sentinel",
+    "title": "Guardian of Reversible Chambers",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "golem",
+    "color": "#64748b",
+    "attackName": "Reversal Slam",
+    "attackPower": 1,
+    "defeatQuote": "My in-stack and out-stack have collapsed into harmony!"
+  },
+  "description": "Simulate a FIFO queue using two LIFO stacks. You are given a list of commands: `[\"push\", x]`, `[\"pop\"]`, `[\"peek\"]`, and `[\"empty\"]`. Return an array of results corresponding to queries that produce an output (`pop`, `peek`, `empty`).",
+  "examples": [
+    {
+      "input": "commands = [[\"push\", 1], [\"push\", 2], [\"peek\"], [\"pop\"], [\"empty\"]]",
+      "output": "[1, 1, False]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(commands) <= 100",
+    "Commands are valid queue operations"
+  ],
+  "starterCode": "def simulateQueue(commands: list) -> list:\n    # Return outputs for pop, peek, empty\n    pass\n",
+  "solutionCode": "def simulateQueue(commands: list) -> list:\n    in_stack = []\n    out_stack = []\n    results = []\n    for cmd in commands:\n        op = cmd[0]\n        if op == 'push':\n            in_stack.append(cmd[1])\n        elif op == 'pop':\n            if not out_stack:\n                while in_stack:\n                    out_stack.append(in_stack.pop())\n            results.append(out_stack.pop())\n        elif op == 'peek':\n            if not out_stack:\n                while in_stack:\n                    out_stack.append(in_stack.pop())\n            results.append(out_stack[-1])\n        elif op == 'empty':\n            results.append(len(in_stack) == 0 and len(out_stack) == 0)\n    return results\n",
+  "functionName": "simulateQueue",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "push",
+            1
+          ],
+          [
+            "push",
+            2
+          ],
+          [
+            "peek"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        false
+      ],
+      "inputDisplay": "[['push', 1], ['push', 2], ['peek'], ['pop'], ['empty']]",
+      "expectedDisplay": "[1, 1, False]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            "push",
+            5
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ]
+        ]
+      ],
+      "expected": [
+        5,
+        true
+      ],
+      "inputDisplay": "[['push', 5], ['pop'], ['empty']]",
+      "expectedDisplay": "[5, True]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            "push",
+            10
+          ],
+          [
+            "push",
+            20
+          ],
+          [
+            "push",
+            30
+          ],
+          [
+            "pop"
+          ],
+          [
+            "peek"
+          ]
+        ]
+      ],
+      "expected": [
+        10,
+        20
+      ],
+      "inputDisplay": "[['push', 10], ['push', 20], ['push', 30], ['pop'], ['peek']]",
+      "expectedDisplay": "[10, 20]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          [
+            "empty"
+          ],
+          [
+            "push",
+            9
+          ],
+          [
+            "empty"
+          ]
+        ]
+      ],
+      "expected": [
+        true,
+        false
+      ],
+      "inputDisplay": "[['empty'], ['push', 9], ['empty']]",
+      "expectedDisplay": "[True, False]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use two stacks: push onto the inbox stack; pop from the outbox stack, transferring elements when outbox is empty."
+  ],
+  "python": {
+    "starterCode": "def simulateQueue(commands: list) -> list:\n    # Return outputs for pop, peek, empty\n    pass\n",
+    "solutionCode": "def simulateQueue(commands: list) -> list:\n    in_stack = []\n    out_stack = []\n    results = []\n    for cmd in commands:\n        op = cmd[0]\n        if op == 'push':\n            in_stack.append(cmd[1])\n        elif op == 'pop':\n            if not out_stack:\n                while in_stack:\n                    out_stack.append(in_stack.pop())\n            results.append(out_stack.pop())\n        elif op == 'peek':\n            if not out_stack:\n                while in_stack:\n                    out_stack.append(in_stack.pop())\n            results.append(out_stack[-1])\n        elif op == 'empty':\n            results.append(len(in_stack) == 0 and len(out_stack) == 0)\n    return results\n"
+  },
+  "leetcodeId": 232,
+  "leetcodeTitle": "Queue using Stacks Simulator",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-e-queue-using-stacks/"
+}

@@ -1,0 +1,97 @@
+{
+  "id": "bt-m-combinations",
+  "wingId": "backtracking",
+  "floor": 215,
+  "title": "Combinations (N Choose K)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-combinations",
+    "name": "Binomial Wyvern",
+    "title": "Keeper of Pascal's Exponents",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#38bdf8",
+    "attackName": "Binomial Flame",
+    "attackPower": 2,
+    "defeatQuote": "All n choose k combinations extracted in sorted order!"
+  },
+  "description": "Given two integers `n` and `k`, return all possible combinations of `k` numbers chosen from the range `[1, n]` in lexicographical order.",
+  "examples": [
+    {
+      "input": "n = 4, k = 2",
+      "output": "[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 20",
+    "1 <= k <= n"
+  ],
+  "starterCode": "def combine(n: int, k: int) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def combine(n: int, k: int) -> list[list[int]]:\n    res = []\n    def backtrack(start, curr):\n        if len(curr) == k:\n            res.append(list(curr))\n            return\n        need = k - len(curr)\n        for i in range(start, n - need + 2):\n            curr.append(i)\n            backtrack(i + 1, curr)\n            curr.pop()\n    backtrack(1, [])\n    return res\n",
+  "functionName": "combine",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        2
+      ],
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "inputDisplay": "args=[4, 2]",
+      "expectedDisplay": "[[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1,
+        1
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ],
+      "inputDisplay": "args=[1, 1]",
+      "expectedDisplay": "[[1]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Prune the loop bound: i only needs to go up to n - (k - len(curr)) + 1."
+  ],
+  "python": {
+    "starterCode": "def combine(n: int, k: int) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def combine(n: int, k: int) -> list[list[int]]:\n    res = []\n    def backtrack(start, curr):\n        if len(curr) == k:\n            res.append(list(curr))\n            return\n        need = k - len(curr)\n        for i in range(start, n - need + 2):\n            curr.append(i)\n            backtrack(i + 1, curr)\n            curr.pop()\n    backtrack(1, [])\n    return res\n"
+  },
+  "leetcodeId": 77,
+  "leetcodeTitle": "Combinations (N Choose K)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-combinations/"
+}

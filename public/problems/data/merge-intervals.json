@@ -33,8 +33,8 @@
     "intervals[i].length == 2",
     "0 <= start_i <= end_i <= 10^4"
   ],
-  "starterCode": "function mergeIntervals(intervals) {\n  return [];\n}",
-  "solutionCode": "function mergeIntervals(intervals) {\n  if (intervals.length <= 1) return intervals;\n  intervals.sort((a, b) => a[0] - b[0]);\n  const result = [intervals[0]];\n  for (let i = 1; i < intervals.length; i++) {\n    const prev = result[result.length - 1];\n    const curr = intervals[i];\n    if (curr[0] <= prev[1]) {\n      prev[1] = Math.max(prev[1], curr[1]);\n    } else {\n      result.push(curr);\n    }\n  }\n  return result;\n}",
+  "starterCode": "def mergeIntervals(intervals):\n    return []\n",
+  "solutionCode": "def mergeIntervals(intervals):\n    if len(intervals) <= 1:\n        return intervals\n    intervals.sort(key=lambda x: x[0])\n    res = [intervals[0]]\n    for curr in intervals[1:]:\n        if curr[0] <= res[-1][1]:\n            res[-1][1] = max(res[-1][1], curr[1])\n        else:\n            res.append(curr)\n    return res\n",
   "functionName": "mergeIntervals",
   "testCases": [
     {

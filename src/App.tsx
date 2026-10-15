@@ -8,13 +8,52 @@ import { DungeonMap } from './components/screens/DungeonMap';
 import { GameOverModal } from './components/screens/GameOverModal';
 import { VictoryModal } from './components/screens/VictoryModal';
 import { ShopModal } from './components/screens/ShopModal';
-import { Map, ShoppingBag, Volume2, VolumeX, BookOpen, ExternalLink } from 'lucide-react';
+import { AuthModal } from './components/auth/AuthModal';
+import { useAuthStore } from './store/useAuthStore';
+import { Map, ShoppingBag, Volume2, VolumeX, BookOpen, ExternalLink, Sparkles, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { sfx } from './engine/sfx';
 
 export const App: React.FC = () => {
-  const { screen, previousScreen, setScreen, stats, currentFloor, currentProblem, isLoadingProblem } = useGameStore();
+  const {
+    screen,
+    previousScreen,
+    setScreen,
+    stats,
+    currentFloor,
+    currentRunCatalog,
+    currentProblem,
+    isLoadingProblem,
+    restoreSession,
+    syncActiveRunsFromDatabase,
+  } = useGameStore();
+  const { hero, isAuthenticated, openAuthModal, checkAuth } = useAuthStore();
   const [muted, setMuted] = React.useState(sfx.isMuted());
+
+  React.useEffect(() => {
+    const init = async () => {
+      await checkAuth();
+      await syncActiveRunsFromDatabase();
+      await restoreSession();
+    };
+    init();
+  }, [checkAuth, syncActiveRunsFromDatabase, restoreSession]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (screen === 'battle') {
+          if (window.history.length > 1 && window.location.hash === '#battle') {
+            window.history.back();
+          } else {
+            setScreen('map');
+          }
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [screen, setScreen]);
 
   const toggleSound = () => {
     const isNowMuted = sfx.toggleMute();
@@ -29,7 +68,25 @@ export const App: React.FC = () => {
       {/* Streamlined Top Navigation Header */}
       <header className="sticky top-0 z-40 bg-dungeon-darker/95 backdrop-blur border-b border-dungeon-border px-3 sm:px-5 py-2.5 flex items-center justify-between shadow-md">
         {/* Game Title & Stage Badge */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Dedicated Back to Map Button when inside a dungeon */}
+          {activeBaseScreen === 'battle' && (
+            <button
+              onClick={() => {
+                if (window.history.length > 1 && window.location.hash === '#battle') {
+                  window.history.back();
+                } else {
+                  setScreen('map');
+                }
+              }}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-600/70 font-pixel text-xs transition-all shadow-sm group"
+              title="Return to Dungeon Map (Back / Esc)"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 text-amber-400 group-hover:-translate-x-0.5 transition-transform" />
+              <span className="hidden sm:inline">MAP</span>
+            </button>
+          )}
+
           <div
             className="flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity"
             onClick={() => setScreen('map')}
@@ -48,7 +105,7 @@ export const App: React.FC = () => {
           {activeBaseScreen === 'battle' && (
             <div className="hidden md:flex items-center gap-2 pl-3 border-l border-slate-700/60 font-mono text-xs">
               <span className="font-pixel text-[10px] text-amber-400 bg-amber-950/60 border border-amber-600/40 px-2 py-0.5 rounded">
-                FLOOR {currentFloor}/10
+                FLOOR {currentFloor}/{currentRunCatalog?.length || 10}
               </span>
               <span className="text-slate-300 font-bold">{currentProblem.title}</span>
               {currentProblem.leetcodeUrl && (
@@ -69,6 +126,38 @@ export const App: React.FC = () => {
 
         {/* Vital Stats & Global Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Guild / Hero Account */}
+          <button
+            onClick={() => openAuthModal()}
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl font-pixel text-xs flex items-center gap-1.5 transition-all border ${
+              isAuthenticated
+                ? 'bg-amber-950/70 border-amber-500/50 text-amber-300 hover:bg-amber-900/60 shadow-sm'
+                : 'bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 border-amber-400 font-bold shadow-md shadow-amber-500/20'
+            }`}
+            title={isAuthenticated ? 'Adventurer Profile & Conquered Trials' : 'Join Guild / Hero Login'}
+          >
+            {isAuthenticated && hero ? (
+              <>
+                <span>🧙</span>
+                <span className="hidden sm:inline font-bold">{hero.hero_name}</span>
+                <span className="text-[10px] bg-amber-400/20 px-1 rounded text-amber-200">
+                  Lv.{hero.level}
+                </span>
+                {hero.passed_problems?.length > 0 && (
+                  <span className="hidden md:inline text-[10px] text-emerald-400">
+                    🏆 {hero.passed_problems.length}
+                  </span>
+                )}
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">GUILD LOGIN</span>
+                <span className="sm:hidden">LOGIN</span>
+              </>
+            )}
+          </button>
+
           {/* Gold */}
           <div className="flex items-center gap-1 font-pixel text-xs text-amber-400 bg-dungeon-card px-2.5 py-1.5 rounded-xl border border-slate-700">
             <span>💰</span>
@@ -240,6 +329,9 @@ export const App: React.FC = () => {
         {screen === 'victory' && <VictoryModal key="modal-victory" />}
         {screen === 'shop' && <ShopModal key="modal-shop" />}
       </AnimatePresence>
+
+      {/* Hero Guild & Account Registry Modal */}
+      <AuthModal />
     </div>
   );
 };

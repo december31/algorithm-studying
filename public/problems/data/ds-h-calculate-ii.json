@@ -1,0 +1,93 @@
+{
+  "id": "ds-h-calculate-ii",
+  "wingId": "data-structures",
+  "floor": 179,
+  "title": "Basic Calculator II",
+  "difficulty": "hard",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-h-calculate-ii",
+    "name": "Precedence Hydra",
+    "title": "Master of Multiplicative Priority",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "hydra",
+    "color": "#e11d48",
+    "attackName": "Precedence Strike",
+    "attackPower": 3,
+    "defeatQuote": "Multiplication and division were resolved immediately on the stack!"
+  },
+  "description": "Given a string `s` which represents an expression, evaluate this expression. Integer division should truncate toward zero. Operators are `+`, `-`, `*`, `/` without parentheses.",
+  "examples": [
+    {
+      "input": "s = \"3+2*2\"",
+      "output": "7"
+    },
+    {
+      "input": "s = \" 3/2 \"",
+      "output": "1"
+    },
+    {
+      "input": "s = \" 3+5 / 2 \"",
+      "output": "5"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 3 * 10^5"
+  ],
+  "starterCode": "def calculateWithMultDiv(s: str) -> int:\n    pass\n",
+  "solutionCode": "def calculateWithMultDiv(s: str) -> int:\n    stack = []\n    num = 0\n    sign = '+'\n    for i, ch in enumerate(s):\n        if ch.isdigit():\n            num = num * 10 + int(ch)\n        if ch in '+-*/' or i == len(s) - 1:\n            if not ch.isdigit() and ch == ' ' and i == len(s) - 1:\n                pass\n            if sign == '+': stack.append(num)\n            elif sign == '-': stack.append(-num)\n            elif sign == '*': stack.append(stack.pop() * num)\n            elif sign == '/': stack.append(int(stack.pop() / num))\n            sign = ch\n            num = 0\n    return sum(stack)\n",
+  "functionName": "calculateWithMultDiv",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "3+2*2"
+      ],
+      "expected": 7,
+      "inputDisplay": "3+2*2",
+      "expectedDisplay": "7",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        " 3/2 "
+      ],
+      "expected": 1,
+      "inputDisplay": " 3/2 ",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        " 3+5 / 2 "
+      ],
+      "expected": 5,
+      "inputDisplay": " 3+5 / 2 ",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "14-3/2"
+      ],
+      "expected": 13,
+      "inputDisplay": "14-3/2",
+      "expectedDisplay": "13",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Resolve * and / directly on stack top; delay + and - for the final sum."
+  ],
+  "python": {
+    "starterCode": "def calculateWithMultDiv(s: str) -> int:\n    pass\n",
+    "solutionCode": "def calculateWithMultDiv(s: str) -> int:\n    stack = []\n    num = 0\n    sign = '+'\n    for i, ch in enumerate(s):\n        if ch.isdigit():\n            num = num * 10 + int(ch)\n        if ch in '+-*/' or i == len(s) - 1:\n            if not ch.isdigit() and ch == ' ' and i == len(s) - 1:\n                pass\n            if sign == '+': stack.append(num)\n            elif sign == '-': stack.append(-num)\n            elif sign == '*': stack.append(stack.pop() * num)\n            elif sign == '/': stack.append(int(stack.pop() / num))\n            sign = ch\n            num = 0\n    return sum(stack)\n"
+  },
+  "leetcodeId": 227,
+  "leetcodeTitle": "Basic Calculator II",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-calculate-ii/"
+}

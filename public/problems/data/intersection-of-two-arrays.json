@@ -32,8 +32,8 @@
     "1 <= nums1.length, nums2.length <= 1000",
     "0 <= nums1[i], nums2[i] <= 1000"
   ],
-  "starterCode": "function intersection(nums1, nums2) {\n  return [];\n}",
-  "solutionCode": "function intersection(nums1, nums2) {\n  const set1 = new Set(nums1);\n  const result = new Set();\n  for (const n of nums2) {\n    if (set1.has(n)) result.add(n);\n  }\n  return Array.from(result);\n}",
+  "starterCode": "def intersection(nums1, nums2):\n    return []\n",
+  "solutionCode": "def intersection(nums1, nums2):\n    return list(set(nums1) & set(nums2))\n",
   "functionName": "intersection",
   "testCases": [
     {

@@ -1,0 +1,95 @@
+{
+  "id": "bsg-m-find-k-closest-elements",
+  "wingId": "binary-search-greedy",
+  "floor": 440,
+  "title": "Find K Closest Elements",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-find-k-closest-elements",
+    "name": "Proximity Shade",
+    "title": "Gatherer of Nearest Numbers",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#38bdf8",
+    "attackName": "Proximity Bind",
+    "attackPower": 2,
+    "defeatQuote": "K closest sorted elements to target x isolated!"
+  },
+  "description": "Given a sorted integer array `arr`, two integers `k` and `x`, return the `k` closest integers to `x` in the array. The result should also be sorted in ascending order.",
+  "examples": [
+    {
+      "input": "arr = [1,2,3,4,5], k = 4, x = 3",
+      "output": "[1,2,3,4]"
+    },
+    {
+      "input": "arr = [1,2,3,4,5], k = 4, x = -1",
+      "output": "[1,2,3,4]"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= arr.length <= 10000"
+  ],
+  "starterCode": "def findClosestElements(arr: list[int], k: int, x: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def findClosestElements(arr: list[int], k: int, x: int) -> list[int]:\n    lo, hi = 0, len(arr) - k\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if x - arr[mid] > arr[mid + k] - x:\n            lo = mid + 1\n        else:\n            hi = mid\n    return arr[lo:lo + k]\n",
+  "functionName": "findClosestElements",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        4,
+        3
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "inputDisplay": "args=[[1, 2, 3, 4, 5], 4, 3]",
+      "expectedDisplay": "[1, 2, 3, 4]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        4,
+        -1
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "inputDisplay": "args=[[1, 2, 3, 4, 5], 4, -1]",
+      "expectedDisplay": "[1, 2, 3, 4]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search for the starting index lo of the k-length window."
+  ],
+  "python": {
+    "starterCode": "def findClosestElements(arr: list[int], k: int, x: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def findClosestElements(arr: list[int], k: int, x: int) -> list[int]:\n    lo, hi = 0, len(arr) - k\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if x - arr[mid] > arr[mid + k] - x:\n            lo = mid + 1\n        else:\n            hi = mid\n    return arr[lo:lo + k]\n"
+  },
+  "leetcodeId": 658,
+  "leetcodeTitle": "Find K Closest Elements",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-find-k-closest-elements/"
+}

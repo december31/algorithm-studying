@@ -1,0 +1,126 @@
+{
+  "id": "ds-m-next-greater-element-ii",
+  "wingId": "data-structures",
+  "floor": 127,
+  "title": "Next Greater Element II (Circular Array)",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-next-greater-element-ii",
+    "name": "Ouroboros Specter",
+    "title": "Guardian of the Looping Index",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#38bdf8",
+    "attackName": "Tail Whip Cycle",
+    "attackPower": 2,
+    "defeatQuote": "Even looping twice around the ring could not evade your stack!"
+  },
+  "description": "Given a circular integer array `nums`, return the next greater number for every element in `nums`. If it doesn't exist, return -1 for this number.",
+  "examples": [
+    {
+      "input": "nums = [1,2,1]",
+      "output": "[2,-1,2]"
+    },
+    {
+      "input": "nums = [1,2,3,4,3]",
+      "output": "[2,3,4,-1,4]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 10^4",
+    "-10^9 <= nums[i] <= 10^9"
+  ],
+  "starterCode": "def nextGreaterElements(nums: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def nextGreaterElements(nums: list[int]) -> list[int]:\n    n = len(nums)\n    res = [-1] * n\n    stack = []\n    for i in range(2 * n):\n        num = nums[i % n]\n        while stack and nums[stack[-1]] < num:\n            idx = stack.pop()\n            res[idx] = num\n        if i < n:\n            stack.append(i)\n    return res\n",
+  "functionName": "nextGreaterElements",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        2,
+        -1,
+        2
+      ],
+      "inputDisplay": "[1, 2, 1]",
+      "expectedDisplay": "[2, -1, 2]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          3
+        ]
+      ],
+      "expected": [
+        2,
+        3,
+        4,
+        -1,
+        4
+      ],
+      "inputDisplay": "[1, 2, 3, 4, 3]",
+      "expectedDisplay": "[2, 3, 4, -1, 4]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        -1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "inputDisplay": "[5, 4, 3, 2, 1]",
+      "expectedDisplay": "[-1, 5, 5, 5, 5]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        -1
+      ],
+      "inputDisplay": "[1]",
+      "expectedDisplay": "[-1]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Simulate circular array by iterating 2 * n times using modulo n with a monotonic stack."
+  ],
+  "python": {
+    "starterCode": "def nextGreaterElements(nums: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def nextGreaterElements(nums: list[int]) -> list[int]:\n    n = len(nums)\n    res = [-1] * n\n    stack = []\n    for i in range(2 * n):\n        num = nums[i % n]\n        while stack and nums[stack[-1]] < num:\n            idx = stack.pop()\n            res[idx] = num\n        if i < n:\n            stack.append(i)\n    return res\n"
+  },
+  "leetcodeId": 503,
+  "leetcodeTitle": "Next Greater Element II (Circular Array)",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-next-greater-element-ii/"
+}

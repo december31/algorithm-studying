@@ -1,0 +1,91 @@
+{
+  "id": "graph-h-build-matrix-with-conditions",
+  "wingId": "graphs",
+  "floor": 381,
+  "title": "Build a Matrix With Conditions",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-h-build-matrix-with-conditions",
+    "name": "Orthogonal Lich",
+    "title": "Weaver of Row and Column Topologies",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#06b6d4",
+    "attackName": "Orthogonal Grid Bind",
+    "attackPower": 3,
+    "defeatQuote": "Matrix satisfying both row and col precedence rules generated!"
+  },
+  "description": "You are given a positive integer `k`. You are also given a 2D integer array `rowConditions` and `colConditions`. You want to build a `k x k` matrix that contains each of the numbers from 1 to `k` exactly once (other cells are 0) such that the relative row order matches `rowConditions` and column order matches `colConditions`. Return any valid matrix, or an empty matrix if none exists.",
+  "examples": [
+    {
+      "input": "k = 3, rowConditions = [[1,2],[3,2]], colConditions = [[2,1],[3,2]]",
+      "output": "[[3,0,0],[0,0,1],[0,2,0]]"
+    }
+  ],
+  "constraints": [
+    "2 <= k <= 400"
+  ],
+  "starterCode": "def buildMatrix(k: int, rowConditions: list[list[int]], colConditions: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def buildMatrix(k: int, rowConditions: list[list[int]], colConditions: list[list[int]]) -> list[list[int]]:\n    from collections import defaultdict, deque\n    def topo_sort(edges):\n        adj = defaultdict(list)\n        in_deg = [0] * (k + 1)\n        for u, v in edges:\n            adj[u].append(v)\n            in_deg[v] += 1\n        q = deque([i for i in range(1, k + 1) if in_deg[i] == 0])\n        res = []\n        while q:\n            u = q.popleft()\n            res.append(u)\n            for v in adj[u]:\n                in_deg[v] -= 1\n                if in_deg[v] == 0: q.append(v)\n        return res if len(res) == k else []\n    row_order = topo_sort(rowConditions)\n    col_order = topo_sort(colConditions)\n    if not row_order or not col_order: return []\n    row_pos = {val: i for i, val in enumerate(row_order)}\n    col_pos = {val: i for i, val in enumerate(col_order)}\n    mat = [[0] * k for _ in range(k)]\n    for num in range(1, k + 1):\n        mat[row_pos[num]][col_pos[num]] = num\n    return mat\n",
+  "functionName": "buildMatrix",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ]
+      ],
+      "inputDisplay": "args=[3, [[1, 2], [3, 2]], [[2, 1], [3, 2]]]",
+      "expectedDisplay": "[[0, 0, 1], [3, 0, 0], [0, 2, 0]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Independent topological sorts on rows and columns."
+  ],
+  "python": {
+    "starterCode": "def buildMatrix(k: int, rowConditions: list[list[int]], colConditions: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def buildMatrix(k: int, rowConditions: list[list[int]], colConditions: list[list[int]]) -> list[list[int]]:\n    from collections import defaultdict, deque\n    def topo_sort(edges):\n        adj = defaultdict(list)\n        in_deg = [0] * (k + 1)\n        for u, v in edges:\n            adj[u].append(v)\n            in_deg[v] += 1\n        q = deque([i for i in range(1, k + 1) if in_deg[i] == 0])\n        res = []\n        while q:\n            u = q.popleft()\n            res.append(u)\n            for v in adj[u]:\n                in_deg[v] -= 1\n                if in_deg[v] == 0: q.append(v)\n        return res if len(res) == k else []\n    row_order = topo_sort(rowConditions)\n    col_order = topo_sort(colConditions)\n    if not row_order or not col_order: return []\n    row_pos = {val: i for i, val in enumerate(row_order)}\n    col_pos = {val: i for i, val in enumerate(col_order)}\n    mat = [[0] * k for _ in range(k)]\n    for num in range(1, k + 1):\n        mat[row_pos[num]][col_pos[num]] = num\n    return mat\n"
+  },
+  "leetcodeId": 2392,
+  "leetcodeTitle": "Build a Matrix With Conditions",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-build-matrix-with-conditions/"
+}

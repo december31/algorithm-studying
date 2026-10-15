@@ -1,0 +1,99 @@
+{
+  "id": "graph-e-is-tree-bipartite",
+  "wingId": "graphs",
+  "floor": 309,
+  "title": "Tree Always Bipartite Validation",
+  "difficulty": "easy",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-e-is-tree-bipartite",
+    "name": "Dual Shade",
+    "title": "Alternating Weaver of Black and White",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "wraith",
+    "color": "#6366f1",
+    "attackName": "Dichotomy Wave",
+    "attackPower": 1,
+    "defeatQuote": "All trees are bipartite with 2-coloring verified!"
+  },
+  "description": "Given an undirected tree represented as `n` vertices (0 to n - 1) and `edges` (length n - 1), return a 2-coloring array `colors` of length `n` containing values `0` and `1` such that no adjacent nodes share the same color. Root node 0 should be colored `0`.",
+  "examples": [
+    {
+      "input": "n = 3, edges = [[0,1],[1,2]]",
+      "output": "[0,1,0]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 1000",
+    "edges.length == n - 1"
+  ],
+  "starterCode": "def colorTreeBipartite(n: int, edges: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def colorTreeBipartite(n: int, edges: list[list[int]]) -> list[int]:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    for u, v in edges:\n        adj[u].append(v)\n        adj[v].append(u)\n    color = [-1] * n\n    color[0] = 0\n    q = deque([0])\n    while q:\n        curr = q.popleft()\n        for nxt in adj[curr]:\n            if color[nxt] == -1:\n                color[nxt] = 1 - color[curr]\n                q.append(nxt)\n    return color\n",
+  "functionName": "colorTreeBipartite",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        0
+      ],
+      "inputDisplay": "args=[3, [[0, 1], [1, 2]]]",
+      "expectedDisplay": "[0, 1, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "inputDisplay": "args=[4, [[0, 1], [0, 2], [0, 3]]]",
+      "expectedDisplay": "[0, 1, 1, 1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "A BFS from node 0 assigns alternate 0/1 colors to adjacent levels."
+  ],
+  "python": {
+    "starterCode": "def colorTreeBipartite(n: int, edges: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def colorTreeBipartite(n: int, edges: list[list[int]]) -> list[int]:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    for u, v in edges:\n        adj[u].append(v)\n        adj[v].append(u)\n    color = [-1] * n\n    color[0] = 0\n    q = deque([0])\n    while q:\n        curr = q.popleft()\n        for nxt in adj[curr]:\n            if color[nxt] == -1:\n                color[nxt] = 1 - color[curr]\n                q.append(nxt)\n    return color\n"
+  },
+  "leetcodeId": 785,
+  "leetcodeTitle": "Tree Always Bipartite Validation",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-e-is-tree-bipartite/"
+}

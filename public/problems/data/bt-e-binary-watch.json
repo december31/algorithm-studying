@@ -1,0 +1,92 @@
+{
+  "id": "bt-e-binary-watch",
+  "wingId": "backtracking",
+  "floor": 201,
+  "title": "Binary Watch Illuminations",
+  "difficulty": "easy",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "mon-bt-e-binary-watch",
+    "name": "Chronos Imp",
+    "title": "Tinkerer of LED Dials",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "goblin",
+    "color": "#eab308",
+    "attackName": "LED Spark",
+    "attackPower": 1,
+    "defeatQuote": "My binary dials illuminated all matching timestamps!"
+  },
+  "description": "A binary watch has 4 LEDs on the top to represent hours (0-11), and 6 LEDs on the bottom to represent minutes (0-59). Each LED represents a zero or one, with the least significant bit on the right. Given an integer `turnedOn` which represents the number of LEDs that are currently on, return all possible times the watch could represent in sorted order.",
+  "examples": [
+    {
+      "input": "turnedOn = 1",
+      "output": "[\"0:01\",\"0:02\",\"0:04\",\"0:08\",\"0:16\",\"0:32\",\"1:00\",\"2:00\",\"4:00\",\"8:00\"]"
+    },
+    {
+      "input": "turnedOn = 9",
+      "output": "[]"
+    }
+  ],
+  "constraints": [
+    "0 <= turnedOn <= 10"
+  ],
+  "starterCode": "def readBinaryWatch(turnedOn: int) -> list[str]:\n    pass\n",
+  "solutionCode": "def readBinaryWatch(turnedOn: int) -> list[str]:\n    res = []\n    for h in range(12):\n        for m in range(60):\n            if (bin(h).count('1') + bin(m).count('1')) == turnedOn:\n                res.append(f\"{h}:{m:02d}\")\n    return sorted(res)\n",
+  "functionName": "readBinaryWatch",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1
+      ],
+      "expected": [
+        "0:01",
+        "0:02",
+        "0:04",
+        "0:08",
+        "0:16",
+        "0:32",
+        "1:00",
+        "2:00",
+        "4:00",
+        "8:00"
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "['0:01', '0:02', '0:04', '0:08', '0:16', '0:32', '1:00', '2:00', '4:00', '8:00']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        9
+      ],
+      "expected": [],
+      "inputDisplay": "9",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        0
+      ],
+      "expected": [
+        "0:00"
+      ],
+      "inputDisplay": "0",
+      "expectedDisplay": "['0:00']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Iterate over all valid hours (0-11) and minutes (0-59), checking if total set bits equals turnedOn."
+  ],
+  "python": {
+    "starterCode": "def readBinaryWatch(turnedOn: int) -> list[str]:\n    pass\n",
+    "solutionCode": "def readBinaryWatch(turnedOn: int) -> list[str]:\n    res = []\n    for h in range(12):\n        for m in range(60):\n            if (bin(h).count('1') + bin(m).count('1')) == turnedOn:\n                res.append(f\"{h}:{m:02d}\")\n    return sorted(res)\n"
+  },
+  "leetcodeId": 401,
+  "leetcodeTitle": "Binary Watch Illuminations",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-e-binary-watch/"
+}

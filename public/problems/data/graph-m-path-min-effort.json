@@ -1,0 +1,101 @@
+{
+  "id": "graph-m-path-min-effort",
+  "wingId": "graphs",
+  "floor": 342,
+  "title": "Path with Minimum Effort (Minimax Dijkstra)",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-path-min-effort",
+    "name": "Crag Wyrm",
+    "title": "Navigator of Rugged Elevations",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#ef4444",
+    "attackName": "Altitude Shear",
+    "attackPower": 2,
+    "defeatQuote": "Route minimizing maximum single-step elevation jump found!"
+  },
+  "description": "You are a hiker preparing for an upcoming hike. You are given `heights`, a 2D array of size `rows x columns`. A route's effort is the maximum absolute difference in heights between two consecutive cells of the route. Return the minimum effort required to travel from `(0, 0)` to `(rows-1, columns-1)`.",
+  "examples": [
+    {
+      "input": "heights = [[1,2,2],[3,8,2],[5,3,5]]",
+      "output": "2"
+    },
+    {
+      "input": "heights = [[1,2,3],[3,8,4],[5,3,5]]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= rows, columns <= 100"
+  ],
+  "starterCode": "def minimumEffortPath(heights: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minimumEffortPath(heights: list[list[int]]) -> int:\n    R, C = len(heights), len(heights[0])\n    import heapq\n    dist = [[float('inf')] * C for _ in range(R)]\n    dist[0][0] = 0\n    pq = [(0, 0, 0)]\n    while pq:\n        d, r, c = heapq.heappop(pq)\n        if r == R - 1 and c == C - 1: return d\n        if d > dist[r][c]: continue\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C:\n                effort = max(d, abs(heights[r][c] - heights[nr][nc]))\n                if effort < dist[nr][nc]:\n                    dist[nr][nc] = effort\n                    heapq.heappush(pq, (effort, nr, nc))\n    return 0\n",
+  "functionName": "minimumEffortPath",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2,
+            2
+          ],
+          [
+            3,
+            8,
+            2
+          ],
+          [
+            5,
+            3,
+            5
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[[1, 2, 2], [3, 8, 2], [5, 3, 5]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            5,
+            3,
+            5
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[1, 2, 3], [3, 8, 4], [5, 3, 5]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Modified Dijkstra where edge relaxation uses max(d, abs(diff))."
+  ],
+  "python": {
+    "starterCode": "def minimumEffortPath(heights: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minimumEffortPath(heights: list[list[int]]) -> int:\n    R, C = len(heights), len(heights[0])\n    import heapq\n    dist = [[float('inf')] * C for _ in range(R)]\n    dist[0][0] = 0\n    pq = [(0, 0, 0)]\n    while pq:\n        d, r, c = heapq.heappop(pq)\n        if r == R - 1 and c == C - 1: return d\n        if d > dist[r][c]: continue\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C:\n                effort = max(d, abs(heights[r][c] - heights[nr][nc]))\n                if effort < dist[nr][nc]:\n                    dist[nr][nc] = effort\n                    heapq.heappush(pq, (effort, nr, nc))\n    return 0\n"
+  },
+  "leetcodeId": 1631,
+  "leetcodeTitle": "Path with Minimum Effort (Minimax Dijkstra)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-path-min-effort/"
+}

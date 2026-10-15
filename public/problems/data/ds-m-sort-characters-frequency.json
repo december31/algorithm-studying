@@ -1,0 +1,94 @@
+{
+  "id": "ds-m-sort-characters-frequency",
+  "wingId": "data-structures",
+  "floor": 118,
+  "title": "Sort Characters By Frequency",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-sort-characters-frequency",
+    "name": "Resonance Harpy",
+    "title": "Singer of Repetitive Chants",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Harmonic Shriek",
+    "attackPower": 2,
+    "defeatQuote": "My highest frequency screams were gathered first!"
+  },
+  "description": "Given a string `s`, sort it in decreasing order based on the frequency of the characters. If two characters have the same frequency, sort them alphabetically.",
+  "examples": [
+    {
+      "input": "s = \"tree\"",
+      "output": "\"eert\""
+    },
+    {
+      "input": "s = \"cccaaa\"",
+      "output": "\"aaaccc\""
+    },
+    {
+      "input": "s = \"Aabb\"",
+      "output": "\"bbAa\""
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 5 * 10^5",
+    "s consists of uppercase and lowercase English letters and digits"
+  ],
+  "starterCode": "def frequencySort(s: str) -> str:\n    pass\n",
+  "solutionCode": "def frequencySort(s: str) -> str:\n    from collections import Counter\n    counts = Counter(s)\n    sorted_chars = sorted(counts.keys(), key=lambda ch: (-counts[ch], ch))\n    return ''.join(ch * counts[ch] for ch in sorted_chars)\n",
+  "functionName": "frequencySort",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "tree"
+      ],
+      "expected": "eert",
+      "inputDisplay": "tree",
+      "expectedDisplay": "eert",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "cccaaa"
+      ],
+      "expected": "aaaccc",
+      "inputDisplay": "cccaaa",
+      "expectedDisplay": "aaaccc",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "Aabb"
+      ],
+      "expected": "bbAa",
+      "inputDisplay": "Aabb",
+      "expectedDisplay": "bbAa",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "z"
+      ],
+      "expected": "z",
+      "inputDisplay": "z",
+      "expectedDisplay": "z",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Count character frequencies and sort using frequency and character."
+  ],
+  "python": {
+    "starterCode": "def frequencySort(s: str) -> str:\n    pass\n",
+    "solutionCode": "def frequencySort(s: str) -> str:\n    from collections import Counter\n    counts = Counter(s)\n    sorted_chars = sorted(counts.keys(), key=lambda ch: (-counts[ch], ch))\n    return ''.join(ch * counts[ch] for ch in sorted_chars)\n"
+  },
+  "leetcodeId": 451,
+  "leetcodeTitle": "Sort Characters By Frequency",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-sort-characters-frequency/"
+}

@@ -1,0 +1,55 @@
+{
+  "id": "bit-e-reverse-bits",
+  "wingId": "bit-manipulation",
+  "floor": 504,
+  "title": "Reverse Bits (32-bit Integer)",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-e-reverse-bits",
+    "name": "Mirror Wraith",
+    "title": "Inverter of 32-bit Words",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Mirror Inversion",
+    "attackPower": 1,
+    "defeatQuote": "All 32 binary bits mirrored end to end!"
+  },
+  "description": "Reverse bits of a given 32 bits unsigned integer.",
+  "examples": [
+    {
+      "input": "n = 43261596",
+      "output": "964176192"
+    }
+  ],
+  "constraints": [
+    "n is a 32-bit unsigned integer"
+  ],
+  "starterCode": "def reverseBits(n: int) -> int:\n    pass\n",
+  "solutionCode": "def reverseBits(n: int) -> int:\n    res = 0\n    for _ in range(32):\n        res = (res << 1) | (n & 1)\n        n >>= 1\n    return res\n",
+  "functionName": "reverseBits",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        43261596
+      ],
+      "expected": 964176192,
+      "inputDisplay": "43261596",
+      "expectedDisplay": "964176192",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Extract lowest bit of n with (n & 1), shift into result with (res << 1), and shift n right."
+  ],
+  "python": {
+    "starterCode": "def reverseBits(n: int) -> int:\n    pass\n",
+    "solutionCode": "def reverseBits(n: int) -> int:\n    res = 0\n    for _ in range(32):\n        res = (res << 1) | (n & 1)\n        n >>= 1\n    return res\n"
+  },
+  "leetcodeId": 190,
+  "leetcodeTitle": "Reverse Bits (32-bit Integer)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-e-reverse-bits/"
+}

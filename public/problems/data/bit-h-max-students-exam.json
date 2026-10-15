@@ -1,0 +1,115 @@
+{
+  "id": "bit-h-max-students-exam",
+  "wingId": "bit-manipulation",
+  "floor": 579,
+  "title": "Maximum Students Taking Exam",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-bit-h-max-students-exam",
+    "name": "Proctor Specter",
+    "title": "Inquisitor of Sightlines and Cheating",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "ghost",
+    "color": "#ec4899",
+    "attackName": "Cheating Blindspot",
+    "attackPower": 3,
+    "defeatQuote": "No student may see the work of left, right, or diagonal peers!"
+  },
+  "description": "Given an `m x n` matrix `seats` representing a classroom. If a seat is broken, it is denoted by `'#'`. Otherwise, it is denoted by `'.'`. Students cannot see each other's test sheets. A student can see answers of students sitting directly left, directly right, upper-left, and upper-right. Return the maximum number of students that can take the exam together.",
+  "examples": [
+    {
+      "input": "seats = [[\"#\",\".\",\"#\",\"#\",\".\",\"#\"],[\".\",\"#\",\"#\",\"#\",\"#\",\".\"],[\"#\",\".\",\"#\",\"#\",\".\",\"#\"]]",
+      "output": "4"
+    },
+    {
+      "input": "seats = [[\".\",\"#\"],[\"#\",\"#\"],[\"#\",\".\"],[\"#\",\"#\"],[\".\",\"#\"]]",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= seats.length, seats[0].length <= 8"
+  ],
+  "starterCode": "def maxStudents(seats: list[list[str]]) -> int:\n    pass\n",
+  "solutionCode": "def maxStudents(seats: list[list[str]]) -> int:\n    m = len(seats)\n    n = len(seats[0])\n    broken = [0] * m\n    for r in range(m):\n        for c in range(n):\n            if seats[r][c] == '#': broken[r] |= (1 << c)\n    memo = {}\n    def dp(row, prev_mask):\n        if row == m: return 0\n        state = (row, prev_mask)\n        if state in memo: return memo[state]\n        ans = 0\n        for mask in range(1 << n):\n            if (mask & broken[row]) != 0: continue\n            if (mask & (mask >> 1)) != 0: continue\n            if (mask & (prev_mask >> 1)) != 0: continue\n            if (mask & (prev_mask << 1)) != 0: continue\n            ans = max(ans, bin(mask).count('1') + dp(row + 1, mask))\n        memo[state] = ans\n        return ans\n    return dp(0, 0)\n",
+  "functionName": "maxStudents",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "#",
+            ".",
+            "#",
+            "#",
+            ".",
+            "#"
+          ],
+          [
+            ".",
+            "#",
+            "#",
+            "#",
+            "#",
+            "."
+          ],
+          [
+            "#",
+            ".",
+            "#",
+            "#",
+            ".",
+            "#"
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[['#', '.', '#', '#', '.', '#'], ['.', '#', '#', '#', '#', '.'], ['#', '.', '#',",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            ".",
+            "#"
+          ],
+          [
+            "#",
+            "#"
+          ],
+          [
+            "#",
+            "."
+          ],
+          [
+            "#",
+            "#"
+          ],
+          [
+            ".",
+            "#"
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[['.', '#'], ['#', '#'], ['#', '.'], ['#', '#'], ['.', '#']]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Since n <= 8, use row-by-row bitmask DP. Verify no adjacent bits within the current row, and no diagonal conflicts with prev_mask."
+  ],
+  "python": {
+    "starterCode": "def maxStudents(seats: list[list[str]]) -> int:\n    pass\n",
+    "solutionCode": "def maxStudents(seats: list[list[str]]) -> int:\n    m = len(seats)\n    n = len(seats[0])\n    broken = [0] * m\n    for r in range(m):\n        for c in range(n):\n            if seats[r][c] == '#': broken[r] |= (1 << c)\n    memo = {}\n    def dp(row, prev_mask):\n        if row == m: return 0\n        state = (row, prev_mask)\n        if state in memo: return memo[state]\n        ans = 0\n        for mask in range(1 << n):\n            if (mask & broken[row]) != 0: continue\n            if (mask & (mask >> 1)) != 0: continue\n            if (mask & (prev_mask >> 1)) != 0: continue\n            if (mask & (prev_mask << 1)) != 0: continue\n            ans = max(ans, bin(mask).count('1') + dp(row + 1, mask))\n        memo[state] = ans\n        return ans\n    return dp(0, 0)\n"
+  },
+  "leetcodeId": 1349,
+  "leetcodeTitle": "Maximum Students Taking Exam",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-max-students-exam/"
+}

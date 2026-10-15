@@ -36,8 +36,8 @@
     "1 <= nums.length <= 10^5",
     "-10^9 <= nums[i] <= 10^9"
   ],
-  "starterCode": "function containsDuplicate(nums) {\n  return false;\n}",
-  "solutionCode": "function containsDuplicate(nums) {\n  return new Set(nums).size !== nums.length;\n}",
+  "starterCode": "def containsDuplicate(nums):\n    return False\n",
+  "solutionCode": "def containsDuplicate(nums):\n    return len(set(nums)) != len(nums)\n",
   "functionName": "containsDuplicate",
   "testCases": [
     {

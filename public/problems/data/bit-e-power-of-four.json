@@ -1,0 +1,93 @@
+{
+  "id": "bit-e-power-of-four",
+  "wingId": "bit-manipulation",
+  "floor": 507,
+  "title": "Power of Four (Even Bit Mask)",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-e-power-of-four",
+    "name": "Quaternary Fiend",
+    "title": "Watcher of Even Bit Positions",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "demon",
+    "color": "#06b6d4",
+    "attackName": "Quaternary Burst",
+    "attackPower": 1,
+    "defeatQuote": "Power of four verified with even-index bitmask 0x55555555!"
+  },
+  "description": "Given an integer `n`, return `True` if it is a power of four. Otherwise, return `False`.",
+  "examples": [
+    {
+      "input": "n = 16",
+      "output": "True"
+    },
+    {
+      "input": "n = 5",
+      "output": "False"
+    },
+    {
+      "input": "n = 1",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "-2^31 <= n <= 2^31 - 1"
+  ],
+  "starterCode": "def isPowerOfFour(n: int) -> bool:\n    pass\n",
+  "solutionCode": "def isPowerOfFour(n: int) -> bool:\n    return n > 0 and (n & (n - 1)) == 0 and (n & 0x55555555) != 0\n",
+  "functionName": "isPowerOfFour",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        16
+      ],
+      "expected": true,
+      "inputDisplay": "16",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        5
+      ],
+      "expected": false,
+      "inputDisplay": "5",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        1
+      ],
+      "expected": true,
+      "inputDisplay": "1",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        8
+      ],
+      "expected": false,
+      "inputDisplay": "8",
+      "expectedDisplay": "False",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Must be a power of two, and the single 1-bit must be located at an even bit position (mask 0x55555555)."
+  ],
+  "python": {
+    "starterCode": "def isPowerOfFour(n: int) -> bool:\n    pass\n",
+    "solutionCode": "def isPowerOfFour(n: int) -> bool:\n    return n > 0 and (n & (n - 1)) == 0 and (n & 0x55555555) != 0\n"
+  },
+  "leetcodeId": 342,
+  "leetcodeTitle": "Power of Four (Even Bit Mask)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-e-power-of-four/"
+}

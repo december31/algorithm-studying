@@ -1,0 +1,127 @@
+{
+  "id": "graph-h-trapping-rain-water-ii",
+  "wingId": "graphs",
+  "floor": 373,
+  "title": "Trapping Rain Water II (3D Elevation)",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-h-trapping-rain-water-ii",
+    "name": "Aquatic Colossus",
+    "title": "Reservoir of 3D Fluid Basins",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#06b6d4",
+    "attackName": "Fluid Compression",
+    "attackPower": 3,
+    "defeatQuote": "Total cubic units of water trapped inside 3D elevation map!"
+  },
+  "description": "Given an `m x n` integer matrix `heightMap` representing the height of each unit cell in a 2D elevation map, return the volume of water it can trap after raining.",
+  "examples": [
+    {
+      "input": "heightMap = [[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 200",
+    "0 <= heightMap[i][j] <= 20000"
+  ],
+  "starterCode": "def trapRainWater(heightMap: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def trapRainWater(heightMap: list[list[int]]) -> int:\n    if not heightMap or not heightMap[0]: return 0\n    R, C = len(heightMap), len(heightMap[0])\n    import heapq\n    visited = [[False] * C for _ in range(R)]\n    pq = []\n    for r in range(R):\n        for c in range(C):\n            if r == 0 or r == R - 1 or c == 0 or c == C - 1:\n                heapq.heappush(pq, (heightMap[r][c], r, c))\n                visited[r][c] = True\n    water = 0\n    while pq:\n        h, r, c = heapq.heappop(pq)\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C and not visited[nr][nc]:\n                visited[nr][nc] = True\n                if heightMap[nr][nc] < h:\n                    water += h - heightMap[nr][nc]\n                heapq.heappush(pq, (max(h, heightMap[nr][nc]), nr, nc))\n    return water\n",
+  "functionName": "trapRainWater",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            4,
+            3,
+            1,
+            3,
+            2
+          ],
+          [
+            3,
+            2,
+            1,
+            3,
+            2,
+            4
+          ],
+          [
+            2,
+            3,
+            3,
+            2,
+            3,
+            1
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1, 4, 3, 1, 3, 2], [3, 2, 1, 3, 2, 4], [2, 3, 3, 2, 3, 1]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          [
+            3,
+            2,
+            2,
+            2,
+            3
+          ],
+          [
+            3,
+            2,
+            1,
+            2,
+            3
+          ],
+          [
+            3,
+            2,
+            2,
+            2,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        ]
+      ],
+      "expected": 10,
+      "inputDisplay": "[[3, 3, 3, 3, 3], [3, 2, 2, 2, 3], [3, 2, 1, 2, 3], [3, 2, 2, 2, 3], [3, 3, 3, 3",
+      "expectedDisplay": "10",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Push all boundary cells into a min-heap, popping the lowest boundary to drain water inwards."
+  ],
+  "python": {
+    "starterCode": "def trapRainWater(heightMap: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def trapRainWater(heightMap: list[list[int]]) -> int:\n    if not heightMap or not heightMap[0]: return 0\n    R, C = len(heightMap), len(heightMap[0])\n    import heapq\n    visited = [[False] * C for _ in range(R)]\n    pq = []\n    for r in range(R):\n        for c in range(C):\n            if r == 0 or r == R - 1 or c == 0 or c == C - 1:\n                heapq.heappush(pq, (heightMap[r][c], r, c))\n                visited[r][c] = True\n    water = 0\n    while pq:\n        h, r, c = heapq.heappop(pq)\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C and not visited[nr][nc]:\n                visited[nr][nc] = True\n                if heightMap[nr][nc] < h:\n                    water += h - heightMap[nr][nc]\n                heapq.heappush(pq, (max(h, heightMap[nr][nc]), nr, nc))\n    return water\n"
+  },
+  "leetcodeId": 407,
+  "leetcodeTitle": "Trapping Rain Water II (3D Elevation)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-trapping-rain-water-ii/"
+}

@@ -1,0 +1,133 @@
+{
+  "id": "graph-m-01-matrix",
+  "wingId": "graphs",
+  "floor": 322,
+  "title": "01 Matrix (Distance to Nearest Zero)",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-01-matrix",
+    "name": "Binary Apparition",
+    "title": "Attractor to Void Zeroes",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#38bdf8",
+    "attackName": "Null Radiance",
+    "attackPower": 2,
+    "defeatQuote": "Distance of each cell to nearest 0 calculated!"
+  },
+  "description": "Given an `m x n` binary matrix `mat`, return the distance of the nearest `0` for each cell. The distance between two adjacent cells is 1.",
+  "examples": [
+    {
+      "input": "mat = [[0,0,0],[0,1,0],[0,0,0]]",
+      "output": "[[0,0,0],[0,1,0],[0,0,0]]"
+    },
+    {
+      "input": "mat = [[0,0,0],[0,1,0],[1,1,1]]",
+      "output": "[[0,0,0],[0,1,0],[1,2,1]]"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 10000"
+  ],
+  "starterCode": "def updateMatrix(mat: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def updateMatrix(mat: list[list[int]]) -> list[list[int]]:\n    R, C = len(mat), len(mat[0])\n    from collections import deque\n    dist = [[-1] * C for _ in range(R)]\n    q = deque()\n    for r in range(R):\n        for c in range(C):\n            if mat[r][c] == 0:\n                dist[r][c] = 0\n                q.append((r, c))\n    while q:\n        r, c = q.popleft()\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C and dist[nr][nc] == -1:\n                dist[nr][nc] = dist[r][c] + 1\n                q.append((nr, nc))\n    return dist\n",
+  "functionName": "updateMatrix",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "inputDisplay": "[[0, 0, 0], [0, 1, 0], [0, 0, 0]]",
+      "expectedDisplay": "[[0, 0, 0], [0, 1, 0], [0, 0, 0]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "inputDisplay": "[[0, 0, 0], [0, 1, 0], [1, 1, 1]]",
+      "expectedDisplay": "[[0, 0, 0], [0, 1, 0], [1, 2, 1]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Initialize queue with all zeroes, then propagate outwards with BFS."
+  ],
+  "python": {
+    "starterCode": "def updateMatrix(mat: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def updateMatrix(mat: list[list[int]]) -> list[list[int]]:\n    R, C = len(mat), len(mat[0])\n    from collections import deque\n    dist = [[-1] * C for _ in range(R)]\n    q = deque()\n    for r in range(R):\n        for c in range(C):\n            if mat[r][c] == 0:\n                dist[r][c] = 0\n                q.append((r, c))\n    while q:\n        r, c = q.popleft()\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < R and 0 <= nc < C and dist[nr][nc] == -1:\n                dist[nr][nc] = dist[r][c] + 1\n                q.append((nr, nc))\n    return dist\n"
+  },
+  "leetcodeId": 542,
+  "leetcodeTitle": "01 Matrix (Distance to Nearest Zero)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-01-matrix/"
+}

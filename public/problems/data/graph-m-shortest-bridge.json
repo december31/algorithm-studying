@@ -1,0 +1,94 @@
+{
+  "id": "graph-m-shortest-bridge",
+  "wingId": "graphs",
+  "floor": 334,
+  "title": "Shortest Bridge Connecting Two Islands",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-shortest-bridge",
+    "name": "Void Pontiff",
+    "title": "Bridger of Isolated Atolls",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#3b82f6",
+    "attackName": "Pontoons of Shadow",
+    "attackPower": 2,
+    "defeatQuote": "Minimum 0-water flips needed to connect the two islands!"
+  },
+  "description": "You are given an `n x n` binary matrix `grid` where 1 represents land and 0 represents water. An island is a 4-directionally connected group of 1's. There are exactly two islands in `grid`. Return the smallest number of 0's you must flip to connect the two islands.",
+  "examples": [
+    {
+      "input": "grid = [[0,1],[1,0]]",
+      "output": "1"
+    },
+    {
+      "input": "grid = [[0,1,0],[0,0,0],[0,0,1]]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "2 <= n <= 100"
+  ],
+  "starterCode": "def shortestBridge(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def shortestBridge(grid: list[list[int]]) -> int:\n    n = len(grid)\n    from collections import deque\n    q = deque()\n    found = False\n    def dfs(r, c):\n        grid[r][c] = 2\n        q.append((r, c, 0))\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < n and 0 <= nc < n and grid[nr][nc] == 1:\n                dfs(nr, nc)\n    for r in range(n):\n        if found: break\n        for c in range(n):\n            if grid[r][c] == 1:\n                dfs(r, c)\n                found = True\n                break\n    while q:\n        r, c, d = q.popleft()\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < n and 0 <= nc < n:\n                if grid[nr][nc] == 1: return d\n                if grid[nr][nc] == 0:\n                    grid[nr][nc] = 2\n                    q.append((nr, nc, d + 1))\n    return 0\n",
+  "functionName": "shortestBridge",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[0, 1], [1, 0]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[[0, 1, 0], [0, 0, 0], [0, 0, 1]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "DFS to find and paint the first island, then BFS simultaneously from all its perimeter cells to reach the second island."
+  ],
+  "python": {
+    "starterCode": "def shortestBridge(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def shortestBridge(grid: list[list[int]]) -> int:\n    n = len(grid)\n    from collections import deque\n    q = deque()\n    found = False\n    def dfs(r, c):\n        grid[r][c] = 2\n        q.append((r, c, 0))\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < n and 0 <= nc < n and grid[nr][nc] == 1:\n                dfs(nr, nc)\n    for r in range(n):\n        if found: break\n        for c in range(n):\n            if grid[r][c] == 1:\n                dfs(r, c)\n                found = True\n                break\n    while q:\n        r, c, d = q.popleft()\n        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < n and 0 <= nc < n:\n                if grid[nr][nc] == 1: return d\n                if grid[nr][nc] == 0:\n                    grid[nr][nc] = 2\n                    q.append((nr, nc, d + 1))\n    return 0\n"
+  },
+  "leetcodeId": 934,
+  "leetcodeTitle": "Shortest Bridge Connecting Two Islands",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-shortest-bridge/"
+}

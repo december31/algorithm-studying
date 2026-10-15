@@ -1,0 +1,112 @@
+{
+  "id": "bsg-h-min-refuel-stops",
+  "wingId": "binary-search-greedy",
+  "floor": 478,
+  "title": "Minimum Number of Refueling Stops",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-min-refuel-stops",
+    "name": "Wasteland Marauder",
+    "title": "Siphoner of Fuel Depots",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "goblin",
+    "color": "#ef4444",
+    "attackName": "Fuel Siphon",
+    "attackPower": 3,
+    "defeatQuote": "Minimum stops to reach target mileage without running dry!"
+  },
+  "description": "A car travels from position 0 to `target`. It starts with `startFuel` liters of fuel. Each station `stations[i] = [positioni, fueli]`. What is the least number of refueling stops the car must make to reach its destination? If impossible, return -1.",
+  "examples": [
+    {
+      "input": "target = 1, startFuel = 1, stations = []",
+      "output": "0"
+    },
+    {
+      "input": "target = 100, startFuel = 1, stations = [[10,100]]",
+      "output": "-1"
+    },
+    {
+      "input": "target = 100, startFuel = 10, stations = [[10,60],[20,30],[30,30],[60,40]]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= target, startFuel <= 10^9",
+    "0 <= stations.length <= 500"
+  ],
+  "starterCode": "def minRefuelStops(target: int, startFuel: int, stations: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minRefuelStops(target: int, startFuel: int, stations: list[list[int]]) -> int:\n    import heapq\n    pq = []\n    curr_fuel = startFuel\n    stops = 0\n    stations.append([target, 0])\n    for pos, fuel in stations:\n        while pq and curr_fuel < pos:\n            curr_fuel += -heapq.heappop(pq)\n            stops += 1\n        if curr_fuel < pos: return -1\n        heapq.heappush(pq, -fuel)\n    return stops\n",
+  "functionName": "minRefuelStops",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1,
+        1,
+        []
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[1, 1, []]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        100,
+        1,
+        [
+          [
+            10,
+            100
+          ]
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[100, 1, [[10, 100]]]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        100,
+        10,
+        [
+          [
+            10,
+            60
+          ],
+          [
+            20,
+            30
+          ],
+          [
+            30,
+            30
+          ],
+          [
+            60,
+            40
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[100, 10, [[10, 60], [20, 30], [30, 30], [60, 40]]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Drive as far as possible. When running out of fuel before next station, retroactively take the largest fuel available from visited stations."
+  ],
+  "python": {
+    "starterCode": "def minRefuelStops(target: int, startFuel: int, stations: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minRefuelStops(target: int, startFuel: int, stations: list[list[int]]) -> int:\n    import heapq\n    pq = []\n    curr_fuel = startFuel\n    stops = 0\n    stations.append([target, 0])\n    for pos, fuel in stations:\n        while pq and curr_fuel < pos:\n            curr_fuel += -heapq.heappop(pq)\n            stops += 1\n        if curr_fuel < pos: return -1\n        heapq.heappush(pq, -fuel)\n    return stops\n"
+  },
+  "leetcodeId": 871,
+  "leetcodeTitle": "Minimum Number of Refueling Stops",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-min-refuel-stops/"
+}

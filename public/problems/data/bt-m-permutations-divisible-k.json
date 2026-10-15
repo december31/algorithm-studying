@@ -1,0 +1,93 @@
+{
+  "id": "bt-m-permutations-divisible-k",
+  "wingId": "backtracking",
+  "floor": 257,
+  "title": "Permutations Divisible by K",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-permutations-divisible-k",
+    "name": "Arithmetic Lich",
+    "title": "Weigher of Permutation Divisibility",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#e11d48",
+    "attackName": "Modulo Hex",
+    "attackPower": 2,
+    "defeatQuote": "Multi-digit integer permutations divisible by k verified!"
+  },
+  "description": "Given an array of distinct digits `digits`, form all permutations into integer numbers. Return the count of permutations that form a number divisible by `k`.",
+  "examples": [
+    {
+      "input": "digits = [1,2,3], k = 3",
+      "output": "6"
+    },
+    {
+      "input": "digits = [1,2,4], k = 2",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= len(digits) <= 8",
+    "1 <= k <= 100"
+  ],
+  "starterCode": "def permutationsDivByK(digits: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def permutationsDivByK(digits: list[int], k: int) -> int:\n    used = [False] * len(digits)\n    count = 0\n    def backtrack(curr_val, length):\n        nonlocal count\n        if length == len(digits):\n            if curr_val % k == 0: count += 1\n            return\n        for i in range(len(digits)):\n            if not used[i]:\n                used[i] = True\n                backtrack(curr_val * 10 + digits[i], length + 1)\n                used[i] = False\n    backtrack(0, 0)\n    return count\n",
+  "functionName": "permutationsDivByK",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      "expected": 6,
+      "inputDisplay": "args=[[1, 2, 3], 3]",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          4
+        ],
+        2
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[[1, 2, 4], 2]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5
+        ],
+        5
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[5], 5]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Accumulate integer value on each branch and check modulo k at full depth."
+  ],
+  "python": {
+    "starterCode": "def permutationsDivByK(digits: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def permutationsDivByK(digits: list[int], k: int) -> int:\n    used = [False] * len(digits)\n    count = 0\n    def backtrack(curr_val, length):\n        nonlocal count\n        if length == len(digits):\n            if curr_val % k == 0: count += 1\n            return\n        for i in range(len(digits)):\n            if not used[i]:\n                used[i] = True\n                backtrack(curr_val * 10 + digits[i], length + 1)\n                used[i] = False\n    backtrack(0, 0)\n    return count\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Permutations Divisible by K",
+  "leetcodeUrl": null
+}

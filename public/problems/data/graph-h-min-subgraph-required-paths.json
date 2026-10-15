@@ -1,0 +1,106 @@
+{
+  "id": "graph-h-min-subgraph-required-paths",
+  "wingId": "graphs",
+  "floor": 385,
+  "title": "Minimum Subgraph with Required Paths (3-way Dijkstra)",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-h-min-subgraph-required-paths",
+    "name": "Tri-Convergent Phantom",
+    "title": "Meeting Point of Divided Paths",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "spectre",
+    "color": "#38bdf8",
+    "attackName": "Trident Convergence",
+    "attackPower": 3,
+    "defeatQuote": "Smallest total weight of directed edges containing paths src1->dest and src2->dest!"
+  },
+  "description": "You are given an integer `n` and a 2D integer array `edges` where `edges[i] = [fromi, toi, weighti]`. You are also given three distinct integers `src1`, `src2`, and `dest`. Return the minimum weight of a subgraph such that there is a path from `src1` to `dest` and from `src2` to `dest`. If impossible, return -1.",
+  "examples": [
+    {
+      "input": "n = 6, edges = [[0,2,2],[0,5,6],[1,0,3],[1,4,5],[2,1,1],[2,3,3],[2,3,4],[3,4,2],[4,5,1]], src1 = 0, src2 = 1, dest = 5",
+      "output": "9"
+    }
+  ],
+  "constraints": [
+    "3 <= n <= 100000",
+    "0 <= edges.length <= 100000"
+  ],
+  "starterCode": "def minimumWeight(n: int, edges: list[list[int]], src1: int, src2: int, dest: int) -> int:\n    pass\n",
+  "solutionCode": "def minimumWeight(n: int, edges: list[list[int]], src1: int, src2: int, dest: int) -> int:\n    import heapq\n    from collections import defaultdict\n    graph = defaultdict(list)\n    rev_graph = defaultdict(list)\n    for u, v, w in edges:\n        graph[u].append((v, w))\n        rev_graph[v].append((u, w))\n    def dijkstra(start, adj):\n        dist = [float('inf')] * n\n        dist[start] = 0\n        pq = [(0, start)]\n        while pq:\n            d, u = heapq.heappop(pq)\n            if d > dist[u]: continue\n            for v, w in adj[u]:\n                if d + w < dist[v]:\n                    dist[v] = d + w\n                    heapq.heappush(pq, (dist[v], v))\n        return dist\n    d1 = dijkstra(src1, graph)\n    d2 = dijkstra(src2, graph)\n    dd = dijkstra(dest, rev_graph)\n    ans = float('inf')\n    for mid in range(n):\n        if d1[mid] != float('inf') and d2[mid] != float('inf') and dd[mid] != float('inf'):\n            ans = min(ans, d1[mid] + d2[mid] + dd[mid])\n    return ans if ans != float('inf') else -1\n",
+  "functionName": "minimumWeight",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        6,
+        [
+          [
+            0,
+            2,
+            2
+          ],
+          [
+            0,
+            5,
+            6
+          ],
+          [
+            1,
+            0,
+            3
+          ],
+          [
+            1,
+            4,
+            5
+          ],
+          [
+            2,
+            1,
+            1
+          ],
+          [
+            2,
+            3,
+            3
+          ],
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            3,
+            4,
+            2
+          ],
+          [
+            4,
+            5,
+            1
+          ]
+        ],
+        0,
+        1,
+        5
+      ],
+      "expected": 9,
+      "inputDisplay": "args=[6, [[0, 2, 2], [0, 5, 6], [1, 0, 3], [1, 4, 5], [2, 1, 1], [2, 3, 3], [2, ",
+      "expectedDisplay": "9",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Pick an intermediate rendezvous node x. Subgraph weight is dist(src1, x) + dist(src2, x) + rev_dist(dest, x)."
+  ],
+  "python": {
+    "starterCode": "def minimumWeight(n: int, edges: list[list[int]], src1: int, src2: int, dest: int) -> int:\n    pass\n",
+    "solutionCode": "def minimumWeight(n: int, edges: list[list[int]], src1: int, src2: int, dest: int) -> int:\n    import heapq\n    from collections import defaultdict\n    graph = defaultdict(list)\n    rev_graph = defaultdict(list)\n    for u, v, w in edges:\n        graph[u].append((v, w))\n        rev_graph[v].append((u, w))\n    def dijkstra(start, adj):\n        dist = [float('inf')] * n\n        dist[start] = 0\n        pq = [(0, start)]\n        while pq:\n            d, u = heapq.heappop(pq)\n            if d > dist[u]: continue\n            for v, w in adj[u]:\n                if d + w < dist[v]:\n                    dist[v] = d + w\n                    heapq.heappush(pq, (dist[v], v))\n        return dist\n    d1 = dijkstra(src1, graph)\n    d2 = dijkstra(src2, graph)\n    dd = dijkstra(dest, rev_graph)\n    ans = float('inf')\n    for mid in range(n):\n        if d1[mid] != float('inf') and d2[mid] != float('inf') and dd[mid] != float('inf'):\n            ans = min(ans, d1[mid] + d2[mid] + dd[mid])\n    return ans if ans != float('inf') else -1\n"
+  },
+  "leetcodeId": 2203,
+  "leetcodeTitle": "Minimum Subgraph with Required Paths (3-way Dijkstra)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-min-subgraph-required-paths/"
+}

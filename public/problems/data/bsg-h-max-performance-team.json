@@ -1,0 +1,103 @@
+{
+  "id": "bsg-h-max-performance-team",
+  "wingId": "binary-search-greedy",
+  "floor": 487,
+  "title": "Maximum Performance of a Team",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-max-performance-team",
+    "name": "Efficiency Titan",
+    "title": "Amplifier of Synergistic Output",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "titan",
+    "color": "#38bdf8",
+    "attackName": "Synergy Slam",
+    "attackPower": 3,
+    "defeatQuote": "Maximum performance sum(speeds) * min(efficiencies) modulo 10^9+7!"
+  },
+  "description": "You are given two integers `n` and `k` and two integer arrays `speed` and `efficiency` of length `n`. Return the maximum performance of a team of at most `k` engineers modulo `10^9 + 7`.",
+  "examples": [
+    {
+      "input": "n = 6, speed = [2,10,3,1,5,8], efficiency = [5,4,3,9,7,2], k = 2",
+      "output": "60"
+    },
+    {
+      "input": "n = 6, speed = [2,10,3,1,5,8], efficiency = [5,4,3,9,7,2], k = 3",
+      "output": "68"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= n <= 100000"
+  ],
+  "starterCode": "def maxPerformance(n: int, speed: list[int], efficiency: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def maxPerformance(n: int, speed: list[int], efficiency: list[int], k: int) -> int:\n    import heapq\n    MOD = 10**9 + 7\n    engineers = sorted(zip(efficiency, speed), reverse=True)\n    speed_heap = []\n    speed_sum = 0\n    best = 0\n    for eff, spd in engineers:\n        heapq.heappush(speed_heap, spd)\n        speed_sum += spd\n        if len(speed_heap) > k:\n            speed_sum -= heapq.heappop(speed_heap)\n        best = max(best, speed_sum * eff)\n    return best % MOD\n",
+  "functionName": "maxPerformance",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        6,
+        [
+          2,
+          10,
+          3,
+          1,
+          5,
+          8
+        ],
+        [
+          5,
+          4,
+          3,
+          9,
+          7,
+          2
+        ],
+        2
+      ],
+      "expected": 60,
+      "inputDisplay": "args=[6, [2, 10, 3, 1, 5, 8], [5, 4, 3, 9, 7, 2], 2]",
+      "expectedDisplay": "60",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        6,
+        [
+          2,
+          10,
+          3,
+          1,
+          5,
+          8
+        ],
+        [
+          5,
+          4,
+          3,
+          9,
+          7,
+          2
+        ],
+        3
+      ],
+      "expected": 68,
+      "inputDisplay": "args=[6, [2, 10, 3, 1, 5, 8], [5, 4, 3, 9, 7, 2], 3]",
+      "expectedDisplay": "68",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort descending by efficiency. Iterate each engineer as the minimum efficiency in the team, tracking top k speeds with a min-heap."
+  ],
+  "python": {
+    "starterCode": "def maxPerformance(n: int, speed: list[int], efficiency: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def maxPerformance(n: int, speed: list[int], efficiency: list[int], k: int) -> int:\n    import heapq\n    MOD = 10**9 + 7\n    engineers = sorted(zip(efficiency, speed), reverse=True)\n    speed_heap = []\n    speed_sum = 0\n    best = 0\n    for eff, spd in engineers:\n        heapq.heappush(speed_heap, spd)\n        speed_sum += spd\n        if len(speed_heap) > k:\n            speed_sum -= heapq.heappop(speed_heap)\n        best = max(best, speed_sum * eff)\n    return best % MOD\n"
+  },
+  "leetcodeId": 1383,
+  "leetcodeTitle": "Maximum Performance of a Team",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-max-performance-team/"
+}

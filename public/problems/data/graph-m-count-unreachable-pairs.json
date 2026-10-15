@@ -1,0 +1,106 @@
+{
+  "id": "graph-m-count-unreachable-pairs",
+  "wingId": "graphs",
+  "floor": 356,
+  "title": "Count Unreachable Pairs of Nodes",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-count-unreachable-pairs",
+    "name": "Void Severer",
+    "title": "Tallyer of Disjoint Realms",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Severing Cleave",
+    "attackPower": 2,
+    "defeatQuote": "Total pairs of vertices with no connecting paths counted!"
+  },
+  "description": "You are given an integer `n`. There is an undirected graph with `n` nodes, numbered from 0 to `n - 1`. You are given a 2D integer array `edges` where `edges[i] = [ai, bi]`. Return the number of pairs of different nodes that are unreachable from each other.",
+  "examples": [
+    {
+      "input": "n = 3, edges = [[0,1],[0,2],[1,2]]",
+      "output": "0"
+    },
+    {
+      "input": "n = 7, edges = [[0,2],[0,5],[2,4],[1,6],[5,4]]",
+      "output": "14"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 100000",
+    "0 <= edges.length <= 200000"
+  ],
+  "starterCode": "def countPairs(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def countPairs(n: int, edges: list[list[int]]) -> int:\n    parent = list(range(n))\n    size = [1] * n\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    for u, v in edges:\n        ru, rv = find(u), find(v)\n        if ru != rv:\n            parent[ru] = rv\n            size[rv] += size[ru]\n    comp_sizes = [size[i] for i in range(n) if parent[i] == i]\n    ans = 0\n    rem = n\n    for s in comp_sizes:\n        ans += s * (rem - s)\n        rem -= s\n    return ans\n",
+  "functionName": "countPairs",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[3, [[0, 1], [0, 2], [1, 2]]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        7,
+        [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            5,
+            4
+          ]
+        ]
+      ],
+      "expected": 14,
+      "inputDisplay": "args=[7, [[0, 2], [0, 5], [2, 4], [1, 6], [5, 4]]]",
+      "expectedDisplay": "14",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Find component sizes using DSU. Sum size * (remaining nodes - size) across components."
+  ],
+  "python": {
+    "starterCode": "def countPairs(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def countPairs(n: int, edges: list[list[int]]) -> int:\n    parent = list(range(n))\n    size = [1] * n\n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n    for u, v in edges:\n        ru, rv = find(u), find(v)\n        if ru != rv:\n            parent[ru] = rv\n            size[rv] += size[ru]\n    comp_sizes = [size[i] for i in range(n) if parent[i] == i]\n    ans = 0\n    rem = n\n    for s in comp_sizes:\n        ans += s * (rem - s)\n        rem -= s\n    return ans\n"
+  },
+  "leetcodeId": 2316,
+  "leetcodeTitle": "Count Unreachable Pairs of Nodes",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-count-unreachable-pairs/"
+}

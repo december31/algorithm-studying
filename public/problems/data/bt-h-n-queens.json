@@ -1,0 +1,82 @@
+{
+  "id": "bt-h-n-queens",
+  "wingId": "backtracking",
+  "floor": 271,
+  "title": "N-Queens Full Boards",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-n-queens",
+    "name": "Regal Gorgon",
+    "title": "Empress of the Non-Attacking 8-Directions",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#ec4899",
+    "attackName": "Royal Annihilation",
+    "attackPower": 3,
+    "defeatQuote": "All non-attacking queen configurations placed across rows and diagonals!"
+  },
+  "description": "The n-queens puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other. Return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration, where `'Q'` and `'.'` both indicate a queen and an empty space respectively.",
+  "examples": [
+    {
+      "input": "n = 4",
+      "output": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 9"
+  ],
+  "starterCode": "def solveNQueens(n: int) -> list[list[str]]:\n    pass\n",
+  "solutionCode": "def solveNQueens(n: int) -> list[list[str]]:\n    res = []\n    cols = set()\n    diag1 = set()\n    diag2 = set()\n    def backtrack(r, state):\n        if r == n:\n            board = []\n            for c in state:\n                board.append('.' * c + 'Q' + '.' * (n - c - 1))\n            res.append(board)\n            return\n        for c in range(n):\n            if c not in cols and (r - c) not in diag1 and (r + c) not in diag2:\n                cols.add(c)\n                diag1.add(r - c)\n                diag2.add(r + c)\n                backtrack(r + 1, state + [c])\n                cols.remove(c)\n                diag1.remove(r - c)\n                diag2.remove(r + c)\n    backtrack(0, [])\n    return res\n",
+  "functionName": "solveNQueens",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4
+      ],
+      "expected": [
+        [
+          ".Q..",
+          "...Q",
+          "Q...",
+          "..Q."
+        ],
+        [
+          "..Q.",
+          "Q...",
+          "...Q",
+          ".Q.."
+        ]
+      ],
+      "inputDisplay": "4",
+      "expectedDisplay": "[['.Q..', '...Q', 'Q...', '..Q.'], ['..Q.', 'Q...', '...Q', '.Q..']]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": [
+        [
+          "Q"
+        ]
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "[['Q']]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Place row by row. Track occupied columns, main diagonals (r - c), and anti-diagonals (r + c)."
+  ],
+  "python": {
+    "starterCode": "def solveNQueens(n: int) -> list[list[str]]:\n    pass\n",
+    "solutionCode": "def solveNQueens(n: int) -> list[list[str]]:\n    res = []\n    cols = set()\n    diag1 = set()\n    diag2 = set()\n    def backtrack(r, state):\n        if r == n:\n            board = []\n            for c in state:\n                board.append('.' * c + 'Q' + '.' * (n - c - 1))\n            res.append(board)\n            return\n        for c in range(n):\n            if c not in cols and (r - c) not in diag1 and (r + c) not in diag2:\n                cols.add(c)\n                diag1.add(r - c)\n                diag2.add(r + c)\n                backtrack(r + 1, state + [c])\n                cols.remove(c)\n                diag1.remove(r - c)\n                diag2.remove(r + c)\n    backtrack(0, [])\n    return res\n"
+  },
+  "leetcodeId": 51,
+  "leetcodeTitle": "N-Queens Full Boards",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-n-queens/"
+}

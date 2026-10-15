@@ -1,0 +1,94 @@
+{
+  "id": "bt-m-splitting-descending",
+  "wingId": "backtracking",
+  "floor": 233,
+  "title": "Split String Descending Consecutive",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-splitting-descending",
+    "name": "Countdown Golem",
+    "title": "Decrementer of Numeric Runs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Countdown Stomp",
+    "attackPower": 2,
+    "defeatQuote": "Every adjacent numerical token decremented by exactly 1!"
+  },
+  "description": "You are given a string `s` that consists of only digits. Check if we can split `s` into two or more non-empty substrings such that the numerical values of the substrings are in descending order and the difference between numerical values of every two adjacent substrings is equal to `1`.",
+  "examples": [
+    {
+      "input": "s = \"050043\"",
+      "output": "True"
+    },
+    {
+      "input": "s = \"9080701\"",
+      "output": "False"
+    },
+    {
+      "input": "s = \"10009998\"",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 20",
+    "s consists of only digits"
+  ],
+  "starterCode": "def splitStringDescending(s: str) -> bool:\n    pass\n",
+  "solutionCode": "def splitStringDescending(s: str) -> bool:\n    def dfs(idx, prev):\n        if idx == len(s): return True\n        for j in range(idx + 1, len(s) + 1):\n            val = int(s[idx:j])\n            if val == prev - 1:\n                if dfs(j, val): return True\n        return False\n    for i in range(1, len(s)):\n        val = int(s[:i])\n        if dfs(i, val): return True\n    return False\n",
+  "functionName": "splitStringDescending",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "050043"
+      ],
+      "expected": true,
+      "inputDisplay": "050043",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "9080701"
+      ],
+      "expected": false,
+      "inputDisplay": "9080701",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "10009998"
+      ],
+      "expected": true,
+      "inputDisplay": "10009998",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "001"
+      ],
+      "expected": false,
+      "inputDisplay": "001",
+      "expectedDisplay": "False",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Pick the first number, then recursively search for value - 1."
+  ],
+  "python": {
+    "starterCode": "def splitStringDescending(s: str) -> bool:\n    pass\n",
+    "solutionCode": "def splitStringDescending(s: str) -> bool:\n    def dfs(idx, prev):\n        if idx == len(s): return True\n        for j in range(idx + 1, len(s) + 1):\n            val = int(s[idx:j])\n            if val == prev - 1:\n                if dfs(j, val): return True\n        return False\n    for i in range(1, len(s)):\n        val = int(s[:i])\n        if dfs(i, val): return True\n    return False\n"
+  },
+  "leetcodeId": 1849,
+  "leetcodeTitle": "Split String Descending Consecutive",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-splitting-descending/"
+}

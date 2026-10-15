@@ -1,0 +1,73 @@
+{
+  "id": "bt-h-cracking-the-safe",
+  "wingId": "backtracking",
+  "floor": 289,
+  "title": "Cracking the Safe (De Bruijn Sequence)",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-h-cracking-the-safe",
+    "name": "Vault Lock Hydra",
+    "title": "Guardian of De Bruijn Cycles",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "hydra",
+    "color": "#10b981",
+    "attackName": "Vault Squeeze",
+    "attackPower": 3,
+    "defeatQuote": "Eulerian circuit through de Bruijn graph unlocked the safe in k^n + n - 1 steps!"
+  },
+  "description": "There is a safe protected by a password of `n` digits. Each digit can be one of the first `k` digits: `0, 1, ..., k-1`. The safe opens as soon as the last `n` digits of the entered sequence match the password. Return any sequence of minimum length that is guaranteed to open the safe.",
+  "examples": [
+    {
+      "input": "n = 1, k = 2",
+      "output": "\"10\""
+    },
+    {
+      "input": "n = 2, k = 2",
+      "output": "\"01100\""
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 4",
+    "1 <= k <= 10",
+    "k^n <= 4096"
+  ],
+  "starterCode": "def crackSafe(n: int, k: int) -> str:\n    pass\n",
+  "solutionCode": "def crackSafe(n: int, k: int) -> str:\n    seen = set()\n    ans = []\n    def dfs(node):\n        for x in map(str, range(k)):\n            edge = node + x\n            if edge not in seen:\n                seen.add(edge)\n                dfs(edge[1:])\n                ans.append(x)\n    start = '0' * (n - 1)\n    dfs(start)\n    return start + ''.join(reversed(ans))\n",
+  "functionName": "crackSafe",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1,
+        2
+      ],
+      "expected": "01",
+      "inputDisplay": "args=[1, 2]",
+      "expectedDisplay": "01",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        2,
+        2
+      ],
+      "expected": "00110",
+      "inputDisplay": "args=[2, 2]",
+      "expectedDisplay": "00110",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Hierholzer's algorithm on the de Bruijn graph generates an Eulerian circuit."
+  ],
+  "python": {
+    "starterCode": "def crackSafe(n: int, k: int) -> str:\n    pass\n",
+    "solutionCode": "def crackSafe(n: int, k: int) -> str:\n    seen = set()\n    ans = []\n    def dfs(node):\n        for x in map(str, range(k)):\n            edge = node + x\n            if edge not in seen:\n                seen.add(edge)\n                dfs(edge[1:])\n                ans.append(x)\n    start = '0' * (n - 1)\n    dfs(start)\n    return start + ''.join(reversed(ans))\n"
+  },
+  "leetcodeId": 753,
+  "leetcodeTitle": "Cracking the Safe (De Bruijn Sequence)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-cracking-the-safe/"
+}

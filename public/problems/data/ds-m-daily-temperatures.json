@@ -1,0 +1,134 @@
+{
+  "id": "ds-m-daily-temperatures",
+  "wingId": "data-structures",
+  "floor": 112,
+  "title": "Daily Temperatures",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-daily-temperatures",
+    "name": "Thermal Drake",
+    "title": "Lord of Rising Heat Waves",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#ef4444",
+    "attackName": "Inferno Blast",
+    "attackPower": 2,
+    "defeatQuote": "A monotonic stack pierced right through my temperature anomalies!"
+  },
+  "description": "Given an array of integers `temperatures` representing daily temperatures, return an array `answer` such that `answer[i]` is the number of days you have to wait after the `i-th` day to get a warmer temperature. If there is no future day for which this is possible, keep `answer[i] == 0`.",
+  "examples": [
+    {
+      "input": "temperatures = [73,74,75,71,69,72,76,73]",
+      "output": "[1,1,4,2,1,1,0,0]"
+    },
+    {
+      "input": "temperatures = [30,40,50,60]",
+      "output": "[1,1,1,0]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(temperatures) <= 10^5",
+    "30 <= temperatures[i] <= 100"
+  ],
+  "starterCode": "def dailyTemperatures(temperatures: list[int]) -> list[int]:\n    pass\n",
+  "solutionCode": "def dailyTemperatures(temperatures: list[int]) -> list[int]:\n    res = [0] * len(temperatures)\n    stack = []\n    for i, t in enumerate(temperatures):\n        while stack and temperatures[stack[-1]] < t:\n            prev = stack.pop()\n            res[prev] = i - prev\n        stack.append(i)\n    return res\n",
+  "functionName": "dailyTemperatures",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          73,
+          74,
+          75,
+          71,
+          69,
+          72,
+          76,
+          73
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        4,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      "inputDisplay": "[73, 74, 75, 71, 69, 72, 76, 73]",
+      "expectedDisplay": "[1, 1, 4, 2, 1, 1, 0, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          30,
+          40,
+          50,
+          60
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "inputDisplay": "[30, 40, 50, 60]",
+      "expectedDisplay": "[1, 1, 1, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          30,
+          60,
+          90
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        0
+      ],
+      "inputDisplay": "[30, 60, 90]",
+      "expectedDisplay": "[1, 1, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          80,
+          70,
+          60
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "inputDisplay": "[80, 70, 60]",
+      "expectedDisplay": "[0, 0, 0]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Maintain a decreasing monotonic stack of indices."
+  ],
+  "python": {
+    "starterCode": "def dailyTemperatures(temperatures: list[int]) -> list[int]:\n    pass\n",
+    "solutionCode": "def dailyTemperatures(temperatures: list[int]) -> list[int]:\n    res = [0] * len(temperatures)\n    stack = []\n    for i, t in enumerate(temperatures):\n        while stack and temperatures[stack[-1]] < t:\n            prev = stack.pop()\n            res[prev] = i - prev\n        stack.append(i)\n    return res\n"
+  },
+  "leetcodeId": 739,
+  "leetcodeTitle": "Daily Temperatures",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-daily-temperatures/"
+}

@@ -32,8 +32,8 @@
     "1 <= arr.length, queries.length <= 3 * 10^4",
     "queries[i].length == 2"
   ],
-  "starterCode": "function xorQueries(arr, queries) {\n  return [];\n}",
-  "solutionCode": "function xorQueries(arr, queries) {\n  const prefix = new Array(arr.length + 1).fill(0);\n  for (let i = 0; i < arr.length; i++) {\n    prefix[i + 1] = prefix[i] ^ arr[i];\n  }\n  const result = [];\n  for (const [L, R] of queries) {\n    result.push(prefix[R + 1] ^ prefix[L]);\n  }\n  return result;\n}",
+  "starterCode": "def xorQueries(arr, queries):\n    return []\n",
+  "solutionCode": "def xorQueries(arr, queries):\n    prefix = [0] * (len(arr) + 1)\n    for i, n in enumerate(arr):\n        prefix[i + 1] = prefix[i] ^ n\n    return [prefix[r + 1] ^ prefix[l] for l, r in queries]\n",
   "functionName": "xorQueries",
   "testCases": [
     {

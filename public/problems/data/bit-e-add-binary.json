@@ -1,0 +1,72 @@
+{
+  "id": "bit-e-add-binary",
+  "wingId": "bit-manipulation",
+  "floor": 509,
+  "title": "Add Binary Strings",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-e-add-binary",
+    "name": "Carry Golem",
+    "title": "Propagator of Binary Carries",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Carry Shock",
+    "attackPower": 1,
+    "defeatQuote": "Sum of two binary strings computed with carry logic!"
+  },
+  "description": "Given two binary strings `a` and `b`, return their sum as a binary string.",
+  "examples": [
+    {
+      "input": "a = \"11\", b = \"1\"",
+      "output": "\"100\""
+    },
+    {
+      "input": "a = \"1010\", b = \"1011\"",
+      "output": "\"10101\""
+    }
+  ],
+  "constraints": [
+    "1 <= a.length, b.length <= 10000",
+    "a and b consist only of '0' or '1' characters"
+  ],
+  "starterCode": "def addBinary(a: str, b: str) -> str:\n    pass\n",
+  "solutionCode": "def addBinary(a: str, b: str) -> str:\n    i, j = len(a) - 1, len(b) - 1\n    carry = 0\n    res = []\n    while i >= 0 or j >= 0 or carry:\n        total = carry\n        if i >= 0:\n            total += int(a[i])\n            i -= 1\n        if j >= 0:\n            total += int(b[j])\n            j -= 1\n        res.append(str(total % 2))\n        carry = total // 2\n    return \"\".join(res[::-1])\n",
+  "functionName": "addBinary",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "11",
+        "1"
+      ],
+      "expected": "100",
+      "inputDisplay": "args=['11', '1']",
+      "expectedDisplay": "100",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "1010",
+        "1011"
+      ],
+      "expected": "10101",
+      "inputDisplay": "args=['1010', '1011']",
+      "expectedDisplay": "10101",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Simulate column addition from right to left with carry."
+  ],
+  "python": {
+    "starterCode": "def addBinary(a: str, b: str) -> str:\n    pass\n",
+    "solutionCode": "def addBinary(a: str, b: str) -> str:\n    i, j = len(a) - 1, len(b) - 1\n    carry = 0\n    res = []\n    while i >= 0 or j >= 0 or carry:\n        total = carry\n        if i >= 0:\n            total += int(a[i])\n            i -= 1\n        if j >= 0:\n            total += int(b[j])\n            j -= 1\n        res.append(str(total % 2))\n        carry = total // 2\n    return \"\".join(res[::-1])\n"
+  },
+  "leetcodeId": 67,
+  "leetcodeTitle": "Add Binary Strings",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-e-add-binary/"
+}

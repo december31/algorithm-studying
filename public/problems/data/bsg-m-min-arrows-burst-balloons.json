@@ -1,0 +1,103 @@
+{
+  "id": "bsg-m-min-arrows-burst-balloons",
+  "wingId": "binary-search-greedy",
+  "floor": 426,
+  "title": "Min Arrows to Burst Balloons",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-min-arrows-burst-balloons",
+    "name": "Ballistics Imp",
+    "title": "Piercer of Spherical Intervals",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#ef4444",
+    "attackName": "Arrow Skewer",
+    "attackPower": 2,
+    "defeatQuote": "Minimum vertical arrow shots piercing all balloons calculated!"
+  },
+  "description": "There are spherical balloons taped to a flat wall. The coordinates are represented by `points` where `points[i] = [xstart, xend]`. An arrow shot at x bursts all balloons satisfying `xstart <= x <= xend`. Return the minimum number of arrows that must be shot to burst all balloons.",
+  "examples": [
+    {
+      "input": "points = [[10,16],[2,8],[1,6],[7,12]]",
+      "output": "2"
+    },
+    {
+      "input": "points = [[1,2],[3,4],[5,6],[7,8]]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= points.length <= 100000"
+  ],
+  "starterCode": "def findMinArrowShots(points: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def findMinArrowShots(points: list[list[int]]) -> int:\n    if not points: return 0\n    points.sort(key=lambda x: x[1])\n    arrows = 1\n    arrow_pos = points[0][1]\n    for i in range(1, len(points)):\n        if points[i][0] > arrow_pos:\n            arrows += 1\n            arrow_pos = points[i][1]\n    return arrows\n",
+  "functionName": "findMinArrowShots",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            10,
+            16
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            7,
+            12
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[[10, 16], [2, 8], [1, 6], [7, 12]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[1, 2], [3, 4], [5, 6], [7, 8]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort by end coordinate. Shoot arrow at end of earliest-finishing balloon."
+  ],
+  "python": {
+    "starterCode": "def findMinArrowShots(points: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def findMinArrowShots(points: list[list[int]]) -> int:\n    if not points: return 0\n    points.sort(key=lambda x: x[1])\n    arrows = 1\n    arrow_pos = points[0][1]\n    for i in range(1, len(points)):\n        if points[i][0] > arrow_pos:\n            arrows += 1\n            arrow_pos = points[i][1]\n    return arrows\n"
+  },
+  "leetcodeId": 452,
+  "leetcodeTitle": "Min Arrows to Burst Balloons",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-min-arrows-burst-balloons/"
+}

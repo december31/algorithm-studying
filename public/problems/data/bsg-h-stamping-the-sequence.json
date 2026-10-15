@@ -1,0 +1,78 @@
+{
+  "id": "bsg-h-stamping-the-sequence",
+  "wingId": "binary-search-greedy",
+  "floor": 495,
+  "title": "Stamping the Sequence (Greedy Reverse Stamping)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-stamping-the-sequence",
+    "name": "Impression Spectre",
+    "title": "Inverter of Overlapping Stamps",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Stamp Impression",
+    "attackPower": 3,
+    "defeatQuote": "Stamp positions to transform ????? into target string assembled!"
+  },
+  "description": "You are given two strings `stamp` and `target`. Initially, there is a string of length `target.length` filled with `'?'`. In each turn, you may place the stamp on top of the string. Return an array of the index of the left-most letter being stamped at each turn to produce `target`. If impossible, return `[]`.",
+  "examples": [
+    {
+      "input": "stamp = \"abc\", target = \"ababc\"",
+      "output": "[0,2]"
+    },
+    {
+      "input": "stamp = \"abca\", target = \"aabcaca\"",
+      "output": "[3,0,1]"
+    }
+  ],
+  "constraints": [
+    "1 <= stamp.length <= target.length <= 1000"
+  ],
+  "starterCode": "def movesToStamp(stamp: str, target: str) -> list[int]:\n    pass\n",
+  "solutionCode": "def movesToStamp(stamp: str, target: str) -> list[int]:\n    S, T = len(stamp), len(target)\n    target_list = list(target)\n    moves = []\n    stars = 0\n    visited = [False] * (T - S + 1)\n    def can_stamp(idx):\n        changed = False\n        for i in range(S):\n            if target_list[idx + i] == '?': continue\n            if target_list[idx + i] != stamp[i]: return False\n            changed = True\n        return changed\n    while stars < T:\n        stamped = False\n        for i in range(T - S + 1):\n            if not visited[i] and can_stamp(i):\n                visited[i] = True\n                stamped = True\n                moves.append(i)\n                for j in range(S):\n                    if target_list[i + j] != '?':\n                        target_list[i + j] = '?'\n                        stars += 1\n        if not stamped: return []\n    return moves[::-1]\n",
+  "functionName": "movesToStamp",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "abc",
+        "ababc"
+      ],
+      "expected": [
+        0,
+        2
+      ],
+      "inputDisplay": "args=['abc', 'ababc']",
+      "expectedDisplay": "[0, 2]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "abca",
+        "aabcaca"
+      ],
+      "expected": [
+        3,
+        0,
+        1
+      ],
+      "inputDisplay": "args=['abca', 'aabcaca']",
+      "expectedDisplay": "[3, 0, 1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Work backwards from target: repeatedly replace matching stamp substrings with '?'."
+  ],
+  "python": {
+    "starterCode": "def movesToStamp(stamp: str, target: str) -> list[int]:\n    pass\n",
+    "solutionCode": "def movesToStamp(stamp: str, target: str) -> list[int]:\n    S, T = len(stamp), len(target)\n    target_list = list(target)\n    moves = []\n    stars = 0\n    visited = [False] * (T - S + 1)\n    def can_stamp(idx):\n        changed = False\n        for i in range(S):\n            if target_list[idx + i] == '?': continue\n            if target_list[idx + i] != stamp[i]: return False\n            changed = True\n        return changed\n    while stars < T:\n        stamped = False\n        for i in range(T - S + 1):\n            if not visited[i] and can_stamp(i):\n                visited[i] = True\n                stamped = True\n                moves.append(i)\n                for j in range(S):\n                    if target_list[i + j] != '?':\n                        target_list[i + j] = '?'\n                        stars += 1\n        if not stamped: return []\n    return moves[::-1]\n"
+  },
+  "leetcodeId": 936,
+  "leetcodeTitle": "Stamping the Sequence (Greedy Reverse Stamping)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-stamping-the-sequence/"
+}

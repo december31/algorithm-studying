@@ -32,8 +32,8 @@
     "1 <= nums.length <= 1000",
     "0 <= nums[i] < 2^16"
   ],
-  "starterCode": "function countTriplets(nums) {\n  return 0;\n}",
-  "solutionCode": "function countTriplets(nums) {\n  const pairCount = new Array(1 << 16).fill(0);\n  for (const a of nums) {\n    for (const b of nums) {\n      pairCount[a & b]++;\n    }\n  }\n  let ans = 0;\n  for (const c of nums) {\n    for (let pair = 0; pair < (1 << 16); pair++) {\n      if ((c & pair) === 0) {\n        ans += pairCount[pair];\n      }\n    }\n  }\n  return ans;\n}",
+  "starterCode": "def countTriplets(nums):\n    return 0\n",
+  "solutionCode": "def countTriplets(nums):\n    pair_count = [0] * (1 << 16)\n    for a in nums:\n        for b in nums:\n            pair_count[a & b] += 1\n    ans = 0\n    for c in nums:\n        for pair in range(1 << 16):\n            if (c & pair) == 0:\n                ans += pair_count[pair]\n    return ans\n",
   "functionName": "countTriplets",
   "testCases": [
     {

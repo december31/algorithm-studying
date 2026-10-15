@@ -1,0 +1,97 @@
+{
+  "id": "bt-h-wildcard-matching",
+  "wingId": "backtracking",
+  "floor": 276,
+  "title": "Wildcard Matching (* and ?)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-wildcard-matching",
+    "name": "Wildcard Drake",
+    "title": "Morpher of Question Marks and Asterisks",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "dragon",
+    "color": "#38bdf8",
+    "attackName": "Wildcard Blast",
+    "attackPower": 3,
+    "defeatQuote": "Asterisk and question mark wildcard matches verified!"
+  },
+  "description": "Given an input string (`s`) and a pattern (`p`), implement wildcard pattern matching with support for `'?'` (matches any single character) and `'*'` (matches any sequence of characters including empty).",
+  "examples": [
+    {
+      "input": "s = \"aa\", p = \"a\"",
+      "output": "False"
+    },
+    {
+      "input": "s = \"aa\", p = \"*\"",
+      "output": "True"
+    },
+    {
+      "input": "s = \"cb\", p = \"?a\"",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "0 <= len(s), len(p) <= 2000"
+  ],
+  "starterCode": "def isMatchWildcard(s: str, p: str) -> bool:\n    pass\n",
+  "solutionCode": "def isMatchWildcard(s: str, p: str) -> bool:\n    s_ptr, p_ptr = 0, 0\n    star_idx = -1\n    match_idx = 0\n    while s_ptr < len(s):\n        if p_ptr < len(p) and (p[p_ptr] == '?' or p[p_ptr] == s[s_ptr]):\n            s_ptr += 1\n            p_ptr += 1\n        elif p_ptr < len(p) and p[p_ptr] == '*':\n            star_idx = p_ptr\n            match_idx = s_ptr\n            p_ptr += 1\n        elif star_idx != -1:\n            p_ptr = star_idx + 1\n            match_idx += 1\n            s_ptr = match_idx\n        else:\n            return False\n    while p_ptr < len(p) and p[p_ptr] == '*':\n        p_ptr += 1\n    return p_ptr == len(p)\n",
+  "functionName": "isMatchWildcard",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "aa",
+        "a"
+      ],
+      "expected": false,
+      "inputDisplay": "args=['aa', 'a']",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "aa",
+        "*"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['aa', '*']",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "cb",
+        "?a"
+      ],
+      "expected": false,
+      "inputDisplay": "args=['cb', '?a']",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "adceb",
+        "*a*b"
+      ],
+      "expected": true,
+      "inputDisplay": "args=['adceb', '*a*b']",
+      "expectedDisplay": "True",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Two pointers with backtracking to the last seen '*' in O(n) average time."
+  ],
+  "python": {
+    "starterCode": "def isMatchWildcard(s: str, p: str) -> bool:\n    pass\n",
+    "solutionCode": "def isMatchWildcard(s: str, p: str) -> bool:\n    s_ptr, p_ptr = 0, 0\n    star_idx = -1\n    match_idx = 0\n    while s_ptr < len(s):\n        if p_ptr < len(p) and (p[p_ptr] == '?' or p[p_ptr] == s[s_ptr]):\n            s_ptr += 1\n            p_ptr += 1\n        elif p_ptr < len(p) and p[p_ptr] == '*':\n            star_idx = p_ptr\n            match_idx = s_ptr\n            p_ptr += 1\n        elif star_idx != -1:\n            p_ptr = star_idx + 1\n            match_idx += 1\n            s_ptr = match_idx\n        else:\n            return False\n    while p_ptr < len(p) and p[p_ptr] == '*':\n        p_ptr += 1\n    return p_ptr == len(p)\n"
+  },
+  "leetcodeId": 44,
+  "leetcodeTitle": "Wildcard Matching (* and ?)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-wildcard-matching/"
+}

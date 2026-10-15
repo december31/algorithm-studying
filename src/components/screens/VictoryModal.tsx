@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 import { Trophy, ArrowRight, Map, Sparkles } from 'lucide-react';
 
 export const VictoryModal: React.FC = () => {
-  const { currentProblem, currentFloor, advanceFloor, setScreen } = useGameStore();
+  const { currentProblem, currentFloor, advanceFloor, setScreen, isSolutionUsedForProblem } = useGameStore();
 
   useEffect(() => {
     // Launch celebratory confetti burst
@@ -44,9 +44,26 @@ export const VictoryModal: React.FC = () => {
           {isWingBoss ? 'WING CLEARED!' : 'FLOOR CONQUERED!'}
         </h1>
 
-        <p className="font-mono text-sm text-slate-300 mb-4">
-          You struck down <span className="text-rose-400 font-bold">{currentProblem.monster.name}</span> with flawless algorithmic logic!
-        </p>
+        {isSolutionUsedForProblem ? (
+          <div className="mb-4 space-y-2">
+            <p className="font-mono text-sm text-purple-300">
+              You banished <span className="text-rose-400 font-bold">{currentProblem.monster.name}</span> using the <span className="text-purple-400 font-bold">Forbidden Scroll (-25 HP)</span>!
+            </p>
+            <div className="bg-purple-950/60 border border-purple-500/40 rounded-xl p-3 text-xs font-mono text-purple-200 flex items-start gap-2 text-left">
+              <span className="text-base">📜</span>
+              <div className="space-y-0.5">
+                <div className="font-pixel text-[10px] text-purple-300 font-bold">HEALTH SACRIFICED FOR SOLUTION</div>
+                <div className="text-slate-300 text-[11px] leading-relaxed">
+                  This problem was <strong>not marked conquered</strong> and <strong>will be shown again</strong> in future dungeon runs so you can conquer it with your own logic!
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <p className="font-mono text-sm text-slate-300 mb-4">
+            You struck down <span className="text-rose-400 font-bold">{currentProblem.monster.name}</span> with flawless algorithmic logic!
+          </p>
+        )}
 
         {/* Monster defeat quote */}
         <div className="bg-dungeon-card p-3 rounded-xl border border-slate-800 text-xs font-mono mb-5 italic text-slate-400">
@@ -68,7 +85,12 @@ export const VictoryModal: React.FC = () => {
         {/* Next Floor / Map Actions */}
         <div className="flex flex-col sm:flex-row gap-3">
           <button
-            onClick={() => setScreen('map')}
+            onClick={async () => {
+              if (!isWingBoss) {
+                await advanceFloor();
+              }
+              setScreen('map');
+            }}
             className="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-pixel text-xs flex items-center justify-center gap-2 transition-colors border border-slate-700"
           >
             <Map className="w-4 h-4" />

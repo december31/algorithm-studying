@@ -1,0 +1,112 @@
+{
+  "id": "bsg-h-min-days-disconnect-island",
+  "wingId": "binary-search-greedy",
+  "floor": 496,
+  "title": "Minimum Days to Disconnect Island",
+  "difficulty": "hard",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-bsg-h-min-days-disconnect-island",
+    "name": "Severance Archon",
+    "title": "Isolator of Contiguous Archipelagos",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#ef4444",
+    "attackName": "Articulation Cleave",
+    "attackPower": 3,
+    "defeatQuote": "Island disconnected in at most 2 flips!"
+  },
+  "description": "Given an `m x n` binary grid `grid` where 1 represents land and 0 represents water. An island is a 4-directionally connected group of 1s. A grid is disconnected if it has 0 islands or more than 1 island. In one day you can change any land cell to water. Return the minimum number of days to disconnect the grid. (Note: answer is always 0, 1, or 2).",
+  "examples": [
+    {
+      "input": "grid = [[0,1,1,0],[0,1,1,0],[0,0,0,0]]",
+      "output": "2"
+    },
+    {
+      "input": "grid = [[1,1]]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 30"
+  ],
+  "starterCode": "def minDaysDisconnect(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minDaysDisconnect(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    def count_islands():\n        visited = set()\n        islands = 0\n        def dfs(r, c):\n            visited.add((r, c))\n            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n                nr, nc = r + dr, c + dc\n                if 0 <= nr < R and 0 <= nc < C and grid[nr][nc] == 1 and (nr, nc) not in visited:\n                    dfs(nr, nc)\n        for r in range(R):\n            for c in range(C):\n                if grid[r][c] == 1 and (r, c) not in visited:\n                    islands += 1\n                    dfs(r, c)\n        return islands\n    if count_islands() != 1: return 0\n    # Try removing 1 cell\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == 1:\n                grid[r][c] = 0\n                if count_islands() != 1:\n                    grid[r][c] = 1\n                    return 1\n                grid[r][c] = 1\n    return 2\n",
+  "functionName": "minDaysDisconnect",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[[0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[[1, 1]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[[1, 0], [0, 1]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Any island can be disconnected in at most 2 operations (removing corner neighbors). Test 0, 1, then default to 2."
+  ],
+  "python": {
+    "starterCode": "def minDaysDisconnect(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minDaysDisconnect(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    def count_islands():\n        visited = set()\n        islands = 0\n        def dfs(r, c):\n            visited.add((r, c))\n            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:\n                nr, nc = r + dr, c + dc\n                if 0 <= nr < R and 0 <= nc < C and grid[nr][nc] == 1 and (nr, nc) not in visited:\n                    dfs(nr, nc)\n        for r in range(R):\n            for c in range(C):\n                if grid[r][c] == 1 and (r, c) not in visited:\n                    islands += 1\n                    dfs(r, c)\n        return islands\n    if count_islands() != 1: return 0\n    # Try removing 1 cell\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == 1:\n                grid[r][c] = 0\n                if count_islands() != 1:\n                    grid[r][c] = 1\n                    return 1\n                grid[r][c] = 1\n    return 2\n"
+  },
+  "leetcodeId": 1568,
+  "leetcodeTitle": "Minimum Days to Disconnect Island",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-min-days-disconnect-island/"
+}

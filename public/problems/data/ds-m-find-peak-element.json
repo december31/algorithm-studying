@@ -1,0 +1,90 @@
+{
+  "id": "ds-m-find-peak-element",
+  "wingId": "data-structures",
+  "floor": 155,
+  "title": "Find Peak Element",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-find-peak-element",
+    "name": "Mountain Basilisk",
+    "title": "Dweller of Isolated Summits",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "slime",
+    "color": "#10b981",
+    "attackName": "Apex Venom",
+    "attackPower": 2,
+    "defeatQuote": "Binary search ascended directly to an apex peak in O(log n)!"
+  },
+  "description": "A peak element is an element that is strictly greater than its neighbors. Given a 0-indexed integer array `nums`, find a peak element, and return its index. You may imagine that `nums[-1] = nums[n] = -∞`.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,1]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [1,2,1,3,5,6,4]",
+      "output": "5"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 1000",
+    "-2^31 <= nums[i] <= 2^31 - 1"
+  ],
+  "starterCode": "def findPeakElement(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def findPeakElement(nums: list[int]) -> int:\n    left, right = 0, len(nums) - 1\n    while left < right:\n        mid = (left + right) // 2\n        if nums[mid] > nums[mid + 1]:\n            right = mid\n        else:\n            left = mid + 1\n    return left\n",
+  "functionName": "findPeakElement",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 2, 3, 1]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1, 2]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "If nums[mid] < nums[mid + 1], a peak must exist to the right."
+  ],
+  "python": {
+    "starterCode": "def findPeakElement(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def findPeakElement(nums: list[int]) -> int:\n    left, right = 0, len(nums) - 1\n    while left < right:\n        mid = (left + right) // 2\n        if nums[mid] > nums[mid + 1]:\n            right = mid\n        else:\n            left = mid + 1\n    return left\n"
+  },
+  "leetcodeId": 162,
+  "leetcodeTitle": "Find Peak Element",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-find-peak-element/"
+}

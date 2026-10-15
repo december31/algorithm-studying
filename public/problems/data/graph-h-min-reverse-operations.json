@@ -1,0 +1,93 @@
+{
+  "id": "graph-h-min-reverse-operations",
+  "wingId": "graphs",
+  "floor": 399,
+  "title": "Minimum Subarray Reverse Operations",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-graph-h-min-reverse-operations",
+    "name": "Parity Inversion Archon",
+    "title": "Shifter of Even and Odd Jump Bands",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "lich",
+    "color": "#8b5cf6",
+    "attackName": "Parity Jump",
+    "attackPower": 3,
+    "defeatQuote": "Shortest operations to shift the 1 to all target indices!"
+  },
+  "description": "You are given an integer `n` and an integer `p` in the range `[0, n - 1]`. Representing an array `arr` of size `n` with 1 at index `p` and 0 elsewhere. You can reverse any subarray of length `k` not containing indices in `banned`. Return an array `ans` where `ans[i]` is the minimum number of reverse operations needed to bring 1 to index `i`, or -1 if impossible.",
+  "examples": [
+    {
+      "input": "n = 4, p = 0, banned = [1,2], k = 4",
+      "output": "[0,-1,-1,1]"
+    },
+    {
+      "input": "n = 5, p = 0, banned = [2,4], k = 3",
+      "output": "[0,-1,-1,-1,-1]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 1000",
+    "0 <= p < n"
+  ],
+  "starterCode": "def minReverseOperations(n: int, p: int, banned: list[int], k: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def minReverseOperations(n: int, p: int, banned: list[int], k: int) -> list[int]:\n    from collections import deque\n    ans = [-1] * n\n    banned_set = set(banned)\n    # Unvisited available nodes split by parity\n    avail = {0: set(i for i in range(n) if i % 2 == 0 and i not in banned_set and i != p),\n             1: set(i for i in range(n) if i % 2 == 1 and i not in banned_set and i != p)}\n    q = deque([(p, 0)])\n    ans[p] = 0\n    while q:\n        curr, d = q.popleft()\n        # New positions after reversing subarray of length k covering curr\n        min_j = max(0, curr - k + 1)\n        max_j = min(n - k, curr)\n        # Target range of curr reversed: 2*j + k - 1 - curr\n        low = 2 * min_j + k - 1 - curr\n        high = 2 * max_j + k - 1 - curr\n        target_parity = (curr + k - 1) % 2\n        to_remove = []\n        for nxt in avail[target_parity]:\n            if low <= nxt <= high:\n                ans[nxt] = d + 1\n                q.append((nxt, d + 1))\n                to_remove.append(nxt)\n        for r in to_remove:\n            avail[target_parity].remove(r)\n    return ans\n",
+  "functionName": "minReverseOperations",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        0,
+        [
+          1,
+          2
+        ],
+        4
+      ],
+      "expected": [
+        0,
+        -1,
+        -1,
+        1
+      ],
+      "inputDisplay": "args=[4, 0, [1, 2], 4]",
+      "expectedDisplay": "[0, -1, -1, 1]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        5,
+        0,
+        [
+          2,
+          4
+        ],
+        3
+      ],
+      "expected": [
+        0,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "inputDisplay": "args=[5, 0, [2, 4], 3]",
+      "expectedDisplay": "[0, -1, -1, -1, -1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "The reversed index range has the same parity (curr + k - 1) % 2. Prune visited nodes with sets."
+  ],
+  "python": {
+    "starterCode": "def minReverseOperations(n: int, p: int, banned: list[int], k: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def minReverseOperations(n: int, p: int, banned: list[int], k: int) -> list[int]:\n    from collections import deque\n    ans = [-1] * n\n    banned_set = set(banned)\n    # Unvisited available nodes split by parity\n    avail = {0: set(i for i in range(n) if i % 2 == 0 and i not in banned_set and i != p),\n             1: set(i for i in range(n) if i % 2 == 1 and i not in banned_set and i != p)}\n    q = deque([(p, 0)])\n    ans[p] = 0\n    while q:\n        curr, d = q.popleft()\n        # New positions after reversing subarray of length k covering curr\n        min_j = max(0, curr - k + 1)\n        max_j = min(n - k, curr)\n        # Target range of curr reversed: 2*j + k - 1 - curr\n        low = 2 * min_j + k - 1 - curr\n        high = 2 * max_j + k - 1 - curr\n        target_parity = (curr + k - 1) % 2\n        to_remove = []\n        for nxt in avail[target_parity]:\n            if low <= nxt <= high:\n                ans[nxt] = d + 1\n                q.append((nxt, d + 1))\n                to_remove.append(nxt)\n        for r in to_remove:\n            avail[target_parity].remove(r)\n    return ans\n"
+  },
+  "leetcodeId": 2612,
+  "leetcodeTitle": "Minimum Subarray Reverse Operations",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-min-reverse-operations/"
+}

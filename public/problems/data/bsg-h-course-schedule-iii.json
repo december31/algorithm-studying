@@ -1,0 +1,110 @@
+{
+  "id": "bsg-h-course-schedule-iii",
+  "wingId": "binary-search-greedy",
+  "floor": 476,
+  "title": "Course Schedule III (Deadline Priority Queue)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-course-schedule-iii",
+    "name": "Academic Sovereign",
+    "title": "Arbiter of Strict Deadlines",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wizard",
+    "color": "#8b5cf6",
+    "attackName": "Deadline Enforcer",
+    "attackPower": 3,
+    "defeatQuote": "Maximum number of courses completed before individual deadlines!"
+  },
+  "description": "There are `n` different online courses numbered from 1 to `n`. You are given an array `courses` where `courses[i] = [durationi, lastDayi]`. You start on day 1. Return the maximum number of courses that you can take.",
+  "examples": [
+    {
+      "input": "courses = [[100,200],[200,1300],[1000,1250],[2000,3200]]",
+      "output": "3"
+    },
+    {
+      "input": "courses = [[1,2]]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= courses.length <= 10000"
+  ],
+  "starterCode": "def scheduleCourse(courses: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def scheduleCourse(courses: list[list[int]]) -> int:\n    import heapq\n    courses.sort(key=lambda x: x[1])\n    total_time = 0\n    max_heap = []\n    for dur, last_day in courses:\n        if total_time + dur <= last_day:\n            total_time += dur\n            heapq.heappush(max_heap, -dur)\n        elif max_heap and -max_heap[0] > dur:\n            total_time += dur + heapq.heappop(max_heap)\n            heapq.heappush(max_heap, -dur)\n    return len(max_heap)\n",
+  "functionName": "scheduleCourse",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            100,
+            200
+          ],
+          [
+            200,
+            1300
+          ],
+          [
+            1000,
+            1250
+          ],
+          [
+            2000,
+            3200
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[[100, 200], [200, 1300], [1000, 1250], [2000, 3200]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[1, 2]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            3
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[[3, 2], [4, 3]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort courses by deadline lastDay. If a course causes total_time > lastDay, swap it with the longest scheduled course if shorter."
+  ],
+  "python": {
+    "starterCode": "def scheduleCourse(courses: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def scheduleCourse(courses: list[list[int]]) -> int:\n    import heapq\n    courses.sort(key=lambda x: x[1])\n    total_time = 0\n    max_heap = []\n    for dur, last_day in courses:\n        if total_time + dur <= last_day:\n            total_time += dur\n            heapq.heappush(max_heap, -dur)\n        elif max_heap and -max_heap[0] > dur:\n            total_time += dur + heapq.heappop(max_heap)\n            heapq.heappush(max_heap, -dur)\n    return len(max_heap)\n"
+  },
+  "leetcodeId": 630,
+  "leetcodeTitle": "Course Schedule III (Deadline Priority Queue)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-course-schedule-iii/"
+}

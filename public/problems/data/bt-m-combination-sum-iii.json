@@ -1,0 +1,105 @@
+{
+  "id": "bt-m-combination-sum-iii",
+  "wingId": "backtracking",
+  "floor": 218,
+  "title": "Combination Sum III (K Numbers 1-9)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-combination-sum-iii",
+    "name": "Nine-Digit Sphinx",
+    "title": "Keeper of Single-Digit Constellations",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "beholder",
+    "color": "#8b5cf6",
+    "attackName": "Digit Glare",
+    "attackPower": 2,
+    "defeatQuote": "K distinct digits from 1 to 9 summed to n!"
+  },
+  "description": "Find all valid combinations of `k` numbers that sum up to `n` such that only numbers 1 through 9 are used, and each number is used at most once. Return a list of all possible valid combinations.",
+  "examples": [
+    {
+      "input": "k = 3, n = 7",
+      "output": "[[1,2,4]]"
+    },
+    {
+      "input": "k = 3, n = 9",
+      "output": "[[1,2,6],[1,3,5],[2,3,4]]"
+    }
+  ],
+  "constraints": [
+    "2 <= k <= 9",
+    "1 <= n <= 60"
+  ],
+  "starterCode": "def combinationSum3(k: int, n: int) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def combinationSum3(k: int, n: int) -> list[list[int]]:\n    res = []\n    def backtrack(start, rem, curr):\n        if len(curr) == k:\n            if rem == 0: res.append(list(curr))\n            return\n        for d in range(start, 10):\n            if d > rem: break\n            curr.append(d)\n            backtrack(d + 1, rem - d, curr)\n            curr.pop()\n    backtrack(1, n, [])\n    return res\n",
+  "functionName": "combinationSum3",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        7
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "inputDisplay": "args=[3, 7]",
+      "expectedDisplay": "[[1, 2, 4]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        9
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          3,
+          5
+        ],
+        [
+          2,
+          3,
+          4
+        ]
+      ],
+      "inputDisplay": "args=[3, 9]",
+      "expectedDisplay": "[[1, 2, 6], [1, 3, 5], [2, 3, 4]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        4,
+        1
+      ],
+      "expected": [],
+      "inputDisplay": "args=[4, 1]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Digits from 1 to 9. Enforce len(curr) == k and rem == 0."
+  ],
+  "python": {
+    "starterCode": "def combinationSum3(k: int, n: int) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def combinationSum3(k: int, n: int) -> list[list[int]]:\n    res = []\n    def backtrack(start, rem, curr):\n        if len(curr) == k:\n            if rem == 0: res.append(list(curr))\n            return\n        for d in range(start, 10):\n            if d > rem: break\n            curr.append(d)\n            backtrack(d + 1, rem - d, curr)\n            curr.pop()\n    backtrack(1, n, [])\n    return res\n"
+  },
+  "leetcodeId": 216,
+  "leetcodeTitle": "Combination Sum III (K Numbers 1-9)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-combination-sum-iii/"
+}

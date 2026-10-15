@@ -1,0 +1,152 @@
+{
+  "id": "bt-m-maximum-score-words",
+  "wingId": "backtracking",
+  "floor": 251,
+  "title": "Maximum Score Words Formed by Letters",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-maximum-score-words",
+    "name": "Scrabble Titan",
+    "title": "Maximized Word Score Calculator",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Score Slam",
+    "attackPower": 2,
+    "defeatQuote": "Letter inventory tracked and highest-scoring subset found!"
+  },
+  "description": "Given a list of `words`, list of single `letters` (might be repeating) and `score` of every character. Return the maximum score of any valid set of words formed by using the given letters (words[i] cannot be used multiple times).",
+  "examples": [
+    {
+      "input": "words = [\"dog\",\"cat\",\"dad\",\"good\"], letters = [\"a\",\"a\",\"c\",\"d\",\"d\",\"d\",\"g\",\"o\",\"o\"], score = [1,0,9,5,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0]",
+      "output": "23"
+    }
+  ],
+  "constraints": [
+    "1 <= len(words) <= 14",
+    "len(score) == 26"
+  ],
+  "starterCode": "def maxScoreWords(words: list[str], letters: list[str], score: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def maxScoreWords(words: list[str], letters: list[str], score: list[int]) -> int:\n    from collections import Counter\n    letter_counts = Counter(letters)\n    def word_val(w):\n        return sum(score[ord(ch) - 97] for ch in w)\n    def dfs(idx, counts):\n        if idx == len(words): return 0\n        # Skip word\n        res = dfs(idx + 1, counts)\n        # Try taking word\n        w = words[idx]\n        w_counts = Counter(w)\n        if all(counts[ch] >= w_counts[ch] for ch in w_counts):\n            new_counts = Counter(counts)\n            for ch in w_counts: new_counts[ch] -= w_counts[ch]\n            res = max(res, word_val(w) + dfs(idx + 1, new_counts))\n        return res\n    return dfs(0, letter_counts)\n",
+  "functionName": "maxScoreWords",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "dog",
+          "cat",
+          "dad",
+          "good"
+        ],
+        [
+          "a",
+          "a",
+          "c",
+          "d",
+          "d",
+          "d",
+          "g",
+          "o",
+          "o"
+        ],
+        [
+          1,
+          0,
+          9,
+          5,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 23,
+      "inputDisplay": "args=[['dog', 'cat', 'dad', 'good'], ['a', 'a', 'c', 'd', 'd', 'd', 'g', 'o', 'o",
+      "expectedDisplay": "23",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "xxxz",
+          "ax",
+          "bx",
+          "cx"
+        ],
+        [
+          "z",
+          "a",
+          "b",
+          "c",
+          "x",
+          "x",
+          "x"
+        ],
+        [
+          4,
+          4,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          0,
+          10
+        ]
+      ],
+      "expected": 27,
+      "inputDisplay": "args=[['xxxz', 'ax', 'bx', 'cx'], ['z', 'a', 'b', 'c', 'x', 'x', 'x'], [4, 4, 4,",
+      "expectedDisplay": "27",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Recursive branch: either skip words[idx] or take it if remaining letter counts allow."
+  ],
+  "python": {
+    "starterCode": "def maxScoreWords(words: list[str], letters: list[str], score: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def maxScoreWords(words: list[str], letters: list[str], score: list[int]) -> int:\n    from collections import Counter\n    letter_counts = Counter(letters)\n    def word_val(w):\n        return sum(score[ord(ch) - 97] for ch in w)\n    def dfs(idx, counts):\n        if idx == len(words): return 0\n        # Skip word\n        res = dfs(idx + 1, counts)\n        # Try taking word\n        w = words[idx]\n        w_counts = Counter(w)\n        if all(counts[ch] >= w_counts[ch] for ch in w_counts):\n            new_counts = Counter(counts)\n            for ch in w_counts: new_counts[ch] -= w_counts[ch]\n            res = max(res, word_val(w) + dfs(idx + 1, new_counts))\n        return res\n    return dfs(0, letter_counts)\n"
+  },
+  "leetcodeId": 1255,
+  "leetcodeTitle": "Maximum Score Words Formed by Letters",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-maximum-score-words/"
+}

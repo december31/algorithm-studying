@@ -1,0 +1,133 @@
+{
+  "id": "ds-m-group-anagrams",
+  "wingId": "data-structures",
+  "floor": 116,
+  "title": "Group Anagram Signatures",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-group-anagrams",
+    "name": "Permutation Gorgon",
+    "title": "Weaver of Shuffled Syllables",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "slime",
+    "color": "#f59e0b",
+    "attackName": "Scramble Stare",
+    "attackPower": 2,
+    "defeatQuote": "My scrambled letters were indexed by their canonical sorts!"
+  },
+  "description": "Given an array of strings `strs`, group the anagrams together. Return the groups sorted by group size, and lexicographically within each group.",
+  "examples": [
+    {
+      "input": "strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+      "output": "[[\"bat\"], [\"nat\", \"tan\"], [\"ate\", \"eat\", \"tea\"]]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(strs) <= 10^4",
+    "0 <= len(strs[i]) <= 100",
+    "strs[i] consists of lowercase English letters"
+  ],
+  "starterCode": "def groupAnagramsCanonical(strs: list[str]) -> list[list[str]]:\n    pass\n",
+  "solutionCode": "def groupAnagramsCanonical(strs: list[str]) -> list[list[str]]:\n    from collections import defaultdict\n    groups = defaultdict(list)\n    for s in strs:\n        key = ''.join(sorted(s))\n        groups[key].append(s)\n    res = [sorted(g) for g in groups.values()]\n    res.sort(key=lambda x: (len(x), x[0] if x else ''))\n    return res\n",
+  "functionName": "groupAnagramsCanonical",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "eat",
+          "tea",
+          "tan",
+          "ate",
+          "nat",
+          "bat"
+        ]
+      ],
+      "expected": [
+        [
+          "bat"
+        ],
+        [
+          "nat",
+          "tan"
+        ],
+        [
+          "ate",
+          "eat",
+          "tea"
+        ]
+      ],
+      "inputDisplay": "['eat', 'tea', 'tan', 'ate', 'nat', 'bat']",
+      "expectedDisplay": "[['bat'], ['nat', 'tan'], ['ate', 'eat', 'tea']]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          ""
+        ]
+      ],
+      "expected": [
+        [
+          ""
+        ]
+      ],
+      "inputDisplay": "['']",
+      "expectedDisplay": "[['']]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "a"
+        ]
+      ],
+      "expected": [
+        [
+          "a"
+        ]
+      ],
+      "inputDisplay": "['a']",
+      "expectedDisplay": "[['a']]",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          "ab",
+          "ba",
+          "abc",
+          "cba"
+        ]
+      ],
+      "expected": [
+        [
+          "ab",
+          "ba"
+        ],
+        [
+          "abc",
+          "cba"
+        ]
+      ],
+      "inputDisplay": "['ab', 'ba', 'abc', 'cba']",
+      "expectedDisplay": "[['ab', 'ba'], ['abc', 'cba']]",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use tuple of char counts or sorted string as dictionary key."
+  ],
+  "python": {
+    "starterCode": "def groupAnagramsCanonical(strs: list[str]) -> list[list[str]]:\n    pass\n",
+    "solutionCode": "def groupAnagramsCanonical(strs: list[str]) -> list[list[str]]:\n    from collections import defaultdict\n    groups = defaultdict(list)\n    for s in strs:\n        key = ''.join(sorted(s))\n        groups[key].append(s)\n    res = [sorted(g) for g in groups.values()]\n    res.sort(key=lambda x: (len(x), x[0] if x else ''))\n    return res\n"
+  },
+  "leetcodeId": 49,
+  "leetcodeTitle": "Group Anagram Signatures",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-group-anagrams/"
+}

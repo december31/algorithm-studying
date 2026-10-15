@@ -32,8 +32,8 @@
     "1 <= n <= 20",
     "1 <= k <= n"
   ],
-  "starterCode": "function combine(n, k) {\n  return [];\n}",
-  "solutionCode": "function combine(n, k) {\n  const result = [];\n  function backtrack(start, current) {\n    if (current.length === k) {\n      result.push([...current]);\n      return;\n    }\n    for (let i = start; i <= n; i++) {\n      current.push(i);\n      backtrack(i + 1, current);\n      current.pop();\n    }\n  }\n  backtrack(1, []);\n  return result;\n}",
+  "starterCode": "def combine(n, k):\n    return []\n",
+  "solutionCode": "def combine(n, k):\n    res = []\n    def backtrack(start, curr):\n        if len(curr) == k:\n            res.append(list(curr))\n            return\n        for i in range(start, n + 1):\n            curr.append(i)\n            backtrack(i + 1, curr)\n            curr.pop()\n    backtrack(1, [])\n    return res\n",
   "functionName": "combine",
   "testCases": [
     {

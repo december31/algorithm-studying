@@ -1,0 +1,94 @@
+{
+  "id": "graph-m-time-inform-employees",
+  "wingId": "graphs",
+  "floor": 335,
+  "title": "Time Needed to Inform All Employees",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-time-inform-employees",
+    "name": "Herald Fiend",
+    "title": "Relayer of Imperial Edicts",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#f97316",
+    "attackName": "Mandate Cascade",
+    "attackPower": 2,
+    "defeatQuote": "Maximum propagation time down hierarchy tree evaluated!"
+  },
+  "description": "A company has `n` employees with a unique ID for each employee from 0 to `n - 1`. The head of the company has is `headID`. Each employee `i` has a direct manager `manager[i]`. `manager[headID] = -1`. The head receives urgent news and needs to inform all employees. Employee `i` takes `informTime[i]` minutes to inform all direct subordinates. Return the number of minutes to inform all employees.",
+  "examples": [
+    {
+      "input": "n = 1, headID = 0, manager = [-1], informTime = [0]",
+      "output": "0"
+    },
+    {
+      "input": "n = 6, headID = 2, manager = [2,2,-1,2,2,2], informTime = [0,0,1,0,0,0]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 100000",
+    "0 <= informTime[i] <= 1000"
+  ],
+  "starterCode": "def numOfMinutes(n: int, headID: int, manager: list[int], informTime: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def numOfMinutes(n: int, headID: int, manager: list[int], informTime: list[int]) -> int:\n    from collections import defaultdict\n    tree = defaultdict(list)\n    for emp, mgr in enumerate(manager):\n        if mgr != -1:\n            tree[mgr].append(emp)\n    def dfs(u):\n        return informTime[u] + max([dfs(v) for v in tree[u]], default=0)\n    return dfs(headID)\n",
+  "functionName": "numOfMinutes",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        1,
+        0,
+        [
+          -1
+        ],
+        [
+          0
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[1, 0, [-1], [0]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        6,
+        2,
+        [
+          2,
+          2,
+          -1,
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[6, 2, [2, 2, -1, 2, 2, 2], [0, 0, 1, 0, 0, 0]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "DFS from headID taking the maximum sum of informTime along any root-to-leaf path."
+  ],
+  "python": {
+    "starterCode": "def numOfMinutes(n: int, headID: int, manager: list[int], informTime: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def numOfMinutes(n: int, headID: int, manager: list[int], informTime: list[int]) -> int:\n    from collections import defaultdict\n    tree = defaultdict(list)\n    for emp, mgr in enumerate(manager):\n        if mgr != -1:\n            tree[mgr].append(emp)\n    def dfs(u):\n        return informTime[u] + max([dfs(v) for v in tree[u]], default=0)\n    return dfs(headID)\n"
+  },
+  "leetcodeId": 1376,
+  "leetcodeTitle": "Time Needed to Inform All Employees",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-time-inform-employees/"
+}

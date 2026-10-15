@@ -1,0 +1,105 @@
+{
+  "id": "bsg-m-first-last-position-sorted",
+  "wingId": "binary-search-greedy",
+  "floor": 413,
+  "title": "First and Last Position in Sorted Array",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-first-last-position-sorted",
+    "name": "Range Drake",
+    "title": "Guardian of Target Spans",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#8b5cf6",
+    "attackName": "Span Blast",
+    "attackPower": 2,
+    "defeatQuote": "Starting and ending index range [first, last] discovered!"
+  },
+  "description": "Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value. If target is not found, return `[-1, -1]`. You must write an algorithm with `O(log n)` runtime complexity.",
+  "examples": [
+    {
+      "input": "nums = [5,7,7,8,8,10], target = 8",
+      "output": "[3,4]"
+    },
+    {
+      "input": "nums = [5,7,7,8,8,10], target = 6",
+      "output": "[-1,-1]"
+    }
+  ],
+  "constraints": [
+    "0 <= nums.length <= 100000"
+  ],
+  "starterCode": "def searchRange(nums: list[int], target: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def searchRange(nums: list[int], target: int) -> list[int]:\n    def find_bound(is_first):\n        lo, hi = 0, len(nums) - 1\n        bound = -1\n        while lo <= hi:\n            mid = (lo + hi) // 2\n            if nums[mid] == target:\n                bound = mid\n                if is_first: hi = mid - 1\n                else: lo = mid + 1\n            elif nums[mid] < target: lo = mid + 1\n            else: hi = mid - 1\n        return bound\n    return [find_bound(True), find_bound(False)]\n",
+  "functionName": "searchRange",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          5,
+          7,
+          7,
+          8,
+          8,
+          10
+        ],
+        8
+      ],
+      "expected": [
+        3,
+        4
+      ],
+      "inputDisplay": "args=[[5, 7, 7, 8, 8, 10], 8]",
+      "expectedDisplay": "[3, 4]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5,
+          7,
+          7,
+          8,
+          8,
+          10
+        ],
+        6
+      ],
+      "expected": [
+        -1,
+        -1
+      ],
+      "inputDisplay": "args=[[5, 7, 7, 8, 8, 10], 6]",
+      "expectedDisplay": "[-1, -1]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [],
+        0
+      ],
+      "expected": [
+        -1,
+        -1
+      ],
+      "inputDisplay": "args=[[], 0]",
+      "expectedDisplay": "[-1, -1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Run two separate binary searches: one biasing left (hi = mid - 1), one biasing right (lo = mid + 1)."
+  ],
+  "python": {
+    "starterCode": "def searchRange(nums: list[int], target: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def searchRange(nums: list[int], target: int) -> list[int]:\n    def find_bound(is_first):\n        lo, hi = 0, len(nums) - 1\n        bound = -1\n        while lo <= hi:\n            mid = (lo + hi) // 2\n            if nums[mid] == target:\n                bound = mid\n                if is_first: hi = mid - 1\n                else: lo = mid + 1\n            elif nums[mid] < target: lo = mid + 1\n            else: hi = mid - 1\n        return bound\n    return [find_bound(True), find_bound(False)]\n"
+  },
+  "leetcodeId": 34,
+  "leetcodeTitle": "First and Last Position in Sorted Array",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-first-last-position-sorted/"
+}

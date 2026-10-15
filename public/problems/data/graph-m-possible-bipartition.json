@@ -1,0 +1,98 @@
+{
+  "id": "graph-m-possible-bipartition",
+  "wingId": "graphs",
+  "floor": 345,
+  "title": "Possible Bipartition (Dislike Graph)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-possible-bipartition",
+    "name": "Faction Splitter",
+    "title": "Polarizer of Divided Clans",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "imp",
+    "color": "#f59e0b",
+    "attackName": "Discord Flare",
+    "attackPower": 2,
+    "defeatQuote": "Partitioning people into two non-conflicting groups verified!"
+  },
+  "description": "We want to split a group of `n` people (labeled from 1 to `n`) into two groups of any size. Each person may dislike some other people. Given `dislikes` where `dislikes[i] = [ai, bi]`, return `True` if it is possible to split everyone into two groups such that no two people that dislike each other are in the same group.",
+  "examples": [
+    {
+      "input": "n = 4, dislikes = [[1,2],[1,3],[2,4]]",
+      "output": "True"
+    },
+    {
+      "input": "n = 3, dislikes = [[1,2],[1,3],[2,3]]",
+      "output": "False"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 2000",
+    "0 <= dislikes.length <= 10000"
+  ],
+  "starterCode": "def possibleBipartition(n: int, dislikes: list[list[int]]) -> bool:\n    pass\n",
+  "solutionCode": "def possibleBipartition(n: int, dislikes: list[list[int]]) -> bool:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    for u, v in dislikes:\n        adj[u].append(v)\n        adj[v].append(u)\n    color = {}\n    for i in range(1, n + 1):\n        if i not in color:\n            color[i] = 0\n            q = deque([i])\n            while q:\n                u = q.popleft()\n                for v in adj[u]:\n                    if v not in color:\n                        color[v] = 1 - color[u]\n                        q.append(v)\n                    elif color[v] == color[u]:\n                        return False\n    return True\n",
+  "functionName": "possibleBipartition",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      ],
+      "expected": true,
+      "inputDisplay": "args=[4, [[1, 2], [1, 3], [2, 4]]]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": false,
+      "inputDisplay": "args=[3, [[1, 2], [1, 3], [2, 3]]]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Check if the dislike graph is bipartite (2-colorable)."
+  ],
+  "python": {
+    "starterCode": "def possibleBipartition(n: int, dislikes: list[list[int]]) -> bool:\n    pass\n",
+    "solutionCode": "def possibleBipartition(n: int, dislikes: list[list[int]]) -> bool:\n    from collections import defaultdict, deque\n    adj = defaultdict(list)\n    for u, v in dislikes:\n        adj[u].append(v)\n        adj[v].append(u)\n    color = {}\n    for i in range(1, n + 1):\n        if i not in color:\n            color[i] = 0\n            q = deque([i])\n            while q:\n                u = q.popleft()\n                for v in adj[u]:\n                    if v not in color:\n                        color[v] = 1 - color[u]\n                        q.append(v)\n                    elif color[v] == color[u]:\n                        return False\n    return True\n"
+  },
+  "leetcodeId": 886,
+  "leetcodeTitle": "Possible Bipartition (Dislike Graph)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-possible-bipartition/"
+}

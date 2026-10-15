@@ -33,8 +33,8 @@
     "0 <= edges.length <= 2 * 10^5",
     "0 <= source, destination < n"
   ],
-  "starterCode": "function validPath(n, edges, source, destination) {\n  return false;\n}",
-  "solutionCode": "function validPath(n, edges, source, destination) {\n  if (source === destination) return true;\n  const adj = Array.from({ length: n }, () => []);\n  for (const [u, v] of edges) {\n    adj[u].push(v);\n    adj[v].push(u);\n  }\n  const visited = new Set([source]);\n  const queue = [source];\n  while (queue.length > 0) {\n    const node = queue.shift();\n    if (node === destination) return true;\n    for (const neighbor of adj[node]) {\n      if (!visited.has(neighbor)) {\n        visited.add(neighbor);\n        queue.push(neighbor);\n      }\n    }\n  }\n  return false;\n}",
+  "starterCode": "def validPath(n, edges, source, destination):\n    return False\n",
+  "solutionCode": "from collections import deque\ndef validPath(n, edges, source, destination):\n    if source == destination:\n        return True\n    adj = [[] for _ in range(n)]\n    for u, v in edges:\n        adj[u].append(v)\n        adj[v].append(u)\n    visited = {source}\n    q = deque([source])\n    while q:\n        curr = q.popleft()\n        if curr == destination:\n            return True\n        for nxt in adj[curr]:\n            if nxt not in visited:\n                visited.add(nxt)\n                q.append(nxt)\n    return False\n",
   "functionName": "validPath",
   "testCases": [
     {

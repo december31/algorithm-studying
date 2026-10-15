@@ -33,8 +33,8 @@
     "2 <= candidates[i] <= 40",
     "1 <= target <= 40"
   ],
-  "starterCode": "function combinationSum(candidates, target) {\n  return [];\n}",
-  "solutionCode": "function combinationSum(candidates, target) {\n  const result = [];\n  candidates.sort((a, b) => a - b);\n  function backtrack(start, remain, current) {\n    if (remain === 0) {\n      result.push([...current]);\n      return;\n    }\n    for (let i = start; i < candidates.length; i++) {\n      if (candidates[i] > remain) break;\n      current.push(candidates[i]);\n      backtrack(i, remain - candidates[i], current);\n      current.pop();\n    }\n  }\n  backtrack(0, target, []);\n  return result;\n}",
+  "starterCode": "def combinationSum(candidates, target):\n    return []\n",
+  "solutionCode": "def combinationSum(candidates, target):\n    candidates.sort()\n    res = []\n    def backtrack(start, remain, curr):\n        if remain == 0:\n            res.append(list(curr))\n            return\n        for i in range(start, len(candidates)):\n            if candidates[i] > remain:\n                break\n            curr.append(candidates[i])\n            backtrack(i, remain - candidates[i], curr)\n            curr.pop()\n    backtrack(0, target, [])\n    return res\n",
   "functionName": "combinationSum",
   "testCases": [
     {

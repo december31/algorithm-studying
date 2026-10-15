@@ -1,0 +1,91 @@
+{
+  "id": "ds-m-zigzag-level-order",
+  "wingId": "data-structures",
+  "floor": 168,
+  "title": "Binary Tree Zigzag Level Order",
+  "difficulty": "medium",
+  "visualizerType": "tree",
+  "monster": {
+    "id": "mon-ds-m-zigzag-level-order",
+    "name": "Serpentine Drake",
+    "title": "Alternating Sweeper of Tree Tiers",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#10b981",
+    "attackName": "Alternating Blaze",
+    "attackPower": 2,
+    "defeatQuote": "Reversing alternate levels zigzagged smoothly!"
+  },
+  "description": "Given a binary tree as an array, return the zigzag level order traversal of its nodes' values (i.e., from left to right, then right to left for the next level and alternate between).",
+  "examples": [
+    {
+      "input": "tree = [3,9,20,None,None,15,7]",
+      "output": "[[3],[20,9],[15,7]]"
+    }
+  ],
+  "constraints": [
+    "0 <= len(tree) <= 2000"
+  ],
+  "starterCode": "def zigzagLevelOrder(tree: list) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def zigzagLevelOrder(tree: list) -> list[list[int]]:\n    if not tree or tree[0] is None: return []\n    from collections import deque\n    res = []\n    queue = deque([0])\n    reverse_level = False\n    while queue:\n        level = []\n        for _ in range(len(queue)):\n            idx = queue.popleft()\n            if idx < len(tree) and tree[idx] is not None:\n                level.append(tree[idx])\n                left, right = 2 * idx + 1, 2 * idx + 2\n                if left < len(tree) and tree[left] is not None: queue.append(left)\n                if right < len(tree) and tree[right] is not None: queue.append(right)\n        if level:\n            res.append(list(reversed(level)) if reverse_level else level)\n            reverse_level = not reverse_level\n    return res\n",
+  "functionName": "zigzagLevelOrder",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          9,
+          20,
+          null,
+          null,
+          15,
+          7
+        ]
+      ],
+      "expected": [
+        [
+          3
+        ],
+        [
+          20,
+          9
+        ],
+        [
+          15,
+          7
+        ]
+      ],
+      "inputDisplay": "[3, 9, 20, None, None, 15, 7]",
+      "expectedDisplay": "[[3], [20, 9], [15, 7]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ],
+      "inputDisplay": "[1]",
+      "expectedDisplay": "[[1]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Same as level order BFS, but reverse level array whenever depth is odd."
+  ],
+  "python": {
+    "starterCode": "def zigzagLevelOrder(tree: list) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def zigzagLevelOrder(tree: list) -> list[list[int]]:\n    if not tree or tree[0] is None: return []\n    from collections import deque\n    res = []\n    queue = deque([0])\n    reverse_level = False\n    while queue:\n        level = []\n        for _ in range(len(queue)):\n            idx = queue.popleft()\n            if idx < len(tree) and tree[idx] is not None:\n                level.append(tree[idx])\n                left, right = 2 * idx + 1, 2 * idx + 2\n                if left < len(tree) and tree[left] is not None: queue.append(left)\n                if right < len(tree) and tree[right] is not None: queue.append(right)\n        if level:\n            res.append(list(reversed(level)) if reverse_level else level)\n            reverse_level = not reverse_level\n    return res\n"
+  },
+  "leetcodeId": 103,
+  "leetcodeTitle": "Binary Tree Zigzag Level Order",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-zigzag-level-order/"
+}

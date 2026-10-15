@@ -1,0 +1,142 @@
+{
+  "id": "the-security-sectors-path-of-trials",
+  "wingId": "security-sectors-trial",
+  "floor": 5,
+  "title": "The Security Sectors & Path of Trials",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-security-overlord",
+    "name": "Malcor the Firewall Core",
+    "title": "Arch-Sentinel of the High Citadel",
+    "maxHp": 15,
+    "hp": 15,
+    "sprite": "dragon",
+    "color": "#f43f5e",
+    "attackName": "Firewall Purge Wave",
+    "attackPower": 3,
+    "defeatQuote": "The security sectors fall... the path to the digital realm is open!"
+  },
+  "description": "### Backstory\nThe final gateway of the Digital Realm blocks Alice and Bob's reunion. It requires Albert (their digital avatar) to traverse a massive network of cities while navigating dangerous roads and simultaneously hacking into $P$ independent security sectors to bypass the core firewall.\n\n### Problem Statement\nAlbert is exploring a kingdom consisting of $n$ cities and $m$ undirected roads. Each road has a danger weight $w$.\n\nThere are **$P$ independent security sectors** distributed across the cities (each city contains at most the access key for one sector, represented by an ID from $0$ to $P-1$, or -1 if none).\n\nWhen Albert visits a city containing a security sector key $id$, his traversal profile permanently records and activates that sector. (Visiting the same area multiple times or visiting multiple cities that contain the same key provides no additional benefit.)\n\n**Bob imposes a threshold rule:**\n* A road is considered **light** if its weight is $\\le \\text{threshold}$.\n* A road is considered **heavy** if its weight is $> \\text{threshold}$.\n* Albert is only allowed to use at most $k$ **heavy** roads during the entire trip from `source` to `target`.\n\n**The Goal:** Find the minimum possible threshold such that there exists at least one valid path from `source` to `target` using at most $k$ heavy roads, while ensuring that upon reaching the destination, the activated security sectors cover all requirements specified by a target mask (`required_sectors`).\n\nIf no such path exists for any threshold, return `-1`.",
+  "examples": [
+    {
+      "input": "n = 4, sector_keys = [0, -1, 1, -1], roads = [[0, 1, 5], [1, 3, 8], [0, 2, 4], [2, 3, 3]], source = 0, target = 3, k = 1, required_sectors = 3",
+      "output": "3",
+      "explanation": "Path 0 -> 2 -> 3 activates sector 0 (at city 0) and sector 1 (at city 2), satisfying required_sectors (binary 11 = 3). Road (2, 3) has weight 3 <= 3 (light), road (0, 2) has weight 4 > 3 (1 heavy road <= k). Minimum threshold is 3."
+    }
+  ],
+  "constraints": [
+    "1 <= n, m <= 5 * 10^4",
+    "1 <= P <= 10",
+    "0 <= source, target < n",
+    "0 <= k <= 15",
+    "0 <= required_sectors < 2^P",
+    "1 <= road weight w <= 10^9"
+  ],
+  "starterCode": "def minSecurityThreshold(n: int, sector_keys: list[int], roads: list[list[int]], source: int, target: int, k: int, required_sectors: int) -> int:\n    \"\"\"\n    Find the minimum threshold such that there exists a valid path from source to target\n    using at most k heavy roads (road weight > threshold), while collecting all required sectors.\n    Return -1 if impossible.\n    \"\"\"\n    pass\n",
+  "solutionCode": "def minSecurityThreshold(n: int, sector_keys: list[int], roads: list[list[int]], source: int, target: int, k: int, required_sectors: int) -> int:\n    from collections import deque\n    adj = [[] for _ in range(n)]\n    weights = [0]\n    for u, v, w in roads:\n        adj[u].append((v, w))\n        adj[v].append((u, w))\n        weights.append(w)\n    \n    weights = sorted(list(set(weights)))\n    \n    start_mask = 0\n    if sector_keys[source] != -1:\n        start_mask = 1 << sector_keys[source]\n\n    def can(threshold):\n        dist = {}\n        q = deque()\n        dist[(source, start_mask)] = 0\n        q.append((source, start_mask, 0))\n        \n        while q:\n            u, mask, d = q.popleft()\n            if d > dist.get((u, mask), float('inf')):\n                continue\n            if u == target and (mask & required_sectors) == required_sectors:\n                return True\n                \n            for v, w in adj[u]:\n                nxt_mask = mask\n                if sector_keys[v] != -1:\n                    nxt_mask |= (1 << sector_keys[v])\n                cost = 1 if w > threshold else 0\n                nxt_d = d + cost\n                if nxt_d <= k and nxt_d < dist.get((v, nxt_mask), float('inf')):\n                    dist[(v, nxt_mask)] = nxt_d\n                    if cost == 0:\n                        q.appendleft((v, nxt_mask, nxt_d))\n                    else:\n                        q.append((v, nxt_mask, nxt_d))\n        return False\n\n    lo = 0\n    hi = len(weights) - 1\n    ans = -1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if can(weights[mid]):\n            ans = weights[mid]\n            hi = mid - 1\n        else:\n            lo = mid + 1\n            \n    return ans\n",
+  "functionName": "minSecurityThreshold",
+  "hints": [
+    "Monotonicity: Notice that if threshold T is valid, any T' > T is also valid because fewer roads exceed the threshold. This enables Binary Search on the minimum threshold.",
+    "Bitmask State: Because P <= 10, the collected sectors can be tracked as an integer bitmask (0 to 1023).",
+    "0-1 BFS: For a fixed threshold, roads with weight <= threshold cost 0 heavy roads, and roads with weight > threshold cost 1. Use a deque with push_front for 0-cost transitions and push_back for 1-cost transitions."
+  ],
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [0, -1, 1, -1],
+        [[0, 1, 5], [1, 3, 8], [0, 2, 4], [2, 3, 3]],
+        0,
+        3,
+        1,
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "n=4, keys=[0,-1,1,-1], roads=4, src=0, dst=3, k=1, mask=3",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        3,
+        [-1, -1, -1],
+        [[0, 1, 10]],
+        0,
+        2,
+        5,
+        0
+      ],
+      "expected": -1,
+      "inputDisplay": "Disconnected graph (no path to dst=2)",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        2,
+        [0, 1],
+        [[0, 1, 10]],
+        0,
+        0,
+        0,
+        1
+      ],
+      "expected": 0,
+      "inputDisplay": "source == target, sector 0 already active",
+      "expectedDisplay": "0",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        3,
+        [-1, -1, -1],
+        [[0, 1, 10], [1, 2, 20]],
+        0,
+        2,
+        0,
+        0
+      ],
+      "expected": 20,
+      "inputDisplay": "k=0, must use all light roads (threshold=20)",
+      "expectedDisplay": "20",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        3,
+        [-1, -1, -1],
+        [[0, 1, 5], [1, 2, 5], [0, 2, 100]],
+        0,
+        2,
+        1,
+        0
+      ],
+      "expected": 0,
+      "inputDisplay": "Direct edge 0->2 has w=100 with k=1 heavy allowed",
+      "expectedDisplay": "0",
+      "isHidden": true
+    },
+    {
+      "id": 6,
+      "input": [
+        5,
+        [0, 1, 2, -1, -1],
+        [[0, 1, 10], [1, 2, 10], [2, 3, 10], [3, 4, 10], [0, 4, 50]],
+        0,
+        4,
+        0,
+        7
+      ],
+      "expected": 10,
+      "inputDisplay": "Path visiting sectors 0, 1, 2 (mask=7) with k=0",
+      "expectedDisplay": "10",
+      "isHidden": true
+    }
+  ]
+}

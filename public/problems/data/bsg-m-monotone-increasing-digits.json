@@ -1,0 +1,83 @@
+{
+  "id": "bsg-m-monotone-increasing-digits",
+  "wingId": "binary-search-greedy",
+  "floor": 461,
+  "title": "Monotone Increasing Digits",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-monotone-increasing-digits",
+    "name": "Ascendant Sphinx",
+    "title": "Pruner of Monotonic Decimals",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "sphinx",
+    "color": "#f59e0b",
+    "attackName": "Nines Cascade",
+    "attackPower": 2,
+    "defeatQuote": "Largest integer <= n with non-decreasing digits produced!"
+  },
+  "description": "An integer has monotone increasing digits if and only if each pair of adjacent digits `x` and `y` satisfy `x <= y`. Given an integer `n`, return the largest number that is less than or equal to `n` with monotone increasing digits.",
+  "examples": [
+    {
+      "input": "n = 10",
+      "output": "9"
+    },
+    {
+      "input": "n = 1234",
+      "output": "1234"
+    },
+    {
+      "input": "n = 332",
+      "output": "299"
+    }
+  ],
+  "constraints": [
+    "0 <= n <= 10^9"
+  ],
+  "starterCode": "def monotoneIncreasingDigits(n: int) -> int:\n    pass\n",
+  "solutionCode": "def monotoneIncreasingDigits(n: int) -> int:\n    digits = list(str(n))\n    mark = len(digits)\n    for i in range(len(digits) - 1, 0, -1):\n        if digits[i - 1] > digits[i]:\n            digits[i - 1] = str(int(digits[i - 1]) - 1)\n            mark = i\n    for i in range(mark, len(digits)):\n        digits[i] = '9'\n    return int(\"\".join(digits))\n",
+  "functionName": "monotoneIncreasingDigits",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        10
+      ],
+      "expected": 9,
+      "inputDisplay": "10",
+      "expectedDisplay": "9",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1234
+      ],
+      "expected": 1234,
+      "inputDisplay": "1234",
+      "expectedDisplay": "1234",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        332
+      ],
+      "expected": 299,
+      "inputDisplay": "332",
+      "expectedDisplay": "299",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Scan right to left: if digits[i-1] > digits[i], decrement digits[i-1] and fill subsequent digits with '9'."
+  ],
+  "python": {
+    "starterCode": "def monotoneIncreasingDigits(n: int) -> int:\n    pass\n",
+    "solutionCode": "def monotoneIncreasingDigits(n: int) -> int:\n    digits = list(str(n))\n    mark = len(digits)\n    for i in range(len(digits) - 1, 0, -1):\n        if digits[i - 1] > digits[i]:\n            digits[i - 1] = str(int(digits[i - 1]) - 1)\n            mark = i\n    for i in range(mark, len(digits)):\n        digits[i] = '9'\n    return int(\"\".join(digits))\n"
+  },
+  "leetcodeId": 738,
+  "leetcodeTitle": "Monotone Increasing Digits",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-monotone-increasing-digits/"
+}

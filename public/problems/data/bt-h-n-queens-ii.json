@@ -1,0 +1,79 @@
+{
+  "id": "bt-h-n-queens-ii",
+  "wingId": "backtracking",
+  "floor": 272,
+  "title": "N-Queens II (Solution Count)",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-n-queens-ii",
+    "name": "Matriarch Spectre",
+    "title": "Counter of Peaceful Sovereign Formations",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Sovereign Ray",
+    "attackPower": 3,
+    "defeatQuote": "The total count of valid N-Queens states was calculated!"
+  },
+  "description": "The n-queens puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other. Given an integer `n`, return the number of distinct solutions to the n-queens puzzle.",
+  "examples": [
+    {
+      "input": "n = 4",
+      "output": "2"
+    },
+    {
+      "input": "n = 1",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 9"
+  ],
+  "starterCode": "def totalNQueens(n: int) -> int:\n    pass\n",
+  "solutionCode": "def totalNQueens(n: int) -> int:\n    count = 0\n    cols = set()\n    diag1 = set()\n    diag2 = set()\n    def backtrack(r):\n        nonlocal count\n        if r == n:\n            count += 1\n            return\n        for c in range(n):\n            if c not in cols and (r - c) not in diag1 and (r + c) not in diag2:\n                cols.add(c)\n                diag1.add(r - c)\n                diag2.add(r + c)\n                backtrack(r + 1)\n                cols.remove(c)\n                diag1.remove(r - c)\n                diag2.remove(r + c)\n    backtrack(0)\n    return count\n",
+  "functionName": "totalNQueens",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4
+      ],
+      "expected": 2,
+      "inputDisplay": "4",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "1",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        5
+      ],
+      "expected": 10,
+      "inputDisplay": "5",
+      "expectedDisplay": "10",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Exact same backtracking logic as N-Queens I, but incrementing count on terminal condition."
+  ],
+  "python": {
+    "starterCode": "def totalNQueens(n: int) -> int:\n    pass\n",
+    "solutionCode": "def totalNQueens(n: int) -> int:\n    count = 0\n    cols = set()\n    diag1 = set()\n    diag2 = set()\n    def backtrack(r):\n        nonlocal count\n        if r == n:\n            count += 1\n            return\n        for c in range(n):\n            if c not in cols and (r - c) not in diag1 and (r + c) not in diag2:\n                cols.add(c)\n                diag1.add(r - c)\n                diag2.add(r + c)\n                backtrack(r + 1)\n                cols.remove(c)\n                diag1.remove(r - c)\n                diag2.remove(r + c)\n    backtrack(0)\n    return count\n"
+  },
+  "leetcodeId": 52,
+  "leetcodeTitle": "N-Queens II (Solution Count)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-n-queens-ii/"
+}

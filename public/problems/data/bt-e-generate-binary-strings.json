@@ -1,0 +1,96 @@
+{
+  "id": "bt-e-generate-binary-strings",
+  "wingId": "backtracking",
+  "floor": 204,
+  "title": "Binary String Permutations",
+  "difficulty": "easy",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "mon-bt-e-generate-binary-strings",
+    "name": "Binary Golem",
+    "title": "Mason of Fixed-Length Words",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "golem",
+    "color": "#64748b",
+    "attackName": "Bit Compression",
+    "attackPower": 1,
+    "defeatQuote": "All 2^n binary permutations were generated in order!"
+  },
+  "description": "Given an integer `n`, return all binary strings of length `n` in lexicographical order.",
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "[\"00\",\"01\",\"10\",\"11\"]"
+    },
+    {
+      "input": "n = 1",
+      "output": "[\"0\",\"1\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 8"
+  ],
+  "starterCode": "def generateBinaryStrings(n: int) -> list[str]:\n    pass\n",
+  "solutionCode": "def generateBinaryStrings(n: int) -> list[str]:\n    res = []\n    def dfs(path):\n        if len(path) == n:\n            res.append(path)\n            return\n        dfs(path + '0')\n        dfs(path + '1')\n    dfs('')\n    return res\n",
+  "functionName": "generateBinaryStrings",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2
+      ],
+      "expected": [
+        "00",
+        "01",
+        "10",
+        "11"
+      ],
+      "inputDisplay": "2",
+      "expectedDisplay": "['00', '01', '10', '11']",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1
+      ],
+      "expected": [
+        "0",
+        "1"
+      ],
+      "inputDisplay": "1",
+      "expectedDisplay": "['0', '1']",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        3
+      ],
+      "expected": [
+        "000",
+        "001",
+        "010",
+        "011",
+        "100",
+        "101",
+        "110",
+        "111"
+      ],
+      "inputDisplay": "3",
+      "expectedDisplay": "['000', '001', '010', '011', '100', '101', '110', '111']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Recursively append '0' then '1' until the path reaches length n."
+  ],
+  "python": {
+    "starterCode": "def generateBinaryStrings(n: int) -> list[str]:\n    pass\n",
+    "solutionCode": "def generateBinaryStrings(n: int) -> list[str]:\n    res = []\n    def dfs(path):\n        if len(path) == n:\n            res.append(path)\n            return\n        dfs(path + '0')\n        dfs(path + '1')\n    dfs('')\n    return res\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Binary String Permutations",
+  "leetcodeUrl": null
+}

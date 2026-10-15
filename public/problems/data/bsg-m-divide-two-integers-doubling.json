@@ -1,0 +1,72 @@
+{
+  "id": "bsg-m-divide-two-integers-doubling",
+  "wingId": "binary-search-greedy",
+  "floor": 439,
+  "title": "Divide Two Integers (Bit Shift Doubling)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-divide-two-integers-doubling",
+    "name": "Quotient Colossus",
+    "title": "Subtractor of Exponential Powers",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Bit Shift Quake",
+    "attackPower": 2,
+    "defeatQuote": "Integer quotient computed without multiplication, division, or modulo!"
+  },
+  "description": "Given two integers `dividend` and `divisor`, divide two integers without using multiplication, division, and mod operator. Return the quotient after dividing dividend by divisor. Clamp within `[-2^31, 2^31 - 1]`.",
+  "examples": [
+    {
+      "input": "dividend = 10, divisor = 3",
+      "output": "3"
+    },
+    {
+      "input": "dividend = 7, divisor = -3",
+      "output": "-2"
+    }
+  ],
+  "constraints": [
+    "-2^31 <= dividend, divisor <= 2^31 - 1",
+    "divisor != 0"
+  ],
+  "starterCode": "def divide(dividend: int, divisor: int) -> int:\n    pass\n",
+  "solutionCode": "def divide(dividend: int, divisor: int) -> int:\n    if dividend == -2**31 and divisor == -1: return 2**31 - 1\n    sign = 1 if (dividend > 0) == (divisor > 0) else -1\n    a, b = abs(dividend), abs(divisor)\n    ans = 0\n    while a >= b:\n        temp, multiple = b, 1\n        while a >= (temp << 1):\n            temp <<= 1\n            multiple <<= 1\n        a -= temp\n        ans += multiple\n    return sign * ans\n",
+  "functionName": "divide",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        10,
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[10, 3]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        7,
+        -3
+      ],
+      "expected": -2,
+      "inputDisplay": "args=[7, -3]",
+      "expectedDisplay": "-2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Repeatedly double the divisor using bit shifts until it exceeds dividend, then subtract."
+  ],
+  "python": {
+    "starterCode": "def divide(dividend: int, divisor: int) -> int:\n    pass\n",
+    "solutionCode": "def divide(dividend: int, divisor: int) -> int:\n    if dividend == -2**31 and divisor == -1: return 2**31 - 1\n    sign = 1 if (dividend > 0) == (divisor > 0) else -1\n    a, b = abs(dividend), abs(divisor)\n    ans = 0\n    while a >= b:\n        temp, multiple = b, 1\n        while a >= (temp << 1):\n            temp <<= 1\n            multiple <<= 1\n        a -= temp\n        ans += multiple\n    return sign * ans\n"
+  },
+  "leetcodeId": 29,
+  "leetcodeTitle": "Divide Two Integers (Bit Shift Doubling)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-divide-two-integers-doubling/"
+}

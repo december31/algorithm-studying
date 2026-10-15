@@ -1,0 +1,94 @@
+{
+  "id": "ds-m-decode-string",
+  "wingId": "data-structures",
+  "floor": 121,
+  "title": "Decode String",
+  "difficulty": "medium",
+  "visualizerType": "stack",
+  "monster": {
+    "id": "mon-ds-m-decode-string",
+    "name": "Cipher Banshee",
+    "title": "Shrieker of Compressed Runs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Frequency Wail",
+    "attackPower": 2,
+    "defeatQuote": "My nested brackets have unfolded completely!"
+  },
+  "description": "Given an encoded string `s`, return its decoded string. The encoding rule is: `k[encoded_string]`, where the `encoded_string` inside the square brackets is being repeated exactly `k` times.",
+  "examples": [
+    {
+      "input": "s = \"3[a]2[bc]\"",
+      "output": "\"aaabcbc\""
+    },
+    {
+      "input": "s = \"3[a2[c]]\"",
+      "output": "\"accaccacc\""
+    },
+    {
+      "input": "s = \"2[abc]3[cd]ef\"",
+      "output": "\"abcabccdcdcdef\""
+    }
+  ],
+  "constraints": [
+    "1 <= len(s) <= 30",
+    "s consists of lowercase English letters, digits, and square brackets"
+  ],
+  "starterCode": "def decodeString(s: str) -> str:\n    pass\n",
+  "solutionCode": "def decodeString(s: str) -> str:\n    stack = []\n    curr_str = ''\n    curr_num = 0\n    for ch in s:\n        if ch.isdigit():\n            curr_num = curr_num * 10 + int(ch)\n        elif ch == '[':\n            stack.append((curr_str, curr_num))\n            curr_str = ''\n            curr_num = 0\n        elif ch == ']':\n            prev_str, repeat = stack.pop()\n            curr_str = prev_str + curr_str * repeat\n        else:\n            curr_str += ch\n    return curr_str\n",
+  "functionName": "decodeString",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "3[a]2[bc]"
+      ],
+      "expected": "aaabcbc",
+      "inputDisplay": "3[a]2[bc]",
+      "expectedDisplay": "aaabcbc",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "3[a2[c]]"
+      ],
+      "expected": "accaccacc",
+      "inputDisplay": "3[a2[c]]",
+      "expectedDisplay": "accaccacc",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "2[abc]3[cd]ef"
+      ],
+      "expected": "abcabccdcdcdef",
+      "inputDisplay": "2[abc]3[cd]ef",
+      "expectedDisplay": "abcabccdcdcdef",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        "abc"
+      ],
+      "expected": "abc",
+      "inputDisplay": "abc",
+      "expectedDisplay": "abc",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use a stack to remember previous string states and multipliers when entering brackets."
+  ],
+  "python": {
+    "starterCode": "def decodeString(s: str) -> str:\n    pass\n",
+    "solutionCode": "def decodeString(s: str) -> str:\n    stack = []\n    curr_str = ''\n    curr_num = 0\n    for ch in s:\n        if ch.isdigit():\n            curr_num = curr_num * 10 + int(ch)\n        elif ch == '[':\n            stack.append((curr_str, curr_num))\n            curr_str = ''\n            curr_num = 0\n        elif ch == ']':\n            prev_str, repeat = stack.pop()\n            curr_str = prev_str + curr_str * repeat\n        else:\n            curr_str += ch\n    return curr_str\n"
+  },
+  "leetcodeId": 394,
+  "leetcodeTitle": "Decode String",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-decode-string/"
+}

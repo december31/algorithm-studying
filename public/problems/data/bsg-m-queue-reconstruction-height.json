@@ -1,0 +1,105 @@
+{
+  "id": "bsg-m-queue-reconstruction-height",
+  "wingId": "binary-search-greedy",
+  "floor": 427,
+  "title": "Queue Reconstruction by Height",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-queue-reconstruction-height",
+    "name": "Stature Archon",
+    "title": "Sorter of Tallness and Precedence",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#8b5cf6",
+    "attackName": "Height Alignment",
+    "attackPower": 2,
+    "defeatQuote": "Queue reconstructed satisfying exact [h, k] visibility criteria!"
+  },
+  "description": "You are given an array of people `people` where `people[i] = [hi, ki]` represents the `i`-th person of height `hi` with exactly `ki` other people in front who have height greater than or equal to `hi`. Reconstruct and return the queue that is represented by the input array `people`.",
+  "examples": [
+    {
+      "input": "people = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]",
+      "output": "[[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]]"
+    }
+  ],
+  "constraints": [
+    "1 <= people.length <= 2000"
+  ],
+  "starterCode": "def reconstructQueue(people: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def reconstructQueue(people: list[list[int]]) -> list[list[int]]:\n    # Sort descending by height, ascending by k\n    people.sort(key=lambda x: (-x[0], x[1]))\n    res = []\n    for p in people:\n        res.insert(p[1], p)\n    return res\n",
+  "functionName": "reconstructQueue",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            7,
+            0
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            5,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          5,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "inputDisplay": "[[7, 0], [4, 4], [7, 1], [5, 0], [6, 1], [5, 2]]",
+      "expectedDisplay": "[[5, 0], [7, 0], [5, 2], [6, 1], [4, 4], [7, 1]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort tallest first. Shorter people inserted at index k do not disrupt taller peoples' k-counts."
+  ],
+  "python": {
+    "starterCode": "def reconstructQueue(people: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def reconstructQueue(people: list[list[int]]) -> list[list[int]]:\n    # Sort descending by height, ascending by k\n    people.sort(key=lambda x: (-x[0], x[1]))\n    res = []\n    for p in people:\n        res.insert(p[1], p)\n    return res\n"
+  },
+  "leetcodeId": 406,
+  "leetcodeTitle": "Queue Reconstruction by Height",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-queue-reconstruction-height/"
+}

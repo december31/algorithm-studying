@@ -1,0 +1,78 @@
+{
+  "id": "bsg-m-candy-distribution",
+  "wingId": "binary-search-greedy",
+  "floor": 469,
+  "title": "Candy Distribution (Two-Pass Greedy)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-candy-distribution",
+    "name": "Confection Arbiter",
+    "title": "Weigher of Relative Merit",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#ef4444",
+    "attackName": "Sweet Mandate",
+    "attackPower": 2,
+    "defeatQuote": "Minimum candies distributed satisfying neighbor rating differentials!"
+  },
+  "description": "There are `n` children standing in a line, each assigned a rating. Each child must have at least one candy. Children with a higher rating get more candies than their neighbors. Return the minimum number of candies you need to distribute.",
+  "examples": [
+    {
+      "input": "ratings = [1,0,2]",
+      "output": "5"
+    },
+    {
+      "input": "ratings = [1,2,2]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "n == ratings.length",
+    "1 <= n <= 20000"
+  ],
+  "starterCode": "def candy(ratings: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def candy(ratings: list[int]) -> int:\n    n = len(ratings)\n    candies = [1] * n\n    for i in range(1, n):\n        if ratings[i] > ratings[i - 1]:\n            candies[i] = candies[i - 1] + 1\n    for i in range(n - 2, -1, -1):\n        if ratings[i] > ratings[i + 1]:\n            candies[i] = max(candies[i], candies[i + 1] + 1)\n    return sum(candies)\n",
+  "functionName": "candy",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[1, 0, 2]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[1, 2, 2]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Two passes: left-to-right to enforce rightward increases, right-to-left to enforce leftward increases."
+  ],
+  "python": {
+    "starterCode": "def candy(ratings: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def candy(ratings: list[int]) -> int:\n    n = len(ratings)\n    candies = [1] * n\n    for i in range(1, n):\n        if ratings[i] > ratings[i - 1]:\n            candies[i] = candies[i - 1] + 1\n    for i in range(n - 2, -1, -1):\n        if ratings[i] > ratings[i + 1]:\n            candies[i] = max(candies[i], candies[i + 1] + 1)\n    return sum(candies)\n"
+  },
+  "leetcodeId": 135,
+  "leetcodeTitle": "Candy Distribution (Two-Pass Greedy)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-candy-distribution/"
+}

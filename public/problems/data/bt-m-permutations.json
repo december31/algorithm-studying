@@ -1,0 +1,112 @@
+{
+  "id": "bt-m-permutations",
+  "wingId": "backtracking",
+  "floor": 213,
+  "title": "Permutations (All Distinct)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-permutations",
+    "name": "Permuto Behemoth",
+    "title": "Lord of the Factorial Matrix",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Factorial Stomp",
+    "attackPower": 2,
+    "defeatQuote": "All N! full permutations verified in order!"
+  },
+  "description": "Given an array `nums` of distinct integers, return all the possible permutations sorted lexicographically.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3]",
+      "output": "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 6"
+  ],
+  "starterCode": "def permute(nums: list[int]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def permute(nums: list[int]) -> list[list[int]]:\n    res = []\n    used = [False] * len(nums)\n    def backtrack(curr):\n        if len(curr) == len(nums):\n            res.append(list(curr))\n            return\n        for i in range(len(nums)):\n            if not used[i]:\n                used[i] = True\n                curr.append(nums[i])\n                backtrack(curr)\n                curr.pop()\n                used[i] = False\n    backtrack([])\n    return sorted(res)\n",
+  "functionName": "permute",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "inputDisplay": "[1, 2, 3]",
+      "expectedDisplay": "[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "inputDisplay": "[0, 1]",
+      "expectedDisplay": "[[0, 1], [1, 0]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Track elements placed with a used boolean array."
+  ],
+  "python": {
+    "starterCode": "def permute(nums: list[int]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def permute(nums: list[int]) -> list[list[int]]:\n    res = []\n    used = [False] * len(nums)\n    def backtrack(curr):\n        if len(curr) == len(nums):\n            res.append(list(curr))\n            return\n        for i in range(len(nums)):\n            if not used[i]:\n                used[i] = True\n                curr.append(nums[i])\n                backtrack(curr)\n                curr.pop()\n                used[i] = False\n    backtrack([])\n    return sorted(res)\n"
+  },
+  "leetcodeId": 46,
+  "leetcodeTitle": "Permutations (All Distinct)",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-permutations/"
+}

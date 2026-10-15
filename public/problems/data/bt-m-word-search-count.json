@@ -1,0 +1,106 @@
+{
+  "id": "bt-m-word-search-count",
+  "wingId": "backtracking",
+  "floor": 264,
+  "title": "Count Word Paths in Grid",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-m-word-search-count",
+    "name": "Grid Hound",
+    "title": "Sniffer of Multiple Word Paths",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#ef4444",
+    "attackName": "Multi-Scent Claw",
+    "attackPower": 2,
+    "defeatQuote": "All distinct paths constructing the word counted!"
+  },
+  "description": "Given an `m x n` grid of characters `board` and a string `word`, return the total number of distinct non-intersecting grid paths that spell `word`.",
+  "examples": [
+    {
+      "input": "board = [[\"A\",\"B\"],[\"B\",\"A\"]], word = \"AB\"",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= len(board), len(board[0]) <= 5",
+    "1 <= len(word) <= 6"
+  ],
+  "starterCode": "def countWordGrid(board: list[list[str]], word: str) -> int:\n    pass\n",
+  "solutionCode": "def countWordGrid(board: list[list[str]], word: str) -> int:\n    m, n = len(board), len(board[0])\n    def dfs(r, c, idx):\n        if r < 0 or r >= m or c < 0 or c >= n or board[r][c] != word[idx]: return 0\n        if idx == len(word) - 1: return 1\n        temp = board[r][c]\n        board[r][c] = '#'\n        total = dfs(r+1, c, idx+1) + dfs(r-1, c, idx+1) + dfs(r, c+1, idx+1) + dfs(r, c-1, idx+1)\n        board[r][c] = temp\n        return total\n    ans = 0\n    for i in range(m):\n        for j in range(n):\n            ans += dfs(i, j, 0)\n    return ans\n",
+  "functionName": "countWordGrid",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "A"
+          ]
+        ],
+        "AB"
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[[['A', 'B'], ['B', 'A']], 'AB']",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        "AA"
+      ],
+      "expected": 8,
+      "inputDisplay": "args=[[['A', 'A'], ['A', 'A']], 'AA']",
+      "expectedDisplay": "8",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "C",
+            "D"
+          ]
+        ],
+        "ACD"
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[['A', 'B'], ['C', 'D']], 'ACD']",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sum returns of dfs in 4 directions instead of early return on True."
+  ],
+  "python": {
+    "starterCode": "def countWordGrid(board: list[list[str]], word: str) -> int:\n    pass\n",
+    "solutionCode": "def countWordGrid(board: list[list[str]], word: str) -> int:\n    m, n = len(board), len(board[0])\n    def dfs(r, c, idx):\n        if r < 0 or r >= m or c < 0 or c >= n or board[r][c] != word[idx]: return 0\n        if idx == len(word) - 1: return 1\n        temp = board[r][c]\n        board[r][c] = '#'\n        total = dfs(r+1, c, idx+1) + dfs(r-1, c, idx+1) + dfs(r, c+1, idx+1) + dfs(r, c-1, idx+1)\n        board[r][c] = temp\n        return total\n    ans = 0\n    for i in range(m):\n        for j in range(n):\n            ans += dfs(i, j, 0)\n    return ans\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Count Word Paths in Grid",
+  "leetcodeUrl": null
+}

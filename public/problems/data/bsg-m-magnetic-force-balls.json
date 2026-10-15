@@ -1,0 +1,86 @@
+{
+  "id": "bsg-m-magnetic-force-balls",
+  "wingId": "binary-search-greedy",
+  "floor": 420,
+  "title": "Magnetic Force Between Two Balls (Max-Min Distance)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-magnetic-force-balls",
+    "name": "Repulsion Core",
+    "title": "Maximizer of Minimum Spacings",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "spectre",
+    "color": "#06b6d4",
+    "attackName": "Magnetic Repulsion",
+    "attackPower": 2,
+    "defeatQuote": "Maximum possible minimum distance among m placed balls determined!"
+  },
+  "description": "In the universe, there are `n` baskets positioned at `position`. You have `m` balls and need to distribute them into the baskets such that the minimum magnetic force between any two balls is maximized. Return the maximum possible minimum magnetic force.",
+  "examples": [
+    {
+      "input": "position = [1,2,3,4,7], m = 3",
+      "output": "3"
+    },
+    {
+      "input": "position = [5,4,3,2,1,1000000000], m = 2",
+      "output": "999999999"
+    }
+  ],
+  "constraints": [
+    "n == position.length",
+    "2 <= n <= 100000",
+    "2 <= m <= n"
+  ],
+  "starterCode": "def maxDistance(position: list[int], m: int) -> int:\n    pass\n",
+  "solutionCode": "def maxDistance(position: list[int], m: int) -> int:\n    position.sort()\n    lo, hi = 1, position[-1] - position[0]\n    ans = 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        count = 1\n        last = position[0]\n        for p in position[1:]:\n            if p - last >= mid:\n                count += 1\n                last = p\n        if count >= m:\n            ans = mid\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return ans\n",
+  "functionName": "maxDistance",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          7
+        ],
+        3
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[1, 2, 3, 4, 7], 3]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          5,
+          4,
+          3,
+          2,
+          1,
+          1000000000
+        ],
+        2
+      ],
+      "expected": 999999999,
+      "inputDisplay": "args=[[5, 4, 3, 2, 1, 1000000000], 2]",
+      "expectedDisplay": "999999999",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort positions. Binary search the answer distance gap, greedily placing balls."
+  ],
+  "python": {
+    "starterCode": "def maxDistance(position: list[int], m: int) -> int:\n    pass\n",
+    "solutionCode": "def maxDistance(position: list[int], m: int) -> int:\n    position.sort()\n    lo, hi = 1, position[-1] - position[0]\n    ans = 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        count = 1\n        last = position[0]\n        for p in position[1:]:\n            if p - last >= mid:\n                count += 1\n                last = p\n        if count >= m:\n            ans = mid\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return ans\n"
+  },
+  "leetcodeId": 1552,
+  "leetcodeTitle": "Magnetic Force Between Two Balls (Max-Min Distance)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-magnetic-force-balls/"
+}

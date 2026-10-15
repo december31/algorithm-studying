@@ -1,0 +1,95 @@
+{
+  "id": "bt-m-max-length-unique-concat",
+  "wingId": "backtracking",
+  "floor": 232,
+  "title": "Max Length String with Unique Chars",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-max-length-unique-concat",
+    "name": "Alphabet Hydra",
+    "title": "Devourer of Disjoint Alphabets",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "hydra",
+    "color": "#10b981",
+    "attackName": "Disjoint Snap",
+    "attackPower": 2,
+    "defeatQuote": "Subsequence concatenation maintained 100% unique characters!"
+  },
+  "description": "You are given an array of strings `arr`. A string `s` is formed by the concatenation of a subsequence of `arr` that has unique characters. Return the maximum possible length of `s`.",
+  "examples": [
+    {
+      "input": "arr = [\"un\",\"iq\",\"ue\"]",
+      "output": "4"
+    },
+    {
+      "input": "arr = [\"cha\",\"r\",\"act\",\"ers\"]",
+      "output": "6"
+    },
+    {
+      "input": "arr = [\"abcdefghijklmnopqrstuvwxyz\"]",
+      "output": "26"
+    }
+  ],
+  "constraints": [
+    "1 <= len(arr) <= 16",
+    "1 <= len(arr[i]) <= 26"
+  ],
+  "starterCode": "def maxLengthUnique(arr: list[str]) -> int:\n    pass\n",
+  "solutionCode": "def maxLengthUnique(arr: list[str]) -> int:\n    valid = [s for s in arr if len(set(s)) == len(s)]\n    res = 0\n    def backtrack(idx, curr_set):\n        nonlocal res\n        res = max(res, len(curr_set))\n        for i in range(idx, len(valid)):\n            s_set = set(valid[i])\n            if not (curr_set & s_set):\n                backtrack(i + 1, curr_set | s_set)\n    backtrack(0, set())\n    return res\n",
+  "functionName": "maxLengthUnique",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "un",
+          "iq",
+          "ue"
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "['un', 'iq', 'ue']",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "cha",
+          "r",
+          "act",
+          "ers"
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "['cha', 'r', 'act', 'ers']",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          "abcdefghijklmnopqrstuvwxyz"
+        ]
+      ],
+      "expected": 26,
+      "inputDisplay": "['abcdefghijklmnopqrstuvwxyz']",
+      "expectedDisplay": "26",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Filter out strings with internal duplicates, then branch with set intersection."
+  ],
+  "python": {
+    "starterCode": "def maxLengthUnique(arr: list[str]) -> int:\n    pass\n",
+    "solutionCode": "def maxLengthUnique(arr: list[str]) -> int:\n    valid = [s for s in arr if len(set(s)) == len(s)]\n    res = 0\n    def backtrack(idx, curr_set):\n        nonlocal res\n        res = max(res, len(curr_set))\n        for i in range(idx, len(valid)):\n            s_set = set(valid[i])\n            if not (curr_set & s_set):\n                backtrack(i + 1, curr_set | s_set)\n    backtrack(0, set())\n    return res\n"
+  },
+  "leetcodeId": 1239,
+  "leetcodeTitle": "Max Length String with Unique Chars",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-max-length-unique-concat/"
+}

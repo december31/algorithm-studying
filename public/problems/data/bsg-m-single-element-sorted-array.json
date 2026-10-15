@@ -1,0 +1,87 @@
+{
+  "id": "bsg-m-single-element-sorted-array",
+  "wingId": "binary-search-greedy",
+  "floor": 435,
+  "title": "Single Element in a Sorted Array",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-single-element-sorted-array",
+    "name": "Solitary Drake",
+    "title": "Unpaired Entity in Duplicated Lands",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#38bdf8",
+    "attackName": "Singular Beam",
+    "attackPower": 2,
+    "defeatQuote": "Single unpaired element in sorted array found in O(log n)!"
+  },
+  "description": "You are given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once. Return the single element that appears only once in `O(log n)` time and `O(1)` space.",
+  "examples": [
+    {
+      "input": "nums = [1,1,2,3,3,4,4,8,8]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [3,3,7,7,10,11,11]",
+      "output": "10"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 100000"
+  ],
+  "starterCode": "def singleNonDuplicate(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def singleNonDuplicate(nums: list[int]) -> int:\n    lo, hi = 0, len(nums) - 1\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if mid % 2 == 1: mid -= 1\n        if nums[mid] == nums[mid + 1]:\n            lo = mid + 2\n        else:\n            hi = mid\n    return nums[lo]\n",
+  "functionName": "singleNonDuplicate",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          1,
+          2,
+          3,
+          3,
+          4,
+          4,
+          8,
+          8
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 1, 2, 3, 3, 4, 4, 8, 8]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          3,
+          3,
+          7,
+          7,
+          10,
+          11,
+          11
+        ]
+      ],
+      "expected": 10,
+      "inputDisplay": "[3, 3, 7, 7, 10, 11, 11]",
+      "expectedDisplay": "10",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Before the single element, pairs start at even indices (mid % 2 == 0). After it, pairs start at odd indices."
+  ],
+  "python": {
+    "starterCode": "def singleNonDuplicate(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def singleNonDuplicate(nums: list[int]) -> int:\n    lo, hi = 0, len(nums) - 1\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if mid % 2 == 1: mid -= 1\n        if nums[mid] == nums[mid + 1]:\n            lo = mid + 2\n        else:\n            hi = mid\n    return nums[lo]\n"
+  },
+  "leetcodeId": 540,
+  "leetcodeTitle": "Single Element in a Sorted Array",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-single-element-sorted-array/"
+}

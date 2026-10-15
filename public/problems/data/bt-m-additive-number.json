@@ -1,0 +1,79 @@
+{
+  "id": "bt-m-additive-number",
+  "wingId": "backtracking",
+  "floor": 245,
+  "title": "Additive Number",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-additive-number",
+    "name": "Additive Sphinx",
+    "title": "Verifier of Consecutive Sums",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "beholder",
+    "color": "#ec4899",
+    "attackName": "Additive Gaze",
+    "attackPower": 2,
+    "defeatQuote": "A valid additive sequence was verified across the string!"
+  },
+  "description": "An additive number is a string whose digits can form an additive sequence: num1 + num2 = num3. Given a string containing only digits, return `True` if it is an additive number or `False` otherwise.",
+  "examples": [
+    {
+      "input": "num = \"112358\"",
+      "output": "True"
+    },
+    {
+      "input": "num = \"199100199\"",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= len(num) <= 35"
+  ],
+  "starterCode": "def isAdditiveNumber(num: str) -> bool:\n    pass\n",
+  "solutionCode": "def isAdditiveNumber(num: str) -> bool:\n    n = len(num)\n    for i in range(1, n):\n        for j in range(i + 1, n):\n            s1, s2 = num[:i], num[i:j]\n            if (len(s1) > 1 and s1[0] == '0') or (len(s2) > 1 and s2[0] == '0'): continue\n            n1, n2 = int(s1), int(s2)\n            k = j\n            valid = True\n            while k < n:\n                n3 = n1 + n2\n                s3 = str(n3)\n                if not num.startswith(s3, k):\n                    valid = False\n                    break\n                k += len(s3)\n                n1, n2 = n2, n3\n            if valid and k == n: return True\n    return False\n",
+  "functionName": "isAdditiveNumber",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "112358"
+      ],
+      "expected": true,
+      "inputDisplay": "112358",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "199100199"
+      ],
+      "expected": true,
+      "inputDisplay": "199100199",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        "1023"
+      ],
+      "expected": false,
+      "inputDisplay": "1023",
+      "expectedDisplay": "False",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Fix the first two numbers; all subsequent numbers are determined by their sum."
+  ],
+  "python": {
+    "starterCode": "def isAdditiveNumber(num: str) -> bool:\n    pass\n",
+    "solutionCode": "def isAdditiveNumber(num: str) -> bool:\n    n = len(num)\n    for i in range(1, n):\n        for j in range(i + 1, n):\n            s1, s2 = num[:i], num[i:j]\n            if (len(s1) > 1 and s1[0] == '0') or (len(s2) > 1 and s2[0] == '0'): continue\n            n1, n2 = int(s1), int(s2)\n            k = j\n            valid = True\n            while k < n:\n                n3 = n1 + n2\n                s3 = str(n3)\n                if not num.startswith(s3, k):\n                    valid = False\n                    break\n                k += len(s3)\n                n1, n2 = n2, n3\n            if valid and k == n: return True\n    return False\n"
+  },
+  "leetcodeId": 306,
+  "leetcodeTitle": "Additive Number",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-additive-number/"
+}

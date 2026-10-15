@@ -32,8 +32,8 @@
     "0 <= nums.length <= 10^5",
     "-10^9 <= nums[i], target <= 10^9"
   ],
-  "starterCode": "function searchRange(nums, target) {\n  return [-1, -1];\n}",
-  "solutionCode": "function searchRange(nums, target) {\n  function findBound(isFirst) {\n    let left = 0, right = nums.length - 1;\n    let bound = -1;\n    while (left <= right) {\n      const mid = Math.floor((left + right) / 2);\n      if (nums[mid] === target) {\n        bound = mid;\n        if (isFirst) right = mid - 1;\n        else left = mid + 1;\n      } else if (nums[mid] < target) {\n        left = mid + 1;\n      } else {\n        right = mid - 1;\n      }\n    }\n    return bound;\n  }\n  return [findBound(true), findBound(false)];\n}",
+  "starterCode": "def searchRange(nums, target):\n    return [-1, -1]\n",
+  "solutionCode": "def searchRange(nums, target):\n    def find_bound(first):\n        left, right = 0, len(nums) - 1\n        bound = -1\n        while left <= right:\n            mid = (left + right) // 2\n            if nums[mid] == target:\n                bound = mid\n                if first:\n                    right = mid - 1\n                else:\n                    left = mid + 1\n            elif nums[mid] < target:\n                left = mid + 1\n            else:\n                right = mid - 1\n        return bound\n    return [find_bound(True), find_bound(False)]\n",
   "functionName": "searchRange",
   "testCases": [
     {

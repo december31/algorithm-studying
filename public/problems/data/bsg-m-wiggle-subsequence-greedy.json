@@ -1,0 +1,107 @@
+{
+  "id": "bsg-m-wiggle-subsequence-greedy",
+  "wingId": "binary-search-greedy",
+  "floor": 460,
+  "title": "Wiggle Subsequence (Greedy Alternation)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-wiggle-subsequence-greedy",
+    "name": "Oscillation Drake",
+    "title": "Rider of Peak and Valley Waves",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#8b5cf6",
+    "attackName": "Wiggle Ripple",
+    "attackPower": 2,
+    "defeatQuote": "Longest alternating differences subsequence length found!"
+  },
+  "description": "A wiggle sequence is a sequence where the differences between successive numbers strictly alternate between positive and negative. Given an integer array `nums`, return the length of the longest wiggle subsequence of `nums`.",
+  "examples": [
+    {
+      "input": "nums = [1,7,4,9,2,5]",
+      "output": "6"
+    },
+    {
+      "input": "nums = [1,17,5,10,13,15,10,5,16,8]",
+      "output": "7"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 1000"
+  ],
+  "starterCode": "def wiggleMaxLength(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def wiggleMaxLength(nums: list[int]) -> int:\n    if len(nums) < 2: return len(nums)\n    up = down = 1\n    for i in range(1, len(nums)):\n        if nums[i] > nums[i - 1]: up = down + 1\n        elif nums[i] < nums[i - 1]: down = up + 1\n    return max(up, down)\n",
+  "functionName": "wiggleMaxLength",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          7,
+          4,
+          9,
+          2,
+          5
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "[1, 7, 4, 9, 2, 5]",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          17,
+          5,
+          10,
+          13,
+          15,
+          10,
+          5,
+          16,
+          8
+        ]
+      ],
+      "expected": 7,
+      "inputDisplay": "[1, 17, 5, 10, 13, 15, 10, 5, 16, 8]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 2, 3, 4, 5, 6, 7, 8, 9]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Maintain two states: up (last move was up) and down (last move was down)."
+  ],
+  "python": {
+    "starterCode": "def wiggleMaxLength(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def wiggleMaxLength(nums: list[int]) -> int:\n    if len(nums) < 2: return len(nums)\n    up = down = 1\n    for i in range(1, len(nums)):\n        if nums[i] > nums[i - 1]: up = down + 1\n        elif nums[i] < nums[i - 1]: down = up + 1\n    return max(up, down)\n"
+  },
+  "leetcodeId": 376,
+  "leetcodeTitle": "Wiggle Subsequence (Greedy Alternation)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-wiggle-subsequence-greedy/"
+}

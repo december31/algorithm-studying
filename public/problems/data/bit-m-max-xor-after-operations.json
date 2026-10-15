@@ -1,0 +1,80 @@
+{
+  "id": "bit-m-max-xor-after-operations",
+  "wingId": "bit-manipulation",
+  "floor": 563,
+  "title": "Maximum XOR After Operations",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-max-xor-after-operations",
+    "name": "Cumulative Bit Fiend",
+    "title": "Harvester of Available Bits",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#38bdf8",
+    "attackName": "Union Ray",
+    "attackPower": 2,
+    "defeatQuote": "Maximum bitwise XOR achievable across arbitrary bit deletions!"
+  },
+  "description": "You are given a 0-indexed integer array `nums`. In one operation, you may choose any integer `nums[i]` and any integer `x`, and set `nums[i] = nums[i] AND (nums[i] XOR x)`. Return the maximum possible bitwise XOR of all elements of `nums` after applying the operation any number of times.",
+  "examples": [
+    {
+      "input": "nums = [3,2,4,6]",
+      "output": "7"
+    },
+    {
+      "input": "nums = [1,2,3,9,2]",
+      "output": "11"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 100000"
+  ],
+  "starterCode": "def maximumXOR(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def maximumXOR(nums: list[int]) -> int:\n    ans = 0\n    for x in nums: ans |= x\n    return ans\n",
+  "functionName": "maximumXOR",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          2,
+          4,
+          6
+        ]
+      ],
+      "expected": 7,
+      "inputDisplay": "[3, 2, 4, 6]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          9,
+          2
+        ]
+      ],
+      "expected": 11,
+      "inputDisplay": "[1, 2, 3, 9, 2]",
+      "expectedDisplay": "11",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "The operation allows clearing any 1-bit from any number. Thus, any bit that appears in at least one number can be preserved as a single 1. Result is the bitwise OR of all numbers."
+  ],
+  "python": {
+    "starterCode": "def maximumXOR(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def maximumXOR(nums: list[int]) -> int:\n    ans = 0\n    for x in nums: ans |= x\n    return ans\n"
+  },
+  "leetcodeId": 2317,
+  "leetcodeTitle": "Maximum XOR After Operations",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-max-xor-after-operations/"
+}

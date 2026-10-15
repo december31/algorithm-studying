@@ -33,8 +33,8 @@
     "-10^4 <= nums[i] <= 10^4",
     "k is in the range [1, the number of unique elements in the array]."
   ],
-  "starterCode": "function topKFrequent(nums, k) {\n  return [];\n}",
-  "solutionCode": "function topKFrequent(nums, k) {\n  const count = new Map();\n  for (const n of nums) count.set(n, (count.get(n) || 0) + 1);\n  const bucket = Array.from({ length: nums.length + 1 }, () => []);\n  for (const [n, freq] of count.entries()) {\n    bucket[freq].push(n);\n  }\n  const result = [];\n  for (let i = bucket.length - 1; i >= 0 && result.length < k; i--) {\n    for (const n of bucket[i]) {\n      result.push(n);\n      if (result.length === k) break;\n    }\n  }\n  return result;\n}",
+  "starterCode": "def topKFrequent(nums, k):\n    return []\n",
+  "solutionCode": "def topKFrequent(nums, k):\n    count = {}\n    for n in nums:\n        count[n] = count.get(n, 0) + 1\n    buckets = [[] for _ in range(len(nums) + 1)]\n    for n, freq in count.items():\n        buckets[freq].append(n)\n    res = []\n    for i in range(len(buckets) - 1, 0, -1):\n        for n in buckets[i]:\n            res.append(n)\n            if len(res) == k:\n                return res\n    return res\n",
   "functionName": "topKFrequent",
   "testCases": [
     {

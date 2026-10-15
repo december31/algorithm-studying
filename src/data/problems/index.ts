@@ -29,6 +29,8 @@ export const allTopics: DungeonTopic[] = [
   'graphs',
   'binary-search-greedy',
   'bit-manipulation',
+  'security-sectors-trial',
+  'maximum-parentheses-trial',
 ];
 
 export const allProblems: Record<DungeonTopic, Problem[]> = {
@@ -37,6 +39,8 @@ export const allProblems: Record<DungeonTopic, Problem[]> = {
   'graphs': graphProblems.map(enrichWithLeetCode),
   'binary-search-greedy': binarySearchGreedyProblems.map(enrichWithLeetCode),
   'bit-manipulation': bitManipulationProblems.map(enrichWithLeetCode),
+  'security-sectors-trial': [],
+  'maximum-parentheses-trial': [],
 };
 
 // Utility to shuffle an array immutably

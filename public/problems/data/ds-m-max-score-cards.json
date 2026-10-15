@@ -1,0 +1,123 @@
+{
+  "id": "ds-m-max-score-cards",
+  "wingId": "data-structures",
+  "floor": 146,
+  "title": "Maximum Points From Cards",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-max-score-cards",
+    "name": "Deck Leviathan",
+    "title": "Dealer of Edge-Card Draws",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "hydra",
+    "color": "#10b981",
+    "attackName": "Card Barrage",
+    "attackPower": 2,
+    "defeatQuote": "Finding the minimum remaining middle window maximized card sum!"
+  },
+  "description": "There are several cards arranged in a row, and each card has an associated number of points. In one step, you can take one card from the beginning or from the end of the row. You have to take exactly `k` cards. Your score is the sum of the points of the cards you have taken. Return the maximum score you can obtain.",
+  "examples": [
+    {
+      "input": "cardPoints = [1,2,3,4,5,6,1], k = 3",
+      "output": "12"
+    },
+    {
+      "input": "cardPoints = [2,2,2], k = 2",
+      "output": "4"
+    },
+    {
+      "input": "cardPoints = [9,7,7,9,7,7,9], k = 7",
+      "output": "55"
+    }
+  ],
+  "constraints": [
+    "1 <= len(cardPoints) <= 10^5",
+    "1 <= cardPoints[i] <= 10^4",
+    "1 <= k <= len(cardPoints)"
+  ],
+  "starterCode": "def maxScoreCards(cardPoints: list[int], k: int) -> int:\n    pass\n",
+  "solutionCode": "def maxScoreCards(cardPoints: list[int], k: int) -> int:\n    n = len(cardPoints)\n    window_size = n - k\n    total = sum(cardPoints)\n    if window_size == 0: return total\n    curr = sum(cardPoints[:window_size])\n    min_window = curr\n    for i in range(window_size, n):\n        curr += cardPoints[i] - cardPoints[i - window_size]\n        min_window = min(min_window, curr)\n    return total - min_window\n",
+  "functionName": "maxScoreCards",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          1
+        ],
+        3
+      ],
+      "expected": 12,
+      "inputDisplay": "args=[[1, 2, 3, 4, 5, 6, 1], 3]",
+      "expectedDisplay": "12",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          2,
+          2
+        ],
+        2
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[[2, 2, 2], 2]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          9,
+          7,
+          7,
+          9,
+          7,
+          7,
+          9
+        ],
+        7
+      ],
+      "expected": 55,
+      "inputDisplay": "args=[[9, 7, 7, 9, 7, 7, 9], 7]",
+      "expectedDisplay": "55",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1,
+          1000,
+          1
+        ],
+        1
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1, 1000, 1], 1]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Taking k cards from the ends is equivalent to leaving a contiguous window of size n - k with minimal sum."
+  ],
+  "python": {
+    "starterCode": "def maxScoreCards(cardPoints: list[int], k: int) -> int:\n    pass\n",
+    "solutionCode": "def maxScoreCards(cardPoints: list[int], k: int) -> int:\n    n = len(cardPoints)\n    window_size = n - k\n    total = sum(cardPoints)\n    if window_size == 0: return total\n    curr = sum(cardPoints[:window_size])\n    min_window = curr\n    for i in range(window_size, n):\n        curr += cardPoints[i] - cardPoints[i - window_size]\n        min_window = min(min_window, curr)\n    return total - min_window\n"
+  },
+  "leetcodeId": 1423,
+  "leetcodeTitle": "Maximum Points From Cards",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-max-score-cards/"
+}

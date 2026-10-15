@@ -1,0 +1,96 @@
+{
+  "id": "bit-h-subtrees-max-distance",
+  "wingId": "bit-manipulation",
+  "floor": 574,
+  "title": "Subtrees with Maximum Distance",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bit-h-subtrees-max-distance",
+    "name": "Arboreal Leviathan",
+    "title": "Ruler of Tree Subgraph Diameters",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "boss",
+    "color": "#ef4444",
+    "attackName": "Branch Distance Shockwave",
+    "attackPower": 3,
+    "defeatQuote": "Every subset of nodes forms a realm; measure their furthest reaches!"
+  },
+  "description": "There are `n` cities numbered `1` to `n`. You are given an integer `n` and an array `edges` where `edges[i] = [u, v]` represents a bidirectional edge between `u` and `v` forming a tree. Return an array of size `n - 1` where the `d-th` element (1-indexed) is the number of subtrees in which the maximum distance between any two cities in the subtree is equal to `d`.",
+  "examples": [
+    {
+      "input": "n = 4, edges = [[1,2],[2,3],[2,4]]",
+      "output": "[3,4,0]"
+    },
+    {
+      "input": "n = 2, edges = [[1,2]]",
+      "output": "[1]"
+    }
+  ],
+  "constraints": [
+    "2 <= n <= 15",
+    "edges.length == n - 1"
+  ],
+  "starterCode": "def countSubgraphsForEachDiameter(n: int, edges: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def countSubgraphsForEachDiameter(n: int, edges: list[list[int]]) -> list[int]:\n    dist = [[float('inf')] * n for _ in range(n)]\n    for i in range(n): dist[i][i] = 0\n    adj = [[] for _ in range(n)]\n    for u, v in edges:\n        u -= 1; v -= 1\n        dist[u][v] = dist[v][u] = 1\n        adj[u].append(v); adj[v].append(u)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])\n    ans = [0] * (n - 1)\n    for mask in range(1, 1 << n):\n        nodes = [i for i in range(n) if (mask & (1 << i))]\n        if len(nodes) < 2: continue\n        edge_count = 0\n        for u, v in edges:\n            if (mask & (1 << (u - 1))) and (mask & (1 << (v - 1))):\n                edge_count += 1\n        if edge_count != len(nodes) - 1: continue\n        q = [nodes[0]]\n        visited = {nodes[0]}\n        while q:\n            curr = q.pop(0)\n            for neighbor in adj[curr]:\n                if (mask & (1 << neighbor)) and neighbor not in visited:\n                    visited.add(neighbor)\n                    q.append(neighbor)\n        if len(visited) != len(nodes): continue\n        max_d = 0\n        for i in nodes:\n            for j in nodes:\n                max_d = max(max_d, dist[i][j])\n        if 1 <= max_d <= n - 1:\n            ans[max_d - 1] += 1\n    return ans\n",
+  "functionName": "countSubgraphsForEachDiameter",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      ],
+      "expected": [
+        3,
+        4,
+        0
+      ],
+      "inputDisplay": "args=[4, [[1, 2], [2, 3], [2, 4]]]",
+      "expectedDisplay": "[3, 4, 0]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        2,
+        [
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "args=[2, [[1, 2]]]",
+      "expectedDisplay": "[1]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Enumerate all 2^n masks. Verify that mask induces a connected tree (num_edges == num_nodes - 1 and connected), then calculate diameter using Floyd-Warshall distances."
+  ],
+  "python": {
+    "starterCode": "def countSubgraphsForEachDiameter(n: int, edges: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def countSubgraphsForEachDiameter(n: int, edges: list[list[int]]) -> list[int]:\n    dist = [[float('inf')] * n for _ in range(n)]\n    for i in range(n): dist[i][i] = 0\n    adj = [[] for _ in range(n)]\n    for u, v in edges:\n        u -= 1; v -= 1\n        dist[u][v] = dist[v][u] = 1\n        adj[u].append(v); adj[v].append(u)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])\n    ans = [0] * (n - 1)\n    for mask in range(1, 1 << n):\n        nodes = [i for i in range(n) if (mask & (1 << i))]\n        if len(nodes) < 2: continue\n        edge_count = 0\n        for u, v in edges:\n            if (mask & (1 << (u - 1))) and (mask & (1 << (v - 1))):\n                edge_count += 1\n        if edge_count != len(nodes) - 1: continue\n        q = [nodes[0]]\n        visited = {nodes[0]}\n        while q:\n            curr = q.pop(0)\n            for neighbor in adj[curr]:\n                if (mask & (1 << neighbor)) and neighbor not in visited:\n                    visited.add(neighbor)\n                    q.append(neighbor)\n        if len(visited) != len(nodes): continue\n        max_d = 0\n        for i in nodes:\n            for j in nodes:\n                max_d = max(max_d, dist[i][j])\n        if 1 <= max_d <= n - 1:\n            ans[max_d - 1] += 1\n    return ans\n"
+  },
+  "leetcodeId": 1617,
+  "leetcodeTitle": "Subtrees with Maximum Distance",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-subtrees-max-distance/"
+}

@@ -32,8 +32,8 @@
     "1 <= s.length <= 16",
     "s contains only lowercase English letters."
   ],
-  "starterCode": "function partition(s) {\n  return [];\n}",
-  "solutionCode": "function partition(s) {\n  const res = [];\n  function isPal(sub) {\n    let l = 0, r = sub.length - 1;\n    while (l < r) {\n      if (sub[l++] !== sub[r--]) return false;\n    }\n    return true;\n  }\n  function backtrack(start, current) {\n    if (start === s.length) {\n      res.push([...current]);\n      return;\n    }\n    for (let end = start + 1; end <= s.length; end++) {\n      const sub = s.slice(start, end);\n      if (isPal(sub)) {\n        current.push(sub);\n        backtrack(end, current);\n        current.pop();\n      }\n    }\n  }\n  backtrack(0, []);\n  return res;\n}",
+  "starterCode": "def partition(s):\n    return []\n",
+  "solutionCode": "def partition(s):\n    res = []\n    def backtrack(start, curr):\n        if start == len(s):\n            res.append(list(curr))\n            return\n        for end in range(start + 1, len(s) + 1):\n            sub = s[start:end]\n            if sub == sub[::-1]:\n                curr.append(sub)\n                backtrack(end, curr)\n                curr.pop()\n    backtrack(0, [])\n    return res\n",
   "functionName": "partition",
   "testCases": [
     {

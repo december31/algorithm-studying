@@ -1,0 +1,86 @@
+{
+  "id": "bt-h-minimum-xor-sum",
+  "wingId": "backtracking",
+  "floor": 286,
+  "title": "Minimum XOR Sum of Two Arrays",
+  "difficulty": "hard",
+  "visualizerType": "bits",
+  "monster": {
+    "id": "mon-bt-h-minimum-xor-sum",
+    "name": "XOR Pairing Archon",
+    "title": "Minimizer of Bitwise Mismatches",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "demon",
+    "color": "#8b5cf6",
+    "attackName": "Bitwise Pair Hex",
+    "attackPower": 3,
+    "defeatQuote": "Optimal bijection assignment minimized total XOR sum!"
+  },
+  "description": "You are given two integer arrays `nums1` and `nums2` of length `n`. Rearrange the elements of `nums2` such that the sum of `(nums1[i] ^ nums2[i])` for all `0 <= i < n` is minimized. Return the minimum XOR sum.",
+  "examples": [
+    {
+      "input": "nums1 = [1,2], nums2 = [2,3]",
+      "output": "2"
+    },
+    {
+      "input": "nums1 = [1,0,3], nums2 = [5,3,4]",
+      "output": "8"
+    }
+  ],
+  "constraints": [
+    "n == len(nums1) == len(nums2)",
+    "1 <= n <= 14"
+  ],
+  "starterCode": "def minimumXORSum(nums1: list[int], nums2: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minimumXORSum(nums1: list[int], nums2: list[int]) -> int:\n    n = len(nums1)\n    memo = {}\n    def dfs(i, mask):\n        if i == n: return 0\n        if mask in memo: return memo[mask]\n        ans = float('inf')\n        for j in range(n):\n            if not (mask & (1 << j)):\n                ans = min(ans, (nums1[i] ^ nums2[j]) + dfs(i + 1, mask | (1 << j)))\n        memo[mask] = ans\n        return ans\n    return dfs(0, 0)\n",
+  "functionName": "minimumXORSum",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[1, 2], [2, 3]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          5,
+          3,
+          4
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "args=[[1, 0, 3], [5, 3, 4]]",
+      "expectedDisplay": "8",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Bitmask DP assigning elements of nums2 to positions of nums1."
+  ],
+  "python": {
+    "starterCode": "def minimumXORSum(nums1: list[int], nums2: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minimumXORSum(nums1: list[int], nums2: list[int]) -> int:\n    n = len(nums1)\n    memo = {}\n    def dfs(i, mask):\n        if i == n: return 0\n        if mask in memo: return memo[mask]\n        ans = float('inf')\n        for j in range(n):\n            if not (mask & (1 << j)):\n                ans = min(ans, (nums1[i] ^ nums2[j]) + dfs(i + 1, mask | (1 << j)))\n        memo[mask] = ans\n        return ans\n    return dfs(0, 0)\n"
+  },
+  "leetcodeId": 1879,
+  "leetcodeTitle": "Minimum XOR Sum of Two Arrays",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-minimum-xor-sum/"
+}

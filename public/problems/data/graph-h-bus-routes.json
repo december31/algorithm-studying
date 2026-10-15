@@ -1,0 +1,107 @@
+{
+  "id": "graph-h-bus-routes",
+  "wingId": "graphs",
+  "floor": 376,
+  "title": "Bus Routes (Minimum Transfers)",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-h-bus-routes",
+    "name": "Transit Gargoyle",
+    "title": "Conductor of Interlocking Lines",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "gargoyle",
+    "color": "#f59e0b",
+    "attackName": "Ticket Barrier",
+    "attackPower": 3,
+    "defeatQuote": "Least number of buses to travel from source stop to target stop!"
+  },
+  "description": "You are given an array `routes` representing bus routes where `routes[i]` is a bus route that the `i`-th bus repeats forever. You start at the bus stop `source` and want to go to the bus stop `target`. You can travel between bus stops by buses only. Return the least number of buses you must take to travel from `source` to `target`. If it is not possible, return `-1`.",
+  "examples": [
+    {
+      "input": "routes = [[1,2,7],[3,6,7]], source = 1, target = 6",
+      "output": "2"
+    },
+    {
+      "input": "routes = [[7,12],[4,5,15],[6],[15,19],[9,12,13]], source = 15, target = 12",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= routes.length <= 500",
+    "source, target are integers"
+  ],
+  "starterCode": "def numBusesToDestination(routes: list[list[int]], source: int, target: int) -> int:\n    pass\n",
+  "solutionCode": "def numBusesToDestination(routes: list[list[int]], source: int, target: int) -> int:\n    if source == target: return 0\n    from collections import defaultdict, deque\n    stop_to_buses = defaultdict(list)\n    for bus_idx, route in enumerate(routes):\n        for stop in route:\n            stop_to_buses[stop].append(bus_idx)\n    if source not in stop_to_buses or target not in stop_to_buses: return -1\n    visited_buses = set()\n    visited_stops = {source}\n    q = deque([(source, 0)])\n    while q:\n        stop, buses_taken = q.popleft()\n        if stop == target: return buses_taken\n        for bus in stop_to_buses[stop]:\n            if bus not in visited_buses:\n                visited_buses.add(bus)\n                for nxt_stop in routes[bus]:\n                    if nxt_stop not in visited_stops:\n                        visited_stops.add(nxt_stop)\n                        q.append((nxt_stop, buses_taken + 1))\n    return -1\n",
+  "functionName": "numBusesToDestination",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            2,
+            7
+          ],
+          [
+            3,
+            6,
+            7
+          ]
+        ],
+        1,
+        6
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[[1, 2, 7], [3, 6, 7]], 1, 6]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            7,
+            12
+          ],
+          [
+            4,
+            5,
+            15
+          ],
+          [
+            6
+          ],
+          [
+            15,
+            19
+          ],
+          [
+            9,
+            12,
+            13
+          ]
+        ],
+        15,
+        12
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[[[7, 12], [4, 5, 15], [6], [15, 19], [9, 12, 13]], 15, 12]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Treat each bus as a hyperedge or node. BFS over buses rather than individual stops."
+  ],
+  "python": {
+    "starterCode": "def numBusesToDestination(routes: list[list[int]], source: int, target: int) -> int:\n    pass\n",
+    "solutionCode": "def numBusesToDestination(routes: list[list[int]], source: int, target: int) -> int:\n    if source == target: return 0\n    from collections import defaultdict, deque\n    stop_to_buses = defaultdict(list)\n    for bus_idx, route in enumerate(routes):\n        for stop in route:\n            stop_to_buses[stop].append(bus_idx)\n    if source not in stop_to_buses or target not in stop_to_buses: return -1\n    visited_buses = set()\n    visited_stops = {source}\n    q = deque([(source, 0)])\n    while q:\n        stop, buses_taken = q.popleft()\n        if stop == target: return buses_taken\n        for bus in stop_to_buses[stop]:\n            if bus not in visited_buses:\n                visited_buses.add(bus)\n                for nxt_stop in routes[bus]:\n                    if nxt_stop not in visited_stops:\n                        visited_stops.add(nxt_stop)\n                        q.append((nxt_stop, buses_taken + 1))\n    return -1\n"
+  },
+  "leetcodeId": 815,
+  "leetcodeTitle": "Bus Routes (Minimum Transfers)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-h-bus-routes/"
+}

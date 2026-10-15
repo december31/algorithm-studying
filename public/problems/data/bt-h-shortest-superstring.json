@@ -1,0 +1,80 @@
+{
+  "id": "bt-h-shortest-superstring",
+  "wingId": "backtracking",
+  "floor": 296,
+  "title": "Find the Shortest Superstring",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-h-shortest-superstring",
+    "name": "Thread Weaver",
+    "title": "Consolidator of Overlapping Glyphs",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "arachne",
+    "color": "#3b82f6",
+    "attackName": "Silk Binding",
+    "attackPower": 3,
+    "defeatQuote": "Shortest concatenated superstring covering all substrings produced!"
+  },
+  "description": "Given an array of strings `words`, return the smallest string that contains each string in `words` as a substring. If there are multiple valid strings of the smallest length, return any of them.",
+  "examples": [
+    {
+      "input": "words = [\"alex\",\"loves\",\"leetcode\"]",
+      "output": "\"alexlovesleetcode\""
+    },
+    {
+      "input": "words = [\"catg\",\"ctaagt\",\"gcta\",\"ttca\",\"atgcatc\"]",
+      "output": "\"gctaagttcatgcatc\""
+    }
+  ],
+  "constraints": [
+    "1 <= words.length <= 12",
+    "1 <= words[i].length <= 20"
+  ],
+  "starterCode": "def shortestSuperstring(words: list[str]) -> str:\n    pass\n",
+  "solutionCode": "def shortestSuperstring(words: list[str]) -> str:\n    n = len(words)\n    cost = [[0] * n for _ in range(n)]\n    for i in range(n):\n        for j in range(n):\n            if i != j:\n                cost[i][j] = len(words[j])\n                for k in range(min(len(words[i]), len(words[j])), 0, -1):\n                    if words[i][-k:] == words[j][:k]:\n                        cost[i][j] = len(words[j]) - k\n                        break\n    memo = {}\n    def tsp(mask, u):\n        if mask == (1 << n) - 1: return (0, [])\n        if (mask, u) in memo: return memo[(mask, u)]\n        best_val = float('inf')\n        best_path = []\n        for v in range(n):\n            if not (mask & (1 << v)):\n                c = cost[u][v] if u != -1 else len(words[v])\n                sub_c, sub_p = tsp(mask | (1 << v), v)\n                if c + sub_c < best_val:\n                    best_val = c + sub_c\n                    best_path = [v] + sub_p\n        memo[(mask, u)] = (best_val, best_path)\n        return memo[(mask, u)]\n    _, path = tsp(0, -1)\n    res = words[path[0]]\n    for i in range(1, len(path)):\n        u, v = path[i-1], path[i]\n        c = cost[u][v]\n        res += words[v][len(words[v])-c:]\n    return res\n",
+  "functionName": "shortestSuperstring",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "alex",
+          "loves",
+          "leetcode"
+        ]
+      ],
+      "expected": "alexlovesleetcode",
+      "inputDisplay": "['alex', 'loves', 'leetcode']",
+      "expectedDisplay": "alexlovesleetcode",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          "catg",
+          "ctaagt",
+          "gcta",
+          "ttca",
+          "atgcatc"
+        ]
+      ],
+      "expected": "gctaagttcatgcatc",
+      "inputDisplay": "['catg', 'ctaagt', 'gcta', 'ttca', 'atgcatc']",
+      "expectedDisplay": "gctaagttcatgcatc",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Formulate as TSP over the directed graph where edge (i, j) is the added suffix length."
+  ],
+  "python": {
+    "starterCode": "def shortestSuperstring(words: list[str]) -> str:\n    pass\n",
+    "solutionCode": "def shortestSuperstring(words: list[str]) -> str:\n    n = len(words)\n    cost = [[0] * n for _ in range(n)]\n    for i in range(n):\n        for j in range(n):\n            if i != j:\n                cost[i][j] = len(words[j])\n                for k in range(min(len(words[i]), len(words[j])), 0, -1):\n                    if words[i][-k:] == words[j][:k]:\n                        cost[i][j] = len(words[j]) - k\n                        break\n    memo = {}\n    def tsp(mask, u):\n        if mask == (1 << n) - 1: return (0, [])\n        if (mask, u) in memo: return memo[(mask, u)]\n        best_val = float('inf')\n        best_path = []\n        for v in range(n):\n            if not (mask & (1 << v)):\n                c = cost[u][v] if u != -1 else len(words[v])\n                sub_c, sub_p = tsp(mask | (1 << v), v)\n                if c + sub_c < best_val:\n                    best_val = c + sub_c\n                    best_path = [v] + sub_p\n        memo[(mask, u)] = (best_val, best_path)\n        return memo[(mask, u)]\n    _, path = tsp(0, -1)\n    res = words[path[0]]\n    for i in range(1, len(path)):\n        u, v = path[i-1], path[i]\n        c = cost[u][v]\n        res += words[v][len(words[v])-c:]\n    return res\n"
+  },
+  "leetcodeId": 943,
+  "leetcodeTitle": "Find the Shortest Superstring",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-shortest-superstring/"
+}

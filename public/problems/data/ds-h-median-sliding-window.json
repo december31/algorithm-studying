@@ -1,0 +1,107 @@
+{
+  "id": "ds-h-median-sliding-window",
+  "wingId": "data-structures",
+  "floor": 186,
+  "title": "Sliding Window Median",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-h-median-sliding-window",
+    "name": "Equilibrium Wyrm",
+    "title": "Balancer of Rolling Medians",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "slime",
+    "color": "#ec4899",
+    "attackName": "Median Pulse",
+    "attackPower": 3,
+    "defeatQuote": "Bisect window maintenance produced exact floating-point medians!"
+  },
+  "description": "Given an array `nums` and an integer `k`, there is a sliding window of size `k` moving from left to right. Return the median array for each window in the original array.",
+  "examples": [
+    {
+      "input": "nums = [1,3,-1,-3,5,3,6,7], k = 3",
+      "output": "[1.0,-1.0,-1.0,3.0,5.0,6.0]"
+    }
+  ],
+  "constraints": [
+    "1 <= k <= len(nums) <= 10^5"
+  ],
+  "starterCode": "def medianSlidingWindow(nums: list[int], k: int) -> list[float]:\n    pass\n",
+  "solutionCode": "def medianSlidingWindow(nums: list[int], k: int) -> list[float]:\n    import bisect\n    window = sorted(nums[:k])\n    res = []\n    for i in range(k, len(nums) + 1):\n        if k % 2 == 1:\n            res.append(float(window[k // 2]))\n        else:\n            res.append((window[k // 2 - 1] + window[k // 2]) / 2.0)\n        if i < len(nums):\n            del window[bisect.bisect_left(window, nums[i - k])]\n            bisect.insort(window, nums[i])\n    return res\n",
+  "functionName": "medianSlidingWindow",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          3,
+          -1,
+          -3,
+          5,
+          3,
+          6,
+          7
+        ],
+        3
+      ],
+      "expected": [
+        1.0,
+        -1.0,
+        -1.0,
+        3.0,
+        5.0,
+        6.0
+      ],
+      "inputDisplay": "args=[[1, 3, -1, -3, 5, 3, 6, 7], 3]",
+      "expectedDisplay": "[1.0, -1.0, -1.0, 3.0, 5.0, 6.0]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        2
+      ],
+      "expected": [
+        1.5,
+        2.5,
+        3.5
+      ],
+      "inputDisplay": "args=[[1, 2, 3, 4], 2]",
+      "expectedDisplay": "[1.5, 2.5, 3.5]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          5
+        ],
+        1
+      ],
+      "expected": [
+        5.0
+      ],
+      "inputDisplay": "args=[[5], 1]",
+      "expectedDisplay": "[5.0]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Maintain a sorted window with bisect insertion and deletion, reading median at k//2."
+  ],
+  "python": {
+    "starterCode": "def medianSlidingWindow(nums: list[int], k: int) -> list[float]:\n    pass\n",
+    "solutionCode": "def medianSlidingWindow(nums: list[int], k: int) -> list[float]:\n    import bisect\n    window = sorted(nums[:k])\n    res = []\n    for i in range(k, len(nums) + 1):\n        if k % 2 == 1:\n            res.append(float(window[k // 2]))\n        else:\n            res.append((window[k // 2 - 1] + window[k // 2]) / 2.0)\n        if i < len(nums):\n            del window[bisect.bisect_left(window, nums[i - k])]\n            bisect.insort(window, nums[i])\n    return res\n"
+  },
+  "leetcodeId": 480,
+  "leetcodeTitle": "Sliding Window Median",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-h-median-sliding-window/"
+}

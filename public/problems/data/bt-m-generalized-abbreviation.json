@@ -1,0 +1,85 @@
+{
+  "id": "bt-m-generalized-abbreviation",
+  "wingId": "backtracking",
+  "floor": 239,
+  "title": "Generalized Abbreviation",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-generalized-abbreviation",
+    "name": "Compressor Wraith",
+    "title": "Encoder of Substring Counts",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#eab308",
+    "attackName": "Count Hex",
+    "attackPower": 2,
+    "defeatQuote": "All 2^n character-or-count abbreviations generated!"
+  },
+  "description": "A word can be abbreviated by replacing any number of non-adjacent, non-empty substrings with their lengths. Given a string `word`, return a list of all the possible generalized abbreviations of `word` in sorted order.",
+  "examples": [
+    {
+      "input": "word = \"word\"",
+      "output": "[\"1o1d\",\"1o2\",\"1or1\",\"1ord\",\"2r1\",\"2rd\",\"3d\",\"4\",\"w1r1\",\"w1rd\",\"w2d\",\"w3\",\"wo1d\",\"wo2\",\"wor1\",\"word\"]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(word) <= 10"
+  ],
+  "starterCode": "def generateAbbreviations(word: str) -> list[str]:\n    pass\n",
+  "solutionCode": "def generateAbbreviations(word: str) -> list[str]:\n    res = []\n    def backtrack(idx, curr, count):\n        if idx == len(word):\n            res.append(curr + (str(count) if count > 0 else ''))\n            return\n        # Option 1: abbreviate word[idx]\n        backtrack(idx + 1, curr, count + 1)\n        # Option 2: keep word[idx]\n        backtrack(idx + 1, curr + (str(count) if count > 0 else '') + word[idx], 0)\n    backtrack(0, '', 0)\n    return sorted(res)\n",
+  "functionName": "generateAbbreviations",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "word"
+      ],
+      "expected": [
+        "1o1d",
+        "1o2",
+        "1or1",
+        "1ord",
+        "2r1",
+        "2rd",
+        "3d",
+        "4",
+        "w1r1",
+        "w1rd",
+        "w2d",
+        "w3",
+        "wo1d",
+        "wo2",
+        "wor1",
+        "word"
+      ],
+      "inputDisplay": "word",
+      "expectedDisplay": "['1o1d', '1o2', '1or1', '1ord', '2r1', '2rd', '3d', '4', 'w1r1', 'w1rd', 'w2d', ",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "a"
+      ],
+      "expected": [
+        "1",
+        "a"
+      ],
+      "inputDisplay": "a",
+      "expectedDisplay": "['1', 'a']",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "At each position, choose to either increment the count of abbreviated letters or write the count and the letter."
+  ],
+  "python": {
+    "starterCode": "def generateAbbreviations(word: str) -> list[str]:\n    pass\n",
+    "solutionCode": "def generateAbbreviations(word: str) -> list[str]:\n    res = []\n    def backtrack(idx, curr, count):\n        if idx == len(word):\n            res.append(curr + (str(count) if count > 0 else ''))\n            return\n        # Option 1: abbreviate word[idx]\n        backtrack(idx + 1, curr, count + 1)\n        # Option 2: keep word[idx]\n        backtrack(idx + 1, curr + (str(count) if count > 0 else '') + word[idx], 0)\n    backtrack(0, '', 0)\n    return sorted(res)\n"
+  },
+  "leetcodeId": 320,
+  "leetcodeTitle": "Generalized Abbreviation",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-generalized-abbreviation/"
+}

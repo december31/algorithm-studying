@@ -1,0 +1,96 @@
+{
+  "id": "graph-m-max-area-island",
+  "wingId": "graphs",
+  "floor": 312,
+  "title": "Max Area of Island",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-max-area-island",
+    "name": "Terran Behemoth",
+    "title": "Monarch of Vast Landmasses",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#22c55e",
+    "attackName": "Continental Crush",
+    "attackPower": 2,
+    "defeatQuote": "Largest contiguous land component measured!"
+  },
+  "description": "You are given an `m x n` binary matrix `grid`. An island is a group of `1`'s connected 4-directionally. The area of an island is the number of cells with a value 1 in the island. Return the maximum area of an island in `grid`. If there is no island, return 0.",
+  "examples": [
+    {
+      "input": "grid = [[0,0,1,0,0],[1,1,1,0,0],[0,0,0,1,1]]",
+      "output": "4"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 50",
+    "grid[i][j] is either 0 or 1"
+  ],
+  "starterCode": "def maxAreaOfIsland(grid: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def maxAreaOfIsland(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    def dfs(r, c):\n        if 0 <= r < R and 0 <= c < C and grid[r][c] == 1:\n            grid[r][c] = 0\n            return 1 + dfs(r + 1, c) + dfs(r - 1, c) + dfs(r, c + 1) + dfs(r, c - 1)\n        return 0\n    ans = 0\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == 1:\n                ans = max(ans, dfs(r, c))\n    return ans\n",
+  "functionName": "maxAreaOfIsland",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 4,
+      "inputDisplay": "[[0, 0, 1, 0, 0], [1, 1, 1, 0, 0], [0, 0, 0, 1, 1]]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[[0, 0, 0, 0, 0]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Use DFS to compute component sizes, taking the maximum."
+  ],
+  "python": {
+    "starterCode": "def maxAreaOfIsland(grid: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def maxAreaOfIsland(grid: list[list[int]]) -> int:\n    R, C = len(grid), len(grid[0])\n    def dfs(r, c):\n        if 0 <= r < R and 0 <= c < C and grid[r][c] == 1:\n            grid[r][c] = 0\n            return 1 + dfs(r + 1, c) + dfs(r - 1, c) + dfs(r, c + 1) + dfs(r, c - 1)\n        return 0\n    ans = 0\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == 1:\n                ans = max(ans, dfs(r, c))\n    return ans\n"
+  },
+  "leetcodeId": 695,
+  "leetcodeTitle": "Max Area of Island",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-max-area-island/"
+}

@@ -1,0 +1,99 @@
+{
+  "id": "bit-m-max-score-words",
+  "wingId": "bit-manipulation",
+  "floor": 547,
+  "title": "Max Score Words Formed by Letters",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-max-score-words",
+    "name": "Lexicon Dragon",
+    "title": "Hoarder of Letter Tiles",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#06b6d4",
+    "attackName": "Scrabble Fire",
+    "attackPower": 2,
+    "defeatQuote": "Maximum letter score achieved using available inventory!"
+  },
+  "description": "Given a list of `words`, list of single `letters` (might be repeating) and `score` of every character from 'a' to 'z'. Return the maximum score of any valid set of words formed by using the given letters (words[i] cannot be used multiple times).",
+  "examples": [
+    {
+      "input": "words = [\"dog\",\"cat\",\"dad\",\"good\"], letters = [\"a\",\"a\",\"c\",\"d\",\"d\",\"d\",\"g\",\"o\",\"o\"], score = [1,0,9,5,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0]",
+      "output": "23"
+    }
+  ],
+  "constraints": [
+    "1 <= words.length <= 14"
+  ],
+  "starterCode": "def maxScoreWords(words: list[str], letters: list[str], score: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def maxScoreWords(words: list[str], letters: list[str], score: list[int]) -> int:\n    from collections import Counter\n    avail = Counter(letters)\n    n = len(words)\n    max_val = 0\n    for mask in range(1 << n):\n        needed = Counter()\n        word_score = 0\n        for i in range(n):\n            if (mask & (1 << i)):\n                for ch in words[i]:\n                    needed[ch] += 1\n                    word_score += score[ord(ch) - ord('a')]\n        if all(needed[ch] <= avail[ch] for ch in needed):\n            max_val = max(max_val, word_score)\n    return max_val\n",
+  "functionName": "maxScoreWords",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          "dog",
+          "cat",
+          "dad",
+          "good"
+        ],
+        [
+          "a",
+          "a",
+          "c",
+          "d",
+          "d",
+          "d",
+          "g",
+          "o",
+          "o"
+        ],
+        [
+          1,
+          0,
+          9,
+          5,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 23,
+      "inputDisplay": "args=[['dog', 'cat', 'dad', 'good'], ['a', 'a', 'c', 'd', 'd', 'd', 'g', 'o', 'o",
+      "expectedDisplay": "23",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Since words.length <= 14, iterate all 2^14 subsets using bitmasks and check letter budget."
+  ],
+  "python": {
+    "starterCode": "def maxScoreWords(words: list[str], letters: list[str], score: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def maxScoreWords(words: list[str], letters: list[str], score: list[int]) -> int:\n    from collections import Counter\n    avail = Counter(letters)\n    n = len(words)\n    max_val = 0\n    for mask in range(1 << n):\n        needed = Counter()\n        word_score = 0\n        for i in range(n):\n            if (mask & (1 << i)):\n                for ch in words[i]:\n                    needed[ch] += 1\n                    word_score += score[ord(ch) - ord('a')]\n        if all(needed[ch] <= avail[ch] for ch in needed):\n            max_val = max(max_val, word_score)\n    return max_val\n"
+  },
+  "leetcodeId": 1255,
+  "leetcodeTitle": "Max Score Words Formed by Letters",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-max-score-words/"
+}

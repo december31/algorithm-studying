@@ -1,0 +1,93 @@
+{
+  "id": "bsg-m-kth-smallest-sorted-matrix",
+  "wingId": "binary-search-greedy",
+  "floor": 455,
+  "title": "Kth Smallest Element in Sorted Matrix",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-bsg-m-kth-smallest-sorted-matrix",
+    "name": "Matrix Behemoth",
+    "title": "Keeper of Row-Col Monotonicity",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#ec4899",
+    "attackName": "Matrix Stampede",
+    "attackPower": 2,
+    "defeatQuote": "K-th smallest value in 2D sorted matrix found in logarithmic range time!"
+  },
+  "description": "Given an `n x n` matrix where each row and column is sorted in ascending order, return the `k`-th smallest element in the matrix.",
+  "examples": [
+    {
+      "input": "matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8",
+      "output": "13"
+    },
+    {
+      "input": "matrix = [[-5]], k = 1",
+      "output": "-5"
+    }
+  ],
+  "constraints": [
+    "n == matrix.length",
+    "1 <= n <= 300",
+    "1 <= k <= n^2"
+  ],
+  "starterCode": "def kthSmallest(matrix: list[list[int]], k: int) -> int:\n    pass\n",
+  "solutionCode": "def kthSmallest(matrix: list[list[int]], k: int) -> int:\n    n = len(matrix)\n    lo, hi = matrix[0][0], matrix[n - 1][n - 1]\n    def count_less_equal(mid):\n        count = 0\n        c = n - 1\n        for r in range(n):\n            while c >= 0 and matrix[r][c] > mid: c -= 1\n            count += (c + 1)\n        return count\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if count_less_equal(mid) < k:\n            lo = mid + 1\n        else:\n            hi = mid\n    return lo\n",
+  "functionName": "kthSmallest",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            1,
+            5,
+            9
+          ],
+          [
+            10,
+            11,
+            13
+          ],
+          [
+            12,
+            13,
+            15
+          ]
+        ],
+        8
+      ],
+      "expected": 13,
+      "inputDisplay": "args=[[[1, 5, 9], [10, 11, 13], [12, 13, 15]], 8]",
+      "expectedDisplay": "13",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            -5
+          ]
+        ],
+        1
+      ],
+      "expected": -5,
+      "inputDisplay": "args=[[[-5]], 1]",
+      "expectedDisplay": "-5",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search on value range [matrix[0][0], matrix[n-1][n-1]]. Count elements <= mid in O(n)."
+  ],
+  "python": {
+    "starterCode": "def kthSmallest(matrix: list[list[int]], k: int) -> int:\n    pass\n",
+    "solutionCode": "def kthSmallest(matrix: list[list[int]], k: int) -> int:\n    n = len(matrix)\n    lo, hi = matrix[0][0], matrix[n - 1][n - 1]\n    def count_less_equal(mid):\n        count = 0\n        c = n - 1\n        for r in range(n):\n            while c >= 0 and matrix[r][c] > mid: c -= 1\n            count += (c + 1)\n        return count\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if count_less_equal(mid) < k:\n            lo = mid + 1\n        else:\n            hi = mid\n    return lo\n"
+  },
+  "leetcodeId": 378,
+  "leetcodeTitle": "Kth Smallest Element in Sorted Matrix",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-kth-smallest-sorted-matrix/"
+}

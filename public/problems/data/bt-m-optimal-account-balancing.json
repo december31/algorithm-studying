@@ -1,0 +1,101 @@
+{
+  "id": "bt-m-optimal-account-balancing",
+  "wingId": "backtracking",
+  "floor": 252,
+  "title": "Optimal Account Balancing",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-optimal-account-balancing",
+    "name": "Debt Minotaur",
+    "title": "Settler of Intersecting Debts",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#ef4444",
+    "attackName": "Debt Horns",
+    "attackPower": 2,
+    "defeatQuote": "Minimum transactions required to zero all balances achieved!"
+  },
+  "description": "You are given an array of transactions `transactions` where `transactions[i] = [fromi, toi, amount]`. Return the minimum number of transactions required to settle the debt.",
+  "examples": [
+    {
+      "input": "transactions = [[0,1,10],[2,0,5]]",
+      "output": "2"
+    },
+    {
+      "input": "transactions = [[0,1,10],[1,0,1],[1,2,5],[2,0,5]]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= len(transactions) <= 8"
+  ],
+  "starterCode": "def minTransfers(transactions: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minTransfers(transactions: list[list[int]]) -> int:\n    from collections import defaultdict\n    bal = defaultdict(int)\n    for u, v, amt in transactions:\n        bal[u] -= amt\n        bal[v] += amt\n    debts = [v for v in bal.values() if v != 0]\n    def dfs(idx):\n        while idx < len(debts) and debts[idx] == 0:\n            idx += 1\n        if idx == len(debts): return 0\n        res = float('inf')\n        for j in range(idx + 1, len(debts)):\n            if debts[idx] * debts[j] < 0:\n                debts[j] += debts[idx]\n                res = min(res, 1 + dfs(idx + 1))\n                debts[j] -= debts[idx]\n        return res\n    return dfs(0)\n",
+  "functionName": "minTransfers",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1,
+            10
+          ],
+          [
+            2,
+            0,
+            5
+          ]
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[[0, 1, 10], [2, 0, 5]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            0,
+            1,
+            10
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            2,
+            5
+          ],
+          [
+            2,
+            0,
+            5
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[[0, 1, 10], [1, 0, 1], [1, 2, 5], [2, 0, 5]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Calculate net debt per person. Pair negative balances with positive balances recursively."
+  ],
+  "python": {
+    "starterCode": "def minTransfers(transactions: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minTransfers(transactions: list[list[int]]) -> int:\n    from collections import defaultdict\n    bal = defaultdict(int)\n    for u, v, amt in transactions:\n        bal[u] -= amt\n        bal[v] += amt\n    debts = [v for v in bal.values() if v != 0]\n    def dfs(idx):\n        while idx < len(debts) and debts[idx] == 0:\n            idx += 1\n        if idx == len(debts): return 0\n        res = float('inf')\n        for j in range(idx + 1, len(debts)):\n            if debts[idx] * debts[j] < 0:\n                debts[j] += debts[idx]\n                res = min(res, 1 + dfs(idx + 1))\n                debts[j] -= debts[idx]\n        return res\n    return dfs(0)\n"
+  },
+  "leetcodeId": 465,
+  "leetcodeTitle": "Optimal Account Balancing",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-optimal-account-balancing/"
+}

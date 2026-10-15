@@ -1,0 +1,87 @@
+{
+  "id": "bit-m-can-i-win-minimax",
+  "wingId": "bit-manipulation",
+  "floor": 543,
+  "title": "Can I Win (Minimax Bitmask Memoization)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-can-i-win-minimax",
+    "name": "Game Theory Sphinx",
+    "title": "Oracle of Forced Win States",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "sphinx",
+    "color": "#ef4444",
+    "attackName": "Forced Checkmate",
+    "attackPower": 2,
+    "defeatQuote": "Can the first player force a win under optimal play?"
+  },
+  "description": "In the \"100 game\", two players take turns adding, to a running total, any integer from `1` to `maxChoosableInteger`. Each integer can only be used once. The player who first causes the running total to reach or exceed `desiredTotal` wins. Return `True` if the first player can force a win, otherwise `False`.",
+  "examples": [
+    {
+      "input": "maxChoosableInteger = 10, desiredTotal = 11",
+      "output": "False"
+    },
+    {
+      "input": "maxChoosableInteger = 10, desiredTotal = 0",
+      "output": "True"
+    },
+    {
+      "input": "maxChoosableInteger = 10, desiredTotal = 1",
+      "output": "True"
+    }
+  ],
+  "constraints": [
+    "1 <= maxChoosableInteger <= 20",
+    "0 <= desiredTotal <= 300"
+  ],
+  "starterCode": "def canIWinGame(maxChoosableInteger: int, desiredTotal: int) -> bool:\n    pass\n",
+  "solutionCode": "def canIWinGame(maxChoosableInteger: int, desiredTotal: int) -> bool:\n    if desiredTotal <= 0: return True\n    total_sum = (maxChoosableInteger * (maxChoosableInteger + 1)) // 2\n    if total_sum < desiredTotal: return False\n    memo = {}\n    def dfs(mask, rem):\n        if mask in memo: return memo[mask]\n        for i in range(1, maxChoosableInteger + 1):\n            if not (mask & (1 << i)):\n                if i >= rem or not dfs(mask | (1 << i), rem - i):\n                    memo[mask] = True\n                    return True\n        memo[mask] = False\n        return False\n    return dfs(0, desiredTotal)\n",
+  "functionName": "canIWinGame",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        10,
+        11
+      ],
+      "expected": false,
+      "inputDisplay": "args=[10, 11]",
+      "expectedDisplay": "False",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        10,
+        0
+      ],
+      "expected": true,
+      "inputDisplay": "args=[10, 0]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        10,
+        1
+      ],
+      "expected": true,
+      "inputDisplay": "args=[10, 1]",
+      "expectedDisplay": "True",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Bitmask memoization: if choosing integer i forces opponent into a losing state (!dfs), current player wins."
+  ],
+  "python": {
+    "starterCode": "def canIWinGame(maxChoosableInteger: int, desiredTotal: int) -> bool:\n    pass\n",
+    "solutionCode": "def canIWinGame(maxChoosableInteger: int, desiredTotal: int) -> bool:\n    if desiredTotal <= 0: return True\n    total_sum = (maxChoosableInteger * (maxChoosableInteger + 1)) // 2\n    if total_sum < desiredTotal: return False\n    memo = {}\n    def dfs(mask, rem):\n        if mask in memo: return memo[mask]\n        for i in range(1, maxChoosableInteger + 1):\n            if not (mask & (1 << i)):\n                if i >= rem or not dfs(mask | (1 << i), rem - i):\n                    memo[mask] = True\n                    return True\n        memo[mask] = False\n        return False\n    return dfs(0, desiredTotal)\n"
+  },
+  "leetcodeId": 464,
+  "leetcodeTitle": "Can I Win (Minimax Bitmask Memoization)",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-can-i-win-minimax/"
+}

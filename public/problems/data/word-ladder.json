@@ -32,8 +32,8 @@
     "1 <= beginWord.length <= 10",
     "1 <= wordList.length <= 5000"
   ],
-  "starterCode": "function ladderLength(beginWord, endWord, wordList) {\n  return 0;\n}",
-  "solutionCode": "function ladderLength(beginWord, endWord, wordList) {\n  const words = new Set(wordList);\n  if (!words.has(endWord)) return 0;\n  const queue = [[beginWord, 1]];\n  const visited = new Set([beginWord]);\n\n  while (queue.length > 0) {\n    const [curr, level] = queue.shift();\n    if (curr === endWord) return level;\n    for (let i = 0; i < curr.length; i++) {\n      for (let c = 97; c <= 122; c++) {\n        const next = curr.slice(0, i) + String.fromCharCode(c) + curr.slice(i + 1);\n        if (words.has(next) && !visited.has(next)) {\n          visited.add(next);\n          queue.push([next, level + 1]);\n        }\n      }\n    }\n  }\n  return 0;\n}",
+  "starterCode": "def ladderLength(beginWord, endWord, wordList):\n    return 0\n",
+  "solutionCode": "from collections import deque\ndef ladderLength(beginWord, endWord, wordList):\n    words = set(wordList)\n    if endWord not in words:\n        return 0\n    q = deque([(beginWord, 1)])\n    visited = {beginWord}\n    while q:\n        curr, level = q.popleft()\n        if curr == endWord:\n            return level\n        for i in range(len(curr)):\n            for c in \"abcdefghijklmnopqrstuvwxyz\":\n                nxt = curr[:i] + c + curr[i+1:]\n                if nxt in words and nxt not in visited:\n                    visited.add(nxt)\n                    q.append((nxt, level + 1))\n    return 0\n",
   "functionName": "ladderLength",
   "testCases": [
     {

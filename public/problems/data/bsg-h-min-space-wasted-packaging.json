@@ -1,0 +1,102 @@
+{
+  "id": "bsg-h-min-space-wasted-packaging",
+  "wingId": "binary-search-greedy",
+  "floor": 498,
+  "title": "Minimum Space Wasted From Packaging",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-h-min-space-wasted-packaging",
+    "name": "Volumetric Golem",
+    "title": "Compressor of Empty Box Space",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Volume Clamp",
+    "attackPower": 3,
+    "defeatQuote": "Supplier with minimum total wasted box space selected!"
+  },
+  "description": "You have `n` packages with given `packages` weights. You are given `m` suppliers, each offering different box sizes `boxes[j]`. A package fits in a box if weight <= box size. Each package must be packed in a box. Return the minimum total wasted space modulo `10^9 + 7`, or `-1` if no supplier can package all packages.",
+  "examples": [
+    {
+      "input": "packages = [2,3,5], boxes = [[4,8],[2,8]]",
+      "output": "6"
+    },
+    {
+      "input": "packages = [2,3,5], boxes = [[1,4],[2,3],[3,4]]",
+      "output": "-1"
+    }
+  ],
+  "constraints": [
+    "1 <= packages.length <= 100000",
+    "1 <= boxes.length <= 100000"
+  ],
+  "starterCode": "def minWastedSpace(packages: list[int], boxes: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minWastedSpace(packages: list[int], boxes: list[list[int]]) -> int:\n    import bisect\n    MOD = 10**9 + 7\n    packages.sort()\n    total_pkg = sum(packages)\n    ans = float('inf')\n    for supplier in boxes:\n        supplier.sort()\n        if supplier[-1] < packages[-1]: continue\n        prev_idx = 0\n        total_box_space = 0\n        for b in supplier:\n            idx = bisect.bisect_right(packages, b)\n            count = idx - prev_idx\n            total_box_space += count * b\n            prev_idx = idx\n            if idx == len(packages): break\n        ans = min(ans, total_box_space - total_pkg)\n    return ans % MOD if ans != float('inf') else -1\n",
+  "functionName": "minWastedSpace",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          [
+            4,
+            8
+          ],
+          [
+            2,
+            8
+          ]
+        ]
+      ],
+      "expected": 6,
+      "inputDisplay": "args=[[2, 3, 5], [[4, 8], [2, 8]]]",
+      "expectedDisplay": "6",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[[2, 3, 5], [[1, 4], [2, 3], [3, 4]]]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort packages. For each box size, binary search how many packages it can cover and accumulate."
+  ],
+  "python": {
+    "starterCode": "def minWastedSpace(packages: list[int], boxes: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minWastedSpace(packages: list[int], boxes: list[list[int]]) -> int:\n    import bisect\n    MOD = 10**9 + 7\n    packages.sort()\n    total_pkg = sum(packages)\n    ans = float('inf')\n    for supplier in boxes:\n        supplier.sort()\n        if supplier[-1] < packages[-1]: continue\n        prev_idx = 0\n        total_box_space = 0\n        for b in supplier:\n            idx = bisect.bisect_right(packages, b)\n            count = idx - prev_idx\n            total_box_space += count * b\n            prev_idx = idx\n            if idx == len(packages): break\n        ans = min(ans, total_box_space - total_pkg)\n    return ans % MOD if ans != float('inf') else -1\n"
+  },
+  "leetcodeId": 1889,
+  "leetcodeTitle": "Minimum Space Wasted From Packaging",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-h-min-space-wasted-packaging/"
+}

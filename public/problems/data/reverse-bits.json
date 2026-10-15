@@ -27,8 +27,8 @@
   "constraints": [
     "The input must be a binary string or 32-bit integer."
   ],
-  "starterCode": "function reverseBits(n) {\n  return 0;\n}",
-  "solutionCode": "function reverseBits(n) {\n  let result = 0;\n  for (let i = 0; i < 32; i++) {\n    result = (result << 1) | (n & 1);\n    n >>>= 1;\n  }\n  return result >>> 0;\n}",
+  "starterCode": "def reverseBits(n):\n    return 0\n",
+  "solutionCode": "def reverseBits(n):\n    res = 0\n    for _ in range(32):\n        res = (res << 1) | (n & 1)\n        n >>= 1\n    return res\n",
   "functionName": "reverseBits",
   "testCases": [
     {

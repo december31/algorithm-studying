@@ -1,0 +1,113 @@
+{
+  "id": "bt-e-dice-combinations",
+  "wingId": "backtracking",
+  "floor": 206,
+  "title": "Dice Combinations Target Sum",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-e-dice-combinations",
+    "name": "Dice Drake",
+    "title": "Roller of Polyhedral Destinies",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "dragon",
+    "color": "#ec4899",
+    "attackName": "Dice Breath",
+    "attackPower": 1,
+    "defeatQuote": "All dice roll combinations summing to target were found!"
+  },
+  "description": "Given an integer `d` (number of standard 6-sided dice) and an integer `target`, return all combinations of rolls (each 1-6) that sum to `target`, sorted lexicographically.",
+  "examples": [
+    {
+      "input": "d = 2, target = 7",
+      "output": "[[1,6],[2,5],[3,4],[4,3],[5,2],[6,1]]"
+    }
+  ],
+  "constraints": [
+    "1 <= d <= 3",
+    "d <= target <= 6 * d"
+  ],
+  "starterCode": "def diceCombinations(d: int, target: int) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def diceCombinations(d: int, target: int) -> list[list[int]]:\n    res = []\n    def backtrack(dice_left, curr_sum, path):\n        if dice_left == 0:\n            if curr_sum == target:\n                res.append(list(path))\n            return\n        for face in range(1, 7):\n            if curr_sum + face + (dice_left - 1) * 1 <= target <= curr_sum + face + (dice_left - 1) * 6:\n                backtrack(dice_left - 1, curr_sum + face, path + [face])\n    backtrack(d, 0, [])\n    return res\n",
+  "functionName": "diceCombinations",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2,
+        7
+      ],
+      "expected": [
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          1
+        ]
+      ],
+      "inputDisplay": "args=[2, 7]",
+      "expectedDisplay": "[[1, 6], [2, 5], [3, 4], [4, 3], [5, 2], [6, 1]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        1,
+        5
+      ],
+      "expected": [
+        [
+          5
+        ]
+      ],
+      "inputDisplay": "args=[1, 5]",
+      "expectedDisplay": "[[5]]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        2,
+        12
+      ],
+      "expected": [
+        [
+          6,
+          6
+        ]
+      ],
+      "inputDisplay": "args=[2, 12]",
+      "expectedDisplay": "[[6, 6]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Prune whenever the target is impossible to reach with remaining dice."
+  ],
+  "python": {
+    "starterCode": "def diceCombinations(d: int, target: int) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def diceCombinations(d: int, target: int) -> list[list[int]]:\n    res = []\n    def backtrack(dice_left, curr_sum, path):\n        if dice_left == 0:\n            if curr_sum == target:\n                res.append(list(path))\n            return\n        for face in range(1, 7):\n            if curr_sum + face + (dice_left - 1) * 1 <= target <= curr_sum + face + (dice_left - 1) * 6:\n                backtrack(dice_left - 1, curr_sum + face, path + [face])\n    backtrack(d, 0, [])\n    return res\n"
+  },
+  "leetcodeId": 1155,
+  "leetcodeTitle": "Dice Combinations Target Sum",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-e-dice-combinations/"
+}

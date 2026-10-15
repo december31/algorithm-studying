@@ -31,8 +31,8 @@
   "constraints": [
     "1 <= n <= 9"
   ],
-  "starterCode": "function solveNQueens(n) {\n  return [];\n}",
-  "solutionCode": "function solveNQueens(n) {\n  const result = [];\n  const cols = new Set();\n  const diag1 = new Set(); // r - c\n  const diag2 = new Set(); // r + c\n  const board = Array.from({ length: n }, () => Array(n).fill('.'));\n\n  function backtrack(row) {\n    if (row === n) {\n      result.push(board.map((r) => r.join('')));\n      return;\n    }\n    for (let col = 0; col < n; col++) {\n      if (cols.has(col) || diag1.has(row - col) || diag2.has(row + col)) continue;\n      cols.add(col);\n      diag1.add(row - col);\n      diag2.add(row + col);\n      board[row][col] = 'Q';\n      backtrack(row + 1);\n      board[row][col] = '.';\n      cols.delete(col);\n      diag1.delete(row - col);\n      diag2.delete(row + col);\n    }\n  }\n  backtrack(0);\n  return result;\n}",
+  "starterCode": "def solveNQueens(n):\n    return []\n",
+  "solutionCode": "def solveNQueens(n):\n    res = []\n    cols, diag1, diag2 = set(), set(), set()\n    board = [[\".\"] * n for _ in range(n)]\n    def backtrack(r):\n        if r == n:\n            res.append([\"\".join(row) for row in board])\n            return\n        for c in range(n):\n            if c in cols or (r - c) in diag1 or (r + c) in diag2:\n                continue\n            cols.add(c)\n            diag1.add(r - c)\n            diag2.add(r + c)\n            board[r][c] = \"Q\"\n            backtrack(r + 1)\n            board[r][c] = \".\"\n            cols.remove(c)\n            diag1.remove(r - c)\n            diag2.remove(r + c)\n    backtrack(0)\n    return res\n",
   "functionName": "solveNQueens",
   "testCases": [
     {

@@ -1,0 +1,87 @@
+{
+  "id": "graph-m-word-ladder-length",
+  "wingId": "graphs",
+  "floor": 333,
+  "title": "Word Ladder (Shortest Mutation Chain)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-word-ladder-length",
+    "name": "Lexical Chimera",
+    "title": "Transformer of Monosyllabic Runes",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "manticore",
+    "color": "#ec4899",
+    "attackName": "Rune Shift",
+    "attackPower": 2,
+    "defeatQuote": "Shortest sequence of one-letter transformations computed!"
+  },
+  "description": "A transformation sequence from word `beginWord` to word `endWord` using a dictionary `wordList` is a sequence of words `beginWord -> s1 -> s2 -> ... -> sk` such that every adjacent pair differs by a single letter, and `endWord == sk`. Return the number of words in the shortest transformation sequence from `beginWord` to `endWord`, or 0 if no such sequence exists.",
+  "examples": [
+    {
+      "input": "beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+      "output": "5"
+    },
+    {
+      "input": "beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]",
+      "output": "0"
+    }
+  ],
+  "constraints": [
+    "1 <= beginWord.length <= 10",
+    "1 <= wordList.length <= 5000"
+  ],
+  "starterCode": "def ladderLength(beginWord: str, endWord: str, wordList: list[str]) -> int:\n    pass\n",
+  "solutionCode": "def ladderLength(beginWord: str, endWord: str, wordList: list[str]) -> int:\n    word_set = set(wordList)\n    if endWord not in word_set: return 0\n    from collections import deque\n    q = deque([(beginWord, 1)])\n    visited = set([beginWord])\n    while q:\n        word, step = q.popleft()\n        if word == endWord: return step\n        for i in range(len(word)):\n            for c in 'abcdefghijklmnopqrstuvwxyz':\n                nxt = word[:i] + c + word[i+1:]\n                if nxt in word_set and nxt not in visited:\n                    visited.add(nxt)\n                    q.append((nxt, step + 1))\n    return 0\n",
+  "functionName": "ladderLength",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log",
+          "cog"
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "args=['hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log"
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "args=['hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log']]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "BFS exploring all 26 character variations at each letter position."
+  ],
+  "python": {
+    "starterCode": "def ladderLength(beginWord: str, endWord: str, wordList: list[str]) -> int:\n    pass\n",
+    "solutionCode": "def ladderLength(beginWord: str, endWord: str, wordList: list[str]) -> int:\n    word_set = set(wordList)\n    if endWord not in word_set: return 0\n    from collections import deque\n    q = deque([(beginWord, 1)])\n    visited = set([beginWord])\n    while q:\n        word, step = q.popleft()\n        if word == endWord: return step\n        for i in range(len(word)):\n            for c in 'abcdefghijklmnopqrstuvwxyz':\n                nxt = word[:i] + c + word[i+1:]\n                if nxt in word_set and nxt not in visited:\n                    visited.add(nxt)\n                    q.append((nxt, step + 1))\n    return 0\n"
+  },
+  "leetcodeId": 127,
+  "leetcodeTitle": "Word Ladder (Shortest Mutation Chain)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-word-ladder-length/"
+}

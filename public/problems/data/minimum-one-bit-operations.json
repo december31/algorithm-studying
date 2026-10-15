@@ -31,8 +31,8 @@
   "constraints": [
     "0 <= n <= 10^9"
   ],
-  "starterCode": "function minimumOneBitOperations(n) {\n  return 0;\n}",
-  "solutionCode": "function minimumOneBitOperations(n) {\n  let ans = 0;\n  while (n > 0) {\n    ans ^= n;\n    n >>= 1;\n  }\n  return ans;\n}",
+  "starterCode": "def minimumOneBitOperations(n):\n    return 0\n",
+  "solutionCode": "def minimumOneBitOperations(n):\n    ans = 0\n    while n > 0:\n        ans ^= n\n        n >>= 1\n    return ans\n",
   "functionName": "minimumOneBitOperations",
   "testCases": [
     {

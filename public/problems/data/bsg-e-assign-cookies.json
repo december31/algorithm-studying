@@ -1,0 +1,86 @@
+{
+  "id": "bsg-e-assign-cookies",
+  "wingId": "binary-search-greedy",
+  "floor": 406,
+  "title": "Assign Cookies (Greedy Contentment)",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-e-assign-cookies",
+    "name": "Baker Imp",
+    "title": "Distributor of Sugary Morsels",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "imp",
+    "color": "#f97316",
+    "attackName": "Cookie Rain",
+    "attackPower": 1,
+    "defeatQuote": "Maximum number of children satisfied with cookie sizes!"
+  },
+  "description": "Assume you are an awesome parent and want to give your children some cookies. Each child `i` has a greed factor `g[i]`, and each cookie `j` has a size `s[j]`. If `s[j] >= g[i]`, we can assign cookie `j` to child `i`. Your goal is to maximize the number of content children and return the count.",
+  "examples": [
+    {
+      "input": "g = [1,2,3], s = [1,1]",
+      "output": "1"
+    },
+    {
+      "input": "g = [1,2], s = [1,2,3]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= g.length <= 30000",
+    "0 <= s.length <= 30000"
+  ],
+  "starterCode": "def findContentChildren(g: list[int], s: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def findContentChildren(g: list[int], s: list[int]) -> int:\n    g.sort()\n    s.sort()\n    i = j = 0\n    while i < len(g) and j < len(s):\n        if s[j] >= g[i]:\n            i += 1\n        j += 1\n    return i\n",
+  "functionName": "findContentChildren",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "args=[[1, 2, 3], [1, 1]]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[1, 2], [1, 2, 3]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Sort both arrays and greedily satisfy the least greedy child with the smallest sufficient cookie."
+  ],
+  "python": {
+    "starterCode": "def findContentChildren(g: list[int], s: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def findContentChildren(g: list[int], s: list[int]) -> int:\n    g.sort()\n    s.sort()\n    i = j = 0\n    while i < len(g) and j < len(s):\n        if s[j] >= g[i]:\n            i += 1\n        j += 1\n    return i\n"
+  },
+  "leetcodeId": 455,
+  "leetcodeTitle": "Assign Cookies (Greedy Contentment)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-e-assign-cookies/"
+}

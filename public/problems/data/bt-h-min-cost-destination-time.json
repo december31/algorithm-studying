@@ -1,0 +1,196 @@
+{
+  "id": "bt-h-min-cost-destination-time",
+  "wingId": "backtracking",
+  "floor": 299,
+  "title": "Minimum Cost to Reach Destination in Time",
+  "difficulty": "hard",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-bt-h-min-cost-destination-time",
+    "name": "Toll Spectre",
+    "title": "Tribute Master of Timed Transit",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "wraith",
+    "color": "#eab308",
+    "attackName": "Toll Levy",
+    "attackPower": 3,
+    "defeatQuote": "Minimum passing fee under maxTime deadline computed!"
+  },
+  "description": "There is a country of `n` cities numbered from 0 to n - 1. You are given `maxTime`, a 2D integer array `edges` where `edges[i] = [ui, vi, timei]`, and an integer array `passingFees` of length `n`. Return the minimum fee to reach city n - 1 from city 0 in at most `maxTime` minutes, or `-1` if there is no such journey.",
+  "examples": [
+    {
+      "input": "maxTime = 30, edges = [[0,1,10],[1,2,10],[2,5,10],[0,3,1],...], passingFees = [...]",
+      "output": "11"
+    }
+  ],
+  "constraints": [
+    "1 <= maxTime <= 1000",
+    "2 <= n <= 1000"
+  ],
+  "starterCode": "def minCost(maxTime: int, edges: list[list[int]], passingFees: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minCost(maxTime: int, edges: list[list[int]], passingFees: list[int]) -> int:\n    import heapq\n    from collections import defaultdict\n    n = len(passingFees)\n    graph = defaultdict(list)\n    for u, v, t in edges:\n        graph[u].append((v, t))\n        graph[v].append((u, t))\n    min_time = [float('inf')] * n\n    pq = [(passingFees[0], 0, 0)]\n    min_time[0] = 0\n    while pq:\n        cost, time, u = heapq.heappop(pq)\n        if u == n - 1: return cost\n        for v, t in graph[u]:\n            nt = time + t\n            if nt <= maxTime and nt < min_time[v]:\n                min_time[v] = nt\n                heapq.heappush(pq, (cost + passingFees[v], nt, v))\n    return -1\n",
+  "functionName": "minCost",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        30,
+        [
+          [
+            0,
+            1,
+            10
+          ],
+          [
+            1,
+            2,
+            10
+          ],
+          [
+            2,
+            5,
+            10
+          ],
+          [
+            0,
+            3,
+            1
+          ],
+          [
+            3,
+            4,
+            10
+          ],
+          [
+            4,
+            5,
+            15
+          ]
+        ],
+        [
+          5,
+          1,
+          2,
+          20,
+          20,
+          3
+        ]
+      ],
+      "expected": 11,
+      "inputDisplay": "args=[30, [[0, 1, 10], [1, 2, 10], [2, 5, 10], [0, 3, 1], [3, 4, 10], [4, 5, 15]",
+      "expectedDisplay": "11",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        29,
+        [
+          [
+            0,
+            1,
+            10
+          ],
+          [
+            1,
+            2,
+            10
+          ],
+          [
+            2,
+            5,
+            10
+          ],
+          [
+            0,
+            3,
+            1
+          ],
+          [
+            3,
+            4,
+            10
+          ],
+          [
+            4,
+            5,
+            15
+          ]
+        ],
+        [
+          5,
+          1,
+          2,
+          20,
+          20,
+          3
+        ]
+      ],
+      "expected": 48,
+      "inputDisplay": "args=[29, [[0, 1, 10], [1, 2, 10], [2, 5, 10], [0, 3, 1], [3, 4, 10], [4, 5, 15]",
+      "expectedDisplay": "48",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        25,
+        [
+          [
+            0,
+            1,
+            10
+          ],
+          [
+            1,
+            2,
+            10
+          ],
+          [
+            2,
+            5,
+            10
+          ],
+          [
+            0,
+            3,
+            1
+          ],
+          [
+            3,
+            4,
+            10
+          ],
+          [
+            4,
+            5,
+            15
+          ]
+        ],
+        [
+          5,
+          1,
+          2,
+          20,
+          20,
+          3
+        ]
+      ],
+      "expected": -1,
+      "inputDisplay": "args=[25, [[0, 1, 10], [1, 2, 10], [2, 5, 10], [0, 3, 1], [3, 4, 10], [4, 5, 15]",
+      "expectedDisplay": "-1",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Modified Dijkstra keeping track of best arrival time at each node."
+  ],
+  "python": {
+    "starterCode": "def minCost(maxTime: int, edges: list[list[int]], passingFees: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minCost(maxTime: int, edges: list[list[int]], passingFees: list[int]) -> int:\n    import heapq\n    from collections import defaultdict\n    n = len(passingFees)\n    graph = defaultdict(list)\n    for u, v, t in edges:\n        graph[u].append((v, t))\n        graph[v].append((u, t))\n    min_time = [float('inf')] * n\n    pq = [(passingFees[0], 0, 0)]\n    min_time[0] = 0\n    while pq:\n        cost, time, u = heapq.heappop(pq)\n        if u == n - 1: return cost\n        for v, t in graph[u]:\n            nt = time + t\n            if nt <= maxTime and nt < min_time[v]:\n                min_time[v] = nt\n                heapq.heappush(pq, (cost + passingFees[v], nt, v))\n    return -1\n"
+  },
+  "leetcodeId": 1928,
+  "leetcodeTitle": "Minimum Cost to Reach Destination in Time",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-h-min-cost-destination-time/"
+}

@@ -1,0 +1,86 @@
+{
+  "id": "bsg-m-broken-calculator",
+  "wingId": "binary-search-greedy",
+  "floor": 433,
+  "title": "Broken Calculator (Greedy Reverse Operations)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-broken-calculator",
+    "name": "Arithmancy Wraith",
+    "title": "Tinkerer with Faulty Operations",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "wraith",
+    "color": "#ec4899",
+    "attackName": "Parity Split",
+    "attackPower": 2,
+    "defeatQuote": "Minimum steps to reach target from startValue with (*2, -1) buttons!"
+  },
+  "description": "There is a broken calculator that has the following two operations: Multiply the number on display by 2, or subtract 1 from the number on display. Given two integers `startValue` and `target`, return the minimum number of operations needed to display `target`.",
+  "examples": [
+    {
+      "input": "startValue = 2, target = 3",
+      "output": "2"
+    },
+    {
+      "input": "startValue = 5, target = 8",
+      "output": "2"
+    },
+    {
+      "input": "startValue = 3, target = 10",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "1 <= startValue, target <= 10^9"
+  ],
+  "starterCode": "def brokenCalc(startValue: int, target: int) -> int:\n    pass\n",
+  "solutionCode": "def brokenCalc(startValue: int, target: int) -> int:\n    ops = 0\n    while target > startValue:\n        ops += 1\n        if target % 2 == 1: target += 1\n        else: target //= 2\n    return ops + (startValue - target)\n",
+  "functionName": "brokenCalc",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        2,
+        3
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[2, 3]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        5,
+        8
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[5, 8]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        3,
+        10
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[3, 10]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Work backwards from target: if target is odd, add 1; if even, divide by 2."
+  ],
+  "python": {
+    "starterCode": "def brokenCalc(startValue: int, target: int) -> int:\n    pass\n",
+    "solutionCode": "def brokenCalc(startValue: int, target: int) -> int:\n    ops = 0\n    while target > startValue:\n        ops += 1\n        if target % 2 == 1: target += 1\n        else: target //= 2\n    return ops + (startValue - target)\n"
+  },
+  "leetcodeId": 991,
+  "leetcodeTitle": "Broken Calculator (Greedy Reverse Operations)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-broken-calculator/"
+}

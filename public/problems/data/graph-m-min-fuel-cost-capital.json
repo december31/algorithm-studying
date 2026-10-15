@@ -1,0 +1,110 @@
+{
+  "id": "graph-m-min-fuel-cost-capital",
+  "wingId": "graphs",
+  "floor": 365,
+  "title": "Minimum Fuel Cost to Report to Capital",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-min-fuel-cost-capital",
+    "name": "Fleet Vanguard",
+    "title": "Consolidator of Carpooling Convoys",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "gargoyle",
+    "color": "#10b981",
+    "attackName": "Carpool Rush",
+    "attackPower": 2,
+    "defeatQuote": "Minimum fuel liters spent transporting all representatives to node 0!"
+  },
+  "description": "There is a tree (a connected undirected graph with no cycles) representing a country with `n` cities and `roads`. City 0 is the capital. There is a representative in every city. There is a car with `seats` capacity in each city. Representatives can carpool. Return the minimum number of liters of fuel needed to bring everyone to the capital.",
+  "examples": [
+    {
+      "input": "roads = [[0,1],[0,2],[0,3]], seats = 5",
+      "output": "3"
+    },
+    {
+      "input": "roads = [[3,1],[3,2],[1,0],[0,4],[0,5],[4,6]], seats = 2",
+      "output": "7"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 100000",
+    "1 <= seats <= 100000"
+  ],
+  "starterCode": "def minimumFuelCost(roads: list[list[int]], seats: int) -> int:\n    pass\n",
+  "solutionCode": "def minimumFuelCost(roads: list[list[int]], seats: int) -> int:\n    import math\n    from collections import defaultdict\n    graph = defaultdict(list)\n    for u, v in roads:\n        graph[u].append(v)\n        graph[v].append(u)\n    total_fuel = [0]\n    def dfs(u, p):\n        people = 1\n        for v in graph[u]:\n            if v != p:\n                people += dfs(v, u)\n        if u != 0:\n            total_fuel[0] += math.ceil(people / seats)\n        return people\n    dfs(0, -1)\n    return total_fuel[0]\n",
+  "functionName": "minimumFuelCost",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        5
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[[[0, 1], [0, 2], [0, 3]], 5]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            4,
+            6
+          ]
+        ],
+        2
+      ],
+      "expected": 7,
+      "inputDisplay": "args=[[[3, 1], [3, 2], [1, 0], [0, 4], [0, 5], [4, 6]], 2]",
+      "expectedDisplay": "7",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "DFS from capital 0. For each subtree, liters required along its incoming edge is ceil(subtree_size / seats)."
+  ],
+  "python": {
+    "starterCode": "def minimumFuelCost(roads: list[list[int]], seats: int) -> int:\n    pass\n",
+    "solutionCode": "def minimumFuelCost(roads: list[list[int]], seats: int) -> int:\n    import math\n    from collections import defaultdict\n    graph = defaultdict(list)\n    for u, v in roads:\n        graph[u].append(v)\n        graph[v].append(u)\n    total_fuel = [0]\n    def dfs(u, p):\n        people = 1\n        for v in graph[u]:\n            if v != p:\n                people += dfs(v, u)\n        if u != 0:\n            total_fuel[0] += math.ceil(people / seats)\n        return people\n    dfs(0, -1)\n    return total_fuel[0]\n"
+  },
+  "leetcodeId": 2477,
+  "leetcodeTitle": "Minimum Fuel Cost to Report to Capital",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-min-fuel-cost-capital/"
+}

@@ -1,0 +1,126 @@
+{
+  "id": "graph-m-min-trio-degree",
+  "wingId": "graphs",
+  "floor": 370,
+  "title": "Minimum Degree of a Connected Trio",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-min-trio-degree",
+    "name": "Triquetra Lich",
+    "title": "Lord of the 3-Way Cliques",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#ef4444",
+    "attackName": "Triune Annihilation",
+    "attackPower": 2,
+    "defeatQuote": "Trio of mutually connected nodes with minimal external degree found!"
+  },
+  "description": "You are given an undirected graph with `n` nodes labeled from 1 to `n` and `edges`. A connected trio is a set of three nodes where there is an edge between every pair. The degree of a connected trio is the number of edges outside the trio incident to any node in the trio. Return the minimum degree of a connected trio in the graph, or -1 if none exists.",
+  "examples": [
+    {
+      "input": "n = 6, edges = [[1,2],[1,3],[3,2],[4,1],[5,2],[3,6]]",
+      "output": "3"
+    }
+  ],
+  "constraints": [
+    "2 <= n <= 400",
+    "edges.length <= n * (n - 1) / 2"
+  ],
+  "starterCode": "def minTrioDegree(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+  "solutionCode": "def minTrioDegree(n: int, edges: list[list[int]]) -> int:\n    adj = [[False] * (n + 1) for _ in range(n + 1)]\n    deg = [0] * (n + 1)\n    for u, v in edges:\n        adj[u][v] = adj[v][u] = True\n        deg[u] += 1\n        deg[v] += 1\n    ans = float('inf')\n    for u in range(1, n + 1):\n        for v in range(u + 1, n + 1):\n            if adj[u][v]:\n                for w in range(v + 1, n + 1):\n                    if adj[u][w] and adj[v][w]:\n                        ans = min(ans, deg[u] + deg[v] + deg[w] - 6)\n    return ans if ans != float('inf') else -1\n",
+  "functionName": "minTrioDegree",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        6,
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            3,
+            6
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "args=[6, [[1, 2], [1, 3], [3, 2], [4, 1], [5, 2], [3, 6]]]",
+      "expectedDisplay": "3",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        7,
+        [
+          [
+            1,
+            3
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            2,
+            6
+          ]
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "args=[7, [[1, 3], [4, 1], [4, 3], [2, 5], [5, 6], [6, 7], [7, 5], [2, 6]]]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Iterate all trios (u < v < w). If all three edges exist, external degree is deg[u] + deg[v] + deg[w] - 6."
+  ],
+  "python": {
+    "starterCode": "def minTrioDegree(n: int, edges: list[list[int]]) -> int:\n    pass\n",
+    "solutionCode": "def minTrioDegree(n: int, edges: list[list[int]]) -> int:\n    adj = [[False] * (n + 1) for _ in range(n + 1)]\n    deg = [0] * (n + 1)\n    for u, v in edges:\n        adj[u][v] = adj[v][u] = True\n        deg[u] += 1\n        deg[v] += 1\n    ans = float('inf')\n    for u in range(1, n + 1):\n        for v in range(u + 1, n + 1):\n            if adj[u][v]:\n                for w in range(v + 1, n + 1):\n                    if adj[u][w] and adj[v][w]:\n                        ans = min(ans, deg[u] + deg[v] + deg[w] - 6)\n    return ans if ans != float('inf') else -1\n"
+  },
+  "leetcodeId": 1761,
+  "leetcodeTitle": "Minimum Degree of a Connected Trio",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-min-trio-degree/"
+}

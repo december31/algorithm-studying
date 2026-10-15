@@ -32,8 +32,8 @@
     "1 <= s.length <= 10^5",
     "s consists of lowercase English letters."
   ],
-  "starterCode": "function removeDuplicates(s) {\n  return \"\";\n}",
-  "solutionCode": "function removeDuplicates(s) {\n  const stack = [];\n  for (const c of s) {\n    if (stack.length > 0 && stack[stack.length - 1] === c) {\n      stack.pop();\n    } else {\n      stack.push(c);\n    }\n  }\n  return stack.join('');\n}",
+  "starterCode": "def removeDuplicates(s):\n    return \"\"\n",
+  "solutionCode": "def removeDuplicates(s):\n    stack = []\n    for c in s:\n        if stack and stack[-1] == c:\n            stack.pop()\n        else:\n            stack.append(c)\n    return \"\".join(stack)\n",
   "functionName": "removeDuplicates",
   "testCases": [
     {

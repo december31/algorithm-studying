@@ -1,0 +1,104 @@
+{
+  "id": "bt-m-combination-sum-coins",
+  "wingId": "backtracking",
+  "floor": 269,
+  "title": "Combination Sum with 4 Coins",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-combination-sum-coins",
+    "name": "Quarter Warden",
+    "title": "Coin Changer of Exact Denominations",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#f59e0b",
+    "attackName": "Coin Smash",
+    "attackPower": 2,
+    "defeatQuote": "Combinations of [1, 5, 10, 25] coins totaled exact change!"
+  },
+  "description": "Given an integer `target`, return all combinations of coin denominations `[1, 5, 10, 25]` that sum up to `target`. Each coin may be used an unlimited number of times.",
+  "examples": [
+    {
+      "input": "target = 10",
+      "output": "[[1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,5],[5,5],[10]]"
+    }
+  ],
+  "constraints": [
+    "1 <= target <= 30"
+  ],
+  "starterCode": "def combinationSumCoins(target: int) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def combinationSumCoins(target: int) -> list[list[int]]:\n    coins = [1, 5, 10, 25]\n    res = []\n    def backtrack(idx, rem, path):\n        if rem == 0:\n            res.append(list(path))\n            return\n        for i in range(idx, len(coins)):\n            if coins[i] > rem: break\n            path.append(coins[i])\n            backtrack(i, rem - coins[i], path)\n            path.pop()\n    backtrack(0, target, [])\n    res.sort(key=lambda c: (len(c), c))\n    return res\n",
+  "functionName": "combinationSumCoins",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        10
+      ],
+      "expected": [
+        [
+          10
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "inputDisplay": "10",
+      "expectedDisplay": "[[10], [5, 5], [1, 1, 1, 1, 1, 5], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        5
+      ],
+      "expected": [
+        [
+          5
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "inputDisplay": "5",
+      "expectedDisplay": "[[5], [1, 1, 1, 1, 1]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Unbounded knapsack combination sum with sorted coin denominations."
+  ],
+  "python": {
+    "starterCode": "def combinationSumCoins(target: int) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def combinationSumCoins(target: int) -> list[list[int]]:\n    coins = [1, 5, 10, 25]\n    res = []\n    def backtrack(idx, rem, path):\n        if rem == 0:\n            res.append(list(path))\n            return\n        for i in range(idx, len(coins)):\n            if coins[i] > rem: break\n            path.append(coins[i])\n            backtrack(i, rem - coins[i], path)\n            path.pop()\n    backtrack(0, target, [])\n    res.sort(key=lambda c: (len(c), c))\n    return res\n"
+  },
+  "leetcodeId": null,
+  "leetcodeTitle": "Combination Sum with 4 Coins",
+  "leetcodeUrl": null
+}

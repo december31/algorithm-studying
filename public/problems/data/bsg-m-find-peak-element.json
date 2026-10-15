@@ -1,0 +1,77 @@
+{
+  "id": "bsg-m-find-peak-element",
+  "wingId": "binary-search-greedy",
+  "floor": 416,
+  "title": "Find Peak Element (Strict Greater Neighbor)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-find-peak-element",
+    "name": "Summit Titan",
+    "title": "Dweller on Any Local Crest",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "titan",
+    "color": "#f59e0b",
+    "attackName": "Ridge Tremor",
+    "attackPower": 2,
+    "defeatQuote": "Any valid local peak element index returned in O(log n)!"
+  },
+  "description": "A peak element is an element that is strictly greater than its neighbors. Given a 0-indexed integer array `nums`, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks. You must write an algorithm that runs in `O(log n)` time.",
+  "examples": [
+    {
+      "input": "nums = [1,2,3,1]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [1,2,1,3,5,6,4]",
+      "output": "5"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 1000",
+    "nums[i] != nums[i + 1]"
+  ],
+  "starterCode": "def findPeakElement(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def findPeakElement(nums: list[int]) -> int:\n    lo, hi = 0, len(nums) - 1\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if nums[mid] < nums[mid + 1]:\n            lo = mid + 1\n        else:\n            hi = mid\n    return lo\n",
+  "functionName": "findPeakElement",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2,
+          3,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 2, 3, 1]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 0,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "0",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "If nums[mid] < nums[mid + 1], a peak must exist on the right side. Otherwise, a peak exists on the left."
+  ],
+  "python": {
+    "starterCode": "def findPeakElement(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def findPeakElement(nums: list[int]) -> int:\n    lo, hi = 0, len(nums) - 1\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if nums[mid] < nums[mid + 1]:\n            lo = mid + 1\n        else:\n            hi = mid\n    return lo\n"
+  },
+  "leetcodeId": 162,
+  "leetcodeTitle": "Find Peak Element (Strict Greater Neighbor)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-find-peak-element/"
+}

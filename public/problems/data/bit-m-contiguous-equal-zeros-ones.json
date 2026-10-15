@@ -1,0 +1,76 @@
+{
+  "id": "bit-m-contiguous-equal-zeros-ones",
+  "wingId": "bit-manipulation",
+  "floor": 553,
+  "title": "Contiguous Array with Equal 0s and 1s",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-m-contiguous-equal-zeros-ones",
+    "name": "Equilibrium Sphinx",
+    "title": "Measurer of Balanced Binary Segments",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "sphinx",
+    "color": "#06b6d4",
+    "attackName": "Binary Equilibrium",
+    "attackPower": 2,
+    "defeatQuote": "Longest contiguous subarray with equal number of 0s and 1s measured!"
+  },
+  "description": "Given a binary array `nums`, return the maximum length of a contiguous subarray with an equal number of `0` and `1`.",
+  "examples": [
+    {
+      "input": "nums = [0,1]",
+      "output": "2"
+    },
+    {
+      "input": "nums = [0,1,0]",
+      "output": "2"
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 100000"
+  ],
+  "starterCode": "def findMaxLength(nums: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def findMaxLength(nums: list[int]) -> int:\n    seen = {0: -1}\n    curr = 0\n    max_len = 0\n    for i, x in enumerate(nums):\n        curr += (1 if x == 1 else -1)\n        if curr in seen:\n            max_len = max(max_len, i - seen[curr])\n        else:\n            seen[curr] = i\n    return max_len\n",
+  "functionName": "findMaxLength",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[0, 1]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[0, 1, 0]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Treat 0 as -1 and 1 as +1. Problem reduces to finding longest subarray with sum 0."
+  ],
+  "python": {
+    "starterCode": "def findMaxLength(nums: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def findMaxLength(nums: list[int]) -> int:\n    seen = {0: -1}\n    curr = 0\n    max_len = 0\n    for i, x in enumerate(nums):\n        curr += (1 if x == 1 else -1)\n        if curr in seen:\n            max_len = max(max_len, i - seen[curr])\n        else:\n            seen[curr] = i\n    return max_len\n"
+  },
+  "leetcodeId": 525,
+  "leetcodeTitle": "Contiguous Array with Equal 0s and 1s",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-m-contiguous-equal-zeros-ones/"
+}

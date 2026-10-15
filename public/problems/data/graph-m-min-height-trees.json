@@ -1,0 +1,123 @@
+{
+  "id": "graph-m-min-height-trees",
+  "wingId": "graphs",
+  "floor": 336,
+  "title": "Minimum Height Trees (Graph Centroids)",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-min-height-trees",
+    "name": "Centroid Titan",
+    "title": "Balancing Center of the Forest",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "titan",
+    "color": "#8b5cf6",
+    "attackName": "Gravity Well",
+    "attackPower": 2,
+    "defeatQuote": "Forest centroids that minimize tree height discovered!"
+  },
+  "description": "A tree is an undirected graph in which any two vertices are connected by exactly one path. You are given `n` nodes labeled from 0 to `n - 1` and `edges`. Find all trees that have minimum height and return a list of their root labels in sorted order.",
+  "examples": [
+    {
+      "input": "n = 4, edges = [[1,0],[1,2],[1,3]]",
+      "output": "[1]"
+    },
+    {
+      "input": "n = 6, edges = [[3,0],[3,1],[3,2],[3,4],[5,4]]",
+      "output": "[3,4]"
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 20000"
+  ],
+  "starterCode": "def findMinHeightTrees(n: int, edges: list[list[int]]) -> list[int]:\n    pass\n",
+  "solutionCode": "def findMinHeightTrees(n: int, edges: list[list[int]]) -> list[int]:\n    if n <= 2: return sorted(list(range(n)))\n    from collections import defaultdict, deque\n    adj = defaultdict(set)\n    for u, v in edges:\n        adj[u].add(v)\n        adj[v].add(u)\n    leaves = deque([i for i in range(n) if len(adj[i]) == 1])\n    remaining = n\n    while remaining > 2:\n        leaves_cnt = len(leaves)\n        remaining -= leaves_cnt\n        for _ in range(leaves_cnt):\n            leaf = leaves.popleft()\n            neighbor = adj[leaf].pop()\n            adj[neighbor].remove(leaf)\n            if len(adj[neighbor]) == 1:\n                leaves.append(neighbor)\n    return sorted(list(leaves))\n",
+  "functionName": "findMinHeightTrees",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        4,
+        [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "inputDisplay": "args=[4, [[1, 0], [1, 2], [1, 3]]]",
+      "expectedDisplay": "[1]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        6,
+        [
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            4
+          ]
+        ]
+      ],
+      "expected": [
+        3,
+        4
+      ],
+      "inputDisplay": "args=[6, [[3, 0], [3, 1], [3, 2], [3, 4], [5, 4]]]",
+      "expectedDisplay": "[3, 4]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        1,
+        []
+      ],
+      "expected": [
+        0
+      ],
+      "inputDisplay": "args=[1, []]",
+      "expectedDisplay": "[0]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Prune leaves layer by layer (topological peel) until 1 or 2 centroid nodes remain."
+  ],
+  "python": {
+    "starterCode": "def findMinHeightTrees(n: int, edges: list[list[int]]) -> list[int]:\n    pass\n",
+    "solutionCode": "def findMinHeightTrees(n: int, edges: list[list[int]]) -> list[int]:\n    if n <= 2: return sorted(list(range(n)))\n    from collections import defaultdict, deque\n    adj = defaultdict(set)\n    for u, v in edges:\n        adj[u].add(v)\n        adj[v].add(u)\n    leaves = deque([i for i in range(n) if len(adj[i]) == 1])\n    remaining = n\n    while remaining > 2:\n        leaves_cnt = len(leaves)\n        remaining -= leaves_cnt\n        for _ in range(leaves_cnt):\n            leaf = leaves.popleft()\n            neighbor = adj[leaf].pop()\n            adj[neighbor].remove(leaf)\n            if len(adj[neighbor]) == 1:\n                leaves.append(neighbor)\n    return sorted(list(leaves))\n"
+  },
+  "leetcodeId": 310,
+  "leetcodeTitle": "Minimum Height Trees (Graph Centroids)",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-min-height-trees/"
+}

@@ -1,0 +1,115 @@
+{
+  "id": "ds-m-book-calendar",
+  "wingId": "data-structures",
+  "floor": 154,
+  "title": "My Calendar I Single Booking",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-m-book-calendar",
+    "name": "Temporal Archon",
+    "title": "Gatekeeper of Non-Overlapping Epochs",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "lich",
+    "color": "#8b5cf6",
+    "attackName": "Time Paradox",
+    "attackPower": 2,
+    "defeatQuote": "Your interval intersection test prevented double booking!"
+  },
+  "description": "You are implementing a program to use as your calendar. We can add a new event if adding the event will not cause a double booking. Given a list of booking intervals `[start, end)`, return a list of booleans indicating whether each booking was successfully scheduled.",
+  "examples": [
+    {
+      "input": "intervals = [[10,20],[15,25],[20,30]]",
+      "output": "[True,False,True]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(intervals) <= 1000",
+    "0 <= start < end <= 10^9"
+  ],
+  "starterCode": "def bookCalendar(intervals: list[list[int]]) -> list[bool]:\n    pass\n",
+  "solutionCode": "def bookCalendar(intervals: list[list[int]]) -> list[bool]:\n    booked = []\n    res = []\n    for s, e in intervals:\n        conflict = False\n        for bs, be in booked:\n            if max(s, bs) < min(e, be):\n                conflict = True\n                break\n        if not conflict:\n            booked.append((s, e))\n            res.append(True)\n        else:\n            res.append(False)\n    return res\n",
+  "functionName": "bookCalendar",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            10,
+            20
+          ],
+          [
+            15,
+            25
+          ],
+          [
+            20,
+            30
+          ]
+        ]
+      ],
+      "expected": [
+        true,
+        false,
+        true
+      ],
+      "inputDisplay": "[[10, 20], [15, 25], [20, 30]]",
+      "expectedDisplay": "[True, False, True]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            47,
+            50
+          ],
+          [
+            33,
+            41
+          ],
+          [
+            39,
+            45
+          ],
+          [
+            33,
+            42
+          ],
+          [
+            25,
+            32
+          ],
+          [
+            26,
+            35
+          ]
+        ]
+      ],
+      "expected": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        false
+      ],
+      "inputDisplay": "[[47, 50], [33, 41], [39, 45], [33, 42], [25, 32], [26, 35]]",
+      "expectedDisplay": "[True, True, False, False, True, False]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Two intervals [s1, e1) and [s2, e2) overlap if and only if max(s1, s2) < min(e1, e2)."
+  ],
+  "python": {
+    "starterCode": "def bookCalendar(intervals: list[list[int]]) -> list[bool]:\n    pass\n",
+    "solutionCode": "def bookCalendar(intervals: list[list[int]]) -> list[bool]:\n    booked = []\n    res = []\n    for s, e in intervals:\n        conflict = False\n        for bs, be in booked:\n            if max(s, bs) < min(e, be):\n                conflict = True\n                break\n        if not conflict:\n            booked.append((s, e))\n            res.append(True)\n        else:\n            res.append(False)\n    return res\n"
+  },
+  "leetcodeId": 729,
+  "leetcodeTitle": "My Calendar I Single Booking",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-m-book-calendar/"
+}

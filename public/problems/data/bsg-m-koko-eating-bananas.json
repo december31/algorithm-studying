@@ -1,0 +1,100 @@
+{
+  "id": "bsg-m-koko-eating-bananas",
+  "wingId": "binary-search-greedy",
+  "floor": 417,
+  "title": "Koko Eating Bananas (Binary Search on Answer)",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bsg-m-koko-eating-bananas",
+    "name": "Simian Titan",
+    "title": "Glutton of Monotonic Speeds",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "boss",
+    "color": "#eab308",
+    "attackName": "Banana Barrage",
+    "attackPower": 2,
+    "defeatQuote": "Minimum integer eating speed k to finish all piles within h hours!"
+  },
+  "description": "Koko loves to eat bananas. There are `n` piles of bananas, the `i`-th pile has `piles[i]` bananas. The guards will come back in `h` hours. Koko can decide her bananas-per-hour eating speed of `k`. Return the minimum integer `k` such that she can eat all the bananas within `h` hours.",
+  "examples": [
+    {
+      "input": "piles = [3,6,7,11], h = 8",
+      "output": "4"
+    },
+    {
+      "input": "piles = [30,11,23,4,20], h = 5",
+      "output": "30"
+    }
+  ],
+  "constraints": [
+    "piles.length <= h <= 10^9",
+    "1 <= piles[i] <= 10^9"
+  ],
+  "starterCode": "def minEatingSpeed(piles: list[int], h: int) -> int:\n    pass\n",
+  "solutionCode": "def minEatingSpeed(piles: list[int], h: int) -> int:\n    import math\n    lo, hi = 1, max(piles)\n    ans = hi\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        hours = sum(math.ceil(p / mid) for p in piles)\n        if hours <= h:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n",
+  "functionName": "minEatingSpeed",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          3,
+          6,
+          7,
+          11
+        ],
+        8
+      ],
+      "expected": 4,
+      "inputDisplay": "args=[[3, 6, 7, 11], 8]",
+      "expectedDisplay": "4",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          30,
+          11,
+          23,
+          4,
+          20
+        ],
+        5
+      ],
+      "expected": 30,
+      "inputDisplay": "args=[[30, 11, 23, 4, 20], 5]",
+      "expectedDisplay": "30",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          30,
+          11,
+          23,
+          4,
+          20
+        ],
+        6
+      ],
+      "expected": 23,
+      "inputDisplay": "args=[[30, 11, 23, 4, 20], 6]",
+      "expectedDisplay": "23",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Binary search over speed range [1, max(piles)]. Calculate ceil(pile / speed) total hours."
+  ],
+  "python": {
+    "starterCode": "def minEatingSpeed(piles: list[int], h: int) -> int:\n    pass\n",
+    "solutionCode": "def minEatingSpeed(piles: list[int], h: int) -> int:\n    import math\n    lo, hi = 1, max(piles)\n    ans = hi\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        hours = sum(math.ceil(p / mid) for p in piles)\n        if hours <= h:\n            ans = mid\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return ans\n"
+  },
+  "leetcodeId": 875,
+  "leetcodeTitle": "Koko Eating Bananas (Binary Search on Answer)",
+  "leetcodeUrl": "https://leetcode.com/problems/bsg-m-koko-eating-bananas/"
+}

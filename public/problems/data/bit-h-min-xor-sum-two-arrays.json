@@ -1,0 +1,86 @@
+{
+  "id": "bit-h-min-xor-sum-two-arrays",
+  "wingId": "bit-manipulation",
+  "floor": 582,
+  "title": "Minimum XOR Sum of Two Arrays",
+  "difficulty": "hard",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bit-h-min-xor-sum-two-arrays",
+    "name": "Bipartite XOR Weaver",
+    "title": "Harmonizer of Paired Bitwise Energy",
+    "maxHp": 10,
+    "hp": 10,
+    "sprite": "golem",
+    "color": "#06b6d4",
+    "attackName": "Resonant XOR Pair",
+    "attackPower": 3,
+    "defeatQuote": "Pair every element of the first array to a unique twin in the second!"
+  },
+  "description": "You are given two integer arrays `nums1` and `nums2` of length `n`. Rearrange the elements of `nums2` such that the sum of `nums1[i] ^ nums2[i]` for `0 <= i < n` is minimized. Return the minimum XOR sum.",
+  "examples": [
+    {
+      "input": "nums1 = [1,2], nums2 = [2,3]",
+      "output": "2"
+    },
+    {
+      "input": "nums1 = [1,0,3], nums2 = [5,3,4]",
+      "output": "8"
+    }
+  ],
+  "constraints": [
+    "n == nums1.length == nums2.length <= 14",
+    "0 <= nums1[i], nums2[i] <= 10^7"
+  ],
+  "starterCode": "def minimumXORSum(nums1: list[int], nums2: list[int]) -> int:\n    pass\n",
+  "solutionCode": "def minimumXORSum(nums1: list[int], nums2: list[int]) -> int:\n    n = len(nums1)\n    memo = {}\n    def dp(mask):\n        i = bin(mask).count('1')\n        if i == n: return 0\n        if mask in memo: return memo[mask]\n        res = float('inf')\n        for j in range(n):\n            if not (mask & (1 << j)):\n                res = min(res, (nums1[i] ^ nums2[j]) + dp(mask | (1 << j)))\n        memo[mask] = res\n        return res\n    return dp(0)\n",
+  "functionName": "minimumXORSum",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "args=[[1, 2], [2, 3]]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          5,
+          3,
+          4
+        ]
+      ],
+      "expected": 8,
+      "inputDisplay": "args=[[1, 0, 3], [5, 3, 4]]",
+      "expectedDisplay": "8",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Since n <= 14, use bitmask DP dp(mask) where the number of set bits in mask indicates how many elements of nums1 have been paired."
+  ],
+  "python": {
+    "starterCode": "def minimumXORSum(nums1: list[int], nums2: list[int]) -> int:\n    pass\n",
+    "solutionCode": "def minimumXORSum(nums1: list[int], nums2: list[int]) -> int:\n    n = len(nums1)\n    memo = {}\n    def dp(mask):\n        i = bin(mask).count('1')\n        if i == n: return 0\n        if mask in memo: return memo[mask]\n        res = float('inf')\n        for j in range(n):\n            if not (mask & (1 << j)):\n                res = min(res, (nums1[i] ^ nums2[j]) + dp(mask | (1 << j)))\n        memo[mask] = res\n        return res\n    return dp(0)\n"
+  },
+  "leetcodeId": 1879,
+  "leetcodeTitle": "Minimum XOR Sum of Two Arrays",
+  "leetcodeUrl": "https://leetcode.com/problems/bit-h-min-xor-sum-two-arrays/"
+}

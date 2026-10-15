@@ -1,0 +1,113 @@
+{
+  "id": "graph-m-clone-graph-adj",
+  "wingId": "graphs",
+  "floor": 319,
+  "title": "Clone Graph Adjacency Structure",
+  "difficulty": "medium",
+  "visualizerType": "graph",
+  "monster": {
+    "id": "mon-graph-m-clone-graph-adj",
+    "name": "Doppelganger Fiend",
+    "title": "Mirrorer of Graph Topologies",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "demon",
+    "color": "#ec4899",
+    "attackName": "Mirror Replication",
+    "attackPower": 2,
+    "defeatQuote": "Deep clone of all node pointers and adjacency lists generated!"
+  },
+  "description": "Given an adjacency list `adjList` of an undirected graph where `adjList[i]` contains the 1-indexed neighbors of node `i + 1`, create a deep copy of the adjacency list structure, preserving all original edge relationships.",
+  "examples": [
+    {
+      "input": "adjList = [[2,4],[1,3],[2,4],[1,3]]",
+      "output": "[[2,4],[1,3],[2,4],[1,3]]"
+    }
+  ],
+  "constraints": [
+    "0 <= adjList.length <= 100"
+  ],
+  "starterCode": "def cloneGraphAdj(adjList: list[list[int]]) -> list[list[int]]:\n    pass\n",
+  "solutionCode": "def cloneGraphAdj(adjList: list[list[int]]) -> list[list[int]]:\n    if not adjList: return []\n    return [list(neighbors) for neighbors in adjList]\n",
+  "functionName": "cloneGraphAdj",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            2,
+            4
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "inputDisplay": "[[2, 4], [1, 3], [2, 4], [1, 3]]",
+      "expectedDisplay": "[[2, 4], [1, 3], [2, 4], [1, 3]]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        []
+      ],
+      "expected": [],
+      "inputDisplay": "[]",
+      "expectedDisplay": "[]",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          []
+        ]
+      ],
+      "expected": [
+        []
+      ],
+      "inputDisplay": "[[]]",
+      "expectedDisplay": "[[]]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Deep copy the nested neighbor lists."
+  ],
+  "python": {
+    "starterCode": "def cloneGraphAdj(adjList: list[list[int]]) -> list[list[int]]:\n    pass\n",
+    "solutionCode": "def cloneGraphAdj(adjList: list[list[int]]) -> list[list[int]]:\n    if not adjList: return []\n    return [list(neighbors) for neighbors in adjList]\n"
+  },
+  "leetcodeId": 133,
+  "leetcodeTitle": "Clone Graph Adjacency Structure",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-clone-graph-adj/"
+}

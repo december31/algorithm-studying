@@ -1,0 +1,124 @@
+{
+  "id": "graph-m-num-islands",
+  "wingId": "graphs",
+  "floor": 311,
+  "title": "Number of Islands",
+  "difficulty": "medium",
+  "visualizerType": "grid",
+  "monster": {
+    "id": "mon-graph-m-num-islands",
+    "name": "Archipelago Golem",
+    "title": "Lord of Isolated Archipelagos",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "golem",
+    "color": "#10b981",
+    "attackName": "Island Quake",
+    "attackPower": 2,
+    "defeatQuote": "Disconnected land masses in the endless ocean counted!"
+  },
+  "description": "Given an `m x n` 2D binary grid `grid` which represents a map of `'1'`s (land) and `'0'`s (water), return the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.",
+  "examples": [
+    {
+      "input": "grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]",
+      "output": "1"
+    }
+  ],
+  "constraints": [
+    "1 <= m, n <= 300",
+    "grid[i][j] is '0' or '1'"
+  ],
+  "starterCode": "def numIslands(grid: list[list[str]]) -> int:\n    pass\n",
+  "solutionCode": "def numIslands(grid: list[list[str]]) -> int:\n    if not grid: return 0\n    R, C = len(grid), len(grid[0])\n    count = 0\n    def dfs(r, c):\n        if 0 <= r < R and 0 <= c < C and grid[r][c] == '1':\n            grid[r][c] = '0'\n            dfs(r + 1, c)\n            dfs(r - 1, c)\n            dfs(r, c + 1)\n            dfs(r, c - 1)\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == '1':\n                count += 1\n                dfs(r, c)\n    return count\n",
+  "functionName": "numIslands",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          [
+            "1",
+            "1",
+            "1",
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "1",
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[['1', '1', '1', '1', '0'], ['1', '1', '0', '1', '0'], ['1', '1', '0', '0', '0']",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          [
+            "1",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1",
+            "1"
+          ]
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[['1', '1', '0', '0', '0'], ['1', '1', '0', '0', '0'], ['0', '0', '1', '0', '0']",
+      "expectedDisplay": "3",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Iterate every cell. When '1' is found, increment island count and DFS/BFS sink all adjacent '1's."
+  ],
+  "python": {
+    "starterCode": "def numIslands(grid: list[list[str]]) -> int:\n    pass\n",
+    "solutionCode": "def numIslands(grid: list[list[str]]) -> int:\n    if not grid: return 0\n    R, C = len(grid), len(grid[0])\n    count = 0\n    def dfs(r, c):\n        if 0 <= r < R and 0 <= c < C and grid[r][c] == '1':\n            grid[r][c] = '0'\n            dfs(r + 1, c)\n            dfs(r - 1, c)\n            dfs(r, c + 1)\n            dfs(r, c - 1)\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == '1':\n                count += 1\n                dfs(r, c)\n    return count\n"
+  },
+  "leetcodeId": 200,
+  "leetcodeTitle": "Number of Islands",
+  "leetcodeUrl": "https://leetcode.com/problems/graph-m-num-islands/"
+}

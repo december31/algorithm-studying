@@ -1,0 +1,129 @@
+{
+  "id": "ds-e-remove-duplicates",
+  "wingId": "data-structures",
+  "floor": 101,
+  "title": "Remove Duplicates from Sorted Array",
+  "difficulty": "easy",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-ds-e-remove-duplicates",
+    "name": "Shard Imp",
+    "title": "Minor Collector of Redundant Runes",
+    "maxHp": 6,
+    "hp": 6,
+    "sprite": "goblin",
+    "color": "#eab308",
+    "attackName": "Duplication Pierce",
+    "attackPower": 1,
+    "defeatQuote": "My duplicate shards have vanished into the ether!"
+  },
+  "description": "Given an integer array `nums` sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. Return the number of unique elements `k`. The first `k` elements of `nums` should hold the unique elements.",
+  "examples": [
+    {
+      "input": "nums = [1,1,2]",
+      "output": "2",
+      "explanation": "Unique elements are [1, 2]"
+    },
+    {
+      "input": "nums = [0,0,1,1,1,2,2,3,3,4]",
+      "output": "5",
+      "explanation": "Unique elements are [0, 1, 2, 3, 4]"
+    }
+  ],
+  "constraints": [
+    "1 <= len(nums) <= 3 * 10^4",
+    "-100 <= nums[i] <= 100",
+    "nums is sorted in non-decreasing order"
+  ],
+  "starterCode": "def removeDuplicates(nums: list[int]) -> int:\n    # Return the count of unique elements\n    pass\n",
+  "solutionCode": "def removeDuplicates(nums: list[int]) -> int:\n    if not nums:\n        return 0\n    write = 1\n    for read in range(1, len(nums)):\n        if nums[read] != nums[read - 1]:\n            nums[write] = nums[read]\n            write += 1\n    return write\n",
+  "functionName": "removeDuplicates",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "expected": 2,
+      "inputDisplay": "[1, 1, 2]",
+      "expectedDisplay": "2",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          3,
+          4
+        ]
+      ],
+      "expected": 5,
+      "inputDisplay": "[0, 0, 1, 1, 1, 2, 2, 3, 3, 4]",
+      "expectedDisplay": "5",
+      "isHidden": false
+    },
+    {
+      "id": 3,
+      "input": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[1]",
+      "expectedDisplay": "1",
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "input": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 3,
+      "inputDisplay": "[1, 2, 3]",
+      "expectedDisplay": "3",
+      "isHidden": true
+    },
+    {
+      "id": 5,
+      "input": [
+        [
+          5,
+          5,
+          5,
+          5
+        ]
+      ],
+      "expected": 1,
+      "inputDisplay": "[5, 5, 5, 5]",
+      "expectedDisplay": "1",
+      "isHidden": true
+    }
+  ],
+  "hints": [
+    "Use two pointers: one write pointer for unique placements, one read pointer scanning ahead."
+  ],
+  "python": {
+    "starterCode": "def removeDuplicates(nums: list[int]) -> int:\n    # Return the count of unique elements\n    pass\n",
+    "solutionCode": "def removeDuplicates(nums: list[int]) -> int:\n    if not nums:\n        return 0\n    write = 1\n    for read in range(1, len(nums)):\n        if nums[read] != nums[read - 1]:\n            nums[write] = nums[read]\n            write += 1\n    return write\n"
+  },
+  "leetcodeId": 26,
+  "leetcodeTitle": "Remove Duplicates from Sorted Array",
+  "leetcodeUrl": "https://leetcode.com/problems/ds-e-remove-duplicates/"
+}

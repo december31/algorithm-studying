@@ -1,0 +1,96 @@
+{
+  "id": "bt-m-numbers-same-consec-diff",
+  "wingId": "backtracking",
+  "floor": 236,
+  "title": "Same Consecutive Differences",
+  "difficulty": "medium",
+  "visualizerType": "array",
+  "monster": {
+    "id": "mon-bt-m-numbers-same-consec-diff",
+    "name": "Difference Drake",
+    "title": "Maintainer of Delta Intervals",
+    "maxHp": 8,
+    "hp": 8,
+    "sprite": "dragon",
+    "color": "#ec4899",
+    "attackName": "Delta Flame",
+    "attackPower": 2,
+    "defeatQuote": "Digits constructed with exact step difference k!"
+  },
+  "description": "Given two integers `n` and `k`, return an array of all the integers of length `n` where the difference between every two consecutive digits is `k`. You may return the answer in any order.",
+  "examples": [
+    {
+      "input": "n = 3, k = 7",
+      "output": "[181,292,707,818,929]"
+    },
+    {
+      "input": "n = 2, k = 1",
+      "output": "[10,12,21,23,32,34,43,45,54,56,65,67,76,78,87,89,98]"
+    }
+  ],
+  "constraints": [
+    "2 <= n <= 9",
+    "0 <= k <= 9"
+  ],
+  "starterCode": "def numsSameConsecDiff(n: int, k: int) -> list[int]:\n    pass\n",
+  "solutionCode": "def numsSameConsecDiff(n: int, k: int) -> list[int]:\n    res = []\n    def dfs(num, count):\n        if count == n:\n            res.append(num)\n            return\n        last = num % 10\n        next_digits = {last + k, last - k}\n        for d in next_digits:\n            if 0 <= d <= 9:\n                dfs(num * 10 + d, count + 1)\n    for start in range(1, 10):\n        dfs(start, 1)\n    return sorted(res)\n",
+  "functionName": "numsSameConsecDiff",
+  "testCases": [
+    {
+      "id": 1,
+      "input": [
+        3,
+        7
+      ],
+      "expected": [
+        181,
+        292,
+        707,
+        818,
+        929
+      ],
+      "inputDisplay": "args=[3, 7]",
+      "expectedDisplay": "[181, 292, 707, 818, 929]",
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "input": [
+        2,
+        1
+      ],
+      "expected": [
+        10,
+        12,
+        21,
+        23,
+        32,
+        34,
+        43,
+        45,
+        54,
+        56,
+        65,
+        67,
+        76,
+        78,
+        87,
+        89,
+        98
+      ],
+      "inputDisplay": "args=[2, 1]",
+      "expectedDisplay": "[10, 12, 21, 23, 32, 34, 43, 45, 54, 56, 65, 67, 76, 78, 87, 89, 98]",
+      "isHidden": false
+    }
+  ],
+  "hints": [
+    "Branch on last_digit + k and last_digit - k, avoiding duplicates when k == 0."
+  ],
+  "python": {
+    "starterCode": "def numsSameConsecDiff(n: int, k: int) -> list[int]:\n    pass\n",
+    "solutionCode": "def numsSameConsecDiff(n: int, k: int) -> list[int]:\n    res = []\n    def dfs(num, count):\n        if count == n:\n            res.append(num)\n            return\n        last = num % 10\n        next_digits = {last + k, last - k}\n        for d in next_digits:\n            if 0 <= d <= 9:\n                dfs(num * 10 + d, count + 1)\n    for start in range(1, 10):\n        dfs(start, 1)\n    return sorted(res)\n"
+  },
+  "leetcodeId": 967,
+  "leetcodeTitle": "Same Consecutive Differences",
+  "leetcodeUrl": "https://leetcode.com/problems/bt-m-numbers-same-consec-diff/"
+}
